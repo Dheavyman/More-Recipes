@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Signup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" rel="stylesheet">
+    <link href="css/signup.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="body">
+        <div class="row">
+            <div id="heading" class="col s12 indigo darken-4">
+                <h5><a href="index.html" class="brand-logo white-text">More-Recipes</a></h5>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div id="form-body" class="col s12 m6 l6 offset-m3 offset-l3 z-depth-5">
+                    <div class="row">
+                        <h5 class="blue-text center-align">Create an account</h5>
+                        <form class="col s12" method="post">
+                            <div class="input-field col s12">
+                                <input id="username" name="username" type="text" class="validate" required>
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="password" name="password" type="password" class="validate" required>
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="retype-password" name="password" type="password" class="validate" required>
+                                <label for="retype-password">Retype Password</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="email" name="email" type="email" class="validate" required>
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="firstName" name="firstName" type="text" class="validate" required>
+                                <label for="firstName">First Name</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="lastName" name="lastName" type="text" class="validate" required>
+                                <label for="lastName">Last Name</label>
+                            </div>
+                            <p>
+                                <input class="with-gap" name="gender" type="radio" id="male" />
+                                <label for="male">Male</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="gender" type="radio" id="female" checked/>
+                                <label for="female">Female</label>
+                            </p>
+                            <div class="row"></div>
+                            <div class='row'>
+                                <button type='submit' name='signupbtn' class='col s6 offset-s3 btn btn-large waves-effect waves-light indigo darken-2'>Sign Up</button>
+                            </div>
+                            <div class="row center-align">
+                                Already have an account? <a href="signin.html" class="blue-text">Sign In</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+</body>
+
+</html>
