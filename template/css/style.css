@@ -1,0 +1,84 @@
+
+h2 {
+    height: 20px;
+    font-size: 25px;
+}
+
+#logo {
+    font-family: 'Lobster', cursive;
+    font-size: 25px;
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
+.nav-content {
+    height: 28px;
+    padding-right: 200px;
+}
+
+.nav-content a {
+    font-size: 16px;
+}
+
+#position {
+    position: relative;
+}
+
+.slider {
+    z-index: -1;
+}
+
+#search_bar {
+    position: absolute;
+    top: 0;
+    
+}
+
+#search_bar .input-field {
+    border-radius: 10px;
+}
+
+#search {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#recipes .card-title {
+    color: blue;
+    font-size: 20px;
+}
+
+#recipes .card-image img {
+    height: 250px;
+}
+
+.card-content p {
+    font-size: 12px;
+}
+
+.card-action img {
+    height: 40px;
+    width: 40px;
+}
+
+.card-action p {
+    margin: 0;
+}
+
+.card-action li {
+    display: inline;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: 12px;
+}
+
+.card-stacked .card-action ul {
+    margin: 0;
+}
+
+#popular img {
+    height: 180px;
+}
