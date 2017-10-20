@@ -1,5 +1,7 @@
 $(document).ready(() => {
-  $(".button-collapse").sideNav();
+  $(".button-collapse").sideNav({
+    draggable: true,
+  });
   $('.slider').slider({
     full_width: true
   });
