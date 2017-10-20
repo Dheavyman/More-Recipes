@@ -14,5 +14,15 @@
 }
 
 #heading {
+    margin-bottom: 0;
+}
+
+h2 {
+    height: 20px;
+}
+
+#heading .brand-logo {
+    font-size: 25px;
+    margin-left: 20px;
     padding-left: 20px;
 }
