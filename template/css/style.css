@@ -11,13 +11,8 @@ h2 {
     padding-left: 20px;
 }
 
-.nav-content {
-    height: 28px;
-    padding-right: 200px;
-}
-
-.nav-content a {
-    font-size: 16px;
+.dropdown-button {
+    width: 180px;
 }
 
 #position {
@@ -55,30 +50,72 @@ h2 {
     height: 250px;
 }
 
-.card-content p {
-    font-size: 12px;
+#recipes .card-content p {
+    font-size: 14px;
 }
 
-.card-action img {
+#recipes .card-action img {
     height: 40px;
     width: 40px;
 }
 
-.card-action p {
+#recipes .card-action p {
     margin: 0;
 }
 
-.card-action li {
+#recipes .card-action li {
     display: inline;
     margin-left: 3px;
     margin-right: 3px;
     font-size: 12px;
 }
 
-.card-stacked .card-action ul {
+#popular .card-stacked .card-action ul {
     margin: 0;
+}
+
+#popular .card-content p {
+    font-size: 14px;
+}
+
+#popular .card-action li {
+    display: inline;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: 12px;
 }
 
 #popular img {
     height: 180px;
+}
+
+#recipe-img img {
+    width: 255px;
+}
+#popular .card-action li {
+    display: inline;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: 12px;
+}
+
+
+#add-review {
+    border: 1px solid grey;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
+    color: #616161 !important;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #616161 !important;
+    box-shadow: 0 1px 0 0 #616161 !important;
+}
+
+#created-on {
+    font-size: 11px;
+    font-style: italic;
 }
