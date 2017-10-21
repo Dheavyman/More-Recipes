@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-extended deep-orange darken-4">
+            <div class="nav-wrapper">
+                <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
+                <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <!-- This icon activate the user control dropdown structure -->
+                    <li><a class="dropdown-button" href="#!" data-activates="user-control">John Stew<i class="material-icons left">account_circle</i></a>
+                        <!-- Dropdown structure for the user control icon-->
+                        <ul id="user-control" class="dropdown-content">
+                            <li><a href="profile.html">Profile<i class="material-icons left">person</i></a></li>
+                            <li><a href="recipes.html">My Recipes<i class="material-icons left">folder</i></a></li>
+                            <li class="divider"></li>
+                            <li><a href="index.html">Logout<i class="material-icons left">lock</i></a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="side-nav fixed" id="slide_out">
+                    <li>
+                        <div class="nav-wrapper deep-orange darken-4">
+                            <a id="logo" href="index.html" class="show-on-medium-and-down">More-Recipes</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="user-view">
+                            <div class="background">
+                                <img src="images/background.jpg">
+                            </div>
+                            <a href="#!user"><img class="circle" src="images/avatar.png"></a>
+                            <a href="#!name"><span class="white-text name">John Stew</span></a>
+                            <a href="#!email"><span class="white-text email">johnstew@gmail.com</span></a>
+                        </div>
+                    </li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                    <li><a class="subheader">Activities</a></li>
+                    <li>
+                        <a href="recipes.html">My Recipes<span class="badge">22</span></a>
+                    </li>
+                    <li>
+                        <a href="recipes.html">My Favorites<span class="badge">55</span></a>
+                    </li>
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <br>
+        <div class="row profile">
+            <div class="col s12 m5 l4">
+                <figure class="col s12">
+                    <img id="profile-image" class="materialboxed responsive-img circle" src="images/avatar.png" alt="profile image">
+                </figure>
+                <a href="#edit-profile" class="waves-effect waves-light btn blue modal-trigger"><i class="material-icons left">edit</i>Edit</a>
+                <div class="col s12">
+                    <h5>About Me</h5>
+                    <div class="divider black"></div>
+                    <p id="about-me">I am an aspiring world class developer. I like to learn and play with code. I don't joke with food either
+                        :)
+                    </p>
+                </div>
+            </div>
+            <div class="col s12 m5 l6 z-depth-2">
+                <h5><i class="material-icons left">person</i>My Profile</h5>
+                <div class="divider black"></div>
+                <br>
+                <div id="about_user" class="row">
+                    <div id="profile_username" class="row">
+                        <label for="username" class="col s4">Username: </label>
+                        <div id="username" class="col s8">Heavyman</div>
+                    </div>
+                    <div id="profile_first_name" class="row">
+                        <label for="firstname" class="col s4">First Name: </label>
+                        <div id="firstname" class="col s8">Justin</div>
+                    </div>
+                    <div id="profile_last_name" class="row">
+                        <label for="lastname" class="col s4">Last Name: </label>
+                        <div id="lastname" class="col s8">Justin</div>
+                    </div>
+                    <div id="profile_email" class="row">
+                        <label for="email" class="col s4">Email: </label>
+                        <div id="email" class="col s8">heavyman@gmail.com</div>
+                    </div>
+                    <div id="profile_phone" class="row">
+                        <label for="phone" class="col s4">Phone No: </label>
+                        <div id="phone" class="col s8">01-254-2456</div>
+                    </div>
+                    <div id="profile_gender" class="row">
+                        <label for="gender" class="col s4">Gender: </label>
+                        <div id="gender" class="col s8">Male</div>
+                    </div>
+                    <div id="profile_city" class="row">
+                        <label for="city" class="col s4">City: </label>
+                        <div id="city" class="col s8">Lagos</div>
+                    </div>
+                    <div id="profile_country" class="row">
+                        <label for="country" class="col s4">Country: </label>
+                        <div id="country" class="col s8">Nigeria</div>
+                    </div>
+                </div>
+            </div>
+            <div id="edit-profile" class="row modal center-align">
+                <form class="col s12">
+                    <div class="modal-content">
+                        <h5>Edit Profile</h5>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="first_name" type="text" class="validate">
+                                <label for="first_name">First Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="last_name" type="text" class="validate">
+                                <label for="last_name">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="phone_no" type="text" class="validate">
+                                <label for="phone_no">Phone Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="city" type="text" class="validate">
+                                <label for="city">City</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <select>
+                                        <option value="" disabled selected>Choose your option</option>
+                                        <option value="Nigeria">Nigeria</option>
+                                        <option value="Kenya">Kenya</option>
+                                        <option value="Uganda">Uganda</option>
+                                    </select>
+                                <label>Country</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea name="aboutme" id="about-me" type="text" class="materialize-textarea"></textarea>
+                                <label for="about-me">About me</label>
+                            </div>
+                        </div>
+                        <div class="file-field input-field">
+                            <div class="btn indigo accent-2">
+                                <span>File</span>
+                                <input type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Upload photo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn modal-close waves-effect waves-light btn-flat red lighten-2 white-text">Cancel</button>
+                        <button type="submit" class="btn modal-action waves-effect waves-light btn-flat indigo accent-2 white-text">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer deep-orange lighten-1">
+        <div class="container center-align">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <h5 class="white-text">Stay Connected</h5>
+                    <i class="fa fa-facebook-square fa-2x"></i>
+                    <i class="fa fa-twitter-square fa-2x"></i>
+                    <i class="fa fa-pinterest-square fa-2x"></i>
+                    <i class="fa fa-instagram fa-2x"></i>
+                </div>
+                <div class="col s12 m6 l4 offset-l2">
+                    <h5 class="white-text">Navigate</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Popular Recipes</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 All rights reserved
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/src.js"></script>
+</body>
+
+</html>
