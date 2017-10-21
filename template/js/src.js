@@ -10,7 +10,7 @@ $(document).ready(() => {
      belowOrigin: true,
    });
   $('.parallax').parallax();
-  $('#modal1').modal();
+  $('#edit-profile').modal();
   $('#modal2').modal();
   $('select').material_select();
 });
