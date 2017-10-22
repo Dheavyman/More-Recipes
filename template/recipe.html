@@ -14,48 +14,55 @@
 
 <body>
     <header>
-        <nav class="nav-extended deep-orange darken-4">
-            <div class="nav-wrapper">
-                <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
-                <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <!-- This icon activate the user control dropdown structure -->
-                    <li><a class="dropdown-button" href="#!" data-activates="user-control">John Stew<i class="material-icons left">account_circle</i></a>
-                        <!-- Dropdown structure for the user control icon-->
-                        <ul id="user-control" class="dropdown-content">
-                            <li><a href="profile.html">Profile<i class="material-icons left">person</i></a></li>
-                            <li><a href="recipes.html">My Recipes<i class="material-icons left">folder</i></a></li>
-                            <li class="divider"></li>
-                            <li><a href="index.html">Logout<i class="material-icons left">lock</i></a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="side-nav" id="slide_out">
-                    <li>
-                        <div class="nav-wrapper deep-orange darken-4">
-                            <a id="logo" href="index.html" class="show-on-medium-and-down">More-Recipes</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="user-view">
-                            <div class="background">
-                                <img src="images/background.jpg">
-                            </div>
-                            <a href="#!user"><img class="circle" src="images/avatar.png"></a>
-                            <a href="#!name"><span class="white-text name">John Stew</span></a>
-                            <a href="#!email"><span class="white-text email">johnstew@gmail.com</span></a>
-                        </div>
-                    </li>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li><a href="recipes.html">My Recipes</a></li>
-                    <li>
-                        <div class="divider"></div>
-                    </li>
-                    <li><a href="index.html">Logout</a></li>
-                </ul>
-            </div>
-        </nav>
+        <div class="navbar-fixed">
+            <nav class="nav-extended deep-orange darken-4">
+                <div class="nav-wrapper">
+                    <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
+                    <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a class="dropdown-button" href="#!" data-activates="user-control">John Stew<i class="material-icons left">account_circle</i></a>
+                            <ul id="user-control" class="dropdown-content">
+                                <li><a href="profile.html">Profile<i class="material-icons left">person</i></a></li>
+                                <li><a href="recipes.html">My Recipes<i class="material-icons left">folder</i></a></li>
+                                <li class="divider"></li>
+                                <li><a href="index.html">Logout<i class="material-icons left">lock</i></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <ul class="side-nav" id="slide_out">
+            <li>
+                <div class="nav-wrapper deep-orange darken-4">
+                    <a id="logo" href="index.html" class="show-on-medium-and-down">More-Recipes</a>
+                </div>
+            </li>
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="images/background.jpg">
+                    </div>
+                    <a href="#!user"><img class="circle" src="images/avatar.png"></a>
+                    <a href="#!name"><span class="white-text name">John Stew</span></a>
+                    <a href="#!email"><span class="white-text email">johnstew@gmail.com</span></a>
+                </div>
+            </li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html?#category">Category</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="subheader">Activities</a></li>
+            <li><a href="recipes.html">My Recipes<span class="badge">22</span></a></li>
+            <li><a href="recipes.html?#user-favorites">My Favorites<span class="badge">55</span></a></li>
+            <li><a href="profile.html?#notifications">Notificatons<span class="new badge">2</span></a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
     </header>
     <main>
         <div class="parallax-container">
@@ -103,27 +110,29 @@
                         <div class="col s12">
                             <h6><b><em>Directions:</em></b></h6>
                             <p id="directions" class="grey-text text-darken-3 lighten-3">
-
+                                Boil the boilables for 20 minutes. <br>
+                                Cook the fish for 15 minutes. <br>
+                                Add spices and seasonings and cook for 30 minutes.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div id="reviews" class="col s12 valign-wrapper deep-orange darken-4">
+                <div class="col s12 valign-wrapper deep-orange darken-4">
                     <h5 class="white-text">Reviews</h5>
                 </div>
-                <ul id="review" class="collection">
+                <ul class="collection">
                     <li class="collection-item avatar">
                         <img src="C:\Users\Justin\Pictures\Personal\2012-11-12-576.jpg" alt="" class="circle">
                         <span class="name"><b>John Stew</b></span>
-                        <p id="created-on">Oct 20, 2017 07:30:25 PM</p>
+                        <p id="created-on">Oct 20, 2017 at 07:30:25 PM</p>
                         <p id="review-content">A wonderful recipe, very tasty and easy to prepare.</p>
                     </li>
                     <li class="collection-item avatar">
                         <img src="images/avatar.png" alt="" class="circle">
                         <span class="name"><b>John Soup</b></span>
-                        <p id="created-on">Oct 20, 2017 07:35:50 PM</p>
+                        <p id="created-on">Oct 20, 2017 at 07:35:50 PM</p>
                         <p>I added one table spoon full of grinded curry leave and it made a great wonderful difference.</p>
                     </li>
                 </ul>
@@ -158,10 +167,9 @@
                 <div class="col s12 m6 l4 offset-l2">
                     <h5 class="white-text">Navigate</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Home</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Popular Recipes</a></li>
+                        <li><a class="grey-text text-lighten-3" href="index.html">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="index.html?#popular">Popular Recipes</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!"></a></li>
                     </ul>
                 </div>
             </div>

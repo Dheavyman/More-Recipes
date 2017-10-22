@@ -14,57 +14,45 @@
 
 <body>
     <header id="header">
-        <nav class="nav-extended deep-orange darken-4">
-            <div class="nav-wrapper">
-                <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
-                <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <!-- This icon activate the user control dropdown structure -->
-                    <li><a class="dropdown-button" href="#!" data-activates="user-control">John Stew<i class="material-icons left">account_circle</i></a>
-                        <!-- Dropdown structure for the user control icon-->
-                        <ul id="user-control" class="dropdown-content">
-                            <li><a href="profile.html">Profile<i class="material-icons left">person</i></a></li>
-                            <li><a href="recipes.html">My Recipes<i class="material-icons left">folder</i></a></li>
-                            <li class="divider"></li>
-                            <li><a href="index.html">Logout<i class="material-icons left">lock</i></a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="side-nav fixed" id="slide_out">
-                    <li>
-                        <div class="nav-wrapper deep-orange darken-4 hide-on-med-and-up">
-                            <a id="logo" href="index.html" class="show-on-medium-and-down">More-Recipes</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="user-view">
-                            <div class="background">
-                                <img src="images/background.jpg">
-                            </div>
-                            <a href="#!user"><img class="circle" src="images/avatar.png"></a>
-                            <a href="#!name"><span class="white-text name">John Stew</span></a>
-                            <a href="#!email"><span class="white-text email">johnstew@gmail.com</span></a>
-                        </div>
-                    </li>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li>
-                        <div class="divider"></div>
-                    </li>
-                    <li><a class="subheader">Activities</a></li>
-                    <li>
-                        <a href="recipes.html">My Recipes<span class="badge">22</span></a>
-                    </li>
-                    <li>
-                        <a href="recipes.html">My Favorites<span class="badge">55</span></a>
-                    </li>
-                    <li>
-                        <div class="divider"></div>
-                    </li>
-                    <li><a href="index.html">Logout</a></li>
-                </ul>
-            </div>
-        </nav>
+        <div class="navbar-fixed">
+            <nav class="nav-extended deep-orange darken-4">
+                <div class="nav-wrapper">
+                    <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
+                    <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
+            </nav>
+        </div>
+        <ul class="side-nav fixed" id="slide_out">
+            <li>
+                <div class="nav-wrapper deep-orange darken-4 hide-on-med-and-up">
+                    <a id="logo" href="index.html" class="show-on-medium-and-down">More-Recipes</a>
+                </div>
+            </li>
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="images/background.jpg">
+                    </div>
+                    <a href="#!user"><img class="circle" src="images/avatar.png"></a>
+                    <a href="#!name"><span class="white-text name">John Stew</span></a>
+                    <a href="#!email"><span class="white-text email">johnstew@gmail.com</span></a>
+                </div>
+            </li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html?#category">Category</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="subheader">Activities</a></li>
+            <li><a href="recipes.html">My Recipes<span class="badge">22</span></a></li>
+            <li><a href="recipes.html?#user-favorites">My Favorites<span class="badge">55</span></a></li>
+            <li><a href="?#notifications">Notificatons<span class="new badge">2</span></a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
     </header>
     <main id="main">
         <br>
@@ -119,6 +107,25 @@
                         <label for="country" class="col s4">Country: </label>
                         <div id="country" class="col s8">Nigeria</div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div id="notifications" class="col s12 valign-wrapper deep-orange darken-4">
+                        <h5 class="white-text">Notifications</h5>
+                    </div>
+                    <ul class="collection">
+                        <li class="collection-item avatar">
+                            <img src="images/user.jpg" alt="user" class="circle">
+                            <p id="created-on">Oct 21, 2017 at 02:48:20 PM</p>
+                            <p id="recipe-reviewed">German Sauce was reviewed by John Stew</p>
+                        </li>
+                        <li class="collection-item avatar">
+                            <img src="images/avatar.png" alt="" class="circle">
+                            <p id="created-on">Oct 21, 2017 at 08:15:20 AM</p>
+                            <p id="favorite-modified">Your favorite recipe German Sauce was modified</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div id="edit-profile" class="row modal center-align">
@@ -197,10 +204,9 @@
                 <div class="col s12 m6 l4 offset-l2">
                     <h5 class="white-text">Navigate</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Home</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Popular Recipes</a></li>
+                        <li><a class="grey-text text-lighten-3" href="index.html">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="index.html?#popular">Popular Recipes</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!"></a></li>
                     </ul>
                 </div>
             </div>

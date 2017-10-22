@@ -1,7 +1,11 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
 
-h2 {
-    height: 20px;
-    font-size: 25px;
+main {
+    flex: 1 0 auto;
 }
 
 #logo {
@@ -9,6 +13,24 @@ h2 {
     font-size: 25px;
     margin-left: 20px;
     padding-left: 20px;
+}
+#body {
+    background: url(../images/background.jpg) no-repeat center;
+    height: 100%;
+    min-height: 100vh; 
+    background-size: cover;
+}
+
+h2 {
+    height: 18px;
+}
+
+#form-data {
+    background: white;
+    padding: 20px 25px;
+    height: auto;
+    box-sizing: border-box;
+    border-radius: 10px;
 }
 
 .dropdown-button {
@@ -140,4 +162,17 @@ h2 {
     height: 500px;
     max-height: 90%;
     max-width:90%;
+}
+
+#my-recipes {
+    margin-top: 50px;
+}
+
+#user-recipes .btn-floating {
+margin-left: 5px;
+margin-right: 5px;
+}
+
+.fixed-action-btn {
+    margin-bottom: 30px;
 }
