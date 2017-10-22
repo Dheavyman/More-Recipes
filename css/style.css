@@ -157,6 +157,14 @@ h2 {
     height: 250px;
 }
 
+.profile #edit-btn {
+    margin-left: 10px;
+}
+
+#notifications {
+    margin-top: 15px;
+}
+
 .modal {
     width: 450px;
     height: 500px;
