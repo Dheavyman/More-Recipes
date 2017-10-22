@@ -3,14 +3,14 @@ $(document).ready(() => {
     draggable: true,
   });
   $('.slider').slider({
-    full_width: true
+    full_width: true,
   });
-   $('.dropdown-button').dropdown({
+  $('.dropdown-button').dropdown({
      hover: true,
      belowOrigin: true,
    });
   $('.parallax').parallax();
-  $('#edit-profile').modal();
-  $('#modal2').modal();
+  $('.collapsible').collapsible();
+  $('.modal').modal();
   $('select').material_select();
 });
