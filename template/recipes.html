@@ -71,220 +71,222 @@
         </ul>
     </header>
     <main>
-        <div class="fixed-action-btn">
-            <a href="#add-recipe" class="btn-floating btn-large modal-trigger waves-effect waves-light indigo darken-2 pulse"><i class="material-icons">add</i></a>
-        </div>
-        <div id="my-recipes" class="row container">
-            <div id="user-recipes" class="col s12">
-                <div id="recipes" class="card large col s12 m6 l4">
-                    <a href="recipe.html"><span class="card-title">Spanish Chips</span></a>
-                    <div class="card-image">
-                        <a href="recipe.html"><img src="images/image03.jpg"></a>
+        <div class="row">
+            <div class="fixed-action-btn">
+                <a href="#add-recipe" class="btn-floating btn-large modal-trigger waves-effect waves-light indigo darken-2 pulse"><i class="material-icons">add</i></a>
+            </div>
+            <div id="my-recipes" class="row container">
+                <div id="user-recipes" class="col s12">
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Spanish Chips</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image03.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A light meal full of nutrients with sweet taste.</p>
+                        </div>
+                        <div class="card-action">
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                            <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                            <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <p>A light meal full of nutrients with sweet taste.</p>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image05.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                            <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                            <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                        </div>
                     </div>
-                    <div class="card-action">
-                        <ul>
-                            <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                            <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                            <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                            <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                        </ul>
-                        <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
-                        <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image06.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                            <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                            <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                        </div>
                     </div>
                 </div>
-                <div id="recipes" class="card large col s12 m6 l4">
-                    <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
-                    <div class="card-image">
-                        <a href="recipe.html"><img src="images/image05.jpg"></a>
+                <div id="user-favorites" class="col s12">
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image06.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner"></p>
+                            <label for="owner">Recipe by: </label>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <p>A rich meal for an awesome afternoon.</p>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">German Sauce</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image01.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner">
+                                <label for="owner">Recipe by: </label> John Stew
+                            </p>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="card-action">
-                        <ul>
-                            <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                            <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                            <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                            <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                        </ul>
-                        <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
-                        <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
-                    </div>
-                </div>
-                <div id="recipes" class="card large col s12 m6 l4">
-                    <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
-                    <div class="card-image">
-                        <a href="recipe.html"><img src="images/image06.jpg"></a>
-                    </div>
-                    <div class="card-content">
-                        <p>A rich meal for an awesome afternoon.</p>
-                    </div>
-                    <div class="card-action">
-                        <ul>
-                            <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                            <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                            <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                            <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                        </ul>
-                        <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
-                        <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image05.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner"></p>
+                            <label for="owner">Recipe by: </label>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="user-favorites" class="col s12">
-                <div id="recipes" class="card large col s12 m6 l4">
-                    <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
-                    <div class="card-image">
-                        <a href="recipe.html"><img src="images/image06.jpg"></a>
+            <div id="add-recipe" class="row modal center-align">
+                <form class="col s12">
+                    <div class="modal-content">
+                        <h5>Add Recipe</h5>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="recipe_name" type="text" class="validate" required>
+                                <label for="recipe_name">Title</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="recipe_description" class="materialize-textarea" required></textarea>
+                                <label for="recipe_description">Description</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="recipe_prep_time" type="number" min="0" required>
+                                <label for="recipe_prep_time">Preparation Time (MINS)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="recipe_ingredients" class="materialize-textarea" required></textarea>
+                                <label for="recipe_ingredients">Ingredients</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="recipe_directions" class="materialize-textarea" required></textarea>
+                                <label for="recipe_directions">Directions</label>
+                            </div>
+                        </div>
+                        <div class="file-field input-field">
+                            <div class="btn indigo accent-2">
+                                <span>File</span>
+                                <input type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Upload photo">
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <p>A rich meal for an awesome afternoon.</p>
+                    <div class="modal-footer">
+                        <a class="btn modal-close waves-effect waves-light btn-flat red lighten-2 white-text">Cancel</a>
+                        <button type="submit" class="btn modal-action waves-effect waves-light btn-flat indigo accent-2 white-text">Add</button>
                     </div>
-                    <div class="card-action">
-                        <p id="owner"></p>
-                        <label for="owner">Recipe by: </label>
-                        <ul>
-                            <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                            <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                            <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                            <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="recipes" class="card large col s12 m6 l4">
-                    <a href="recipe.html"><span class="card-title">German Sauce</span></a>
-                    <div class="card-image">
-                        <a href="recipe.html"><img src="images/image01.jpg"></a>
-                    </div>
-                    <div class="card-content">
-                        <p>A rich meal for an awesome afternoon.</p>
-                    </div>
-                    <div class="card-action">
-                        <p id="owner">
-                            <label for="owner">Recipe by: </label> John Stew
-                        </p>
-                        <ul>
-                            <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                            <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                            <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                            <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="recipes" class="card large col s12 m6 l4">
-                    <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
-                    <div class="card-image">
-                        <a href="recipe.html"><img src="images/image05.jpg"></a>
-                    </div>
-                    <div class="card-content">
-                        <p>A rich meal for an awesome afternoon.</p>
-                    </div>
-                    <div class="card-action">
-                        <p id="owner"></p>
-                        <label for="owner">Recipe by: </label>
-                        <ul>
-                            <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                            <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                            <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                            <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                        </ul>
-                    </div>
-                </div>
+                </form>
             </div>
-        </div>
-        <div id="add-recipe" class="row modal center-align">
-            <form class="col s12" method="post">
-                <div class="modal-content">
-                    <h5>Add Recipe</h5>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="recipe_name" type="text" class="validate" required>
-                            <label for="recipe_name">Title</label>
+            <div id="edit-recipe" class="row modal center-align">
+                <form class="col s12">
+                    <div class="modal-content">
+                        <h5>Edit Recipe</h5>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="recipe-name" type="text" class="validate">
+                                <label for="recipe-name">Title</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="recipe-description" class="materialize-textarea">
+                                <label for="recipe-description">Description</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="recipe-prep-time" type="number" min="0">
+                                <label for="recipe-prep-time">Preparation Time (MINS)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="recipe-ingredients" class="materialize-textarea"></textarea>
+                                <label for="recipe-ingredients">Ingredients</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="recipe-directions" class="materialize-textarea"></textarea>
+                                <label for="recipe-directions">Directions</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="recipe_description" class="materialize-textarea" required></textarea>
-                            <label for="recipe_description">Description</label>
-                        </div>
+                    <div class="modal-footer">
+                        <a class="btn modal-action modal-close waves-effect waves-light btn-flat red lighten-2 white-text">Cancel</a>
+                        <button type="submit" class="btn modal-action waves-effect waves-light btn-flat indigo accent-2 white-text">Save</button>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="recipe_prep_time" type="number" min="0" class="materialize-textarea" required>
-                            <label for="recipe_prep_time">Preparation Time (MINS)</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="recipe_ingredients" class="materialize-textarea" required></textarea>
-                            <label for="recipe_ingredients">Ingredients</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="recipe_directions" class="materialize-textarea" required></textarea>
-                            <label for="recipe_directions">Directions</label>
-                        </div>
-                    </div>
-                    <div class="file-field input-field">
-                        <div class="btn indigo accent-2">
-                            <span>File</span>
-                            <input type="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" placeholder="Upload photo">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn modal-close waves-effect waves-light btn-flat red lighten-2 white-text">Cancel</button>
-                    <button type="submit" class="btn modal-action waves-effect waves-light btn-flat indigo accent-2 white-text">Add</button>
-                </div>
-            </form>
-        </div>
-        <div id="edit-recipe" class="modal center-align">
-            <form class="col s12" method="post">
-                <div class="modal-content">
-                    <h5>Edit Recipe</h5>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="recipe-name" type="text" class="validate">
-                            <label for="recipe-name">Title</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="recipe-description" class="materialize-textarea">
-                            <label for="recipe-description">Description</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="recipe-prep-time" type="number" min="0" class="materialize-textarea">
-                            <label for="recipe-prep-time">Preparation Time (MINS)</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="recipe-ingredients" class="materialize-textarea"></textarea>
-                            <label for="recipe-ingredients">Ingredients</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="recipe-directions" class="materialize-textarea"></textarea>
-                            <label for="recipe-directions">Directions</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn modal-close waves-effect waves-light btn-flat red white-text">Cancel</button>
-                    <button type="submit" class="btn modal-action waves-effect waves-light btn-flat indigo accent-2 white-text">Save</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </main>
     <footer class="page-footer deep-orange darken-1">

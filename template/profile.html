@@ -61,7 +61,7 @@
                 <figure class="col s12">
                     <img id="profile-image" class="materialboxed responsive-img circle" src="images/avatar.png" alt="profile image">
                 </figure>
-                <a href="#edit-profile" class="waves-effect waves-light btn blue modal-trigger"><i class="material-icons left">edit</i>Edit</a>
+                <a id="edit-btn" href="#edit-profile" class="btn-floating waves-effect waves-light indigo accent-2 modal-trigger"><i class="material-icons left">edit</i></a>
                 <div class="col s12">
                     <h5>About Me</h5>
                     <div class="divider black"></div>
@@ -70,7 +70,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col s12 m5 l6 z-depth-2">
+            <div class="col s12 m5 l6 z-depth-1">
                 <h5><i class="material-icons left">person</i>My Profile</h5>
                 <div class="divider black"></div>
                 <br>
@@ -169,7 +169,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea name="aboutme" id="about-me" type="text" class="materialize-textarea"></textarea>
+                                <textarea id="about-me" class="materialize-textarea"></textarea>
                                 <label for="about-me">About me</label>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn modal-close waves-effect waves-light btn-flat red lighten-2 white-text">Cancel</button>
+                        <a class="btn modal-close waves-effect waves-light btn-flat red lighten-2 white-text">Cancel</a>
                         <button type="submit" class="btn modal-action waves-effect waves-light btn-flat indigo accent-2 white-text">Save</button>
                     </div>
                 </form>
