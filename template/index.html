@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="navbar-fixed">
+            <nav class="deep-orange darken-4">
+                <div class="nav-wrapper">
+                    <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
+                    <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
+            </nav>
+        </div>
+        <ul class="side-nav fixed" id="slide_out">
+            <li>
+                <div class="nav-wrapper deep-orange darken-4 hide-on-med-and-up">
+                    <a id="logo" href="index.html" class="white-text">More-Recipes</a>
+                </div>
+            </li>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header black-text">Category</div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#!" class="collection-item blue-text">Breakfast</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Lunch</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Dinner</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Appetizer</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Main</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Dessert</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a href="#signin" class="modal-trigger">Sign In</a></li>
+            <li><a href="#signup" class="modal-trigger">Register</a></li>
+        </ul>
+        <div id="signin" class="row modal center-align">
+            <form class="col s12">
+                <div class="modal-content">
+                    <h5 class="blue-text center-align">Login into your account</h5>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text" class="validate" required>
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password" type="password" class="validate" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row"></div>
+                    <div class='row'>
+                        <button type='submit' name='signinbtn' class='col s6 offset-s3 btn btn-large waves-effect waves-light indigo darken-2'>Sign In</button>
+                    </div>
+                    <div class="row center-align">
+                        Don't have an account? <a href="#signup" class="modal-trigger modal-close blue-text">Register</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="signup" class="row modal center-align">
+            <form class="col s12">
+                <div class="modal-content">
+                    <h5 class="blue-text center-align">Create an account</h5>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text" class="validate" required>
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password" type="password" class="validate" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="retype-password" name="password" type="password" class="validate" required>
+                            <label for="retype-password">Retype Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" name="email" type="email" class="validate" required>
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="firstName" name="firstName" type="text" class="validate" required>
+                            <label for="firstName">First Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="lastName" name="lastName" type="text" class="validate" required>
+                            <label for="lastName">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p>
+                            <input class="with-gap" name="gender" type="radio" id="male" checked/>
+                            <label for="male">Male</label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="gender" type="radio" id="female" />
+                            <label for="female">Female</label>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row"></div>
+                    <div class='row'>
+                        <button type='submit' name='signupbtn' class='col s6 offset-s3 btn btn-large waves-effect waves-light indigo darken-2'>Sign Up</button>
+                    </div>
+                    <div class="row center-align">
+                        Already have an account? <a href="#signin" class="modal-trigger modal-close blue-text">Sign In</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </header>
+    <main>
+        <div id="position">
+            <div class="slider col s12">
+                <ul class="slides">
+                    <li>
+                        <img src="images/slider1.jpg">
+                        <div class="caption center-align">
+                            <h3>The taste of nature's gift.</h3>
+                            <h5 class="light grey-text text-lighten-3">The source of healthy living.</h5>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/slider2.jpg">
+                        <div class="caption left-align">
+                            <h3>We eat to live.</h3>
+                            <h5 class="light grey-text text-lighten-3">Let the food be worth it.</h5>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/slider3.jpg">
+                        <div class="caption right-align">
+                            <h3>Let healthiness be your priority.</h3>
+                            <h5 class="light grey-text text-lighten-3">Health is wealth.</h5>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/slider4.jpg">
+                        <div class="caption center-align">
+                            <h3>Share your wonderful recipe</h3>
+                            <h5 class="light grey-text text-lighten-3">Never let your ideas get lost.</h5>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div id="search_bar" class="col s12 m6 l6 offset-m3 offset-l3">
+                    <form class="container">
+                        <div class="input-field white">
+                            <input id="search" type="search" placeholder="Search for recipes" required>
+                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m7 l8">
+                <div class="row">
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">German Sauce</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image01.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner">
+                                <label for="owner">Recipe by: </label> John Stew
+                            </p>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">French Soup</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image02.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>Have a taste of a nourishing soup.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner">
+                                <label for="owner">Recipe by: </label> John Soup
+                            </p>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Spanish Chips</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image03.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A light meal full of nutrients with sweet taste.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner"></p>
+                            <label for="owner">Recipe by: </label>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Canadian Noodles</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image04.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner"></p>
+                            <label for="owner">Recipe by: </label>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image05.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner"></p>
+                            <label for="owner">Recipe by: </label>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="recipes" class="card large col s12 m6 l4">
+                        <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                        <div class="card-image">
+                            <a href="recipe.html"><img src="images/image06.jpg"></a>
+                        </div>
+                        <div class="card-content">
+                            <p>A rich meal for an awesome afternoon.</p>
+                        </div>
+                        <div class="card-action">
+                            <p id="owner"></p>
+                            <label for="owner">Recipe by: </label>
+                            <ul>
+                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <ul class="pagination">
+                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    <li class=" waves-effect green active"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a href="#!">2</a></li>
+                    <li class="waves-effect"><a href="#!">3</a></li>
+                    <li class="waves-effect"><a href="#!">4</a></li>
+                    <li class="waves-effect"><a href="#!">5</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+            <div class="col s12 m5 l4">
+                <div id="popular" class="col s12 grey lighten-3 z-depth-1">
+                    <h5><em>Popular Recipes</em></h5>
+                    <hr>
+                    <div class="col s12">
+                        <h5 class="header"><a href="recipe.html">Italian Burger</a></h5>
+                        <div class="card horizontal">
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image05.jpg"></a>
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p>Filled with sweetness and nutrients.</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li id="downvotes"><i class="material-icons tiny">visibility</i>200</li>
+                                        <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <h5 class="header"><a href="recipe.html">Spanish Chips</a></h5>
+                        <div class="card horizontal">
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image03.jpg"></a>
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p>Filled with sweetness and nutrients.</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li id="downvotes"><i class="material-icons tiny">visibility</i>200</li>
+                                        <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <h5 class="header"><a href="recipe.html">French Soup</a></h5>
+                        <div class="card horizontal">
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image02.jpg"></a>
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p>Filled with sweetness and nutrients.</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li id="downvotes"><i class="material-icons tiny">visibility</i>200</li>
+                                        <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <h5 class="header"><a href="recipe.html">Italian Burger</a></h5>
+                        <div class="card horizontal">
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image05.jpg"></a>
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p>Filled with sweetness and nutrients.</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li id="downvotes"><i class="material-icons tiny">visibility</i>200</li>
+                                        <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"></div>
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer deep-orange darken-1">
+        <div class="container center-align">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <h5 class="white-text">Stay Connected</h5>
+                    <i class="fa fa-facebook-square fa-2x"></i>
+                    <i class="fa fa-twitter-square fa-2x"></i>
+                    <i class="fa fa-pinterest-square fa-2x"></i>
+                    <i class="fa fa-instagram fa-2x"></i>
+                </div>
+                <div class="col s12 m6 l4 offset-l2">
+                    <h5 class="white-text">Navigate</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#popular">Popular Recipes</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 All rights reserved
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/src.js"></script>
+</body>
+
+</html>
