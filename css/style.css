@@ -25,16 +25,16 @@ h2 {
     height: 18px;
 }
 
-#form-data {
-    background: white;
-    padding: 20px 25px;
-    height: auto;
-    box-sizing: border-box;
-    border-radius: 10px;
+.collapsible-header {
+    margin-left: 14px;
 }
 
-.dropdown-button {
-    width: 180px;
+#signin .modal-footer button {
+    margin-left: 25%;
+}
+
+#signup .modal-footer button {
+    margin-left: 25%;
 }
 
 #position {
@@ -125,12 +125,10 @@ h2 {
     border: 1px solid grey;
 }
 
-/* label focus color */
 .input-field input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
     color: #616161 !important;
 }
 
-/* label underline focus color */
 .input-field input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
     border-bottom: 1px solid #616161 !important;
     box-shadow: 0 1px 0 0 #616161 !important;
@@ -141,12 +139,12 @@ h2 {
     font-style: italic;
 }
 
-#header, #main, #footer {
+header, main, footer {
     padding-left: 300px;
 }
 
 @media only screen and (max-width : 992px) {
-    #header, #main, #footer {
+    header, main, footer {
       padding-left: 0;
     }
 }
@@ -174,6 +172,13 @@ h2 {
 
 #my-recipes {
     margin-top: 50px;
+}
+
+
+#delete-recipe {
+    height: auto;
+    box-sizing: border-box;
+    border-radius: 10px;
 }
 
 #user-recipes .btn-floating {

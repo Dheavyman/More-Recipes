@@ -19,16 +19,6 @@
                 <div class="nav-wrapper">
                     <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
                     <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a class="dropdown-button" href="#!" data-activates="user-control">John Stew<i class="material-icons left">account_circle</i></a>
-                            <ul id="user-control" class="dropdown-content">
-                                <li><a href="profile.html">Profile<i class="material-icons left">person</i></a></li>
-                                <li><a href="recipes.html">My Recipes<i class="material-icons left">folder</i></a></li>
-                                <li class="divider"></li>
-                                <li><a href="index.html">Logout<i class="material-icons left">lock</i></a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
                 <div class="nav-content">
                     <ul class="tabs tabs-transparent">
@@ -38,7 +28,7 @@
                 </div>
             </nav>
         </div>
-        <ul class="side-nav" id="slide_out">
+        <ul class="side-nav fixed" id="slide_out">
             <li>
                 <div class="nav-wrapper deep-orange darken-4 hide-on-med-and-up">
                     <a id="logo" href="index.html" class="white-text">More-Recipes</a>
@@ -55,7 +45,23 @@
                 </div>
             </li>
             <li><a href="index.html">Home</a></li>
-            <li><a href="index.html?#category">Category</a></li>
+            <li>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header black-text">Category</div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#!" class="collection-item blue-text">Breakfast</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Lunch</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Dinner</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Appetizer</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Main</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Dessert</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
             <li><a href="profile.html">Profile</a></li>
             <li>
                 <div class="divider"></div>
@@ -92,7 +98,7 @@
                                 <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
                                 <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
                             </ul>
-                            <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                            <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
                             <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
                         </div>
                     </div>
@@ -111,7 +117,7 @@
                                 <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
                                 <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
                             </ul>
-                            <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                            <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
                             <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
                         </div>
                     </div>
@@ -130,8 +136,17 @@
                                 <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
                                 <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
                             </ul>
-                            <a class="btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                            <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
                             <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                        </div>
+                    </div>
+                    <div id="delete-recipe" class="modal">
+                        <div class="modal-content center-align">
+                            <p>Are you sure you want to delete this recipe?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-close waves-effect waves-light btn-flat">Cancel</a>
+                            <a class="modal-action modal-close waves-effect waves-red btn-flat">Delete</a>
                         </div>
                     </div>
                 </div>

@@ -19,20 +19,10 @@
                 <div class="nav-wrapper">
                     <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
                     <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a class="dropdown-button" href="#!" data-activates="user-control">John Stew<i class="material-icons left">account_circle</i></a>
-                            <ul id="user-control" class="dropdown-content">
-                                <li><a href="profile.html">Profile<i class="material-icons left">person</i></a></li>
-                                <li><a href="recipes.html">My Recipes<i class="material-icons left">folder</i></a></li>
-                                <li class="divider"></li>
-                                <li><a href="index.html">Logout<i class="material-icons left">lock</i></a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
             </nav>
         </div>
-        <ul class="side-nav" id="slide_out">
+        <ul class="side-nav fixed" id="slide_out">
             <li>
                 <div class="nav-wrapper deep-orange darken-4 hide-on-med-and-up">
                     <a id="logo" href="index.html" class="white-text">More-Recipes</a>
@@ -49,7 +39,23 @@
                 </div>
             </li>
             <li><a href="index.html">Home</a></li>
-            <li><a href="index.html?#category">Category</a></li>
+            <li>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header black-text">Category</div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#!" class="collection-item blue-text">Breakfast</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Lunch</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Dinner</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Appetizer</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Main</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Dessert</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
             <li><a href="profile.html">Profile</a></li>
             <li>
                 <div class="divider"></div>
@@ -81,9 +87,9 @@
                             <img src="images/image01.jpg">
                         </div>
                         <div class="card-action">
-                            <a href="#!" class="chip waves-effect waves-red red"><i class="fa fa-heart"></i></a>
-                            <a href="#!" class="chip waves-effect waves-red"><i class="fa fa-thumbs-up"></i></a>
-                            <a href="#!" class="chip waves-effect waves-red"><i class="fa fa-thumbs-down"></i></a>
+                            <a id="favorite" class="chip waves-effect waves-red "><i class="fa fa-heart"></i></a>
+                            <a id="upvote" class="chip waves-effect waves-red"><i class="fa fa-thumbs-up"></i></a>
+                            <a id="downvote" class="chip waves-effect waves-red"><i class="fa fa-thumbs-down"></i></a>
                         </div>
                     </div>
                 </div>
@@ -110,9 +116,8 @@
                         <div class="col s12">
                             <h6><b><em>Directions:</em></b></h6>
                             <p id="directions" class="grey-text text-darken-3 lighten-3">
-                                Boil the boilables for 20 minutes. <br>
-                                Cook the fish for 15 minutes. <br>
-                                Add spices and seasonings and cook for 30 minutes.
+                                Boil the boilables for 20 minutes. <br> Cook the fish for 15 minutes. <br> Add spices and
+                                seasonings and cook for 30 minutes.
                             </p>
                         </div>
                     </div>

@@ -19,31 +19,129 @@
                 <div class="nav-wrapper">
                     <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
                     <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a class="dropdown-button" href="#!" data-activates="user-control">Welcome<i class="material-icons large left">account_circle</i></a>
-                            <ul id="user-control" class="dropdown-content">
-                                <li><a href="signin.html">Sign in<i class="material-icons left">person</i></a></li>
-                                <li><a href="signup.html">Register<i class="material-icons left">folder</i></a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
             </nav>
         </div>
-        <ul class="side-nav" id="slide_out">
+        <ul class="side-nav fixed" id="slide_out">
             <li>
                 <div class="nav-wrapper deep-orange darken-4 hide-on-med-and-up">
-                    <a id="logo" class="white-text">More-Recipes</a>
+                    <a id="logo" href="index.html" class="white-text">More-Recipes</a>
                 </div>
             </li>
             <li><a href="index.html">Home</a></li>
-            <li><a href="?#category">Category</a></li>
+            <li>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header black-text">Category</div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#!" class="collection-item blue-text">Breakfast</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Lunch</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Dinner</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Appetizer</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Main</a></li>
+                                <li><a href="#!" class="collection-item blue-text">Dessert</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
             <li>
                 <div class="divider"></div>
             </li>
-            <li><a href="signin.html">Sign In</a></li>
-            <li><a href="signup.html">Register</a></li>
+            <li><a href="#signin" class="modal-trigger">Sign In</a></li>
+            <li><a href="#signup" class="modal-trigger">Register</a></li>
         </ul>
+        <div id="signin" class="row modal center-align">
+            <form class="col s12">
+                <div class="modal-content">
+                    <h5 class="blue-text center-align">Login into your account</h5>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text" class="validate" required>
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password" type="password" class="validate" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row"></div>
+                    <div class='row'>
+                        <button type='submit' name='signinbtn' class='col s6 offset-s3 btn btn-large waves-effect waves-light indigo darken-2'>Sign In</button>
+                    </div>
+                    <div class="row center-align">
+                        Don't have an account? <a href="#signup" class="modal-trigger modal-close blue-text">Register</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="signup" class="row modal center-align">
+            <form class="col s12">
+                <div class="modal-content">
+                    <h5 class="blue-text center-align">Create an account</h5>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text" class="validate" required>
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password" type="password" class="validate" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="retype-password" name="password" type="password" class="validate" required>
+                            <label for="retype-password">Retype Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" name="email" type="email" class="validate" required>
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="firstName" name="firstName" type="text" class="validate" required>
+                            <label for="firstName">First Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="lastName" name="lastName" type="text" class="validate" required>
+                            <label for="lastName">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p>
+                            <input class="with-gap" name="gender" type="radio" id="male" checked/>
+                            <label for="male">Male</label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="gender" type="radio" id="female" />
+                            <label for="female">Female</label>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row"></div>
+                    <div class='row'>
+                        <button type='submit' name='signupbtn' class='col s6 offset-s3 btn btn-large waves-effect waves-light indigo darken-2'>Sign Up</button>
+                    </div>
+                    <div class="row center-align">
+                        Already have an account? <a href="#signin" class="modal-trigger modal-close blue-text">Sign In</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </header>
     <main>
         <div id="position">
@@ -91,8 +189,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s12 m1 l1"></div>
-            <div class="col s12 m7 l7">
+            <div class="col s12 m7 l8">
                 <div class="row">
                     <div id="recipes" class="card large col s12 m6 l4">
                         <a href="recipe.html"><span class="card-title">German Sauce</span></a>
@@ -221,7 +318,7 @@
                     <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
                 </ul>
             </div>
-            <div class="col s12 m4 l3">
+            <div class="col s12 m5 l4">
                 <div id="popular" class="col s12 grey lighten-3 z-depth-1">
                     <h5><em>Popular Recipes</em></h5>
                     <hr>
@@ -282,21 +379,27 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row"></div>
-                <div class="row z-depth-1">
-                    <div id="category" class="col s12">
-                        <h5><em>Category</em></h5>
-                        <div class="collection">
-                            <a href="#!" class="collection-item black-text">Breakfast</a>
-                            <a href="#!" class="collection-item black-text">Lunch</a>
-                            <a href="#!" class="collection-item black-text">Dinner</a>
-                            <a href="#!" class="collection-item black-text">Appetizer</a>
-                            <a href="#!" class="collection-item black-text">Main</a>
-                            <a href="#!" class="collection-item black-text">Dessert</a>
+                    <div class="col s12">
+                        <h5 class="header"><a href="recipe.html">Italian Burger</a></h5>
+                        <div class="card horizontal">
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image05.jpg"></a>
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p>Filled with sweetness and nutrients.</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li id="downvotes"><i class="material-icons tiny">visibility</i>200</li>
+                                        <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="row"></div>
             </div>
         </div>
     </main>
