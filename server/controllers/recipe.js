@@ -1,4 +1,6 @@
-import recipes from '../../dummyDb';
+import db from '../../dummyDb';
+
+const recipes = db.recipes;
 
 export default {
   addRecipe(req, res) {
