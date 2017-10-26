@@ -11,4 +11,7 @@ export default (app) => {
 
   // Modifies a recipe in the recipe catalog
   app.put('/api/recipes/:recipeId', recipeController.modifyRecipe);
+
+  // Delete a recipe in the recipe catalog
+  app.delete('/api/recipes/:recipeId', recipeController.deleteRecipe);
 };

@@ -33,6 +33,23 @@ export default {
     });
   },
 
+  deleteRecipe(req, res) {
+    for (let i = 0; i < recipes.length; i += 1) {
+      const recipe = recipes[i];
+      if (recipe.id === parseInt(req.params.recipeId, 10)) {
+        recipes.splice(i, 1);
+        return res.status(200).send({
+          status: 'Success',
+          message: 'Recipe deleted successfully',
+        });
+      }
+    }
+    return res.status(404).send({
+      status: 'Fail',
+      message: 'Recipe not found'
+    });
+  },
+
   getAll(req, res) {
     res.status(200).send({
       recipes,
