@@ -37,4 +37,15 @@ export default {
     }
     next();
   },
+
+  // Check for review required input fields
+  reviewRequiredInputs(req, res, next) {
+    if (!req.body.content || isEmpty(req.body.content)) {
+      return res.status(406).send({
+        status: 'Fail',
+        message: 'Content cannot be empty'
+      });
+    }
+    next();
+  }
 };

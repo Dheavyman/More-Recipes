@@ -18,6 +18,12 @@ class RecipeHandler {
    * @memberof RecipeHandler
    */
   static addRecipe(req, res) {
+    const addedRecipeProperties = {
+      upvotes: 0,
+      downvotes: 0,
+      views: 0,
+    };
+    Object.assign(req.body, addedRecipeProperties);
     recipes.push(req.body);
     return res.status(200).send({
       status: 'Success',
@@ -38,12 +44,11 @@ class RecipeHandler {
     for (let i = 0; i < recipes.length; i += 1) {
       const recipe = recipes[i];
       if (recipe.id === parseInt(req.params.recipeId, 10)) {
-        recipe.title = req.body.title || recipe.title;
-        recipe.description = req.body.description || recipe.description;
-        recipe.preparationTime = req.body.preparationTime ||
-          recipe.preparationTime;
-        recipe.ingredients = req.body.ingredients || recipe.ingredients;
-        recipe.directions = req.body.directions || recipe.directions;
+        recipe.title = req.body.title;
+        recipe.description = req.body.description;
+        recipe.preparationTime = req.body.preparationTime;
+        recipe.ingredients = req.body.ingredients;
+        recipe.directions = req.body.directions;
         return res.status(200).send({
           status: 'Success',
           message: 'Recipe modified successfully',
