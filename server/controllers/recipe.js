@@ -18,6 +18,12 @@ class RecipeHandler {
    * @memberof RecipeHandler
    */
   static addRecipe(req, res) {
+    const addedRecipeProperties = {
+      upvotes: 0,
+      downvotes: 0,
+      views: 0,
+    };
+    Object.assign(req.body, addedRecipeProperties);
     recipes.push(req.body);
     return res.status(200).send({
       status: 'Success',
