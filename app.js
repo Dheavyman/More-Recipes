@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 routes(app);
 
 // Catch other routes that doesn't exist
-app.all('*', (req, res) => res.status(200).send({
-  message: 'You have reached the default endpoint',
+app.all('*', (req, res) => res.status(404).send({
+  message: 'Oops! 404. Page not Found',
 }));
 
 export default app;
