@@ -14,4 +14,7 @@ export default (app) => {
 
   // Delete a recipe in the recipe catalog
   app.delete('/api/recipes/:recipeId', recipeController.deleteRecipe);
+
+  // Retrieve all the recipes in the catalog
+  app.get('/api/recipes', recipeController.getAll);
 };
