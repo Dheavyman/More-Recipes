@@ -1,6 +1,6 @@
 const isEmpty = (str) => {
   const regexp = /^[ ]+$/;
-  if (str.match(regexp) || !str.length) {
+  if (regexp.test(str) || !str.length) {
     return true;
   }
   return false;

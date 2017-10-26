@@ -9,5 +9,33 @@ export default {
       status: 'Success',
       message: 'Recipe added successfully',
     });
+  },
+
+  modifyRecipe(req, res) {
+    for (let i = 0; i < recipes.length; i += 1) {
+      const recipe = recipes[i];
+      if (recipe.id === parseInt(req.params.recipeId, 10)) {
+        recipe.title = req.body.title || recipe.title;
+        recipe.description = req.body.description || recipe.description;
+        recipe.preparationTime = req.body.preparationTime ||
+          recipe.preparationTime;
+        recipe.ingredients = req.body.ingredients || recipe.ingredients;
+        recipe.directions = req.body.directions || recipe.directions;
+        return res.status(200).send({
+          status: 'Success',
+          message: 'Recipe modified successfully',
+        });
+      }
+    }
+    return res.status(404).send({
+      status: 'Fail',
+      message: 'Recipe not found'
+    });
+  },
+
+  getAll(req, res) {
+    res.status(200).send({
+      recipes,
+    });
   }
 };
