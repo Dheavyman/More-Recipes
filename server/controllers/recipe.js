@@ -54,5 +54,21 @@ export default {
     res.status(200).send({
       recipes,
     });
+  },
+
+  getOne(req, res) {
+    for (let i = 0; i < recipes.length; i += 1) {
+      const recipe = recipes[i];
+      if (recipe.id === parseInt(req.params.recipeId, 10)) {
+        return res.status(200).send({
+          status: 'Success',
+          recipe: recipes[i],
+        });
+      }
+    }
+    return res.status(404).send({
+      status: 'Fail',
+      message: 'Recipe not found'
+    });
   }
 };

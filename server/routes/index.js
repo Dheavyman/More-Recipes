@@ -17,4 +17,7 @@ export default (app) => {
 
   // Retrieve all the recipes in the catalog
   app.get('/api/recipes', recipeController.getAll);
+
+  // Retrieve a single recipe from the catalog
+  app.get('/api/recipes/:recipeId', recipeController.getOne);
 };
