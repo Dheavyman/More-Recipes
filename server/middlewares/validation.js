@@ -3,6 +3,7 @@ import helpers from '../helpers';
 const isEmpty = helpers.isEmpty;
 
 export default {
+  // Checks for the recipe required input fields
   recipeRequiredInputs(req, res, next) {
     if (!req.body.title || isEmpty(req.body.title)) {
       return res.status(406).send({
