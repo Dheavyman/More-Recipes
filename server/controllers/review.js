@@ -22,10 +22,12 @@ class ReviewHandler {
     for (let i = 0; i < recipes.length; i += 1) {
       const recipe = recipes[i];
       if (recipe.id === parseInt(req.params.recipeId, 10)) {
+        req.body.recipeId = parseInt(req.params.recipeId, 10);
         reviews.push(req.body);
         return res.status(200).send({
           status: 'Success',
           message: 'Review added successfully',
+          review: req.body
         });
       }
     }
