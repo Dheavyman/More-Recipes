@@ -19,15 +19,18 @@ class RecipeHandler {
    */
   static addRecipe(req, res) {
     const addedRecipeProperties = {
+      id: recipes.length + 1,
       upvotes: 0,
       downvotes: 0,
       views: 0,
     };
     Object.assign(req.body, addedRecipeProperties);
+    console.log(req.body)
     recipes.push(req.body);
     return res.status(201).send({
       status: 'Success',
       message: 'Recipe added successfully',
+      recipeId: recipes[recipes.length - 1].id,
     });
   }
 
@@ -49,9 +52,14 @@ class RecipeHandler {
         recipe.preparationTime = req.body.preparationTime;
         recipe.ingredients = req.body.ingredients;
         recipe.directions = req.body.directions;
-        return res.status(200).send({
+        return res.status(201).send({
           status: 'Success',
           message: 'Recipe modified successfully',
+          title: recipe.title,
+          description: recipe.description,
+          preparationTime: recipe.preparationTime,
+          ingredients: recipe.description,
+          directions: recipe.directions,
         });
       }
     }
