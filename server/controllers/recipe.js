@@ -25,7 +25,6 @@ class RecipeHandler {
       views: 0,
     };
     Object.assign(req.body, addedRecipeProperties);
-    console.log(req.body)
     recipes.push(req.body);
     return res.status(201).send({
       status: 'Success',
