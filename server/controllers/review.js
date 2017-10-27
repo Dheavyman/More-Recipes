@@ -5,13 +5,13 @@ const reviews = db.reviews,
 
 /**
  * Class representing review handler
- * 
+ *
  * @class ReviewHandler
  */
 class ReviewHandler {
   /**
    * Add a review for a recipe
-   * 
+   *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
@@ -40,7 +40,7 @@ class ReviewHandler {
 
   /**
    * Delete a review for a recipe
-   * 
+   *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object

@@ -5,13 +5,13 @@ const recipes = db.recipes,
 
 /**
  * Class representing recipe handler
- * 
+ *
  * @class RecipeHandler
  */
 class RecipeHandler {
   /**
    * Add a recipe to the recipe catalog
-   * 
+   *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
@@ -36,7 +36,7 @@ class RecipeHandler {
 
   /**
    * Modify a recipe in the catalog
-   * 
+   *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
@@ -67,7 +67,7 @@ class RecipeHandler {
 
   /**
    * Delete a recipe in the catalog
-   * 
+   *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The responsee object
@@ -93,7 +93,7 @@ class RecipeHandler {
 
   /**
    * Retrieve all the recipe in the catalog
-   * 
+   *
    * @static
    * @param {object} req - The request object 
    * @param {object} res - The response object
@@ -108,7 +108,7 @@ class RecipeHandler {
 
   /**
    * Retrieve a single recipe in the catalog
-   * 
+   *
    * @static
    * @param {object} req - The request object 
    * @param {object} res - The response object
