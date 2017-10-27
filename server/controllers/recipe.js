@@ -1,6 +1,7 @@
 import db from '../../dummyDb';
 
-const recipes = db.recipes;
+const recipes = db.recipes,
+  reviews = db.reviews;
 
 /**
  * Class representing recipe handler
@@ -29,7 +30,7 @@ class RecipeHandler {
     return res.status(201).send({
       status: 'Success',
       message: 'Recipe added successfully',
-      recipeId: recipes[recipes.length - 1].id,
+      recipe: recipes[recipes.length - 1],
     });
   }
 
@@ -54,11 +55,7 @@ class RecipeHandler {
         return res.status(201).send({
           status: 'Success',
           message: 'Recipe modified successfully',
-          title: recipe.title,
-          description: recipe.description,
-          preparationTime: recipe.preparationTime,
-          ingredients: recipe.description,
-          directions: recipe.directions,
+          recipe,
         });
       }
     }
@@ -120,11 +117,18 @@ class RecipeHandler {
    */
   static getOne(req, res) {
     for (let i = 0; i < recipes.length; i += 1) {
-      const recipe = recipes[i];
+      const recipe = recipes[i],
+        review = [];
       if (recipe.id === parseInt(req.params.recipeId, 10)) {
+        for (let j = 0; j < reviews.length; j += 1) {
+          if (reviews[j].recipeId === recipe.id) {
+            review.push(reviews[j]);
+          }
+        }
         return res.status(200).send({
           status: 'Success',
           recipe: recipes[i],
+          reviews: review,
         });
       }
     }

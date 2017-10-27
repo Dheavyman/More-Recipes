@@ -22,12 +22,13 @@ class ReviewHandler {
     for (let i = 0; i < recipes.length; i += 1) {
       const recipe = recipes[i];
       if (recipe.id === parseInt(req.params.recipeId, 10)) {
+        req.body.id = reviews.length + 1;
         req.body.recipeId = parseInt(req.params.recipeId, 10);
         reviews.push(req.body);
         return res.status(201).send({
           status: 'Success',
           message: 'Review added successfully',
-          review: req.body
+          review: reviews[reviews.length - 1]
         });
       }
     }
@@ -49,12 +50,14 @@ class ReviewHandler {
   static deleteReview(req, res) {
     for (let i = 0; i < reviews.length; i += 1) {
       const review = reviews[i];
-      if (review.recipeId === parseInt(req.params.recipeId, 10)) {
-        review.splice(i, 1);
-        return res.status(200).send({
-          status: 'Success',
-          message: 'Review deleted successfully',
-        });
+      if (review.id === parseInt(req.params.reviewId, 10)) {
+        if (review.recipeId === parseInt(req.params.recipeId, 10)) {
+          reviews.splice(i, 1);
+          return res.status(200).send({
+            status: 'Success',
+            message: 'Review deleted successfully',
+          });
+        }
       }
     }
     return res.status(404).send({
