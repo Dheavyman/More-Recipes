@@ -95,7 +95,7 @@ class RecipeHandler {
    * Retrieve all the recipe in the catalog
    *
    * @static
-   * @param {object} req - The request object 
+   * @param {object} req - The request object
    * @param {object} res - The response object
    * @return {object} - JSON object representing the recipes in the catalog
    * @memberof RecipeHandler
@@ -110,7 +110,7 @@ class RecipeHandler {
    * Retrieve a single recipe in the catalog
    *
    * @static
-   * @param {object} req - The request object 
+   * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} - JSON object representing the single recipe retrieved
    * @memberof RecipeHandler
