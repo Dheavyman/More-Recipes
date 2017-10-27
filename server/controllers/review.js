@@ -24,7 +24,7 @@ class ReviewHandler {
       if (recipe.id === parseInt(req.params.recipeId, 10)) {
         req.body.recipeId = parseInt(req.params.recipeId, 10);
         reviews.push(req.body);
-        return res.status(200).send({
+        return res.status(201).send({
           status: 'Success',
           message: 'Review added successfully',
           review: req.body

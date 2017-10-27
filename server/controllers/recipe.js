@@ -25,7 +25,7 @@ class RecipeHandler {
     };
     Object.assign(req.body, addedRecipeProperties);
     recipes.push(req.body);
-    return res.status(200).send({
+    return res.status(201).send({
       status: 'Success',
       message: 'Recipe added successfully',
     });
