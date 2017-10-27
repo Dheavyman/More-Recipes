@@ -28,5 +28,6 @@ export default (app) => {
     reviewController.addReview);
 
   // Delete a review for a recipe
-  app.delete('/api/recipes/:recipeId/reviews', reviewController.deleteReview);
+  app.delete('/api/recipes/:recipeId/reviews/:reviewId',
+    reviewController.deleteReview);
 };
