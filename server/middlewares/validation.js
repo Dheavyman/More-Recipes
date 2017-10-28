@@ -3,7 +3,14 @@ import helpers from '../helpers';
 const isEmpty = helpers.isEmpty;
 
 export default {
-  // Checks for the recipe required input fields
+  /**
+   * Check for all required input fields
+   *
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @param {function} next - Calls the next route handler
+   * @returns {object} JSON object representing failure message
+   */
   recipeRequiredInputs(req, res, next) {
     if (!req.body.title || isEmpty(req.body.title)) {
       return res.status(406).send({
@@ -38,7 +45,14 @@ export default {
     next();
   },
 
-  // Check for review required input fields
+  /**
+   * Checks for the required input fields
+   *
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @param {function} next - Calls the next route handler
+   * @returns {object} JSON object representing the failure message
+   */
   reviewRequiredInputs(req, res, next) {
     if (!req.body.content || isEmpty(req.body.content)) {
       return res.status(406).send({
