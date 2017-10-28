@@ -19,7 +19,8 @@ export default (app) => {
   app.delete('/api/recipes/:recipeId', recipeController.deleteRecipe);
 
   // Retrieve all the recipes in the catalog
-  app.get('/api/recipes', recipeController.getAll);
+  app.get('/api/recipes', recipeController.getAll,
+    recipeController.getMostUpvotes);
 
   // Retrieve a single recipe from the catalog
   app.get('/api/recipes/:recipeId', recipeController.getOne);

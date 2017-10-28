@@ -97,11 +97,14 @@ class RecipeHandler {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
+   * @param {function} next - Calls the next route handler function
    * @return {object} - JSON object representing the recipes in the catalog
    * @memberof RecipeHandler
    */
-  static getAll(req, res) {
+  static getAll(req, res, next) {
+    if (req.query.sort) return next();
     return res.status(200).send({
+      status: 'Success',
       recipes,
     });
   }
@@ -136,6 +139,33 @@ class RecipeHandler {
       status: 'Fail',
       message: 'Recipe not found'
     });
+  }
+
+  /**
+   * Retrieve recipes with most upvotes in descending order
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @param {object} next - Calls the next route handler
+   * @return {object} JSON object representing the success or failure message
+   * @memberof RecipeHandler
+   */
+  static getMostUpvotes(req, res, next) {
+    if (req.query.sort && req.query.order) {
+      const sort = req.query.sort.toLowerCase(),
+        order = req.query.order.slice(0, 4).toLowerCase(),
+        sortedRecipes = recipes.slice(0);
+      if (sort === 'upvotes' && order === 'desc') {
+        sortedRecipes
+          .sort((current, nextIndex) => nextIndex.upvotes - current.upvotes);
+        return res.status(200).send({
+          status: 'Success',
+          sortedRecipes
+        });
+      }
+    }
+    next();
   }
 }
 
