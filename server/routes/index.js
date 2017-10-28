@@ -3,6 +3,7 @@ import middlewares from '../middlewares';
 
 const recipeController = controllers.recipe,
   reviewController = controllers.review,
+  voteController = controllers.vote,
   validate = middlewares.validation;
 
 export default (app) => {
@@ -30,4 +31,10 @@ export default (app) => {
   // Delete a review for a recipe
   app.delete('/api/recipes/:recipeId/reviews/:reviewId',
     reviewController.deleteReview);
+
+  // Upvote a recipe
+  app.put('/api/recipes/:recipeId/upvote', voteController.upvote);
+
+  // Downvote a recipe
+  app.put('/api/recipes/:recipeId/downvote', voteController.downvote);
 };
