@@ -430,4 +430,64 @@ describe('More Recipes', () => {
         });
     });
   });
+  describe('vote recipe API', () => {
+    it('should allow a user to upvote a recipe', (done) => {
+      server
+        .put(`/api/recipes/${recipeId1}/upvote`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Upvote recorded');
+          if (err) return done(err);
+          done();
+        });
+    });
+    it('should allow a user to downvote a recipe', (done) => {
+      server
+        .put(`/api/recipes/${recipeId1}/downvote`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Downvote recorded');
+          if (err) return done(err);
+          done();
+        });
+    });
+    it('should return 404 for attempt to upvote a recipe that doesn\'t exist',
+      (done) => {
+        server
+          .put(`/api/recipes/${410}/upvote`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body.status).to.equal('Fail');
+            expect(res.body.message).to.equal('Recipe not found');
+            if (err) return done(err);
+            done();
+          });
+      });
+    it('should return 404 for attempt to upvote a recipe that doesn\'t exist',
+      (done) => {
+        server
+          .put(`/api/recipes/${250}/downvote`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body.status).to.equal('Fail');
+            expect(res.body.message).to.equal('Recipe not found');
+            if (err) return done(err);
+            done();
+          });
+      });
+  });
 });
