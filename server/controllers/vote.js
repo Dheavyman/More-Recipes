@@ -32,7 +32,7 @@ class Vote {
     }
     return res.status(404).send({
       status: 'Fail',
-      message: 'Recipe not founddd',
+      message: 'Recipe not found',
     });
   }
 
