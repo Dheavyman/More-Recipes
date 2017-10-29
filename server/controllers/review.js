@@ -50,14 +50,13 @@ class ReviewHandler {
   static deleteReview(req, res) {
     for (let i = 0; i < reviews.length; i += 1) {
       const review = reviews[i];
-      if (review.id === parseInt(req.params.reviewId, 10)) {
-        if (review.recipeId === parseInt(req.params.recipeId, 10)) {
-          reviews.splice(i, 1);
-          return res.status(200).send({
-            status: 'Success',
-            message: 'Review deleted successfully',
-          });
-        }
+      if (review.id === parseInt(req.params.reviewId, 10) &&
+        review.recipeId === parseInt(req.params.recipeId, 10)) {
+        reviews.splice(i, 1);
+        return res.status(200).send({
+          status: 'Success',
+          message: 'Review deleted successfully',
+        });
       }
     }
     return res.status(404).send({
