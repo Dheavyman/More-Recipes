@@ -490,4 +490,47 @@ describe('More Recipes', () => {
           });
       });
   });
+  describe('retrieve recipe API', () => {
+    it('should allow user get recipes with most upvotes in descending order',
+      (done) => {
+        server
+          .get('/api/recipes?sort=upvotes&order=descending')
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.sortedRecipes).to.be.an('array');
+            if (err) return done(err);
+            done();
+          });
+      });
+    it('should return 404 for unmatched query strings', (done) => {
+      server
+        .get('/api/recipes?sort=upvotes&match=unordered')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.message).to.equal('Oops! 404. Page not Found');
+          if (err) return done(err);
+          done();
+        });
+    });
+    it('should return 404 for unmatched query strings', (done) => {
+      server
+        .get('/api/recipes?sort=upvotes&order=unordered')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.message).to.equal('Oops! 404. Page not Found');
+          if (err) return done(err);
+          done();
+        });
+    });
+  });
 });
