@@ -6,10 +6,7 @@
  */
 const isValidEmail = (email) => {
   const regexp = /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/;
-  if (regexp.test(email)) {
-    return true;
-  }
-  return false;
+  return (regexp.test(email));
 };
 
 export default isValidEmail;

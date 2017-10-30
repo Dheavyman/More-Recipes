@@ -6,10 +6,7 @@
  */
 const isAlphaNumeric = (username) => {
   const regexp = /^[A-Za-z0-9]+$/;
-  if (regexp.test(username)) {
-    return true;
-  }
-  return false;
+  return (regexp.test(username));
 };
 
 export default isAlphaNumeric;
