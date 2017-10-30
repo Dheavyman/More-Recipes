@@ -8,7 +8,7 @@ export default {
         id: user.id,
         username: user.username,
       }
-    }, 'awesome_secret', {
+    }, process.env.SECRET, {
       expiresIn: 60 * 60 * 24,
     });
     return token;
@@ -23,7 +23,7 @@ export default {
         message: 'Unauthenticated access, no token provided'
       });
     } else if (token) {
-      jwt.verify(token, 'awesome_secret', (err, decoded) => {
+      jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) {
           return res.status(403).send({
             message: err.message,
