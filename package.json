@@ -7,6 +7,8 @@
   "description": "A platform for sharing recipes",
   "main": "index.js",
   "scripts": {
+    "migrate": "node_modules/.bin/sequelize db:migrate",
+    "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all",
     "start": "babel-node ./bin/www",
     "start:dev": "nodemon --exec babel-node ./bin/www",
     "test": "nyc mocha --compilers js:babel-core/register tests/test.js",
