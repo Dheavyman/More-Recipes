@@ -1,41 +1,5 @@
-import controllers from '../controllers';
-import middlewares from '../middlewares';
-
-const recipeController = controllers.recipe,
-  reviewController = controllers.review,
-  voteController = controllers.vote,
-  validate = middlewares.validation;
+import apiVersion1 from './version1'
 
 export default (app) => {
-  // Add a recipe to the catalog
-  app.post('/api/recipes', validate.recipeRequiredInputs,
-    recipeController.addRecipe);
-
-  // Modifies a recipe in the recipe catalog
-  app.put('/api/recipes/:recipeId', validate.recipeRequiredInputs,
-    recipeController.modifyRecipe);
-
-  // Delete a recipe in the recipe catalog
-  app.delete('/api/recipes/:recipeId', recipeController.deleteRecipe);
-
-  // Retrieve all the recipes in the catalog
-  app.get('/api/recipes', recipeController.getAll,
-    recipeController.getMostUpvotes);
-
-  // Retrieve a single recipe from the catalog
-  app.get('/api/recipes/:recipeId', recipeController.getOne);
-
-  // Add a review for a recipe
-  app.post('/api/recipes/:recipeId/reviews', validate.reviewRequiredInputs,
-    reviewController.addReview);
-
-  // Delete a review for a recipe
-  app.delete('/api/recipes/:recipeId/reviews/:reviewId',
-    reviewController.deleteReview);
-
-  // Upvote a recipe
-  app.put('/api/recipes/:recipeId/upvote', voteController.upvote);
-
-  // Downvote a recipe
-  app.put('/api/recipes/:recipeId/downvote', voteController.downvote);
+  app.use('/api/v1', apiVersion1);
 };

@@ -72,7 +72,7 @@ describe('More Recipes', () => {
   describe('add recipe API', () => {
     it('should allow a user to add a recipe', (done) => {
       server
-        .post('/api/recipes')
+        .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -89,7 +89,7 @@ describe('More Recipes', () => {
     });
     it('should allow a user to add another recipe', (done) => {
       server
-        .post('/api/recipes')
+        .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -106,7 +106,7 @@ describe('More Recipes', () => {
     });
     it('should return 406 for an empty title', (done) => {
       server
-        .post('/api/recipes')
+        .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -122,7 +122,7 @@ describe('More Recipes', () => {
     });
     it('should return 406 for empty description', (done) => {
       server
-        .post('/api/recipes')
+        .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -138,7 +138,7 @@ describe('More Recipes', () => {
     });
     it('should return 406 for empty preparation time', (done) => {
       server
-        .post('/api/recipes')
+        .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -154,7 +154,7 @@ describe('More Recipes', () => {
     });
     it('should return 406 for empty ingredients', (done) => {
       server
-        .post('/api/recipes')
+        .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -170,7 +170,7 @@ describe('More Recipes', () => {
     });
     it('should return 406 for empty directions', (done) => {
       server
-        .post('/api/recipes')
+        .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -188,7 +188,7 @@ describe('More Recipes', () => {
   describe('modify recipe API', () => {
     it('should allow a user to modify a recipe', (done) => {
       server
-        .put(`/api/recipes/${recipeId1}`)
+        .put(`/api/v1/recipes/${recipeId1}`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -207,7 +207,7 @@ describe('More Recipes', () => {
     it('should return 404 for attempt to modify a recipe that doesn\'t exist',
       (done) => {
         server
-          .put(`/api/recipes/${500}`)
+          .put(`/api/v1/recipes/${500}`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -226,7 +226,7 @@ describe('More Recipes', () => {
     it('should allow a user to get all the recipes in the catalog',
       (done) => {
         server
-          .get('/api/recipes')
+          .get('/api/v1/recipes')
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -240,7 +240,7 @@ describe('More Recipes', () => {
     it('should allow a user to get a single recipe in the catalog',
       (done) => {
         server
-          .get(`/api/recipes/${recipeId2}`)
+          .get(`/api/v1/recipes/${recipeId2}`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -254,7 +254,7 @@ describe('More Recipes', () => {
     it('should return 404 for attempt to get a recipe that doesn\'t exist',
       (done) => {
         server
-          .get(`/api/recipes/${250}`)
+          .get(`/api/v1/recipes/${250}`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -270,7 +270,7 @@ describe('More Recipes', () => {
   describe('delete recipe API', () => {
     it('should allow a user to delete a recipe', (done) => {
       server
-        .delete(`/api/recipes/${recipeId2}`)
+        .delete(`/api/v1/recipes/${recipeId2}`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -286,7 +286,7 @@ describe('More Recipes', () => {
     it('should return 404 for attempt to delete a recipe that doesn\'t exist',
       (done) => {
         server
-          .delete(`/api/recipes/${5000}`)
+          .delete(`/api/v1/recipes/${5000}`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -303,7 +303,7 @@ describe('More Recipes', () => {
   describe('review recipe API', () => {
     it('should allow a user add a review for a recipe', (done) => {
       server
-        .post(`/api/recipes/${recipeId1}/reviews`)
+        .post(`/api/v1/recipes/${recipeId1}/reviews`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -321,7 +321,7 @@ describe('More Recipes', () => {
     });
     it('should allow a user add a review for a recipe', (done) => {
       server
-        .post(`/api/recipes/${recipeId1}/reviews`)
+        .post(`/api/v1/recipes/${recipeId1}/reviews`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -339,7 +339,7 @@ describe('More Recipes', () => {
     });
     it('should return 406 for empty content', (done) => {
       server
-        .post(`/api/recipes/${recipeId1}/reviews`)
+        .post(`/api/v1/recipes/${recipeId1}/reviews`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -356,7 +356,7 @@ describe('More Recipes', () => {
     it('should return 404 for attempt to review a recipe that doesn\'t exist',
       (done) => {
         server
-          .post(`/api/recipes/${400}/reviews`)
+          .post(`/api/v1/recipes/${400}/reviews`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -372,7 +372,7 @@ describe('More Recipes', () => {
       });
     it('should allow a user to delete a review', (done) => {
       server
-        .delete(`/api/recipes/${recipeId1}/reviews/${reviewId1}`)
+        .delete(`/api/v1/recipes/${recipeId1}/reviews/${reviewId1}`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -387,7 +387,7 @@ describe('More Recipes', () => {
     it('should return 404 for attempt to delete a review that doesn\'t exist',
       (done) => {
         server
-          .delete(`/api/recipes/${recipeId1}/reviews/${1000}`)
+          .delete(`/api/v1/recipes/${recipeId1}/reviews/${1000}`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -402,7 +402,7 @@ describe('More Recipes', () => {
     it('should return 404 for attempt to delete a review that doesn\'t exist',
       (done) => {
         server
-          .delete(`/api/recipes/${150}/reviews/${reviewId2}`)
+          .delete(`/api/v1/recipes/${150}/reviews/${reviewId2}`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -418,7 +418,7 @@ describe('More Recipes', () => {
   describe('get single recipe API', () => {
     it('should return recipe with its reviews', (done) => {
       server
-        .get(`/api/recipes/${recipeId1}`)
+        .get(`/api/v1/recipes/${recipeId1}`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -433,7 +433,7 @@ describe('More Recipes', () => {
   describe('vote recipe API', () => {
     it('should allow a user to upvote a recipe', (done) => {
       server
-        .put(`/api/recipes/${recipeId1}/upvote`)
+        .put(`/api/v1/recipes/${recipeId1}/upvote`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -447,7 +447,7 @@ describe('More Recipes', () => {
     });
     it('should allow a user to downvote a recipe', (done) => {
       server
-        .put(`/api/recipes/${recipeId1}/downvote`)
+        .put(`/api/v1/recipes/${recipeId1}/downvote`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -462,7 +462,7 @@ describe('More Recipes', () => {
     it('should return 404 for attempt to upvote a recipe that doesn\'t exist',
       (done) => {
         server
-          .put(`/api/recipes/${410}/upvote`)
+          .put(`/api/v1/recipes/${410}/upvote`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -477,7 +477,7 @@ describe('More Recipes', () => {
     it('should return 404 for attempt to upvote a recipe that doesn\'t exist',
       (done) => {
         server
-          .put(`/api/recipes/${250}/downvote`)
+          .put(`/api/v1/recipes/${250}/downvote`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -494,7 +494,7 @@ describe('More Recipes', () => {
     it('should allow user get recipes with most upvotes in descending order',
       (done) => {
         server
-          .get('/api/recipes?sort=upvotes&order=descending')
+          .get('/api/v1/recipes?sort=upvotes&order=descending')
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
@@ -508,7 +508,7 @@ describe('More Recipes', () => {
       });
     it('should return 404 for unmatched query strings', (done) => {
       server
-        .get('/api/recipes?sort=upvotes&match=unordered')
+        .get('/api/v1/recipes?sort=upvotes&match=unordered')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -521,7 +521,7 @@ describe('More Recipes', () => {
     });
     it('should return 404 for unmatched query strings', (done) => {
       server
-        .get('/api/recipes?sort=upvotes&order=unordered')
+        .get('/api/v1/recipes?sort=upvotes&order=unordered')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
