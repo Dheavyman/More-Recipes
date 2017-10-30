@@ -1,23 +1,23 @@
-{
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+export default {
+  development: {
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DEV,
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
   },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+  test: {
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_TEST,
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT
   },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+  production: {
+    use_env_variable: 'DATABASE_URL'
   }
-}
+};
