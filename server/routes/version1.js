@@ -13,8 +13,7 @@ router.route('/recipes')
   .post(validate.recipeRequiredInputs, recipeController.addRecipe)
 
   // Retrieve all the recipes in the catalog
-  .get('/recipes', recipeController.getAll,
-    recipeController.getMostUpvotes);
+  .get(recipeController.getAll, recipeController.getMostUpvotes);
 
 router.route('/recipes/:recipeId')
   // Retrieve a single recipe from the catalog
