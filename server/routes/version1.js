@@ -26,17 +26,17 @@ router.route('/recipes/:recipeId')
   .delete(recipeController.deleteRecipe);
 
 // Add a review for a recipe
-router.post('/api/recipes/:recipeId/reviews', validate.reviewRequiredInputs,
+router.post('/recipes/:recipeId/reviews', validate.reviewRequiredInputs,
   reviewController.addReview);
 
 // Delete a review for a recipe
-router.delete('/api/recipes/:recipeId/reviews/:reviewId',
+router.delete('/recipes/:recipeId/reviews/:reviewId',
   reviewController.deleteReview);
 
 // Upvote a recipe
-router.put('/api/recipes/:recipeId/upvote', voteController.upvote);
+router.put('/recipes/:recipeId/upvote', voteController.upvote);
 
 // Downvote a recipe
-router.put('/api/recipes/:recipeId/downvote', voteController.downvote);
+router.put('/recipes/:recipeId/downvote', voteController.downvote);
 
 export default router;
