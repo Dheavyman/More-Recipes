@@ -5,8 +5,12 @@ import middlewares from '../middlewares';
 const router = express.Router(),
   recipeController = controllers.recipe,
   reviewController = controllers.review,
+  userController = controllers.user,
   voteController = controllers.vote,
   validate = middlewares.validation;
+
+// Register a user on the platform
+router.post('/users/signup', userController.registerUser);
 
 router.route('/recipes')
   // Add a recipe to the catalog
