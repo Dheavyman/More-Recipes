@@ -87,6 +87,39 @@ class RecipeValidation {
         message: error.message,
       }));
   }
+
+  /**
+   * Check if a recipe belongs to a user
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {any} res - The response object
+   * @param {any} next The next route handler function
+   * @returns {any} Object representing error message or
+   * calls the next function
+   * @memberof RecipeValidation
+   */
+  static userRecipe(req, res, next) {
+    return Recipe
+      .find({
+        where: {
+          id: req.params.recipeId,
+          userId: req.decoded.user.id,
+        }
+      })
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(403).send({
+            status: 'Fail',
+            message: 'Not user\'s recipe',
+          });
+        }
+        next();
+      })
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
+  }
 }
 
 export default RecipeValidation;

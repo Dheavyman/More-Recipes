@@ -34,7 +34,8 @@ router.route('/recipes/:recipeId')
 
   // Modifies a recipe in the recipe catalog
   .put(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
-    recipeValidate.recipeExist, recipeController.modifyRecipe)
+    recipeValidate.recipeExist, recipeValidate.userRecipe,
+    recipeController.modifyRecipe)
 
   // Delete a recipe in the recipe catalog
   .delete(recipeController.deleteRecipe);
