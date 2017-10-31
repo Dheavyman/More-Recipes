@@ -2,8 +2,7 @@ import models from '../models';
 import db from '../../dummyDb';
 
 const Recipe = models.Recipe,
-  recipes = db.recipes,
-  reviews = db.reviews;
+  recipes = db.recipes;
 
 /**
  * Class representing recipe handler
