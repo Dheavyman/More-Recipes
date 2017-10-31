@@ -12,7 +12,14 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Username required',
         },
+        isAlphanumeric: {
+          args: true,
+          msg: 'Username can only contain alphabets and numbers'
+        }
       },
+      set(val) {
+        this.setDataValue('username', val.toLowerCase().trim());
+      }
     },
     password: {
       type: DataTypes.STRING,
@@ -22,6 +29,10 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Password required!',
         },
+        len: {
+          args: [6],
+          msg: 'Password must be at least six characters'
+        }
       },
     },
     email: {
@@ -36,6 +47,10 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Email required!',
         },
+        isEmail: {
+          args: true,
+          msg: 'Invalid email address format'
+        }
       },
     },
     firstName: {
@@ -61,6 +76,10 @@ export default (sequelize, DataTypes) => {
     phone: {
       type: DataTypes.INTEGER,
       allowNull: true,
+      unique: {
+        args: true,
+        msg: 'Phone number already exist',
+      },
     },
     gender: {
       type: DataTypes.STRING,
@@ -82,21 +101,13 @@ export default (sequelize, DataTypes) => {
     }
   }, {
     getterMethods: {
-      fullName() { return `${this.firstName} ${this.lastName}`; },
-    },
-    classMethods: {
-      associate: (models) => {
-        User.hasMany(models.Recipe, {
-          foreignKey: 'userId',
-        });
-        User.hasMany(models.Favorite, {
-          foreignKey: 'userId',
-        });
-        User.hasMany(models.Vote, {
-          foreignKey: 'userId',
-        });
-      }
+      fullName() {
+        return `${this.getDataValue('firstName')} ${this.getDataValue('lastName')}`;
+      },
     }
   });
+  User.associate = (models) => {
+
+  };
   return User;
 };
