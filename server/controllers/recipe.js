@@ -123,21 +123,27 @@ class RecipeHandler {
   }
 
   /**
-   * Retrieve all the recipe in the catalog
+   * Retrieve all the recipes
    *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @param {function} next - Calls the next route handler function
-   * @return {object} - JSON object representing the recipes in the catalog
+   * @return {object} - Object representing the success status or
+   * error status
    * @memberof RecipeHandler
    */
-  static getAll(req, res, next) {
-    if (req.query.sort) return next();
-    return res.status(200).send({
-      status: 'Success',
-      recipes,
-    });
+  static getAll(req, res) {
+    return Recipe
+      .all({
+        attributes: [
+          'id', 'title', 'description', 'preparationTime', 'ingredients',
+          'directions', 'upvotes', 'downvotes', 'views'
+        ],
+      })
+      .then(recipe => res.status(200).send(recipe))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 
   /**
