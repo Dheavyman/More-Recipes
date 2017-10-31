@@ -28,8 +28,8 @@ class userHandler {
           username,
           password: hash,
           email: req.body.email,
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
           gender: req.body.gender.toLowerCase(),
         })
           .then((user) => {
@@ -37,8 +37,12 @@ class userHandler {
             res.status(201).send({
               status: 'Success',
               message: 'User created',
-              user,
-              token
+              token,
+              id: user.id,
+              username: user.username,
+              email: user.email,
+              fullName: user.fullName,
+              gender: user.gender
             });
           })
           .catch(error => res.status(400).send({
