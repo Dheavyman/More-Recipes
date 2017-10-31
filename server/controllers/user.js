@@ -37,6 +37,54 @@ class userHandler {
         message: error.message,
       }));
   }
+
+  /**
+   * Sign in a user on the platform
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {any} res - The response object
+   * @returns {object} Success message after successful login or
+   * error message if unsuccessful
+   * @memberof userHandler
+   */
+  static signinUser(req, res) {
+    const username = req.body.username.toLowerCase().trim();
+    return User
+      .findOne({
+        where: {
+          username,
+        }
+      })
+      .then((user) => {
+        if (!user) {
+          res.status(401).send({
+            status: 'Fail',
+            message: 'Authentication failed, user does not exist'
+          });
+        } else if (user) {
+          const hash = user.password;
+          bcrypt.compare(req.body.password, hash).then((confirmed) => {
+            if (!confirmed) {
+              res.status(401).send({
+                status: 'Fail',
+                message: 'Authentication failed, invalid password'
+              });
+            } else {
+              const token = authenticate.generateToken(user);
+              res.status(200).send({
+                status: 'Success',
+                message: 'Login successful',
+                token
+              });
+            }
+          });
+        }
+      })
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
+  }
 }
 
 export default userHandler;
