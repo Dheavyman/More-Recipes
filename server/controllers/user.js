@@ -52,7 +52,7 @@ class userHandler {
     return User
       .findOne({
         where: {
-          username: req.body.username
+          username: req.body.username.toLowerCase().trim(),
         }
       })
       .then((user) => {
@@ -63,21 +63,20 @@ class userHandler {
           });
         }
         const hash = user.password;
-        bcrypt.compare(req.body.password, hash)
-          .then((confirmed) => {
-            if (confirmed) {
-              const token = authenticate.generateToken(user);
-              res.status(200).send({
-                status: 'Success',
-                message: 'Login successful',
-                token
-              });
-            }
+        bcrypt.compare(req.body.password, hash).then((confirmed) => {
+          if (!confirmed) {
             res.status(401).send({
               status: 'Fail',
               message: 'Invalid password'
             });
+          }
+          const token = authenticate.generateToken(user);
+          res.status(200).send({
+            status: 'Success',
+            message: 'Login successful',
+            token
           });
+        });
       })
       .catch(error => res.status(400).send({
         message: error.message,
