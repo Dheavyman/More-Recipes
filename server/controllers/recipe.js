@@ -2,8 +2,7 @@ import models from '../models';
 import db from '../../dummyDb';
 
 const Recipe = models.Recipe,
-  recipes = db.recipes,
-  reviews = db.reviews;
+  recipes = db.recipes;
 
 /**
  * Class representing recipe handler
@@ -156,26 +155,17 @@ class RecipeHandler {
    * @memberof RecipeHandler
    */
   static getOne(req, res) {
-    for (let i = 0; i < recipes.length; i += 1) {
-      const recipe = recipes[i],
-        review = [];
-      if (recipe.id === parseInt(req.params.recipeId, 10)) {
-        for (let j = 0; j < reviews.length; j += 1) {
-          if (reviews[j].recipeId === recipe.id) {
-            review.push(reviews[j]);
-          }
-        }
-        return res.status(200).send({
-          status: 'Success',
-          recipe: recipes[i],
-          reviews: review,
-        });
-      }
-    }
-    return res.status(404).send({
-      status: 'Fail',
-      message: 'Recipe not found'
-    });
+    return Recipe
+      .findById(req.params.recipeId, {
+        attributes: [
+          'id', 'title', 'description', 'preparationTime', 'ingredients',
+          'directions', 'upvotes', 'downvotes', 'views'
+        ],
+      })
+      .then(recipe => res.status(200).send(recipe))
+      .catch(error => res.status(400).send({
+        message: error.message
+      }));
   }
 
   /**
