@@ -3,25 +3,27 @@ import controllers from '../controllers';
 import middlewares from '../middlewares';
 
 const router = express.Router(),
+  authenticate = middlewares.authentication,
   recipeController = controllers.recipe,
   reviewController = controllers.review,
   userController = controllers.user,
   voteController = controllers.vote,
-  userValidation = middlewares.userValidation,
-  validate = middlewares.validation;
+  userValidate = middlewares.userValidation,
+  recipeValidate = middlewares.recipeValidation;
 
 // Register a user on the platform
-router.post('/users/signup', userValidation.signupRequiredInputs,
-  userValidation.validateUserInputs, userValidation.usernameExist,
-  userValidation.emailExist, userController.registerUser);
+router.post('/users/signup', userValidate.signupRequiredInputs,
+  userValidate.validUserInputs, userValidate.usernameExist,
+  userValidate.emailExist, userController.registerUser);
 
 // Signin a user on the platform
-router.post('/users/signin', userValidation.signinRequiredInputs,
+router.post('/users/signin', userValidate.signinRequiredInputs,
   userController.signinUser);
 
 router.route('/recipes')
   // Add a recipe to the catalog
-  .post(validate.recipeRequiredInputs, recipeController.addRecipe)
+  .post(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
+    recipeController.addRecipe)
 
   // Retrieve all the recipes in the catalog
   .get(recipeController.getAll, recipeController.getMostUpvotes);
@@ -31,13 +33,13 @@ router.route('/recipes/:recipeId')
   .get(recipeController.getOne)
 
   // Modifies a recipe in the recipe catalog
-  .put(validate.recipeRequiredInputs, recipeController.modifyRecipe)
+  .put(recipeValidate.recipeRequiredInputs, recipeController.modifyRecipe)
 
   // Delete a recipe in the recipe catalog
   .delete(recipeController.deleteRecipe);
 
 // Add a review for a recipe
-router.post('/recipes/:recipeId/reviews', validate.reviewRequiredInputs,
+router.post('/recipes/:recipeId/reviews', recipeValidate.reviewRequiredInputs,
   reviewController.addReview);
 
 // Delete a review for a recipe

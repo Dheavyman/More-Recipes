@@ -1,6 +1,8 @@
+import models from '../models';
 import db from '../../dummyDb';
 
-const recipes = db.recipes,
+const Recipe = models.Recipe,
+  recipes = db.recipes,
   reviews = db.reviews;
 
 /**
@@ -10,28 +12,44 @@ const recipes = db.recipes,
  */
 class RecipeHandler {
   /**
-   * Add a recipe to the recipe catalog
+   * Add a recipe
    *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} - JSON object representing success or error message
+   * @returns {object} - Object representing success status or
+   *  error status
    * @memberof RecipeHandler
    */
   static addRecipe(req, res) {
-    const addedRecipeProperties = {
-      id: recipes.length + 1,
-      upvotes: 0,
-      downvotes: 0,
-      views: 0,
-    };
-    Object.assign(req.body, addedRecipeProperties);
-    recipes.push(req.body);
-    return res.status(201).send({
-      status: 'Success',
-      message: 'Recipe added successfully',
-      recipe: recipes[recipes.length - 1],
-    });
+    return Recipe
+      .create({
+        userId: req.decoded.user.id,
+        title: req.body.title,
+        description: req.body.description,
+        preparationTime: req.body.preparationTime,
+        ingredients: req.body.ingredients,
+        directions: req.body.directions,
+      })
+      .then(recipe => recipe.increment('views'))
+      .then(recipe => recipe.reload())
+      .then(recipe => res.status(201).send({
+        status: 'Success',
+        message: 'Recipe created',
+        id: recipe.id,
+        userId: recipe.userId,
+        title: recipe.title,
+        description: recipe.description,
+        preparationTime: recipe.preparationTime,
+        ingredients: recipe.ingredients,
+        directions: recipe.directions,
+        upvotes: recipe.upvotes,
+        downvotes: recipe.downvotes,
+        views: recipe.views,
+      }))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 
   /**
