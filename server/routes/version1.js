@@ -12,6 +12,9 @@ const router = express.Router(),
 // Register a user on the platform
 router.post('/users/signup', userController.registerUser);
 
+// Signin a user on the platform
+router.post('/users/signin', userController.signinUser);
+
 router.route('/recipes')
   // Add a recipe to the catalog
   .post(validate.recipeRequiredInputs, recipeController.addRecipe)
