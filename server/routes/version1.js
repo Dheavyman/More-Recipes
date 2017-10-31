@@ -32,13 +32,14 @@ router.route('/recipes/:recipeId')
   // Retrieve a single recipe from the catalog
   .get(recipeController.getOne)
 
-  // Modifies a recipe in the recipe catalog
+  // Modifies a recipe
   .put(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
     recipeValidate.recipeExist, recipeValidate.userRecipe,
     recipeController.modifyRecipe)
 
-  // Delete a recipe in the recipe catalog
-  .delete(recipeController.deleteRecipe);
+  // Delete a recipe
+  .delete(authenticate.verifyToken, recipeValidate.recipeExist,
+    recipeValidate.userRecipe, recipeController.deleteRecipe);
 
 // Add a review for a recipe
 // router.post('/recipes/:recipeId/reviews', recipeValidate.reviewRequiredInputs,
