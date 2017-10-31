@@ -38,7 +38,7 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    firstname: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -48,7 +48,7 @@ export default (sequelize, DataTypes) => {
         },
       },
     },
-    lastname: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -81,9 +81,20 @@ export default (sequelize, DataTypes) => {
       allowNull: true,
     }
   }, {
+    getterMethods: {
+      fullName() { return `${this.firstName} ${this.lastName}`; },
+    },
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
+        User.hasMany(models.Recipe, {
+          foreignKey: 'userId',
+        });
+        User.hasMany(models.Favorite, {
+          foreignKey: 'userId',
+        });
+        User.hasMany(models.Vote, {
+          foreignKey: 'userId',
+        });
       }
     }
   });
