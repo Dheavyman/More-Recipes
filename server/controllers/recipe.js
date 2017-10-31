@@ -53,34 +53,45 @@ class RecipeHandler {
   }
 
   /**
-   * Modify a recipe in the catalog
+   * Modify a recipe
    *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} - JSON object representing success or error message
+   * @returns {object} - Object representing success status or
+   *  error status
    * @memberof RecipeHandler
    */
   static modifyRecipe(req, res) {
-    for (let i = 0; i < recipes.length; i += 1) {
-      const recipe = recipes[i];
-      if (recipe.id === parseInt(req.params.recipeId, 10)) {
-        recipe.title = req.body.title;
-        recipe.description = req.body.description;
-        recipe.preparationTime = req.body.preparationTime;
-        recipe.ingredients = req.body.ingredients;
-        recipe.directions = req.body.directions;
-        return res.status(201).send({
-          status: 'Success',
-          message: 'Recipe modified successfully',
-          recipe,
-        });
-      }
-    }
-    return res.status(404).send({
-      status: 'Fail',
-      message: 'Recipe not found'
-    });
+    return Recipe
+      .find({
+        where: {
+          id: req.params.recipeId,
+          userId: req.decoded.user.id,
+        },
+      })
+      .then(recipe => recipe
+        .update({
+          title: req.body.title,
+          description: req.body.description,
+          preparationTime: req.body.preparationTime,
+          ingredients: req.body.ingredients,
+          directions: req.body.directions,
+        })
+      )
+      .then(updatedRecipe => res.status(200).send({
+        status: 'success',
+        message: 'Recipe modified',
+        id: updatedRecipe.id,
+        title: updatedRecipe.title,
+        description: updatedRecipe.description,
+        preparationTime: updatedRecipe.preparationTime,
+        ingredients: updatedRecipe.ingredients,
+        directions: updatedRecipe.directions,
+      }))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 
   /**

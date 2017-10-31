@@ -33,14 +33,16 @@ router.route('/recipes/:recipeId')
   .get(recipeController.getOne)
 
   // Modifies a recipe in the recipe catalog
-  .put(recipeValidate.recipeRequiredInputs, recipeController.modifyRecipe)
+  .put(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
+    recipeValidate.recipeExist, recipeValidate.userRecipe,
+    recipeController.modifyRecipe)
 
   // Delete a recipe in the recipe catalog
   .delete(recipeController.deleteRecipe);
 
 // Add a review for a recipe
-router.post('/recipes/:recipeId/reviews', recipeValidate.reviewRequiredInputs,
-  reviewController.addReview);
+// router.post('/recipes/:recipeId/reviews', recipeValidate.reviewRequiredInputs,
+//   reviewController.addReview);
 
 // Delete a review for a recipe
 router.delete('/recipes/:recipeId/reviews/:reviewId',
