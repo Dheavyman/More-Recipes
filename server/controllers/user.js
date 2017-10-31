@@ -43,34 +43,29 @@ class userHandler {
    *
    * @static
    * @param {object} req - The request object
-   * @param {any} res - The response object
+   * @param {object} res - The response object
    * @returns {object} Success message after successful login or
    * error message if unsuccessful
    * @memberof userHandler
    */
   static signinUser(req, res) {
-    const username = req.body.username.toLowerCase().trim();
     return User
       .findOne({
         where: {
-          username,
+          username: req.body.username
         }
       })
       .then((user) => {
         if (!user) {
           res.status(401).send({
             status: 'Fail',
-            message: 'Authentication failed, user does not exist'
+            message: 'User does not exist'
           });
-        } else if (user) {
-          const hash = user.password;
-          bcrypt.compare(req.body.password, hash).then((confirmed) => {
-            if (!confirmed) {
-              res.status(401).send({
-                status: 'Fail',
-                message: 'Authentication failed, invalid password'
-              });
-            } else {
+        }
+        const hash = user.password;
+        bcrypt.compare(req.body.password, hash)
+          .then((confirmed) => {
+            if (confirmed) {
               const token = authenticate.generateToken(user);
               res.status(200).send({
                 status: 'Success',
@@ -78,8 +73,11 @@ class userHandler {
                 token
               });
             }
+            res.status(401).send({
+              status: 'Fail',
+              message: 'Invalid password'
+            });
           });
-        }
       })
       .catch(error => res.status(400).send({
         message: error.message,
