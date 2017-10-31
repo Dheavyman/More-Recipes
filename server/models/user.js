@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
@@ -12,7 +14,14 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Username required',
         },
+        isAlphanumeric: {
+          args: true,
+          msg: 'Username can only contain alphabets and numbers'
+        }
       },
+      set(val) {
+        this.setDataValue('username', val.toLowerCase().trim());
+      }
     },
     password: {
       type: DataTypes.STRING,
@@ -22,6 +31,10 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Password required!',
         },
+        len: {
+          args: [6],
+          msg: 'Password must be at least six characters'
+        }
       },
     },
     email: {
@@ -36,6 +49,10 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Email required!',
         },
+        isEmail: {
+          args: true,
+          msg: 'Invalid email address format'
+        }
       },
     },
     firstName: {
@@ -47,6 +64,9 @@ export default (sequelize, DataTypes) => {
           msg: 'Firstname required!',
         },
       },
+      set(val) {
+        this.setDataValue('firstName', val.trim());
+      }
     },
     lastName: {
       type: DataTypes.STRING,
@@ -57,10 +77,17 @@ export default (sequelize, DataTypes) => {
           msg: 'Lastname required!',
         },
       },
+      set(val) {
+        this.setDataValue('lastName', val.trim());
+      }
     },
     phone: {
       type: DataTypes.INTEGER,
       allowNull: true,
+      unique: {
+        args: true,
+        msg: 'Phone number already exist',
+      },
     },
     gender: {
       type: DataTypes.STRING,
@@ -71,6 +98,9 @@ export default (sequelize, DataTypes) => {
           msg: 'Gender required!',
         },
       },
+      set(val) {
+        this.setDataValue('gender', val.toLowerCase().trim());
+      }
     },
     city: {
       type: DataTypes.STRING,
@@ -82,21 +112,18 @@ export default (sequelize, DataTypes) => {
     }
   }, {
     getterMethods: {
-      fullName() { return `${this.firstName} ${this.lastName}`; },
+      fullName() {
+        return `${this.getDataValue('firstName')} ${this.getDataValue('lastName')}`;
+      },
     },
-    classMethods: {
-      associate: (models) => {
-        User.hasMany(models.Recipe, {
-          foreignKey: 'userId',
-        });
-        User.hasMany(models.Favorite, {
-          foreignKey: 'userId',
-        });
-        User.hasMany(models.Vote, {
-          foreignKey: 'userId',
-        });
+    hooks: {
+      afterValidate: (user) => {
+        user.password = bcrypt.hashSync(user.password, 10);
       }
     }
   });
+  User.associate = (models) => {
+
+  };
   return User;
 };
