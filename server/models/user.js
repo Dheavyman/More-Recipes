@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
@@ -63,7 +65,7 @@ export default (sequelize, DataTypes) => {
         },
       },
       set(val) {
-        this.setDataValue('username', val.trim());
+        this.setDataValue('firstName', val.trim());
       }
     },
     lastName: {
@@ -76,7 +78,7 @@ export default (sequelize, DataTypes) => {
         },
       },
       set(val) {
-        this.setDataValue('username', val.trim());
+        this.setDataValue('lastName', val.trim());
       }
     },
     phone: {
@@ -96,6 +98,9 @@ export default (sequelize, DataTypes) => {
           msg: 'Gender required!',
         },
       },
+      set(val) {
+        this.setDataValue('gender', val.toLowerCase().trim());
+      }
     },
     city: {
       type: DataTypes.STRING,
@@ -110,6 +115,11 @@ export default (sequelize, DataTypes) => {
       fullName() {
         return `${this.getDataValue('firstName')} ${this.getDataValue('lastName')}`;
       },
+    },
+    hooks: {
+      afterValidate: (user) => {
+        user.password = bcrypt.hashSync(user.password, 10);
+      }
     }
   });
   User.associate = (models) => {
