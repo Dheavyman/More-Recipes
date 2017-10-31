@@ -7,10 +7,17 @@ const router = express.Router(),
   reviewController = controllers.review,
   userController = controllers.user,
   voteController = controllers.vote,
+  userValidation = middlewares.userValidation,
   validate = middlewares.validation;
 
 // Register a user on the platform
-router.post('/users/signup', userController.registerUser);
+router.post('/users/signup', userValidation.signupRequiredInputs,
+  userValidation.validateUserInputs, userValidation.usernameExist,
+  userValidation.emailExist, userController.registerUser);
+
+// Signin a user on the platform
+router.post('/users/signin', userValidation.signinRequiredInputs,
+  userController.signinUser);
 
 router.route('/recipes')
   // Add a recipe to the catalog

@@ -76,13 +76,12 @@ class UserValidation {
    */
   static validateUserInputs(req, res, next) {
     const username = (req.body.username).toLowerCase().trim();
-    const email = (req.body.email);
     if (!isAlphaNumeric(username)) {
       return res.status(400).send({
         message: 'Invalid username, only alphabets and numbers allowed'
       });
     }
-    if (!isEmail(email)) {
+    if (!isEmail(req.body.email)) {
       return res.status(400).send({
         message: 'Invalid email address format'
       });
@@ -156,6 +155,33 @@ class UserValidation {
       .catch(error => res.status(400).send({
         message: error.message,
       }));
+  }
+
+  /**
+   * Check for required signin inputs fields
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {any} res - The response object
+   * @param {any} next - The next route handler function
+   * @returns {any} Object representing error message or
+   * calls the next function
+   * @memberof UserValidation
+   */
+  static signinRequiredInputs(req, res, next) {
+    // Check if username is empty
+    if (!req.body.username || isEmpty(req.body.username)) {
+      return res.status(401).send({
+        message: 'Username required'
+      });
+    }
+    // Check if password is empty
+    if (!req.body.password || isEmpty(req.body.password)) {
+      return res.status(401).send({
+        message: 'Password required'
+      });
+    }
+    return next();
   }
 }
 
