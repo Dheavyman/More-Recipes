@@ -80,7 +80,7 @@ class RecipeHandler {
         })
       )
       .then(updatedRecipe => res.status(200).send({
-        status: 'success',
+        status: 'Success',
         message: 'Recipe modified',
         id: updatedRecipe.id,
         title: updatedRecipe.title,
@@ -100,24 +100,26 @@ class RecipeHandler {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The responsee object
-   * @returns {object} - JSON object representing success or error message
+   * @returns {object} - Object representing success status or
+   * error status
    * @memberof RecipeHandler
    */
   static deleteRecipe(req, res) {
-    for (let i = 0; i < recipes.length; i += 1) {
-      const recipe = recipes[i];
-      if (recipe.id === parseInt(req.params.recipeId, 10)) {
-        recipes.splice(i, 1);
-        return res.status(200).send({
-          status: 'Success',
-          message: 'Recipe deleted successfully',
-        });
-      }
-    }
-    return res.status(404).send({
-      status: 'Fail',
-      message: 'Recipe not found'
-    });
+    return Recipe
+      .find({
+        where: {
+          id: req.params.recipeId,
+          userId: req.decoded.user.id,
+        }
+      })
+      .then(recipe => recipe.destroy())
+      .then(() => res.status(200).send({
+        status: 'Success',
+        message: 'Recipe deleted'
+      }))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 
   /**
