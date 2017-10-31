@@ -5,8 +5,7 @@ export default {
   generateToken(user) {
     const token = jwt.sign({
       user: {
-        id: user.id,
-        username: user.username,
+        id: user.id
       }
     }, process.env.SECRET, {
       expiresIn: 60 * 60 * 24,
