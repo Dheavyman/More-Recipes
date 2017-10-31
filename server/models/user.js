@@ -62,6 +62,9 @@ export default (sequelize, DataTypes) => {
           msg: 'Firstname required!',
         },
       },
+      set(val) {
+        this.setDataValue('username', val.trim());
+      }
     },
     lastName: {
       type: DataTypes.STRING,
@@ -72,6 +75,9 @@ export default (sequelize, DataTypes) => {
           msg: 'Lastname required!',
         },
       },
+      set(val) {
+        this.setDataValue('username', val.trim());
+      }
     },
     phone: {
       type: DataTypes.INTEGER,
