@@ -74,7 +74,7 @@ class UserValidation {
    * call to next route handler
    * @memberof UserValidation
    */
-  static validateUserInputs(req, res, next) {
+  static validUserInputs(req, res, next) {
     const username = (req.body.username).toLowerCase().trim();
     if (!isAlphaNumeric(username)) {
       return res.status(400).send({
