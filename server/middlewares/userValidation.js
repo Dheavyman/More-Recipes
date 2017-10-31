@@ -42,6 +42,24 @@ class UserValidation {
         message: 'Email required'
       });
     }
+    // Check if firstname is empty
+    if (!req.body.firstName || isEmpty(req.body.firstName)) {
+      return res.status(400).send({
+        message: 'Firstname required'
+      });
+    }
+    // Check if lastname is empty
+    if (!req.body.lastName || isEmpty(req.body.lastName)) {
+      return res.status(400).send({
+        message: 'Lastname required'
+      });
+    }
+    // Check if gender is empty
+    if (!req.body.gender || isEmpty(req.body.gender)) {
+      return res.status(400).send({
+        message: 'Gender required'
+      });
+    }
     return next();
   }
 
