@@ -36,7 +36,8 @@ class VoteHandler {
             .then(recipe => recipe.increment('upvotes'))
             .then(recipe => res.status(200).send({
               status: 'Success',
-              message: 'Upvote recorded ',
+              message: 'Upvote recorded',
+              id: recipe.id,
               upvotes: recipe.upvotes,
               downvotes: recipe.downvotes
             }));
@@ -51,6 +52,7 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Upvote recorded and downvote removed',
+              id: recipe.id,
               upvotes: recipe.upvotes,
               downvotes: recipe.downvotes
             }));
@@ -62,6 +64,7 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Vote removed',
+              id: recipe.id,
               upvotes: recipe.upvotes,
               downvotes: recipe.downvotes
             }));
@@ -99,6 +102,7 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Downvote recorded',
+              id: recipe.id,
               upvotes: recipe.upvotes,
               downvotes: recipe.downvotes
             }));
@@ -113,6 +117,7 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'success',
               message: 'Downvote recorded and upvote removed',
+              id: recipe.id,
               upvotes: recipe.upvotes,
               downvotes: recipe.downvotes
             }));
@@ -124,6 +129,7 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'success',
               message: 'Vote removed',
+              id: recipe.id,
               upvotes: recipe.upvotes,
               downvotes: recipe.downvotes
             }));
