@@ -43,6 +43,36 @@ class FavoriteController {
         message: error.message,
       }));
   }
+
+  /**
+   * Remove a recipe from user favorites
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {any} Object representing success status or
+   * error status
+   * @memberof FavoriteController
+   */
+  static removeFavorite(req, res) {
+    return Favorite
+      .find({
+        where: {
+          recipeId: req.params.recipeId,
+          userId: req.decoded.user.id
+        }
+      })
+      .then(favorite => favorite
+        .destroy()
+      )
+      .then(() => res.status(200).send({
+        status: 'success',
+        message: 'Recipe removed from favorites'
+      }))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
+  }
 }
 
 export default FavoriteController;
