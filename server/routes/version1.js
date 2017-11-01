@@ -58,7 +58,10 @@ router.delete('/recipes/:recipeId/reviews/:reviewId', authenticate.verifyToken,
 router.route('/recipes/:recipeId/favorites')
   // Add a recipe to a user's favorite
   .post(authenticate.verifyToken, recipeValidate.recipeExist,
-    favoriteController.create);
+    favoriteController.addFavorite)
+  // Delete a recipe from a user's favorite
+  .delete(authenticate.verifyToken, recipeValidate.recipeExist,
+    favoriteController.removeFavorite);
 
 // Upvote a recipe
 router.put('/recipes/:recipeId/upvote', voteController.upvote);
