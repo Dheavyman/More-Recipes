@@ -71,6 +71,7 @@ router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,
   recipeValidate.recipeExist, voteController.upvote);
 
 // Downvote a recipe
-router.put('/recipes/:recipeId/downvotes', voteController.downvote);
+router.put('/recipes/:recipeId/downvotes', authenticate.verifyToken,
+  recipeValidate.recipeExist, voteController.downvote);
 
 export default router;
