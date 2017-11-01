@@ -28,8 +28,7 @@ router.route('/recipes')
     recipeController.addRecipe)
 
   // Retrieve all the recipes in the catalog
-  .get(authenticate.verifyToken, recipeController.getAll,
-    recipeController.getMostUpvotes);
+  .get(recipeController.getAll, recipeController.getMostUpvotes);
 
 router.route('/recipes/:recipeId')
   // Retrieve a single recipe from the catalog
@@ -68,9 +67,10 @@ router.get('/users/:userId/recipes', authenticate.verifyToken,
   userValidate.userExist, userController.userFavorites);
 
 // Upvote a recipe
-router.put('/recipes/:recipeId/upvote', voteController.upvote);
+router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,
+  recipeValidate.recipeExist, voteController.upvote);
 
 // Downvote a recipe
-router.put('/recipes/:recipeId/downvote', voteController.downvote);
+router.put('/recipes/:recipeId/downvotes', voteController.downvote);
 
 export default router;
