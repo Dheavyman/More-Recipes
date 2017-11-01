@@ -1,9 +1,7 @@
 import models from '../models';
-import db from '../../dummyDb';
 
 const Recipe = models.Recipe,
-  Review = models.Review,
-  recipes = db.recipes;
+  Review = models.Review;
 
 /**
  * Class representing recipe handler
@@ -128,11 +126,13 @@ class RecipeHandler {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @return {object} - Object representing the success status or
-   * error status
+   * @param {function} next - The next route handler function
+   * @return {object} - Call to the next route handler or
+   * object representing the success status or error status
    * @memberof RecipeHandler
    */
-  static getAll(req, res) {
+  static getAll(req, res, next) {
+    if (req.query.sort) return next();
     return Recipe
       .all({
         attributes: [
@@ -182,22 +182,29 @@ class RecipeHandler {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {object} next - Calls the next route handler
-   * @return {object} JSON object representing the success or failure message
+   * @return {object} Object representing the success status or
+   * error status or call to the next route handler
    * @memberof RecipeHandler
    */
   static getMostUpvotes(req, res, next) {
     if (req.query.sort && req.query.order) {
-      const sort = req.query.sort.toLowerCase(),
-        order = req.query.order.slice(0, 4).toLowerCase(),
-        sortedRecipes = recipes.slice(0);
-      if (sort === 'upvotes' && order === 'desc') {
-        sortedRecipes
-          .sort((current, nextIndex) => nextIndex.upvotes - current.upvotes);
-        return res.status(200).send({
-          status: 'Success',
-          sortedRecipes
-        });
-      }
+      const sort = req.query.sort,
+        order = req.query.order.toUpperCase().slice(0, 4);
+      return Recipe
+        .findAll({
+          attributes: [
+            'id', 'title', 'description', 'preparationTime', 'ingredients',
+            'directions', 'upvotes', 'downvotes'
+          ],
+          order: [
+            [sort, order]
+          ],
+          limit: 20,
+        })
+        .then(recipes => res.status(200).send(recipes))
+        .catch(error => res.status(400).send({
+          message: error.message,
+        }));
     }
     next();
   }
