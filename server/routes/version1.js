@@ -45,8 +45,9 @@ router.route('/recipes/:recipeId')
     recipeValidate.userRecipe, recipeController.deleteRecipe);
 
 // Add a review for a recipe
-router.post('/recipes/:recipeId/reviews', reviewValidate.reviewRequiredInputs,
-  recipeValidate.recipeExist, reviewController.addReview);
+router.post('/recipes/:recipeId/reviews', authenticate.verifyToken,
+  reviewValidate.reviewRequiredInputs, recipeValidate.recipeExist,
+  reviewController.addReview);
 
 // Delete a review for a recipe
 router.delete('/recipes/:recipeId/reviews/:reviewId',
