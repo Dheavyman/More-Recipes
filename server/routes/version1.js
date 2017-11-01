@@ -9,7 +9,8 @@ const router = express.Router(),
   userController = controllers.user,
   voteController = controllers.vote,
   userValidate = middlewares.userValidation,
-  recipeValidate = middlewares.recipeValidation;
+  recipeValidate = middlewares.recipeValidation,
+  reviewValidate = middlewares.reviewValidation;
 
 // Register a user on the platform
 router.post('/users/signup', userValidate.signupRequiredInputs,
@@ -44,8 +45,8 @@ router.route('/recipes/:recipeId')
     recipeValidate.userRecipe, recipeController.deleteRecipe);
 
 // Add a review for a recipe
-// router.post('/recipes/:recipeId/reviews', recipeValidate.reviewRequiredInputs,
-//   reviewController.addReview);
+router.post('/recipes/:recipeId/reviews', reviewValidate.reviewRequiredInputs,
+  recipeValidate.recipeExist, reviewController.addReview);
 
 // Delete a review for a recipe
 router.delete('/recipes/:recipeId/reviews/:reviewId',
