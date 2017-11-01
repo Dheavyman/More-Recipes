@@ -2,6 +2,7 @@ import models from '../models';
 import db from '../../dummyDb';
 
 const Recipe = models.Recipe,
+  Review = models.Review,
   recipes = db.recipes;
 
 /**
@@ -161,6 +162,12 @@ class RecipeHandler {
           'id', 'title', 'description', 'preparationTime', 'ingredients',
           'directions', 'upvotes', 'downvotes', 'views'
         ],
+        include: [{
+          model: Review,
+          attributes: [
+            'content', 'reviewerName', 'createdAt'
+          ]
+        }]
       })
       .then(recipe => res.status(200).send(recipe))
       .catch(error => res.status(400).send({
