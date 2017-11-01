@@ -6,8 +6,7 @@ const recipes = db.recipes,
   Vote = models.Vote;
 
 /**
- * Class representing voting handler
- * for upvoting or downvoting a recipe
+ * Class representing voting handler for upvoting or downvoting a recipe
  *
  * @class VoteHandler
  */
@@ -19,7 +18,7 @@ class VoteHandler {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} Object representing the success or failure message
-   * @memberof Vote
+   * @memberof VoteHandler
    */
   static upvote(req, res) {
     return Vote
@@ -28,9 +27,9 @@ class VoteHandler {
           userId: req.decoded.user.id,
           recipeId: req.params.recipeId
         },
-        defaults: { option: true }
+        defaults: { hasVoted: true }
       })
-      .spread((vote, created) => {
+      .spread((voter, created) => {
         if (created) {
           return Recipe
             .findOne({
@@ -42,12 +41,12 @@ class VoteHandler {
             .then(recipe => recipe.increment('upvotes'))
             .then(recipe => res.status(200).send({
               status: 'Success',
-              message: 'Recorded upvote',
+              message: 'Upvote recorded ',
               upvotes: recipe.upvotes,
               downvotes: recipe.downvotes
             }));
-        } else if (!created && vote.option === false) {
-          vote.update({
+        } else if (!created && voter.hasVoted === false) {
+          voter.update({
             option: true
           });
           return Recipe
@@ -61,12 +60,12 @@ class VoteHandler {
             .then(recipe => recipe.decrement('downvotes'))
             .then(recipe => res.status(200).send({
               status: 'Success',
-              message: 'Recorded upvote and removed downvote',
+              message: 'Upvote recorded and downvote removed',
               upvotes: recipe.upvotes,
               downvotes: recipe.downvotes
             }));
-        } else if (!created && vote.option === true) {
-          vote.destroy();
+        } else if (!created && voter.hasVoted === true) {
+          voter.destroy();
           return Recipe
             .findOne({
               attributes: ['id'],
@@ -93,7 +92,7 @@ class VoteHandler {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object containing the success or failure message
-   * @memberof Vote
+   * @memberof VoteHandler
    */
   static downvote(req, res) {
     for (let i = 0; i < recipes.length; i += 1) {
