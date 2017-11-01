@@ -3,7 +3,8 @@ import models from '../models';
 
 const reviews = db.reviews,
   recipes = db.recipes,
-  Review = models.Review;
+  Review = models.Review,
+  User = models.User;
 
 /**
  * Class representing review handler
@@ -22,13 +23,19 @@ class ReviewHandler {
    * @memberof ReviewHandler
    */
   static addReview(req, res) {
-    return Review
-      .create({
-        userId: req.decoded.user.id,
-        recipeId: req.params.recipeId,
-        content: req.body.content,
-        reviewerName: req.body.reviewerName,
-      })
+    User.findOne({
+      where: {
+        id: req.decoded.user.id
+      }
+    })
+      .then(user => Review
+        .create({
+          userId: req.decoded.user.id,
+          recipeId: req.params.recipeId,
+          content: req.body.content,
+          reviewerName: user.fullName,
+        })
+      )
       .then(review => res.status(201).send({
         status: 'Success',
         message: 'Review created',
