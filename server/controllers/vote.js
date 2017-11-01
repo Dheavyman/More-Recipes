@@ -12,7 +12,7 @@ const recipes = db.recipes,
  */
 class VoteHandler {
   /**
-   * Recipe upvote 
+   * Recipe upvote
    *
    * @static
    * @param {object} req - The request object
