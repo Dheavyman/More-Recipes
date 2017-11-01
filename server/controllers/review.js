@@ -1,8 +1,6 @@
-import db from '../../dummyDb';
 import models from '../models';
 
-const reviews = db.reviews,
-  Review = models.Review,
+const Review = models.Review,
   User = models.User;
 
 /**
