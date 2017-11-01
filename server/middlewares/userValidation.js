@@ -183,6 +183,31 @@ class UserValidation {
     }
     return next();
   }
+
+  /**
+   * Check that a user exist
+   *
+   * @static
+   * @param {object} req - This is the request object
+   * @param {object} res - This is the response object
+   * @param {object} next - The next route handler function
+   * @returns {any} Object representing error message or
+   * calls the next function
+   * @memberof UserValidation
+   */
+  static userExist(req, res, next) {
+    return User
+      .findById(req.params.userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            status: 'Fail',
+            message: 'User does not exist'
+          });
+        }
+        next();
+      });
+  }
 }
 
 export default UserValidation;
