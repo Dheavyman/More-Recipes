@@ -4,6 +4,7 @@ import middlewares from '../middlewares';
 
 const router = express.Router(),
   authenticate = middlewares.authentication,
+  favoriteController = controllers.favorite,
   recipeController = controllers.recipe,
   reviewController = controllers.review,
   userController = controllers.user,
@@ -53,6 +54,11 @@ router.post('/recipes/:recipeId/reviews', authenticate.verifyToken,
 router.delete('/recipes/:recipeId/reviews/:reviewId', authenticate.verifyToken,
   recipeValidate.recipeExist, reviewValidate.reviewExist,
   reviewValidate.userReview, reviewController.deleteReview);
+
+router.route('/recipes/:recipeId/favorites')
+  // Add a recipe to a user's favorite
+  .post(authenticate.verifyToken, recipeValidate.recipeExist,
+    favoriteController.create);
 
 // Upvote a recipe
 router.put('/recipes/:recipeId/upvote', voteController.upvote);
