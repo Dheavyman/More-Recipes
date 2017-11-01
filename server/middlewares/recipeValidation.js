@@ -68,12 +68,7 @@ class RecipeValidation {
    */
   static recipeExist(req, res, next) {
     return Recipe
-      .find({
-        attributes: ['id'],
-        where: {
-          id: req.params.recipeId
-        }
-      })
+      .findById(req.params.recipeId)
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({

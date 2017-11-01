@@ -3,6 +3,8 @@ import middlewares from '../middlewares';
 import models from '../models';
 
 const User = models.User,
+  Favorite = models.Favorite,
+  Recipe = models.Recipe,
   authenticate = middlewares.authentication;
 
 /**
@@ -78,6 +80,38 @@ class userHandler {
           });
         });
       })
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Retrieve all user favorite recipes
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} Object representing success status or
+   * error stattus
+   * @memberof userHandler
+   */
+  static userFavorites(req, res) {
+    return User
+      .findById(req.params.userId, {
+        attributes: ['username', 'firstName', 'lastName'],
+        include: [{
+          model: Favorite,
+          attributes: ['recipeId'],
+          include: [{
+            model: Recipe,
+            attributes: [
+              'title', 'description', 'preparationTime', 'ingredients',
+              'directions', 'upvotes', 'downvotes', 'views'
+            ]
+          }]
+        }],
+      })
+      .then(favorites => res.status(200).send(favorites))
       .catch(error => res.status(400).send({
         message: error.message,
       }));

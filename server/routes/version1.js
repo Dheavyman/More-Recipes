@@ -63,6 +63,10 @@ router.route('/recipes/:recipeId/favorites')
   .delete(authenticate.verifyToken, recipeValidate.recipeExist,
     favoriteController.removeFavorite);
 
+// Get all user favorite recipes
+router.get('/users/:userId/recipes', authenticate.verifyToken,
+  userValidate.userExist, userController.userFavorites);
+
 // Upvote a recipe
 router.put('/recipes/:recipeId/upvote', voteController.upvote);
 
