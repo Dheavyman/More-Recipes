@@ -1,6 +1,8 @@
 import helpers from '../helpers';
+import models from '../models';
 
-const isEmpty = helpers.isEmpty;
+const isEmpty = helpers.isEmpty,
+  Review = models.Review;
 
 /**
  * Class representing recipe review validations
@@ -27,6 +29,72 @@ class ReviewValidation {
       });
     }
     next();
+  }
+
+  /**
+   * Check if a review exist
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @param {object} next - The next route handler function
+   * @returns {any} Object representing the failure status or
+   * call to the next route handler function
+   * @memberof ReviewValidation
+   */
+  static reviewExist(req, res, next) {
+    return Review
+      .find({
+        attributes: ['id'],
+        where: {
+          id: req.params.reviewId
+        }
+      })
+      .then((review) => {
+        if (!review) {
+          return res.status(404).send({
+            status: 'Fail',
+            message: 'Review not found'
+          });
+        }
+        next();
+      })
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Check if a review belongs to a user
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {any} res - The response object
+   * @param {any} next The next route handler function
+   * @returns {any} Object representing error message or
+   * calls the next function
+   * @memberof ReviewValidation
+   */
+  static userReview(req, res, next) {
+    return Review
+      .find({
+        where: {
+          id: req.params.reviewId,
+          userId: req.decoded.user.id,
+        }
+      })
+      .then((review) => {
+        if (!review) {
+          return res.status(403).send({
+            status: 'Fail',
+            message: 'Not user\'s review',
+          });
+        }
+        next();
+      })
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 }
 

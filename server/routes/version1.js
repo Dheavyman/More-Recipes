@@ -50,8 +50,9 @@ router.post('/recipes/:recipeId/reviews', authenticate.verifyToken,
   reviewController.addReview);
 
 // Delete a review for a recipe
-router.delete('/recipes/:recipeId/reviews/:reviewId',
-  reviewController.deleteReview);
+router.delete('/recipes/:recipeId/reviews/:reviewId', authenticate.verifyToken,
+  recipeValidate.recipeExist, reviewValidate.reviewExist,
+  reviewValidate.userReview, reviewController.deleteReview);
 
 // Upvote a recipe
 router.put('/recipes/:recipeId/upvote', voteController.upvote);
