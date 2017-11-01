@@ -1,7 +1,9 @@
 import db from '../../dummyDb';
+import models from '../models';
 
 const reviews = db.reviews,
-  recipes = db.recipes;
+  Review = models.Review,
+  User = models.User;
 
 /**
  * Class representing review handler
@@ -15,27 +17,33 @@ class ReviewHandler {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} - JSON object representing success message
+   * @returns {object} - Object representing success status or
+   * error status
    * @memberof ReviewHandler
    */
   static addReview(req, res) {
-    for (let i = 0; i < recipes.length; i += 1) {
-      const recipe = recipes[i];
-      if (recipe.id === parseInt(req.params.recipeId, 10)) {
-        req.body.id = reviews.length + 1;
-        req.body.recipeId = parseInt(req.params.recipeId, 10);
-        reviews.push(req.body);
-        return res.status(201).send({
-          status: 'Success',
-          message: 'Review added successfully',
-          review: reviews[reviews.length - 1]
-        });
+    User.findOne({
+      where: {
+        id: req.decoded.user.id
       }
-    }
-    return res.status(404).send({
-      status: 'Fail',
-      message: 'Recipe not found',
-    });
+    })
+      .then(user => Review
+        .create({
+          userId: req.decoded.user.id,
+          recipeId: req.params.recipeId,
+          content: req.body.content,
+          reviewerName: user.fullName,
+        })
+      )
+      .then(review => res.status(201).send({
+        status: 'Success',
+        message: 'Review created',
+        content: review.content,
+        reviewerName: review.reviewerName,
+      }))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 
   /**
