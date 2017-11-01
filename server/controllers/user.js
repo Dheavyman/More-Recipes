@@ -98,7 +98,7 @@ class userHandler {
   static userFavorites(req, res) {
     return User
       .findById(req.params.userId, {
-        attributes: ['username', 'fullName'],
+        attributes: ['username', 'firstName', 'lastName'],
         include: [{
           model: Favorite,
           attributes: ['recipeId'],
