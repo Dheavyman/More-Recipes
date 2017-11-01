@@ -14,7 +14,7 @@ module.exports = {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    option: {
+    hasVoted: {
       type: Sequelize.BOOLEAN,
       allowNull: false
     },

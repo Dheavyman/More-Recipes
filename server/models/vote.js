@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    option: {
+    hasVoted: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     }
