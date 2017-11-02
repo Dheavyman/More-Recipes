@@ -31,20 +31,21 @@ class RecipeHandler {
         directions: req.body.directions,
       })
       .then(recipe => recipe.increment('views'))
-      .then(recipe => recipe.reload())
       .then(recipe => res.status(201).send({
         status: 'Success',
         message: 'Recipe created',
-        id: recipe.id,
-        userId: recipe.userId,
-        title: recipe.title,
-        description: recipe.description,
-        preparationTime: recipe.preparationTime,
-        ingredients: recipe.ingredients,
-        directions: recipe.directions,
-        upvotes: recipe.upvotes,
-        downvotes: recipe.downvotes,
-        views: recipe.views,
+        data: {
+          id: recipe.id,
+          userId: recipe.userId,
+          title: recipe.title,
+          description: recipe.description,
+          preparationTime: recipe.preparationTime,
+          ingredients: recipe.ingredients,
+          directions: recipe.directions,
+          upvotes: recipe.upvotes,
+          downvotes: recipe.downvotes,
+          views: recipe.views,
+        }
       }))
       .catch(error => res.status(400).send({
         message: error.message,
@@ -81,12 +82,14 @@ class RecipeHandler {
       .then(updatedRecipe => res.status(200).send({
         status: 'Success',
         message: 'Recipe modified',
-        id: updatedRecipe.id,
-        title: updatedRecipe.title,
-        description: updatedRecipe.description,
-        preparationTime: updatedRecipe.preparationTime,
-        ingredients: updatedRecipe.ingredients,
-        directions: updatedRecipe.directions,
+        data: {
+          id: updatedRecipe.id,
+          title: updatedRecipe.title,
+          description: updatedRecipe.description,
+          preparationTime: updatedRecipe.preparationTime,
+          ingredients: updatedRecipe.ingredients,
+          directions: updatedRecipe.directions,
+        }
       }))
       .catch(error => res.status(400).send({
         message: error.message,
@@ -141,7 +144,13 @@ class RecipeHandler {
           'directions', 'upvotes', 'downvotes', 'views'
         ],
       })
-      .then(recipe => res.status(200).send(recipe))
+      .then(recipe => res.status(200).send({
+        status: 'Success',
+        message: 'Recipes retrieved',
+        data: {
+          recipe
+        }
+      }))
       .catch(error => res.status(400).send({
         message: error.message,
       }));
@@ -172,7 +181,13 @@ class RecipeHandler {
           }],
         }],
       })
-      .then(recipe => res.status(200).send(recipe))
+      .then(recipe => res.status(200).send({
+        status: 'Success',
+        message: 'Recipe retrieved',
+        data: {
+          recipe
+        }
+      }))
       .catch(error => res.status(400).send({
         message: error.message
       }));
@@ -204,7 +219,13 @@ class RecipeHandler {
           ],
           limit: 20,
         })
-        .then(recipes => res.status(200).send(recipes))
+        .then(recipes => res.status(200).send({
+          status: 'Success',
+          message: 'Recipes retrieved',
+          data: {
+            recipes
+          }
+        }))
         .catch(error => res.status(400).send({
           message: error.message,
         }));
