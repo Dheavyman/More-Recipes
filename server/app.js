@@ -1,8 +1,10 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import routes from './server/routes';
+import routes from './routes';
+
+dotenv.config();
 
 // Setup the express app
 const app = express();
@@ -21,5 +23,11 @@ routes(app);
 app.all('*', (req, res) => res.status(404).send({
   message: 'Oops! 404. Page not Found',
 }));
+
+// Set the app entry port
+app.set('port', process.env.PORT || 3000);
+
+// app.listen(port);
+app.listen(app.get('port'));
 
 export default app;
