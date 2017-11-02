@@ -1,7 +1,6 @@
-import db from '../../dummyDb';
+import models from '../models';
 
-const reviews = db.reviews,
-  recipes = db.recipes;
+const Review = models.Review;
 
 /**
  * Class representing review handler
@@ -15,27 +14,27 @@ class ReviewHandler {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} - JSON object representing success message
+   * @returns {object} - Object representing success status or
+   * error status
    * @memberof ReviewHandler
    */
   static addReview(req, res) {
-    for (let i = 0; i < recipes.length; i += 1) {
-      const recipe = recipes[i];
-      if (recipe.id === parseInt(req.params.recipeId, 10)) {
-        req.body.id = reviews.length + 1;
-        req.body.recipeId = parseInt(req.params.recipeId, 10);
-        reviews.push(req.body);
-        return res.status(201).send({
-          status: 'Success',
-          message: 'Review added successfully',
-          review: reviews[reviews.length - 1]
-        });
-      }
-    }
-    return res.status(404).send({
-      status: 'Fail',
-      message: 'Recipe not found',
-    });
+    return Review
+      .create({
+        userId: req.decoded.user.id,
+        recipeId: req.params.recipeId,
+        content: req.body.content,
+      })
+      .then(review => res.status(201).send({
+        status: 'Success',
+        message: 'Review created',
+        userId: review.userId,
+        recipeId: review.recipeId,
+        content: review.content,
+      }))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 
   /**
@@ -44,25 +43,28 @@ class ReviewHandler {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} JSON object representing success or error message
+   * @returns {object} Object representing success status or
+   * error status
    * @memberof ReviewHandler
    */
   static deleteReview(req, res) {
-    for (let i = 0; i < reviews.length; i += 1) {
-      const review = reviews[i];
-      if (review.id === parseInt(req.params.reviewId, 10) &&
-        review.recipeId === parseInt(req.params.recipeId, 10)) {
-        reviews.splice(i, 1);
-        return res.status(200).send({
-          status: 'Success',
-          message: 'Review deleted successfully',
-        });
-      }
-    }
-    return res.status(404).send({
-      status: 'Fail',
-      message: 'Review not found'
-    });
+    return Review
+      .find({
+        where: {
+          recipeId: req.params.recipeId,
+          userId: req.decoded.user.id
+        }
+      })
+      .then(review => review
+        .destroy()
+      )
+      .then(() => res.status(200).send({
+        status: 'Success',
+        message: 'Review deleted'
+      }))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 }
 

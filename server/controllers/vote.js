@@ -1,39 +1,76 @@
-import db from '../../dummyDb';
+import models from '../models';
 
-const recipes = db.recipes;
+const Recipe = models.Recipe,
+  Vote = models.Vote;
 
 /**
- * Class representing voting handler
- * for upvoting or downvoting a recipe
+ * Class representing voting handler for upvoting or downvoting a recipe
  *
- * @class Vote
+ * @class VoteHandler
  */
-class Vote {
+class VoteHandler {
   /**
-   * upvote a recipe
+   * Recipe upvote
    *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} JSON object representing the success or failure message
-   * @memberof Vote
+   * @returns {object} Object representing the success or failure message
+   * @memberof VoteHandler
    */
   static upvote(req, res) {
-    for (let i = 0; i < recipes.length; i += 1) {
-      const recipe = recipes[i];
-      if (recipe.id === parseInt(req.params.recipeId, 10)) {
-        recipe.upvotes += 1;
-        return res.status(200).send({
-          status: 'Success',
-          message: 'Upvote recorded',
-          recipe,
-        });
-      }
-    }
-    return res.status(404).send({
-      status: 'Fail',
-      message: 'Recipe not found',
-    });
+    return Vote
+      .findOrCreate({
+        where: {
+          userId: req.decoded.user.id,
+          recipeId: req.params.recipeId
+        },
+        defaults: {
+          hasVoted: true
+        }
+      })
+      .spread((voter, created) => {
+        if (created) {
+          return Recipe
+            .findById(req.params.recipeId)
+            .then(recipe => recipe.increment('upvotes'))
+            .then(recipe => res.status(200).send({
+              status: 'Success',
+              message: 'Upvote recorded',
+              id: recipe.id,
+              upvotes: recipe.upvotes,
+              downvotes: recipe.downvotes
+            }));
+        } else if (!created && voter.hasVoted === false) {
+          voter.update({
+            hasVoted: true
+          });
+          return Recipe
+            .findById(req.params.recipeId)
+            .then(recipe => recipe.increment('upvotes'))
+            .then(recipe => recipe.decrement('downvotes'))
+            .then(recipe => res.status(200).send({
+              status: 'Success',
+              message: 'Upvote recorded and downvote removed',
+              id: recipe.id,
+              upvotes: recipe.upvotes,
+              downvotes: recipe.downvotes
+            }));
+        } else if (!created && voter.hasVoted === true) {
+          voter.destroy();
+          return Recipe
+            .findById(req.params.recipeId)
+            .then(recipe => recipe.decrement('upvotes'))
+            .then(recipe => res.status(200).send({
+              status: 'Success',
+              message: 'Vote removed',
+              id: recipe.id,
+              upvotes: recipe.upvotes,
+              downvotes: recipe.downvotes
+            }));
+        }
+      })
+      .catch(error => res.status(400).send(error));
   }
 
   /**
@@ -42,26 +79,64 @@ class Vote {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} JSON object containing the success or failure message
-   * @memberof Vote
+   * @returns {object} Object containing the success status or
+   * error status
+   * @memberof VoteHandler
    */
   static downvote(req, res) {
-    for (let i = 0; i < recipes.length; i += 1) {
-      const recipe = recipes[i];
-      if (recipe.id === parseInt(req.params.recipeId, 10)) {
-        recipe.downvotes += 1;
-        return res.status(200).send({
-          status: 'Success',
-          message: 'Downvote recorded',
-          recipe,
-        });
-      }
-    }
-    return res.status(404).send({
-      status: 'Fail',
-      message: 'Recipe not found',
-    });
+    return Vote
+      .findOrCreate({
+        where: {
+          userId: req.decoded.user.id,
+          recipeId: req.params.recipeId
+        },
+        defaults: {
+          hasVoted: false
+        }
+      })
+      .spread((voter, created) => {
+        if (created) {
+          return Recipe
+            .findById(req.params.recipeId)
+            .then(recipe => recipe.increment('downvotes'))
+            .then(recipe => res.status(200).send({
+              status: 'Success',
+              message: 'Downvote recorded',
+              id: recipe.id,
+              upvotes: recipe.upvotes,
+              downvotes: recipe.downvotes
+            }));
+        } else if (!created && voter.hasVoted === true) {
+          voter.update({
+            hasVoted: false
+          });
+          return Recipe
+            .findById(req.params.recipeId)
+            .then(recipe => recipe.increment('downvotes'))
+            .then(recipe => recipe.decrement('upvotes'))
+            .then(recipe => res.status(200).send({
+              status: 'success',
+              message: 'Downvote recorded and upvote removed',
+              id: recipe.id,
+              upvotes: recipe.upvotes,
+              downvotes: recipe.downvotes
+            }));
+        } else if (!created && voter.hasVoted === false) {
+          voter.destroy();
+          return Recipe
+            .findById(req.params.recipeId)
+            .then(recipe => recipe.decrement('downvotes'))
+            .then(recipe => res.status(200).send({
+              status: 'success',
+              message: 'Vote removed',
+              id: recipe.id,
+              upvotes: recipe.upvotes,
+              downvotes: recipe.downvotes
+            }));
+        }
+      })
+      .catch(error => res.status(400).send(error));
   }
 }
 
-export default Vote;
+export default VoteHandler;
