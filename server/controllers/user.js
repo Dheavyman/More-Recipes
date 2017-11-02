@@ -28,11 +28,13 @@ class userHandler {
         res.status(201).send({
           status: 'Success',
           message: 'User created',
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          fullName: user.fullName,
-          gender: user.gender
+          data: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            fullName: user.fullName,
+            gender: user.gender
+          }
         });
       })
       .catch(error => res.status(400).send({
@@ -76,7 +78,9 @@ class userHandler {
           res.status(200).send({
             status: 'Success',
             message: 'Login successful',
-            token
+            data: {
+              token
+            }
           });
         });
       })
@@ -111,7 +115,13 @@ class userHandler {
           }]
         }],
       })
-      .then(favorites => res.status(200).send(favorites))
+      .then(favorites => res.status(200).send({
+        status: 'Success',
+        message: 'Favorites retrieved',
+        data: {
+          favorites
+        }
+      }))
       .catch(error => res.status(400).send({
         message: error.message,
       }));
