@@ -7,9 +7,11 @@
   "description": "A platform for sharing recipes",
   "main": "index.js",
   "scripts": {
+    "build": "babel -d ./dist/ ./bin",
+    "heroku-postbuild": "npm run build && npm run migrate",
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all",
-    "start": "babel-node ./bin/www",
+    "start": "node ./dist/www.js",
     "start:dev": "nodemon --exec babel-node ./bin/www",
     "test": "nyc mocha --compilers js:babel-core/register tests/test.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
