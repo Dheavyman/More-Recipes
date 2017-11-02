@@ -1,7 +1,8 @@
 import models from '../models';
 
 const Recipe = models.Recipe,
-  Review = models.Review;
+  Review = models.Review,
+  User = models.User;
 
 /**
  * Class representing recipe handler
@@ -164,10 +165,12 @@ class RecipeHandler {
         ],
         include: [{
           model: Review,
-          attributes: [
-            'content', 'reviewerName', 'createdAt'
-          ]
-        }]
+          attributes: ['content', 'createdAt'],
+          include: [{
+            model: User,
+            attributes: ['firstName', 'lastName'],
+          }],
+        }],
       })
       .then(recipe => res.status(200).send(recipe))
       .catch(error => res.status(400).send({

@@ -1,9 +1,5 @@
 export default (sequelize, DataTypes) => {
   const Review = sequelize.define('Review', {
-    reviewerName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     content: {
       type: DataTypes.TEXT,
       allowNull: false,
