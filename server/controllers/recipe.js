@@ -174,7 +174,7 @@ class RecipeHandler {
         ],
         include: [{
           model: Review,
-          attributes: ['content', 'createdAt'],
+          attributes: ['id', 'content', 'createdAt'],
           include: [{
             model: User,
             attributes: ['firstName', 'lastName'],

@@ -29,7 +29,7 @@ class FavoriteController {
       .spread((favorite, created) => {
         if (!created) {
           favorite.destroy();
-          return res.status(409).send({
+          return res.status(200).send({
             status: 'Success',
             message: 'Recipe removed from favorites'
           });
@@ -37,7 +37,6 @@ class FavoriteController {
         return res.status(201).send({
           status: 'Success',
           message: 'Recipe added to favorites',
-          recipeId: favorite.recipeId,
         });
       })
       .catch(error => res.status(400).send({

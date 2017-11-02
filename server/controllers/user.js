@@ -63,7 +63,7 @@ class userHandler {
         if (!user) {
           res.status(401).send({
             status: 'Fail',
-            message: 'User does not exist'
+            message: 'Username or password incorrect'
           });
         }
         const hash = user.password;
@@ -71,7 +71,7 @@ class userHandler {
           if (!confirmed) {
             res.status(401).send({
               status: 'Fail',
-              message: 'Invalid password'
+              message: 'Username or password incorrect'
             });
           }
           const token = authenticate.generateToken(user);
@@ -102,7 +102,7 @@ class userHandler {
   static userFavorites(req, res) {
     return User
       .findById(req.params.userId, {
-        attributes: ['username', 'firstName', 'lastName'],
+        attributes: ['firstName', 'lastName'],
         include: [{
           model: Favorite,
           attributes: ['recipeId'],
@@ -115,11 +115,11 @@ class userHandler {
           }]
         }],
       })
-      .then(favorites => res.status(200).send({
+      .then(user => res.status(200).send({
         status: 'Success',
         message: 'Favorites retrieved',
         data: {
-          favorites
+          user
         }
       }))
       .catch(error => res.status(400).send({

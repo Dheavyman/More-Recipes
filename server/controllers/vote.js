@@ -37,9 +37,11 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Upvote recorded',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         } else if (!created && voter.hasVoted === false) {
           voter.update({
@@ -52,9 +54,11 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Upvote recorded and downvote removed',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         } else if (!created && voter.hasVoted === true) {
           voter.destroy();
@@ -64,13 +68,17 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Vote removed',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         }
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send({
+        message: error.message
+      }));
   }
 
   /**
@@ -102,9 +110,11 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Downvote recorded',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         } else if (!created && voter.hasVoted === true) {
           voter.update({
@@ -117,9 +127,11 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'success',
               message: 'Downvote recorded and upvote removed',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         } else if (!created && voter.hasVoted === false) {
           voter.destroy();
@@ -129,13 +141,17 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'success',
               message: 'Vote removed',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         }
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 }
 

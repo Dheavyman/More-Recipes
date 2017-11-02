@@ -24,7 +24,14 @@ export default {
     } else if (token) {
       jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) {
+          if (err.message.includes('token')) {
+            return res.status(401).send({
+              status: 'Error',
+              message: 'Invalid token'
+            });
+          }
           return res.status(401).send({
+            status: 'Error',
             message: err.message,
           });
         }

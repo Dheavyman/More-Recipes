@@ -28,9 +28,12 @@ class ReviewHandler {
       .then(review => res.status(201).send({
         status: 'Success',
         message: 'Review created',
-        userId: review.userId,
-        recipeId: review.recipeId,
-        content: review.content,
+        data: {
+          id: review.id,
+          userId: review.userId,
+          recipeId: review.recipeId,
+          content: review.content,
+        }
       }))
       .catch(error => res.status(400).send({
         message: error.message,
