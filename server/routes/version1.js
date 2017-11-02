@@ -32,8 +32,7 @@ router.route('/recipes')
 
 router.route('/recipes/:recipeId')
   // Retrieve a single recipe from the catalog
-  .get(authenticate.verifyToken, recipeValidate.recipeExist,
-    recipeController.getOne)
+  .get(recipeValidate.recipeExist, recipeController.getOne)
 
   // Modifies a recipe
   .put(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
