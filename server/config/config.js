@@ -11,7 +11,7 @@ const config = {
   test: {
     username: 'postgres',
     password: process.env.DB_PASSWORD,
-    database: 'more_recipes_test',
+    database: 'more-recipes-test',
     host: '127.0.0.1',
     dialect: 'postgres'
   },
