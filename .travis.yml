@@ -5,7 +5,7 @@ node_js:
 services:
   - postgresql
 before_script:
-  - createdb test --username=postgres
+  - createdb more_recipes-test --username=postgres
 install: 
   - npm install
 script:
