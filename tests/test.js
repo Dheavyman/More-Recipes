@@ -1,10 +1,109 @@
 import 'mocha';
 import chai from 'chai';
 import supertest from 'supertest';
-import app from '../app';
+import app from '../server/app';
 
 const server = supertest.agent(app),
   expect = chai.expect,
+  validSignupSeed = [{
+    username: 'Scotch',
+    password: 'scotchpassword',
+    email: 'scotch@example.com',
+    firstName: 'John',
+    lastName: 'Scoth',
+    gender: 'Male'
+  }, {
+    username: 'Jessy',
+    password: 'jessypassword',
+    email: 'jessy@example.com',
+    firstName: 'Jessy',
+    lastName: 'Sanders',
+    gender: 'Female'
+  }, {
+    username: 'Vincent',
+    password: 'vincentpassword',
+    email: 'scotch@example.com',
+    firstName: 'Vincent',
+    lastName: 'Cross',
+    gender: 'Male'
+  }],
+  invalidSignupSeed = [{
+    username: '  ',
+    password: 'awesome',
+    email: '@example.com',
+    firstName: 'Alex',
+    lastName: 'Scotch',
+    gender: 'Male'
+  }, {
+    username: 'Paul',
+    password: '  ',
+    email: 'paul@example.com',
+    firstName: 'Paul',
+    lastName: 'Sunders',
+    gender: 'male'
+  }, {
+    username: 'Paul',
+    password: 'awesome',
+    email: '   ',
+    firstName: 'Paul',
+    lastName: 'Sunders',
+    gender: 'male'
+  }, {
+    username: 'Paul',
+    password: 'awesome',
+    email: 'paul@example.com',
+    firstName: '   ',
+    lastName: 'Sunders',
+    gender: 'male'
+  }, {
+    username: 'Paul',
+    password: 'awesome',
+    email: 'paul@example.com',
+    firstName: 'Paul',
+    lastName: '  ',
+    gender: 'male'
+  }, {
+    username: 'Paul',
+    password: 'awesome',
+    email: 'paul@example.com',
+    firstName: 'Paul',
+    lastName: 'Sunders',
+    gender: '   '
+  }, {
+    username: 'Paul#',
+    password: 'awesome',
+    email: 'paul@example.com',
+    firstName: 'Paul',
+    lastName: 'Sunders',
+    gender: 'male'
+  }, {
+    username: 'paul',
+    password: 'awesome',
+    email: 'paulexample.com',
+    firstName: 'Paul',
+    lastName: 'Sunders',
+    gender: 'male'
+  }],
+  validSigninSeed = [{
+    username: 'Jessy',
+    password: 'jessypassword',
+  }, {
+    username: 'scotch',
+    password: 'scotchpassword',
+  }],
+  invalidSigninSeed = [{
+    username: '  ',
+    password: 'jessypassword',
+  }, {
+    username: 'Jessy',
+    password: '   ',
+  }, {
+    username: 'notJessy',
+    password: 'jessypassword',
+  }, {
+    username: 'Jessy',
+    password: 'notjessypassword',
+  }],
   validRecipeSeed = [{
     title: 'Beans',
     description: 'Tasty beans',
@@ -62,14 +161,321 @@ const server = supertest.agent(app),
   }],
   invalidReviewSeed = [{
     content: '  ',
-  }];
-let recipeId1,
+  }],
+  userToken = [];
+let userId1,
+  userId2,
+  recipeId1,
   recipeId2,
   reviewId1,
   reviewId2;
 
 describe('More Recipes', () => {
+  describe('Test Server Connection', () => {
+    it('should respond with welcome message and status code 200', (done) => {
+      server
+        .get('/api/v1')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect('Content-Type', /json/);
+          expect(res.body.message).to.equal('Welcome to the Users API!');
+          expect(res.statusCode).to.equal(200);
+          done();
+        });
+    });
+  });
+  describe('signup API', () => {
+    it('should allow user to create an account', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSignupSeed[0])
+        .end((err, res) => {
+          userId1 = res.body.userId;
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('User created');
+          done();
+        });
+    });
+    it('should return 409 for an existing username', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSignupSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(409);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Username already exist');
+          done();
+        });
+    });
+    it('should return 409 for an existing email', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSignupSeed[2])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(409);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Email already exist');
+          done();
+        });
+    });
+    it('should allow another user to create an account', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSignupSeed[1])
+        .end((err, res) => {
+          userId2 = res.body.userId;
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('User created');
+          done();
+        });
+    });
+    it('should return 400 for empty username', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSignupSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.message).to.equal('Username required');
+          done();
+        });
+    });
+    it('should return 400 for empty password', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSignupSeed[1])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.message).to.equal('Password required');
+          done();
+        });
+    });
+    it('should return 400 for empty email', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSignupSeed[2])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.message).to.equal('Email required');
+          done();
+        });
+    });
+    it('should return 400 for empty firstname', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSignupSeed[3])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.message).to.equal('Firstname required');
+          done();
+        });
+    });
+    it('should return 400 for empty lastname', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSignupSeed[4])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.message).to.equal('Lastname required');
+          done();
+        });
+    });
+    it('should return 400 for empty gender', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSignupSeed[5])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.message).to.equal('Gender required');
+          done();
+        });
+    });
+    it('should return 400 for invalid username', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSignupSeed[6])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.message).to
+            .equal('Invalid username, only alphabets and numbers allowed');
+          done();
+        });
+    });
+    it('should return 400 for invalid email', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSignupSeed[7])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.message).to
+            .equal('Invalid email address format');
+          done();
+        });
+    });
+  });
+  describe('signin API', () => {
+    it('should return 400 for empty username', (done) => {
+      server
+        .post('/api/v1/users/signin')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSigninSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body.message).to.equal('Username required');
+          done();
+        });
+    });
+    it('should return 400 for empty password', (done) => {
+      server
+        .post('/api/v1/users/signin')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSigninSeed[1])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body.message).to.equal('Password required');
+          done();
+        });
+    });
+    it('should return 401 for invalid username', (done) => {
+      server
+        .post('/api/v1/users/signin')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSigninSeed[2])
+        .end((err, res) => {
+          expect('Content-Type', 'applicaton/json');
+          expect(res.statusCode).to.equal(401);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to
+            .equal('User does not exist');
+          done();
+        });
+    });
+    it('should return 401 for invalid password', (done) => {
+      server
+        .post('/api/v1/users/signin')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidSigninSeed[3])
+        .end((err, res) => {
+          expect('Content-Type', 'application/json');
+          expect(res.statusCode).to.equal(401);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Invalid password');
+          done();
+        });
+    });
+    it('should allow a user to login', (done) => {
+      server
+        .post('/api/v1/users/signin')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSigninSeed[0])
+        .end((err, res) => {
+          userToken[0] = res.body.token;
+          expect('Content-Type', 'application/json');
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Login successful');
+          done();
+        });
+    });
+    it('should allow another user to login', (done) => {
+      server
+        .post('/api/v1/users/signin')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSigninSeed[1])
+        .end((err, res) => {
+          userToken[1] = res.body.token;
+          expect('Content-Type', 'application/json');
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Login successful');
+          done();
+        });
+    });
+  });
   describe('add recipe API', () => {
+    it('should return 403 for unauthenticated access', (done) => {
+      server
+        .post('/api/v1/recipes')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', '')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validRecipeSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(403);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to
+            .equal('Unauthenticated access, no token provided');
+          done();
+        });
+    });
+    it('should return 403 for unverified token', (done) => {
+      server
+        .post('/api/v1/recipes')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', 'abc.123.xyz')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validRecipeSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(403);
+          expect(res.body).to.have.a.property('message');
+          expect(res.body.message).to.equal('Invalid token');
+          done();
+        });
+    });
     it('should allow a user to add a recipe', (done) => {
       server
         .post('/api/v1/recipes')
