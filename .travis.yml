@@ -2,10 +2,16 @@ language: node_js
 sudo: false
 node_js:
   - "stable"
+services:
+  - postgresql
+before_script:
+  - createdb test --username=postgres
 install: 
   - npm install
 script:
   - npm test
+env:
+  - NODE_ENV=test
 cache:
   directories:
    - "node_modules"
@@ -14,7 +20,7 @@ after_success:
 branches:
   only:
     - develop
-    - ch-write-tests-with-ci-152327803
+    - ch-tests-and-integration-150888969
 
 notifications:
   webhooks:

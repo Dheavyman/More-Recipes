@@ -13,6 +13,10 @@ const router = express.Router(),
   recipeValidate = middlewares.recipeValidation,
   reviewValidate = middlewares.reviewValidation;
 
+router.get('/', (req, res) => res.status(200).send({
+  message: 'Welcome to the Users API!',
+}));
+
 // Register a user on the platform
 router.post('/users/signup', userValidate.signupRequiredInputs,
   userValidate.validUserInputs, userValidate.usernameExist,
