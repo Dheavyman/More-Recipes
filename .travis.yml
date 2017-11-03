@@ -5,7 +5,7 @@ node_js:
 services:
   - postgresql
 before_script:
-  - createdb test --username=postgres
+  - createdb more_recipes-test --username=postgres
 install: 
   - npm install
 script:
@@ -20,7 +20,7 @@ after_success:
 branches:
   only:
     - develop
-    - ch-tests-and-integration-150888969
+    - ch-tests-integrate-database-152520673
 
 notifications:
   webhooks:
