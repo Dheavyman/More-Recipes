@@ -5,7 +5,8 @@ node_js:
 services:
   - postgresql
 before_script:
-  - createdb more-recipes-test --username=postgres
+  - psql -c "CREATE DATABASE more-recipes-test;" -U postgres
+  - psql -c "CREATE USER postgres WITH PASSWORD 'diligence';" -U postgres
 install: 
   - npm install
 script:
