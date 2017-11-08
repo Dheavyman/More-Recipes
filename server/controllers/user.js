@@ -61,28 +61,32 @@ class userHandler {
       })
       .then((user) => {
         if (!user) {
-          res.status(401).send({
+          return res.status(401).send({
             status: 'Fail',
             message: 'Username or password incorrect'
           });
         }
         const hash = user.password;
-        bcrypt.compare(req.body.password, hash).then((confirmed) => {
-          if (!confirmed) {
-            res.status(401).send({
-              status: 'Fail',
-              message: 'Username or password incorrect'
-            });
-          }
-          const token = authenticate.generateToken(user);
-          res.status(200).send({
-            status: 'Success',
-            message: 'Login successful',
-            data: {
-              token
+        bcrypt.compare(req.body.password, hash)
+          .then((confirmed) => {
+            if (!confirmed) {
+              return res.status(401).send({
+                status: 'Fail',
+                message: 'Username or password incorrect'
+              });
             }
-          });
-        });
+            const token = authenticate.generateToken(user);
+            return res.status(200).send({
+              status: 'Success',
+              message: 'Login successful',
+              data: {
+                token
+              }
+            });
+          })
+          .catch(error => res.status(400).send({
+            message: error.message,
+          }));
       })
       .catch(error => res.status(400).send({
         message: error.message,

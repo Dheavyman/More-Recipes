@@ -352,7 +352,7 @@ describe('More Recipes', () => {
     });
   });
   describe('signin API', () => {
-    it('should return 400 for empty username', (done) => {
+    it('should return 401 for empty username', (done) => {
       server
         .post('/api/v1/users/signin')
         .set('Connection', 'keep alive')
@@ -365,7 +365,7 @@ describe('More Recipes', () => {
           done();
         });
     });
-    it('should return 400 for empty password', (done) => {
+    it('should return 401 for empty password', (done) => {
       server
         .post('/api/v1/users/signin')
         .set('Connection', 'keep alive')
@@ -443,7 +443,7 @@ describe('More Recipes', () => {
     });
   });
   describe('add recipe API', () => {
-    it('should return 403 for unauthenticated access', (done) => {
+    it('should return 401 for unauthenticated access', (done) => {
       server
         .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
@@ -460,7 +460,7 @@ describe('More Recipes', () => {
           done();
         });
     });
-    it('should return 403 for unverified token', (done) => {
+    it('should return 401 for unverified token', (done) => {
       server
         .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
