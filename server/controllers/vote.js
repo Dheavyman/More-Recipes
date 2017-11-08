@@ -125,7 +125,7 @@ class VoteHandler {
             .then(recipe => recipe.increment('downvotes'))
             .then(recipe => recipe.decrement('upvotes'))
             .then(recipe => res.status(200).send({
-              status: 'success',
+              status: 'Success',
               message: 'Downvote recorded and upvote removed',
               data: {
                 id: recipe.id,
@@ -139,7 +139,7 @@ class VoteHandler {
             .findById(req.params.recipeId)
             .then(recipe => recipe.decrement('downvotes'))
             .then(recipe => res.status(200).send({
-              status: 'success',
+              status: 'Success',
               message: 'Vote removed',
               data: {
                 id: recipe.id,
