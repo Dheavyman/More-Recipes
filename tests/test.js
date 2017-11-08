@@ -164,7 +164,6 @@ const server = supertest.agent(app),
   }],
   userToken = [];
 let userId1,
-  userId2,
   recipeId1,
   recipeId2,
   reviewId1,
@@ -194,7 +193,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validSignupSeed[0])
         .end((err, res) => {
-          userId1 = res.body.userId;
+          userId1 = res.body.data.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User created');
@@ -237,7 +236,6 @@ describe('More Recipes', () => {
         .type('form')
         .send(validSignupSeed[1])
         .end((err, res) => {
-          userId2 = res.body.userId;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User created');
@@ -782,10 +780,24 @@ describe('More Recipes', () => {
           .set('x-access-token', userToken[0])
           .set('Content-Type', 'application/json')
           .end((err, res) => {
-            console.log(res.body)
             expect(res.statusCode).to.equal(200);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Review deleted');
+            done();
+          });
+      });
+    it('should return 403 if user tries to delete a review not his/hers',
+      (done) => {
+        server
+          .delete(`/api/v1/recipes/${recipeId2}/reviews/${reviewId2}`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(403);
+            expect(res.body.status).to.equal('Fail');
+            expect(res.body.message).to.equal('Not user\'s review');
             done();
           });
       });
@@ -851,6 +863,68 @@ describe('More Recipes', () => {
           });
       });
   });
+  describe('favorite recipe API', () => {
+    it('should allow logged in user add a recipe to his/her favorites',
+      (done) => {
+        server
+          .post(`/api/v1/recipes/${recipeId2}/favorites`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe added to favorites');
+            done();
+          });
+      });
+    it('should return 404 while getting user favorites if user does not exist',
+      (done) => {
+        server
+          .get(`/api/v1/users/${15}/recipes`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body.status).to.equal('Fail');
+            expect(res.body.message).to.equal('User does not exist');
+            done();
+          });
+      });
+    it('should allow logged in user to get all his/her favorite recipes',
+      (done) => {
+        server
+          .get(`/api/v1/users/${userId1}/recipes`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Favorites retrieved');
+            done();
+          });
+      });
+    it('should allow logged in user delete a recipe from his/her favorites',
+      (done) => {
+        server
+          .post(`/api/v1/recipes/${recipeId2}/favorites`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe removed from favorites');
+            done();
+          });
+      });
+  });
   describe('vote recipe API', () => {
     it('should allow a user to upvote a recipe', (done) => {
       server
@@ -877,6 +951,66 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Downvote recorded');
+          done();
+        });
+    });
+    it('should allow a user to downvote a recipe previously upvoted',
+      (done) => {
+        server
+          .put(`/api/v1/recipes/${recipeId2}/downvotes`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to
+              .equal('Downvote recorded and upvote removed');
+            done();
+          });
+      });
+    it('should allow a user to remove his/her vote', (done) => {
+      server
+        .put(`/api/v1/recipes/${recipeId2}/downvotes`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Vote removed');
+          done();
+        });
+    });
+    it('should allow a user to upvote a recipe previously downvoted',
+      (done) => {
+        server
+          .put(`/api/v1/recipes/${recipeId2}/upvotes`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[1])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to
+              .equal('Upvote recorded and downvote removed');
+            done();
+          });
+      });
+    it('should allow a user to remove his/her vote', (done) => {
+      server
+        .put(`/api/v1/recipes/${recipeId2}/upvotes`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[1])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Vote removed');
           done();
         });
     });
