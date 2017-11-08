@@ -5,13 +5,13 @@ node_js:
 services:
   - postgresql
 before_script:
-  - createdb more_recipes-test --username=postgres
+  - createdb more-recipes-travis --username=postgres
 install: 
   - npm install
 script:
   - npm test
 env:
-  - NODE_ENV=test
+  - NODE_ENV=test_travis
 cache:
   directories:
    - "node_modules"
