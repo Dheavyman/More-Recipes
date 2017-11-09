@@ -3,6 +3,11 @@ $(document).ready(() => {
   $('.button-collapse').sideNav({
     draggable: true,
   });
+  // Initialize materialize dropdown class
+  $('.dropdown-button').dropdown({
+    hover: true,
+    belowOrigin: true,
+  });
   // Initialize materialize css slider class
   $('.slider').slider({
     full_width: true,
