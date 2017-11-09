@@ -4,7 +4,7 @@ $(document).ready(() => {
     draggable: true,
   });
   // Initialize materialize dropdown class
-  $(".dropdown-button").dropdown({
+  $('.dropdown-button').dropdown({
     hover: true,
     belowOrigin: true,
   });
