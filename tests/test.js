@@ -11,21 +11,18 @@ const server = supertest.agent(app),
     email: 'scotch@example.com',
     firstName: 'John',
     lastName: 'Scoth',
-    gender: 'Male'
   }, {
     username: 'Jessy',
     password: 'jessypassword',
     email: 'jessy@example.com',
     firstName: 'Jessy',
     lastName: 'Sanders',
-    gender: 'Female'
   }, {
     username: 'Vincent',
     password: 'vincentpassword',
     email: 'scotch@example.com',
     firstName: 'Vincent',
     lastName: 'Cross',
-    gender: 'Male'
   }],
   invalidSignupSeed = [{
     username: '  ',
@@ -33,42 +30,30 @@ const server = supertest.agent(app),
     email: '@example.com',
     firstName: 'Alex',
     lastName: 'Scotch',
-    gender: 'Male'
   }, {
     username: 'Paul',
     password: '  ',
     email: 'paul@example.com',
     firstName: 'Paul',
     lastName: 'Sunders',
-    gender: 'male'
   }, {
     username: 'Paul',
     password: 'awesome',
     email: '   ',
     firstName: 'Paul',
     lastName: 'Sunders',
-    gender: 'male'
   }, {
     username: 'Paul',
     password: 'awesome',
     email: 'paul@example.com',
     firstName: '   ',
     lastName: 'Sunders',
-    gender: 'male'
   }, {
     username: 'Paul',
     password: 'awesome',
     email: 'paul@example.com',
     firstName: 'Paul',
     lastName: '  ',
-    gender: 'male'
-  }, {
-    username: 'Paul',
-    password: 'awesome',
-    email: 'paul@example.com',
-    firstName: 'Paul',
-    lastName: 'Sunders',
-    gender: '   '
   }, {
     username: 'Paul#',
     password: 'awesome',
@@ -82,7 +67,6 @@ const server = supertest.agent(app),
     email: 'paulexample.com',
     firstName: 'Paul',
     lastName: 'Sunders',
-    gender: 'male'
   }],
   validSigninSeed = [{
     username: 'Jessy',
@@ -307,26 +291,13 @@ describe('More Recipes', () => {
           done();
         });
     });
-    it('should return 400 for empty gender', (done) => {
-      server
-        .post('/api/v1/users/signup')
-        .set('Connection', 'keep alive')
-        .set('Content-Type', 'application/json')
-        .type('form')
-        .send(invalidSignupSeed[5])
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('Gender required');
-          done();
-        });
-    });
     it('should return 400 for invalid username', (done) => {
       server
         .post('/api/v1/users/signup')
         .set('Connection', 'keep alive')
         .set('Content-Type', 'application/json')
         .type('form')
-        .send(invalidSignupSeed[6])
+        .send(invalidSignupSeed[5])
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body.message).to
@@ -340,7 +311,7 @@ describe('More Recipes', () => {
         .set('Connection', 'keep alive')
         .set('Content-Type', 'application/json')
         .type('form')
-        .send(invalidSignupSeed[7])
+        .send(invalidSignupSeed[6])
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body.message).to
@@ -419,7 +390,7 @@ describe('More Recipes', () => {
           expect('Content-Type', 'application/json');
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
-          expect(res.body.message).to.equal('Login successful');
+          expect(res.body.message).to.equal('User logged in');
           done();
         });
     });
@@ -435,7 +406,7 @@ describe('More Recipes', () => {
           expect('Content-Type', 'application/json');
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
-          expect(res.body.message).to.equal('Login successful');
+          expect(res.body.message).to.equal('User logged in');
           done();
         });
     });
