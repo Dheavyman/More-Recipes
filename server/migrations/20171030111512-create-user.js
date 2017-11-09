@@ -26,15 +26,6 @@ module.exports = {
     phone: {
       type: Sequelize.INTEGER
     },
-    gender: {
-      type: Sequelize.STRING
-    },
-    city: {
-      type: Sequelize.STRING
-    },
-    country: {
-      type: Sequelize.STRING
-    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE

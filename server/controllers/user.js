@@ -33,7 +33,6 @@ class userHandler {
             username: user.username,
             email: user.email,
             fullName: user.fullName,
-            gender: user.gender
           }
         });
       })
@@ -78,7 +77,7 @@ class userHandler {
             const token = authenticate.generateToken(user);
             return res.status(200).send({
               status: 'Success',
-              message: 'Login successful',
+              message: 'User logged in',
               data: {
                 token
               }

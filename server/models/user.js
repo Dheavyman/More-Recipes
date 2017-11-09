@@ -88,32 +88,12 @@ export default (sequelize, DataTypes) => {
         args: true,
         msg: 'Phone number already exist',
       },
-    },
-    gender: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'Gender required!',
-        },
-      },
-      set(val) {
-        this.setDataValue('gender', val.toLowerCase().trim());
-      }
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: true,
     }
   }, {
     getterMethods: {
       fullName() {
-        return `${this.getDataValue('firstName')} ${this.getDataValue('lastName')}`;
+        return `${this.getDataValue('firstName')} ${
+          this.getDataValue('lastName')}`;
       },
     },
     hooks: {
