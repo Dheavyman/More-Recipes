@@ -3,10 +3,20 @@ export default (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(val) {
+        this.setDataValue('title', val.trim());
+      }
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     description: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(val) {
+        this.setDataValue('description', val.trim());
+      }
     },
     preparationTime: {
       type: DataTypes.INTEGER,
@@ -23,14 +33,17 @@ export default (sequelize, DataTypes) => {
     upvotes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
+      allowNull: false,
     },
     downvotes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
+      allowNull: false,
     },
     views: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
+      allowNull: false,
     }
   });
   Recipe.associate = (models) => {
