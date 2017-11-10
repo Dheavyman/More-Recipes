@@ -71,7 +71,12 @@ router.get('/recipes/users/:userId', authenticate.verifyToken,
 
 // Get all user favorite recipes
 router.get('/users/:userId/recipes', authenticate.verifyToken,
-  userValidate.userExist, userController.userFavorites);
+  userValidate.userExist, favoriteController.userFavorites);
+
+// Creare category for user favorite recipe
+router.put('/users/:userId/recipes/:recipeId', authenticate.verifyToken,
+  userValidate.userExist, recipeValidate.recipeExist,
+  favoriteController.favoriteCategory);
 
 // Upvote a recipe
 router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,

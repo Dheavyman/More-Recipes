@@ -6,9 +6,9 @@ const Recipe = models.Recipe,
 /**
  * Class representing voting handler for upvoting or downvoting a recipe
  *
- * @class VoteHandler
+ * @class VoteController
  */
-class VoteHandler {
+class VoteController {
   /**
    * Recipe upvote
    *
@@ -16,7 +16,7 @@ class VoteHandler {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} Object representing the success or failure message
-   * @memberof VoteHandler
+   * @memberof VoteController
    */
   static upvote(req, res) {
     return Vote
@@ -89,7 +89,7 @@ class VoteHandler {
    * @param {object} res - The response object
    * @returns {object} Object containing the success status or
    * error status
-   * @memberof VoteHandler
+   * @memberof VoteController
    */
   static downvote(req, res) {
     return Vote
@@ -155,4 +155,4 @@ class VoteHandler {
   }
 }
 
-export default VoteHandler;
+export default VoteController;

@@ -1,9 +1,11 @@
 import models from '../models';
 
-const Favorite = models.Favorite;
+const Favorite = models.Favorite,
+  Recipe = models.Recipe,
+  User = models.User;
 
 /**
- * Class representing favorite controller funcitons
+ * Class representing favorite controller functions
  *
  * @class FavoriteController
  */
@@ -40,6 +42,84 @@ class FavoriteController {
         });
       })
       .catch(error => res.status(400).send({
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Retrieve all user favorite recipes
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} Object representing success status or
+   * error stattus
+   * @memberof FavoriteController
+   */
+  static userFavorites(req, res) {
+    return User
+      .findById(req.params.userId, {
+        attributes: ['firstName', 'lastName'],
+        include: [{
+          model: Favorite,
+          attributes: ['recipeId', 'category'],
+          include: [{
+            model: Recipe,
+            attributes: [
+              'title', 'category', 'description', 'preparationTime',
+              'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+            ]
+          }]
+        }],
+      })
+      .then(user => res.status(200).send({
+        status: 'Success',
+        message: 'Favorites retrieved',
+        data: {
+          user
+        }
+      }))
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Create category for a user favorite recipe
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} Object representing the success status or
+   * error status
+   * @memberof FavoriteController
+   */
+  static favoriteCategory(req, res) {
+    return Favorite
+      .findOne({
+        where: {
+          userId: req.decoded.user.id,
+          recipeId: req.params.recipeId,
+        }
+      })
+      .then((favorite) => {
+        if (!favorite) {
+          return res.status(404).send({
+            status: 'Fail',
+            message: 'Favorite recipe not found',
+          });
+        }
+        favorite
+          .update({
+            category: req.body.category,
+          });
+      })
+      .then(() => res.status(200).send({
+        status: 'Success',
+        message: 'Favorite recipe category added',
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Fail',
         message: error.message,
       }));
   }
