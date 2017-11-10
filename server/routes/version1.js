@@ -32,7 +32,10 @@ router.route('/recipes')
     recipeController.addRecipe)
 
   // Retrieve all the recipes in the catalog
-  .get(recipeController.getAll, recipeController.getMostUpvotes);
+  // Retrieve recipes with the most upvotes
+  // Search for recipes based on list of ingredients
+  .get(recipeController.getAll, recipeController.getMostUpvotes,
+    recipeController.searchByIngredients);
 
 router.route('/recipes/:recipeId')
   // Retrieve a single recipe from the catalog
