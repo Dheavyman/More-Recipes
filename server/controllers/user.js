@@ -3,8 +3,6 @@ import middlewares from '../middlewares';
 import models from '../models';
 
 const User = models.User,
-  Favorite = models.Favorite,
-  Recipe = models.Recipe,
   authenticate = middlewares.authentication;
 
 /**
@@ -12,7 +10,7 @@ const User = models.User,
  *
  * @class userHandler
  */
-class userHandler {
+class UserController {
   /**
    * Register a user on the platform
    *
@@ -20,7 +18,7 @@ class userHandler {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @return {object} Success message with the user created or error message
-   * @memberof userHandler
+   * @memberof UserController
    */
   static registerUser(req, res) {
     User.create(req.body)
@@ -49,7 +47,7 @@ class userHandler {
    * @param {object} res - The response object
    * @returns {object} Success message after successful login or
    * error message if unsuccessful
-   * @memberof userHandler
+   * @memberof UserController
    */
   static signinUser(req, res) {
     return User
@@ -91,44 +89,6 @@ class userHandler {
         message: error.message,
       }));
   }
-
-  /**
-   * Retrieve all user favorite recipes
-   *
-   * @static
-   * @param {object} req - The request object
-   * @param {object} res - The response object
-   * @returns {object} Object representing success status or
-   * error stattus
-   * @memberof userHandler
-   */
-  static userFavorites(req, res) {
-    return User
-      .findById(req.params.userId, {
-        attributes: ['firstName', 'lastName'],
-        include: [{
-          model: Favorite,
-          attributes: ['recipeId'],
-          include: [{
-            model: Recipe,
-            attributes: [
-              'title', 'description', 'preparationTime', 'ingredients',
-              'directions', 'upvotes', 'downvotes', 'views'
-            ]
-          }]
-        }],
-      })
-      .then(user => res.status(200).send({
-        status: 'Success',
-        message: 'Favorites retrieved',
-        data: {
-          user
-        }
-      }))
-      .catch(error => res.status(400).send({
-        message: error.message,
-      }));
-  }
 }
 
-export default userHandler;
+export default UserController;
