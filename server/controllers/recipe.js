@@ -164,7 +164,8 @@ class RecipeHandler {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} - JSON object representing the single recipe retrieved
+   * @returns {object} - Object representing the success status or
+   * error status
    * @memberof RecipeHandler
    */
   static getOne(req, res) {
@@ -192,6 +193,48 @@ class RecipeHandler {
       }))
       .catch(error => res.status(400).send({
         message: error.message
+      }));
+  }
+
+  /**
+   * Retrieve user recipes
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} Object representing the success status or
+   * error status
+   * @memberof RecipeHandler
+   */
+  static userRecipes(req, res) {
+    return Recipe
+      .all({
+        attributes: [
+          'id', 'title', 'description', 'preparationTime', 'ingredients',
+          'directions', 'upvotes', 'downvotes', 'views'
+        ],
+        where: {
+          userId: req.params.userId,
+        }
+      })
+      .then((recipes) => {
+        if (recipes.length === 0) {
+          return res.status(404).send({
+            status: 'Fail',
+            message: 'User has not added any recipe',
+          });
+        }
+        return res.status(200).send({
+          status: 'Success',
+          message: 'User recipes retrieved',
+          data: {
+            recipes,
+          }
+        });
+      })
+      .catch(error => res.status(500).send({
+        status: 'Fail',
+        message: error.message,
       }));
   }
 
