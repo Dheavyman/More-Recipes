@@ -207,7 +207,7 @@ class RecipeHandler {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @return {object} Object representing the success status or
+   * @returns {object} Object representing the success status or
    * error status
    * @memberof RecipeHandler
    */
