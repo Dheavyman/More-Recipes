@@ -64,6 +64,10 @@ router.delete('/recipes/:recipeId/reviews/:reviewId', authenticate.verifyToken,
 router.post('/recipes/:recipeId/favorites', authenticate.verifyToken,
   recipeValidate.recipeExist, favoriteController.setFavorite);
 
+// Get all user recipes
+router.get('/recipes/users/:userId', authenticate.verifyToken,
+  userValidate.userExist, recipeController.userRecipes);
+
 // Get all user favorite recipes
 router.get('/users/:userId/recipes', authenticate.verifyToken,
   userValidate.userExist, userController.userFavorites);
