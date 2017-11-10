@@ -9,9 +9,9 @@ const Recipe = models.Recipe,
 /**
  * Class representing recipe handler
  *
- * @class RecipeHandler
+ * @class RecipeController
  */
-class RecipeHandler {
+class RecipeController {
   /**
    * Add a recipe
    *
@@ -20,7 +20,7 @@ class RecipeHandler {
    * @param {object} res - The response object
    * @returns {object} - Object representing success status or
    *  error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static addRecipe(req, res) {
     return Recipe
@@ -64,7 +64,7 @@ class RecipeHandler {
    * @param {object} res - The response object
    * @returns {object} - Object representing success status or
    *  error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static modifyRecipe(req, res) {
     return Recipe
@@ -110,7 +110,7 @@ class RecipeHandler {
    * @param {object} res - The responsee object
    * @returns {object} - Object representing success status or
    * error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static deleteRecipe(req, res) {
     return Recipe
@@ -139,7 +139,7 @@ class RecipeHandler {
    * @param {function} next - The next route handler function
    * @return {object} - Object representing the success status or
    * error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static getAll(req, res, next) {
     if (req.query.sort || req.query.search) return next();
@@ -170,7 +170,7 @@ class RecipeHandler {
    * @param {object} res - The response object
    * @return {object} - Object representing the success status or
    * error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static getOne(req, res) {
     return Recipe
@@ -209,7 +209,7 @@ class RecipeHandler {
    * @param {object} res - The response object
    * @returns {object} Object representing the success status or
    * error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static userRecipes(req, res) {
     return Recipe
@@ -252,7 +252,7 @@ class RecipeHandler {
    * @param {object} next - Calls the next route handler
    * @return {object} Object representing the success status or
    * error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static getMostUpvotes(req, res, next) {
     if (req.query.sort && req.query.order) {
@@ -292,7 +292,7 @@ class RecipeHandler {
    * @param {function} next - Calls the next route handler
    * @returns {object} Object representing success status or
    *  error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static searchByIngredients(req, res, next) {
     if (req.query.search === 'ingredients') {
@@ -344,7 +344,7 @@ class RecipeHandler {
    * @param {function} next - Calls the next route handler
    * @returns {object} Object representing success status or
    *  error status
-   * @memberof RecipeHandler
+   * @memberof RecipeController
    */
   static searchByCategory(req, res, next) {
     if (req.query.search === 'category') {
@@ -388,4 +388,4 @@ class RecipeHandler {
   }
 }
 
-export default RecipeHandler;
+export default RecipeController;

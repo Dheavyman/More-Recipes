@@ -5,9 +5,9 @@ const Review = models.Review;
 /**
  * Class representing review handler
  *
- * @class ReviewHandler
+ * @class ReviewController
  */
-class ReviewHandler {
+class ReviewController {
   /**
    * Add a review for a recipe
    *
@@ -16,7 +16,7 @@ class ReviewHandler {
    * @param {object} res - The response object
    * @returns {object} - Object representing success status or
    * error status
-   * @memberof ReviewHandler
+   * @memberof ReviewController
    */
   static addReview(req, res) {
     return Review
@@ -48,7 +48,7 @@ class ReviewHandler {
    * @param {object} res - The response object
    * @returns {object} Object representing success status or
    * error status
-   * @memberof ReviewHandler
+   * @memberof ReviewController
    */
   static deleteReview(req, res) {
     return Review
@@ -71,4 +71,4 @@ class ReviewHandler {
   }
 }
 
-export default ReviewHandler;
+export default ReviewController;
