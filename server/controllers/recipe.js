@@ -184,6 +184,7 @@ class RecipeHandler {
           }],
         }],
       })
+      .then(recipe => recipe.increment('views'))
       .then(recipe => res.status(200).send({
         status: 'Success',
         message: 'Recipe retrieved',
