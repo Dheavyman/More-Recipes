@@ -248,7 +248,7 @@ class RecipeHandler {
    */
   static searchByIngredients(req, res, next) {
     if (req.query.search === 'ingredients') {
-      const ingredients = req.query.list.split(',');
+      const ingredients = req.query.list.split(' ');
       const searchList = ingredients.map(keyWord => ({
         ingredients: {
           [Op.iLike]: `%${keyWord}%`,
