@@ -1,8 +1,10 @@
+import Sequelize from 'sequelize';
 import models from '../models';
 
 const Recipe = models.Recipe,
   Review = models.Review,
-  User = models.User;
+  User = models.User,
+  Op = Sequelize.Op;
 
 /**
  * Class representing recipe handler
@@ -131,12 +133,12 @@ class RecipeHandler {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - The next route handler function
-   * @return {object} - Call to the next route handler or
-   * object representing the success status or error status
+   * @return {object} - Object representing the success status or
+   * error status
    * @memberof RecipeHandler
    */
   static getAll(req, res, next) {
-    if (req.query.sort) return next();
+    if (req.query.sort || req.query.search) return next();
     return Recipe
       .all({
         attributes: [
@@ -144,11 +146,11 @@ class RecipeHandler {
           'directions', 'upvotes', 'downvotes', 'views'
         ],
       })
-      .then(recipe => res.status(200).send({
+      .then(recipes => res.status(200).send({
         status: 'Success',
         message: 'Recipes retrieved',
         data: {
-          recipe
+          recipes
         }
       }))
       .catch(error => res.status(400).send({
@@ -201,7 +203,7 @@ class RecipeHandler {
    * @param {object} res - The response object
    * @param {object} next - Calls the next route handler
    * @return {object} Object representing the success status or
-   * error status or call to the next route handler
+   * error status
    * @memberof RecipeHandler
    */
   static getMostUpvotes(req, res, next) {
@@ -212,7 +214,7 @@ class RecipeHandler {
         .findAll({
           attributes: [
             'id', 'title', 'description', 'preparationTime', 'ingredients',
-            'directions', 'upvotes', 'downvotes'
+            'directions', 'upvotes', 'downvotes', 'views'
           ],
           order: [
             [sort, order]
@@ -227,6 +229,58 @@ class RecipeHandler {
           }
         }))
         .catch(error => res.status(400).send({
+          message: error.message,
+        }));
+    }
+    next();
+  }
+
+  /**
+   * Search for recipes based on list of ingredients
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @param {function} next - Calls the next route handler
+   * @returns {object} Object representing success status or
+   *  error status
+   * @memberof RecipeHandler
+   */
+  static searchByIngredients(req, res, next) {
+    if (req.query.search === 'ingredients') {
+      const ingredients = req.query.list.split(' ');
+      const searchList = ingredients.map(keyWord => ({
+        ingredients: {
+          [Op.iLike]: `%${keyWord}%`,
+        }
+      }));
+      return Recipe
+        .all({
+          attributes: [
+            'id', 'title', 'description', 'preparationTime', 'ingredients',
+            'directions', 'upvotes', 'downvotes', 'views'
+          ],
+          where: {
+            [Op.or]: searchList,
+          }
+        })
+        .then((recipes) => {
+          if (recipes.length === 0) {
+            return res.status(400).send({
+              status: 'Fail',
+              message: 'No recipe matched your search',
+            });
+          }
+          return res.status(200).send({
+            status: 'Success',
+            message: 'Recipe(s) found',
+            data: {
+              recipes,
+            }
+          });
+        })
+        .catch(error => res.status(500).send({
+          status: 'Fail',
           message: error.message,
         }));
     }
