@@ -1,5 +1,10 @@
-export default (sequelize) => {
-  const Favorite = sequelize.define('Favorite', {});
+export default (sequelize, DataTypes) => {
+  const Favorite = sequelize.define('Favorite', {
+    category: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
+  });
   Favorite.associate = (models) => {
     Favorite.belongsTo(models.User, {
       foreignKey: 'userId',

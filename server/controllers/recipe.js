@@ -27,6 +27,7 @@ class RecipeHandler {
       .create({
         userId: req.decoded.user.id,
         title: req.body.title,
+        category: req.body.category,
         description: req.body.description,
         preparationTime: req.body.preparationTime,
         ingredients: req.body.ingredients,
@@ -40,6 +41,7 @@ class RecipeHandler {
           id: recipe.id,
           userId: recipe.userId,
           title: recipe.title,
+          category: recipe.category,
           description: recipe.description,
           preparationTime: recipe.preparationTime,
           ingredients: recipe.ingredients,
@@ -75,6 +77,7 @@ class RecipeHandler {
       .then(recipe => recipe
         .update({
           title: req.body.title,
+          category: req.body.category,
           description: req.body.description,
           preparationTime: req.body.preparationTime,
           ingredients: req.body.ingredients,
@@ -87,6 +90,7 @@ class RecipeHandler {
         data: {
           id: updatedRecipe.id,
           title: updatedRecipe.title,
+          category: updatedRecipe.category,
           description: updatedRecipe.description,
           preparationTime: updatedRecipe.preparationTime,
           ingredients: updatedRecipe.ingredients,
@@ -142,8 +146,8 @@ class RecipeHandler {
     return Recipe
       .all({
         attributes: [
-          'id', 'title', 'description', 'preparationTime', 'ingredients',
-          'directions', 'upvotes', 'downvotes', 'views'
+          'id', 'title', 'category', 'description', 'preparationTime',
+          'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
         ],
       })
       .then(recipes => res.status(200).send({
@@ -172,8 +176,8 @@ class RecipeHandler {
     return Recipe
       .findById(req.params.recipeId, {
         attributes: [
-          'id', 'title', 'description', 'preparationTime', 'ingredients',
-          'directions', 'upvotes', 'downvotes', 'views'
+          'id', 'title', 'category', 'description', 'preparationTime',
+          'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
         ],
         include: [{
           model: Review,
@@ -211,8 +215,8 @@ class RecipeHandler {
     return Recipe
       .all({
         attributes: [
-          'id', 'title', 'description', 'preparationTime', 'ingredients',
-          'directions', 'upvotes', 'downvotes', 'views'
+          'id', 'title', 'category', 'description', 'preparationTime',
+          'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
         ],
         where: {
           userId: req.params.userId,
@@ -257,8 +261,8 @@ class RecipeHandler {
       return Recipe
         .findAll({
           attributes: [
-            'id', 'title', 'description', 'preparationTime', 'ingredients',
-            'directions', 'upvotes', 'downvotes', 'views'
+            'id', 'title', 'category', 'description', 'preparationTime',
+            'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
           ],
           order: [
             [sort, order]
@@ -301,8 +305,60 @@ class RecipeHandler {
       return Recipe
         .all({
           attributes: [
-            'id', 'title', 'description', 'preparationTime', 'ingredients',
-            'directions', 'upvotes', 'downvotes', 'views'
+            'id', 'title', 'category', 'description', 'preparationTime',
+            'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+          ],
+          where: {
+            [Op.or]: searchList,
+          }
+        })
+        .then((recipes) => {
+          if (recipes.length === 0) {
+            return res.status(400).send({
+              status: 'Fail',
+              message: 'No recipe matched your search',
+            });
+          }
+          return res.status(200).send({
+            status: 'Success',
+            message: 'Recipe(s) found',
+            data: {
+              recipes,
+            }
+          });
+        })
+        .catch(error => res.status(500).send({
+          status: 'Fail',
+          message: error.message,
+        }));
+    }
+    next();
+  }
+
+  /**
+   * Search for recipes based on category
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @param {function} next - Calls the next route handler
+   * @returns {object} Object representing success status or
+   *  error status
+   * @memberof RecipeHandler
+   */
+  static searchByCategory(req, res, next) {
+    if (req.query.search === 'category') {
+      const category = req.query.list.split(' ');
+      const searchList = category.map(keyWord => ({
+        category: {
+          [Op.iLike]: `%${keyWord}%`,
+        }
+      }));
+      return Recipe
+        .all({
+          attributes: [
+            'id', 'title', 'category', 'description', 'preparationTime',
+            'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
           ],
           where: {
             [Op.or]: searchList,
