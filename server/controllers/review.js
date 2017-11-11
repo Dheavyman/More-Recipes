@@ -1,6 +1,10 @@
 import models from '../models';
+import helpers from '../helpers';
 
-const Review = models.Review;
+const Review = models.Review,
+  Recipe = models.Recipe,
+  User = models.User,
+  sendNotification = helpers.sendEmail;
 
 /**
  * Class representing review handler
@@ -35,7 +39,28 @@ class ReviewController {
           content: review.content,
         }
       }))
-      .catch(error => res.status(400).send({
+      // Notify the recipe owner of the review through email
+      .then(() =>
+        Recipe
+          .findById(req.params.recipeId, {
+            include: [{
+              model: User,
+              attributes: ['email'],
+            }]
+          })
+      )
+      .then((recipe) => {
+        User
+          .findById(req.decoded.user.id, {
+            attributes: ['firstName', 'lastName'],
+          })
+          .then((reviewer) => {
+            sendNotification(recipe.User.email,
+              'New notification', `Your recipe ${
+                recipe.title} was reviewed by ${reviewer.fullName}`);
+          });
+      })
+      .catch(error => res.status(500).send({
         message: error.message,
       }));
   }
@@ -65,7 +90,7 @@ class ReviewController {
         status: 'Success',
         message: 'Review deleted'
       }))
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
         message: error.message,
       }));
   }
