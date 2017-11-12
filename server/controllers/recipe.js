@@ -51,7 +51,8 @@ class RecipeController {
           views: recipe.views,
         }
       }))
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -97,7 +98,8 @@ class RecipeController {
           directions: updatedRecipe.directions,
         }
       }))
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -125,7 +127,8 @@ class RecipeController {
         status: 'Success',
         message: 'Recipe deleted'
       }))
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -157,7 +160,8 @@ class RecipeController {
           recipes
         }
       }))
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -196,7 +200,8 @@ class RecipeController {
           recipe
         }
       }))
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message
       }));
   }
@@ -238,7 +243,7 @@ class RecipeController {
         });
       })
       .catch(error => res.status(500).send({
-        status: 'Fail',
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -276,7 +281,8 @@ class RecipeController {
             recipes
           }
         }))
-        .catch(error => res.status(400).send({
+        .catch(error => res.status(500).send({
+          status: 'Error',
           message: error.message,
         }));
     }
@@ -328,7 +334,7 @@ class RecipeController {
           });
         })
         .catch(error => res.status(500).send({
-          status: 'Fail',
+          status: 'Error',
           message: error.message,
         }));
     }
@@ -380,7 +386,7 @@ class RecipeController {
           });
         })
         .catch(error => res.status(500).send({
-          status: 'Fail',
+          status: 'Error',
           message: error.message,
         }));
     }
