@@ -45,22 +45,26 @@ class ReviewController {
           .findById(req.params.recipeId, {
             include: [{
               model: User,
-              attributes: ['email'],
+              attributes: ['id', 'email', 'notifications'],
             }]
           })
       )
       .then((recipe) => {
         User
           .findById(req.decoded.user.id, {
-            attributes: ['firstName', 'lastName'],
+            attributes: ['id', 'firstName', 'lastName'],
           })
           .then((reviewer) => {
-            sendNotification(recipe.User.email,
-              'New notification', `Your recipe ${
-                recipe.title} was reviewed by ${reviewer.fullName}`);
+            if (recipe.User.notifications === true &&
+              recipe.User.id !== reviewer.id) {
+              sendNotification(recipe.User.email,
+                'New notification', `Your recipe ${
+                  recipe.title} was reviewed by ${reviewer.fullName}`);
+            }
           });
       })
       .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -91,6 +95,7 @@ class ReviewController {
         message: 'Review deleted'
       }))
       .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }

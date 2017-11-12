@@ -86,4 +86,11 @@ router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,
 router.put('/recipes/:recipeId/downvotes', authenticate.verifyToken,
   recipeValidate.recipeExist, voteController.downvote);
 
+// User opt-in for notifications
+router.put('/users/enable', authenticate.verifyToken,
+  userController.enableNotifications);
+
+// User opt-out for notifications
+router.put('/users/disable', authenticate.verifyToken,
+  userController.disableNotifications);
 export default router;

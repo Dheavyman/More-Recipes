@@ -31,10 +31,12 @@ class UserController {
             username: user.username,
             email: user.email,
             fullName: user.fullName,
+            notifications: user.notifications,
           }
         });
       })
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -81,11 +83,71 @@ class UserController {
               }
             });
           })
-          .catch(error => res.status(400).send({
+          .catch(error => res.status(500).send({
+            status: 'Error',
             message: error.message,
           }));
       })
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Enable notifications for a user
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} Object representing success status or
+   * error status
+   * @memberof UserController
+   */
+  static enableNotifications(req, res) {
+    return User
+      .findById(req.decoded.user.id)
+      .then(user =>
+        user
+          .update({
+            notifications: true,
+          })
+      )
+      .then(() => res.status(200).send({
+        status: 'Success',
+        message: 'Notifications enabled',
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Disable notifications for a user
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} Object representing success status or
+   * error status
+   * @memberof UserController
+   */
+  static disableNotifications(req, res) {
+    return User
+      .findById(req.decoded.user.id)
+      .then(user =>
+        user
+          .update({
+            notifications: false,
+          })
+      )
+      .then(() => res.status(200).send({
+        status: 'Success',
+        message: 'Notifications disabled',
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
