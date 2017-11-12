@@ -93,4 +93,5 @@ router.put('/users/enable', authenticate.verifyToken,
 // User opt-out for notifications
 router.put('/users/disable', authenticate.verifyToken,
   userController.disableNotifications);
+
 export default router;
