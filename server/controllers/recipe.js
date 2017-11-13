@@ -1,10 +1,12 @@
 import Sequelize from 'sequelize';
 import models from '../models';
+import helpers from '../helpers';
 
 const Recipe = models.Recipe,
   Review = models.Review,
   User = models.User,
-  Op = Sequelize.Op;
+  Op = Sequelize.Op,
+  sendNotification = helpers.sendEmail;
 
 /**
  * Class representing recipe handler
@@ -75,16 +77,18 @@ class RecipeController {
           userId: req.decoded.user.id,
         },
       })
-      .then(recipe => recipe
-        .update({
-          title: req.body.title,
-          category: req.body.category,
-          description: req.body.description,
-          preparationTime: req.body.preparationTime,
-          ingredients: req.body.ingredients,
-          directions: req.body.directions,
-        })
-      )
+      .then((recipe) => {
+        res.locals.recipeTitle = recipe.title;
+        return recipe
+          .update({
+            title: req.body.title,
+            category: req.body.category,
+            description: req.body.description,
+            preparationTime: req.body.preparationTime,
+            ingredients: req.body.ingredients,
+            directions: req.body.directions,
+          });
+      })
       .then(updatedRecipe => res.status(200).send({
         status: 'Success',
         message: 'Recipe modified',
@@ -98,6 +102,14 @@ class RecipeController {
           directions: updatedRecipe.directions,
         }
       }))
+      // Notify users that their favorite recipe has been modified
+      .then(() => {
+        if (res.locals.usersEmail.length > 0) {
+          sendNotification(res.locals.usersEmail,
+            'New notification', `Your favorite recipe ${
+              res.locals.recipeTitle} was modified`);
+        }
+      })
       .catch(error => res.status(500).send({
         status: 'Error',
         message: error.message,
