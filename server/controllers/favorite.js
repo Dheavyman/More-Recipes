@@ -41,7 +41,8 @@ class FavoriteController {
           message: 'Recipe added to favorites',
         });
       })
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -79,7 +80,8 @@ class FavoriteController {
           user
         }
       }))
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -112,14 +114,14 @@ class FavoriteController {
         favorite
           .update({
             category: req.body.category,
-          });
+          })
+          .then(() => res.status(200).send({
+            status: 'Success',
+            message: 'Favorite recipe category added',
+          }));
       })
-      .then(() => res.status(200).send({
-        status: 'Success',
-        message: 'Favorite recipe category added',
-      }))
       .catch(error => res.status(500).send({
-        status: 'Fail',
+        status: 'Error',
         message: error.message,
       }));
   }

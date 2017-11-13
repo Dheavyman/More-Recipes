@@ -96,6 +96,7 @@ const server = supertest.agent(app),
     directions: 'Cook the beans and add the ingredients',
   }, {
     title: 'Yam sauce',
+    category: 'Lunch',
     description: 'Served white and colourful',
     preparationTime: '50',
     ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
@@ -106,6 +107,20 @@ const server = supertest.agent(app),
     preparationTime: '80',
     ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
     directions: 'Cook the beans and add the ingredients',
+  }, {
+    title: 'Egusi soup',
+    category: 'Dinner',
+    description: 'Tasty and nutricious soup',
+    preparationTime: '65',
+    ingredients: 'Egusi, stock fish, red oil, onion, salt, maggi, pepper',
+    directions: 'Cook the egusi and add the ingredients',
+  }, {
+    title: 'Yam sauce',
+    category: 'Lunch',
+    description: 'Served white and colourful',
+    preparationTime: '50',
+    ingredients: 'Yam, tomatoes, vegetable oil, egg, salt, maggi, pepper',
+    directions: 'Slice the yam and prepare the sauce',
   }],
   invalidRecipeSeed = [{
     title: '   ',
@@ -142,14 +157,20 @@ const server = supertest.agent(app),
     content: 'A nice recipe idea',
   }, {
     content: 'I added spinach and it was wonderful',
+  }, {
+    content: 'A very tasty recipe, so sweet',
   }],
   invalidReviewSeed = [{
     content: '  ',
+  }],
+  userFavoriteCategory = [{
+    category: 'Lunch',
   }],
   userToken = [];
 let userId1,
   recipeId1,
   recipeId2,
+  recipeId3,
   reviewId1,
   reviewId2;
 
@@ -446,6 +467,22 @@ describe('More Recipes', () => {
           done();
         });
     });
+    it('should return 401 for unverified token', (done) => {
+      server
+        .post('/api/v1/recipes')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', `${userToken[0]}1a2`)
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validRecipeSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body.status).to.equal('Error');
+          expect(res.body).to.have.a.property('message');
+          done();
+        });
+    });
     it('should allow logged in user to post a recipe', (done) => {
       server
         .post('/api/v1/recipes')
@@ -463,7 +500,7 @@ describe('More Recipes', () => {
           done();
         });
     });
-    it('should allow another logged in user to post a recipe', (done) => {
+    it('should allow logged in user to post another recipe', (done) => {
       server
         .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
@@ -474,6 +511,23 @@ describe('More Recipes', () => {
         .send(validRecipeSeed[1])
         .end((err, res) => {
           recipeId2 = res.body.data.id;
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Recipe created');
+          done();
+        });
+    });
+    it('should allow another logged in user to post a recipe', (done) => {
+      server
+        .post('/api/v1/recipes')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[1])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validRecipeSeed[3])
+        .end((err, res) => {
+          recipeId3 = res.body.data.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe created');
@@ -850,6 +904,36 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should allow logged in user add another recipe to his/her favorites',
+      (done) => {
+        server
+          .post(`/api/v1/recipes/${recipeId3}/favorites`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe added to favorites');
+            done();
+          });
+      });
+    it('should allow another logged in user add a recipe to his/her favorites',
+      (done) => {
+        server
+          .post(`/api/v1/recipes/${recipeId2}/favorites`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[1])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe added to favorites');
+            done();
+          });
+      });
     it('should return 404 while getting user favorites if user does not exist',
       (done) => {
         server
@@ -883,7 +967,7 @@ describe('More Recipes', () => {
     it('should allow logged in user delete a recipe from his/her favorites',
       (done) => {
         server
-          .post(`/api/v1/recipes/${recipeId2}/favorites`)
+          .post(`/api/v1/recipes/${recipeId3}/favorites`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('x-access-token', userToken[0])
@@ -1055,6 +1139,166 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body.message).to.equal('Oops! 404. Page not Found');
+          done();
+        });
+    });
+  });
+  describe('search recipes by ingredients', () => {
+    it('should allow a user to search for recipes based on list of ingredients',
+      (done) => {
+        server
+          .get('/api/v1/recipes?search=ingredients&list=rice+salt')
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('Recipe(s) found');
+            done();
+          });
+      });
+    it('should return 404 for a searvh that has no match', (done) => {
+      server
+        .get('/api/v1/recipes?search=ingredients&list=meat')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.message).to.equal('No recipe matched your search');
+          done();
+        });
+    });
+  });
+  describe('search recipes by category', () => {
+    it('should allow a user to search for recipes based on category',
+      (done) => {
+        server
+          .get('/api/v1/recipes?search=category&list=lunch')
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('Recipe(s) found');
+            done();
+          });
+      });
+    it('should return 404 for a search that has no match', (done) => {
+      server
+        .get('/api/v1/recipes?search=category&list=breakfast')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.message).to.equal('No recipe matched your search');
+          done();
+        });
+    });
+  });
+  describe('create user favorite category API', () => {
+    it('should allow a user to create category for user favorite recipes',
+      (done) => {
+        server
+          .put(`/api/v1/users/${userId1}/recipes/${recipeId2}`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .send(userFavoriteCategory[0])
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('Favorite recipe category added');
+            done();
+          });
+      });
+    it('should return 404 for a recipe not a users favorite', (done) => {
+      server
+        .put(`/api/v1/users/${userId1}/recipes/${recipeId3}`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .send(userFavoriteCategory[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.message).to.equal('Favorite recipe not found');
+          done();
+        });
+    });
+  });
+  describe('opt-in and test notifications', () => {
+    it('should allow a user to opt-in for notifications', (done) => {
+      server
+        .put('/api/v1/users/enable')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.message).to.equal('Notifications enabled');
+          done();
+        });
+    });
+    it('should allow another user to opt-in for notifications', (done) => {
+      server
+        .put('/api/v1/users/enable')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[1])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.message).to.equal('Notifications enabled');
+          done();
+        });
+    });
+    it('should notify user when user recipe gets a review', (done) => {
+      server
+        .post(`/api/v1/recipes/${recipeId2}/reviews`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[1])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validReviewSeed[2])
+        .end((err, res) => {
+          reviewId2 = res.body.data.id;
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Review created');
+          done();
+        });
+    });
+    it('should notify users when their favorite recipe get modified',
+      (done) => {
+        server
+          .put(`/api/v1/recipes/${recipeId2}`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .type('form')
+          .send(validRecipeSeed[4])
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe modified');
+            done();
+          });
+      });
+    it('should allow a user to opt-out for notifications', (done) => {
+      server
+        .put('/api/v1/users/disable')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.message).to.equal('Notifications disabled');
           done();
         });
     });

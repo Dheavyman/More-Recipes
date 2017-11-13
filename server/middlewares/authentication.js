@@ -21,23 +21,22 @@ export default {
         status: 'Fail',
         message: 'Unauthenticated access, no token provided'
       });
-    } else if (token) {
-      jwt.verify(token, process.env.SECRET, (err, decoded) => {
-        if (err) {
-          if (err.message.includes('token')) {
-            return res.status(401).send({
-              status: 'Error',
-              message: 'Invalid token'
-            });
-          }
+    }
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        if (err.message.includes('token')) {
           return res.status(401).send({
             status: 'Error',
-            message: err.message,
+            message: 'Invalid token'
           });
         }
-        req.decoded = decoded;
-        return next();
-      });
-    }
+        return res.status(401).send({
+          status: 'Error',
+          message: err.message,
+        });
+      }
+      req.decoded = decoded;
+      return next();
+    });
   }
 };
