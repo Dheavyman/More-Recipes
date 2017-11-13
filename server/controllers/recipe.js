@@ -332,7 +332,7 @@ class RecipeController {
         })
         .then((recipes) => {
           if (recipes.length === 0) {
-            return res.status(400).send({
+            return res.status(404).send({
               status: 'Fail',
               message: 'No recipe matched your search',
             });
@@ -384,7 +384,7 @@ class RecipeController {
         })
         .then((recipes) => {
           if (recipes.length === 0) {
-            return res.status(400).send({
+            return res.status(404).send({
               status: 'Fail',
               message: 'No recipe matched your search',
             });
