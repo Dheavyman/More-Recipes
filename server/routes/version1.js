@@ -11,7 +11,8 @@ const router = express.Router(),
   voteController = controllers.vote,
   userValidate = middlewares.userValidation,
   recipeValidate = middlewares.recipeValidation,
-  reviewValidate = middlewares.reviewValidation;
+  reviewValidate = middlewares.reviewValidation,
+  notifyUsers = middlewares.usersNotification;
 
 router.get('/', (req, res) => res.status(200).send({
   message: 'Welcome to the Users API!',
@@ -45,7 +46,7 @@ router.route('/recipes/:recipeId')
   // Modifies a recipe
   .put(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
     recipeValidate.recipeExist, recipeValidate.userRecipe,
-    recipeController.modifyRecipe)
+    notifyUsers.favoriteRecipeModified, recipeController.modifyRecipe)
 
   // Delete a recipe
   .delete(authenticate.verifyToken, recipeValidate.recipeExist,
@@ -85,5 +86,13 @@ router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,
 // Downvote a recipe
 router.put('/recipes/:recipeId/downvotes', authenticate.verifyToken,
   recipeValidate.recipeExist, voteController.downvote);
+
+// User opt-in for notifications
+router.put('/users/enable', authenticate.verifyToken,
+  userController.enableNotifications);
+
+// User opt-out for notifications
+router.put('/users/disable', authenticate.verifyToken,
+  userController.disableNotifications);
 
 export default router;

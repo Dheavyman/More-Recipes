@@ -31,8 +31,8 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Password required!',
         },
-        len: {
-          args: [6],
+        min: {
+          args: 6,
           msg: 'Password must be at least six characters'
         }
       },
@@ -88,6 +88,11 @@ export default (sequelize, DataTypes) => {
         args: true,
         msg: 'Phone number already exist',
       },
+    },
+    notifications: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     }
   }, {
     getterMethods: {
