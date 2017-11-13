@@ -40,15 +40,13 @@ class ReviewController {
         }
       }))
       // Notify the recipe owner of the review through email
-      .then(() =>
-        Recipe
-          .findById(req.params.recipeId, {
-            include: [{
-              model: User,
-              attributes: ['id', 'email', 'notifications'],
-            }]
-          })
-      )
+      .then(() => Recipe
+        .findById(req.params.recipeId, {
+          include: [{
+            model: User,
+            attributes: ['id', 'email', 'notifications'],
+          }]
+        }))
       .then((recipe) => {
         User
           .findById(req.decoded.user.id, {

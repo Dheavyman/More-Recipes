@@ -107,12 +107,10 @@ class UserController {
   static enableNotifications(req, res) {
     return User
       .findById(req.decoded.user.id)
-      .then(user =>
-        user
-          .update({
-            notifications: true,
-          })
-      )
+      .then(user => user
+        .update({
+          notifications: true,
+        }))
       .then(() => res.status(200).send({
         status: 'Success',
         message: 'Notifications enabled',
@@ -136,12 +134,10 @@ class UserController {
   static disableNotifications(req, res) {
     return User
       .findById(req.decoded.user.id)
-      .then(user =>
-        user
-          .update({
-            notifications: false,
-          })
-      )
+      .then(user => user
+        .update({
+          notifications: false,
+        }))
       .then(() => res.status(200).send({
         status: 'Success',
         message: 'Notifications disabled',
