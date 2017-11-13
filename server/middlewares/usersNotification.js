@@ -37,10 +37,10 @@ class NotificationController {
         const usersEmail = favorites
         // Get the email addresses of users who favorited the recipe
         // excluding that of the recipe owner if he favorites it
-          .reduce((accumulator, currentValue, currentIndex) => {
-            if (favorites[currentIndex].User.notifications === true &&
-              favorites[currentIndex].userId !== req.decoded.user.id) {
-              accumulator.push(favorites[currentIndex].User.email);
+          .reduce((accumulator, currentValue) => {
+            if (currentValue.User.notifications === true &&
+              currentValue.userId !== req.decoded.user.id) {
+              accumulator.push(currentValue.User.email);
             }
             return accumulator;
           }, []);
