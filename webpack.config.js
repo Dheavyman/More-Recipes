@@ -8,7 +8,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 module.exports = {
-  entry: path.resolve(__dirname, 'client/src/App.jsx'),
+  entry: path.resolve(__dirname, 'client/index.js'),
   output: {
     path: path.resolve(__dirname, 'client/dist'),
     filename: 'bundle.js',
@@ -19,7 +19,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        include: path.resolve(__dirname, 'client/src'),
+        include: path.resolve(__dirname, 'client'),
         query: {
           presets: ['env', 'react']
         }
