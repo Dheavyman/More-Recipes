@@ -3,8 +3,6 @@ import middlewares from '../middlewares';
 import models from '../models';
 
 const User = models.User,
-  Favorite = models.Favorite,
-  Recipe = models.Recipe,
   authenticate = middlewares.authentication;
 
 /**
@@ -12,7 +10,7 @@ const User = models.User,
  *
  * @class userHandler
  */
-class userHandler {
+class UserController {
   /**
    * Register a user on the platform
    *
@@ -20,7 +18,7 @@ class userHandler {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @return {object} Success message with the user created or error message
-   * @memberof userHandler
+   * @memberof UserController
    */
   static registerUser(req, res) {
     User.create(req.body)
@@ -28,14 +26,17 @@ class userHandler {
         res.status(201).send({
           status: 'Success',
           message: 'User created',
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          fullName: user.fullName,
-          gender: user.gender
+          data: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            fullName: user.fullName,
+            notifications: user.notifications,
+          }
         });
       })
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -48,7 +49,7 @@ class userHandler {
    * @param {object} res - The response object
    * @returns {object} Success message after successful login or
    * error message if unsuccessful
-   * @memberof userHandler
+   * @memberof UserController
    */
   static signinUser(req, res) {
     return User
@@ -59,63 +60,93 @@ class userHandler {
       })
       .then((user) => {
         if (!user) {
-          res.status(401).send({
+          return res.status(401).send({
             status: 'Fail',
-            message: 'User does not exist'
+            message: 'Username or password incorrect'
           });
         }
         const hash = user.password;
-        bcrypt.compare(req.body.password, hash).then((confirmed) => {
-          if (!confirmed) {
-            res.status(401).send({
-              status: 'Fail',
-              message: 'Invalid password'
+        bcrypt.compare(req.body.password, hash)
+          .then((confirmed) => {
+            if (!confirmed) {
+              return res.status(401).send({
+                status: 'Fail',
+                message: 'Username or password incorrect'
+              });
+            }
+            const token = authenticate.generateToken(user);
+            return res.status(200).send({
+              status: 'Success',
+              message: 'User logged in',
+              data: {
+                token
+              }
             });
-          }
-          const token = authenticate.generateToken(user);
-          res.status(200).send({
-            status: 'Success',
-            message: 'Login successful',
-            token
-          });
-        });
+          })
+          .catch(error => res.status(500).send({
+            status: 'Error',
+            message: error.message,
+          }));
       })
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
 
   /**
-   * Retrieve all user favorite recipes
+   * Enable notifications for a user
    *
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} Object representing success status or
-   * error stattus
-   * @memberof userHandler
+   * error status
+   * @memberof UserController
    */
-  static userFavorites(req, res) {
+  static enableNotifications(req, res) {
     return User
-      .findById(req.params.userId, {
-        attributes: ['username', 'firstName', 'lastName'],
-        include: [{
-          model: Favorite,
-          attributes: ['recipeId'],
-          include: [{
-            model: Recipe,
-            attributes: [
-              'title', 'description', 'preparationTime', 'ingredients',
-              'directions', 'upvotes', 'downvotes', 'views'
-            ]
-          }]
-        }],
-      })
-      .then(favorites => res.status(200).send(favorites))
-      .catch(error => res.status(400).send({
+      .findById(req.decoded.user.id)
+      .then(user => user
+        .update({
+          notifications: true,
+        }))
+      .then(() => res.status(200).send({
+        status: 'Success',
+        message: 'Notifications enabled',
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Disable notifications for a user
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} Object representing success status or
+   * error status
+   * @memberof UserController
+   */
+  static disableNotifications(req, res) {
+    return User
+      .findById(req.decoded.user.id)
+      .then(user => user
+        .update({
+          notifications: false,
+        }))
+      .then(() => res.status(200).send({
+        status: 'Success',
+        message: 'Notifications disabled',
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
 }
 
-export default userHandler;
+export default UserController;

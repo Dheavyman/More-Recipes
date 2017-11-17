@@ -25,6 +25,10 @@ h2 {
     height: 18px;
 }
 
+.dropdown-button {
+    width: 180px;
+}
+
 .collapsible-header {
     margin-left: 14px;
 }
@@ -64,8 +68,9 @@ h2 {
 }
 
 #recipes .card-title {
-    color: blue;
+    color: black;
     font-size: 20px;
+    font-weight: bold;
 }
 
 #recipes .card-image img {
@@ -139,12 +144,12 @@ h2 {
     font-style: italic;
 }
 
-header, main, footer {
+#header, #main, #footer {
     padding-left: 300px;
 }
 
 @media only screen and (max-width : 992px) {
-    header, main, footer {
+    #header, #main, #footer {
       padding-left: 0;
     }
 }

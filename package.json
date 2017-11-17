@@ -13,7 +13,7 @@
     "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all",
     "start": "node ./build/app",
     "start:dev": "nodemon --exec babel-node ./server/app",
-    "test": "nyc mocha --compilers js:babel-core/register tests/test.js",
+    "test": "npm run unmigrate && npm run migrate && nyc mocha --compilers js:babel-core/register tests/test.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
     "morgan": "^1.9.0",
+    "nodemailer": "^4.4.0",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.7.5",
@@ -49,6 +50,7 @@
     "babel-eslint": "^8.0.1",
     "chai": "^4.1.2",
     "coveralls": "^2.13.1",
+    "cross-env": "^5.1.1",
     "eslint": "^4.2.0",
     "eslint-config-airbnb": "^15.0.2",
     "eslint-plugin-import": "^2.7.0",

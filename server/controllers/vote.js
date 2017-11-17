@@ -6,9 +6,9 @@ const Recipe = models.Recipe,
 /**
  * Class representing voting handler for upvoting or downvoting a recipe
  *
- * @class VoteHandler
+ * @class VoteController
  */
-class VoteHandler {
+class VoteController {
   /**
    * Recipe upvote
    *
@@ -16,7 +16,7 @@ class VoteHandler {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} Object representing the success or failure message
-   * @memberof VoteHandler
+   * @memberof VoteController
    */
   static upvote(req, res) {
     return Vote
@@ -37,9 +37,11 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Upvote recorded',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         } else if (!created && voter.hasVoted === false) {
           voter.update({
@@ -52,9 +54,11 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Upvote recorded and downvote removed',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         } else if (!created && voter.hasVoted === true) {
           voter.destroy();
@@ -64,13 +68,17 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Vote removed',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         }
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send({
+        message: error.message
+      }));
   }
 
   /**
@@ -81,7 +89,7 @@ class VoteHandler {
    * @param {object} res - The response object
    * @returns {object} Object containing the success status or
    * error status
-   * @memberof VoteHandler
+   * @memberof VoteController
    */
   static downvote(req, res) {
     return Vote
@@ -102,9 +110,11 @@ class VoteHandler {
             .then(recipe => res.status(200).send({
               status: 'Success',
               message: 'Downvote recorded',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         } else if (!created && voter.hasVoted === true) {
           voter.update({
@@ -115,11 +125,13 @@ class VoteHandler {
             .then(recipe => recipe.increment('downvotes'))
             .then(recipe => recipe.decrement('upvotes'))
             .then(recipe => res.status(200).send({
-              status: 'success',
+              status: 'Success',
               message: 'Downvote recorded and upvote removed',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         } else if (!created && voter.hasVoted === false) {
           voter.destroy();
@@ -127,16 +139,20 @@ class VoteHandler {
             .findById(req.params.recipeId)
             .then(recipe => recipe.decrement('downvotes'))
             .then(recipe => res.status(200).send({
-              status: 'success',
+              status: 'Success',
               message: 'Vote removed',
-              id: recipe.id,
-              upvotes: recipe.upvotes,
-              downvotes: recipe.downvotes
+              data: {
+                id: recipe.id,
+                upvotes: recipe.upvotes,
+                downvotes: recipe.downvotes
+              }
             }));
         }
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send({
+        message: error.message,
+      }));
   }
 }
 
-export default VoteHandler;
+export default VoteController;

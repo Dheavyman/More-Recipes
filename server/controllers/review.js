@@ -1,13 +1,17 @@
 import models from '../models';
+import helpers from '../helpers';
 
-const Review = models.Review;
+const Review = models.Review,
+  Recipe = models.Recipe,
+  User = models.User,
+  sendNotification = helpers.sendEmail;
 
 /**
  * Class representing review handler
  *
- * @class ReviewHandler
+ * @class ReviewController
  */
-class ReviewHandler {
+class ReviewController {
   /**
    * Add a review for a recipe
    *
@@ -16,7 +20,7 @@ class ReviewHandler {
    * @param {object} res - The response object
    * @returns {object} - Object representing success status or
    * error status
-   * @memberof ReviewHandler
+   * @memberof ReviewController
    */
   static addReview(req, res) {
     return Review
@@ -28,11 +32,37 @@ class ReviewHandler {
       .then(review => res.status(201).send({
         status: 'Success',
         message: 'Review created',
-        userId: review.userId,
-        recipeId: review.recipeId,
-        content: review.content,
+        data: {
+          id: review.id,
+          userId: review.userId,
+          recipeId: review.recipeId,
+          content: review.content,
+        }
       }))
-      .catch(error => res.status(400).send({
+      // Notify the recipe owner of the review through email
+      .then(() => Recipe
+        .findById(req.params.recipeId, {
+          include: [{
+            model: User,
+            attributes: ['id', 'email', 'notifications'],
+          }]
+        }))
+      .then((recipe) => {
+        User
+          .findById(req.decoded.user.id, {
+            attributes: ['id', 'firstName', 'lastName'],
+          })
+          .then((reviewer) => {
+            if (recipe.User.notifications === true &&
+              recipe.User.id !== reviewer.id) {
+              sendNotification(recipe.User.email,
+                'New notification', `Your recipe ${
+                  recipe.title} was reviewed by ${reviewer.fullName}`);
+            }
+          });
+      })
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -45,7 +75,7 @@ class ReviewHandler {
    * @param {object} res - The response object
    * @returns {object} Object representing success status or
    * error status
-   * @memberof ReviewHandler
+   * @memberof ReviewController
    */
   static deleteReview(req, res) {
     return Review
@@ -62,10 +92,11 @@ class ReviewHandler {
         status: 'Success',
         message: 'Review deleted'
       }))
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(500).send({
+        status: 'Error',
         message: error.message,
       }));
   }
 }
 
-export default ReviewHandler;
+export default ReviewController;

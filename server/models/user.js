@@ -31,8 +31,8 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'Password required!',
         },
-        len: {
-          args: [6],
+        min: {
+          args: 6,
           msg: 'Password must be at least six characters'
         }
       },
@@ -89,31 +89,16 @@ export default (sequelize, DataTypes) => {
         msg: 'Phone number already exist',
       },
     },
-    gender: {
-      type: DataTypes.STRING,
+    notifications: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'Gender required!',
-        },
-      },
-      set(val) {
-        this.setDataValue('gender', val.toLowerCase().trim());
-      }
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      defaultValue: false,
     }
   }, {
     getterMethods: {
       fullName() {
-        return `${this.getDataValue('firstName')} ${this.getDataValue('lastName')}`;
+        return `${this.getDataValue('firstName')} ${
+          this.getDataValue('lastName')}`;
       },
     },
     hooks: {

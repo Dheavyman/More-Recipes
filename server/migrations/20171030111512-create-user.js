@@ -9,31 +9,32 @@ module.exports = {
     username: {
       type: Sequelize.STRING,
       unique: true,
+      allowNull: false,
     },
     password: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     email: {
       type: Sequelize.STRING,
       unique: true,
+      allowNull: false,
     },
     firstName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     lastName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     phone: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      allowNull: true,
     },
-    gender: {
-      type: Sequelize.STRING
-    },
-    city: {
-      type: Sequelize.STRING
-    },
-    country: {
-      type: Sequelize.STRING
+    notifications: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
     },
     createdAt: {
       allowNull: false,

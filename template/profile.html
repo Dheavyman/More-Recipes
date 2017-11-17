@@ -45,12 +45,12 @@
                         <div class="collapsible-header black-text">Category</div>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#!" class="collection-item blue-text">Breakfast</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Lunch</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Dinner</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Appetizer</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Main</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Dessert</a></li>
+                                <li><a href="#!" class="collection-item">Breakfast</a></li>
+                                <li><a href="#!" class="collection-item">Lunch</a></li>
+                                <li><a href="#!" class="collection-item">Dinner</a></li>
+                                <li><a href="#!" class="collection-item">Appetizer</a></li>
+                                <li><a href="#!" class="collection-item">Main</a></li>
+                                <li><a href="#!" class="collection-item">Dessert</a></li>
                             </ul>
                         </div>
                     </li>
@@ -63,7 +63,7 @@
             <li><a class="subheader">Activities</a></li>
             <li><a href="recipes.html">My Recipes<span class="badge">22</span></a></li>
             <li><a href="recipes.html?#user-favorites">My Favorites<span class="badge">55</span></a></li>
-            <li><a href="?#notifications">Notificatons<span class="new badge">2</span></a></li>
+            <li><a href="?#notifications">Notificatons<span class="new badge deep-orange darken-1">2</span></a></li>
             <li>
                 <div class="divider"></div>
             </li>
@@ -77,7 +77,9 @@
                 <figure class="col s12">
                     <img id="profile-image" class="materialboxed responsive-img circle" src="images/avatar.png" alt="profile image">
                 </figure>
-                <a id="edit-btn" href="#edit-profile" class="btn-floating waves-effect waves-light indigo accent-2 modal-trigger"><i class="material-icons left">edit</i></a>
+            </div>
+            <div class="col s12 m5 l6 z-depth-1">
+                <a id="edit-btn" href="#edit-profile" class="btn-floating waves-effect waves-light indigo accent-2 modal-trigger right"><i class="material-icons left">edit</i></a>
                 <div class="col s12">
                     <h5>About Me</h5>
                     <div class="divider black"></div>
@@ -85,43 +87,30 @@
                         :)
                     </p>
                 </div>
-            </div>
-            <div class="col s12 m5 l6 z-depth-1">
+                <div class="row"></div>
                 <h5><i class="material-icons left">person</i>My Profile</h5>
                 <div class="divider black"></div>
                 <br>
                 <div id="about_user" class="row">
                     <div id="profile_username" class="row">
                         <label for="username" class="col s4">Username: </label>
-                        <div id="username" class="col s8">Heavyman</div>
+                        <div id="username" class="col s8">JStew</div>
                     </div>
                     <div id="profile_first_name" class="row">
                         <label for="firstname" class="col s4">First Name: </label>
-                        <div id="firstname" class="col s8">Justin</div>
+                        <div id="firstname" class="col s8">John</div>
                     </div>
                     <div id="profile_last_name" class="row">
                         <label for="lastname" class="col s4">Last Name: </label>
-                        <div id="lastname" class="col s8">Justin</div>
+                        <div id="lastname" class="col s8">Stew</div>
                     </div>
                     <div id="profile_email" class="row">
                         <label for="email" class="col s4">Email: </label>
-                        <div id="email" class="col s8">heavyman@gmail.com</div>
+                        <div id="email" class="col s8">johnstew@gmail.com</div>
                     </div>
                     <div id="profile_phone" class="row">
                         <label for="phone" class="col s4">Phone No: </label>
                         <div id="phone" class="col s8">01-254-2456</div>
-                    </div>
-                    <div id="profile_gender" class="row">
-                        <label for="gender" class="col s4">Gender: </label>
-                        <div id="gender" class="col s8">Male</div>
-                    </div>
-                    <div id="profile_city" class="row">
-                        <label for="city" class="col s4">City: </label>
-                        <div id="city" class="col s8">Lagos</div>
-                    </div>
-                    <div id="profile_country" class="row">
-                        <label for="country" class="col s4">Country: </label>
-                        <div id="country" class="col s8">Nigeria</div>
                     </div>
                 </div>
             </div>
@@ -168,23 +157,6 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="city" type="text" class="validate">
-                                <label for="city">City</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <select>
-                                        <option value="" disabled selected>Choose your option</option>
-                                        <option value="Nigeria">Nigeria</option>
-                                        <option value="Kenya">Kenya</option>
-                                        <option value="Uganda">Uganda</option>
-                                    </select>
-                                <label>Country</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
                                 <textarea id="about-me" class="materialize-textarea"></textarea>
                                 <label for="about-me">About me</label>
                             </div>
@@ -207,32 +179,6 @@
             </div>
         </div>
     </main>
-    <footer id="footer" class="page-footer deep-orange darken-1">
-        <div class="container center-align">
-            <div class="row">
-                <div class="col s12 m6 l6">
-                    <h5 class="white-text">Stay Connected</h5>
-                    <i class="fa fa-facebook-square fa-2x"></i>
-                    <i class="fa fa-twitter-square fa-2x"></i>
-                    <i class="fa fa-pinterest-square fa-2x"></i>
-                    <i class="fa fa-instagram fa-2x"></i>
-                </div>
-                <div class="col s12 m6 l4 offset-l2">
-                    <h5 class="white-text">Navigate</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="index.html">Home</a></li>
-                        <li><a class="grey-text text-lighten-3" href="index.html?#popular">Popular Recipes</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                © 2017 All rights reserved
-            </div>
-        </div>
-    </footer>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
     <script type="text/javascript" src="js/src.js"></script>

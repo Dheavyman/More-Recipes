@@ -11,7 +11,12 @@ const router = express.Router(),
   voteController = controllers.vote,
   userValidate = middlewares.userValidation,
   recipeValidate = middlewares.recipeValidation,
-  reviewValidate = middlewares.reviewValidation;
+  reviewValidate = middlewares.reviewValidation,
+  notifyUsers = middlewares.usersNotification;
+
+router.get('/', (req, res) => res.status(200).send({
+  message: 'Welcome to the Users API!',
+}));
 
 // Register a user on the platform
 router.post('/users/signup', userValidate.signupRequiredInputs,
@@ -28,17 +33,20 @@ router.route('/recipes')
     recipeController.addRecipe)
 
   // Retrieve all the recipes in the catalog
-  .get(recipeController.getAll, recipeController.getMostUpvotes);
+  // Retrieve recipes with the most upvotes
+  // Search for recipes based on list of ingredients
+  // Search for recipes based on category
+  .get(recipeController.getAll, recipeController.getMostUpvotes,
+    recipeController.searchByIngredients, recipeController.searchByCategory);
 
 router.route('/recipes/:recipeId')
   // Retrieve a single recipe from the catalog
-  .get(authenticate.verifyToken, recipeValidate.recipeExist,
-    recipeController.getOne)
+  .get(recipeValidate.recipeExist, recipeController.getOne)
 
   // Modifies a recipe
   .put(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
     recipeValidate.recipeExist, recipeValidate.userRecipe,
-    recipeController.modifyRecipe)
+    notifyUsers.favoriteRecipeModified, recipeController.modifyRecipe)
 
   // Delete a recipe
   .delete(authenticate.verifyToken, recipeValidate.recipeExist,
@@ -58,9 +66,18 @@ router.delete('/recipes/:recipeId/reviews/:reviewId', authenticate.verifyToken,
 router.post('/recipes/:recipeId/favorites', authenticate.verifyToken,
   recipeValidate.recipeExist, favoriteController.setFavorite);
 
+// Get all user recipes
+router.get('/recipes/users/:userId', authenticate.verifyToken,
+  userValidate.userExist, recipeController.userRecipes);
+
 // Get all user favorite recipes
 router.get('/users/:userId/recipes', authenticate.verifyToken,
-  userValidate.userExist, userController.userFavorites);
+  userValidate.userExist, favoriteController.userFavorites);
+
+// Create category for user favorite recipe
+router.put('/users/:userId/recipes/:recipeId', authenticate.verifyToken,
+  userValidate.userExist, recipeValidate.recipeExist,
+  favoriteController.favoriteCategory);
 
 // Upvote a recipe
 router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,
@@ -69,5 +86,13 @@ router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,
 // Downvote a recipe
 router.put('/recipes/:recipeId/downvotes', authenticate.verifyToken,
   recipeValidate.recipeExist, voteController.downvote);
+
+// User opt-in for notifications
+router.put('/users/enable', authenticate.verifyToken,
+  userController.enableNotifications);
+
+// User opt-out for notifications
+router.put('/users/disable', authenticate.verifyToken,
+  userController.disableNotifications);
 
 export default router;

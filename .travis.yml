@@ -2,10 +2,16 @@ language: node_js
 sudo: false
 node_js:
   - "stable"
+services:
+  - postgresql
+before_script:
+  - createdb more-recipes-travis --username=postgres
 install: 
   - npm install
 script:
   - npm test
+env:
+  - NODE_ENV=test_travis
 cache:
   directories:
    - "node_modules"
@@ -14,7 +20,7 @@ after_success:
 branches:
   only:
     - develop
-    - ch-write-tests-with-ci-152327803
+    - ch-tests-integrate-database-152520673
 
 notifications:
   webhooks:

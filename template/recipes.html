@@ -19,6 +19,27 @@
                 <div class="nav-wrapper">
                     <a href="index.html" id="logo" class="brand-logo hide-on-small-only">More-Recipes</a>
                     <a href="#" data-activates="slide_out" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a class="dropdown-button" data-activates="dropdown1">Category</a></li>
+                        <ul id="dropdown1" class="dropdown-content">
+                            <li><a href="#!" class="collection-item black-text">Breakfast</a></li>
+                            <li><a href="#!" class="collection-item black-text">Lunch</a></li>
+                            <li><a href="#!" class="collection-item black-text">Dinner</a></li>
+                            <li><a href="#!" class="collection-item black-text">Appetizer</a></li>
+                            <li><a href="#!" class="collection-item black-text">Main</a></li>
+                            <li><a href="#!" class="collection-item black-text">Dessert</a></li>
+                        </ul>
+                        <li><a class="dropdown-button" href="#!" data-activates="user-control">John Stew<i class="material-icons left">account_circle</i></a>
+                            <ul id="user-control" class="dropdown-content">
+                                <li><a href="profile.html" class="black-text">Profile<i class="material-icons left">person</i></a></li>
+                                <li><a href="recipes.html" class="black-text">My Recipes<i class="material-icons left">folder</i></a></li>
+                                <li><a href="recipes.html?#user-favorites" class="black-text">My Favorites<i class="material-icons left">folder</i></a></li>
+                                <li class="divider"></li>
+                                <li><a href="index.html" class="black-text">Logout<i class="material-icons left">lock</i></a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
                 <div class="nav-content">
                     <ul class="tabs tabs-transparent">
@@ -28,7 +49,7 @@
                 </div>
             </nav>
         </div>
-        <ul class="side-nav fixed" id="slide_out">
+        <ul class="side-nav" id="slide_out">
             <li>
                 <div class="nav-wrapper deep-orange darken-4 hide-on-med-and-up">
                     <a id="logo" href="index.html" class="white-text">More-Recipes</a>
@@ -37,7 +58,7 @@
             <li>
                 <div class="user-view">
                     <div class="background">
-                        <img src="images/background.jpg">
+                        <img src="images/background4.jpg">
                     </div>
                     <a href="#!user"><img class="circle" src="images/avatar.png"></a>
                     <a href="#!name"><span class="white-text name">John Stew</span></a>
@@ -51,12 +72,12 @@
                         <div class="collapsible-header black-text">Category</div>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#!" class="collection-item blue-text">Breakfast</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Lunch</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Dinner</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Appetizer</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Main</a></li>
-                                <li><a href="#!" class="collection-item blue-text">Dessert</a></li>
+                                <li><a href="#!" class="collection-item">Breakfast</a></li>
+                                <li><a href="#!" class="collection-item">Lunch</a></li>
+                                <li><a href="#!" class="collection-item">Dinner</a></li>
+                                <li><a href="#!" class="collection-item">Appetizer</a></li>
+                                <li><a href="#!" class="collection-item">Main</a></li>
+                                <li><a href="#!" class="collection-item">Dessert</a></li>
                             </ul>
                         </div>
                     </li>
@@ -69,7 +90,7 @@
             <li><a class="subheader">Activities</a></li>
             <li><a href="recipes.html">My Recipes<span class="badge">22</span></a></li>
             <li><a href="?#user-favorites">My Favorites<span class="badge">55</span></a></li>
-            <li><a href="profile.html?#notifications">Notificatons<span class="new badge">2</span></a></li>
+            <li><a href="profile.html?#notifications">Notificatons<span class="new badge blue">2</span></a></li>
             <li>
                 <div class="divider"></div>
             </li>
@@ -79,65 +100,176 @@
     <main>
         <div class="row">
             <div class="fixed-action-btn">
-                <a href="#add-recipe" class="btn-floating btn-large modal-trigger waves-effect waves-light indigo darken-2 pulse"><i class="material-icons">add</i></a>
+                <a href="#add-recipe" class="btn-floating btn-large modal-trigger waves-effect waves-light indigo accent-2 pulse"><i class="material-icons">add</i></a>
             </div>
-            <div id="my-recipes" class="row container">
+            <div id="my-recipes" class="row">
                 <div id="user-recipes" class="col s12">
-                    <div id="recipes" class="card large col s12 m6 l4">
-                        <a href="recipe.html"><span class="card-title">Spanish Chips</span></a>
-                        <div class="card-image">
-                            <a href="recipe.html"><img src="images/image03.jpg"></a>
-                        </div>
-                        <div class="card-content">
-                            <p>A light meal full of nutrients with sweet taste.</p>
-                        </div>
-                        <div class="card-action">
-                            <ul>
-                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                            </ul>
-                            <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
-                            <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
-                        </div>
-                    </div>
-                    <div id="recipes" class="card large col s12 m6 l4">
-                        <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
-                        <div class="card-image">
-                            <a href="recipe.html"><img src="images/image05.jpg"></a>
-                        </div>
-                        <div class="card-content">
-                            <p>A rich meal for an awesome afternoon.</p>
-                        </div>
-                        <div class="card-action">
-                            <ul>
-                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                            </ul>
-                            <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
-                            <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Spanish Chips</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image03.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A light meal full of nutrients with sweet taste.</p>
+                            </div>
+                            <div class="card-action">
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                                <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                                <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                            </div>
                         </div>
                     </div>
-                    <div id="recipes" class="card large col s12 m6 l4">
-                        <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
-                        <div class="card-image">
-                            <a href="recipe.html"><img src="images/image06.jpg"></a>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image05.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                                <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                                <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                            </div>
                         </div>
-                        <div class="card-content">
-                            <p>A rich meal for an awesome afternoon.</p>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image06.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                                <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                                <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                            </div>
                         </div>
-                        <div class="card-action">
-                            <ul>
-                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                            </ul>
-                            <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
-                            <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Spanish Chips</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image03.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A light meal full of nutrients with sweet taste.</p>
+                            </div>
+                            <div class="card-action">
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                                <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                                <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image05.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                                <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                                <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image06.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                                <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                                <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Spanish Chips</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image03.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A light meal full of nutrients with sweet taste.</p>
+                            </div>
+                            <div class="card-action">
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                                <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                                <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image06.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                                <a href="#delete-recipe" class="modal-trigger btn-floating waves-effect waves-light red right"><i class="material-icons">delete</i></a>
+                                <a href="#edit-recipe" class="btn-floating waves-effect waves-light green modal-trigger right"><i class="material-icons">edit</i></a>
+                            </div>
                         </div>
                     </div>
                     <div id="delete-recipe" class="modal">
@@ -151,62 +283,174 @@
                     </div>
                 </div>
                 <div id="user-favorites" class="col s12">
-                    <div id="recipes" class="card large col s12 m6 l4">
-                        <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
-                        <div class="card-image">
-                            <a href="recipe.html"><img src="images/image06.jpg"></a>
-                        </div>
-                        <div class="card-content">
-                            <p>A rich meal for an awesome afternoon.</p>
-                        </div>
-                        <div class="card-action">
-                            <p id="owner"></p>
-                            <label for="owner">Recipe by: </label>
-                            <ul>
-                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="recipes" class="card large col s12 m6 l4">
-                        <a href="recipe.html"><span class="card-title">German Sauce</span></a>
-                        <div class="card-image">
-                            <a href="recipe.html"><img src="images/image01.jpg"></a>
-                        </div>
-                        <div class="card-content">
-                            <p>A rich meal for an awesome afternoon.</p>
-                        </div>
-                        <div class="card-action">
-                            <p id="owner">
-                                <label for="owner">Recipe by: </label> John Stew
-                            </p>
-                            <ul>
-                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                            </ul>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image06.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <p id="owner"></p>
+                                <label for="owner">Recipe by: </label>
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div id="recipes" class="card large col s12 m6 l4">
-                        <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
-                        <div class="card-image">
-                            <a href="recipe.html"><img src="images/image05.jpg"></a>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">German Sauce</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image01.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <p id="owner">
+                                    <label for="owner">Recipe by: </label> John Stew
+                                </p>
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="card-content">
-                            <p>A rich meal for an awesome afternoon.</p>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image05.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <p id="owner"></p>
+                                <label for="owner">Recipe by: </label>
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="card-action">
-                            <p id="owner"></p>
-                            <label for="owner">Recipe by: </label>
-                            <ul>
-                                <li id="views"><i class="material-icons tiny">visibility</i>200</li>
-                                <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
-                                <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
-                                <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
-                            </ul>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image06.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <p id="owner"></p>
+                                <label for="owner">Recipe by: </label>
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">German Sauce</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image01.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <p id="owner">
+                                    <label for="owner">Recipe by: </label> John Stew
+                                </p>
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image05.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <p id="owner"></p>
+                                <label for="owner">Recipe by: </label>
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Italian Burger</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image05.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <p id="owner"></p>
+                                <label for="owner">Recipe by: </label>
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div id="recipes" class="card large">
+                            <a href="recipe.html"><span class="card-title">Swedish Noodles</span></a>
+                            <div class="card-image">
+                                <a href="recipe.html"><img src="images/image06.jpg"></a>
+                            </div>
+                            <div class="card-content">
+                                <p>A rich meal for an awesome afternoon.</p>
+                            </div>
+                            <div class="card-action">
+                                <p id="owner"></p>
+                                <label for="owner">Recipe by: </label>
+                                <ul>
+                                    <li id="views"><i class="material-icons tiny">visibility</i>200</li>
+                                    <li id="favorites"><i class="material-icons tiny">favorite</i>20</li>
+                                    <li id="upvotes"><i class="material-icons tiny">thumb_up</i>50</li>
+                                    <li id="downvotes"><i class="material-icons tiny">thumb_down</i>10</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
