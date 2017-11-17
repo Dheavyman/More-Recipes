@@ -23,7 +23,7 @@
     "url": "git+https://github.com/Dheavyman/More-Recipes.git"
   },
   "keywords": [
-    "API"
+    "API", "React", "Redux"
   ],
   "author": "Justin Nebo",
   "license": "MIT",
