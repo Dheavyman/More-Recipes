@@ -14,7 +14,7 @@
     "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all",
     "start": "node ./build/app",
     "start:dev": "nodemon --exec babel-node ./server/app",
-    "start:client": "webpack -d && webpack-dev-server --inline --hot",
+    "start:client": "webpack -d && cp client/public/index.html client/dist/index.html && webpack-dev-server --inline --hot",
     "test": "set NODE_ENV=test && npm run unmigrate && npm run migrate && nyc mocha --compilers js:babel-core/register tests/test.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -23,7 +23,9 @@
     "url": "git+https://github.com/Dheavyman/More-Recipes.git"
   },
   "keywords": [
-    "API", "React", "Redux"
+    "API",
+    "React",
+    "Redux"
   ],
   "author": "Justin Nebo",
   "license": "MIT",
@@ -51,6 +53,7 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
