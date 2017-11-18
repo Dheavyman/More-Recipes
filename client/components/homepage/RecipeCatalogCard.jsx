@@ -1,5 +1,9 @@
 import React from 'react';
 
+import common from '../common';
+
+const { RecipeImage } = common;
+
 const RecipeCard = () =>
   (
     <div className="col s12 m6 l4">
@@ -8,7 +12,7 @@ const RecipeCard = () =>
           <span className="card-title">German Sauce</span></a>
         <div className="card-image">
           <a href="recipe.html">
-            <img src="images/image01.jpg" alt="recipeName" />
+            <RecipeImage />
           </a>
         </div>
         <div className="card-content">
@@ -18,7 +22,7 @@ const RecipeCard = () =>
           <p id="owner">
             <label htmlFor="owner">Recipe by: </label> John Stew
           </p>
-          <ul>
+          <ul className="center-align">
             <li id="views"><i className="material-icons tiny">visibility</i>
               200
             </li>

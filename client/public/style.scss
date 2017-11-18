@@ -53,6 +53,7 @@ main {
     color: black;
     font-size: 20px;
     font-weight: bold;
+    padding-left: 10px;
   }
 
   .card-image {
@@ -82,5 +83,18 @@ main {
         font-size: 12px;
       }
     } 
+  }
+}
+
+#popular {
+  .card-action {
+    ul {
+      li {
+        display: inline;
+        margin-left: 3px;
+        margin-right: 3px;
+        font-size: 12px;
+      }
+    }
   }
 }

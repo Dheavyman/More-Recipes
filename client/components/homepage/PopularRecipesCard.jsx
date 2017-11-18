@@ -1,5 +1,9 @@
 import React from 'react';
 
+import common from '../common';
+
+const { RecipeImage } = common;
+
 const PopularRecipeCard = () => (
   <div className="col s12">
     <h5 className="header">
@@ -8,7 +12,7 @@ const PopularRecipeCard = () => (
     <div className="card horizontal">
       <div className="card-image">
         <a href="recipe.html">
-          <img src="images/image05.jpg" alt="Popular1" />
+          <RecipeImage />
         </a>
       </div>
       <div className="card-stacked">
