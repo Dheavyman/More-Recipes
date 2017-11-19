@@ -20,11 +20,11 @@ const Navbar = () => (
         <ul className="right hide-on-med-and-down">
           <li><a href="index.html">Home</a></li>
           <li>
-            <a className="dropdown-button" data-activates="dropdown1">
+            <a className="dropdown-button dropdown-category" data-activates="category">
               Category
             </a>
           </li>
-          <ul id="dropdown1" className="dropdown-content">
+          <ul id="category" className="dropdown-content">
             <li>
               <a href="#!" className="collection-item black-text">Breakfast</a>
             </li>
