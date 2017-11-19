@@ -1,18 +1,22 @@
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
+// body {
+//   display: flex;
+//   min-height: 100vh;
+//   flex-direction: column;
+// }
 
-main {
-  flex: 1 0 auto;
-}
+// main {
+//   flex: 1 0 auto;
+// }
 
 #logo {
   font-family: 'Lobster', cursive;
   font-size: 25px;
   margin-left: 20px;
   padding-left: 20px;
+}
+
+.dropdown-category {
+  margin-right: 100px;
 }
 
 .dropdown-user {
