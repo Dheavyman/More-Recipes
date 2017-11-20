@@ -1,22 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import common from '../common';
 
 const { RecipeImage } = common;
 
-const RecipeCard = () =>
-  (
+const RecipeCatalogCard = (props) => {
+  const { recipe } = props;
+  return (
     <div className="col s12 m6 l4">
       <div id="recipes" className="card large">
         <a href="recipe.html">
-          <span className="card-title">German Sauce</span></a>
+          <span className="card-title">{recipe.title}</span></a>
         <div className="card-image">
           <a href="recipe.html">
             <RecipeImage />
           </a>
         </div>
         <div className="card-content">
-          <p>A rich meal for an awesome afternoon.</p>
+          <p>{recipe.description}</p>
         </div>
         <div className="card-action">
           <p id="owner">
@@ -24,21 +26,30 @@ const RecipeCard = () =>
           </p>
           <ul className="center-align">
             <li id="views"><i className="material-icons tiny">visibility</i>
-              200
+              {recipe.views}
             </li>
             <li id="favorites"><i className="material-icons tiny">favorite</i>
               20
             </li>
             <li id="upvotes"><i className="material-icons tiny">thumb_up</i>
-              50
+              {recipe.upvotes}
             </li>
             <li id="downvotes"><i className="material-icons tiny">thumb_down</i>
-              10
+              {recipe.downvotes}
             </li>
           </ul>
         </div>
       </div>
     </div>
   );
+};
 
-export default RecipeCard;
+RecipeCatalogCard.propTypes = {
+  recipe: PropTypes.object,
+};
+
+RecipeCatalogCard.defaultProps = {
+  recipe: undefined,
+};
+
+export default RecipeCatalogCard;

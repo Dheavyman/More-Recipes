@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import PopularRecipes from './PopularRecipes';
 import RecipeCatalog from './RecipeCatalog';
 import SearchBar from './SearchBar';
 import Slider from './Slider';
 
-const Main = () => (
+const Main = props => (
   <main>
     <div id="position">
       <Slider />
@@ -16,10 +17,18 @@ const Main = () => (
         <PopularRecipes />
       </div>
       <div className="col s12 m7 l8 pull-m5 pull-l4">
-        <RecipeCatalog />
+        <RecipeCatalog recipes={props.recipes} />
       </div>
     </div>
   </main>
 );
+
+Main.propTypes = {
+  recipes: PropTypes.array,
+};
+
+Main.defaultProps = {
+  recipes: undefined,
+};
 
 export default Main;
