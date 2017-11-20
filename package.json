@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel ./server -d ./build",
-    "build:client": "webpack -p",
+    "build:client": "webpack -p && cp client/public/index.html client/dist/index.html",
     "heroku-postbuild": "npm run build && npm run migrate",
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all",
