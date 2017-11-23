@@ -21,7 +21,7 @@ module.exports = {
         loader: 'babel-loader',
         include: path.resolve(__dirname, 'client'),
         query: {
-          presets: ['env', 'react']
+          presets: ['env', 'react', 'stage-2']
         }
       },
       {
@@ -39,6 +39,14 @@ module.exports = {
           // use style-loader in development
           fallback: 'style-loader',
         })
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader?name=/public/images/[name].[ext]',
+          }
+        ]
       }
     ]
   },
@@ -52,6 +60,7 @@ module.exports = {
   devServer: {
     contentBase: './client/dist',
     hot: true,
+    historyApiFallback: true,
   },
   devtool: 'source-map',
 };
