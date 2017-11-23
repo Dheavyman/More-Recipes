@@ -1,16 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => (
   <div className="navbar-fixed">
     <nav className="deep-orange darken-4">
       <div className="nav-wrapper">
-        <a
-          href="index.html"
+        <Link
+          to="/"
           id="logo"
           className="brand-logo hide-on-small-only"
         >
           More-Recipes
-        </a>
+        </Link>
         <a
           data-activates="slide_out"
           className="button-collapse"
@@ -18,9 +19,12 @@ const Navbar = () => (
           <i className="material-icons">menu</i>
         </a>
         <ul className="right hide-on-med-and-down">
-          <li><a href="index.html">Home</a></li>
+          <li><Link to="/">Home</Link></li>
           <li>
-            <a className="dropdown-button dropdown-category" data-activates="category">
+            <a
+              className="dropdown-button dropdown-category"
+              data-activates="category"
+            >
               Category
             </a>
           </li>
