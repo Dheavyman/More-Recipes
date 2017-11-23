@@ -2,7 +2,7 @@ import React from 'react';
 
 const RecipeImage = () => (
   <img
-    src="../public/images/image01.jpg"
+    src=""
     alt="Recipe name"
   />
 );

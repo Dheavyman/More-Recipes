@@ -45,7 +45,15 @@ const RecipeCatalogCard = (props) => {
 };
 
 RecipeCatalogCard.propTypes = {
-  recipe: PropTypes.object,
+  recipe: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    category: PropTypes.string,
+    description: PropTypes.string,
+    preparationTime: PropTypes.number,
+    ingredients: PropTypes.string,
+    directions: PropTypes.string,
+  }),
 };
 
 RecipeCatalogCard.defaultProps = {
