@@ -1,11 +1,25 @@
-const fetchRecipes = recipes => ({
-  type: 'FETCH_RECIPES',
-  recipes,
+import axios from 'axios';
+
+const retrieveRecipes = recipes => ({
+  type: 'RETRIEVE_RECIPES_SUCCESS',
+  payload: recipes,
 });
 
-const fetchPopularRecipes = popularRecipes => ({
-  type: 'FETCH_POPULAR_RECIPES',
-  popularRecipes,
+const requestPopularRecipes = popularRecipes => ({
+  type: 'RETRIEVE_POPULAR_RECIPES_SUCCESS',
+  payload: popularRecipes,
 });
 
-export { fetchRecipes, fetchPopularRecipes };
+const fetchRecipes = () => (dispatch) => {
+  axios.get('http://127.0.0.1:3000/api/v1/recipes')
+    .then((response) => {
+      const recipes = response.data;
+      dispatch(retrieveRecipes(recipes));
+    })
+    .catch((error) => {
+      // Error handler
+      console.log(error);
+    });
+};
+
+export { fetchRecipes, requestPopularRecipes };
