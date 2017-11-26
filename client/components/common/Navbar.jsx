@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Signup from '../homepage/Signup';
+import Modal from '../homepage/Modal';
 
 /**
  * Class representing navbar
@@ -10,6 +11,19 @@ import Signup from '../homepage/Signup';
  * @extends {React.Component}
  */
 class Navbar extends React.Component {
+  /**
+   * Creates an instance of Navbar.
+   *
+   * @memberof Navbar
+   */
+  constructor() {
+    super();
+    this.state = {
+      open: false
+    };
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
   /**
    * Component did mount method
    *
@@ -26,9 +40,30 @@ class Navbar extends React.Component {
       hover: true,
       belowOrigin: true,
     });
-    // Initialize materialize modal
-    $('.modal').modal();
+    // // Initialize materialize modal
+    // $('.modal').modal();
   }
+
+  /**
+   * Opens the modal
+   *
+   * @returns {object} Set open state to true
+   * @memberof Navbar
+   */
+  handleOpen() {
+    this.setState({ open: true });
+  }
+
+  /**
+   * Closes the modal
+   *
+   * @returns {object} Set open state to false
+   * @memberof Navbar
+   */
+  handleClose() {
+    this.setState({ open: false });
+  }
+
   /**
    * Render method
    *
@@ -45,7 +80,7 @@ class Navbar extends React.Component {
               id="logo"
               className="brand-logo hide-on-small-only"
             >
-          More-Recipes
+              More-Recipes
             </Link>
             <a
               data-activates="slide_out"
@@ -60,12 +95,14 @@ class Navbar extends React.Component {
                   className="dropdown-button dropdown-category"
                   data-activates="category"
                 >
-              Category
+                  Category
                 </a>
               </li>
               <ul id="category" className="dropdown-content">
                 <li>
-                  <a href="#!" className="collection-item black-text">Breakfast</a>
+                  <a href="#!" className="collection-item black-text">
+                    Breakfast
+                  </a>
                 </li>
                 <li>
                   <a href="#!" className="collection-item black-text">Lunch</a>
@@ -74,13 +111,17 @@ class Navbar extends React.Component {
                   <a href="#!" className="collection-item black-text">Dinner</a>
                 </li>
                 <li>
-                  <a href="#!" className="collection-item black-text">Appetizer</a>
+                  <a href="#!" className="collection-item black-text">
+                    Appetizer
+                  </a>
                 </li>
                 <li>
                   <a href="#!" className="collection-item black-text">Main</a>
                 </li>
                 <li>
-                  <a href="#!" className="collection-item black-text">Dessert</a>
+                  <a href="#!" className="collection-item black-text">
+                    Dessert
+                  </a>
                 </li>
               </ul>
               <li>
@@ -88,19 +129,24 @@ class Navbar extends React.Component {
                   className="dropdown-button dropdown-user"
                   data-activates="user-control"
                 >
-              Welcome
+                  Welcome
                   <i className="material-icons large left">account_circle</i>
                 </a>
                 <ul id="user-control" className="dropdown-content">
                   <li>
                     <a href="#signin" className="modal-trigger black-text">
-                  Sign in
+                      Sign in
                       <i className="material-icons left">person</i>
                     </a>
                   </li>
                   <li>
-                    <a href="#signup" className="modal-trigger black-text">
-                  Register
+                    <a
+                      role="button"
+                      tabIndex="0"
+                      className="black-text"
+                      onClick={this.handleOpen}
+                    >
+                      Register
                       <i className="material-icons left">folder</i>
                     </a>
                   </li>
@@ -109,7 +155,9 @@ class Navbar extends React.Component {
             </ul>
           </div>
         </nav>
-        <Signup />
+        <MuiThemeProvider>
+          <Modal open={this.state.open} handleClose={this.handleClose} />
+        </MuiThemeProvider>
       </div>
     );
   }
