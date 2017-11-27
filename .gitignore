@@ -3,6 +3,7 @@ node_modules/
 
 # Compiled directory
 build/
+client/dist/
 
 # nyc test coverage
 .nyc_output

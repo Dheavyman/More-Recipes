@@ -8,13 +8,13 @@
   "main": "index.js",
   "scripts": {
     "build": "babel ./server -d ./build",
-    "build:client": "webpack -p",
+    "build:client": "webpack -p && cp client/public/index.html client/dist/index.html",
     "heroku-postbuild": "npm run build && npm run migrate",
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all",
     "start": "node ./build/app",
     "start:dev": "nodemon --exec babel-node ./server/app",
-    "start:client": "webpack -d && webpack-dev-server --inline --hot",
+    "start:client": "webpack -d && cp client/public/index.html client/dist/index.html && webpack-dev-server --inline --hot",
     "test": "set NODE_ENV=test && npm run unmigrate && npm run migrate && nyc mocha --compilers js:babel-core/register tests/test.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -23,7 +23,9 @@
     "url": "git+https://github.com/Dheavyman/More-Recipes.git"
   },
   "keywords": [
-    "API", "React", "Redux"
+    "API",
+    "React",
+    "Redux"
   ],
   "author": "Justin Nebo",
   "license": "MIT",
@@ -32,17 +34,21 @@
   },
   "homepage": "https://github.com/Dheavyman/More-Recipes#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "file-loader": "^1.1.5",
     "jsonwebtoken": "^8.1.0",
+    "material-ui": "^0.19.4",
     "morgan": "^1.9.0",
     "nodemailer": "^4.4.0",
     "pg": "^6.4.2",
@@ -50,7 +56,9 @@
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-modal": "^3.1.3",
     "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
