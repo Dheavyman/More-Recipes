@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Modal from '../homepage/Modal';
+// import Modal from '../homepage/Modal';
+import Signup from '../homepage/Signup';
+import Signin from '../homepage/Signin';
 
 /**
  * Class representing navbar
@@ -19,9 +21,11 @@ class Navbar extends React.Component {
   constructor() {
     super();
     this.state = {
-      open: false
+      openSignup: false,
+      openSignin: false
     };
-    this.handleOpen = this.handleOpen.bind(this);
+    this.handleOpenSignup = this.handleOpenSignup.bind(this);
+    this.handleOpenSignin = this.handleOpenSignin.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
   /**
@@ -45,13 +49,23 @@ class Navbar extends React.Component {
   }
 
   /**
-   * Opens the modal
+   * Opens the signup modal
    *
    * @returns {object} Set open state to true
    * @memberof Navbar
    */
-  handleOpen() {
-    this.setState({ open: true });
+  handleOpenSignup() {
+    this.setState({ openSignup: true });
+  }
+
+  /**
+   * Opens the signin modal
+   *
+   * @returns {object} Set open state to true
+   * @memberof Navbar
+   */
+  handleOpenSignin() {
+    this.setState({ openSignin: true });
   }
 
   /**
@@ -61,7 +75,10 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleClose() {
-    this.setState({ open: false });
+    this.setState({
+      openSignup: false,
+      openSignin: false
+    });
   }
 
   /**
@@ -134,7 +151,12 @@ class Navbar extends React.Component {
                 </a>
                 <ul id="user-control" className="dropdown-content">
                   <li>
-                    <a href="#signin" className="modal-trigger black-text">
+                    <a
+                      role="button"
+                      tabIndex="0"
+                      className="black-text"
+                      onClick={this.handleOpenSignin}
+                    >
                       Sign in
                       <i className="material-icons left">person</i>
                     </a>
@@ -144,7 +166,7 @@ class Navbar extends React.Component {
                       role="button"
                       tabIndex="0"
                       className="black-text"
-                      onClick={this.handleOpen}
+                      onClick={this.handleOpenSignup}
                     >
                       Register
                       <i className="material-icons left">folder</i>
@@ -156,7 +178,18 @@ class Navbar extends React.Component {
           </div>
         </nav>
         <MuiThemeProvider>
-          <Modal open={this.state.open} handleClose={this.handleClose} />
+          <Signup
+            open={this.state.openSignup}
+            handleClose={this.handleClose}
+            handleOpenSignin={this.handleOpenSignin}
+          />
+        </MuiThemeProvider>
+        <MuiThemeProvider>
+          <Signin
+            open={this.state.openSignin}
+            handleClose={this.handleClose}
+            handleOpenSignup={this.handleOpenSignup}
+          />
         </MuiThemeProvider>
       </div>
     );
