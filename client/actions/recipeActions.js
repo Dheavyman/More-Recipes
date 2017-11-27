@@ -16,9 +16,8 @@ const fetchRecipes = () => (dispatch) => {
       const recipes = response.data;
       dispatch(retrieveRecipes(recipes));
     })
-    .catch((error) => {
+    .catch(() => {
       // Error handler
-      console.log(error);
     });
 };
 
