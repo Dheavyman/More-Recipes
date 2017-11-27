@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import common from '../common';
 
@@ -10,12 +11,13 @@ const RecipeCatalogCard = (props) => {
   return (
     <div className="col s12 m6 l4">
       <div id="recipes" className="card large">
-        <a href="recipe.html">
-          <span className="card-title">{recipe.title}</span></a>
+        <Link to={`recipes/${recipe.id}`}>
+          <span className="card-title">{recipe.title}</span>
+        </Link>
         <div className="card-image">
-          <a href="recipe.html">
+          <Link to={`recipes/${recipe.id}`}>
             <RecipeImage />
-          </a>
+          </Link>
         </div>
         <div className="card-content">
           <p>{recipe.description}</p>
