@@ -76,29 +76,20 @@
     p {
       margin: 0;
     }
-  }
-
-  .card-action {
-    ul {
-      li {
-        display: inline;
-        margin-left: 3px;
-        margin-right: 3px;
-        font-size: 12px;
-      }
-    } 
+    li {
+      display: inline;
+      font-size: 12px;
+      margin-left: 3px;
+      margin-right: 3px;
+    }
   }
 }
 
 #popular {
-  .card-action {
-    ul {
-      li {
-        display: inline;
-        margin-left: 3px;
-        margin-right: 3px;
-        font-size: 12px;
-      }
-    }
+  li {
+    display: inline;
+    font-size: 12px;
+    margin-left: 3px;
+    margin-right: 3px;
   }
 }
