@@ -16,11 +16,11 @@ class UserRecipes extends React.Component {
   /**
    * Component did mount life cycle method
    *
-   * @returns {function} Call the API 
+   * @returns {function} Call the API
    * @memberof UserRecipes
    */
   componentDidMount() {
-    console.log('User recipes mounted');
+    // console.log('User recipes mounted');
   }
 
   /**
