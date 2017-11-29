@@ -3,9 +3,9 @@ import React from 'react';
 import Navbar from './Navbar';
 import SideNav from './SideNav';
 
-const Header = () => (
+const Header = props => (
   <header>
-    <Navbar />
+    <Navbar {...props} />
     <SideNav />
   </header>
 );

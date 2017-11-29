@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -27,6 +28,7 @@ class Navbar extends React.Component {
     this.handleOpenSignup = this.handleOpenSignup.bind(this);
     this.handleOpenSignin = this.handleOpenSignin.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   /**
    * Component did mount method
@@ -79,6 +81,18 @@ class Navbar extends React.Component {
       openSignup: false,
       openSignin: false
     });
+  }
+
+  /**
+   * Form submission handler function
+   *
+   * @param {any} values The form values
+   * @returns {any} Submit function
+   * @memberof Navbar
+   */
+  handleSubmit(values) {
+    this.props.signupUser(values);
+    this.handleClose();
   }
 
   /**
@@ -182,6 +196,7 @@ class Navbar extends React.Component {
             open={this.state.openSignup}
             handleClose={this.handleClose}
             handleOpenSignin={this.handleOpenSignin}
+            onSubmit={this.handleSubmit}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
@@ -195,5 +210,9 @@ class Navbar extends React.Component {
     );
   }
 }
+
+Navbar.propTypes = {
+  signupUser: PropTypes.func.isRequired,
+};
 
 export default Navbar;

@@ -35,7 +35,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header {...this.props} />
         <Main {...this.props} />
         <Footer />
       </div>
