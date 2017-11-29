@@ -14,6 +14,20 @@ const userSignupFailure = error => ({
   payload: error,
 });
 
+const userSigninRequest = () => ({
+  type: 'USER_SIGNIN_REQUEST',
+});
+
+const userSigninSucess = data => ({
+  type: 'USER_SIGNIN_SUCCESS',
+  payload: data,
+});
+
+const userSigninFailure = error => ({
+  type: 'USER_SIGNIN_SUCCESS',
+  payload: error,
+});
+
 const signupUser = values => (dispatch) => {
   dispatch(userSignupRequest());
   axios.post('http://127.0.0.1:3000/api/v1/users/signup', values)
@@ -25,4 +39,16 @@ const signupUser = values => (dispatch) => {
     });
 };
 
-export { userSignupRequest, userSignupSuccess, userSignupFailure, signupUser };
+const signinUser = values => (dispatch) => {
+  dispatch(userSigninRequest());
+  axios.post('http://127.0.0.1:3000/api/v1/users/signin', values)
+    .then((response) => {
+      dispatch(userSigninSucess(response.data));
+    })
+    .catch((error) => {
+      dispatch(userSigninFailure(error));
+    });
+};
+
+export { userSignupRequest, userSignupSuccess, userSignupFailure,
+  signupUser, signinUser };

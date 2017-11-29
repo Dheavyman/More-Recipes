@@ -1,9 +1,13 @@
 import { fetchRecipes, fetchPopularRecipes } from './recipeActions';
-import { userSignup, signupUser } from './userActions';
+import { userSignupRequest, userSignupSuccess, userSignupFailure,
+  signupUser, signinUser } from './userActions';
 
 export default {
   fetchRecipes,
   fetchPopularRecipes,
-  userSignup,
+  userSignupRequest,
+  userSignupSuccess,
+  userSignupFailure,
   signupUser,
+  signinUser
 };
