@@ -13,6 +13,18 @@ const customContentStyle = {
   maxWidth: '35%',
 };
 
+/**
+ * Function to render each of the input fields
+ *
+ * @param {object} Field - The input field
+ * @param {object} Field.input - The input field element
+ * @param {string} Field.label - The input field label
+ * @param {string} Field.type - The input field type
+ * @param {object} Field.meta
+ * @param {boolean} Field.meta.touched - The field input state
+ * @param {string} Field.meta.error - Validation error message
+ * @returns {object} Input element
+ */
 const renderField = ({
   input,
   label,
@@ -20,7 +32,7 @@ const renderField = ({
   meta: { touched, error }
 }) => (
   <div>
-    <label htmlFor={type}>{label}</label>
+    <label htmlFor={label}>{label}</label>
     <br />
     <div>
       <input
@@ -33,6 +45,12 @@ const renderField = ({
   </div>
 );
 
+/**
+ * Signup react component
+ *
+ * @param {any} props 
+ * @returns {object} React element
+ */
 const Signup = (props) => {
   const actions = [
     <FlatButton
@@ -135,6 +153,7 @@ const Signup = (props) => {
   );
 };
 
+// Signup props validation
 Signup.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
@@ -142,6 +161,7 @@ Signup.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
+// renderField props validation
 renderField.propTypes = {
   input: PropTypes.shape().isRequired,
   label: PropTypes.string.isRequired,

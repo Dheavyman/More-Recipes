@@ -28,7 +28,8 @@ class Navbar extends React.Component {
     this.handleOpenSignup = this.handleOpenSignup.bind(this);
     this.handleOpenSignin = this.handleOpenSignin.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitSignup = this.handleSubmitSignup.bind(this);
+    this.handleSubmitSignin = this.handleSubmitSignin.bind(this);
   }
   /**
    * Component did mount method
@@ -90,8 +91,20 @@ class Navbar extends React.Component {
    * @returns {any} Submit function
    * @memberof Navbar
    */
-  handleSubmit(values) {
+  handleSubmitSignup(values) {
     this.props.signupUser(values);
+    this.handleClose();
+  }
+
+  /**
+   * Form submission handler function
+   *
+   * @param {any} values The form values
+   * @returns {any} Submit function
+   * @memberof Navbar
+   */
+  handleSubmitSignin = (values) => {
+    this.props.signinUser(values);
     this.handleClose();
   }
 
@@ -196,7 +209,7 @@ class Navbar extends React.Component {
             open={this.state.openSignup}
             handleClose={this.handleClose}
             handleOpenSignin={this.handleOpenSignin}
-            onSubmit={this.handleSubmit}
+            onSubmit={this.handleSubmitSignup}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
@@ -204,6 +217,7 @@ class Navbar extends React.Component {
             open={this.state.openSignin}
             handleClose={this.handleClose}
             handleOpenSignup={this.handleOpenSignup}
+            onSubmit={this.handleSubmitSignin}
           />
         </MuiThemeProvider>
       </div>
@@ -213,6 +227,7 @@ class Navbar extends React.Component {
 
 Navbar.propTypes = {
   signupUser: PropTypes.func.isRequired,
+  signinUser: PropTypes.func.isRequired,
 };
 
 export default Navbar;
