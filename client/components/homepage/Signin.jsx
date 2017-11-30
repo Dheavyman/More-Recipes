@@ -4,7 +4,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import { Field, reduxForm } from 'redux-form';
 
-import { required } from '../../helpers/validate';
+import { required, isEmpty } from '../../helpers/validate';
 
 const customContentStyle = {
   width: '35%',
@@ -80,7 +80,7 @@ const Signin = (props) => {
                   label="Username"
                   component={renderField}
                   type="text"
-                  validate={required}
+                  validate={[required, isEmpty]}
                 />
               </div>
             </div>
@@ -99,9 +99,9 @@ const Signin = (props) => {
             <div className="row">
               <button
                 type="submit"
-                name="signinbtn"
                 className={`col s6 offset-s3 btn btn-large waves-effect
                   waves-light indigo accent-2`}
+                disabled={props.submitting}
               >
                 Sign In
               </button>
@@ -119,6 +119,7 @@ Signin.propTypes = {
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };
 
 // renderfield props validation

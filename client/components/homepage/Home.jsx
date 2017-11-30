@@ -45,6 +45,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   recipes: state.recipes,
+  user: state.user,
 });
 
 const mapDispatchToProps = dispatch => (

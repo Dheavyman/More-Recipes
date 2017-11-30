@@ -142,6 +142,7 @@ const Signup = (props) => {
                 name="signupbtn"
                 className={`col s6 offset-s3 btn btn-large waves-effect
                   waves-light indigo accent-2`}
+                disabled={props.submitting}
               >
                   Sign Up
               </button>
@@ -159,6 +160,7 @@ Signup.propTypes = {
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };
 
 // renderField props validation

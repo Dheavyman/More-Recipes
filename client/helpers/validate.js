@@ -1,5 +1,7 @@
 const required = value => (value ? undefined : 'Required');
 
+const isEmpty = value => (!/^\s*$/.test(value) ? undefined : 'Invalid input');
+
 const email = value => (
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Invalid email address'
@@ -28,16 +30,22 @@ const validate = (values) => {
   const errors = {};
   if (!values.firstName) {
     errors.firstName = 'Required';
+  } else if (values.firstName.trim() === '') {
+    errors.firstName = 'Invalid input';
   }
   if (!values.lastName) {
     errors.lastName = 'Required';
+  } else if (values.lastName.trim() === '') {
+    errors.lastName = 'Invalid input';
   }
   if (!values.username) {
     errors.username = 'Required';
+  } else if (values.username.trim() === '') {
+    errors.username = 'Invalid input';
   } else if (/[^a-zA-Z0-9 ]/i.test(values.username)) {
     errors.username = 'Only alphanumeric characters';
-  } else if (values.username.length < 8) {
-    errors.username = 'Must be 8 characters or more';
+  } else if (values.username.length < 6) {
+    errors.username = 'Must be 6 characters or more';
   }
   if (!values.email) {
     errors.email = 'Required';
@@ -57,4 +65,5 @@ const validate = (values) => {
   return errors;
 };
 
-export { required, email, alphaNumeric, minLength, confirmPassword, validate };
+export { required, isEmpty, email, alphaNumeric, minLength, confirmPassword,
+  validate };

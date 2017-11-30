@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import isEmpty from 'lodash/isEmpty';
 
-// import Modal from '../homepage/Modal';
+import Category from './Category';
 import Signup from '../homepage/Signup';
 import Signin from '../homepage/Signin';
 
@@ -74,14 +75,17 @@ class Navbar extends React.Component {
   /**
    * Closes the modal
    *
+   * @param {object} errors - The error object
    * @returns {object} Set open state to false
    * @memberof Navbar
    */
-  handleClose() {
-    this.setState({
-      openSignup: false,
-      openSignin: false
-    });
+  handleClose(errors) {
+    if (isEmpty(errors)) {
+      this.setState({
+        openSignup: false,
+        openSignin: false
+      });
+    }
   }
 
   /**
@@ -92,8 +96,17 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignup(values) {
-    this.props.signupUser(values);
-    this.handleClose();
+    let errors = {};
+    this.props.signupUser(values)
+      .then((response) => {
+        this.props.userSignupSuccess(response.data);
+        this.handleClose(errors);
+      })
+      .catch((error) => {
+        errors = error.response.data;
+        this.props.userSignupFailure(error.response.data);
+        this.handleClose(errors);
+      });
   }
 
   /**
@@ -104,8 +117,17 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignin = (values) => {
-    this.props.signinUser(values);
-    this.handleClose();
+    let errors = {};
+    this.props.signinUser(values)
+      .then((response) => {
+        this.props.userSigninSuccess(response.data);
+        this.handleClose(errors);
+      })
+      .catch((error) => {
+        errors = error.response.data;
+        this.props.userSigninFailure(error.response.data);
+        this.handleClose(errors);
+      });
   }
 
   /**
@@ -142,32 +164,7 @@ class Navbar extends React.Component {
                   Category
                 </a>
               </li>
-              <ul id="category" className="dropdown-content">
-                <li>
-                  <a href="#!" className="collection-item black-text">
-                    Breakfast
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="collection-item black-text">Lunch</a>
-                </li>
-                <li>
-                  <a href="#!" className="collection-item black-text">Dinner</a>
-                </li>
-                <li>
-                  <a href="#!" className="collection-item black-text">
-                    Appetizer
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="collection-item black-text">Main</a>
-                </li>
-                <li>
-                  <a href="#!" className="collection-item black-text">
-                    Dessert
-                  </a>
-                </li>
-              </ul>
+              <Category />
               <li>
                 <a
                   className="dropdown-button dropdown-user"
@@ -228,6 +225,10 @@ class Navbar extends React.Component {
 Navbar.propTypes = {
   signupUser: PropTypes.func.isRequired,
   signinUser: PropTypes.func.isRequired,
+  userSignupSuccess: PropTypes.func.isRequired,
+  userSignupFailure: PropTypes.func.isRequired,
+  userSigninSuccess: PropTypes.func.isRequired,
+  userSigninFailure: PropTypes.func.isRequired,
 };
 
 export default Navbar;
