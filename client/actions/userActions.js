@@ -1,34 +1,32 @@
 import axios from 'axios';
 
-import { USER_SIGNUP_REQUEST, USER_SIGNUP_SUCCESS,
-  USER_SIGNUP_FAILURE, USER_SIGNIN_REQUEST,
-  USER_SIGNIN_SUCCESS, USER_SIGNIN_FAILURE } from './actionTypes';
+import * as actionTypes from './actionTypes';
 
 const userSignupRequest = () => ({
-  type: USER_SIGNUP_REQUEST,
+  type: actionTypes.SIGNUP_REQUEST,
 });
 
 const userSignupSuccess = data => ({
-  type: USER_SIGNUP_SUCCESS,
+  type: actionTypes.SIGNUP_SUCCESS,
   payload: data,
 });
 
 const userSignupFailure = error => ({
-  type: USER_SIGNUP_FAILURE,
+  type: actionTypes.SIGNUP_FAILURE,
   payload: error,
 });
 
 const userSigninRequest = () => ({
-  type: USER_SIGNIN_REQUEST,
+  type: actionTypes.SIGNIN_REQUEST,
 });
 
 const userSigninSuccess = data => ({
-  type: USER_SIGNIN_SUCCESS,
+  type: actionTypes.SIGNIN_SUCCESS,
   payload: data,
 });
 
 const userSigninFailure = error => ({
-  type: USER_SIGNIN_FAILURE,
+  type: actionTypes.SIGNIN_FAILURE,
   payload: error,
 });
 
