@@ -79,13 +79,11 @@ class Navbar extends React.Component {
    * @returns {object} Set open state to false
    * @memberof Navbar
    */
-  handleClose(errors) {
-    if (isEmpty(errors)) {
-      this.setState({
-        openSignup: false,
-        openSignin: false
-      });
-    }
+  handleClose() {
+    this.setState({
+      openSignup: false,
+      openSignin: false
+    });
   }
 
   /**
@@ -96,16 +94,13 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignup(values) {
-    let errors = {};
     this.props.signupUser(values)
       .then((response) => {
         this.props.userSignupSuccess(response.data);
-        this.handleClose(errors);
+        this.handleClose();
       })
       .catch((error) => {
-        errors = error.response.data;
         this.props.userSignupFailure(error.response.data);
-        this.handleClose(errors);
       });
   }
 
@@ -117,16 +112,13 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignin = (values) => {
-    let errors = {};
     this.props.signinUser(values)
       .then((response) => {
         this.props.userSigninSuccess(response.data);
-        this.handleClose(errors);
+        this.handleClose();
       })
       .catch((error) => {
-        errors = error.response.data;
         this.props.userSigninFailure(error.response.data);
-        this.handleClose(errors);
       });
   }
 
