@@ -1,6 +1,4 @@
-import { USER_SIGNUP_REQUEST, USER_SIGNUP_SUCCESS,
-  USER_SIGNUP_FAILURE, USER_SIGNIN_REQUEST,
-  USER_SIGNIN_SUCCESS, USER_SIGNIN_FAILURE } from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   isLoading: false,
@@ -11,37 +9,37 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case USER_SIGNUP_REQUEST:
+    case actionTypes.SIGNUP_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case USER_SIGNUP_SUCCESS:
+    case actionTypes.SIGNUP_SUCCESS:
       return {
         ...state,
         isLoading: false,
         userSignup: action.payload,
         error: {},
       };
-    case USER_SIGNUP_FAILURE:
+    case actionTypes.SIGNUP_FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.payload
       };
-    case USER_SIGNIN_REQUEST:
+    case actionTypes.SIGNIN_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case USER_SIGNIN_SUCCESS:
+    case actionTypes.SIGNIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
         userSignin: action.payload,
         error: {},
       };
-    case USER_SIGNIN_FAILURE:
+    case actionTypes.SIGNIN_FAILURE:
       return {
         ...state,
         isLoading: false,
