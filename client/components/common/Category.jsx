@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Category = () => (
-  <ul id="dropdown1" className="dropdown-content">
+  <ul id="category" className="dropdown-content">
     <li><a href="#!" className="collection-item black-text">Breakfast</a></li>
     <li><a href="#!" className="collection-item black-text">Lunch</a></li>
     <li><a href="#!" className="collection-item black-text">Dinner</a></li>

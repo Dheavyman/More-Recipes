@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import isEmpty from 'lodash/isEmpty';
 
 import Category from './Category';
+import IndexUserNav from './IndexUserNav';
+import AuthUserNav from './AuthUserNav';
 import Signup from '../homepage/Signup';
 import Signin from '../homepage/Signin';
 
@@ -45,11 +46,21 @@ class Navbar extends React.Component {
     });
     // Initialize materialize dropdown class
     $('.dropdown-button').dropdown({
-      hover: true,
       belowOrigin: true,
     });
-    // // Initialize materialize modal
-    // $('.modal').modal();
+  }
+
+  /**
+   * Component did update lifecycle mehtod
+   *
+   * @returns {any} Initialize materialize component
+   * @memberof Navbar
+   */
+  componentDidUpdate() {
+    // Initialize materialize dropdown class
+    $('.dropdown-button').dropdown({
+      belowOrigin: true,
+    });
   }
 
   /**
@@ -129,6 +140,10 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   render() {
+    const { user } = this.props;
+    const { isAuthenticated, userSignin } = user;
+    const { message } = userSignin;
+    
     return (
       <div className="navbar-fixed">
         <nav className="deep-orange darken-4">
@@ -162,33 +177,18 @@ class Navbar extends React.Component {
                   className="dropdown-button dropdown-user"
                   data-activates="user-control"
                 >
-                  Welcome
+                  {!isAuthenticated && 'Welcome'}
+                  {isAuthenticated && message}
                   <i className="material-icons large left">account_circle</i>
                 </a>
-                <ul id="user-control" className="dropdown-content">
-                  <li>
-                    <a
-                      role="button"
-                      tabIndex="0"
-                      className="black-text"
-                      onClick={this.handleOpenSignin}
-                    >
-                      Sign in
-                      <i className="material-icons left">person</i>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      role="button"
-                      tabIndex="0"
-                      className="black-text"
-                      onClick={this.handleOpenSignup}
-                    >
-                      Register
-                      <i className="material-icons left">folder</i>
-                    </a>
-                  </li>
-                </ul>
+                {!isAuthenticated &&
+                  <IndexUserNav
+                    handleOpenSignup={this.handleOpenSignup}
+                    handleOpenSignin={this.handleOpenSignin}
+                  />
+                }
+                {isAuthenticated &&
+                  <AuthUserNav />}
               </li>
             </ul>
           </div>
@@ -221,6 +221,12 @@ Navbar.propTypes = {
   userSignupFailure: PropTypes.func.isRequired,
   userSigninSuccess: PropTypes.func.isRequired,
   userSigninFailure: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    userSignin: PropTypes.shape({
+      message: PropTypes.string
+    })
+  }).isRequired,
 };
 
 export default Navbar;
