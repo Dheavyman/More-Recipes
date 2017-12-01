@@ -2,8 +2,9 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   isLoading: false,
-  userSignup: null,
-  userSignin: null,
+  userSignup: {},
+  userSignin: {},
+  isAuthenticated: false,
   error: {},
 };
 
@@ -31,11 +32,13 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        isAuthenticated: false,
       };
     case actionTypes.SIGNIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
+        isAuthenticated: true,
         userSignin: action.payload,
         error: {},
       };
@@ -43,6 +46,7 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isAuthenticated: false,
         error: action.payload
       };
     default:
