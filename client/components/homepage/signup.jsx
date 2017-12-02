@@ -137,7 +137,6 @@ Signup.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  reset: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     error: PropTypes.shape({
       message: PropTypes.string
