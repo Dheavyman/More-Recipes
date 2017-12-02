@@ -1,7 +1,7 @@
 import { fetchRecipes, fetchPopularRecipes } from './recipeActions';
 import { userSignupRequest, userSignupSuccess, userSignupFailure,
   userSigninSuccess, userSigninFailure, signupUser,
-  signinUser } from './userActions';
+  signinUser, logoutUser } from './userActions';
 
 export default {
   fetchRecipes,
@@ -13,4 +13,5 @@ export default {
   userSigninFailure,
   signupUser,
   signinUser,
+  logoutUser,
 };

@@ -32,6 +32,7 @@ class Navbar extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmitSignup = this.handleSubmitSignup.bind(this);
     this.handleSubmitSignin = this.handleSubmitSignin.bind(this);
+    this.handleLogoutUser = this.handleLogoutUser.bind(this);
   }
   /**
    * Component did mount method
@@ -115,8 +116,18 @@ class Navbar extends React.Component {
    * @returns {any} Submit function
    * @memberof Navbar
    */
-  handleSubmitSignin = (values) => {
+  handleSubmitSignin(values) {
     this.props.signinUser(values, this.handleClose);
+  }
+
+  /**
+   * Logout user from the application
+   *
+   * @returns {any} Logout user
+   * @memberof Navbar
+   */
+  handleLogoutUser() {
+    this.props.logoutUser();
   }
 
   /**
@@ -126,9 +137,7 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   render() {
-    const { user } = this.props;
-    const { isAuthenticated, userSignin } = user;
-    const { message } = userSignin;
+    const { user: { isAuthenticated } } = this.props;
 
     return (
       <div className="navbar-fixed">
@@ -164,7 +173,7 @@ class Navbar extends React.Component {
                   data-activates="user-control"
                 >
                   {!isAuthenticated && 'Welcome'}
-                  {isAuthenticated && message}
+                  {isAuthenticated && 'User fullname'}
                   <i className="material-icons large left">account_circle</i>
                 </a>
                 {!isAuthenticated &&
@@ -174,7 +183,7 @@ class Navbar extends React.Component {
                   />
                 }
                 {isAuthenticated &&
-                  <AuthUserNav />}
+                  <AuthUserNav handleLogoutUser={this.handleLogoutUser} />}
               </li>
             </ul>
           </div>
@@ -205,6 +214,7 @@ class Navbar extends React.Component {
 Navbar.propTypes = {
   signupUser: PropTypes.func.isRequired,
   signinUser: PropTypes.func.isRequired,
+  logoutUser: PropTypes.func.isRequired,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
     userSignin: PropTypes.shape({

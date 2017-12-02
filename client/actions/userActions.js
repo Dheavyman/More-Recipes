@@ -30,6 +30,14 @@ const userSigninFailure = error => ({
   payload: error,
 });
 
+const userLogoutRequest = () => ({
+  type: actionTypes.LOGOUT_REQUEST,
+});
+
+const userLogoutSuccess = () => ({
+  type: actionTypes.LOGOUT_SUCCESS
+});
+
 const signupUser = (values, closeSignupModal) => (dispatch) => {
   dispatch(userSignupRequest());
   axios.post('http://127.0.0.1:3000/api/v1/users/signup', values)
@@ -59,5 +67,11 @@ const signinUser = (values, closeSigninModal) => (dispatch) => {
     });
 };
 
+const logoutUser = () => (dispatch) => {
+  dispatch(userLogoutRequest());
+  localStorage.removeItem('token');
+  dispatch(userLogoutSuccess());
+};
+
 export { userSignupRequest, userSignupSuccess, userSignupFailure,
-  userSigninSuccess, userSigninFailure, signupUser, signinUser };
+  userSigninSuccess, userSigninFailure, signupUser, signinUser, logoutUser };

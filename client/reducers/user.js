@@ -4,7 +4,7 @@ const initialState = {
   isLoading: false,
   userSignup: {},
   userSignin: {},
-  isAuthenticated: false,
+  isAuthenticated: !!localStorage.getItem('token'),
   error: {},
 };
 
@@ -32,7 +32,6 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        isAuthenticated: false,
       };
     case actionTypes.SIGNIN_SUCCESS:
       return {
@@ -48,6 +47,17 @@ const user = (state = initialState, action) => {
         isLoading: false,
         isAuthenticated: false,
         error: action.payload
+      };
+    case actionTypes.LOGOUT_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actionTypes.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isAuthenticated: false,
       };
     default:
       return state;
