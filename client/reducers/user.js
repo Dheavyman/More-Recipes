@@ -32,6 +32,7 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        isAuthenticated: false,
       };
     case actionTypes.SIGNIN_SUCCESS:
       return {
@@ -52,6 +53,7 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        isAuthenticated: true,
       };
     case actionTypes.LOGOUT_SUCCESS:
       return {
