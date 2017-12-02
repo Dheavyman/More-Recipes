@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import common from '../common';
 
-const { Category } = common;
+const { Category, AuthUserNav } = common;
 
 /**
  * Class representing Header component
@@ -25,9 +25,10 @@ class Header extends React.Component {
     });
     // Initialize materialize dropdown class
     $('.dropdown-button').dropdown({
-      hover: true,
       belowOrigin: true,
     });
+    // Initailize materialize tab class
+    $('ul.tabs').tabs();
   }
 
   /**
@@ -61,7 +62,7 @@ class Header extends React.Component {
                 <li>
                   <a
                     className="dropdown-button dropdown-category"
-                    data-activates="dropdown1"
+                    data-activates="category"
                   >
                     Category
                   </a>
@@ -69,45 +70,13 @@ class Header extends React.Component {
                 <Category />
                 <li>
                   <a
-                    href=""
                     className="dropdown-button dropdown-user"
                     data-activates="user-control"
                   >
-                    John Stew
-                    <i className="material-icons left">account_circle</i>
+                    Users name
+                    <i className="material-icons large left">account_circle</i>
                   </a>
-                  <ul id="user-control" className="dropdown-content">
-                    <li>
-                      <a href="profile.html" className="black-text">
-                        Profile
-                        <i className="material-icons left">person</i>
-                      </a>
-                    </li>
-                    <li>
-                      <Link to="/user/recipes" className="black-text">
-                        My Recipes<i className="material-icons left">folder</i>
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        href="recipes.html?#user-favorites"
-                        className="black-text"
-                      >
-                        My Favorites
-                        <i className="material-icons left">folder</i>
-                      </a>
-                    </li>
-                    <li className="divider" />
-                    <li>
-                      <a
-                        href="index.html"
-                        className="black-text"
-                      >
-                        Logout
-                        <i className="material-icons left">lock</i>
-                      </a>
-                    </li>
-                  </ul>
+                  <AuthUserNav />
                 </li>
               </ul>
             </div>

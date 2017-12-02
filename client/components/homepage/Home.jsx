@@ -35,7 +35,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header {...this.props} />
         <Main {...this.props} />
         <Footer />
       </div>
@@ -45,6 +45,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   recipes: state.recipes,
+  user: state.user,
 });
 
 const mapDispatchToProps = dispatch => (
