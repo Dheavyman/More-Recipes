@@ -4,6 +4,7 @@ import RecipeImage from './RecipeImage';
 import Category from './Category';
 import IndexUserNav from './IndexUserNav';
 import AuthUserNav from './AuthUserNav';
+import ErrorMessage from './ErrorMessage';
 
 export default {
   Header,
@@ -12,4 +13,5 @@ export default {
   Category,
   IndexUserNav,
   AuthUserNav,
+  ErrorMessage,
 };

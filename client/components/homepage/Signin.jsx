@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import { Field, reduxForm } from 'redux-form';
+import isEmpty from 'lodash/isEmpty';
 
-import { required, isEmpty } from '../../helpers/validate';
+import { required, isEmptyField } from '../../helpers/validate';
+import ErrorMessage from '../common/ErrorMessage';
 
 const customContentStyle = {
   width: '35%',
@@ -50,6 +52,9 @@ const renderField = ({
  * @returns {object} React element
  */
 const Signin = (props) => {
+  const { user: { error } } = props,
+    { message } = error;
+
   const actions = [
     <FlatButton
       label="Cancel"
@@ -95,12 +100,13 @@ const Signin = (props) => {
                 />
               </div>
             </div>
+            {!isEmpty(error) && <ErrorMessage message={message} /> }
             <div className="row" />
-            <div className="row">
+            <div className="row center-align">
               <button
                 type="submit"
-                className={`col s6 offset-s3 btn btn-large waves-effect
-                  waves-light indigo accent-2`}
+                className={`btn btn-large waves-effect waves-light
+                  indigo accent-2`}
                 disabled={props.submitting}
               >
                 Sign In
@@ -120,6 +126,11 @@ Signin.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    error: PropTypes.shape({
+      message: PropTypes.string
+    })
+  }).isRequired,
 };
 
 // renderfield props validation

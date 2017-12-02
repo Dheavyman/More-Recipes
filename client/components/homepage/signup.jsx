@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import isEmpty from 'lodash/isEmpty';
 
 import * as helpers from '../../helpers/validate';
+import ErrorMessage from '../common/ErrorMessage';
 
 const { validate } = helpers;
 
@@ -45,6 +47,7 @@ const renderField = ({
   </div>
 );
 
+
 /**
  * Signup react component
  *
@@ -52,6 +55,9 @@ const renderField = ({
  * @returns {object} React element
  */
 const Signup = (props) => {
+  const { user: { error } } = props,
+    { message } = error;
+
   const actions = [
     <FlatButton
       label="Cancel"
@@ -135,13 +141,14 @@ const Signup = (props) => {
                 />
               </div>
             </div>
+            {!isEmpty(error) && <ErrorMessage message={message} /> }
             <div className="row" />
-            <div className="row">
+            <div className="row center-align">
               <button
                 type="submit"
                 name="signupbtn"
-                className={`col s6 offset-s3 btn btn-large waves-effect
-                  waves-light indigo accent-2`}
+                className={`btn btn-large waves-effect waves-light
+                  indigo accent-2`}
                 disabled={props.submitting}
               >
                   Sign Up
@@ -161,6 +168,11 @@ Signup.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    error: PropTypes.shape({
+      message: PropTypes.string
+    })
+  }).isRequired,
 };
 
 // renderField props validation

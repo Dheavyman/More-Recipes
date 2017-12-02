@@ -105,14 +105,7 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignup(values) {
-    this.props.signupUser(values)
-      .then((response) => {
-        this.props.userSignupSuccess(response.data);
-        this.handleClose();
-      })
-      .catch((error) => {
-        this.props.userSignupFailure(error.response.data);
-      });
+    this.props.signupUser(values, this.handleClose);
   }
 
   /**
@@ -123,14 +116,7 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignin = (values) => {
-    this.props.signinUser(values)
-      .then((response) => {
-        this.props.userSigninSuccess(response.data);
-        this.handleClose();
-      })
-      .catch((error) => {
-        this.props.userSigninFailure(error.response.data);
-      });
+    this.props.signinUser(values, this.handleClose);
   }
 
   /**
@@ -143,7 +129,7 @@ class Navbar extends React.Component {
     const { user } = this.props;
     const { isAuthenticated, userSignin } = user;
     const { message } = userSignin;
-    
+
     return (
       <div className="navbar-fixed">
         <nav className="deep-orange darken-4">
@@ -199,6 +185,7 @@ class Navbar extends React.Component {
             handleClose={this.handleClose}
             handleOpenSignin={this.handleOpenSignin}
             onSubmit={this.handleSubmitSignup}
+            {...this.props}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
@@ -207,6 +194,7 @@ class Navbar extends React.Component {
             handleClose={this.handleClose}
             handleOpenSignup={this.handleOpenSignup}
             onSubmit={this.handleSubmitSignin}
+            {...this.props}
           />
         </MuiThemeProvider>
       </div>
@@ -217,10 +205,6 @@ class Navbar extends React.Component {
 Navbar.propTypes = {
   signupUser: PropTypes.func.isRequired,
   signinUser: PropTypes.func.isRequired,
-  userSignupSuccess: PropTypes.func.isRequired,
-  userSignupFailure: PropTypes.func.isRequired,
-  userSigninSuccess: PropTypes.func.isRequired,
-  userSigninFailure: PropTypes.func.isRequired,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
     userSignin: PropTypes.shape({

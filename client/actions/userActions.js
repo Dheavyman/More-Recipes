@@ -30,14 +30,33 @@ const userSigninFailure = error => ({
   payload: error,
 });
 
-const signupUser = values => (dispatch) => {
+const signupUser = (values, closeSignupModal) => (dispatch) => {
   dispatch(userSignupRequest());
-  return axios.post('http://127.0.0.1:3000/api/v1/users/signup', values);
+  axios.post('http://127.0.0.1:3000/api/v1/users/signup', values)
+    .then((response) => {
+      dispatch(userSignupSuccess(response.data));
+      closeSignupModal();
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(userSignupFailure(data));
+    });
 };
 
-const signinUser = values => (dispatch) => {
+const signinUser = (values, closeSigninModal) => (dispatch) => {
   dispatch(userSigninRequest());
-  return axios.post('http://127.0.0.1:3000/api/v1/users/signin', values);
+  axios.post('http://127.0.0.1:3000/api/v1/users/signin', values)
+    .then((response) => {
+      const { data } = response;
+      const { data: { token } } = data;
+      dispatch(userSigninSuccess(data));
+      localStorage.setItem('token', token);
+      closeSigninModal();
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(userSigninFailure(data));
+    });
 };
 
 export { userSignupRequest, userSignupSuccess, userSignupFailure,

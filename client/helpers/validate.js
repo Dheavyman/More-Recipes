@@ -1,6 +1,6 @@
 const required = value => (value ? undefined : 'Required');
 
-const isEmpty = value => (!/^\s*$/.test(value) ? undefined : 'Invalid input');
+const isEmptyField = value => (!/^\s*$/.test(value) ? undefined : 'Invalid input');
 
 const email = value => (
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
@@ -65,5 +65,5 @@ const validate = (values) => {
   return errors;
 };
 
-export { required, isEmpty, email, alphaNumeric, minLength, confirmPassword,
-  validate };
+export { required, isEmptyField, email, alphaNumeric, minLength,
+  confirmPassword, validate };
