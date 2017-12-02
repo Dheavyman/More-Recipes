@@ -7,43 +7,12 @@ import isEmpty from 'lodash/isEmpty';
 
 import { required, isEmptyField } from '../../utils/validate';
 import ErrorMessage from '../common/ErrorMessage';
+import RenderField from '../common/RenderField';
 
 const customContentStyle = {
   width: '35%',
   maxWidth: '35%',
 };
-
-/**
- * Function to render each of the input fields
- *
- * @param {object} Field - The input field
- * @param {object} Field.input - The input field element
- * @param {string} Field.label - The input field label
- * @param {string} Field.type - The input field type
- * @param {object} Field.meta
- * @param {boolean} Field.meta.touched - The field input state
- * @param {string} Field.meta.error - Validation error message
- * @returns {object} Input element
- */
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  <div>
-    <label htmlFor={label}>{label}</label>
-    <br />
-    <div>
-      <input
-        {...input}
-        type={type}
-        placeholder={label}
-      />
-      {touched && (error && <span className="red-text">{error}</span>)}
-    </div>
-  </div>
-);
 
 /**
  * Signin react component
@@ -83,7 +52,7 @@ const Signin = (props) => {
                 <Field
                   name="username"
                   label="Username"
-                  component={renderField}
+                  component={RenderField}
                   type="text"
                   validate={[required, isEmptyField]}
                 />
@@ -94,7 +63,7 @@ const Signin = (props) => {
                 <Field
                   name="password"
                   label="Password"
-                  component={renderField}
+                  component={RenderField}
                   type="password"
                   validate={required}
                 />
@@ -130,17 +99,6 @@ Signin.propTypes = {
     error: PropTypes.shape({
       message: PropTypes.string
     })
-  }).isRequired,
-};
-
-// renderfield props validation
-renderField.propTypes = {
-  input: PropTypes.shape().isRequired,
-  label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  meta: PropTypes.shape({
-    touched: PropTypes.bool,
-    error: PropTypes.string,
   }).isRequired,
 };
 
