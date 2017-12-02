@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { Field, reduxForm } from 'redux-form';
 import isEmpty from 'lodash/isEmpty';
 
-import { required, isEmptyField } from '../../helpers/validate';
+import { required, isEmptyField } from '../../utils/validate';
 import ErrorMessage from '../common/ErrorMessage';
 
 const customContentStyle = {
@@ -48,7 +48,7 @@ const renderField = ({
 /**
  * Signin react component
  *
- * @param {any} props 
+ * @param {any} props The props passed to component
  * @returns {object} React element
  */
 const Signin = (props) => {
@@ -85,7 +85,7 @@ const Signin = (props) => {
                   label="Username"
                   component={renderField}
                   type="text"
-                  validate={[required, isEmpty]}
+                  validate={[required, isEmptyField]}
                 />
               </div>
             </div>

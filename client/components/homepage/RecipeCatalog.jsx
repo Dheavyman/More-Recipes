@@ -7,13 +7,13 @@ const RecipeCatalog = (props) => {
   const recipes = props.recipesCatalog;
   return (
     <div className="row">
-      {recipes ? recipes.map((recipe, index) =>
+      {recipes && recipes.map((recipe, index) =>
         (<RecipeCatalogCard
           {...props}
           key={recipe.id}
           index={index}
           recipe={recipe}
-        />)) : ''}
+        />))}
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import isEmpty from 'lodash/isEmpty';
 
-import * as helpers from '../../helpers/validate';
+import * as helpers from '../../utils/validate';
 import ErrorMessage from '../common/ErrorMessage';
 
 const { validate } = helpers;
@@ -51,7 +51,7 @@ const renderField = ({
 /**
  * Signup react component
  *
- * @param {any} props 
+ * @param {any} props The props passed to component
  * @returns {object} React element
  */
 const Signup = (props) => {
@@ -141,7 +141,7 @@ const Signup = (props) => {
                 />
               </div>
             </div>
-            {!isEmpty(error) && <ErrorMessage message={message} /> }
+            {!isEmpty(error) && <ErrorMessage message={message} />}
             <div className="row" />
             <div className="row center-align">
               <button
