@@ -2,6 +2,8 @@ import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
 
+// const URL = 'https://more-recipes-25.herokuapp.com/api/v1/';
+
 const retrieveRecipesRequest = () => ({
   type: actionTypes.RETRIEVE_RECIPES_REQUEST,
 });

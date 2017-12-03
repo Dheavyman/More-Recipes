@@ -26,13 +26,13 @@ const Main = (props) => {
         </div>
         <div className="row">
           <div className="col s12 m6 l5">
-            <RecipeCard {...recipe} />
+            <RecipeCard recipe={recipe} />
           </div>
           <div className="col s12 m6 l7">
-            <RecipeDetails {...recipe} />
+            <RecipeDetails recipe={recipe} />
           </div>
         </div>
-        <ReviewCollection />
+        <ReviewCollection recipe={recipe} />
         <AddReview />
       </div>
     </div>
