@@ -44,7 +44,8 @@ const signupUser = (values, closeSignupModal) => (dispatch) => {
   dispatch(userSignupRequest());
   axios.post('http://127.0.0.1:3000/api/v1/users/signup', values)
     .then((response) => {
-      dispatch(userSignupSuccess(response.data));
+      const { data } = response;
+      dispatch(userSignupSuccess(data));
       closeSignupModal();
     })
     .catch((error) => {
