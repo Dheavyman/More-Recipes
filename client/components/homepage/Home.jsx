@@ -23,7 +23,7 @@ class Home extends React.Component {
    * @memberof Home
    */
   componentDidMount() {
-    this.props.fetchRecipes();
+    this.props.retrieveRecipes();
   }
 
   /**
@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch => (
 );
 
 Home.propTypes = {
-  fetchRecipes: PropTypes.func.isRequired,
+  retrieveRecipes: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
