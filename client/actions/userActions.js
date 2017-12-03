@@ -73,5 +73,4 @@ const logoutUser = () => (dispatch) => {
   dispatch(userLogoutSuccess());
 };
 
-export { userSignupRequest, userSignupSuccess, userSignupFailure,
-  userSigninSuccess, userSigninFailure, signupUser, signinUser, logoutUser };
+export { signupUser, signinUser, logoutUser };
