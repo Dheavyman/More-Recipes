@@ -21,12 +21,12 @@ const fetchRecipeRequest = () => ({
 });
 
 const fetchRecipeSuccess = recipe => ({
-  type: actionTypes.FETCH_RECIPE_REQUEST,
+  type: actionTypes.FETCH_RECIPE_SUCCESS,
   payload: recipe,
 });
 
 const fetchRecipeFailure = error => ({
-  type: actionTypes.FETCH_RECIPE_REQUEST,
+  type: actionTypes.FETCH_RECIPE_FAILURE,
   payload: error,
 });
 

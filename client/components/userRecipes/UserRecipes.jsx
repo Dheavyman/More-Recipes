@@ -3,11 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import actionCreators from '../../actions';
-import common from '../common';
+import Footer from '../common/Footer';
 import Header from './Header';
 import Main from './Main';
-
-const { Footer } = common;
 
 /**
  * Class representing user recipes
@@ -35,9 +33,15 @@ class UserRecipes extends React.Component {
   render() {
     return (
       <div>
-        <Header {...this.props} />
-        <Main />
-        <Footer />
+        <header>
+          <Header {...this.props} />
+        </header>
+        <main>
+          <Main />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     );
   }

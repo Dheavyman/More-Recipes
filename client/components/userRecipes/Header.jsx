@@ -36,7 +36,7 @@ class Header extends React.Component {
    */
   render() {
     return (
-      <header>
+      <div>
         <div className="navbar-fixed">
           <nav className="nav-extended deep-orange darken-4">
             <Navbar {...this.props} />
@@ -133,7 +133,7 @@ class Header extends React.Component {
           </li>
           <li><a href="index.html">Logout</a></li>
         </ul>
-      </header>
+      </div>
     );
   }
 }

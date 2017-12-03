@@ -7,15 +7,15 @@ const RecipeCard = () => (
     <div className="card-image">
       <RecipeImage />
     </div>
-    <div className="card-action">
+    <div className="card-action center-align">
       <a id="favorite" className="chip waves-effect waves-red ">
-        <i className="fa fa-heart" />
+        <i className="fa fa-heart" /><span>20</span>
       </a>
       <a id="upvote" className="chip waves-effect waves-red">
-        <i className="fa fa-thumbs-up" />
+        <i className="fa fa-thumbs-up" /><span>50</span>
       </a>
       <a id="downvote" className="chip waves-effect waves-red">
-        <i className="fa fa-thumbs-down" />
+        <i className="fa fa-thumbs-down" /><span>10</span>
       </a>
     </div>
   </div>

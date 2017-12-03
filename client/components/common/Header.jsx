@@ -4,14 +4,14 @@ import Navbar from './Navbar';
 import SideNav from './SideNav';
 
 const Header = props => (
-  <header>
+  <div>
     <div className="navbar-fixed">
       <nav className="deep-orange darken-4">
         <Navbar {...props} />
       </nav>
     </div>
     <SideNav />
-  </header>
+  </div>
 );
 
 export default Header;
