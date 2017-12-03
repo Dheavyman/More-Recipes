@@ -140,54 +140,50 @@ class Navbar extends React.Component {
     const { user: { isAuthenticated } } = this.props;
 
     return (
-      <div className="navbar-fixed">
-        <nav className="deep-orange darken-4">
-          <div className="nav-wrapper">
-            <Link
-              to="/"
-              id="logo"
-              className="brand-logo hide-on-small-only"
-            >
-              More-Recipes
-            </Link>
+      <div className="nav-wrapper">
+        <Link
+          to="/"
+          id="logo"
+          className="brand-logo hide-on-small-only"
+        >
+          More-Recipes
+        </Link>
+        <a
+          data-activates="slide_out"
+          className="button-collapse"
+        >
+          <i className="material-icons">menu</i>
+        </a>
+        <ul className="right hide-on-med-and-down">
+          <li><Link to="/">Home</Link></li>
+          <li>
             <a
-              data-activates="slide_out"
-              className="button-collapse"
+              className="dropdown-button dropdown-category"
+              data-activates="category"
             >
-              <i className="material-icons">menu</i>
+              Category
             </a>
-            <ul className="right hide-on-med-and-down">
-              <li><Link to="/">Home</Link></li>
-              <li>
-                <a
-                  className="dropdown-button dropdown-category"
-                  data-activates="category"
-                >
-                  Category
-                </a>
-              </li>
-              <Category />
-              <li>
-                <a
-                  className="dropdown-button dropdown-user"
-                  data-activates="user-control"
-                >
-                  {!isAuthenticated && 'Welcome'}
-                  {isAuthenticated && 'User fullname'}
-                  <i className="material-icons large left">account_circle</i>
-                </a>
-                {!isAuthenticated &&
-                  <IndexUserNav
-                    handleOpenSignup={this.handleOpenSignup}
-                    handleOpenSignin={this.handleOpenSignin}
-                  />
-                }
-                {isAuthenticated &&
-                  <AuthUserNav handleLogoutUser={this.handleLogoutUser} />}
-              </li>
-            </ul>
-          </div>
-        </nav>
+          </li>
+          <Category />
+          <li>
+            <a
+              className="dropdown-button dropdown-user"
+              data-activates="user-control"
+            >
+              {!isAuthenticated && 'Welcome'}
+              {isAuthenticated && 'User fullname'}
+              <i className="material-icons large left">account_circle</i>
+            </a>
+            {!isAuthenticated &&
+              <IndexUserNav
+                handleOpenSignup={this.handleOpenSignup}
+                handleOpenSignin={this.handleOpenSignin}
+              />
+            }
+            {isAuthenticated &&
+              <AuthUserNav handleLogoutUser={this.handleLogoutUser} />}
+          </li>
+        </ul>
         <MuiThemeProvider>
           <Signup
             open={this.state.openSignup}
