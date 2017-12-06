@@ -10,7 +10,6 @@ import AddReview from './AddReview';
 const Main = (props) => {
   const { singleRecipe } = props,
     { data: { recipe } } = singleRecipe;
-  console.log(props);
   return (
     <div>
       <div className="parallax-container">
@@ -33,7 +32,7 @@ const Main = (props) => {
           </div>
         </div>
         <ReviewCollection recipe={recipe} />
-        <AddReview />
+        <AddReview {...props} />
       </div>
     </div>
   );

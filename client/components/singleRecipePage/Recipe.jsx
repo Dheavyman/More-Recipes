@@ -17,6 +17,21 @@ import Main from './Main';
  */
 class Recipe extends React.Component {
   /**
+   * Creates an instance of Recipe.
+   *
+   * @param {any} props - This is the props param
+   * @memberof Recipe
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      reviewContent: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmitReview = this.handleSubmitReview.bind(this);
+  }
+
+  /**
    * Component did mount
    *
    * @returns {object} React element
@@ -28,6 +43,34 @@ class Recipe extends React.Component {
     $('.parallax').parallax();
     this.props.fetchRecipe(this.props.match.params.recipeId);
   }
+
+  /**
+   * Funtion to handle review input state
+   *
+   * @param {string} event - The input value
+   * @returns {string} The updated state
+   * @memberof Recipe
+   */
+  handleChange(event) {
+    this.setState({
+      reviewContent: event.target.value,
+    });
+  }
+
+  /**
+   * Function to handle submission of review
+   *
+   * @param {string} event - The user review
+   * @returns {func} Dispatch function
+   * @memberof Recipe
+   */
+  handleSubmitReview(event) {
+    event.preventDefault();
+    this.props.postReview(
+      this.props.match.params.recipeId, this.state.reviewContent
+    );
+  }
+
   /**
    * Render method
    *
@@ -44,7 +87,12 @@ class Recipe extends React.Component {
             <Header {...this.props} />
           </header>
           <main>
-            <Main singleRecipe={singleRecipe} />
+            <Main
+              singleRecipe={singleRecipe}
+              reviewContent={this.state.reviewContent}
+              handleChange={this.handleChange}
+              handleSubmitReview={this.handleSubmitReview}
+            />
           </main>
           <footer>
             <Footer />
@@ -77,6 +125,7 @@ Recipe.propTypes = {
       recipeId: PropTypes.string,
     })
   }).isRequired,
+  postReview: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipe);

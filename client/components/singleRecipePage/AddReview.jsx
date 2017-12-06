@@ -1,32 +1,48 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const AddReview = () => (
-  <div className="row">
-    <div className="col s12 m12 l8">
-      <form className="add-review col s12 center-align" method="post">
-        <div className="row">
-          <div type="text" className="input-field col s12">
-            <textarea
-              id="new-review"
-              type="text"
-              className="materialize-textarea"
-              required
-            />
-            <label htmlFor="new-review">Add your review</label>
+const AddReview = (props) => {
+  console.log(props);
+  const { reviewContent, handleChange, handleSubmitReview } = props;
+  return (
+    <div className="row">
+      <div className="col s12 m12 l8">
+        <form
+          className="add-review col s12 center-align"
+          onSubmit={handleSubmitReview}
+        >
+          <div className="row">
+            <div type="text" className="input-field col s12">
+              <textarea
+                id="new-review"
+                type="text"
+                value={reviewContent}
+                className="materialize-textarea"
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="new-review">Add your review</label>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <button
-            type="submit"
-            className={`btn waves-effect waves-light indigo accent-2
+          <div className="row">
+            <button
+              type="submit"
+              className={`btn waves-effect waves-light indigo accent-2
               white-text`}
-          >
-            Post Review
-          </button>
-        </div>
-      </form>
+            >
+              Post Review
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
+AddReview.propTypes = {
+  reviewContent: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmitReview: PropTypes.func.isRequired,
+};
 
 export default AddReview;

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import userImage from '../../public/images/user.jpg';
+
 const createdOn = date => new Date(date).toLocaleString();
 
 const Review = (props) => {
@@ -8,7 +10,7 @@ const Review = (props) => {
     { User: { fullName }, content, createdAt } = review;
   return (
     <li className="collection-item avatar">
-      <img src="../../public/images/user.jpg" alt="" className="circle" />
+      <img src={userImage} alt="" className="circle" />
       <span className="name"><b>{fullName}</b></span>
       <p className="created-on">{createdOn(createdAt)}</p>
       <p id="review-content">
