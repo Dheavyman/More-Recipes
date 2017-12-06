@@ -5,8 +5,6 @@ import slide2 from '../../public/images/slide2.jpg';
 import slide3 from '../../public/images/slide3.jpg';
 import slide4 from '../../public/images/slide4.jpg';
 
-console.log(slide1, slide2, slide3, slide4);
-
 /**
  * Class representing slider
  *
