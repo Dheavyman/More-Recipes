@@ -32,8 +32,9 @@ const postReview = (recipeId, reviewContent) => (dispatch) => {
       dispatch(postReviewSuccess(data));
     })
     .catch((error) => {
-      const { response: { data } } = error;
+      const { response: { status, data } } = error;
       dispatch(postReviewFailure(data));
+      return status;
     });
 };
 

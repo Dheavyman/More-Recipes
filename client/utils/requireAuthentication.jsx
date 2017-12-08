@@ -18,7 +18,7 @@ export default (ComposedComponent) => {
      */
     componentWillMount() {
       if (!this.props.isAuthenticated) {
-        console.log('This executed');
+        // console.log('This executed');
         this.props.history.push('/');
       }
     }

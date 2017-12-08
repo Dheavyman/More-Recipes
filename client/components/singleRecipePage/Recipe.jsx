@@ -68,8 +68,12 @@ class Recipe extends React.Component {
     this.props.postReview(
       this.props.match.params.recipeId, this.state.reviewContent
     )
-      .then(() => {
-        this.componentDidMount();
+      .then((response) => {
+        console.log(response);
+        const { status } = response;
+        if (status !== 401) {
+          this.componentDidMount();
+        }
         this.setState({
           reviewContent: '',
         });
@@ -83,6 +87,7 @@ class Recipe extends React.Component {
    * @memberof Recipe
    */
   render() {
+    console.log(this.props);
     const { singleRecipe } = this.props;
     return (
       <div>

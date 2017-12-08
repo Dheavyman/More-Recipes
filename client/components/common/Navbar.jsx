@@ -6,12 +6,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Category from './Category';
 import IndexUserNav from './IndexUserNav';
 import AuthUserNav from './AuthUserNav';
-import Signup from '../homepage/Signup';
-import Signin from '../homepage/Signin';
+import Signup from './Signup';
+import Signin from './Signin';
 
 /**
  * Class representing navbar
- * 
+ *
  * @class Navbar
  * @extends {React.Component}
  */
