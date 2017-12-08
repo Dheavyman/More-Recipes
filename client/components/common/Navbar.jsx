@@ -23,13 +23,6 @@ class Navbar extends React.Component {
    */
   constructor() {
     super();
-    this.state = {
-      openSignup: false,
-      openSignin: false
-    };
-    this.handleOpenSignup = this.handleOpenSignup.bind(this);
-    this.handleOpenSignin = this.handleOpenSignin.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.handleSubmitSignup = this.handleSubmitSignup.bind(this);
     this.handleSubmitSignin = this.handleSubmitSignin.bind(this);
     this.handleLogoutUser = this.handleLogoutUser.bind(this);
@@ -65,40 +58,6 @@ class Navbar extends React.Component {
   }
 
   /**
-   * Opens the signup modal
-   *
-   * @returns {object} Set open state to true
-   * @memberof Navbar
-   */
-  handleOpenSignup() {
-    this.setState({ openSignup: true });
-  }
-
-  /**
-   * Opens the signin modal
-   *
-   * @returns {object} Set open state to true
-   * @memberof Navbar
-   */
-  handleOpenSignin() {
-    this.setState({ openSignin: true });
-  }
-
-  /**
-   * Closes the modal
-   *
-   * @param {object} errors - The error object
-   * @returns {object} Set open state to false
-   * @memberof Navbar
-   */
-  handleClose() {
-    this.setState({
-      openSignup: false,
-      openSignin: false
-    });
-  }
-
-  /**
    * Form submission handler function
    *
    * @param {any} values The form values
@@ -106,7 +65,7 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignup(values) {
-    this.props.signupUser(values, this.handleClose);
+    this.props.signupUser(values, this.props.handleClose);
   }
 
   /**
@@ -117,7 +76,7 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignin(values) {
-    this.props.signinUser(values, this.handleClose);
+    this.props.signinUser(values, this.props.handleClose);
   }
 
   /**
@@ -137,7 +96,8 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   render() {
-    const { user: { isAuthenticated } } = this.props;
+    const { openSignup, openSignin, handleOpenSignup, handleOpenSignin,
+      handleClose, user: { isAuthenticated } } = this.props;
 
     return (
       <div className="nav-wrapper">
@@ -176,8 +136,8 @@ class Navbar extends React.Component {
             </a>
             {!isAuthenticated &&
               <IndexUserNav
-                handleOpenSignup={this.handleOpenSignup}
-                handleOpenSignin={this.handleOpenSignin}
+                handleOpenSignup={handleOpenSignup}
+                handleOpenSignin={handleOpenSignin}
               />
             }
             {isAuthenticated &&
@@ -186,18 +146,18 @@ class Navbar extends React.Component {
         </ul>
         <MuiThemeProvider>
           <Signup
-            open={this.state.openSignup}
-            handleClose={this.handleClose}
-            handleOpenSignin={this.handleOpenSignin}
+            open={openSignup}
+            handleClose={handleClose}
+            handleOpenSignin={handleOpenSignin}
             onSubmit={this.handleSubmitSignup}
             {...this.props}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
           <Signin
-            open={this.state.openSignin}
-            handleClose={this.handleClose}
-            handleOpenSignup={this.handleOpenSignup}
+            open={openSignin}
+            handleClose={handleClose}
+            handleOpenSignup={handleOpenSignup}
             onSubmit={this.handleSubmitSignin}
             {...this.props}
           />
@@ -208,6 +168,11 @@ class Navbar extends React.Component {
 }
 
 Navbar.propTypes = {
+  openSignup: PropTypes.bool.isRequired,
+  openSignin: PropTypes.bool.isRequired,
+  handleOpenSignup: PropTypes.func.isRequired,
+  handleOpenSignin: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
   signupUser: PropTypes.func.isRequired,
   signinUser: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,

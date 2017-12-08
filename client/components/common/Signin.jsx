@@ -21,7 +21,7 @@ const customContentStyle = {
  * @returns {object} React element
  */
 const Signin = (props) => {
-  const { user: { error } } = props,
+  const { open, onSubmit, submitting, user: { error } } = props,
     { message } = error;
 
   const actions = [
@@ -39,13 +39,13 @@ const Signin = (props) => {
         actions={actions}
         modal
         contentStyle={customContentStyle}
-        open={props.open}
+        open={open}
         autoScrollBodyContent
       >
         <div className="row">
           <form
             className="col s12"
-            onSubmit={props.handleSubmit(props.onSubmit)}
+            onSubmit={props.handleSubmit(onSubmit)}
           >
             <div className="row">
               <div className="input-field col s12">
@@ -76,7 +76,7 @@ const Signin = (props) => {
                 type="submit"
                 className={`btn btn-large waves-effect waves-light
                   indigo accent-2`}
-                disabled={props.submitting}
+                disabled={submitting}
               >
                 Sign In
               </button>

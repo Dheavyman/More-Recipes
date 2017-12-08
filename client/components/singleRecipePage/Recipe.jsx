@@ -25,8 +25,13 @@ class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      openSignup: false,
+      openSignin: false,
       reviewContent: '',
     };
+    this.handleOpenSignup = this.handleOpenSignup.bind(this);
+    this.handleOpenSignin = this.handleOpenSignin.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitReview = this.handleSubmitReview.bind(this);
   }
@@ -41,6 +46,40 @@ class Recipe extends React.Component {
     // Initialize materialize css parallax class
     $('.parallax').parallax();
     this.props.fetchRecipe(this.props.match.params.recipeId);
+  }
+
+  /**
+   * Opens the signup modal
+   *
+   * @returns {object} Set open state to true
+   * @memberof Recipe
+   */
+  handleOpenSignup() {
+    this.setState({ openSignup: true });
+  }
+
+  /**
+   * Opens the signin modal
+   *
+   * @returns {object} Set open state to true
+   * @memberof Recipe
+   */
+  handleOpenSignin() {
+    this.setState({ openSignin: true });
+  }
+
+  /**
+   * Closes the modal
+   *
+   * @param {object} errors - The error object
+   * @returns {object} Set open state to false
+   * @memberof Recipe
+   */
+  handleClose() {
+    this.setState({
+      openSignup: false,
+      openSignin: false
+    });
   }
 
   /**
@@ -65,19 +104,23 @@ class Recipe extends React.Component {
    */
   handleSubmitReview(event) {
     event.preventDefault();
-    this.props.postReview(
-      this.props.match.params.recipeId, this.state.reviewContent
-    )
-      .then((response) => {
-        console.log(response);
-        const { status } = response;
-        if (status !== 401) {
-          this.componentDidMount();
-        }
-        this.setState({
-          reviewContent: '',
+    const { user: { isAuthenticated } } = this.props;
+    if (isAuthenticated) {
+      this.props.postReview(
+        this.props.match.params.recipeId, this.state.reviewContent
+      )
+        .then(() => {
+          const { singleRecipe: { error } } = this.props;
+          if (isEmpty(error)) {
+            this.componentDidMount();
+            this.setState({
+              reviewContent: '',
+            });
+          }
         });
-      });
+    } else {
+      this.handleOpenSignin();
+    }
   }
 
   /**
@@ -87,14 +130,20 @@ class Recipe extends React.Component {
    * @memberof Recipe
    */
   render() {
-    console.log(this.props);
     const { singleRecipe } = this.props;
     return (
       <div>
         {!isEmpty(singleRecipe) &&
         <div>
           <header>
-            <Header {...this.props} />
+            <Header
+              openSignup={this.state.openSignup}
+              openSignin={this.state.openSignin}
+              handleOpenSignup={this.handleOpenSignup}
+              handleOpenSignin={this.handleOpenSignin}
+              handleClose={this.handleClose}
+              {...this.props}
+            />
           </header>
           <main>
             <Main
@@ -128,6 +177,9 @@ Recipe.propTypes = {
     data: PropTypes.shape({
       recipe: PropTypes.shape()
     })
+  }).isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
   }).isRequired,
   fetchRecipe: PropTypes.func.isRequired,
   match: PropTypes.shape({

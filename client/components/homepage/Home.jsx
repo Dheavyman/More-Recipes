@@ -4,10 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import actionCreators from '../../actions';
-import common from '../common';
+import Header from '../common/Header';
+import Footer from '../common/Footer';
 import Main from './Main';
-
-const { Header, Footer } = common;
 
 /**
  * Class representing the home component
@@ -16,6 +15,22 @@ const { Header, Footer } = common;
  * @extends {React.Component}
  */
 class Home extends React.Component {
+/**
+ * Creates an instance of Home.
+ *
+ * @memberof Home
+ */
+  constructor() {
+    super();
+    this.state = {
+      openSignup: false,
+      openSignin: false
+    };
+    this.handleOpenSignup = this.handleOpenSignup.bind(this);
+    this.handleOpenSignin = this.handleOpenSignin.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
   /**
    * Component did mount function
    *
@@ -24,6 +39,40 @@ class Home extends React.Component {
    */
   componentDidMount() {
     this.props.retrieveRecipes();
+  }
+
+  /**
+   * Opens the signup modal
+   *
+   * @returns {object} Set open state to true
+   * @memberof Home
+   */
+  handleOpenSignup() {
+    this.setState({ openSignup: true });
+  }
+
+  /**
+   * Opens the signin modal
+   *
+   * @returns {object} Set open state to true
+   * @memberof Home
+   */
+  handleOpenSignin() {
+    this.setState({ openSignin: true });
+  }
+
+  /**
+   * Closes the modal
+   *
+   * @param {object} errors - The error object
+   * @returns {object} Set open state to false
+   * @memberof Home
+   */
+  handleClose() {
+    this.setState({
+      openSignup: false,
+      openSignin: false
+    });
   }
 
   /**
@@ -36,7 +85,14 @@ class Home extends React.Component {
     return (
       <div>
         <header>
-          <Header {...this.props} />
+          <Header
+            openSignup={this.state.openSignup}
+            openSignin={this.state.openSignin}
+            handleOpenSignup={this.handleOpenSignup}
+            handleOpenSignin={this.handleOpenSignin}
+            handleClose={this.handleClose}
+            {...this.props}
+          />
         </header>
         <main>
           <Main {...this.props} />
