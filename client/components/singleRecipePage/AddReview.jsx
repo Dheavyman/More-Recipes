@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const AddReview = (props) => {
-  console.log(props);
   const { reviewContent, handleChange, handleSubmitReview } = props;
   return (
     <div className="row">

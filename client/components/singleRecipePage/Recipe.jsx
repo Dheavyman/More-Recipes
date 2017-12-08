@@ -38,7 +38,6 @@ class Recipe extends React.Component {
    * @memberof Recipe
    */
   componentDidMount() {
-    console.log('Mounted', this.props);
     // Initialize materialize css parallax class
     $('.parallax').parallax();
     this.props.fetchRecipe(this.props.match.params.recipeId);
@@ -68,7 +67,13 @@ class Recipe extends React.Component {
     event.preventDefault();
     this.props.postReview(
       this.props.match.params.recipeId, this.state.reviewContent
-    );
+    )
+      .then(() => {
+        this.componentDidMount();
+        this.setState({
+          reviewContent: '',
+        });
+      });
   }
 
   /**
