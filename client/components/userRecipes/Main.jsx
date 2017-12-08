@@ -2,7 +2,7 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import UserRecipeCard from './UserRecipeCard';
-import FavoriteCard from './FavoriteCard';
+import UserFavoriteCard from './UserFavoriteCard';
 import EditRecipe from './EditRecipe';
 import DeleteRecipe from './DeleteRecipe';
 import AddRecipe from './AddRecipe';
@@ -125,7 +125,7 @@ class Main extends React.Component {
           </div>
           <div id="user-favorites" className="col s12">
             <div className="col s12 m6 l3">
-              <FavoriteCard />
+              <UserFavoriteCard />
             </div>
           </div>
         </div>

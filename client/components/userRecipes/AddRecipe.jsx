@@ -29,7 +29,7 @@ const AddRecipe = (props) => {
       >
         <div id="add-recipe" className="row center-align">
           <form className="col s12">
-            <div className="modal-content">
+            <div>
               <div className="row">
                 <div className="input-field col s12">
                   <input
@@ -93,16 +93,14 @@ const AddRecipe = (props) => {
                 </div>
               </div>
             </div>
-            <div className="modal-footer row">
-              <div className="row" />
-              <button
-                type="submit"
-                className={`btn btn-large waves-effect
+            <div className="row" />
+            <button
+              type="submit"
+              className={`btn btn-large waves-effect
                   waves-light indigo accent-2`}
-              >
-                Add Recipe
-              </button>
-            </div>
+            >
+              Add Recipe
+            </button>
           </form>
         </div>
       </Dialog>
