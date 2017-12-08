@@ -1,10 +1,11 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import common from '../common';
+import actionCreators from '../../actions';
+import Footer from '../common/Footer';
 import Header from './Header';
 import Main from './Main';
-
-const { Footer } = common;
 
 /**
  * Class representing user recipes
@@ -32,12 +33,26 @@ class UserRecipes extends React.Component {
   render() {
     return (
       <div>
-        <Header />
-        <Main />
-        <Footer />
+        <header>
+          <Header {...this.props} />
+        </header>
+        <main>
+          <Main />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     );
   }
 }
 
-export default UserRecipes;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators(actionCreators, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);

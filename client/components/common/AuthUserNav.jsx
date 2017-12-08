@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 /**
  * User navigation when unathenticated
  *
- * @param {any} props 
+ * @param {func} props - Logout a user
  * @returns {object} React element
  */
 const AuthUserNav = (props) => {

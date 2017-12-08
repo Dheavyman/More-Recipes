@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Home from './homepage/Home';
-import Recipe from './recipe/Recipe';
+import Recipe from './singleRecipePage/Recipe';
 import UserRecipes from './userRecipes/UserRecipes';
 import '../public/style.scss';
 

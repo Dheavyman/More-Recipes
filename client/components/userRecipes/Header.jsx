@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import common from '../common';
-
-const { Category, AuthUserNav } = common;
+import Navbar from '../common/Navbar';
 
 /**
  * Class representing Header component
@@ -39,47 +36,10 @@ class Header extends React.Component {
    */
   render() {
     return (
-      <header>
+      <div>
         <div className="navbar-fixed">
           <nav className="nav-extended deep-orange darken-4">
-            <div className="nav-wrapper">
-              <Link
-                to="/"
-                id="logo"
-                className="brand-logo hide-on-small-only"
-              >
-                More-Recipes
-              </Link>
-              <a
-                href=""
-                data-activates="slide_out"
-                className="button-collapse"
-              >
-                <i className="material-icons">menu</i>
-              </a>
-              <ul className="right hide-on-med-and-down">
-                <li><Link to="/">Home</Link></li>
-                <li>
-                  <a
-                    className="dropdown-button dropdown-category"
-                    data-activates="category"
-                  >
-                    Category
-                  </a>
-                </li>
-                <Category />
-                <li>
-                  <a
-                    className="dropdown-button dropdown-user"
-                    data-activates="user-control"
-                  >
-                    Users name
-                    <i className="material-icons large left">account_circle</i>
-                  </a>
-                  <AuthUserNav />
-                </li>
-              </ul>
-            </div>
+            <Navbar {...this.props} />
             <div className="nav-content">
               <ul className="tabs tabs-transparent">
                 <li className="tab"><a href="#user-recipes">My Recipes</a></li>
@@ -173,7 +133,7 @@ class Header extends React.Component {
           </li>
           <li><a href="index.html">Logout</a></li>
         </ul>
-      </header>
+      </div>
     );
   }
 }

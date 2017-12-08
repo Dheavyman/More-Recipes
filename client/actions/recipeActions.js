@@ -1,24 +1,61 @@
 import axios from 'axios';
 
-const retrieveRecipes = recipes => ({
-  type: 'RETRIEVE_RECIPES_SUCCESS',
+import * as actionTypes from './actionTypes';
+
+// const URL = 'https://more-recipes-25.herokuapp.com/api/v1/';
+
+const retrieveRecipesRequest = () => ({
+  type: actionTypes.RETRIEVE_RECIPES_REQUEST,
+});
+
+const retrieveRecipesSuccess = recipes => ({
+  type: actionTypes.RETRIEVE_RECIPES_SUCCESS,
   payload: recipes,
 });
 
-const requestPopularRecipes = popularRecipes => ({
-  type: 'RETRIEVE_POPULAR_RECIPES_SUCCESS',
-  payload: popularRecipes,
+const retrieveRecipesFailure = error => ({
+  type: actionTypes.RETRIEVE_RECIPES_FAILURE,
+  payload: error,
 });
 
-const fetchRecipes = () => (dispatch) => {
+const fetchRecipeRequest = () => ({
+  type: actionTypes.FETCH_RECIPE_REQUEST,
+});
+
+const fetchRecipeSuccess = recipe => ({
+  type: actionTypes.FETCH_RECIPE_SUCCESS,
+  payload: recipe,
+});
+
+const fetchRecipeFailure = error => ({
+  type: actionTypes.FETCH_RECIPE_FAILURE,
+  payload: error,
+});
+
+const retrieveRecipes = () => (dispatch) => {
+  dispatch(retrieveRecipesRequest());
   axios.get('http://127.0.0.1:3000/api/v1/recipes')
     .then((response) => {
-      const recipes = response.data;
-      dispatch(retrieveRecipes(recipes));
+      const { data } = response;
+      dispatch(retrieveRecipesSuccess(data));
     })
-    .catch(() => {
-      // Error handler
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(retrieveRecipesFailure(data));
     });
 };
 
-export { fetchRecipes, requestPopularRecipes };
+const fetchRecipe = recipeId => (dispatch) => {
+  dispatch(fetchRecipeRequest());
+  axios.get(`http://127.0.0.1:3000/api/v1/recipes/${recipeId}`)
+    .then((response) => {
+      const { data } = response;
+      dispatch(fetchRecipeSuccess(data));
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(fetchRecipeFailure(data));
+    });
+};
+
+export { retrieveRecipes, fetchRecipe };

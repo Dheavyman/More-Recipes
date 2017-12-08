@@ -9,7 +9,7 @@ import Slider from './Slider';
 const Main = (props) => {
   const { recipes } = props.recipes;
   return (
-    <main>
+    <div>
       <div id="position">
         <Slider />
         <SearchBar />
@@ -22,7 +22,7 @@ const Main = (props) => {
           <RecipeCatalog recipesCatalog={recipes} />
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

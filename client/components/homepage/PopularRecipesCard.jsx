@@ -1,8 +1,6 @@
 import React from 'react';
 
-import common from '../common';
-
-const { RecipeImage } = common;
+import RecipeImage from '../common/RecipeImage';
 
 const PopularRecipeCard = () => (
   <div className="col s12">

@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import common from '../common';
-
-const { RecipeImage } = common;
+import RecipeImage from '../common/RecipeImage';
 
 const RecipeCatalogCard = (props) => {
   const { recipe } = props;

@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field, reduxForm } from 'redux-form';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import { Field, reduxForm } from 'redux-form';
 import isEmpty from 'lodash/isEmpty';
 
-import { required, isEmptyField } from '../../utils/validate';
+import * as helpers from '../../utils/validate';
 import ErrorMessage from '../common/ErrorMessage';
 import RenderField from '../common/RenderField';
+
+const { validate } = helpers;
 
 const customContentStyle = {
   width: '35%',
@@ -15,38 +17,59 @@ const customContentStyle = {
 };
 
 /**
- * Signin react component
+ * Signup react component
  *
  * @param {any} props The props passed to component
  * @returns {object} React element
  */
-const Signin = (props) => {
-  const { user: { error } } = props,
+const Signup = (props) => {
+  const { user: { error }, open, handleClose, handleSubmit, onSubmit,
+      submitting } = props,
     { message } = error;
 
   const actions = [
     <FlatButton
       label="Cancel"
       secondary
-      onClick={props.handleClose}
+      onClick={handleClose}
     />
   ];
 
   return (
     <div>
       <Dialog
-        title="Login into your account"
+        title="Create an account"
         actions={actions}
         modal
         contentStyle={customContentStyle}
-        open={props.open}
+        open={open}
         autoScrollBodyContent
       >
         <div className="row">
           <form
             className="col s12"
-            onSubmit={props.handleSubmit(props.onSubmit)}
+            onSubmit={handleSubmit(onSubmit)}
           >
+            <div className="row">
+              <div className="input-field col s12">
+                <Field
+                  name="firstName"
+                  label="First Name"
+                  component={RenderField}
+                  type="text"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <Field
+                  name="lastName"
+                  label="Last Name"
+                  component={RenderField}
+                  type="text"
+                />
+              </div>
+            </div>
             <div className="row">
               <div className="input-field col s12">
                 <Field
@@ -54,7 +77,16 @@ const Signin = (props) => {
                   label="Username"
                   component={RenderField}
                   type="text"
-                  validate={[required, isEmptyField]}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <Field
+                  name="email"
+                  label="Email"
+                  component={RenderField}
+                  type="email"
                 />
               </div>
             </div>
@@ -65,20 +97,30 @@ const Signin = (props) => {
                   label="Password"
                   component={RenderField}
                   type="password"
-                  validate={required}
                 />
               </div>
             </div>
-            {!isEmpty(error) && <ErrorMessage message={message} /> }
+            <div className="row">
+              <div className="input-field col s12">
+                <Field
+                  name="retypePassword"
+                  label="Retype-Password"
+                  component={RenderField}
+                  type="password"
+                />
+              </div>
+            </div>
+            {!isEmpty(error) && <ErrorMessage message={message} />}
             <div className="row" />
             <div className="row center-align">
               <button
                 type="submit"
+                name="signupbtn"
                 className={`btn btn-large waves-effect waves-light
                   indigo accent-2`}
-                disabled={props.submitting}
+                disabled={submitting}
               >
-                Sign In
+                  Sign Up
               </button>
             </div>
           </form>
@@ -88,8 +130,8 @@ const Signin = (props) => {
   );
 };
 
-// Signin props validation
-Signin.propTypes = {
+// Signup props validation
+Signup.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
@@ -103,5 +145,6 @@ Signin.propTypes = {
 };
 
 export default reduxForm({
-  form: 'Signin'
-})(Signin);
+  form: 'Signup',
+  validate,
+})(Signup);

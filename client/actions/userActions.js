@@ -2,6 +2,8 @@ import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
 
+// const URL = 'https://more-recipes-25.herokuapp.com/api/v1/';
+
 const userSignupRequest = () => ({
   type: actionTypes.SIGNUP_REQUEST,
 });
@@ -42,7 +44,8 @@ const signupUser = (values, closeSignupModal) => (dispatch) => {
   dispatch(userSignupRequest());
   axios.post('http://127.0.0.1:3000/api/v1/users/signup', values)
     .then((response) => {
-      dispatch(userSignupSuccess(response.data));
+      const { data } = response;
+      dispatch(userSignupSuccess(data));
       closeSignupModal();
     })
     .catch((error) => {
@@ -73,5 +76,4 @@ const logoutUser = () => (dispatch) => {
   dispatch(userLogoutSuccess());
 };
 
-export { userSignupRequest, userSignupSuccess, userSignupFailure,
-  userSigninSuccess, userSigninFailure, signupUser, signinUser, logoutUser };
+export { signupUser, signinUser, logoutUser };
