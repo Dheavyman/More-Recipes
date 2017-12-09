@@ -98,35 +98,13 @@ class Main extends React.Component {
         </div>
         <div className="my-recipes row">
           <div id="user-recipes" className="col s12">
-            <div className="col s12 m6 l3">
-              <UserRecipeCard
-                handleOpenEdit={this.handleOpenEdit}
-                handleOpenDelete={this.handleOpenDelete}
-              />
-            </div>
-            <div id="delete-recipe" className="modal">
-              <div className="modal-content center-align">
-                <p>Are you sure you want to delete this recipe?</p>
-              </div>
-              <div className="modal-footer">
-                <a
-                  className="modal-close waves-effect waves-light btn-flat"
-                >
-                  Cancel
-                </a>
-                <a
-                  className={`modal-action modal-close waves-effect waves-red
-                    btn-flat`}
-                >
-                  Delete
-                </a>
-              </div>
-            </div>
+            <UserRecipeCard
+              handleOpenEdit={this.handleOpenEdit}
+              handleOpenDelete={this.handleOpenDelete}
+            />
           </div>
           <div id="user-favorites" className="col s12">
-            <div className="col s12 m6 l3">
-              <UserFavoriteCard />
-            </div>
+            <UserFavoriteCard />
           </div>
         </div>
         <MuiThemeProvider>
