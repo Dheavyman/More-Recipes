@@ -32,6 +32,34 @@ const fetchRecipeFailure = error => ({
   payload: error,
 });
 
+const fetchUserRecipesRequest = () => ({
+  type: actionTypes.FETCH_USER_RECIPES_REQUEST,
+});
+
+const fetchUserRecipesSuccess = recipes => ({
+  type: actionTypes.FETCH_USER_RECIPES_SUCCESS,
+  payload: recipes,
+});
+
+const fetchUserRecipesFailure = error => ({
+  type: actionTypes.FETCH_USER_RECIPES_SUCCESS,
+  payload: error,
+});
+
+const fetchUserFavoritesRequest = () => ({
+  type: actionTypes.FETCH_USER_FAVORITES_REQUEST,
+});
+
+const fetchUserFavoritesSuccess = recipes => ({
+  type: actionTypes.FETCH_USER_FAVORITES_SUCCESS,
+  payload: recipes,
+});
+
+const fetchUserFavoritesFailure = error => ({
+  type: actionTypes.FETCH_USER_FAVORITES_FAILURE,
+  payload: error,
+});
+
 const retrieveRecipes = () => (dispatch) => {
   dispatch(retrieveRecipesRequest());
   axios.get('http://127.0.0.1:3000/api/v1/recipes')
@@ -58,4 +86,30 @@ const fetchRecipe = recipeId => (dispatch) => {
     });
 };
 
-export { retrieveRecipes, fetchRecipe };
+const fetchUserRecipes = () => (dispatch) => {
+  dispatch(fetchUserRecipesRequest());
+  axios.get('http://127.0.0.1:3000/api/v1/recipes/users/:userId')
+    .then((response) => {
+      const { data } = response;
+      dispatch(fetchUserRecipesSuccess(data));
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(fetchUserRecipesFailure(data));
+    });
+};
+
+const fetchUserFavorites = () => (dispatch) => {
+  dispatch(fetchUserFavoritesRequest());
+  axios.get('http://127.0.0.1:3000/api/v1/users/:userId/recipes')
+    .then((response) => {
+      const { data } = response;
+      dispatch(fetchUserFavoritesSuccess(data));
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(fetchUserFavoritesFailure(data));
+    });
+};
+
+export { retrieveRecipes, fetchRecipe, fetchUserRecipes, fetchUserFavorites };

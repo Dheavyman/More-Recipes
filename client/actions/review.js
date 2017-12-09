@@ -16,13 +16,10 @@ const postReviewFailure = error => ({
   payload: error,
 });
 
-const postReview = (recipeId, reviewContent) => (dispatch) => {
-  const review = {
-      content: reviewContent,
-    },
-    token = {
-      'x-access-token': localStorage.getItem('token'),
-    };
+const postReview = (recipeId, review) => (dispatch) => {
+  const token = {
+    'x-access-token': localStorage.getItem('token'),
+  };
 
   dispatch(postReviewRequest());
   return axios.post(`http://127.0.0.1:3000/api/v1/recipes/${recipeId}/reviews`,
