@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-const customContentStyle = {
-  width: '35%',
-  maxWidth: '35%',
-};
-
 const EditRecipe = (props) => {
   const actions = [
     <FlatButton
@@ -23,7 +18,6 @@ const EditRecipe = (props) => {
         title="Edit Recipe"
         actions={actions}
         modal
-        contentStyle={customContentStyle}
         open={props.open}
         autoScrollBodyContent
       >

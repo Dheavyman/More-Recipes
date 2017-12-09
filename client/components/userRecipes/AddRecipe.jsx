@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-const customContentStyle = {
-  width: '35%',
-  maxWidth: '35%',
-};
-
 const AddRecipe = (props) => {
   const actions = [
     <FlatButton
@@ -23,74 +18,71 @@ const AddRecipe = (props) => {
         title="Add Recipe"
         actions={actions}
         modal
-        contentStyle={customContentStyle}
         open={props.open}
         autoScrollBodyContent
       >
         <div id="add-recipe" className="row center-align">
           <form className="col s12">
-            <div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input
-                    id="recipe_name"
-                    type="text"
-                    className="validate"
-                    required
-                  />
-                  <label htmlFor="recipe_name">Title</label>
-                </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <input
+                  id="recipe_name"
+                  type="text"
+                  className="validate"
+                  required
+                />
+                <label htmlFor="recipe_name">Title</label>
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <textarea
-                    id="recipe_description"
-                    className="materialize-textarea"
-                    required
-                  />
-                  <label htmlFor="recipe_description">Description</label>
-                </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <textarea
+                  id="recipe_description"
+                  className="materialize-textarea"
+                  required
+                />
+                <label htmlFor="recipe_description">Description</label>
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input id="recipe_prep_time" type="number" min="0" required />
-                  <label htmlFor="recipe_prep_time">
+            </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <input id="recipe_prep_time" type="number" min="0" required />
+                <label htmlFor="recipe_prep_time">
                     Preparation Time (MINS)
-                  </label>
-                </div>
+                </label>
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <textarea
-                    id="recipe_ingredients"
-                    className="materialize-textarea"
-                    required
-                  />
-                  <label htmlFor="recipe_ingredients">Ingredients</label>
-                </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <textarea
+                  id="recipe_ingredients"
+                  className="materialize-textarea"
+                  required
+                />
+                <label htmlFor="recipe_ingredients">Ingredients</label>
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <textarea
-                    id="recipe_directions"
-                    className="materialize-textarea"
-                    required
-                  />
-                  <label htmlFor="recipe_directions">Directions</label>
-                </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <textarea
+                  id="recipe_directions"
+                  className="materialize-textarea"
+                  required
+                />
+                <label htmlFor="recipe_directions">Directions</label>
               </div>
-              <div className="file-field input-field">
-                <div className="btn indigo accent-2">
-                  <span>File</span>
-                  <input type="file" />
-                </div>
-                <div className="file-path-wrapper">
-                  <input
-                    className="file-path validate"
-                    type="text"
-                    placeholder="Upload photo"
-                  />
-                </div>
+            </div>
+            <div className="file-field input-field">
+              <div className="btn indigo accent-2">
+                <span>File</span>
+                <input type="file" />
+              </div>
+              <div className="file-path-wrapper">
+                <input
+                  className="file-path validate"
+                  type="text"
+                  placeholder="Upload photo"
+                />
               </div>
             </div>
             <div className="row" />
