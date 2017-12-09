@@ -1,6 +1,6 @@
-import { retrieveRecipes, fetchRecipe } from './recipeActions';
+import { retrieveRecipes, fetchRecipe } from './recipe';
 import { signupUser, signinUser, logoutUser } from './userActions';
-import postReview from './reviewActions';
+import postReview from './review';
 
 export default {
   retrieveRecipes,
