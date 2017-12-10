@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
+import { token } from '../utils/authenticate';
 
 // const URL = 'https://more-recipes-25.herokuapp.com/api/v1/';
 
+// Action to retrieve all recipes
 const retrieveRecipesRequest = () => ({
   type: actionTypes.RETRIEVE_RECIPES_REQUEST,
 });
@@ -18,6 +20,7 @@ const retrieveRecipesFailure = error => ({
   payload: error,
 });
 
+// Action to fetch a single recipe
 const fetchRecipeRequest = () => ({
   type: actionTypes.FETCH_RECIPE_REQUEST,
 });
@@ -32,6 +35,7 @@ const fetchRecipeFailure = error => ({
   payload: error,
 });
 
+// Action for fetching recipes added by user
 const fetchUserRecipesRequest = () => ({
   type: actionTypes.FETCH_USER_RECIPES_REQUEST,
 });
@@ -42,10 +46,11 @@ const fetchUserRecipesSuccess = recipes => ({
 });
 
 const fetchUserRecipesFailure = error => ({
-  type: actionTypes.FETCH_USER_RECIPES_SUCCESS,
+  type: actionTypes.FETCH_USER_RECIPES_FAILURE,
   payload: error,
 });
 
+// Action to fetch user favorite recipes
 const fetchUserFavoritesRequest = () => ({
   type: actionTypes.FETCH_USER_FAVORITES_REQUEST,
 });
@@ -86,9 +91,12 @@ const fetchRecipe = recipeId => (dispatch) => {
     });
 };
 
-const fetchUserRecipes = () => (dispatch) => {
+const fetchUserRecipes = userId => (dispatch) => {
   dispatch(fetchUserRecipesRequest());
-  axios.get('http://127.0.0.1:3000/api/v1/recipes/users/:userId')
+  axios.get(`http://127.0.0.1:3000/api/v1/recipes/users/${userId}`,
+    { headers: {
+      'x-access-token': token,
+    } })
     .then((response) => {
       const { data } = response;
       dispatch(fetchUserRecipesSuccess(data));
@@ -99,9 +107,9 @@ const fetchUserRecipes = () => (dispatch) => {
     });
 };
 
-const fetchUserFavorites = () => (dispatch) => {
+const fetchUserFavorites = userId => (dispatch) => {
   dispatch(fetchUserFavoritesRequest());
-  axios.get('http://127.0.0.1:3000/api/v1/users/:userId/recipes')
+  axios.get(`http://127.0.0.1:3000/api/v1/users/${userId}/recipes`)
     .then((response) => {
       const { data } = response;
       dispatch(fetchUserFavoritesSuccess(data));

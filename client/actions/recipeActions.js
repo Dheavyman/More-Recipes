@@ -22,7 +22,8 @@ const addRecipe = values => (dispatch) => {
   };
 
   dispatch(addRecipeRequest());
-  axios.post('http://127.0.0.1:3000/api/v1/recipes', values, { headers: token })
+  return axios.post('http://127.0.0.1:3000/api/v1/recipes', values,
+    { headers: token })
     .then((response) => {
       const { data } = response;
       console.log(data);

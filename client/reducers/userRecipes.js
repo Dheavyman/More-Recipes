@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   isLoading: false,
-  userRecipes: {},
+  userAddedRecipes: {},
   error: {}
 };
 
@@ -17,7 +17,7 @@ const userRecipes = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        userRecipes: action.payload,
+        userAddedRecipes: action.payload.data,
         error: {},
       };
     case actionTypes.FETCH_USER_RECIPES_FAILURE:

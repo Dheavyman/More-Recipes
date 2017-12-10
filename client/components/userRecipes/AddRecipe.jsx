@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import isEmpty from 'lodash/isEmpty';
+
 /**
  * Class representing Add recipe functionality
  *
@@ -51,8 +53,26 @@ class AddRecipe extends React.Component {
    * @memberof AddRecipe
    */
   handleSubmit(event) {
+    const { addRecipe, handleClose, reloadPage,
+        userRecipes: { error } } = this.props,
+      values = {
+        title: this.state.title,
+        category: this.state.category,
+        description: this.state.description,
+        preparationTime: this.state.preparationTime,
+        ingredients: this.state.ingredients,
+        directions: this.state.directions,
+      };
+
     event.preventDefault();
-    console.log(this, event);
+    console.log(this, event, values);
+    addRecipe(values)
+      .then(() => {
+        if (isEmpty(error)) {
+          handleClose();
+          reloadPage();
+        }
+      });
   }
 
   /**
@@ -124,7 +144,7 @@ class AddRecipe extends React.Component {
               <div className="row">
                 <div className="input-field col s12">
                   <textarea
-                    name="ngredients"
+                    name="ingredients"
                     placeholder="Enter ingredients seperated by comma"
                     className="materialize-textarea validate"
                     onChange={this.handleChange}
@@ -179,6 +199,11 @@ class AddRecipe extends React.Component {
 AddRecipe.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  addRecipe: PropTypes.func.isRequired,
+  reloadPage: PropTypes.func.isRequired,
+  userRecipes: PropTypes.shape({
+    error: PropTypes.shape().isRequired,
+  }).isRequired,
 };
 
 export default AddRecipe;

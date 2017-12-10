@@ -37,7 +37,7 @@ class UserRecipes extends React.Component {
           <Header {...this.props} />
         </header>
         <main>
-          <Main />
+          <Main reloadPage={this.componentDidMount} {...this.props} />
         </main>
         <footer>
           <Footer />
@@ -49,6 +49,7 @@ class UserRecipes extends React.Component {
 
 const mapStateToProps = state => ({
   user: state.user,
+  userRecipes: state.userRecipes,
 });
 
 const mapDispatchToProps = dispatch => (

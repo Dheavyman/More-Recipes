@@ -1,7 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import UserRecipeCard from './UserRecipeCard';
+import UserAddedRecipes from './UserAddedRecipes';
 import UserFavoriteCard from './UserFavoriteCard';
 import EditRecipe from './EditRecipe';
 import DeleteRecipe from './DeleteRecipe';
@@ -96,11 +96,12 @@ class Main extends React.Component {
             <i className="material-icons">add</i>
           </a>
         </div>
-        <div className="my-recipes row">
-          <div id="user-recipes" className="col s12">
-            <UserRecipeCard
+        <div className="my-recipes">
+          <div id="user-recipes">
+            <UserAddedRecipes
               handleOpenEdit={this.handleOpenEdit}
               handleOpenDelete={this.handleOpenDelete}
+              {...this.props}
             />
           </div>
           <div id="user-favorites" className="col s12">
@@ -123,6 +124,7 @@ class Main extends React.Component {
           <AddRecipe
             open={this.state.openAdd}
             handleClose={this.handleClose}
+            {...this.props}
           />
         </MuiThemeProvider>
       </div>

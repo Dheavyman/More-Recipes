@@ -21,7 +21,7 @@ const EditRecipe = (props) => {
         open={props.open}
         autoScrollBodyContent
       >
-        <div id="edit-recipe" className="row">
+        <div id="edit-recipe" className="row center-align">
           <form className="col s12">
             <div className="modal-content">
               <div className="row">
@@ -69,8 +69,8 @@ const EditRecipe = (props) => {
             <div className="modal-footer">
               <button
                 type="submit"
-                className={`col s6 offset-s3 btn btn-large waves-effect
-                  waves-light indigo accent-2`}
+                className={`btn btn-large waves-effect waves-light
+                  indigo accent-2`}
               >
                 Save
               </button>

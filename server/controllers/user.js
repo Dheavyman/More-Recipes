@@ -79,7 +79,8 @@ class UserController {
               status: 'Success',
               message: 'User logged in',
               data: {
-                token
+                token,
+                userId: user.id,
               }
             });
           })
