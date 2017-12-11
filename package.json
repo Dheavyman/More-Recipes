@@ -14,7 +14,7 @@
     "unmigrate": "node_modules/.bin/sequelize db:migrate:undo:all",
     "start": "node ./build/app",
     "start:dev": "nodemon --exec babel-node ./server/app",
-    "start:client": "webpack -d && cp client/public/index.html client/dist/index.html && webpack-dev-server --inline --hot",
+    "start:client": "webpack-dev-server --inline --hot",
     "test": "NODE_ENV=test && npm run unmigrate && npm run migrate && nyc mocha --compilers js:babel-core/register tests/test.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -49,6 +49,7 @@
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.4",

@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 });
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '/client/public')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Require our routes
 routes(app);
@@ -34,7 +34,7 @@ routes(app);
 // Catch other routes with get method
 // returns the index page
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
 });
 
 // Set the app entry port

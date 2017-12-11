@@ -1,6 +1,7 @@
 const path = require('path'),
   dotenv = require('dotenv'),
   webpack = require('webpack'),
+  HtmlWebpackPlugin = require('html-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 dotenv.config();
@@ -63,6 +64,9 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
       }
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'client/public/index.html')
     })
   ],
   devServer: {
