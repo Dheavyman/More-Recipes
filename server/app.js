@@ -34,7 +34,7 @@ routes(app);
 // Catch other routes with get method
 // returns the index page
 app.get('*', (req, res) => {
-  res.sendFile('index.html');
+  res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
 });
 
 // Set the app entry port

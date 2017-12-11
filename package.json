@@ -2,7 +2,7 @@
   "name": "more-recipes",
   "version": "1.0.0",
   "engines": {
-    "node": "7.10.0"
+    "node": "8.9.1"
   },
   "description": "A platform for sharing recipes",
   "main": "index.js",
