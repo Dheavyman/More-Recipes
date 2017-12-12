@@ -50,6 +50,7 @@ class UserRecipes extends React.Component {
 const mapStateToProps = state => ({
   user: state.user,
   userRecipes: state.userRecipes,
+  recipeActions: state.recipeActions,
 });
 
 const mapDispatchToProps = dispatch => (

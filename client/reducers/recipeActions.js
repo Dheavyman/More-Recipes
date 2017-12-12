@@ -4,6 +4,9 @@ const initialState = {
   isLoading: false,
   recipe: {},
   error: {},
+  imageUploading: false,
+  imageUrl: null,
+  errorUploadingImage: {},
 };
 
 const recipeActions = (state = initialState, action) => {
@@ -27,6 +30,26 @@ const recipeActions = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+
+    case actionTypes.UPLOAD_IMAGE_REQUEST:
+      return {
+        ...state,
+        imageUploading: true,
+      };
+
+    case actionTypes.UPLOAD_IMAGE_SUCCESS:
+      return {
+        ...state,
+        imageUploading: false,
+        imageUrl: action.payload,
+      };
+
+    case actionTypes.UPLOAD_IMAGE_FAILURE:
+      return {
+        ...state,
+        imageUploading: false,
+        errorUploadingImage: action.payload,
       };
 
     default:

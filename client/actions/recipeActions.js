@@ -16,6 +16,20 @@ const addRecipeFailure = error => ({
   payload: error,
 });
 
+const uploadImageRequest = () => ({
+  type: actionTypes.UPLOAD_IMAGE_REQUEST,
+});
+
+const uploadImageSuccess = imageUrl => ({
+  type: actionTypes.UPLOAD_IMAGE_SUCCESS,
+  payload: imageUrl,
+});
+
+const uploadImageFailure = error => ({
+  type: actionTypes.UPLOAD_IMAGE_FAILURE,
+  payload: error,
+});
+
 const addRecipe = values => (dispatch) => {
   const token = {
     'x-access-token': localStorage.getItem('token'),
@@ -26,14 +40,27 @@ const addRecipe = values => (dispatch) => {
     { headers: token })
     .then((response) => {
       const { data } = response;
-      console.log(data);
       dispatch(addRecipeSuccess(data));
     })
     .catch((error) => {
       const { response: { data } } = error;
-      console.log(data);
-      dispatch(addRecipeFailure(error));
+      dispatch(addRecipeFailure(data));
     });
 };
 
-export default addRecipe;
+const uploadImage = value => (dispatch) => {
+  dispatch(uploadImageRequest());
+  return axios.post('https://api.cloudinary.com/v1_1/heavyman/image/upload',
+    value)
+    .then((response) => {
+      const { data } = response,
+        { secure_url } = data;
+      dispatch(uploadImageSuccess(secure_url));
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(uploadImageFailure(data));
+    });
+};
+
+export { addRecipe, uploadImage };
