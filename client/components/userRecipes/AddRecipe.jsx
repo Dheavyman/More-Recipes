@@ -28,7 +28,7 @@ class AddRecipe extends React.Component {
       preparationTime: null,
       ingredients: '',
       directions: '',
-      preview: null,
+      imageData: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
@@ -60,15 +60,14 @@ class AddRecipe extends React.Component {
    */
   handleDrop = (files) => {
     console.log(files);
-    const { preview } = files[0];
-    this.setState({
-      preview,
-    });
-    const formData = new FormData();
+    const { handleImagePreview } = this.props,
+      { preview } = files[0],
+      formData = new FormData();
     formData.append('file', files[0]);
     formData.append('upload_preset', 'o62xeo3k');
     formData.append('api_key', '281293666534996');
-    this.props.uploadImage(formData);
+
+    handleImagePreview(preview);
   }
 
   /**
@@ -79,8 +78,9 @@ class AddRecipe extends React.Component {
    * @memberof AddRecipe
    */
   handleSubmit(event) {
-    const { addRecipe, handleClose, reloadPage,
-        userRecipes: { error } } = this.props,
+    const { imageData } = this.state,
+      { uploadImage, addRecipe, handleClose, reloadPage, recipeActions,
+        userRecipes } = this.props,
       values = {
         title: this.state.title,
         category: this.state.category,
@@ -91,13 +91,23 @@ class AddRecipe extends React.Component {
       };
 
     event.preventDefault();
-    console.log(this, event, values);
-    addRecipe(values)
+    console.log(imageData);
+    uploadImage(imageData)
       .then(() => {
+        const { error } = recipeActions;
+        if (isEmpty(error)) {
+          addRecipe(values);
+        }
+      })
+      .then(() => {
+        const { error } = userRecipes;
         if (isEmpty(error)) {
           handleClose();
           reloadPage();
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -108,10 +118,8 @@ class AddRecipe extends React.Component {
    * @memberof AddRecipe
    */
   render() {
-    const { preview } = this.state,
-      { open, handleClose, recipeActions: {
-        imageUploading, imageUrl } } = this.props;
-    console.log(this.props);
+    const { open, handleClose, imagePreview, recipeActions: {
+      imageUploading } } = this.props;
 
     const actions = [
       <FlatButton
@@ -179,7 +187,9 @@ class AddRecipe extends React.Component {
                     onChange={this.handleChange}
                     required
                   />
-                  <label htmlFor="recipe_ingredients">Ingredients</label>
+                  <label htmlFor="recipe_ingredients" className="active">
+                    Ingredients
+                  </label>
                 </div>
               </div>
               <div className="row">
@@ -211,15 +221,19 @@ class AddRecipe extends React.Component {
               </div> */}
               <div className="col s6 offset-s3">
                 <Dropzone
-                  // className="dropzone"
+                  className="dropzone"
                   onDrop={this.handleDrop}
                   accept="image/*"
                   multiple={false}
                 >
-                  <p>Drop your file or click here to upload</p>
-                  {imageUploading && <Spinner />}
-                  {imageUrl && <img src={preview} alt="" />}
+                  {!imagePreview ?
+                    <p className="center-align">
+                      Drop your file or click here to upload
+                      <i className="material-icons center large">camera</i>
+                    </p> :
+                    <img src={imagePreview} alt="" />}
                 </Dropzone>
+                {imageUploading && <Spinner />}
               </div>
               <div className="row" />
               <button
@@ -250,6 +264,8 @@ AddRecipe.propTypes = {
     imageUploading: PropTypes.bool.isRequired,
     imageUrl: PropTypes.string
   }).isRequired,
+  imagePreview: PropTypes.string.isRequired,
+  handleImagePreview: PropTypes.func.isRequired,
 };
 
 export default AddRecipe;

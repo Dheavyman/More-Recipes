@@ -129,6 +129,11 @@
 
 .dropzone {
   width: 100%;
-  height: 20rem;
-  border: 0.2rem dotted black;
+  height: 15rem;
+  border: 0.2rem dotted #2196f3;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }

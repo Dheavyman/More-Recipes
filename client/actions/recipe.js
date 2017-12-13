@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
-import { token, decoded } from '../utils/authenticate';
+import { token } from '../utils/authenticate';
 
-const { user: { id } } = decoded,
-  userId = id;
 // const URL = 'https://more-recipes-25.herokuapp.com/api/v1/';
 
 // Action to retrieve all recipes
@@ -93,7 +91,7 @@ const fetchRecipe = recipeId => (dispatch) => {
     });
 };
 
-const fetchUserRecipes = () => (dispatch) => {
+const fetchUserRecipes = userId => (dispatch) => {
   dispatch(fetchUserRecipesRequest());
   axios.get(`http://127.0.0.1:3000/api/v1/recipes/users/${userId}`,
     { headers: {
@@ -109,7 +107,7 @@ const fetchUserRecipes = () => (dispatch) => {
     });
 };
 
-const fetchUserFavorites = () => (dispatch) => {
+const fetchUserFavorites = userId => (dispatch) => {
   dispatch(fetchUserFavoritesRequest());
   axios.get(`http://127.0.0.1:3000/api/v1/users/${userId}/recipes`)
     .then((response) => {

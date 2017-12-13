@@ -24,12 +24,14 @@ class Main extends React.Component {
     this.state = {
       openEdit: false,
       openDelete: false,
-      openAdd: false
+      openAdd: false,
+      imagePreview: '',
     };
     this.handleOpenEdit = this.handleOpenEdit.bind(this);
     this.handleOpenDelete = this.handleOpenDelete.bind(this);
     this.handleOpenAdd = this.handleOpenAdd.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleImagePreview = this.handleImagePreview.bind(this);
   }
 
   /**
@@ -72,7 +74,22 @@ class Main extends React.Component {
     this.setState({
       openEdit: false,
       openDelete: false,
-      openAdd: false
+      openAdd: false,
+      imagePreview: '',
+    });
+  }
+
+  /**
+   * Funtion to handle image preview
+   *
+   * @param {any} imagePreview - The image to be displaced
+   * @returns {objec} Set the state property imagePreview
+   * @memberof Main
+   */
+  handleImagePreview(imagePreview) {
+    console.log(imagePreview);
+    this.setState({
+      imagePreview,
     });
   }
 
@@ -124,6 +141,8 @@ class Main extends React.Component {
           <AddRecipe
             open={this.state.openAdd}
             handleClose={this.handleClose}
+            imagePreview={this.state.imagePreview}
+            handleImagePreview={this.handleImagePreview}
             {...this.props}
           />
         </MuiThemeProvider>

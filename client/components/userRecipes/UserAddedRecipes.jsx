@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import UserRecipeCard from './UserRecipeCard';
+import { decoded } from '../../utils/authenticate';
 
 /**
  * Class representing user added recipes
@@ -17,7 +18,11 @@ class UserAddedRecipes extends React.Component {
    * @memberof UserAddedRecipes
    */
   componentDidMount() {
-    this.props.fetchUserRecipes();
+    const { user: { id } } = decoded,
+      userId = id,
+      { fetchUserRecipes } = this.props;
+
+    fetchUserRecipes(userId);
   }
   /**
    * Render method

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Spinner = () => (
-  <div className="preloader-wrapper active">
+  <div className="preloader-wrapper small active valign-wrapper">
     <div className="spinner-layer spinner-blue">
       <div className="circle-clipper left">
         <div className="circle" />
