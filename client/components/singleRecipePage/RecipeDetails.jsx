@@ -37,9 +37,9 @@ const RecipeDetails = (props) => {
       </div>
       <div className="col s12">
         <h6><b><em>Directions:</em></b></h6>
-        <p id="directions" className="grey-text text-darken-3 lighten-3">
+        <ol id="directions" className="grey-text text-darken-3 lighten-3">
           {formatDisplay(directions)}
-        </p>
+        </ol>
       </div>
     </div>
   );
