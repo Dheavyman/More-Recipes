@@ -68,6 +68,9 @@ class AddRecipe extends React.Component {
     formData.append('api_key', '281293666534996');
 
     handleImagePreview(preview);
+    this.setState({
+      imageData: formData,
+    });
   }
 
   /**
@@ -91,7 +94,7 @@ class AddRecipe extends React.Component {
       };
 
     event.preventDefault();
-    console.log(imageData);
+    console.log('this', imageData);
     uploadImage(imageData)
       .then(() => {
         const { error } = recipeActions;
@@ -196,6 +199,7 @@ class AddRecipe extends React.Component {
                 <div className="input-field col s12">
                   <textarea
                     name="directions"
+                    placeholder="Enter directions seperated by comma"
                     className="materialize-textarea validate"
                     onChange={this.handleChange}
                     required
