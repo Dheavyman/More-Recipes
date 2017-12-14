@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
+import { getToken } from '../utils/authenticate';
 
 const addRecipeRequest = () => ({
   type: actionTypes.ADD_RECIPE_REQUEST,
@@ -31,9 +32,8 @@ const uploadImageFailure = error => ({
 });
 
 const addRecipe = (values, closeAddRecipeModal) => (dispatch) => {
-  console.log(values);
   const token = {
-    'x-access-token': localStorage.getItem('token'),
+    'x-access-token': getToken(),
   };
 
   dispatch(addRecipeRequest());

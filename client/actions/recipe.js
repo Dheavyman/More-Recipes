@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
-import { token } from '../utils/authenticate';
+import { getToken } from '../utils/authenticate';
 
 // const URL = 'https://more-recipes-25.herokuapp.com/api/v1/';
 
@@ -95,7 +95,7 @@ const fetchUserRecipes = userId => (dispatch) => {
   dispatch(fetchUserRecipesRequest());
   axios.get(`http://127.0.0.1:3000/api/v1/recipes/users/${userId}`,
     { headers: {
-      'x-access-token': token,
+      'x-access-token': getToken(),
     } })
     .then((response) => {
       const { data } = response;

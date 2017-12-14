@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import UserRecipeCard from './UserRecipeCard';
-import { decoded } from '../../utils/authenticate';
+import { decodeToken } from '../../utils/authenticate';
 
 /**
  * Class representing user added recipes
@@ -18,7 +18,7 @@ class UserAddedRecipes extends React.Component {
    * @memberof UserAddedRecipes
    */
   componentDidMount() {
-    const { user: { id } } = decoded,
+    const { user: { id } } = decodeToken(),
       userId = id,
       { fetchUserRecipes } = this.props;
 

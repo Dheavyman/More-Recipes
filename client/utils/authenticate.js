@@ -1,7 +1,11 @@
 import jwt from 'jsonwebtoken';
 
-const token = localStorage.getItem('token');
+const getToken = () => (
+  localStorage.getItem('token')
+);
 
-const decoded = jwt.decode(token);
+const decodeToken = () => (
+  jwt.decode(getToken())
+);
 
-export { token, decoded };
+export { getToken, decodeToken };
