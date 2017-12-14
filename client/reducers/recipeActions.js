@@ -3,10 +3,10 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   isLoading: false,
   recipe: {},
-  error: {},
   imageUploading: false,
+  imageUploaded: false,
   imageUrl: null,
-  errorUploadingImage: {},
+  error: {},
 };
 
 const recipeActions = (state = initialState, action) => {
@@ -36,20 +36,24 @@ const recipeActions = (state = initialState, action) => {
       return {
         ...state,
         imageUploading: true,
+        imageUploaded: false,
       };
 
     case actionTypes.UPLOAD_IMAGE_SUCCESS:
       return {
         ...state,
         imageUploading: false,
+        imageUploaded: true,
         imageUrl: action.payload,
+        error: {},
       };
 
     case actionTypes.UPLOAD_IMAGE_FAILURE:
       return {
         ...state,
         imageUploading: false,
-        errorUploadingImage: action.payload,
+        imageUploaded: false,
+        error: action.payload,
       };
 
     default:

@@ -6,6 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import Dropzone from 'react-dropzone';
 
 import Spinner from '../common/Spinner';
+import ErrorMessage from '../common/ErrorMessage';
 
 /**
  * Class representing Add recipe functionality
@@ -23,7 +24,7 @@ class AddRecipe extends React.Component {
     super();
     this.state = {
       title: '',
-      category: '',
+      category: 'Select Category',
       description: '',
       preparationTime: null,
       ingredients: '',
@@ -31,6 +32,7 @@ class AddRecipe extends React.Component {
       imageData: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -51,6 +53,20 @@ class AddRecipe extends React.Component {
   }
 
   /**
+   * Function to handle on select input change
+   *
+   * @param {any} event - The select input event
+   * @returns {func} Sets the category input state value
+   * @memberof AddRecipe
+   */
+  handleSelect(event) {
+    const { target: { value } } = event;
+    this.setState({
+      category: value,
+    });
+  }
+
+  /**
    * Function to handle image upload
    *
    * @param {any} files - The array of image files to be uploaded
@@ -59,7 +75,6 @@ class AddRecipe extends React.Component {
    * @memberof AddRecipe
    */
   handleDrop = (files) => {
-    console.log(files);
     const { handleImagePreview } = this.props,
       { preview } = files[0],
       formData = new FormData();
@@ -81,37 +96,34 @@ class AddRecipe extends React.Component {
    * @memberof AddRecipe
    */
   handleSubmit(event) {
+    console.log(this.props);
     const { imageData } = this.state,
-      { uploadImage, addRecipe, handleClose, reloadPage, recipeActions,
-        userRecipes } = this.props,
+      { uploadImage, addRecipe, handleClose, reloadPage,
+        recipeActions: { imageUploaded, imageUrl } } = this.props,
+
       values = {
         title: this.state.title,
-        category: this.state.category,
+        category: this.state.category === 'Select Category' ?
+          undefined : this.state.category,
         description: this.state.description,
         preparationTime: this.state.preparationTime,
         ingredients: this.state.ingredients,
         directions: this.state.directions,
+        recipeImage: imageUrl,
       };
+    console.log('Values', values);
 
     event.preventDefault();
-    console.log('this', imageData);
-    uploadImage(imageData)
-      .then(() => {
-        const { error } = recipeActions;
-        if (isEmpty(error)) {
-          addRecipe(values);
-        }
-      })
-      .then(() => {
-        const { error } = userRecipes;
-        if (isEmpty(error)) {
-          handleClose();
-          reloadPage();
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (!imageUploaded) {
+      uploadImage(imageData)
+        .then((error) => {
+          if (isEmpty(error)) {
+            addRecipe(values, handleClose);
+          }
+        });
+    } else {
+      addRecipe(values, handleClose);
+    }
   }
 
   /**
@@ -122,7 +134,7 @@ class AddRecipe extends React.Component {
    */
   render() {
     const { open, handleClose, imagePreview, recipeActions: {
-      imageUploading } } = this.props;
+      imageUploading, error } } = this.props;
 
     const actions = [
       <FlatButton
@@ -141,7 +153,7 @@ class AddRecipe extends React.Component {
           open={open}
           autoScrollBodyContent
         >
-          <div id="add-recipe" className="row center-align">
+          <div id="add-recipe" className="row">
             <form className="col s12" onSubmit={this.handleSubmit} >
               <div className="row">
                 <div className="input-field col s12">
@@ -154,6 +166,21 @@ class AddRecipe extends React.Component {
                   />
                   <label htmlFor="recipe_name">Title</label>
                 </div>
+              </div>
+              <div className="row">
+                <select
+                  className="browser-default"
+                  value={this.state.category}
+                  onChange={this.handleSelect}
+                >
+                  <option value="">Select Category</option>
+                  <option value="Breakfast">Breakfast</option>
+                  <option name="Lunch" value="Lunch">Lunch</option>
+                  <option value="Dinner">Dinner</option>
+                  <option value="Appetizer">Appetizer</option>
+                  <option value="Main">Main</option>
+                  <option value="Dessert">Dessert</option>
+                </select>
               </div>
               <div className="row">
                 <div className="input-field col s12">
@@ -177,7 +204,7 @@ class AddRecipe extends React.Component {
                     required
                   />
                   <label htmlFor="recipe_prep_time">
-                      Preparation Time (MINS)
+                    Preparation Time (MINS)
                   </label>
                 </div>
               </div>
@@ -204,49 +231,43 @@ class AddRecipe extends React.Component {
                     onChange={this.handleChange}
                     required
                   />
-                  <label htmlFor="recipe_directions">Directions</label>
+                  <label htmlFor="recipe_directions" className="active">
+                    Directions
+                  </label>
                 </div>
               </div>
-              {/* <div className="file-field input-field">
-                <div className="btn indigo accent-2">
-                  <span>File</span>
-                  <input type="file" />
+              <div className="row center-align">
+                <div className="col s12">
+                  <div className="col s6 offset-s3">
+                    <Dropzone
+                      className="dropzone"
+                      onDrop={this.handleDrop}
+                      accept="image/*"
+                      multiple={false}
+                    >
+                      {!imagePreview ?
+                        <p className="center-align">
+                          Drop your file or click here to upload
+                          <i className="material-icons center large">camera</i>
+                        </p> :
+                        <img src={imagePreview} alt="" />}
+                    </Dropzone>
+                    <div className="row" />
+                    {imageUploading && <Spinner />}
+                  </div>
                 </div>
-                <div className="file-path-wrapper">
-                  <input
-                    name="recipeImage"
-                    className="file-path validate"
-                    type="text"
-                    placeholder="Upload photo"
-                    onChange={this.handleChange}
-                    // required
-                  />
-                </div>
-              </div> */}
-              <div className="col s6 offset-s3">
-                <Dropzone
-                  className="dropzone"
-                  onDrop={this.handleDrop}
-                  accept="image/*"
-                  multiple={false}
-                >
-                  {!imagePreview ?
-                    <p className="center-align">
-                      Drop your file or click here to upload
-                      <i className="material-icons center large">camera</i>
-                    </p> :
-                    <img src={imagePreview} alt="" />}
-                </Dropzone>
-                {imageUploading && <Spinner />}
               </div>
+              {!isEmpty(error) && <ErrorMessage message={error.message} />}
               <div className="row" />
-              <button
-                type="submit"
-                className={`btn btn-large waves-effect
+              <div className="row center-align">
+                <button
+                  type="submit"
+                  className={`btn btn-large waves-effect
                     waves-light indigo accent-2`}
-              >
-                Add Recipe
-              </button>
+                >
+                  Add Recipe
+                </button>
+              </div>
             </form>
           </div>
         </Dialog>
@@ -260,9 +281,11 @@ AddRecipe.propTypes = {
   handleClose: PropTypes.func.isRequired,
   addRecipe: PropTypes.func.isRequired,
   reloadPage: PropTypes.func.isRequired,
-  userRecipes: PropTypes.shape({
-    error: PropTypes.shape().isRequired,
-  }).isRequired,
+  // userRecipes: PropTypes.shape({
+  //   error: PropTypes.shape({
+  //     message: PropTypes.string
+  //   }).isRequired,
+  // }).isRequired,
   uploadImage: PropTypes.func.isRequired,
   recipeActions: PropTypes.shape({
     imageUploading: PropTypes.bool.isRequired,

@@ -30,7 +30,8 @@ const uploadImageFailure = error => ({
   payload: error,
 });
 
-const addRecipe = values => (dispatch) => {
+const addRecipe = (values, closeAddRecipeModal) => (dispatch) => {
+  console.log(values);
   const token = {
     'x-access-token': localStorage.getItem('token'),
   };
@@ -41,6 +42,7 @@ const addRecipe = values => (dispatch) => {
     .then((response) => {
       const { data } = response;
       dispatch(addRecipeSuccess(data));
+      closeAddRecipeModal();
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -57,9 +59,10 @@ const uploadImage = value => (dispatch) => {
         { secure_url } = data;
       dispatch(uploadImageSuccess(secure_url));
     })
-    .catch((error) => {
-      const { response: { data } } = error;
-      dispatch(uploadImageFailure(data));
+    .catch((errorMessage) => {
+      const { response: { data: { error } } } = errorMessage;
+      dispatch(uploadImageFailure(error));
+      return error;
     });
 };
 
