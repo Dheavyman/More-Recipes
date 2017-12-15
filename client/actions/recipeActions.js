@@ -17,6 +17,20 @@ const addRecipeFailure = error => ({
   payload: error,
 });
 
+const editRecipeRequest = () => ({
+  type: actionTypes.EDIT_RECIPE_REQUEST,
+});
+
+const editRecipeSuccess = values => ({
+  type: actionTypes.EDIT_RECIPE_SUCCESS,
+  payload: values,
+});
+
+const editRecipeFailure = error => ({
+  type: actionTypes.EDIT_RECIPE_FAILURE,
+  payload: error,
+});
+
 const uploadImageRequest = () => ({
   type: actionTypes.UPLOAD_IMAGE_REQUEST,
 });
@@ -50,6 +64,25 @@ const addRecipe = (values, closeAddRecipeModal) => (dispatch) => {
     });
 };
 
+const editRecipe = (recipeId, values, closeAddRecipeModal) => (dispatch) => {
+  const token = {
+    'x-access-token': getToken(),
+  };
+  console.log(values);
+  dispatch(editRecipeRequest());
+  return axios.put(`http://127.0.0.1:3000/api/v1/recipes/${recipeId}`, values,
+    { headers: token })
+    .then((response) => {
+      const { data } = response;
+      dispatch(editRecipeSuccess(data));
+      closeAddRecipeModal();
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(editRecipeFailure(data));
+    });
+};
+
 const uploadImage = value => (dispatch) => {
   dispatch(uploadImageRequest());
   return axios.post('https://api.cloudinary.com/v1_1/heavyman/image/upload',
@@ -66,4 +99,4 @@ const uploadImage = value => (dispatch) => {
     });
 };
 
-export { addRecipe, uploadImage };
+export { addRecipe, editRecipe, uploadImage };

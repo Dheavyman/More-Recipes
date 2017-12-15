@@ -32,6 +32,27 @@ const recipeActions = (state = initialState, action) => {
         error: action.payload,
       };
 
+    case actionTypes.EDIT_RECIPE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case actionTypes.EDIT_RECIPE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        recipe: action.payload,
+        error: {},
+      };
+
+    case actionTypes.EDIT_RECIPE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+
     case actionTypes.UPLOAD_IMAGE_REQUEST:
       return {
         ...state,

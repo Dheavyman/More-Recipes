@@ -24,6 +24,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
+      recipe: {},
       openEdit: false,
       openDelete: false,
       openAdd: false,
@@ -44,17 +45,34 @@ class Main extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
+    this.handleEditChange = this.handleEditChange.bind(this);
+    this.handleEditRecipe = this.handleEditRecipe.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  /**
+   * Component will receive props lifecycle method
+   *
+   * @param {any} nextProps - The next props
+   * @returns {any} Any
+   * @memberof Main
+   */
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
   }
 
   /**
    * Opens the edit recipe modal
    *
+   * @param {number} recipe - The recipe to be edited
    * @returns {object} Set open state to true
    * @memberof Main
    */
-  handleOpenEdit() {
-    this.setState({ openEdit: true });
+  handleOpenEdit(recipe) {
+    this.setState({
+      recipe,
+      openEdit: true,
+    });
   }
 
   /**
@@ -102,6 +120,24 @@ class Main extends React.Component {
   handleImagePreview(imagePreview) {
     this.setState({
       imagePreview,
+    });
+  }
+
+  /**
+   * Function to handle input value change
+   * when user edits a recipe
+   *
+   * @param {any} event - The input event
+   * @returns {func} Sets the state of the input
+   * @memberof Main
+   */
+  handleEditChange(event) {
+    const { target: { name, value } } = event;
+    this.setState({
+      recipe: {
+        ...this.state.recipe,
+        [name]: value,
+      }
     });
   }
 
@@ -156,6 +192,37 @@ class Main extends React.Component {
   }
 
   /**
+   * Function to edit user recipe
+   *
+   * @param {any} event - The edit event
+   * @returns {func} Dispatch action to edit recipe
+   * @memberof Main
+   */
+  handleEditRecipe(event) {
+    console.log(this.props);
+    event.preventDefault();
+    const { recipe, imageData } = this.state,
+      { editRecipe, uploadImage, recipeActions: {
+        imageUploaded, imageUrl } } = this.props,
+      { id } = recipe,
+      values = {
+        ...recipe,
+        recipeImage: imageUrl,
+      };
+    console.log(values);
+    if (!imageUploaded) {
+      uploadImage(imageData)
+        .then((error) => {
+          if (isEmpty(error)) {
+            editRecipe(id, values, this.handleClose);
+          }
+        });
+    } else {
+      editRecipe(id, values, this.handleClose);
+    }
+  }
+
+  /**
    * Function to handle submiting new recipe input values
    *
    * @param {any} event - The submit event
@@ -163,6 +230,7 @@ class Main extends React.Component {
    * @memberof AddRecipe
    */
   handleSubmit(event) {
+    event.preventDefault();
     const { imageData } = this.state,
       { uploadImage, addRecipe, recipeActions: {
         imageUploaded, imageUrl } } = this.props,
@@ -178,7 +246,6 @@ class Main extends React.Component {
         recipeImage: imageUrl,
       };
 
-    event.preventDefault();
     if (!imageUploaded) {
       uploadImage(imageData)
         .then((error) => {
@@ -198,7 +265,8 @@ class Main extends React.Component {
    * @memberof Main
    */
   render() {
-    const { category, imagePreview } = this.state;
+    const { recipe, openAdd, openEdit, openDelete, category,
+      imagePreview } = this.state;
     return (
       <div className="row">
         <div className="fixed-action-btn">
@@ -226,19 +294,26 @@ class Main extends React.Component {
         </div>
         <MuiThemeProvider>
           <EditRecipe
-            open={this.state.openEdit}
+            open={openEdit}
+            handleEditChange={this.handleEditChange}
+            handleSelect={this.handleSelect}
             handleClose={this.handleClose}
+            handleEditRecipe={this.handleEditRecipe}
+            handleDrop={this.handleDrop}
+            imagePreview={imagePreview}
+            recipe={recipe}
+            {...this.props}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
           <DeleteRecipe
-            open={this.state.openDelete}
+            open={openDelete}
             handleClose={this.handleClose}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
           <AddRecipe
-            open={this.state.openAdd}
+            open={openAdd}
             handleChange={this.handleChange}
             handleSelect={this.handleSelect}
             handleClose={this.handleClose}
@@ -263,6 +338,7 @@ Main.propTypes = {
     imageUploading: PropTypes.bool.isRequired,
     imageUrl: PropTypes.string
   }).isRequired,
+  editRecipe: PropTypes.func.isRequired,
 };
 
 export default Main;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -6,6 +7,7 @@ import actionCreators from '../../actions';
 import Footer from '../common/Footer';
 import Header from './Header';
 import Main from './Main';
+import { decodeToken } from '../../utils/authenticate';
 
 /**
  * Class representing user recipes
@@ -21,7 +23,11 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   componentDidMount() {
-    // console.log('User recipes mounted');
+    const { user: { id } } = decodeToken(),
+      userId = id,
+      { fetchUserRecipes } = this.props;
+
+    fetchUserRecipes(userId);
   }
 
   /**
@@ -46,6 +52,10 @@ class UserRecipes extends React.Component {
     );
   }
 }
+
+UserRecipes.propTypes = {
+  fetchUserRecipes: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   user: state.user,

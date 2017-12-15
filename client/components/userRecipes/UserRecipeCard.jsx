@@ -8,10 +8,14 @@ const UserRecipeCard = (props) => {
   const { recipe, handleOpenEdit, handleOpenDelete } = props,
     { id, title, description, views, upvotes, downvotes } = recipe;
 
+  const handleOpen = () => {
+    handleOpenEdit(recipe);
+  };
+
   return (
     <div className="col s12 m6 l3">
       <div id="recipes" className="card large">
-        <Link to={`/recipes/${recipe.id}`}>
+        <Link to={`/recipes/${id}`}>
           <span className="card-title">{title}</span>
         </Link>
         <div className="card-image">
@@ -40,7 +44,7 @@ const UserRecipeCard = (props) => {
           <a
             role="button"
             tabIndex="0"
-            onClick={handleOpenEdit}
+            onClick={handleOpen}
             className={'btn-floating waves-effect waves-light green right'}
           >
             <i className="material-icons">edit</i>
