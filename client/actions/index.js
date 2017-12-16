@@ -1,7 +1,8 @@
 import { retrieveRecipes, fetchRecipe, fetchUserRecipes } from './recipe';
 import { signupUser, signinUser, logoutUser } from './userActions';
 import postReview from './review';
-import { addRecipe, editRecipe, uploadImage } from './recipeActions';
+import { addRecipe, editRecipe, deleteRecipe,
+  uploadImage } from './recipeActions';
 
 export default {
   retrieveRecipes,
@@ -13,5 +14,6 @@ export default {
   postReview,
   addRecipe,
   editRecipe,
+  deleteRecipe,
   uploadImage,
 };

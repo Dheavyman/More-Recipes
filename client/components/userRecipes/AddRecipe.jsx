@@ -16,7 +16,7 @@ import ErrorMessage from '../common/ErrorMessage';
  */
 const AddRecipe = (props) => {
   const { category, open, handleChange, handleSelect, handleDrop, handleClose,
-    handleSubmit, imagePreview, recipeActions: {
+    handleSubmit, imagePreview, userRecipes: {
       imageUploading, error } } = props;
   const actions = [
     <FlatButton
@@ -166,7 +166,7 @@ AddRecipe.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,
   imagePreview: PropTypes.string.isRequired,
-  recipeActions: PropTypes.shape({
+  userRecipes: PropTypes.shape({
     imageUploading: PropTypes.bool.isRequired,
     error: PropTypes.shape()
   }).isRequired,

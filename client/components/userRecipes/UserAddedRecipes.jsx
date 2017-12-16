@@ -10,11 +10,10 @@ import UserRecipeCard from './UserRecipeCard';
  * @returns { object } React component
  */
 const UserAddedRecipes = (props) => {
-  const { userRecipes: { userAddedRecipes } } = props,
-    { recipes } = userAddedRecipes;
+  const { userRecipes: { userAddedRecipes } } = props;
   return (
     <div className="row">
-      {recipes && recipes.map(recipe => (
+      {userAddedRecipes && userAddedRecipes.map(recipe => (
         <UserRecipeCard key={recipe.id} recipe={recipe} {...props} />
       ))}
     </div>
@@ -23,11 +22,7 @@ const UserAddedRecipes = (props) => {
 
 UserAddedRecipes.propTypes = {
   userRecipes: PropTypes.shape({
-    userAddedRecipes: PropTypes.shape({
-      data: PropTypes.shape({
-        recipes: PropTypes.arrayOf(PropTypes.shape()),
-      }),
-    }),
+    userAddedRecipes: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
 };
 

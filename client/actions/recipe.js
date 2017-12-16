@@ -98,8 +98,9 @@ const fetchUserRecipes = userId => (dispatch) => {
       'x-access-token': getToken(),
     } })
     .then((response) => {
-      const { data } = response;
-      dispatch(fetchUserRecipesSuccess(data));
+      const { data } = response,
+        { data: recipes } = data;
+      dispatch(fetchUserRecipesSuccess(recipes));
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -120,4 +121,5 @@ const fetchUserFavorites = userId => (dispatch) => {
     });
 };
 
-export { retrieveRecipes, fetchRecipe, fetchUserRecipes, fetchUserFavorites };
+export { retrieveRecipes, fetchRecipe, fetchUserRecipes,
+  fetchUserRecipesSuccess, fetchUserFavorites };

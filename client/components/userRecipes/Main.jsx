@@ -106,6 +106,7 @@ class Main extends React.Component {
       openEdit: false,
       openDelete: false,
       openAdd: false,
+      category: 'Select Category',
       imagePreview: '',
     });
   }
@@ -202,7 +203,7 @@ class Main extends React.Component {
     console.log(this.props);
     event.preventDefault();
     const { recipe, imageData } = this.state,
-      { editRecipe, uploadImage, recipeActions: {
+      { editRecipe, uploadImage, userRecipes: {
         imageUploaded, imageUrl } } = this.props,
       { id } = recipe,
       values = {
@@ -232,7 +233,7 @@ class Main extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { imageData } = this.state,
-      { uploadImage, addRecipe, recipeActions: {
+      { uploadImage, addRecipe, userRecipes: {
         imageUploaded, imageUrl } } = this.props,
 
       values = {
@@ -265,6 +266,7 @@ class Main extends React.Component {
    * @memberof Main
    */
   render() {
+    console.log(this.props);
     const { recipe, openAdd, openEdit, openDelete, category,
       imagePreview } = this.state;
     return (
@@ -334,7 +336,7 @@ Main.propTypes = {
   addRecipe: PropTypes.func.isRequired,
   reloadPage: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
-  recipeActions: PropTypes.shape({
+  userRecipes: PropTypes.shape({
     imageUploading: PropTypes.bool.isRequired,
     imageUrl: PropTypes.string
   }).isRequired,

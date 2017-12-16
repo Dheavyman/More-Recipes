@@ -18,7 +18,7 @@ const EditRecipe = (props) => {
   const { open, handleEditChange, handleSelect, handleClose, handleDrop,
     handleEditRecipe, imagePreview, recipe: {
       title, category, description, preparationTime, ingredients, directions
-    }, recipeActions: { isLoading, imageUploading, error } } = props;
+    }, userRecipes: { isLoading, imageUploading, error } } = props;
 
   const actions = [
     <FlatButton
@@ -184,7 +184,7 @@ EditRecipe.propTypes = {
     ingredients: PropTypes.string,
     directions: PropTypes.string,
   }).isRequired,
-  recipeActions: PropTypes.shape({
+  userRecipes: PropTypes.shape({
     isLoading: PropTypes.bool.isRequired,
     imageUploading: PropTypes.bool.isRequired,
     error: PropTypes.shape()

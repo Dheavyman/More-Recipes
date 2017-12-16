@@ -5,7 +5,6 @@ import recipes from './recipes';
 import user from './user';
 import singleRecipe from './singleRecipe';
 import review from './review';
-import recipeActions from './recipeActions';
 import userRecipes from './userRecipes';
 
 const rootReducer = combineReducers({
@@ -13,7 +12,6 @@ const rootReducer = combineReducers({
   user,
   singleRecipe,
   review,
-  recipeActions,
   userRecipes,
   form: formReducer,
 });
