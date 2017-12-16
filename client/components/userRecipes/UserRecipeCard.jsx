@@ -6,7 +6,7 @@ import RecipeImage from '../common/RecipeImage';
 
 const UserRecipeCard = (props) => {
   const { recipe, handleOpenEdit, handleOpenDelete } = props,
-    { id, title, description, views, upvotes, downvotes } = recipe;
+    { id, title, description, recipeImage, views, upvotes, downvotes } = recipe;
 
   const openEditModal = () => {
     handleOpenEdit(recipe);
@@ -24,7 +24,7 @@ const UserRecipeCard = (props) => {
         </Link>
         <div className="card-image">
           <Link to={`/recipes/${id}`}>
-            <RecipeImage />
+            <RecipeImage title={title} recipeImage={recipeImage} />
           </Link>
         </div>
         <div className="card-content">
@@ -70,9 +70,11 @@ const UserRecipeCard = (props) => {
 UserRecipeCard.propTypes = {
   recipe: PropTypes.shape({
     title: PropTypes.string,
-    description: PropTypes.string,
-    upvotes: PropTypes.number,
-    downvotes: PropTypes.number,
+    description: PropTypes.string.isRequired,
+    recipeImage: PropTypes.string.isRequired,
+    views: PropTypes.number.isRequired,
+    upvotes: PropTypes.number.isRequired,
+    downvotes: PropTypes.number.isRequired,
   }).isRequired,
   handleOpenEdit: PropTypes.func.isRequired,
   handleOpenDelete: PropTypes.func.isRequired,
