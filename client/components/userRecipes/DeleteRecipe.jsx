@@ -47,10 +47,14 @@ const DeleteRecipe = (props) => {
 };
 
 DeleteRecipe.propTypes = {
-  recipeId: PropTypes.number.isRequired,
+  recipeId: PropTypes.number,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleDeleteRecipe: PropTypes.func.isRequired,
+};
+
+DeleteRecipe.defaultProps = {
+  recipeId: null,
 };
 
 export default DeleteRecipe;

@@ -49,7 +49,7 @@ class Main extends React.Component {
     this.handleEditChange = this.handleEditChange.bind(this);
     this.handleEditRecipe = this.handleEditRecipe.bind(this);
     this.handleDeleteRecipe = this.handleDeleteRecipe.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAddRecipe = this.handleAddRecipe.bind(this);
   }
 
   /**
@@ -246,26 +246,30 @@ class Main extends React.Component {
    * @returns {func} Submit the values to the server
    * @memberof AddRecipe
    */
-  handleSubmit(event) {
+  handleAddRecipe(event) {
     event.preventDefault();
     const { imageData } = this.state,
       { uploadImage, addRecipe, userRecipes: {
-        imageUploaded, imageUrl } } = this.props,
+        imageUploaded } } = this.props;
 
-      values = {
-        title: this.state.title,
-        category: this.state.category === 'Select Category' ?
-          undefined : this.state.category,
-        description: this.state.description,
-        preparationTime: this.state.preparationTime,
-        ingredients: this.state.ingredients,
-        directions: this.state.directions,
-        recipeImage: imageUrl,
-      };
+    let values = {
+      title: this.state.title,
+      category: this.state.category === 'Select Category' ?
+        undefined : this.state.category,
+      description: this.state.description,
+      preparationTime: this.state.preparationTime,
+      ingredients: this.state.ingredients,
+      directions: this.state.directions,
+    };
 
     if (!imageUploaded) {
       uploadImage(imageData)
-        .then((error) => {
+        .then(() => {
+          const { userRecipes: { imageUrl, error } } = this.props;
+          values = {
+            ...values,
+            recipeImage: imageUrl,
+          };
           if (isEmpty(error)) {
             addRecipe(values, this.handleClose);
           }
@@ -282,7 +286,6 @@ class Main extends React.Component {
    * @memberof Main
    */
   render() {
-    console.log(this.props);
     const { recipeId, recipe, openAdd, openEdit, openDelete, category,
       imagePreview } = this.state;
     return (
@@ -337,7 +340,7 @@ class Main extends React.Component {
             handleChange={this.handleChange}
             handleSelect={this.handleSelect}
             handleClose={this.handleClose}
-            handleSubmit={this.handleSubmit}
+            handleAddRecipe={this.handleAddRecipe}
             handleDrop={this.handleDrop}
             imagePreview={imagePreview}
             handleImagePreview={this.handleImagePreview}
@@ -352,7 +355,6 @@ class Main extends React.Component {
 
 Main.propTypes = {
   addRecipe: PropTypes.func.isRequired,
-  reloadPage: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
   userRecipes: PropTypes.shape({
     imageUploading: PropTypes.bool.isRequired,

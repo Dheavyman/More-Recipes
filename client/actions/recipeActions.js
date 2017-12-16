@@ -128,7 +128,6 @@ const uploadImage = value => (dispatch) => {
     .catch((errorMessage) => {
       const { response: { data: { error } } } = errorMessage;
       dispatch(uploadImageFailure(error));
-      return error;
     });
 };
 

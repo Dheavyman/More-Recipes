@@ -43,7 +43,7 @@ class UserRecipes extends React.Component {
           <Header {...this.props} />
         </header>
         <main>
-          <Main reloadPage={this.componentDidMount} {...this.props} />
+          <Main {...this.props} />
         </main>
         <footer>
           <Footer />

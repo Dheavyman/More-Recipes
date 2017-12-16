@@ -16,7 +16,7 @@ import ErrorMessage from '../common/ErrorMessage';
  */
 const AddRecipe = (props) => {
   const { category, open, handleChange, handleSelect, handleDrop, handleClose,
-    handleSubmit, imagePreview, userRecipes: {
+    handleAddRecipe, imagePreview, userRecipes: {
       imageUploading, error } } = props;
   const actions = [
     <FlatButton
@@ -36,7 +36,7 @@ const AddRecipe = (props) => {
         autoScrollBodyContent
       >
         <div id="add-recipe" className="row">
-          <form className="col s12" onSubmit={handleSubmit} >
+          <form className="col s12" onSubmit={handleAddRecipe} >
             <div className="row">
               <div className="input-field col s12">
                 <input
@@ -163,7 +163,7 @@ AddRecipe.propTypes = {
   handleClose: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleAddRecipe: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,
   imagePreview: PropTypes.string.isRequired,
   userRecipes: PropTypes.shape({
