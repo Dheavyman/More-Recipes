@@ -8,8 +8,12 @@ const UserRecipeCard = (props) => {
   const { recipe, handleOpenEdit, handleOpenDelete } = props,
     { id, title, description, views, upvotes, downvotes } = recipe;
 
-  const handleOpen = () => {
+  const openEditModal = () => {
     handleOpenEdit(recipe);
+  };
+
+  const openDeleteModal = () => {
+    handleOpenDelete(id);
   };
 
   return (
@@ -44,7 +48,7 @@ const UserRecipeCard = (props) => {
           <a
             role="button"
             tabIndex="0"
-            onClick={handleOpen}
+            onClick={openEditModal}
             className={'btn-floating waves-effect waves-light green right'}
           >
             <i className="material-icons">edit</i>
@@ -52,7 +56,7 @@ const UserRecipeCard = (props) => {
           <a
             role="button"
             tabIndex="0"
-            onClick={handleOpenDelete}
+            onClick={openDeleteModal}
             className={'btn-floating waves-effect waves-light red right'}
           >
             <i className="material-icons">delete</i>

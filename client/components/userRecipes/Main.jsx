@@ -24,6 +24,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
+      recipeId: null,
       recipe: {},
       openEdit: false,
       openDelete: false,
@@ -47,6 +48,7 @@ class Main extends React.Component {
     this.handleDrop = this.handleDrop.bind(this);
     this.handleEditChange = this.handleEditChange.bind(this);
     this.handleEditRecipe = this.handleEditRecipe.bind(this);
+    this.handleDeleteRecipe = this.handleDeleteRecipe.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -78,11 +80,15 @@ class Main extends React.Component {
   /**
    * Opens the delete recipe modal
    *
+   * @param {number} recipeId - The id of recipe
    * @returns {object} Set openDelete state to true
    * @memberof Main
    */
-  handleOpenDelete() {
-    this.setState({ openDelete: true });
+  handleOpenDelete(recipeId) {
+    this.setState({
+      recipeId,
+      openDelete: true
+    });
   }
 
   /**
@@ -200,7 +206,6 @@ class Main extends React.Component {
    * @memberof Main
    */
   handleEditRecipe(event) {
-    console.log(this.props);
     event.preventDefault();
     const { recipe, imageData } = this.state,
       { editRecipe, uploadImage, userRecipes: {
@@ -210,7 +215,6 @@ class Main extends React.Component {
         ...recipe,
         recipeImage: imageUrl,
       };
-    console.log(values);
     if (!imageUploaded) {
       uploadImage(imageData)
         .then((error) => {
@@ -221,6 +225,18 @@ class Main extends React.Component {
     } else {
       editRecipe(id, values, this.handleClose);
     }
+  }
+
+  /**
+   * Function to delete a recipe
+   *
+   * @param {any} id - The id of recipe
+   * @returns {func} Dispatch action to delete recipe
+   * @memberof Main
+   */
+  handleDeleteRecipe(id) {
+    const { deleteRecipe } = this.props;
+    deleteRecipe(id, this.handleClose);
   }
 
   /**
@@ -267,7 +283,7 @@ class Main extends React.Component {
    */
   render() {
     console.log(this.props);
-    const { recipe, openAdd, openEdit, openDelete, category,
+    const { recipeId, recipe, openAdd, openEdit, openDelete, category,
       imagePreview } = this.state;
     return (
       <div className="row">
@@ -311,6 +327,8 @@ class Main extends React.Component {
           <DeleteRecipe
             open={openDelete}
             handleClose={this.handleClose}
+            handleDeleteRecipe={this.handleDeleteRecipe}
+            recipeId={recipeId}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
@@ -341,6 +359,7 @@ Main.propTypes = {
     imageUrl: PropTypes.string
   }).isRequired,
   editRecipe: PropTypes.func.isRequired,
+  deleteRecipe: PropTypes.func.isRequired,
 };
 
 export default Main;

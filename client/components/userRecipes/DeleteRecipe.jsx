@@ -4,15 +4,21 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 const DeleteRecipe = (props) => {
+  console.log(props);
+  const { recipeId, open, handleClose, handleDeleteRecipe } = props,
+    deleteRecipe = () => {
+      handleDeleteRecipe(recipeId);
+    };
+
   const actions = [
     <FlatButton
       label="Cancel"
       secondary
-      onClick={props.handleClose}
+      onClick={handleClose}
     />,
     <FlatButton
       label="Delete"
-      onClick={props.handleClose}
+      onClick={deleteRecipe}
     />,
   ];
 
@@ -22,11 +28,11 @@ const DeleteRecipe = (props) => {
         title="Delete Recipe"
         actions={actions}
         modal
-        open={props.open}
+        open={open}
         autoScrollBodyContent
       >
         <div id="delete-recipe">
-          <div className="row center-align">
+          <div className="row">
             <div className="col s2">
               <i className="material-icons large">warning</i>
             </div>
@@ -41,8 +47,10 @@ const DeleteRecipe = (props) => {
 };
 
 DeleteRecipe.propTypes = {
+  recipeId: PropTypes.number.isRequired,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  handleDeleteRecipe: PropTypes.func.isRequired,
 };
 
 export default DeleteRecipe;
