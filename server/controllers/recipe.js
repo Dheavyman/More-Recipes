@@ -40,17 +40,18 @@ class RecipeController {
         status: 'Success',
         message: 'Recipe created',
         data: {
-          id: recipe.id,
-          userId: recipe.userId,
-          title: recipe.title,
-          category: recipe.category,
-          description: recipe.description,
-          preparationTime: recipe.preparationTime,
-          ingredients: recipe.ingredients,
-          directions: recipe.directions,
-          upvotes: recipe.upvotes,
-          downvotes: recipe.downvotes,
-          views: recipe.views,
+          recipe: {
+            id: recipe.id,
+            title: recipe.title,
+            category: recipe.category,
+            description: recipe.description,
+            preparationTime: recipe.preparationTime,
+            ingredients: recipe.ingredients,
+            directions: recipe.directions,
+            upvotes: recipe.upvotes,
+            downvotes: recipe.downvotes,
+            views: recipe.views,
+          }
         }
       }))
       .catch(error => res.status(500).send({
@@ -93,13 +94,15 @@ class RecipeController {
         status: 'Success',
         message: 'Recipe modified',
         data: {
-          id: updatedRecipe.id,
-          title: updatedRecipe.title,
-          category: updatedRecipe.category,
-          description: updatedRecipe.description,
-          preparationTime: updatedRecipe.preparationTime,
-          ingredients: updatedRecipe.ingredients,
-          directions: updatedRecipe.directions,
+          recipe: {
+            id: updatedRecipe.id,
+            title: updatedRecipe.title,
+            category: updatedRecipe.category,
+            description: updatedRecipe.description,
+            preparationTime: updatedRecipe.preparationTime,
+            ingredients: updatedRecipe.ingredients,
+            directions: updatedRecipe.directions,
+          }
         }
       }))
       // Notify users that their favorite recipe has been modified
