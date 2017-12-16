@@ -39,6 +39,10 @@ module.exports = {
       type: Sequelize.TEXT,
       allowNull: false
     },
+    recipeImage: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     upvotes: {
       type: Sequelize.INTEGER,
       defaultValue: 0,

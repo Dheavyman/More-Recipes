@@ -34,6 +34,7 @@ class RecipeController {
         preparationTime: req.body.preparationTime,
         ingredients: req.body.ingredients,
         directions: req.body.directions,
+        recipeImage: req.body.recipeImage,
       })
       .then(recipe => recipe.increment('views'))
       .then(recipe => res.status(201).send({
