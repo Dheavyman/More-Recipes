@@ -90,7 +90,7 @@ class RecipeController {
             preparationTime: req.body.preparationTime,
             ingredients: req.body.ingredients,
             directions: req.body.directions,
-            recipeImage: req.body.recipeImage,
+            recipeImage: req.body.recipeImage || recipe.recipeImage,
           });
       })
       .then(updatedRecipe => res.status(200).send({
