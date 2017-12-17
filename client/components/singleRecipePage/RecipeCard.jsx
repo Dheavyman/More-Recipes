@@ -28,10 +28,10 @@ const RecipeCard = (props) => {
 
 RecipeCard.propTypes = {
   recipe: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    recipeImage: PropTypes.string.isRequired,
-    upvotes: PropTypes.number.isRequired,
-    downvotes: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    recipeImage: PropTypes.string,
+    upvotes: PropTypes.number,
+    downvotes: PropTypes.number,
   }).isRequired,
 };
 

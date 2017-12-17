@@ -9,7 +9,7 @@ import AddReview from './AddReview';
 
 const Main = (props) => {
   const { singleRecipe } = props,
-    { data: { recipe } } = singleRecipe,
+    { recipe, reviews } = singleRecipe,
     { title, recipeImage } = recipe;
   return (
     <div>
@@ -32,7 +32,7 @@ const Main = (props) => {
             <RecipeDetails recipe={recipe} />
           </div>
         </div>
-        <ReviewCollection recipe={recipe} />
+        <ReviewCollection reviews={reviews} />
         <AddReview {...props} />
       </div>
     </div>
@@ -42,7 +42,8 @@ const Main = (props) => {
 Main.propTypes = {
   singleRecipe: PropTypes.shape({
     data: PropTypes.shape({
-      recipe: PropTypes.shape()
+      recipe: PropTypes.shape(),
+      reviews: PropTypes.arrayOf(PropTypes.shape()),
     })
   }).isRequired,
 };

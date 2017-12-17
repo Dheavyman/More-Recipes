@@ -116,7 +116,6 @@ class Recipe extends React.Component {
         .then(() => {
           const { singleRecipe: { error } } = this.props;
           if (isEmpty(error)) {
-            this.componentDidMount();
             this.setState({
               reviewContent: '',
             });
@@ -168,7 +167,7 @@ class Recipe extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  singleRecipe: state.singleRecipe.recipe,
+  singleRecipe: state.singleRecipe,
   user: state.user,
 });
 

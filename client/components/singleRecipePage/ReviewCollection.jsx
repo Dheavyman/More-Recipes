@@ -4,15 +4,14 @@ import PropTypes from 'prop-types';
 import Review from './Review';
 
 const ReviewCollection = (props) => {
-  const { recipe } = props,
-    { Reviews } = recipe;
+  const { reviews } = props;
   return (
     <div className="row">
       <div className="col s12 valign-wrapper deep-orange darken-4">
         <h5 className="white-text">Reviews</h5>
       </div>
       <ul className="collection">
-        {Reviews && Reviews.map(review => (
+        {reviews && reviews.map(review => (
           <Review key={review.id} review={review} />
         ))}
       </ul>
@@ -21,7 +20,7 @@ const ReviewCollection = (props) => {
 };
 
 ReviewCollection.propTypes = {
-  recipe: PropTypes.shape().isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default ReviewCollection;

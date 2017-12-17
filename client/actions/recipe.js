@@ -82,8 +82,9 @@ const fetchRecipe = recipeId => (dispatch) => {
   dispatch(fetchRecipeRequest());
   axios.get(`http://127.0.0.1:3000/api/v1/recipes/${recipeId}`)
     .then((response) => {
-      const { data } = response;
-      dispatch(fetchRecipeSuccess(data));
+      const { data } = response,
+        { data: { recipe } } = data;
+      dispatch(fetchRecipeSuccess(recipe));
     })
     .catch((error) => {
       const { response: { data } } = error;
