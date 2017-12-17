@@ -90,68 +90,85 @@ const server = supertest.agent(app),
   }],
   validRecipeSeed = [{
     title: 'Beans',
+    category: 'Dessert',
     description: 'Tasty beans',
-    preparationTime: '65',
+    preparationTime: 65,
     ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
     directions: 'Cook the beans and add the ingredients',
+    recipeImage: 'Url',
   }, {
     title: 'Yam sauce',
     category: 'Lunch',
     description: 'Served white and colourful',
-    preparationTime: '50',
+    preparationTime: 50,
     ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
     directions: 'Slice the yam and prepare the sauce',
+    recipeImage: 'Url',
   }, {
     title: 'Beans',
+    category: 'Appetizer',
     description: 'Tasty and nutricious beans',
-    preparationTime: '80',
+    preparationTime: 80,
     ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
     directions: 'Cook the beans and add the ingredients',
+    recipeImage: 'Url',
   }, {
     title: 'Egusi soup',
     category: 'Dinner',
     description: 'Tasty and nutricious soup',
-    preparationTime: '65',
+    preparationTime: 65,
     ingredients: 'Egusi, stock fish, red oil, onion, salt, maggi, pepper',
     directions: 'Cook the egusi and add the ingredients',
+    recipeImage: 'Url',
   }, {
     title: 'Yam sauce',
     category: 'Lunch',
     description: 'Served white and colourful',
-    preparationTime: '50',
+    preparationTime: 50,
     ingredients: 'Yam, tomatoes, vegetable oil, egg, salt, maggi, pepper',
     directions: 'Slice the yam and prepare the sauce',
+    recipeImage: 'Url',
   }],
   invalidRecipeSeed = [{
     title: '   ',
+    category: 'Lunch',
     description: 'Served white and colourful',
-    preparationTime: '50',
+    preparationTime: 50,
     ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
     directions: 'Slice the yam and prepare the sauce',
+    recipeImage: 'Url',
   }, {
     title: 'Yam sauce',
+    category: 'Breakfast',
     description: '   ',
-    preparationTime: '50',
+    preparationTime: 50,
     ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
     directions: 'Slice the yam and prepare the sauce',
+    recipeImage: 'Url',
   }, {
     title: 'Yam sauce',
+    category: 'Main',
     description: 'Served white and colourful',
-    preparationTime: '  ',
+    preparationTime: null,
     ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
     directions: 'Slice the yam and prepare the sauce',
+    recipeImage: 'Url',
   }, {
     title: 'Yam sauce',
+    category: 'Dinner',
     description: 'Served white and colourful',
-    preparationTime: '50',
+    preparationTime: 50,
     ingredients: '   ',
     directions: 'Slice the yam and prepare the sauce',
+    recipeImage: 'Url',
   }, {
     title: 'Yam sauce',
+    category: 'Breakfast',
     description: 'Served white and colourful',
-    preparationTime: '50',
+    preparationTime: 50,
     ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
     directions: '   ',
+    recipeImage: 'Url',
   }],
   validReviewSeed = [{
     content: 'A nice recipe idea',
@@ -493,7 +510,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validRecipeSeed[0])
         .end((err, res) => {
-          recipeId1 = res.body.data.id;
+          recipeId1 = res.body.data.recipe.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe created');
@@ -510,7 +527,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validRecipeSeed[1])
         .end((err, res) => {
-          recipeId2 = res.body.data.id;
+          recipeId2 = res.body.data.recipe.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe created');
@@ -527,7 +544,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validRecipeSeed[3])
         .end((err, res) => {
-          recipeId3 = res.body.data.id;
+          recipeId3 = res.body.data.recipe.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe created');
@@ -629,7 +646,7 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe modified');
-          expect(res.body.data.description).to
+          expect(res.body.data.recipe.description).to
             .equal('Tasty and nutricious beans');
           done();
         });
@@ -771,7 +788,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validReviewSeed[0])
         .end((err, res) => {
-          reviewId1 = res.body.data.id;
+          reviewId1 = res.body.data.review.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Review created');
@@ -789,7 +806,7 @@ describe('More Recipes', () => {
           .type('form')
           .send(validReviewSeed[1])
           .end((err, res) => {
-            reviewId2 = res.body.data.id;
+            reviewId2 = res.body.data.review.id;
             expect(res.statusCode).to.equal(201);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Review created');
