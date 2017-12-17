@@ -23,22 +23,36 @@ class ReviewController {
    * @memberof ReviewController
    */
   static addReview(req, res) {
+    let reviewer;
     return Review
       .create({
         userId: req.decoded.user.id,
         recipeId: req.params.recipeId,
         content: req.body.content,
       })
-      .then(review => res.status(201).send({
-        status: 'Success',
-        message: 'Review created',
-        data: {
-          id: review.id,
-          userId: review.userId,
-          recipeId: review.recipeId,
-          content: review.content,
-        }
-      }))
+      .then(review => User
+        .findById(req.decoded.user.id, {
+          attributes: ['id', 'firstName', 'lastName'],
+        })
+        .then((user) => {
+          reviewer = user;
+          res.status(201).send({
+            status: 'Success',
+            message: 'Review created',
+            data: {
+              review: {
+                id: review.id,
+                userId: review.userId,
+                recipeId: review.recipeId,
+                content: review.content,
+                createdAt: review.createdAt,
+                User: {
+                  fullName: reviewer.fullName,
+                }
+              }
+            }
+          });
+        }))
       // Notify the recipe owner of the review through email
       .then(() => Recipe
         .findById(req.params.recipeId, {
@@ -48,18 +62,12 @@ class ReviewController {
           }]
         }))
       .then((recipe) => {
-        User
-          .findById(req.decoded.user.id, {
-            attributes: ['id', 'firstName', 'lastName'],
-          })
-          .then((reviewer) => {
-            if (recipe.User.notifications === true &&
+        if (recipe.User.notifications === true &&
               recipe.User.id !== reviewer.id) {
-              sendNotification(recipe.User.email,
-                'New notification', `Your recipe ${
-                  recipe.title} was reviewed by ${reviewer.fullName}`);
-            }
-          });
+          sendNotification(recipe.User.email,
+            'New notification', `Your recipe ${
+              recipe.title} was reviewed by ${reviewer.fullName}`);
+        }
       })
       .catch(error => res.status(500).send({
         status: 'Error',
