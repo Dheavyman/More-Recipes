@@ -150,7 +150,8 @@ const EditRecipe = (props) => {
                 </div>
               </div>
             </div>
-            {!isEmpty(error) && <ErrorMessage message={error.message} />}
+            {!isEmpty(error) &&
+              <ErrorMessage message={error.message} />}
             <div className="row" />
             <div className="row center-align">
               <button

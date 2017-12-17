@@ -38,6 +38,7 @@ const userRecipes = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        imageUploaded: false,
         userAddedRecipes: [
           ...state.userAddedRecipes,
           action.payload,

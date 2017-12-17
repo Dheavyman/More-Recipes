@@ -275,6 +275,11 @@ class Main extends React.Component {
           }
         });
     } else {
+      const { userRecipes: { imageUrl } } = this.props;
+      values = {
+        ...values,
+        recipeImage: imageUrl,
+      };
       addRecipe(values, this.handleClose);
     }
   }

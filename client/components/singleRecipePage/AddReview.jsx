@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const AddReview = (props) => {
-  const { reviewContent, handleChange, handleSubmitReview } = props;
+  const { reviewContent, handleChange, handleAddReview } = props;
   return (
     <div className="row">
       <div className="col s12 m12 l8">
         <form
           className="add-review col s12 center-align"
-          onSubmit={handleSubmitReview}
+          onSubmit={handleAddReview}
         >
           <div className="row">
             <div type="text" className="input-field col s12">
@@ -41,7 +41,7 @@ const AddReview = (props) => {
 AddReview.propTypes = {
   reviewContent: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleSubmitReview: PropTypes.func.isRequired,
+  handleAddReview: PropTypes.func.isRequired,
 };
 
 export default AddReview;

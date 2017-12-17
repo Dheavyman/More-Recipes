@@ -16,7 +16,7 @@ import ErrorMessage from '../common/ErrorMessage';
  */
 const AddRecipe = (props) => {
   const { category, open, handleChange, handleSelect, handleDrop, handleClose,
-    handleAddRecipe, imagePreview, userRecipes: {
+    handleAddRecipe, imagePreview, userRecipes: { isLoading,
       imageUploading, error } } = props;
   const actions = [
     <FlatButton
@@ -42,9 +42,9 @@ const AddRecipe = (props) => {
                 <input
                   name="title"
                   type="text"
-                  className="validate"
+                  // className="validate"
                   onChange={handleChange}
-                  required
+                  // required
                 />
                 <label htmlFor="recipe_name">Title</label>
               </div>
@@ -135,11 +135,12 @@ const AddRecipe = (props) => {
                       <img src={imagePreview} alt="" />}
                   </Dropzone>
                   <div className="row" />
-                  {imageUploading && <Spinner />}
+                  {(imageUploading || isLoading) && <Spinner />}
                 </div>
               </div>
             </div>
-            {!isEmpty(error) && <ErrorMessage message={error.message} />}
+            {!isEmpty(error) &&
+              <ErrorMessage message={error.message} />}
             <div className="row" />
             <div className="row center-align">
               <button

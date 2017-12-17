@@ -4,7 +4,6 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 const DeleteRecipe = (props) => {
-  console.log(props);
   const { recipeId, open, handleClose, handleDeleteRecipe } = props,
     deleteRecipe = () => {
       handleDeleteRecipe(recipeId);

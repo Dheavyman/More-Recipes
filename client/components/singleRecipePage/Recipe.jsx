@@ -33,7 +33,7 @@ class Recipe extends React.Component {
     this.handleOpenSignin = this.handleOpenSignin.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmitReview = this.handleSubmitReview.bind(this);
+    this.handleAddReview = this.handleAddReview.bind(this);
   }
 
   /**
@@ -102,7 +102,7 @@ class Recipe extends React.Component {
    * @returns {func} Dispatch function
    * @memberof Recipe
    */
-  handleSubmitReview(event) {
+  handleAddReview(event) {
     event.preventDefault();
     const { user: { isAuthenticated } } = this.props,
       review = {
@@ -154,7 +154,7 @@ class Recipe extends React.Component {
               singleRecipe={singleRecipe}
               reviewContent={this.state.reviewContent}
               handleChange={this.handleChange}
-              handleSubmitReview={this.handleSubmitReview}
+              handleAddReview={this.handleAddReview}
             />
           </main>
           <footer>
