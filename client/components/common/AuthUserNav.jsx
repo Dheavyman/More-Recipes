@@ -23,15 +23,6 @@ const AuthUserNav = (props) => {
           My Recipes<i className="material-icons left">folder</i>
         </Link>
       </li>
-      <li>
-        <a
-          href="recipes.html?#user-favorites"
-          className="black-text"
-        >
-          My Favorites
-          <i className="material-icons left">folder</i>
-        </a>
-      </li>
       <li className="divider" />
       <li>
         <a

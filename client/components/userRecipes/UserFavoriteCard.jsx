@@ -1,39 +1,67 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const FavoriteCard = () => (
-  <div className="col s12 m6 l3">
-    <div id="recipes" className="card large">
-      <a href="recipe.html">
-        <span className="card-title">Swedish Noodles</span>
-      </a>
-      <div className="card-image">
-        <a href="recipe.html"><img src="images/image06.jpg" alt="" /></a>
-      </div>
-      <div className="card-content">
-        <p>A rich meal for an awesome afternoon.</p>
-      </div>
-      <div className="card-action">
-        <p id="owner">
-          <label htmlFor="owner">Recipe by: </label>
-          John Stew
-        </p>
-        <ul className="center-align">
-          <li id="views"><i className="material-icons tiny">visibility</i>
-            200
-          </li>
-          <li id="favorites"><i className="material-icons tiny">favorite</i>
+import RecipeImage from '../common/RecipeImage';
+
+const UserFavoriteCard = (props) => {
+  const { recipe, userRecipes: { user } } = props,
+    { id, title, description, recipeImage, views, upvotes, downvotes } = recipe,
+    { fullName } = user;
+
+  return (
+    <div className="col s12 m6 l3">
+      <div id="recipes" className="card large">
+        <a href="recipe.html">
+          <span className="card-title">{title}</span>
+        </a>
+        <div className="card-image">
+          <Link to={`/recipes/${id}`}>
+            <RecipeImage title={title} recipeImage={recipeImage} />
+          </Link>
+        </div>
+        <div className="card-content">
+          <p>{description}</p>
+        </div>
+        <div className="card-action">
+          <p id="owner">
+            <label htmlFor="owner">Recipe by: </label>
+            {fullName}
+          </p>
+          <ul className="center-align">
+            <li id="views"><i className="material-icons tiny">visibility</i>
+              {views}
+            </li>
+            <li id="favorites"><i className="material-icons tiny">favorite</i>
             20
-          </li>
-          <li id="upvotes"><i className="material-icons tiny">thumb_up</i>
-            50
-          </li>
-          <li id="downvotes"><i className="material-icons tiny">thumb_down</i>
-            10
-          </li>
-        </ul>
+            </li>
+            <li id="upvotes"><i className="material-icons tiny">thumb_up</i>
+              {upvotes}
+            </li>
+            <li id="downvotes"><i className="material-icons tiny">thumb_down</i>
+              {downvotes}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default FavoriteCard;
+UserFavoriteCard.propTypes = {
+  recipe: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    recipeImage: PropTypes.string,
+    views: PropTypes.number,
+    upvotes: PropTypes.number,
+    downvotes: PropTypes.number,
+  }).isRequired,
+  userRecipes: PropTypes.shape({
+    user: PropTypes.shape({
+      fullName: PropTypes.string,
+    })
+  }).isRequired,
+};
+
+export default UserFavoriteCard;

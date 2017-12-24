@@ -42,9 +42,9 @@ const AddRecipe = (props) => {
                 <input
                   name="title"
                   type="text"
-                  // className="validate"
+                  className="validate"
                   onChange={handleChange}
-                  // required
+                  required
                 />
                 <label htmlFor="recipe_name">Title</label>
               </div>

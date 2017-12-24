@@ -55,9 +55,9 @@ const fetchUserFavoritesRequest = () => ({
   type: actionTypes.FETCH_USER_FAVORITES_REQUEST,
 });
 
-const fetchUserFavoritesSuccess = recipes => ({
+const fetchUserFavoritesSuccess = user => ({
   type: actionTypes.FETCH_USER_FAVORITES_SUCCESS,
-  payload: recipes,
+  payload: user
 });
 
 const fetchUserFavoritesFailure = error => ({
@@ -111,10 +111,14 @@ const fetchUserRecipes = userId => (dispatch) => {
 
 const fetchUserFavorites = userId => (dispatch) => {
   dispatch(fetchUserFavoritesRequest());
-  axios.get(`http://127.0.0.1:3000/api/v1/users/${userId}/recipes`)
+  axios.get(`http://127.0.0.1:3000/api/v1/users/${userId}/recipes`,
+    { headers: {
+      'x-access-token': getToken(),
+    } })
     .then((response) => {
-      const { data } = response;
-      dispatch(fetchUserFavoritesSuccess(data));
+      const { data } = response,
+        { data: { user } } = data;
+      dispatch(fetchUserFavoritesSuccess(user));
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -122,5 +126,4 @@ const fetchUserFavorites = userId => (dispatch) => {
     });
 };
 
-export { retrieveRecipes, fetchRecipe, fetchUserRecipes,
-  fetchUserRecipesSuccess, fetchUserFavorites };
+export { retrieveRecipes, fetchRecipe, fetchUserRecipes, fetchUserFavorites };

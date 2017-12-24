@@ -1,11 +1,19 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
+  isFectchingUserRecipes: false,
+  isFetchingUserFavorites: false,
   isLoading: false,
   imageUploading: false,
   imageUploaded: false,
   imageUrl: null,
   userAddedRecipes: [],
+  user: {
+    fullName: null,
+    userFavorites: [],
+  },
+  errorFetchingUserRecipes: {},
+  errorFetchingUserFavorites: {},
   error: {}
 };
 
@@ -14,20 +22,42 @@ const userRecipes = (state = initialState, action) => {
     case actionTypes.FETCH_USER_RECIPES_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isFectchingUserRecipes: true,
       };
     case actionTypes.FETCH_USER_RECIPES_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isFectchingUserRecipes: false,
         userAddedRecipes: action.payload.recipes,
-        error: {},
+        errorFetchingUserRecipes: {},
       };
     case actionTypes.FETCH_USER_RECIPES_FAILURE:
       return {
         ...state,
-        isLoading: false,
-        error: action.payload,
+        isFectchingUserRecipes: false,
+        errorFetchingUserRecipes: action.payload,
+      };
+    case actionTypes.FETCH_USER_FAVORITES_REQUEST:
+      return {
+        ...state,
+        isFetchingUserFavorites: true,
+      };
+    case actionTypes.FETCH_USER_FAVORITES_SUCCESS:
+      return {
+        ...state,
+        isFetchingUserFavorites: false,
+        user: {
+          ...state.user,
+          fullName: action.payload.fullName,
+          userFavorites: action.payload.Favorites,
+        },
+        errorFetchingUserFavorites: {},
+      };
+    case actionTypes.FETCH_USER_FAVORITES_FAILURE:
+      return {
+        ...state,
+        isFetchingUserFavorites: false,
+        errorFetchingUserFavorites: action.payload,
       };
     case actionTypes.ADD_RECIPE_REQUEST:
       return {
@@ -69,6 +99,7 @@ const userRecipes = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        imageUploaded: false,
         userAddedRecipes,
         error: {},
       };

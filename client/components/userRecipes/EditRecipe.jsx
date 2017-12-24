@@ -16,7 +16,7 @@ import ErrorMessage from '../common/ErrorMessage';
  */
 const EditRecipe = (props) => {
   const { open, handleEditChange, handleSelect, handleClose, handleDrop,
-    handleEditRecipe, imagePreview, recipe: {
+    handleEditRecipe, imagePreview, recipeToEdit: {
       title, category, description, preparationTime, ingredients, directions
     }, userRecipes: { isLoading, imageUploading, error } } = props;
 
@@ -177,7 +177,7 @@ EditRecipe.propTypes = {
   handleEditRecipe: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,
   imagePreview: PropTypes.string.isRequired,
-  recipe: PropTypes.shape({
+  recipeToEdit: PropTypes.shape({
     title: PropTypes.string,
     category: PropTypes.string,
     description: PropTypes.string,

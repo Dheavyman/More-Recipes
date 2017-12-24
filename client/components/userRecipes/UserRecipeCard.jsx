@@ -70,11 +70,11 @@ const UserRecipeCard = (props) => {
 UserRecipeCard.propTypes = {
   recipe: PropTypes.shape({
     title: PropTypes.string,
-    description: PropTypes.string.isRequired,
-    recipeImage: PropTypes.string.isRequired,
-    views: PropTypes.number.isRequired,
-    upvotes: PropTypes.number.isRequired,
-    downvotes: PropTypes.number.isRequired,
+    description: PropTypes.string,
+    recipeImage: PropTypes.string,
+    views: PropTypes.number,
+    upvotes: PropTypes.number,
+    downvotes: PropTypes.number,
   }).isRequired,
   handleOpenEdit: PropTypes.func.isRequired,
   handleOpenDelete: PropTypes.func.isRequired,
