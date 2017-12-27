@@ -1142,7 +1142,6 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
-          expect(res.body.message).to.equal('Oops! 404. Page not Found');
           done();
         });
     });
@@ -1155,7 +1154,6 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
-          expect(res.body.message).to.equal('Oops! 404. Page not Found');
           done();
         });
     });
