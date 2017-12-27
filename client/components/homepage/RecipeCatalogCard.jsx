@@ -5,20 +5,21 @@ import { Link } from 'react-router-dom';
 import RecipeImage from '../common/RecipeImage';
 
 const RecipeCatalogCard = (props) => {
-  const { recipe } = props;
+  const { recipe } = props,
+    { id, title, recipeImage, description, views, upvotes, downvotes } = recipe;
   return (
     <div className="col s12 m6 l4">
       <div id="recipes" className="card large">
-        <Link to={`recipes/${recipe.id}`}>
-          <span className="card-title">{recipe.title}</span>
+        <Link to={`recipes/${id}`}>
+          <span className="card-title">{title}</span>
         </Link>
         <div className="card-image">
-          <Link to={`recipes/${recipe.id}`}>
-            <RecipeImage />
+          <Link to={`recipes/${id}`}>
+            <RecipeImage title={title} recipeImage={recipeImage} />
           </Link>
         </div>
         <div className="card-content">
-          <p>{recipe.description}</p>
+          <p>{description}</p>
         </div>
         <div className="card-action">
           <p id="owner">
@@ -26,16 +27,16 @@ const RecipeCatalogCard = (props) => {
           </p>
           <ul className="center-align">
             <li id="views"><i className="material-icons tiny">visibility</i>
-              {recipe.views}
+              {views}
             </li>
             <li id="favorites"><i className="material-icons tiny">favorite</i>
               20
             </li>
             <li id="upvotes"><i className="material-icons tiny">thumb_up</i>
-              {recipe.upvotes}
+              {upvotes}
             </li>
             <li id="downvotes"><i className="material-icons tiny">thumb_down</i>
-              {recipe.downvotes}
+              {downvotes}
             </li>
           </ul>
         </div>

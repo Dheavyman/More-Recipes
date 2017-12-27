@@ -9,7 +9,7 @@ export default (sequelize, DataTypes) => {
     },
     category: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING,
@@ -27,6 +27,10 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
     directions: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    recipeImage: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -53,9 +57,9 @@ export default (sequelize, DataTypes) => {
     Recipe.hasMany(models.Review, {
       foreignKey: 'recipeId',
     });
-    Recipe.hasMany(models.Favorite, {
-      foreignKey: 'recipeId',
-    });
+    // Recipe.hasMany(models.Favorite, {
+    //   foreignKey: 'recipeId',
+    // });
   };
   return Recipe;
 };

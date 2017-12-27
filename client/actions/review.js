@@ -17,19 +17,17 @@ const postReviewFailure = error => ({
 });
 
 const postReview = (recipeId, reviewContent) => (dispatch) => {
-  const review = {
-      content: reviewContent,
-    },
-    token = {
-      'x-access-token': localStorage.getItem('token'),
-    };
+  const token = {
+    'x-access-token': localStorage.getItem('token'),
+  };
 
   dispatch(postReviewRequest());
   return axios.post(`http://127.0.0.1:3000/api/v1/recipes/${recipeId}/reviews`,
-    review, { headers: token })
+    reviewContent, { headers: token })
     .then((response) => {
-      const { data } = response;
-      dispatch(postReviewSuccess(data));
+      const { data } = response,
+        { data: { review } } = data;
+      dispatch(postReviewSuccess(review));
     })
     .catch((error) => {
       const { response: { data } } = error;

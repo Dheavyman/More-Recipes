@@ -33,7 +33,7 @@ class Recipe extends React.Component {
     this.handleOpenSignin = this.handleOpenSignin.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmitReview = this.handleSubmitReview.bind(this);
+    this.handleAddReview = this.handleAddReview.bind(this);
   }
 
   /**
@@ -102,17 +102,20 @@ class Recipe extends React.Component {
    * @returns {func} Dispatch function
    * @memberof Recipe
    */
-  handleSubmitReview(event) {
+  handleAddReview(event) {
     event.preventDefault();
-    const { user: { isAuthenticated } } = this.props;
+    const { user: { isAuthenticated } } = this.props,
+      review = {
+        content: this.state.reviewContent,
+      };
+
     if (isAuthenticated) {
       this.props.postReview(
-        this.props.match.params.recipeId, this.state.reviewContent
+        this.props.match.params.recipeId, review
       )
         .then(() => {
           const { singleRecipe: { error } } = this.props;
           if (isEmpty(error)) {
-            this.componentDidMount();
             this.setState({
               reviewContent: '',
             });
@@ -150,7 +153,7 @@ class Recipe extends React.Component {
               singleRecipe={singleRecipe}
               reviewContent={this.state.reviewContent}
               handleChange={this.handleChange}
-              handleSubmitReview={this.handleSubmitReview}
+              handleAddReview={this.handleAddReview}
             />
           </main>
           <footer>
@@ -164,7 +167,7 @@ class Recipe extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  singleRecipe: state.singleRecipe.recipe,
+  singleRecipe: state.singleRecipe,
   user: state.user,
 });
 

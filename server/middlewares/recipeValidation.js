@@ -28,13 +28,19 @@ class RecipeValidation {
         message: 'Title cannot be empty'
       });
     }
+    if (!req.body.category || isEmpty(req.body.category)) {
+      return res.status(406).send({
+        status: 'Fail',
+        message: 'Category cannot be empty'
+      });
+    }
     if (!req.body.description || isEmpty(req.body.description)) {
       return res.status(406).send({
         status: 'Fail',
         message: 'Description cannot be empty'
       });
     }
-    if (!req.body.preparationTime || isEmpty(req.body.preparationTime)) {
+    if (!req.body.preparationTime) {
       return res.status(406).send({
         status: 'Fail',
         message: 'Preparation time cannot be empty'

@@ -9,18 +9,19 @@ import AddReview from './AddReview';
 
 const Main = (props) => {
   const { singleRecipe } = props,
-    { data: { recipe } } = singleRecipe;
+    { recipe, reviews } = singleRecipe,
+    { title, recipeImage } = recipe;
   return (
     <div>
       <div className="parallax-container">
         <div className="parallax">
-          <RecipeImage />
+          <RecipeImage title={title} recipeImage={recipeImage} />
         </div>
       </div>
       <div className="section white container">
         <div className="row">
           <div className="col s12">
-            <h5 className="header">{recipe.title}</h5>
+            <h5 className="header">{title}</h5>
           </div>
         </div>
         <div className="row">
@@ -31,7 +32,7 @@ const Main = (props) => {
             <RecipeDetails recipe={recipe} />
           </div>
         </div>
-        <ReviewCollection recipe={recipe} />
+        <ReviewCollection reviews={reviews} />
         <AddReview {...props} />
       </div>
     </div>
@@ -41,7 +42,8 @@ const Main = (props) => {
 Main.propTypes = {
   singleRecipe: PropTypes.shape({
     data: PropTypes.shape({
-      recipe: PropTypes.shape()
+      recipe: PropTypes.shape(),
+      reviews: PropTypes.arrayOf(PropTypes.shape()),
     })
   }).isRequired,
 };

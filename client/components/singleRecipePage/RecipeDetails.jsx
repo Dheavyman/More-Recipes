@@ -32,14 +32,14 @@ const RecipeDetails = (props) => {
       <div className="col s12">
         <h6><b><em>Ingredients:</em></b></h6>
         <p id="ingredients" className="grey-text text-darken-3 lighten-3">
-          {formatDisplay(ingredients)}
+          {ingredients && formatDisplay(ingredients)}
         </p>
       </div>
       <div className="col s12">
         <h6><b><em>Directions:</em></b></h6>
-        <p id="directions" className="grey-text text-darken-3 lighten-3">
-          {formatDisplay(directions)}
-        </p>
+        <ol id="directions" className="grey-text text-darken-3 lighten-3">
+          {directions && formatDisplay(directions)}
+        </ol>
       </div>
     </div>
   );
@@ -48,10 +48,10 @@ const RecipeDetails = (props) => {
 RecipeDetails.propTypes = {
   recipe: PropTypes.shape({
     category: PropTypes.string,
-    description: PropTypes.string.isRequired,
-    preparationTime: PropTypes.number.isRequired,
-    ingredients: PropTypes.string.isRequired,
-    directions: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    preparationTime: PropTypes.number,
+    ingredients: PropTypes.string,
+    directions: PropTypes.string,
   }).isRequired,
 };
 

@@ -28,6 +28,10 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    userImage: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
     phone: {
       type: Sequelize.INTEGER,
       allowNull: true,

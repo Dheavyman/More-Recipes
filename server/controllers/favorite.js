@@ -67,19 +67,28 @@ class FavoriteController {
           include: [{
             model: Recipe,
             attributes: [
-              'title', 'category', 'description', 'preparationTime',
-              'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+              'id', 'title', 'category', 'description', 'preparationTime',
+              'ingredients', 'directions', 'recipeImage', 'upvotes',
+              'downvotes', 'views'
             ]
           }]
         }],
       })
-      .then(user => res.status(200).send({
-        status: 'Success',
-        message: 'Favorites retrieved',
-        data: {
-          user
+      .then((user) => {
+        if (user.Favorites.length === 0) {
+          return res.status(404).send({
+            status: 'Fail',
+            message: 'User has not favorited any recipe',
+          });
         }
-      }))
+        res.status(200).send({
+          status: 'Success',
+          message: 'Favorites retrieved',
+          data: {
+            user
+          }
+        });
+      })
       .catch(error => res.status(500).send({
         status: 'Error',
         message: error.message,

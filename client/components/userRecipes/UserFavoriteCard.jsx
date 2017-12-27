@@ -4,24 +4,17 @@ import { Link } from 'react-router-dom';
 
 import RecipeImage from '../common/RecipeImage';
 
-const UserRecipeCard = (props) => {
-  const { recipe, handleOpenEdit, handleOpenDelete } = props,
-    { id, title, description, recipeImage, views, upvotes, downvotes } = recipe;
-
-  const openEditModal = () => {
-    handleOpenEdit(recipe);
-  };
-
-  const openDeleteModal = () => {
-    handleOpenDelete(id);
-  };
+const UserFavoriteCard = (props) => {
+  const { recipe, userRecipes: { user } } = props,
+    { id, title, description, recipeImage, views, upvotes, downvotes } = recipe,
+    { fullName } = user;
 
   return (
     <div className="col s12 m6 l3">
       <div id="recipes" className="card large">
-        <Link to={`/recipes/${id}`}>
+        <a href="recipe.html">
           <span className="card-title">{title}</span>
-        </Link>
+        </a>
         <div className="card-image">
           <Link to={`/recipes/${id}`}>
             <RecipeImage title={title} recipeImage={recipeImage} />
@@ -31,12 +24,16 @@ const UserRecipeCard = (props) => {
           <p>{description}</p>
         </div>
         <div className="card-action">
+          <p id="owner">
+            <label htmlFor="owner">Recipe by: </label>
+            {fullName}
+          </p>
           <ul className="center-align">
             <li id="views"><i className="material-icons tiny">visibility</i>
               {views}
             </li>
             <li id="favorites"><i className="material-icons tiny">favorite</i>
-              20
+            20
             </li>
             <li id="upvotes"><i className="material-icons tiny">thumb_up</i>
               {upvotes}
@@ -45,29 +42,13 @@ const UserRecipeCard = (props) => {
               {downvotes}
             </li>
           </ul>
-          <a
-            role="button"
-            tabIndex="0"
-            onClick={openEditModal}
-            className={'btn-floating waves-effect waves-light green right'}
-          >
-            <i className="material-icons">edit</i>
-          </a>
-          <a
-            role="button"
-            tabIndex="0"
-            onClick={openDeleteModal}
-            className={'btn-floating waves-effect waves-light red right'}
-          >
-            <i className="material-icons">delete</i>
-          </a>
         </div>
       </div>
     </div>
   );
 };
 
-UserRecipeCard.propTypes = {
+UserFavoriteCard.propTypes = {
   recipe: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -76,8 +57,11 @@ UserRecipeCard.propTypes = {
     upvotes: PropTypes.number,
     downvotes: PropTypes.number,
   }).isRequired,
-  handleOpenEdit: PropTypes.func.isRequired,
-  handleOpenDelete: PropTypes.func.isRequired,
+  userRecipes: PropTypes.shape({
+    user: PropTypes.shape({
+      fullName: PropTypes.string,
+    })
+  }).isRequired,
 };
 
-export default UserRecipeCard;
+export default UserFavoriteCard;

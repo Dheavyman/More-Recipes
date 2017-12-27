@@ -81,6 +81,10 @@ export default (sequelize, DataTypes) => {
         this.setDataValue('lastName', val.trim());
       }
     },
+    userImage: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     phone: {
       type: DataTypes.INTEGER,
       allowNull: true,

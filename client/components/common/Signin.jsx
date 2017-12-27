@@ -9,11 +9,6 @@ import { required, isEmptyField } from '../../utils/validate';
 import ErrorMessage from '../common/ErrorMessage';
 import RenderField from '../common/RenderField';
 
-const customContentStyle = {
-  width: '35%',
-  maxWidth: '35%',
-};
-
 /**
  * Signin react component
  *
@@ -38,7 +33,6 @@ const Signin = (props) => {
         title="Login into your account"
         actions={actions}
         modal
-        contentStyle={customContentStyle}
         open={open}
         autoScrollBodyContent
       >

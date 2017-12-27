@@ -34,23 +34,26 @@ class RecipeController {
         preparationTime: req.body.preparationTime,
         ingredients: req.body.ingredients,
         directions: req.body.directions,
+        recipeImage: req.body.recipeImage,
       })
       .then(recipe => recipe.increment('views'))
       .then(recipe => res.status(201).send({
         status: 'Success',
         message: 'Recipe created',
         data: {
-          id: recipe.id,
-          userId: recipe.userId,
-          title: recipe.title,
-          category: recipe.category,
-          description: recipe.description,
-          preparationTime: recipe.preparationTime,
-          ingredients: recipe.ingredients,
-          directions: recipe.directions,
-          upvotes: recipe.upvotes,
-          downvotes: recipe.downvotes,
-          views: recipe.views,
+          recipe: {
+            id: recipe.id,
+            title: recipe.title,
+            category: recipe.category,
+            description: recipe.description,
+            preparationTime: recipe.preparationTime,
+            ingredients: recipe.ingredients,
+            directions: recipe.directions,
+            recipeImage: recipe.recipeImage,
+            upvotes: recipe.upvotes,
+            downvotes: recipe.downvotes,
+            views: recipe.views,
+          }
         }
       }))
       .catch(error => res.status(500).send({
@@ -87,19 +90,23 @@ class RecipeController {
             preparationTime: req.body.preparationTime,
             ingredients: req.body.ingredients,
             directions: req.body.directions,
+            recipeImage: req.body.recipeImage || recipe.recipeImage,
           });
       })
       .then(updatedRecipe => res.status(200).send({
         status: 'Success',
         message: 'Recipe modified',
         data: {
-          id: updatedRecipe.id,
-          title: updatedRecipe.title,
-          category: updatedRecipe.category,
-          description: updatedRecipe.description,
-          preparationTime: updatedRecipe.preparationTime,
-          ingredients: updatedRecipe.ingredients,
-          directions: updatedRecipe.directions,
+          recipe: {
+            id: updatedRecipe.id,
+            title: updatedRecipe.title,
+            category: updatedRecipe.category,
+            description: updatedRecipe.description,
+            preparationTime: updatedRecipe.preparationTime,
+            ingredients: updatedRecipe.ingredients,
+            directions: updatedRecipe.directions,
+            recipeImage: updatedRecipe.recipeImage,
+          }
         }
       }))
       // Notify users that their favorite recipe has been modified
@@ -162,7 +169,8 @@ class RecipeController {
       .all({
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
-          'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+          'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+          'views'
         ],
       })
       .then(recipes => res.status(200).send({
@@ -193,7 +201,8 @@ class RecipeController {
       .findById(req.params.recipeId, {
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
-          'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+          'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+          'views'
         ],
         include: [{
           model: Review,
@@ -233,7 +242,8 @@ class RecipeController {
       .all({
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
-          'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+          'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+          'views'
         ],
         where: {
           userId: req.params.userId,
@@ -279,7 +289,8 @@ class RecipeController {
         .findAll({
           attributes: [
             'id', 'title', 'category', 'description', 'preparationTime',
-            'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+            'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+            'views'
           ],
           order: [
             [sort, order]
@@ -324,7 +335,8 @@ class RecipeController {
         .all({
           attributes: [
             'id', 'title', 'category', 'description', 'preparationTime',
-            'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+            'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+            'views'
           ],
           where: {
             [Op.or]: searchList,
@@ -376,7 +388,8 @@ class RecipeController {
         .all({
           attributes: [
             'id', 'title', 'category', 'description', 'preparationTime',
-            'ingredients', 'directions', 'upvotes', 'downvotes', 'views'
+            'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+            'views'
           ],
           where: {
             [Op.or]: searchList,

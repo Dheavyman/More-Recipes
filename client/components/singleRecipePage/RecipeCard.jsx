@@ -5,11 +5,11 @@ import RecipeImage from '../common/RecipeImage';
 
 const RecipeCard = (props) => {
   const { recipe } = props,
-    { upvotes, downvotes } = recipe;
+    { title, recipeImage, upvotes, downvotes } = recipe;
   return (
     <div className="card">
       <div className="card-image">
-        <RecipeImage />
+        <RecipeImage title={title} recipeImage={recipeImage} />
       </div>
       <div className="card-action center-align">
         <a id="favorite" className="chip waves-effect waves-red ">
@@ -28,8 +28,10 @@ const RecipeCard = (props) => {
 
 RecipeCard.propTypes = {
   recipe: PropTypes.shape({
-    upvotes: PropTypes.number.isRequired,
-    downvotes: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    recipeImage: PropTypes.string,
+    upvotes: PropTypes.number,
+    downvotes: PropTypes.number,
   }).isRequired,
 };
 

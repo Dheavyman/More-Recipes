@@ -10,12 +10,16 @@ const Review = (props) => {
     { User: { fullName }, content, createdAt } = review;
   return (
     <li className="collection-item avatar">
-      <img src={userImage} alt="" className="circle" />
-      <span className="name"><b>{fullName}</b></span>
-      <p className="created-on">{createdOn(createdAt)}</p>
-      <p id="review-content">
-        {content}
-      </p>
+      { review &&
+      <div>
+        <img src={userImage} alt="" className="circle" />
+        <span className="name"><b>{fullName}</b></span>
+        <p className="created-on">{createdOn(createdAt)}</p>
+        <p id="review-content">
+          {content}
+        </p>
+      </div>
+      }
     </li>
   );
 };
@@ -24,9 +28,9 @@ Review.propTypes = {
   review: PropTypes.shape({
     User: PropTypes.shape({
       fullName: PropTypes.string,
-    }).isRequired,
-    content: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
+    }),
+    content: PropTypes.string,
+    createdAt: PropTypes.string,
   }).isRequired,
 };
 

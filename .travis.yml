@@ -11,7 +11,7 @@ install:
 script:
   - npm test
 env:
-  - NODE_ENV=test_travis
+  - NODE_ENV=test
 cache:
   directories:
    - "node_modules"

@@ -11,11 +11,6 @@ import RenderField from '../common/RenderField';
 
 const { validate } = helpers;
 
-const customContentStyle = {
-  width: '35%',
-  maxWidth: '35%',
-};
-
 /**
  * Signup react component
  *
@@ -41,7 +36,6 @@ const Signup = (props) => {
         title="Create an account"
         actions={actions}
         modal
-        contentStyle={customContentStyle}
         open={open}
         autoScrollBodyContent
       >

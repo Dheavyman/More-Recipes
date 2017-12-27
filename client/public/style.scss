@@ -126,3 +126,14 @@
 .fixed-action-btn {
   margin-bottom: 30px;
 }
+
+.dropzone {
+  width: 100%;
+  height: 15rem;
+  border: 0.2rem dotted #2196f3;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
