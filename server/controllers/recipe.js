@@ -164,7 +164,7 @@ class RecipeController {
    * @memberof RecipeController
    */
   static getAll(req, res, next) {
-    if (req.query.sort || req.query.search) return next();
+    if (req.query) return next();
     return Recipe
       .all({
         attributes: [
@@ -283,8 +283,13 @@ class RecipeController {
    */
   static getMostUpvotes(req, res, next) {
     if (req.query.sort && req.query.order) {
-      const sort = req.query.sort,
-        order = req.query.order.toUpperCase().slice(0, 4);
+      const sort = req.query.sort;
+      let order = req.query.order.toUpperCase();
+      if (order === 'DESCENDING') {
+        order = order.slice(0, 4);
+      } else if (order === 'ASCENDING') {
+        order = order.slice(0, 3);
+      }
       return Recipe
         .findAll({
           attributes: [
@@ -304,10 +309,18 @@ class RecipeController {
             recipes
           }
         }))
-        .catch(error => res.status(500).send({
-          status: 'Error',
-          message: error.message,
-        }));
+        .catch((error) => {
+          if (error.message.includes('column')) {
+            return res.status(401).send({
+              status: 'Error',
+              message: 'Invalid sort or order term in query',
+            });
+          }
+          return res.status(500).send({
+            status: 'Error',
+            message: error.message,
+          });
+        });
     }
     next();
   }
@@ -324,7 +337,7 @@ class RecipeController {
    * @memberof RecipeController
    */
   static searchByIngredients(req, res, next) {
-    if (req.query.search === 'ingredients') {
+    if (req.query.search === 'ingredients' && req.query.list) {
       const ingredients = req.query.list.split(' ');
       const searchList = ingredients.map(keyWord => ({
         ingredients: {
@@ -371,13 +384,12 @@ class RecipeController {
    * @static
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @param {function} next - Calls the next route handler
    * @returns {object} Object representing success status or
    *  error status
    * @memberof RecipeController
    */
-  static searchByCategory(req, res, next) {
-    if (req.query.search === 'category') {
+  static searchByCategory(req, res) {
+    if (req.query.search === 'category' && req.query.list) {
       const category = req.query.list.split(' ');
       const searchList = category.map(keyWord => ({
         category: {
@@ -415,7 +427,9 @@ class RecipeController {
           message: error.message,
         }));
     }
-    next();
+    res.send({
+      message: 'No match found, wrong query strings'
+    });
   }
 }
 
