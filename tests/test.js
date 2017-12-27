@@ -169,6 +169,22 @@ const server = supertest.agent(app),
     ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
     directions: '   ',
     recipeImage: 'Url',
+  }, {
+    title: 'Spaghetti',
+    category: '  ',
+    description: 'Served white and colourful',
+    preparationTime: 50,
+    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
+    directions: 'Slice the yam and prepare the sauce',
+    recipeImage: 'Url',
+  }, {
+    title: 'Spaghetti',
+    category: 'Dinner',
+    description: 'Served white and colourful',
+    preparationTime: 50,
+    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
+    directions: 'Slice the yam and prepare the sauce',
+    recipeImage: '   ',
   }],
   validReviewSeed = [{
     content: 'A nice recipe idea',
@@ -359,7 +375,7 @@ describe('More Recipes', () => {
     });
   });
   describe('signin API', () => {
-    it('should return 401 for empty username', (done) => {
+    it('should return 400 for empty username', (done) => {
       server
         .post('/api/v1/users/signin')
         .set('Connection', 'keep alive')
@@ -367,12 +383,12 @@ describe('More Recipes', () => {
         .type('form')
         .send(invalidSigninSeed[0])
         .end((err, res) => {
-          expect(res.statusCode).to.equal(401);
+          expect(res.statusCode).to.equal(400);
           expect(res.body.message).to.equal('Username required');
           done();
         });
     });
-    it('should return 401 for empty password', (done) => {
+    it('should return 400 for empty password', (done) => {
       server
         .post('/api/v1/users/signin')
         .set('Connection', 'keep alive')
@@ -380,7 +396,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(invalidSigninSeed[1])
         .end((err, res) => {
-          expect(res.statusCode).to.equal(401);
+          expect(res.statusCode).to.equal(400);
           expect(res.body.message).to.equal('Password required');
           done();
         });
@@ -551,7 +567,7 @@ describe('More Recipes', () => {
           done();
         });
     });
-    it('should return 406 for an empty title', (done) => {
+    it('should return 400 for an empty title', (done) => {
       server
         .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
@@ -561,13 +577,29 @@ describe('More Recipes', () => {
         .type('form')
         .send(invalidRecipeSeed[0])
         .end((err, res) => {
-          expect(res.statusCode).to.equal(406);
+          expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('Fail');
           expect(res.body.message).to.equal('Title cannot be empty');
           done();
         });
     });
-    it('should return 406 for empty description', (done) => {
+    it('should return 400 for an empty category', (done) => {
+      server
+        .post('/api/v1/recipes')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidRecipeSeed[5])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Category cannot be empty');
+          done();
+        });
+    });
+    it('should return 400 for empty description', (done) => {
       server
         .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
@@ -577,13 +609,13 @@ describe('More Recipes', () => {
         .type('form')
         .send(invalidRecipeSeed[1])
         .end((err, res) => {
-          expect(res.statusCode).to.equal(406);
+          expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('Fail');
           expect(res.body.message).to.equal('Description cannot be empty');
           done();
         });
     });
-    it('should return 406 for empty preparation time', (done) => {
+    it('should return 400 for empty preparation time', (done) => {
       server
         .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
@@ -593,13 +625,13 @@ describe('More Recipes', () => {
         .type('form')
         .send(invalidRecipeSeed[2])
         .end((err, res) => {
-          expect(res.statusCode).to.equal(406);
+          expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('Fail');
           expect(res.body.message).to.equal('Preparation time cannot be empty');
           done();
         });
     });
-    it('should return 406 for empty ingredients', (done) => {
+    it('should return 400 for empty ingredients', (done) => {
       server
         .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
@@ -609,13 +641,13 @@ describe('More Recipes', () => {
         .type('form')
         .send(invalidRecipeSeed[3])
         .end((err, res) => {
-          expect(res.statusCode).to.equal(406);
+          expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('Fail');
           expect(res.body.message).to.equal('Ingredients cannot be empty');
           done();
         });
     });
-    it('should return 406 for empty directions', (done) => {
+    it('should return 400 for empty directions', (done) => {
       server
         .post('/api/v1/recipes')
         .set('Connection', 'keep alive')
@@ -625,9 +657,25 @@ describe('More Recipes', () => {
         .type('form')
         .send(invalidRecipeSeed[4])
         .end((err, res) => {
-          expect(res.statusCode).to.equal(406);
+          expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('Fail');
           expect(res.body.message).to.equal('Directions cannot be empty');
+          done();
+        });
+    });
+    it('should return 400 for an empty recipe image', (done) => {
+      server
+        .post('/api/v1/recipes')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(invalidRecipeSeed[6])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('Recipe image cannot be empty');
           done();
         });
     });
@@ -856,7 +904,7 @@ describe('More Recipes', () => {
             done();
           });
       });
-    it('should return 406 for empty content', (done) => {
+    it('should return 400 for empty content', (done) => {
       server
         .post(`/api/v1/recipes/${recipeId1}/reviews`)
         .set('Connection', 'keep alive')
@@ -866,7 +914,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(invalidReviewSeed[0])
         .end((err, res) => {
-          expect(res.statusCode).to.equal(406);
+          expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('Fail');
           expect(res.body.message).to.equal('Content cannot be empty');
           done();

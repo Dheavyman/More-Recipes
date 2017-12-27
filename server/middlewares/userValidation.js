@@ -27,30 +27,35 @@ class UserValidation {
     // Check if username is empty
     if (!req.body.username || isEmpty(req.body.username)) {
       return res.status(400).send({
+        status: 'Fail',
         message: 'Username required'
       });
     }
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
       return res.status(400).send({
+        status: 'Fail',
         message: 'Password required'
       });
     }
     // Check if email is empty
     if (!req.body.email || isEmpty(req.body.email)) {
       return res.status(400).send({
+        status: 'Fail',
         message: 'Email required'
       });
     }
     // Check if firstname is empty
     if (!req.body.firstName || isEmpty(req.body.firstName)) {
       return res.status(400).send({
+        status: 'Fail',
         message: 'Firstname required'
       });
     }
     // Check if lastname is empty
     if (!req.body.lastName || isEmpty(req.body.lastName)) {
       return res.status(400).send({
+        status: 'Fail',
         message: 'Lastname required'
       });
     }
@@ -72,11 +77,13 @@ class UserValidation {
     const username = (req.body.username).toLowerCase().trim();
     if (!isAlphaNumeric(username)) {
       return res.status(400).send({
+        status: 'Fail',
         message: 'Invalid username, only alphabets and numbers allowed'
       });
     }
     if (!isEmail(req.body.email)) {
       return res.status(400).send({
+        status: 'Fail',
         message: 'Invalid email address format'
       });
     }
@@ -165,13 +172,15 @@ class UserValidation {
   static signinRequiredInputs(req, res, next) {
     // Check if username is empty
     if (!req.body.username || isEmpty(req.body.username)) {
-      return res.status(401).send({
+      return res.status(400).send({
+        status: 'Fail',
         message: 'Username required'
       });
     }
     // Check if password is empty
     if (!req.body.password || isEmpty(req.body.password)) {
-      return res.status(401).send({
+      return res.status(400).send({
+        status: 'Fail',
         message: 'Password required'
       });
     }

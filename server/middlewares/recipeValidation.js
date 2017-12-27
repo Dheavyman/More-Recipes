@@ -23,39 +23,45 @@ class RecipeValidation {
    */
   static recipeRequiredInputs(req, res, next) {
     if (!req.body.title || isEmpty(req.body.title)) {
-      return res.status(406).send({
+      return res.status(400).send({
         status: 'Fail',
         message: 'Title cannot be empty'
       });
     }
     if (!req.body.category || isEmpty(req.body.category)) {
-      return res.status(406).send({
+      return res.status(400).send({
         status: 'Fail',
         message: 'Category cannot be empty'
       });
     }
     if (!req.body.description || isEmpty(req.body.description)) {
-      return res.status(406).send({
+      return res.status(400).send({
         status: 'Fail',
         message: 'Description cannot be empty'
       });
     }
     if (!req.body.preparationTime) {
-      return res.status(406).send({
+      return res.status(400).send({
         status: 'Fail',
         message: 'Preparation time cannot be empty'
       });
     }
     if (!req.body.ingredients || isEmpty(req.body.ingredients)) {
-      return res.status(406).send({
+      return res.status(400).send({
         status: 'Fail',
         message: 'Ingredients cannot be empty'
       });
     }
     if (!req.body.directions || isEmpty(req.body.directions)) {
-      return res.status(406).send({
+      return res.status(400).send({
         status: 'Fail',
         message: 'Directions cannot be empty'
+      });
+    }
+    if (!req.body.recipeImage || isEmpty(req.body.recipeImage)) {
+      return res.status(400).send({
+        status: 'Fail',
+        message: 'Recipe image cannot be empty'
       });
     }
     next();
