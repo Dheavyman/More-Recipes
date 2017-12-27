@@ -20,15 +20,13 @@ const Main = (props) => {
   return (
     <div className="row">
       <div className="fixed-action-btn">
-        <a
-          role="button"
-          tabIndex="0"
+        <button
           onClick={handleOpenAdd}
           className={`btn-floating btn-large modal-trigger waves-effect
               waves-light indigo accent-2 pulse`}
         >
           <i className="material-icons">add</i>
-        </a>
+        </button>
       </div>
       <div className="my-recipes">
         <div id="user-recipes">
