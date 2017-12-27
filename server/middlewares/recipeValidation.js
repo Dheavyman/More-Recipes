@@ -58,6 +58,12 @@ class RecipeValidation {
         message: 'Directions cannot be empty'
       });
     }
+    if (!req.body.recipeImage || isEmpty(req.body.recipeImage)) {
+      return res.status(400).send({
+        status: 'Fail',
+        message: 'Recipe image cannot be empty'
+      });
+    }
     next();
   }
 

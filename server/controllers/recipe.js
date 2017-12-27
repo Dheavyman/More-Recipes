@@ -1,4 +1,6 @@
 import Sequelize from 'sequelize';
+import isEmpty from 'lodash/isEmpty';
+
 import models from '../models';
 import helpers from '../helpers';
 
@@ -164,7 +166,7 @@ class RecipeController {
    * @memberof RecipeController
    */
   static getAll(req, res, next) {
-    if (req.query) return next();
+    if (!isEmpty(req.query)) return next();
     return Recipe
       .all({
         attributes: [
@@ -311,7 +313,7 @@ class RecipeController {
         }))
         .catch((error) => {
           if (error.message.includes('column')) {
-            return res.status(401).send({
+            return res.status(404).send({
               status: 'Error',
               message: 'Invalid sort or order term in query',
             });
@@ -427,7 +429,8 @@ class RecipeController {
           message: error.message,
         }));
     }
-    res.send({
+    res.status(404).send({
+      status: 'Fail',
       message: 'No match found, wrong query strings'
     });
   }
