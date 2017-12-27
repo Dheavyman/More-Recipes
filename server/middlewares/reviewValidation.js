@@ -23,7 +23,7 @@ class ReviewValidation {
    */
   static reviewRequiredInputs(req, res, next) {
     if (!req.body.content || isEmpty(req.body.content)) {
-      return res.status(406).send({
+      return res.status(400).send({
         status: 'Fail',
         message: 'Content cannot be empty'
       });
