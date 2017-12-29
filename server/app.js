@@ -3,7 +3,10 @@ import path from 'path';
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+
 import routes from './routes';
+import swaggerSpec from './swagger';
 
 dotenv.config();
 
@@ -27,7 +30,10 @@ app.use((req, res, next) => {
 });
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/public')));
+
+// Serve swagger specifications to swagger-ui for browser display
+app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Require our routes
 routes(app);
@@ -36,6 +42,16 @@ routes(app);
 // returns the index page
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+});
+
+// production error handler
+// no stacktraces leaked to user
+app.use((err, req, res, next) => {
+  res.status(err.status || 500)
+    .json({
+      status: 'Error',
+      message: err.message
+    });
 });
 
 // Set the app entry port

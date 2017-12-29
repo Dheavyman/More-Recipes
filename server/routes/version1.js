@@ -1,6 +1,8 @@
 import express from 'express';
+
 import controllers from '../controllers';
 import middlewares from '../middlewares';
+import swaggerSpec from '../swagger';
 
 const router = express.Router(),
   authenticate = middlewares.authentication,
@@ -14,85 +16,831 @@ const router = express.Router(),
   reviewValidate = middlewares.reviewValidation,
   notifyUsers = middlewares.usersNotification;
 
-router.get('/', (req, res) => res.status(200).send({
-  message: 'Welcome to the Users API!',
-}));
+// Create swagger specification for API
+router.get('/swagger.json', (req, res) => {
+  res.set('Content-Type', 'application/json');
+  res.json({
+    swaggerSpec,
+  });
+});
 
-// Register a user on the platform
+/**
+ * @swagger
+ * /users/signup:
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: Create a new user
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: body
+ *         in:  body
+ *         description: Signup details
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/UserSignup'
+ *     responses:
+ *       201:
+ *         description: User created
+ *         schema:
+ *           $ref: '#/definitions/SignupResponse'
+ *       400:
+ *         description: Invalid or incomplete signup details
+ */
 router.post('/users/signup', userValidate.signupRequiredInputs,
   userValidate.validUserInputs, userValidate.usernameExist,
   userValidate.emailExist, userController.registerUser);
 
-// Signin a user on the platform
+/**
+ * @swagger
+ * /users/signin:
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: User login
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: body
+ *         in: body
+ *         description: Login details
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/UserSignin'
+ *     responses:
+ *       200:
+ *         description: Ok, User logged in
+ *         schema:
+ *           $ref: '#/definitions/LoginResponse'
+ */
 router.post('/users/signin', userValidate.signinRequiredInputs,
   userController.signinUser);
 
 router.route('/recipes')
-  // Add a recipe to the catalog
+  /**
+   * @swagger
+   * /recipes:
+   *   post:
+   *     tags:
+   *       - Recipes
+   *     summary: Add a new recipe
+   *     consumes:
+   *       - application/json
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: body
+   *         in: body
+   *         description: Recipe creation details
+   *         required: true
+   *         schema:
+   *           $ref: '#/definitions/NewRecipe'
+   *     responses:
+   *       201:
+   *         description: Recipe created
+   *         schema:
+   *           type: object
+   *           properties:
+   *             status:
+   *               type: string
+   *               example: Success
+   *             message:
+   *               type: string
+   *               example: Recipe created
+   *             data:
+   *               type: object
+   *               properties:
+   *                 recipe:
+   *                   $ref: '#/definitions/Recipe'
+   *       400:
+   *         description: Invalid or incomplete details to create recipe
+   */
   .post(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
     recipeController.addRecipe)
 
-  // Retrieve all the recipes in the catalog
-  // Retrieve recipes with the most upvotes
-  // Search for recipes based on list of ingredients
-  // Search for recipes based on category
+  /**
+   * @swagger
+   * /recipes:
+   *   get:
+   *     tags:
+   *       - Recipes
+   *     summary: Retrieve all recipes
+   *     description: User can either search for recipes or sort recipes
+   *                  but not both at the same time
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: search
+   *         in: query
+   *         description: Value to base the search on
+   *         type: string
+   *         enum:
+   *           - ingredients
+   *           - category
+   *       - name: list
+   *         in: query
+   *         description: Value(s) to search with
+   *         type: string
+   *       - name: sort
+   *         in: query
+   *         description: Value to base the sort on
+   *         type: string
+   *       - name: order
+   *         in: query
+   *         description: Value to order the sort with
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok, Recipes retrieved
+   *         schema:
+   *           type: object
+   *           properties:
+   *             status:
+   *               type: string
+   *               example: Success
+   *             message:
+   *               type: string
+   *               example: Recipes retrieved
+   *             data:
+   *               type: object
+   *               properties:
+   *                 recipes:
+   *                   type: array
+   *                   items:
+   *                     $ref: '#/definitions/Recipe'
+   */
   .get(recipeController.getAll, recipeController.getMostUpvotes,
     recipeController.searchByIngredients, recipeController.searchByCategory);
 
 router.route('/recipes/:recipeId')
-  // Retrieve a single recipe from the catalog
+  /**
+   * @swagger
+   * /recipes/{recipeId}:
+   *   get:
+   *     tags:
+   *       - Recipes
+   *     summary: Retrieve a single recipe
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: recipeId
+   *         in: path
+   *         description: Id of recipe to retrieve
+   *         type: integer
+   *         required: true
+   *     responses:
+   *       200:
+   *         description: Ok, Recipe retrieved
+   *         schema:
+   *           type: object
+   *           properties:
+   *             status:
+   *               type: string
+   *               example: Success
+   *             message:
+   *               type: string
+   *               example: Recipe retrieved
+   *             data:
+   *               type: object
+   *               properties:
+   *                 recipe:
+   *                   $ref: '#/definitions/Recipe'
+   */
   .get(recipeValidate.recipeExist, recipeController.getOne)
 
-  // Modifies a recipe
+  /**
+   * @swagger
+   * /recipes/{recipeId}:
+   *   put:
+   *     tags:
+   *       - Recipes
+   *     summary: Modify a recipe
+   *     consumes:
+   *       - application/json
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: recipeId
+   *         in: path
+   *         description: Id of recipe to modify
+   *         type: integer
+   *         required: true
+   *       - name: body
+   *         in: body
+   *         description: New details
+   *         required: true
+   *         schema:
+   *           $ref: '#/definitions/NewRecipe'
+   *     responses:
+   *       200:
+   *         description: Ok, Recipe modified
+   *         schema:
+   *           type: object
+   *           properties:
+   *             status:
+   *               type: string
+   *               example: Success
+   *             message:
+   *               type: string
+   *               example: Recipe modified
+   *             data:
+   *               type: object
+   *               properties:
+   *                 recipe:
+   *                   $ref: '#/definitions/Recipe'
+   */
   .put(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
     recipeValidate.recipeExist, recipeValidate.userRecipe,
     notifyUsers.favoriteRecipeModified, recipeController.modifyRecipe)
 
-  // Delete a recipe
+  /**
+   * @swagger
+   * /recipes/{recipeId}:
+   *   delete:
+   *     tags:
+   *       - Recipes
+   *     summary: Delete a single recipe
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: recipeId
+   *         in: path
+   *         description: Id of recipe to delete
+   *         type: integer
+   *         required: true
+   *     responses:
+   *       200:
+   *         description: Ok, Recipe deleted
+   *         schema:
+   *           type: object
+   *           properties:
+   *             status:
+   *               type: string
+   *               example: Success
+   *             message:
+   *               type: string
+   *               example: Recipe deleted
+   */
   .delete(authenticate.verifyToken, recipeValidate.recipeExist,
     recipeValidate.userRecipe, recipeController.deleteRecipe);
 
-// Add a review for a recipe
+/**
+ * @swagger
+ * /recipes/{recipeId}/reviews:
+ *   post:
+ *     tags:
+   *       - Reviews
+ *     summary: Add a review
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: recipeId
+ *         in: path
+ *         description: Id of recipe to delete
+ *         type: integer
+ *         required: true
+ *       - name: body
+ *         in: body
+ *         description: Review content
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             content:
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Review created
+ *         schema:
+ *           $ref: '#/definitions/Review'
+ *       400:
+ *         description: Invalid or incomplete details to create review
+ */
 router.post('/recipes/:recipeId/reviews', authenticate.verifyToken,
   reviewValidate.reviewRequiredInputs, recipeValidate.recipeExist,
   reviewController.addReview);
 
-// Delete a review for a recipe
+/**
+ * @swagger
+ * /recipes/{recipeId}/reviews/{reviewId}:
+ *   delete:
+ *     tags:
+   *       - Reviews
+ *     summary: Delete a review
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: recipeId
+ *         in: path
+ *         description: Id of recipe
+ *         type: integer
+ *         required: true
+ *       - name: reviewId
+ *         in: path
+ *         description: Id of review to delete
+ *         type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Ok, Review deleted
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Review deleted
+ */
 router.delete('/recipes/:recipeId/reviews/:reviewId', authenticate.verifyToken,
   recipeValidate.recipeExist, reviewValidate.reviewExist,
   reviewValidate.userReview, reviewController.deleteReview);
 
-// Add a recipe to a user's favorite
+/**
+ * @swagger
+ * /recipes/{recipeId}/favorites:
+ *   post:
+ *     tags:
+   *       - Favorites
+ *     summary: Add a recipe to favorite
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: recipeId
+ *         in: path
+ *         description: Id of recipe to delete
+ *         type: integer
+ *         required: true
+ *     responses:
+ *       201:
+ *         description: Recipe added to favorites
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Recipe added to favorites
+ *       200:
+ *         description: Recipe removed from favorites
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Recipe removed from favorites
+ */
 router.post('/recipes/:recipeId/favorites', authenticate.verifyToken,
   recipeValidate.recipeExist, favoriteController.setFavorite);
 
-// Get all user recipes
+/**
+ * @swagger
+ * /recipes/users/{userId}:
+ *   get:
+ *     tags:
+   *       - Recipes
+ *     summary: Retrieve user added recipes
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         description: Id of user
+ *         type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Ok, Recipes retrieved
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: User recipes retrieved
+ *             data:
+ *               type: object
+ *               properties:
+ *                 recipes:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/definitions/Recipe'
+ *       404:
+ *         description: Not found
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Fail
+ *             message:
+ *               type: string
+ *               example: User has not added any recipe
+ */
 router.get('/recipes/users/:userId', authenticate.verifyToken,
   userValidate.userExist, recipeController.userRecipes);
 
-// Get all user favorite recipes
+/**
+ * @swagger
+ * /users/{userId}/recipes:
+ *   get:
+ *     tags:
+   *       - Favorites
+ *     summary: Retrieve user favorite recipes
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         description: Id of user
+ *         type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Ok, Recipes retrieved
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Favorites retrieved
+ *             data:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/definitions/UserFavorites'
+ *       404:
+ *         description: Not found
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Fail
+ *             message:
+ *               type: string
+ *               example: User has not added any recipe
+ */
 router.get('/users/:userId/recipes', authenticate.verifyToken,
   userValidate.userExist, favoriteController.userFavorites);
 
-// Create category for user favorite recipe
-router.put('/users/:userId/recipes/:recipeId', authenticate.verifyToken,
-  userValidate.userExist, recipeValidate.recipeExist,
-  favoriteController.favoriteCategory);
+/**
+ * @swagger
+ * /users/recipes/{recipeId}:
+ *   put:
+ *     tags:
+ *       - Favorites
+ *     summary: Create category for user favorite recipe
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: recipeId
+ *         in: path
+ *         description: Id of recipe
+ *         type: integer
+ *         required: true
+ *       - name: body
+ *         in: body
+ *         description: Category to be created
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             category:
+ *               type: string
+ *     responses:
+ *       200:
+ *         description: Ok, Category created
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Favorite recipe category added
+ *       404:
+ *         description: Not found
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Fail
+ *             message:
+ *               type: string
+ *               example: Favorite recipe not found
+ */
+router.put('/users/recipes/:recipeId', authenticate.verifyToken,
+  recipeValidate.recipeExist, favoriteController.favoriteCategory);
 
-// Upvote a recipe
+/**
+ * @swagger
+ * /recipes/{recipeId}/upvotes:
+ *   put:
+ *     tags:
+ *       - Votes
+ *     summary: Upvote a recipe
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: recipeId
+ *         in: path
+ *         description: Id of recipe
+ *         type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Ok, Upvote created
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Upvote recorded
+ *             data:
+ *               $ref: '#/definitions/VoteUpdate'
+ */
 router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,
   recipeValidate.recipeExist, voteController.upvote);
 
-// Downvote a recipe
+/**
+ * @swagger
+ * /recipes/{recipeId}/downvotes:
+ *   put:
+ *     tags:
+ *       - Votes
+ *     summary: Downvote a recipe
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: recipeId
+ *         in: path
+ *         description: Id of recipe
+ *         type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Ok, Downvote created
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Downvote recorded
+ *             data:
+ *               $ref: '#/definitions/VoteUpdate'
+ */
 router.put('/recipes/:recipeId/downvotes', authenticate.verifyToken,
   recipeValidate.recipeExist, voteController.downvote);
 
-// User opt-in for notifications
+/**
+ * @swagger
+ * /users/enable:
+ *   put:
+ *     tags:
+ *       - Users
+ *     summary: Enable notification
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Ok, Notification enabled
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Notification enabled
+ */
 router.put('/users/enable', authenticate.verifyToken,
   userController.enableNotifications);
 
-// User opt-out for notifications
+/**
+ * @swagger
+ * /users/disable:
+ *   put:
+ *     tags:
+ *       - Users
+ *     summary: Disable notification
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Ok, Notification disabled
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Notification disabled
+ */
 router.put('/users/disable', authenticate.verifyToken,
   userController.disableNotifications);
 
 export default router;
+
+/**
+ * @swagger
+ * definitions:
+ *   UserSignup:
+ *     type: object
+ *     properties:
+ *       firstName:
+ *         description: User firstName
+ *         type: string
+ *       lastName:
+ *         description: User lastName
+ *         type: string
+ *       username:
+ *         description: User username
+ *         type: string
+ *       email:
+ *         description: User email
+ *         type: string
+ *       password:
+ *         description: User password
+ *         type: string
+ *       userImage:
+ *         description: User image
+ *         type: string
+ *   UserSignin:
+ *     type: object
+ *     properties:
+ *       username:
+ *         description: User username
+ *         type: string
+ *       password:
+ *         description: User password
+ *         type: string
+ *   SignupResponse:
+ *     type: object
+ *     properties:
+ *       status:
+ *         type: string
+ *         example: Success
+ *       message:
+ *         type: string
+ *         example: User created
+ *   LoginResponse:
+ *     type: object
+ *     properties:
+ *       status:
+ *         type: string
+ *         example: Success
+ *       message:
+ *         type: string
+ *         example: User logged in
+ *       data:
+ *         type: object
+ *         properties:
+ *           token:
+ *             type: string
+ *   Recipe:
+ *     type: object
+ *     properties:
+ *       id:
+ *         type: integer
+ *       title:
+ *         type: string
+ *       category:
+ *         type: string
+ *       description:
+ *         type: string
+ *       preparationTime:
+ *         type: integer
+ *         minimum: 0
+ *       ingredients:
+ *         type: string
+ *       directions:
+ *         type: string
+ *       recipeImage:
+ *         type: string
+ *       upvotes:
+ *         type: integer
+ *       downvotes:
+ *         type: integer
+ *       views:
+ *         type: integer
+ *   NewRecipe:
+ *     type: object
+ *     properties:
+ *       title:
+ *         type: string
+ *         description: Title of recipe
+ *       category:
+ *         type: string
+ *         description: Category of recipe
+ *       description:
+ *         type: string
+ *         description: Short description of recipe
+ *       preparationTime:
+ *         type: integer
+ *         minimum: 0
+ *         description: Time to prepare the recipe
+ *       ingredients:
+ *         type: string
+ *         description: Ingredient required
+ *       directions:
+ *         type: string
+ *         description: Directions to prepare the recipe
+ *       recipeImage:
+ *         type: string
+ *         description: Image of recipe
+ *   Review:
+ *     type: object
+ *     properties:
+ *       status:
+ *         type: string
+ *         example: Success
+ *       message:
+ *         type: string
+ *         example: Review created
+ *       data:
+ *         type: object
+ *         properties:
+ *           review:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: integer
+ *               content:
+ *                 type: string
+ *               createdAt:
+ *                 type: integer
+ *               User:
+ *                 type: object
+ *                 properties:
+ *                   fullName:
+ *                     type: string
+ *   UserFavorites:
+ *     type: object
+ *     properties:
+ *       fullName:
+ *         type: string
+ *         description: Full name of User
+ *       firstName:
+ *         type: string
+ *         description: First name of user
+ *       lastName:
+ *         type: string
+ *         description: Last name of user
+ *       Favorites:
+ *         type: array
+ *         items:
+ *           type: object
+ *           properties:
+ *             recipeId:
+ *               type: integer
+ *               description: Id of recipe
+ *             category:
+ *               type: integer
+ *               description: User favorite category
+ *             Recipe:
+ *               $ref: '#/definitions/Recipe'
+ *   VoteUpdate:
+ *     type: object
+ *     properties:
+ *       id:
+ *         type: integer
+ *         description: Id of recipe
+ *       upvotes:
+ *         type: integer
+ *         description: Number of upvotes
+ *       downvotes:
+ *         type: integer
+ *         description: Number of downvotes
+ */
