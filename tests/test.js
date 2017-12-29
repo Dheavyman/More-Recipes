@@ -209,14 +209,13 @@ let userId1,
 
 describe('More Recipes', () => {
   describe('Test Server Connection', () => {
-    it('should respond with welcome message and status code 200', (done) => {
+    it('status code 200', (done) => {
       server
-        .get('/api/v1')
+        .get('/api/v1/swagger.json')
         .set('Connection', 'keep alive')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          expect('Content-Type', /json/);
-          expect(res.body.message).to.equal('Welcome to the Users API!');
+          expect('Content-Type', 'application/json');
           expect(res.statusCode).to.equal(200);
           done();
         });
@@ -1264,7 +1263,7 @@ describe('More Recipes', () => {
     it('should allow a user to create category for user favorite recipes',
       (done) => {
         server
-          .put(`/api/v1/users/${userId1}/recipes/${recipeId2}`)
+          .put(`/api/v1/users/recipes/${recipeId2}`)
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('x-access-token', userToken[0])
@@ -1278,7 +1277,7 @@ describe('More Recipes', () => {
       });
     it('should return 404 for a recipe not a users favorite', (done) => {
       server
-        .put(`/api/v1/users/${userId1}/recipes/${recipeId3}`)
+        .put(`/api/v1/users/recipes/${recipeId3}`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])
