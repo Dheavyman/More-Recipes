@@ -42,8 +42,6 @@ class ReviewController {
             data: {
               review: {
                 id: review.id,
-                userId: review.userId,
-                recipeId: review.recipeId,
                 content: review.content,
                 createdAt: review.createdAt,
                 User: {
@@ -89,7 +87,7 @@ class ReviewController {
     return Review
       .find({
         where: {
-          recipeId: req.params.recipeId,
+          id: req.params.reviewId,
           userId: req.decoded.user.id
         }
       })

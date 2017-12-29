@@ -108,6 +108,9 @@ class RecipeController {
             ingredients: updatedRecipe.ingredients,
             directions: updatedRecipe.directions,
             recipeImage: updatedRecipe.recipeImage,
+            views: updatedRecipe.views,
+            upvotes: updatedRecipe.upvotes,
+            downvotes: updatedRecipe.downvotes,
           }
         }
       }))
