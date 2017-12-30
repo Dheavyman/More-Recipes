@@ -48,6 +48,11 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
+    },
+    favorites: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
     }
   });
   Recipe.associate = (models) => {
