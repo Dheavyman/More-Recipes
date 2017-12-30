@@ -1134,8 +1134,7 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(404);
           expect(res.body.status).to.equal('Fail');
           expect(res.body.message).to.equal(
-            'User has not favorited any recipe'
-          );
+            'User has not favorited any recipe');
           done();
         });
     });
