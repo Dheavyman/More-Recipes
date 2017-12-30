@@ -31,11 +31,17 @@ class FavoriteController {
       .spread((favorite, created) => {
         if (!created) {
           favorite.destroy();
+          Recipe
+            .findById(req.params.recipeId)
+            .then(recipe => recipe.decrement('favorites'));
           return res.status(200).send({
             status: 'Success',
             message: 'Recipe removed from favorites'
           });
         }
+        Recipe
+          .findById(req.params.recipeId)
+          .then(recipe => recipe.increment('favorites'));
         return res.status(201).send({
           status: 'Success',
           message: 'Recipe added to favorites',
@@ -69,7 +75,7 @@ class FavoriteController {
             attributes: [
               'id', 'title', 'category', 'description', 'preparationTime',
               'ingredients', 'directions', 'recipeImage', 'upvotes',
-              'downvotes', 'views'
+              'downvotes', 'views', 'favorites'
             ]
           }]
         }],

@@ -55,6 +55,7 @@ class RecipeController {
             upvotes: recipe.upvotes,
             downvotes: recipe.downvotes,
             views: recipe.views,
+            favorites: recipe.favorites,
           }
         }
       }))
@@ -108,9 +109,10 @@ class RecipeController {
             ingredients: updatedRecipe.ingredients,
             directions: updatedRecipe.directions,
             recipeImage: updatedRecipe.recipeImage,
-            views: updatedRecipe.views,
             upvotes: updatedRecipe.upvotes,
             downvotes: updatedRecipe.downvotes,
+            views: updatedRecipe.views,
+            favorites: updatedRecipe.favorites,
           }
         }
       }))
@@ -175,7 +177,7 @@ class RecipeController {
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
-          'views'
+          'views', 'favorites'
         ],
       })
       .then(recipes => res.status(200).send({
@@ -207,7 +209,7 @@ class RecipeController {
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
-          'views'
+          'views', 'favorites'
         ],
         include: [{
           model: Review,
@@ -248,7 +250,7 @@ class RecipeController {
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
-          'views'
+          'views', 'favorites'
         ],
         where: {
           userId: req.params.userId,
@@ -300,7 +302,7 @@ class RecipeController {
           attributes: [
             'id', 'title', 'category', 'description', 'preparationTime',
             'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
-            'views'
+            'views', 'favorites'
           ],
           order: [
             [sort, order]
@@ -331,6 +333,42 @@ class RecipeController {
   }
 
   /**
+   * Retrieve popular recipes based on favorites count
+   *
+   * @static
+   * @param {any} req - The request object
+   * @param {any} res - The response object
+   * @returns {object} - Object representing the success status or
+     * error status
+   * @memberof RecipeController
+   */
+  static getPopular(req, res) {
+    return Recipe
+      .all({
+        attributes: [
+          'id', 'title', 'category', 'description', 'preparationTime',
+          'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+          'views', 'favorites'
+        ],
+        order: [
+          ['favorites', 'DESC']
+        ],
+        limit: 6,
+      })
+      .then(recipes => res.status(200).send({
+        status: 'Success',
+        message: 'Popular recipes retrieved',
+        data: {
+          recipes,
+        }
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message,
+      }));
+  }
+
+  /**
    * Search for recipes based on list of ingredients
    *
    * @static
@@ -354,7 +392,7 @@ class RecipeController {
           attributes: [
             'id', 'title', 'category', 'description', 'preparationTime',
             'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
-            'views'
+            'views', 'favorites'
           ],
           where: {
             [Op.or]: searchList,
@@ -406,7 +444,7 @@ class RecipeController {
           attributes: [
             'id', 'title', 'category', 'description', 'preparationTime',
             'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
-            'views'
+            'views', 'favorites'
           ],
           where: {
             [Op.or]: searchList,
