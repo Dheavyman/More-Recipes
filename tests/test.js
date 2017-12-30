@@ -23,6 +23,12 @@ const server = supertest.agent(app),
     email: 'scotch@example.com',
     firstName: 'Vincent',
     lastName: 'Cross',
+  }, {
+    username: 'Francis',
+    password: 'francispassword',
+    email: 'francis@example.com',
+    firstName: 'Francis',
+    lastName: 'Johnson',
   }],
   invalidSignupSeed = [{
     username: '  ',
@@ -201,6 +207,7 @@ const server = supertest.agent(app),
   }],
   userToken = [];
 let userId1,
+  userId2,
   recipeId1,
   recipeId2,
   recipeId3,
@@ -273,6 +280,21 @@ describe('More Recipes', () => {
         .type('form')
         .send(validSignupSeed[1])
         .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('User created');
+          done();
+        });
+    });
+    it('should allow another user to create an account', (done) => {
+      server
+        .post('/api/v1/users/signup')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSignupSeed[3])
+        .end((err, res) => {
+          userId2 = res.body.data.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User created');
@@ -759,6 +781,49 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should allow a user retrieve recipes added by him/her or another user',
+      (done) => {
+        server
+          .get(`/api/v1/recipes/users/${userId1}`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[0])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('User recipes retrieved');
+            done();
+          });
+      });
+    it('should return 404 if a user has not added any recipe', (done) => {
+      server
+        .get(`/api/v1/recipes/users/${userId2}`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[1])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('User has not added any recipe');
+          done();
+        });
+    });
+    it('should allow a user to get the recipes based on favorite count',
+      (done) => {
+        server
+          .get('/api/v1/recipes/popular')
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Popular recipes retrieved');
+            done();
+          });
+      });
     it('should return 404 for attempt to get a recipe that doesn\'t exist',
       (done) => {
         server
@@ -1043,6 +1108,36 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should allow another user delete a recipe from his/her favorites',
+      (done) => {
+        server
+          .post(`/api/v1/recipes/${recipeId2}/favorites`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[1])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe removed from favorites');
+            done();
+          });
+      });
+    it('should return 404 if a user has no favorite recipe', (done) => {
+      server
+        .get(`/api/v1/users/${userId1}/recipes`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[1])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal(
+            'User has not favorited any recipe');
+          done();
+        });
+    });
   });
   describe('vote recipe API', () => {
     it('should allow a user to upvote a recipe', (done) => {

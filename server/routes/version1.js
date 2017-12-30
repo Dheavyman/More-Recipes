@@ -16,7 +16,7 @@ const router = express.Router(),
   reviewValidate = middlewares.reviewValidation,
   notifyUsers = middlewares.usersNotification;
 
-// Create swagger specification for API
+// Retrieve swagger specification for API
 router.get('/swagger.json', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.json({
@@ -176,6 +176,37 @@ router.route('/recipes')
    */
   .get(recipeController.getAll, recipeController.getMostUpvotes,
     recipeController.searchByIngredients, recipeController.searchByCategory);
+
+/**
+ * @swagger
+ * /recipes/popular:
+ *   get:
+ *     tags:
+ *       - Recipes
+ *     summary: Retrieve popular recipes based on favorites count
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Ok, Recipes retrieved
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: Popular recipes retrieved
+ *             data:
+ *               type: object
+ *               properties:
+ *                 recipes:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/definitions/Recipe'
+ */
+router.get('/recipes/popular', recipeController.getPopular);
 
 router.route('/recipes/:recipeId')
   /**
@@ -754,6 +785,8 @@ export default router;
  *       downvotes:
  *         type: integer
  *       views:
+ *         type: integer
+ *       favorites:
  *         type: integer
  *   NewRecipe:
  *     type: object
