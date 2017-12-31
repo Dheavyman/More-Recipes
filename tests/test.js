@@ -829,6 +829,21 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should allow another user to get a single recipe in the catalog',
+      (done) => {
+        server
+          .get(`/api/v1/recipes/${recipeId2}`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[1])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe retrieved');
+            done();
+          });
+      });
     it('should return 400 if the recipeId parameter is not integer', (done) => {
       server
         .get('/api/v1/recipes/recipeId2')
