@@ -501,6 +501,19 @@ describe('More Recipes', () => {
           done();
         });
     });
+    it('should return 400 if the userId parameter is not integer', (done) => {
+      server
+        .get('/api/v1/users/userId1')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Error in parameter');
+          done();
+        });
+    });
   });
   describe('add recipe API', () => {
     it('should return 401 for unauthenticated access', (done) => {
@@ -797,6 +810,18 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should return 400 if the recipeId parameter is not integer', (done) => {
+      server
+        .get('/api/v1/recipes/recipeId2')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Error in parameter');
+          done();
+        });
+    });
     it('should allow a user retrieve recipes added by him/her or another user',
       (done) => {
         server
@@ -956,6 +981,19 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should return 400 if the reviewId parameter is not integer', (done) => {
+      server
+        .delete(`/api/v1/recipes/${recipeId2}/reviews/reviewId1`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Error in parameter');
+          done();
+        });
+    });
     it('should return 403 if user tries to delete a review not his/hers',
       (done) => {
         server
