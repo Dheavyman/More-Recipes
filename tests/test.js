@@ -80,6 +80,9 @@ const server = supertest.agent(app),
   }, {
     username: 'scotch',
     password: 'scotchpassword',
+  }, {
+    username: 'Francis',
+    password: 'francispassword',
   }],
   invalidSigninSeed = [{
     username: '  ',
@@ -478,6 +481,22 @@ describe('More Recipes', () => {
         .send(validSigninSeed[1])
         .end((err, res) => {
           userToken[1] = res.body.data.token;
+          expect('Content-Type', 'application/json');
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('User logged in');
+          done();
+        });
+    });
+    it('should allow another user to login', (done) => {
+      server
+        .post('/api/v1/users/signin')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSigninSeed[2])
+        .end((err, res) => {
+          userToken[2] = res.body.data.token;
           expect('Content-Type', 'application/json');
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
@@ -1117,6 +1136,21 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should allow another logged in user add a recipe to his/her favorites',
+      (done) => {
+        server
+          .post(`/api/v1/recipes/${recipeId2}/favorites`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[2])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe added to favorites');
+            done();
+          });
+      });
     it('should return 404 while getting user favorites if user does not exist',
       (done) => {
         server
@@ -1458,7 +1492,7 @@ describe('More Recipes', () => {
         .put('/api/v1/users/enable')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
-        .set('x-access-token', userToken[1])
+        .set('x-access-token', userToken[2])
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);

@@ -120,6 +120,7 @@ class UserValidation {
         }
       })
       .catch(error => res.status(400).send({
+        status: 'Error',
         message: error.message,
       }));
   }
@@ -154,6 +155,7 @@ class UserValidation {
         }
       })
       .catch(error => res.status(400).send({
+        status: 'Error',
         message: error.message,
       }));
   }

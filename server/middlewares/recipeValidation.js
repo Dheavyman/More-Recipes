@@ -133,6 +133,7 @@ class RecipeValidation {
         next();
       })
       .catch(error => res.status(400).send({
+        status: 'Error',
         message: error.message,
       }));
   }
