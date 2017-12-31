@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import isEmpty from 'lodash/isEmpty';
+import jwt from 'jsonwebtoken';
 
 import models from '../models';
 import helpers from '../helpers';
@@ -209,7 +210,7 @@ class RecipeController {
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
-          'views', 'favorites'
+          'views', 'favorites', 'userId'
         ],
         include: [{
           model: Review,
@@ -220,7 +221,19 @@ class RecipeController {
           }],
         }],
       })
-      .then(recipe => recipe.increment('views'))
+      .then((recipe) => {
+        const token = req.body.token || req.query.token ||
+          req.headers['x-access-token'];
+        let userId;
+        if (token) {
+          const { user: { id } } = jwt.decode(token);
+          userId = id;
+        }
+        if (userId && recipe.userId !== userId) {
+          return recipe.increment('views');
+        }
+        return recipe;
+      })
       .then(recipe => res.status(200).send({
         status: 'Success',
         message: 'Recipe retrieved',
