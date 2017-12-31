@@ -486,6 +486,22 @@ describe('More Recipes', () => {
         });
     });
   });
+  describe('retrieve user profile api', () => {
+    it('should allow users to retrieve profile of users', (done) => {
+      server
+        .get(`/api/v1/users/${userId1}`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('User profile retrieved');
+          done();
+        });
+    });
+  });
   describe('add recipe API', () => {
     it('should return 401 for unauthenticated access', (done) => {
       server
