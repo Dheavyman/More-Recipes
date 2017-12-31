@@ -209,6 +209,18 @@ class UserValidation {
           });
         }
         next();
+      })
+      .catch((error) => {
+        if (error.message.includes('invalid input syntax for integer')) {
+          return res.status(400).send({
+            status: 'Error in parameter',
+            message: error.message,
+          });
+        }
+        return res.status(400).send({
+          status: 'Error',
+          message: error.message,
+        });
       });
   }
 }

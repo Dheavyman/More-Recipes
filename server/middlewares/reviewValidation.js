@@ -44,12 +44,7 @@ class ReviewValidation {
    */
   static reviewExist(req, res, next) {
     return Review
-      .find({
-        attributes: ['id'],
-        where: {
-          id: req.params.reviewId
-        }
-      })
+      .findById(req.params.reviewId)
       .then((review) => {
         if (!review) {
           return res.status(404).send({
@@ -59,9 +54,18 @@ class ReviewValidation {
         }
         next();
       })
-      .catch(error => res.status(400).send({
-        message: error.message,
-      }));
+      .catch((error) => {
+        if (error.message.includes('invalid input syntax for integer')) {
+          return res.status(400).send({
+            status: 'Error in parameter',
+            message: error.message,
+          });
+        }
+        return res.status(400).send({
+          status: 'Error',
+          message: error.message,
+        });
+      });
   }
 
   /**
