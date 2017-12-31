@@ -80,6 +80,9 @@ const server = supertest.agent(app),
   }, {
     username: 'scotch',
     password: 'scotchpassword',
+  }, {
+    username: 'Francis',
+    password: 'francispassword',
   }],
   invalidSigninSeed = [{
     username: '  ',
@@ -485,6 +488,51 @@ describe('More Recipes', () => {
           done();
         });
     });
+    it('should allow another user to login', (done) => {
+      server
+        .post('/api/v1/users/signin')
+        .set('Connection', 'keep alive')
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validSigninSeed[2])
+        .end((err, res) => {
+          userToken[2] = res.body.data.token;
+          expect('Content-Type', 'application/json');
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('User logged in');
+          done();
+        });
+    });
+  });
+  describe('retrieve user profile api', () => {
+    it('should allow users to retrieve profile of users', (done) => {
+      server
+        .get(`/api/v1/users/${userId1}`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('User profile retrieved');
+          done();
+        });
+    });
+    it('should return 400 if the userId parameter is not integer', (done) => {
+      server
+        .get('/api/v1/users/userId1')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Error in parameter');
+          done();
+        });
+    });
   });
   describe('add recipe API', () => {
     it('should return 401 for unauthenticated access', (done) => {
@@ -781,6 +829,18 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should return 400 if the recipeId parameter is not integer', (done) => {
+      server
+        .get('/api/v1/recipes/recipeId2')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Error in parameter');
+          done();
+        });
+    });
     it('should allow a user retrieve recipes added by him/her or another user',
       (done) => {
         server
@@ -940,6 +1000,19 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should return 400 if the reviewId parameter is not integer', (done) => {
+      server
+        .delete(`/api/v1/recipes/${recipeId2}/reviews/reviewId1`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body.status).to.equal('Error in parameter');
+          done();
+        });
+    });
     it('should return 403 if user tries to delete a review not his/hers',
       (done) => {
         server
@@ -1055,6 +1128,21 @@ describe('More Recipes', () => {
           .set('Connection', 'keep alive')
           .set('Accept', 'application/json')
           .set('x-access-token', userToken[1])
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Recipe added to favorites');
+            done();
+          });
+      });
+    it('should allow another logged in user add a recipe to his/her favorites',
+      (done) => {
+        server
+          .post(`/api/v1/recipes/${recipeId2}/favorites`)
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', userToken[2])
           .set('Content-Type', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
@@ -1404,7 +1492,7 @@ describe('More Recipes', () => {
         .put('/api/v1/users/enable')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
-        .set('x-access-token', userToken[1])
+        .set('x-access-token', userToken[2])
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);

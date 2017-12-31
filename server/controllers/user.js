@@ -80,7 +80,6 @@ class UserController {
               message: 'User logged in',
               data: {
                 token,
-                userId: user.id,
               }
             });
           })
@@ -142,6 +141,36 @@ class UserController {
       .then(() => res.status(200).send({
         status: 'Success',
         message: 'Notifications disabled',
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Function to retrieve user profile
+   *
+   * @static
+   * @param {any} req - The request object
+   * @param {any} res - The response object
+   * @returns {object} Object representing success status or
+   * error status
+   * @memberof UserController
+   */
+  static userProfile(req, res) {
+    return User
+      .findById(req.params.userId, {
+        attributes: [
+          'firstName', 'lastName', 'email', 'phone', 'userImage'
+        ]
+      })
+      .then(user => res.status(200).send({
+        status: 'Success',
+        message: 'User profile retrieved',
+        data: {
+          user,
+        }
       }))
       .catch(error => res.status(500).send({
         status: 'Error',

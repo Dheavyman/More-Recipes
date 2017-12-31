@@ -81,6 +81,42 @@ router.post('/users/signup', userValidate.signupRequiredInputs,
 router.post('/users/signin', userValidate.signinRequiredInputs,
   userController.signinUser);
 
+/**
+ * @swagger
+ * /users/{userId}:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Retrieve a user profile
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         description: Id of user
+ *         type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Ok, User profile retrieved
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: User profile retrieved
+ *             data:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/definitions/User'
+ */
+router.get('/users/:userId', authenticate.verifyToken, userValidate.userExist,
+  userController.userProfile);
+
 router.route('/recipes')
   /**
    * @swagger
@@ -707,6 +743,24 @@ export default router;
 /**
  * @swagger
  * definitions:
+ *   User:
+ *     type: object
+ *     properties:
+ *       firstName:
+ *         description: User firstName
+ *         type: string
+ *       lastName:
+ *         description: User lastName
+ *         type: string
+ *       email:
+ *         description: User email
+ *         type: string
+ *       phone:
+ *         description: User phone number
+ *         type: integer
+ *       userImage:
+ *         description: User image
+ *         type: string
  *   UserSignup:
  *     type: object
  *     properties:
