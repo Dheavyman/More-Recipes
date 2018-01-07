@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import UserProfile from './UserProfile';
 import UserAddedRecipes from './UserAddedRecipes';
 import UserFavorites from './UserFavorites';
 import EditRecipe from './EditRecipe';
@@ -28,12 +29,17 @@ const Main = (props) => {
           <i className="material-icons">add</i>
         </button>
       </div>
-      <div className="my-recipes">
-        <div id="user-recipes">
-          <UserAddedRecipes {...props} />
-        </div>
-        <div id="user-favorites" className="col s12">
-          <UserFavorites {...props} />
+      <div className="dashboard">
+        <div className="" >
+          <div id="user-profile" className="col s12" >
+            <UserProfile {...props} />
+          </div>
+          <div id="user-recipes" className="col s12" >
+            <UserAddedRecipes {...props} />
+          </div>
+          <div id="user-favorites" className="col s12">
+            <UserFavorites {...props} />
+          </div>
         </div>
       </div>
       <MuiThemeProvider>

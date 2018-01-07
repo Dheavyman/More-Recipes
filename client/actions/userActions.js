@@ -40,6 +40,34 @@ const userLogoutSuccess = () => ({
   type: actionTypes.LOGOUT_SUCCESS
 });
 
+const fetchUserProfileRequest = () => ({
+  type: actionTypes.FETCH_USER_PROFILE_REQUEST,
+});
+
+const fetchUserProfileSuccess = user => ({
+  type: actionTypes.FETCH_USER_PROFILE_SUCCESS,
+  payload: user,
+});
+
+const fetchUserProfileFailure = error => ({
+  type: actionTypes.FETCH_USER_PROFILE_FAILURE,
+  payload: error,
+});
+
+const editUserProfileRequest = () => ({
+  type: actionTypes.EDIT_USER_PROFILE_REQUEST,
+});
+
+const editUserProfileSuccess = user => ({
+  type: actionTypes.EDIT_USER_PROFILE_SUCCESS,
+  payload: user,
+});
+
+const editUserProfileFailure = error => ({
+  type: actionTypes.EDIT_USER_PROFILE_FAILURE,
+  payload: error,
+});
+
 const signupUser = (values, closeSignupModal) => (dispatch) => {
   dispatch(userSignupRequest());
   axios.post('http://127.0.0.1:3000/api/v1/users/signup', values)
@@ -76,4 +104,39 @@ const logoutUser = () => (dispatch) => {
   dispatch(userLogoutSuccess());
 };
 
-export { signupUser, signinUser, logoutUser };
+const fetchUserProfile = userId => (dispatch) => {
+  const token = {
+    'x-access-token': localStorage.getItem('token'),
+  };
+  dispatch(fetchUserProfileRequest());
+  axios.get(`http://127.0.0.1:3000/api/v1/users/${userId}`, { headers: token })
+    .then((response) => {
+      const { data } = response,
+        { data: { user } } = data;
+      dispatch(fetchUserProfileSuccess(user));
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(fetchUserProfileFailure(data));
+    });
+};
+
+const editUserProfile = userId => (dispatch) => {
+  const token = {
+    'x-access-token': localStorage.getItem('token'),
+  };
+  dispatch(editUserProfileRequest());
+  axios.put(`http://127.0.0.1:3000/api/v1/users/${userId}`, { headers: token })
+    .then((response) => {
+      const { data } = response,
+        { data: { user } } = data;
+      dispatch(editUserProfileSuccess(user));
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(editUserProfileFailure(data));
+    });
+};
+
+export { signupUser, signinUser, logoutUser, fetchUserProfile,
+  editUserProfile };

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { decodeToken } from '../../utils/authenticate';
+
 /**
  * User navigation when unathenticated
  *
@@ -9,19 +11,25 @@ import { Link } from 'react-router-dom';
  * @returns {object} React element
  */
 const AuthUserNav = (props) => {
-  const { handleLogoutUser } = props;
+  const { handleLogoutUser } = props,
+    decoded = decodeToken();
+  let userId;
+  if (decoded) {
+    const { user: { id } } = decoded;
+    userId = id;
+  }
   return (
     <ul id="user-control" className="dropdown-content">
       <li>
-        <a href="profile.html" className="black-text">
-          Profile
+        <Link to={`/users/${userId}/dashboard`} className="black-text">
+          Dashboard
           <i className="material-icons left">person</i>
-        </a>
+        </Link>
       </li>
       <li>
-        <Link to="/user/recipes" className="black-text">
+        {/* <Link to={`/users/${user && user.id}`} className="black-text">
           My Recipes<i className="material-icons left">folder</i>
-        </Link>
+        </Link> */}
       </li>
       <li className="divider" />
       <li>

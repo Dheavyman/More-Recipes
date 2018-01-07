@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   userSignup: {},
   userSignin: {},
+  userProfile: {},
   isAuthenticated: !!localStorage.getItem('token'),
   error: {},
 };
@@ -60,6 +61,45 @@ const user = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isAuthenticated: false,
+      };
+    case actionTypes.FETCH_USER_PROFILE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actionTypes.FETCH_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        userProfile: action.payload,
+        error: {},
+      };
+    case actionTypes.FETCH_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    case actionTypes.EDIT_USER_PROFILE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actionTypes.EDIT_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        userProfile: {
+          ...state.userProfile,
+          ...action.payload,
+        },
+        error: {},
+      };
+    case actionTypes.EDIT_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
       };
     default:
       return state;

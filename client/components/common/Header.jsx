@@ -10,7 +10,7 @@ const Header = props => (
         <Navbar {...props} />
       </nav>
     </div>
-    <SideNav />
+    <SideNav {...props} />
   </div>
 );
 

@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import actionCreators from '../../actions';
-import Footer from '../common/Footer';
 import Header from './Header';
 import Main from './Main';
+import { decodeToken } from '../../utils/authenticate';
 
 /**
  * Class representing user recipes
@@ -25,6 +25,7 @@ class UserRecipes extends React.Component {
     super();
     this.state = {
       recipeId: null,
+      userId: null,
       recipeToEdit: {},
       openEdit: false,
       openDelete: false,
@@ -50,6 +51,19 @@ class UserRecipes extends React.Component {
     this.handleEditRecipe = this.handleEditRecipe.bind(this);
     this.handleDeleteRecipe = this.handleDeleteRecipe.bind(this);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
+  }
+
+  /**
+   * Component did mount lifecycle method
+   *
+   * @returns {any} Fetches user favorite recipes
+   * @memberof UserFavorites
+   */
+  componentWillMount() {
+    const { user: { id } } = decodeToken();
+    this.setState({
+      userId: id,
+    });
   }
 
   /**
@@ -199,20 +213,22 @@ class UserRecipes extends React.Component {
     event.preventDefault();
     const { recipeToEdit, imageData } = this.state,
       { editRecipe, uploadImage, userRecipes: {
-        imageUploaded, imageUrl } } = this.props,
-      { id } = recipeToEdit,
-      values = {
-        ...recipeToEdit,
-        recipeImage: imageUrl,
-      };
+        imageUploaded } } = this.props,
+      { id } = recipeToEdit;
     if (!imageUploaded && imageData) {
       uploadImage(imageData)
-        .then((error) => {
+        .then(() => {
+          const { userRecipes: { imageUrl, error } } = this.props,
+            values = {
+              ...recipeToEdit,
+              recipeImage: imageUrl,
+            };
           if (isEmpty(error)) {
             editRecipe(id, values, this.handleClose);
           }
         });
     } else {
+      const values = recipeToEdit;
       editRecipe(id, values, this.handleClose);
     }
   }
@@ -283,10 +299,10 @@ class UserRecipes extends React.Component {
   render() {
     return (
       <div>
-        <header>
+        <header className="header" >
           <Header {...this.props} />
         </header>
-        <main>
+        <main className="main" >
           <Main
             handleChange={this.handleChange}
             handleOpenAdd={this.handleOpenAdd}
@@ -304,9 +320,6 @@ class UserRecipes extends React.Component {
             {...this.props}
           />
         </main>
-        <footer>
-          <Footer />
-        </footer>
       </div>
     );
   }
