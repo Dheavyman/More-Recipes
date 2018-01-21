@@ -26,11 +26,6 @@ const AuthUserNav = (props) => {
           <i className="material-icons left">person</i>
         </Link>
       </li>
-      <li>
-        {/* <Link to={`/users/${user && user.id}`} className="black-text">
-          My Recipes<i className="material-icons left">folder</i>
-        </Link> */}
-      </li>
       <li className="divider" />
       <li>
         <a

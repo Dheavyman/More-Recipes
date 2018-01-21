@@ -31,10 +31,6 @@ class Header extends React.Component {
     $('.button-collapse').sideNav({
       draggable: true,
     });
-    // Initialize materialize dropdown class
-    $('.dropdown-button').dropdown({
-      belowOrigin: true,
-    });
     // Initailize materialize tab class
     $('ul.tabs').tabs();
   }

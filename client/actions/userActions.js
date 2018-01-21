@@ -68,6 +68,34 @@ const editUserProfileFailure = error => ({
   payload: error,
 });
 
+const editProfilePictureRequest = () => ({
+  type: actionTypes.EDIT_PROFILE_PICTURE_REQUEST,
+});
+
+const editProfilePictureSuccess = user => ({
+  type: actionTypes.EDIT_PROFILE_PICTURE_SUCCESS,
+  payload: user,
+});
+
+const editProfilePictureFailure = error => ({
+  type: actionTypes.EDIT_PROFILE_PICTURE_FAILURE,
+  payload: error,
+});
+
+const uploadUserImageRequest = () => ({
+  type: actionTypes.UPLOAD_USER_IMAGE_REQUEST,
+});
+
+const uploadUserImageSuccess = userImageUrl => ({
+  type: actionTypes.UPLOAD_USER_IMAGE_SUCCESS,
+  payload: userImageUrl,
+});
+
+const uploadUserImageFailure = error => ({
+  type: actionTypes.UPLOAD_USER_IMAGE_FAILURE,
+  payload: error,
+});
+
 const signupUser = (values, closeSignupModal) => (dispatch) => {
   dispatch(userSignupRequest());
   axios.post('http://127.0.0.1:3000/api/v1/users/signup', values)
@@ -121,12 +149,13 @@ const fetchUserProfile = userId => (dispatch) => {
     });
 };
 
-const editUserProfile = userId => (dispatch) => {
+const editUserProfile = (userId, values) => (dispatch) => {
   const token = {
     'x-access-token': localStorage.getItem('token'),
   };
   dispatch(editUserProfileRequest());
-  axios.put(`http://127.0.0.1:3000/api/v1/users/${userId}`, { headers: token })
+  axios.put(`http://127.0.0.1:3000/api/v1/users/${userId}`, values,
+    { headers: token })
     .then((response) => {
       const { data } = response,
         { data: { user } } = data;
@@ -138,5 +167,38 @@ const editUserProfile = userId => (dispatch) => {
     });
 };
 
+const editProfilePicture = (userId, imagefile) => (dispatch) => {
+  const token = {
+    'x-access-token': localStorage.getItem('token'),
+  };
+  dispatch(editProfilePictureRequest());
+  axios.put(`http://127.0.0.1:3000/api/v1/users/${userId}`, imagefile,
+    { headers: token })
+    .then((response) => {
+      const { data } = response,
+        { data: { user } } = data;
+      dispatch(editProfilePictureSuccess(user));
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(editProfilePictureFailure(data));
+    });
+};
+
+const uploadUserImage = value => (dispatch) => {
+  dispatch(uploadUserImageRequest());
+  return axios.post('https://api.cloudinary.com/v1_1/heavyman/image/upload',
+    value)
+    .then((response) => {
+      const { data } = response,
+        { secure_url } = data;
+      dispatch(uploadUserImageSuccess(secure_url));
+    })
+    .catch((errorMessage) => {
+      const { response: { data: { error } } } = errorMessage;
+      dispatch(uploadUserImageFailure(error));
+    });
+};
+
 export { signupUser, signinUser, logoutUser, fetchUserProfile,
-  editUserProfile };
+  editUserProfile, editProfilePicture, uploadUserImage };
