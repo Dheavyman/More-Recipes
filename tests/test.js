@@ -1491,7 +1491,7 @@ describe('More Recipes', () => {
   describe('opt-in and test notifications', () => {
     it('should allow a user to opt-in for notifications', (done) => {
       server
-        .put('/api/v1/users/enable')
+        .put(`/api/v1/users/${userId1}/enable`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])
@@ -1504,7 +1504,7 @@ describe('More Recipes', () => {
     });
     it('should allow another user to opt-in for notifications', (done) => {
       server
-        .put('/api/v1/users/enable')
+        .put(`/api/v1/users/${userId2}/enable`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[2])
@@ -1551,7 +1551,7 @@ describe('More Recipes', () => {
       });
     it('should allow a user to opt-out for notifications', (done) => {
       server
-        .put('/api/v1/users/disable')
+        .put(`/api/v1/users/${userId1}/disable`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])

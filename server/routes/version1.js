@@ -156,8 +156,10 @@ router.get('/users/:userId', authenticate.verifyToken, userValidate.userExist,
  *                 user:
  *                   $ref: '#/definitions/NewUserDetails'
  */
-router.put('/users/:userId', authenticate.verifyToken, userValidate.userExist,
-  userController.editUserDetails);
+router.put(
+  '/users/:userId', authenticate.verifyToken, userValidate.userExist,
+  userController.editUserDetails
+);
 
 /**
  * @swagger
@@ -201,8 +203,10 @@ router.put('/users/:userId', authenticate.verifyToken, userValidate.userExist,
  *                 userImage:
  *                   type: string
  */
-router.put('/users/:userId/image', authenticate.verifyToken,
-  userValidate.userExist, userController.editUserImage);
+router.put(
+  '/users/:userId/image', authenticate.verifyToken, userValidate.userExist,
+  userController.editUserImage
+);
 
 router.route('/recipes')
   /**
@@ -797,7 +801,7 @@ router.put('/recipes/:recipeId/downvotes', authenticate.verifyToken,
  *               type: string
  *               example: Notification enabled
  */
-router.put('/users/enable', authenticate.verifyToken,
+router.put('/users/:userId/enable', authenticate.verifyToken,
   userController.enableNotifications);
 
 /**
@@ -822,7 +826,7 @@ router.put('/users/enable', authenticate.verifyToken,
  *               type: string
  *               example: Notification disabled
  */
-router.put('/users/disable', authenticate.verifyToken,
+router.put('/users/:userId/disable', authenticate.verifyToken,
   userController.disableNotifications);
 
 export default router;
