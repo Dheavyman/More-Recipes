@@ -97,6 +97,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+    },
+    aboutMe: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     }
   }, {
     getterMethods: {

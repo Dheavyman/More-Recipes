@@ -162,7 +162,8 @@ class UserController {
     return User
       .findById(req.params.userId, {
         attributes: [
-          'username', 'firstName', 'lastName', 'email', 'phone', 'userImage'
+          'username', 'firstName', 'lastName', 'email', 'phone', 'userImage',
+          'aboutMe'
         ]
       })
       .then(user => res.status(200).send({
@@ -196,7 +197,7 @@ class UserController {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           phone: req.body.phone,
-          // aboutMe: req.body.aboutMe,
+          aboutMe: req.body.aboutMe,
         }))
       .then(user => res.status(200).send({
         status: 'Success',
@@ -208,7 +209,7 @@ class UserController {
           email: user.email,
           userImage: user.userImage,
           notifications: user.notifications,
-          // aboutMe: user.aboutMe,
+          aboutMe: user.aboutMe,
         }
       }))
       .catch(error => res.status(500).send({
