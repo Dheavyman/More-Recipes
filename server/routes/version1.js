@@ -154,7 +154,7 @@ router.get('/users/:userId', authenticate.verifyToken, userValidate.userExist,
  *               type: object
  *               properties:
  *                 user:
- *                   $ref: '#/definitions/User'
+ *                   $ref: '#/definitions/NewUserDetails'
  */
 router.put('/users/:userId', authenticate.verifyToken, userValidate.userExist,
   userController.editUserDetails);
@@ -845,11 +845,11 @@ export default router;
  *       email:
  *         description: User email
  *         type: string
- *       phone:
- *         description: User phone number
- *         type: integer
  *       userImage:
  *         description: User image
+ *         type: string
+ *       aboutMe:
+ *         description: User biography
  *         type: string
  *   NewUserDetails:
  *     type: object
@@ -860,9 +860,9 @@ export default router;
  *       lastName:
  *         description: User lastName
  *         type: string
- *       phone:
- *         description: User phone number
- *         type: integer
+ *       aboutMe:
+ *         description: User biography
+ *         type: string
  *   UserSignup:
  *     type: object
  *     properties:
