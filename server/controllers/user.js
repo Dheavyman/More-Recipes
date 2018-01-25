@@ -201,10 +201,12 @@ class UserController {
         status: 'Success',
         message: 'User details updated',
         data: {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          aboutMe: user.aboutMe,
-        }
+          user: {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            aboutMe: user.aboutMe,
+          },
+        },
       }))
       .catch(error => res.status(500).send({
         status: 'Error',
@@ -233,8 +235,10 @@ class UserController {
         status: 'Success',
         message: 'User image updated',
         data: {
-          userImage: user.userImage,
-        }
+          user: {
+            userImage: user.userImage,
+          },
+        },
       }))
       .catch(error => res.status(500).send({
         status: 'Error',
