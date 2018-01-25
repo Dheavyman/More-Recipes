@@ -85,18 +85,14 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    phone: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      unique: {
-        args: true,
-        msg: 'Phone number already exist',
-      },
-    },
     notifications: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+    },
+    aboutMe: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     }
   }, {
     getterMethods: {

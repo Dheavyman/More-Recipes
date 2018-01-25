@@ -162,7 +162,7 @@ class UserController {
     return User
       .findById(req.params.userId, {
         attributes: [
-          'firstName', 'lastName', 'email', 'phone', 'userImage'
+          'username', 'firstName', 'lastName', 'email', 'userImage', 'aboutMe'
         ]
       })
       .then(user => res.status(200).send({
@@ -171,6 +171,74 @@ class UserController {
         data: {
           user,
         }
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Function to edit user profile details
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} Object representing success or
+   * error status
+   * @memberof UserController
+   */
+  static editUserDetails(req, res) {
+    return User
+      .findById(req.decoded.user.id)
+      .then(user => user
+        .update({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          aboutMe: req.body.aboutMe || user.aboutMe,
+        }))
+      .then(user => res.status(200).send({
+        status: 'Success',
+        message: 'User details updated',
+        data: {
+          user: {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            aboutMe: user.aboutMe,
+          },
+        },
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Function to edit the user profile image
+   *
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} Object representing success or
+   * error status
+   * @memberof UserController
+   */
+  static editUserImage(req, res) {
+    return User
+      .findById(req.decoded.user.id)
+      .then(user => user
+        .update({
+          userImage: req.body.userImage,
+        }))
+      .then(user => res.status(200).send({
+        status: 'Success',
+        message: 'User image updated',
+        data: {
+          user: {
+            userImage: user.userImage,
+          },
+        },
       }))
       .catch(error => res.status(500).send({
         status: 'Error',
