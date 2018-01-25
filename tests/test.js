@@ -97,6 +97,13 @@ const server = supertest.agent(app),
     username: 'Jessy',
     password: 'notjessypassword',
   }],
+  validUserSeed = [{
+    firstName: 'John',
+    lastName: 'Scotch',
+    aboutMe: 'This is my bio',
+  }, {
+    userImage: 'user.image.url',
+  }],
   validRecipeSeed = [{
     title: 'Beans',
     category: 'Dessert',
@@ -530,6 +537,42 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('Error in parameter');
+          done();
+        });
+    });
+  });
+  describe('edit user profile API', () => {
+    it('should allow a user to retrieve user profile details', (done) => {
+      server
+        .put(`/api/v1/users/${userId1}`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validUserSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.message).to.equal('User details updated');
+          expect(res.body.data.user.firstName).to.equal('John');
+          expect(res.body.data.user.lastName).to.equal('Scotch');
+          expect(res.body.data.user.aboutMe).to.equal('This is my bio');
+          done();
+        });
+    });
+    it('should allow a user to update his/her profile image', (done) => {
+      server
+        .put(`/api/v1/users/${userId1}/image`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validUserSeed[1])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.message).to.equal('User image updated');
+          expect(res.body.data.user.userImage).to.equal('user.image.url');
           done();
         });
     });
@@ -1491,7 +1534,7 @@ describe('More Recipes', () => {
   describe('opt-in and test notifications', () => {
     it('should allow a user to opt-in for notifications', (done) => {
       server
-        .put('/api/v1/users/enable')
+        .put(`/api/v1/users/${userId1}/enable`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])
@@ -1504,7 +1547,7 @@ describe('More Recipes', () => {
     });
     it('should allow another user to opt-in for notifications', (done) => {
       server
-        .put('/api/v1/users/enable')
+        .put(`/api/v1/users/${userId2}/enable`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[2])
@@ -1551,7 +1594,7 @@ describe('More Recipes', () => {
       });
     it('should allow a user to opt-out for notifications', (done) => {
       server
-        .put('/api/v1/users/disable')
+        .put(`/api/v1/users/${userId1}/disable`)
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])

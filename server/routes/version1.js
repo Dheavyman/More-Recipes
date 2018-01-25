@@ -117,6 +117,97 @@ router.post('/users/signin', userValidate.signinRequiredInputs,
 router.get('/users/:userId', authenticate.verifyToken, userValidate.userExist,
   userController.userProfile);
 
+/**
+ * @swagger
+ * /users/{userId}:
+ *   put:
+ *     tags:
+ *       - Users
+ *     summary: Edit a user profile
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         description: Id of user
+ *         type: integer
+ *         required: true
+ *       - name: body
+ *         in: body
+ *         description: New details
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/NewUserDetails'
+ *     responses:
+ *       200:
+ *         description: Ok
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: User details updated
+ *             data:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/definitions/NewUserDetails'
+ */
+router.put(
+  '/users/:userId', authenticate.verifyToken, userValidate.userExist,
+  userController.editUserDetails
+);
+
+/**
+ * @swagger
+ * /users/{userId}/image:
+ *   put:
+ *     tags:
+ *       - Users
+ *     summary: Edit a user image
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         description: Id of user
+ *         type: integer
+ *         required: true
+ *       - name: userImage
+ *         in: body
+ *         description: New user image url
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             userImage:
+ *               type: string
+ *     responses:
+ *       200:
+ *         description: Ok
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               example: Success
+ *             message:
+ *               type: string
+ *               example: User image updated
+ *             data:
+ *               type: object
+ *               properties:
+ *                 userImage:
+ *                   type: string
+ */
+router.put(
+  '/users/:userId/image', authenticate.verifyToken, userValidate.userExist,
+  userController.editUserImage
+);
+
 router.route('/recipes')
   /**
    * @swagger
@@ -710,7 +801,7 @@ router.put('/recipes/:recipeId/downvotes', authenticate.verifyToken,
  *               type: string
  *               example: Notification enabled
  */
-router.put('/users/enable', authenticate.verifyToken,
+router.put('/users/:userId/enable', authenticate.verifyToken,
   userController.enableNotifications);
 
 /**
@@ -735,7 +826,7 @@ router.put('/users/enable', authenticate.verifyToken,
  *               type: string
  *               example: Notification disabled
  */
-router.put('/users/disable', authenticate.verifyToken,
+router.put('/users/:userId/disable', authenticate.verifyToken,
   userController.disableNotifications);
 
 export default router;
@@ -746,6 +837,9 @@ export default router;
  *   User:
  *     type: object
  *     properties:
+ *       username:
+ *         description: User username
+ *         type: string
  *       firstName:
  *         description: User firstName
  *         type: string
@@ -755,11 +849,23 @@ export default router;
  *       email:
  *         description: User email
  *         type: string
- *       phone:
- *         description: User phone number
- *         type: integer
  *       userImage:
  *         description: User image
+ *         type: string
+ *       aboutMe:
+ *         description: User biography
+ *         type: string
+ *   NewUserDetails:
+ *     type: object
+ *     properties:
+ *       firstName:
+ *         description: User firstName
+ *         type: string
+ *       lastName:
+ *         description: User lastName
+ *         type: string
+ *       aboutMe:
+ *         description: User biography
  *         type: string
  *   UserSignup:
  *     type: object
