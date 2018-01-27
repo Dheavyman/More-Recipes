@@ -64,24 +64,26 @@ class FavoriteController {
    * @memberof FavoriteController
    */
   static userFavorites(req, res) {
-    return User
-      .findById(req.params.userId, {
-        attributes: ['firstName', 'lastName'],
+    return Favorite
+      .findAll({
+        attributes: ['userId', 'category'],
+        where: {
+          userId: req.params.userId,
+        },
         include: [{
-          model: Favorite,
-          attributes: ['recipeId', 'category'],
+          model: Recipe,
+          attributes: [
+            'id', 'title', 'category', 'description', 'preparationTime',
+            'ingredients', 'directions', 'recipeImage', 'upvotes',
+            'downvotes', 'views', 'favorites'],
           include: [{
-            model: Recipe,
-            attributes: [
-              'id', 'title', 'category', 'description', 'preparationTime',
-              'ingredients', 'directions', 'recipeImage', 'upvotes',
-              'downvotes', 'views', 'favorites'
-            ]
+            model: User,
+            attributes: ['firstName', 'lastName'],
           }]
-        }],
+        }]
       })
-      .then((user) => {
-        if (user.Favorites.length === 0) {
+      .then((favorites) => {
+        if (favorites.length === 0) {
           return res.status(404).send({
             status: 'Fail',
             message: 'User has not favorited any recipe',
@@ -91,7 +93,7 @@ class FavoriteController {
           status: 'Success',
           message: 'Favorites retrieved',
           data: {
-            user
+            favorites,
           }
         });
       })
