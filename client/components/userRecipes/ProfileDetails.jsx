@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
 const ProfileDetails = (props) => {
   const { user: { userProfile }, handleStartEdit } = props,
-    { username, firstName, lastName, email, phone } = userProfile;
+    { username, firstName, lastName, email, aboutMe } = userProfile,
+    editableDetails = {
+      firstName,
+      lastName,
+      aboutMe,
+    };
 
   const handleEdit = () => {
-    handleStartEdit(userProfile);
+    handleStartEdit(editableDetails);
   };
 
   return (
@@ -41,12 +47,6 @@ const ProfileDetails = (props) => {
             </label>
             <div id="email" className="col s9">{email}</div>
           </div>
-          <div id="profile_phone" className="row">
-            <label htmlFor="phone" className="col s3 black-text">
-              Phone Number:
-            </label>
-            <div id="phone" className="col s9">{phone}</div>
-          </div>
         </div>
       </div>
       <div className="col s12">
@@ -55,18 +55,19 @@ const ProfileDetails = (props) => {
         <p
           id="about-me"
         >
-          I am an aspiring world className developer.
-          I like to learn and play with code.
-          I don&#39;t joke with food either:)
+          {aboutMe}
         </p>
       </div>
-      <button
-        id="edit-btn"
-        className={'btn-floating waves-effect waves-light green right'}
-        onClick={handleEdit}
-      >
-        <i className="material-icons left">edit</i>
-      </button>
+      <div>
+        <button
+          id="edit-btn"
+          className={'btn-floating waves-effect waves-light green right'}
+          onClick={handleEdit}
+        >
+          <i className="material-icons left" data-tip="Edit details">edit</i>
+        </button>
+        <ReactTooltip />
+      </div>
       <div className="row" />
     </div>
   );
@@ -79,7 +80,7 @@ ProfileDetails.propTypes = {
       firstName: PropTypes.string,
       lastName: PropTypes.string,
       email: PropTypes.string,
-      phone: PropTypes.string,
+      aboutMe: PropTypes.string,
     })
   }).isRequired,
   handleStartEdit: PropTypes.func.isRequired,

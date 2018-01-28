@@ -8,10 +8,7 @@ const initialState = {
   imageUploaded: false,
   imageUrl: null,
   userAddedRecipes: [],
-  user: {
-    fullName: null,
-    userFavorites: [],
-  },
+  userFavorites: [],
   errorFetchingUserRecipes: {},
   errorFetchingUserFavorites: {},
   error: {}
@@ -23,6 +20,7 @@ const userRecipes = (state = initialState, action) => {
       return {
         ...state,
         isFectchingUserRecipes: true,
+        userAddedRecipes: [],
       };
     case actionTypes.FETCH_USER_RECIPES_SUCCESS:
       return {
@@ -41,16 +39,13 @@ const userRecipes = (state = initialState, action) => {
       return {
         ...state,
         isFetchingUserFavorites: true,
+        userFavorites: [],
       };
     case actionTypes.FETCH_USER_FAVORITES_SUCCESS:
       return {
         ...state,
         isFetchingUserFavorites: false,
-        user: {
-          ...state.user,
-          fullName: action.payload.fullName,
-          userFavorites: action.payload.Favorites,
-        },
+        userFavorites: action.payload,
         errorFetchingUserFavorites: {},
       };
     case actionTypes.FETCH_USER_FAVORITES_FAILURE:

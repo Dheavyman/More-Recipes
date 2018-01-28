@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import ReactTooltip from 'react-tooltip';
 
 import UserProfile from './UserProfile';
 import UserAddedRecipes from './UserAddedRecipes';
@@ -25,9 +26,11 @@ const Main = (props) => {
           onClick={handleOpenAdd}
           className={`btn-floating btn-large modal-trigger waves-effect
               waves-light indigo accent-2 pulse`}
+          data-tip="Add recipe"
         >
           <i className="material-icons">add</i>
         </button>
+        <ReactTooltip />
       </div>
       <div className="dashboard">
         <div className="" >

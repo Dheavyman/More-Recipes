@@ -76,9 +76,9 @@ class Header extends React.Component {
             <div className="nav-content">
               <ul className="tabs tabs-transparent">
                 <li className="tab"><a href="#user-profile">Profile</a></li>
-                <li className="tab"><a href="#user-recipes">My Recipes</a></li>
+                <li className="tab"><a href="#user-recipes">Recipes</a></li>
                 <li className="tab">
-                  <a href="#user-favorites">My Favorites</a>
+                  <a href="#user-favorites">Favorites</a>
                 </li>
               </ul>
             </div>

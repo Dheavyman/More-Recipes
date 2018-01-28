@@ -69,6 +69,7 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        userProfile: {},
       };
     case actionTypes.FETCH_USER_PROFILE_SUCCESS:
       return {

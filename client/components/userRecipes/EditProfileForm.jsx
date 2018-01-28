@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
 import TextField from '../common/TextField';
 
 const EditProfileForm = (props) => {
   const { user: { userProfile }, handleProfileChange, handleSubmitProfile,
       handleCancel } = props,
-    { username, firstName, lastName, email, phone } = userProfile;
+    { username, firstName, lastName, email, aboutMe } = userProfile;
   return (
     <div>
       <div className="row" />
@@ -21,7 +22,7 @@ const EditProfileForm = (props) => {
           placeholder="Username"
           defaultValue={username}
           className="validate"
-          required
+          disabled
           onChange={handleProfileChange}
         />
         <TextField
@@ -53,14 +54,6 @@ const EditProfileForm = (props) => {
           disabled
           onChange={handleProfileChange}
         />
-        <TextField
-          id="Phone Number"
-          name="phone"
-          type="tel"
-          placeholder="Phone number"
-          defaultValue={phone}
-          onChange={handleProfileChange}
-        />
       </div>
       <div className="col s12">
         <h5>About Me</h5>
@@ -69,26 +62,29 @@ const EditProfileForm = (props) => {
           id="textarea"
           name="aboutMe"
           placeholder="About me"
-          defaultValue={'aboutMe'}
+          defaultValue={aboutMe}
           className="materialize-textarea"
           onChange={handleProfileChange}
         />
       </div>
-      <button
-        id="edit-btn"
-        className={`btn-floating waves-effect waves-light indigo accent-2
+      <div>
+        <button
+          id="edit-btn"
+          className={`btn-floating waves-effect waves-light indigo accent-2
         right`}
-        onClick={handleSubmitProfile}
-      >
-        <i className="material-icons">save</i>
-      </button>
-      <button
-        id="edit-btn"
-        className={'btn-floating waves-effect waves-light red right'}
-        onClick={handleCancel}
-      >
-        <i className="material-icons">cancel</i>
-      </button>
+          onClick={handleSubmitProfile}
+        >
+          <i className="material-icons" data-tip="Save details">save</i>
+        </button>
+        <button
+          id="edit-btn"
+          className={'btn-floating waves-effect waves-light red right'}
+          onClick={handleCancel}
+        >
+          <i className="material-icons" data-tip="Cancel">cancel</i>
+        </button>
+        <ReactTooltip />
+      </div>
       <div className="row" />
     </div>
   );
@@ -101,7 +97,7 @@ EditProfileForm.propTypes = {
       firstName: PropTypes.string,
       lastName: PropTypes.string,
       email: PropTypes.string,
-      phone: PropTypes.string,
+      aboutMe: PropTypes.string,
     })
   }).isRequired,
   handleProfileChange: PropTypes.func.isRequired,

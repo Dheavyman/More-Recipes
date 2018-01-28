@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
+import config from '../config';
+
+const { SERVER_URL } = config;
 
 const postReviewRequest = () => ({
   type: actionTypes.POST_REVIEW_REQUEST,
@@ -22,7 +25,7 @@ const postReview = (recipeId, reviewContent) => (dispatch) => {
   };
 
   dispatch(postReviewRequest());
-  return axios.post(`http://127.0.0.1:3000/api/v1/recipes/${recipeId}/reviews`,
+  return axios.post(`${SERVER_URL}/recipes/${recipeId}/reviews`,
     reviewContent, { headers: token })
     .then((response) => {
       const { data } = response,

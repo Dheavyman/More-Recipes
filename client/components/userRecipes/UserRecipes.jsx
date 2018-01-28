@@ -8,6 +8,7 @@ import actionCreators from '../../actions';
 import Header from './Header';
 import Main from './Main';
 import { decodeToken } from '../../utils/authenticate';
+import config from '../../config';
 
 /**
  * Class representing user recipes
@@ -193,8 +194,8 @@ class UserRecipes extends React.Component {
     const { preview } = files[0],
       formData = new FormData();
     formData.append('file', files[0]);
-    formData.append('upload_preset', 'o62xeo3k');
-    formData.append('api_key', '281293666534996');
+    formData.append('upload_preset', config.UPLOAD_PRESET);
+    formData.append('api_key', config.API_KEY);
 
     this.handleImagePreview(preview);
     this.setState({

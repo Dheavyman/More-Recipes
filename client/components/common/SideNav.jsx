@@ -27,6 +27,18 @@ class SideNav extends React.Component {
   }
 
   /**
+   * Logout user from the application
+   *
+   * @returns {any} Logout user
+   * @memberof SideNav
+   */
+  handleLogoutUser = () => {
+    const { logoutUser, history } = this.props;
+    logoutUser();
+    history.push('/');
+  }
+
+  /**
    * Render function
    *
    * @returns {object} React element
@@ -114,7 +126,7 @@ class SideNav extends React.Component {
               <li><a className="subheader">Activities</a></li>
               <li>
                 <a name="user-recipes" href="#!" onClick={this.handleTabChange}>
-                  My Recipes
+                  Recipes
                   <span className="badge">22</span>
                 </a>
               </li>
@@ -124,7 +136,7 @@ class SideNav extends React.Component {
                   href="#!"
                   onClick={this.handleTabChange}
                 >
-                  My Favorites
+                  Favorites
                   <span className="badge">55</span>
                 </a>
               </li>
@@ -137,7 +149,15 @@ class SideNav extends React.Component {
               <li>
                 <div className="divider" />
               </li>
-              <li><a href="index.html">Logout</a></li>
+              <li>
+                <a
+                  role="button"
+                  tabIndex="0"
+                  onClick={this.handleLogoutUser}
+                >
+                  Logout
+                </a>
+              </li>
             </div> :
             <div>
               <li><a href="#signin" className="modal-trigger">Sign In</a></li>
@@ -156,6 +176,10 @@ SideNav.propTypes = {
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string
+  }).isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }).isRequired,
 };
 

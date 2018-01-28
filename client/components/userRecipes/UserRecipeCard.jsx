@@ -6,7 +6,8 @@ import RecipeImage from '../common/RecipeImage';
 
 const UserRecipeCard = (props) => {
   const { recipe, handleOpenEdit, handleOpenDelete } = props,
-    { id, title, description, recipeImage, views, upvotes, downvotes } = recipe;
+    { id, title, description, recipeImage, views, upvotes, downvotes,
+      favorites } = recipe;
 
   const openEditModal = () => {
     handleOpenEdit(recipe);
@@ -36,7 +37,7 @@ const UserRecipeCard = (props) => {
               {views}
             </li>
             <li id="favorites"><i className="material-icons tiny">favorite</i>
-              20
+              {favorites}
             </li>
             <li id="upvotes"><i className="material-icons tiny">thumb_up</i>
               {upvotes}
@@ -75,6 +76,7 @@ UserRecipeCard.propTypes = {
     views: PropTypes.number,
     upvotes: PropTypes.number,
     downvotes: PropTypes.number,
+    favorites: PropTypes.number,
   }).isRequired,
   handleOpenEdit: PropTypes.func.isRequired,
   handleOpenDelete: PropTypes.func.isRequired,

@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
+import config from '../config';
 
-// const URL = 'https://more-recipes-25.herokuapp.com/api/v1/';
+const { SERVER_URL, CLOUDINARY_URL } = config;
 
 const userSignupRequest = () => ({
   type: actionTypes.SIGNUP_REQUEST,
@@ -98,7 +99,7 @@ const uploadUserImageFailure = error => ({
 
 const signupUser = (values, closeSignupModal) => (dispatch) => {
   dispatch(userSignupRequest());
-  axios.post('http://127.0.0.1:3000/api/v1/users/signup', values)
+  axios.post(`${SERVER_URL}/users/signup`, values)
     .then((response) => {
       const { data } = response;
       dispatch(userSignupSuccess(data));
@@ -112,7 +113,7 @@ const signupUser = (values, closeSignupModal) => (dispatch) => {
 
 const signinUser = (values, closeSigninModal) => (dispatch) => {
   dispatch(userSigninRequest());
-  axios.post('http://127.0.0.1:3000/api/v1/users/signin', values)
+  axios.post(`${SERVER_URL}/users/signin`, values)
     .then((response) => {
       const { data } = response;
       const { data: { token } } = data;
@@ -137,7 +138,7 @@ const fetchUserProfile = userId => (dispatch) => {
     'x-access-token': localStorage.getItem('token'),
   };
   dispatch(fetchUserProfileRequest());
-  axios.get(`http://127.0.0.1:3000/api/v1/users/${userId}`, { headers: token })
+  axios.get(`${SERVER_URL}/users/${userId}`, { headers: token })
     .then((response) => {
       const { data } = response,
         { data: { user } } = data;
@@ -154,7 +155,7 @@ const editUserProfile = (userId, values) => (dispatch) => {
     'x-access-token': localStorage.getItem('token'),
   };
   dispatch(editUserProfileRequest());
-  axios.put(`http://127.0.0.1:3000/api/v1/users/${userId}`, values,
+  axios.put(`${SERVER_URL}/users/${userId}`, values,
     { headers: token })
     .then((response) => {
       const { data } = response,
@@ -167,12 +168,12 @@ const editUserProfile = (userId, values) => (dispatch) => {
     });
 };
 
-const editProfilePicture = (userId, imagefile) => (dispatch) => {
+const editProfilePicture = (userId, imageFile) => (dispatch) => {
   const token = {
     'x-access-token': localStorage.getItem('token'),
   };
   dispatch(editProfilePictureRequest());
-  axios.put(`http://127.0.0.1:3000/api/v1/users/${userId}`, imagefile,
+  axios.put(`${SERVER_URL}/users/${userId}/image`, imageFile,
     { headers: token })
     .then((response) => {
       const { data } = response,
@@ -187,8 +188,7 @@ const editProfilePicture = (userId, imagefile) => (dispatch) => {
 
 const uploadUserImage = value => (dispatch) => {
   dispatch(uploadUserImageRequest());
-  return axios.post('https://api.cloudinary.com/v1_1/heavyman/image/upload',
-    value)
+  return axios.post(`${CLOUDINARY_URL}`, value)
     .then((response) => {
       const { data } = response,
         { secure_url } = data;

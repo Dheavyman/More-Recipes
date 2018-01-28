@@ -29,15 +29,15 @@ class UserFavorites extends React.Component {
    * @memberof UserFavorites
    */
   render() {
-    const { userRecipes: { user } } = this.props,
-      { userFavorites } = user;
+    const { userRecipes: { userFavorites } } = this.props;
 
     return (
       <div className="row">
-        {userFavorites && userFavorites.map(recipe => (
+        {userFavorites && userFavorites.map(favorite => (
           <UserFavoriteCard
-            key={recipe.Recipe.id}
-            recipe={recipe.Recipe}
+            key={favorite.Recipe.id}
+            recipe={favorite.Recipe}
+            owner={favorite.Recipe.User}
             {...this.props}
           />
         ))}

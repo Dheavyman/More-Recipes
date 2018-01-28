@@ -67,7 +67,11 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'client/public/index.html')
-    })
+    }),
+    new webpack.EnvironmentPlugin([
+      'SERVER_URL', 'CLOUDINARY_UPLOAD_PRESET', 'CLOUDINARY_API_KEY',
+      'CLOUDINARY_URL'
+    ])
   ],
   devServer: {
     contentBase: './client/dist',

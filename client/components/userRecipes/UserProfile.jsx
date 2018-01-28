@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
+import ReactTooltip from 'react-tooltip';
 
 import avatar from '../../public/images/avatar.png';
 import ProfileDetails from './ProfileDetails';
 import EditProfileForm from './EditProfileForm';
+import config from '../../config';
 
 /**
  * Class representing user profile section
@@ -23,7 +25,6 @@ class UserProfile extends React.Component {
       isEditing: false,
       userDetails: null,
     };
-    // this.handleProfileChange = this.handleProfileChange.bind(this);
   }
 
   /**
@@ -33,8 +34,31 @@ class UserProfile extends React.Component {
    * @memberof UserProfile
    */
   componentDidMount() {
+    // Initialize materialize material box class
+    $('.materialboxed').materialbox();
+    // Initialize materialize tooltip class
+    $('.tooltipped').tooltip({
+      delay: 50
+    });
+
     const { fetchUserProfile, userId } = this.props;
     fetchUserProfile(userId);
+  }
+
+  /**
+   * Component will receive props lifecycle method
+   *
+   * @param {any} nextProps - The next props
+   * @returns {any} Changes state
+   * @memberof UserProfile
+   */
+  componentWillReceiveProps(nextProps) {
+    const { user: { error } } = nextProps;
+    if (isEmpty(error)) {
+      this.setState({
+        isEditing: false,
+      });
+    }
   }
 
   /**
@@ -48,6 +72,7 @@ class UserProfile extends React.Component {
       userDetails,
       isEditing: true,
     });
+    ReactTooltip.hide();
   }
 
   /**
@@ -85,9 +110,9 @@ class UserProfile extends React.Component {
    */
   handleSubmitProfile = () => {
     const { userDetails } = this.state,
-      { editUserProfile } = this.props;
+      { editUserProfile, userId } = this.props;
 
-    editUserProfile(userDetails);
+    editUserProfile(userId, userDetails);
   }
 
   /**
@@ -104,15 +129,18 @@ class UserProfile extends React.Component {
       { userId, uploadUserImage, editProfilePicture } = this.props,
       formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'o62xeo3k');
-    formData.append('api_key', '281293666534996');
+    formData.append('upload_preset', config.UPLOAD_PRESET);
+    formData.append('api_key', config.API_KEY);
 
     uploadUserImage(formData)
       .then(() => {
-        const { user: { userImageUrl, error } } = this.props;
+        const { user: { userImageUrl, error } } = this.props,
+          imageFile = {
+            userImage: userImageUrl,
+          };
 
         if (isEmpty(error)) {
-          editProfilePicture(userId, userImageUrl);
+          editProfilePicture(userId, imageFile);
         }
       });
   }
@@ -148,7 +176,9 @@ class UserProfile extends React.Component {
                 className={`btn-floating waves-effect waves-light
                   ${userImage ? 'green' : 'indigo accent-2'}`}
               >
-                <i className="material-icons small" >camera_alt</i>
+                <i className="material-icons small" data-tip="Edit photo">
+                  camera_alt
+                </i>
               </label>
               <input
                 id="user-image"
@@ -156,6 +186,7 @@ class UserProfile extends React.Component {
                 type="file"
                 onChange={this.handleUploadPhoto}
               />
+              <ReactTooltip />
             </div>
           </div>
         </div>
