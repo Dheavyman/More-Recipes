@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import actionCreators from '../../actions';
-import Footer from '../common/Footer';
 import Header from './Header';
 import Main from './Main';
+import { decodeToken } from '../../utils/authenticate';
+import config from '../../config';
 
 /**
  * Class representing user recipes
@@ -25,6 +26,8 @@ class UserRecipes extends React.Component {
     super();
     this.state = {
       recipeId: null,
+      userId: null,
+      authenticatedUserId: null,
       recipeToEdit: {},
       openEdit: false,
       openDelete: false,
@@ -50,6 +53,21 @@ class UserRecipes extends React.Component {
     this.handleEditRecipe = this.handleEditRecipe.bind(this);
     this.handleDeleteRecipe = this.handleDeleteRecipe.bind(this);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
+  }
+
+  /**
+   * Component did mount lifecycle method
+   *
+   * @returns {any} Fetches user favorite recipes
+   * @memberof UserFavorites
+   */
+  componentWillMount() {
+    const { match: { params: { userId } } } = this.props;
+    const { user: { id } } = decodeToken();
+    this.setState({
+      userId: parseInt(userId, 10),
+      authenticatedUserId: id,
+    });
   }
 
   /**
@@ -128,8 +146,8 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   handleEditChange(event) {
-    const { target: { name, value } } = event,
-      { recipeToEdit } = this.state;
+    const { target: { name, value } } = event;
+    const { recipeToEdit } = this.state;
     this.setState({
       recipeToEdit: {
         ...recipeToEdit,
@@ -176,11 +194,11 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   handleDrop = (files) => {
-    const { preview } = files[0],
-      formData = new FormData();
+    const { preview } = files[0];
+    const formData = new FormData();
     formData.append('file', files[0]);
-    formData.append('upload_preset', 'o62xeo3k');
-    formData.append('api_key', '281293666534996');
+    formData.append('upload_preset', config.UPLOAD_PRESET);
+    formData.append('api_key', config.API_KEY);
 
     this.handleImagePreview(preview);
     this.setState({
@@ -197,22 +215,24 @@ class UserRecipes extends React.Component {
    */
   handleEditRecipe(event) {
     event.preventDefault();
-    const { recipeToEdit, imageData } = this.state,
-      { editRecipe, uploadImage, userRecipes: {
-        imageUploaded, imageUrl } } = this.props,
-      { id } = recipeToEdit,
-      values = {
-        ...recipeToEdit,
-        recipeImage: imageUrl,
-      };
+    const { recipeToEdit, imageData } = this.state;
+    const { editRecipe, uploadImage, userRecipes: {
+      imageUploaded } } = this.props;
+    const { id } = recipeToEdit;
     if (!imageUploaded && imageData) {
       uploadImage(imageData)
-        .then((error) => {
+        .then(() => {
+          const { userRecipes: { imageUrl, error } } = this.props;
+          const values = {
+            ...recipeToEdit,
+            recipeImage: imageUrl,
+          };
           if (isEmpty(error)) {
             editRecipe(id, values, this.handleClose);
           }
         });
     } else {
+      const values = recipeToEdit;
       editRecipe(id, values, this.handleClose);
     }
   }
@@ -238,9 +258,9 @@ class UserRecipes extends React.Component {
    */
   handleAddRecipe(event) {
     event.preventDefault();
-    const { imageData } = this.state,
-      { uploadImage, addRecipe, userRecipes: {
-        imageUploaded } } = this.props;
+    const { imageData } = this.state;
+    const { uploadImage, addRecipe, userRecipes: {
+      imageUploaded } } = this.props;
 
     let values = {
       title: this.state.title,
@@ -283,10 +303,10 @@ class UserRecipes extends React.Component {
   render() {
     return (
       <div>
-        <header>
+        <header className="header" >
           <Header {...this.props} />
         </header>
-        <main>
+        <main className="main" >
           <Main
             handleChange={this.handleChange}
             handleOpenAdd={this.handleOpenAdd}
@@ -304,9 +324,6 @@ class UserRecipes extends React.Component {
             {...this.props}
           />
         </main>
-        <footer>
-          <Footer />
-        </footer>
       </div>
     );
   }
@@ -320,6 +337,11 @@ UserRecipes.propTypes = {
   userRecipes: PropTypes.shape({
     imageUploading: PropTypes.bool.isRequired,
     imageUrl: PropTypes.string
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      userId: PropTypes.string,
+    })
   }).isRequired,
 };
 

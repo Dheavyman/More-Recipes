@@ -4,10 +4,25 @@ import { Link } from 'react-router-dom';
 
 import RecipeImage from '../common/RecipeImage';
 
+const propTypes = {
+  recipe: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    recipeImage: PropTypes.string,
+    views: PropTypes.number,
+    upvotes: PropTypes.number,
+    downvotes: PropTypes.number,
+    favorites: PropTypes.number,
+  }).isRequired,
+  owner: PropTypes.shape({
+    fullName: PropTypes.string,
+  }).isRequired,
+};
+
 const UserFavoriteCard = (props) => {
-  const { recipe, userRecipes: { user } } = props,
-    { id, title, description, recipeImage, views, upvotes, downvotes } = recipe,
-    { fullName } = user;
+  const { recipe, owner: { fullName } } = props;
+  const { id, title, description, recipeImage, views, upvotes, downvotes,
+    favorites } = recipe;
 
   return (
     <div className="col s12 m6 l3">
@@ -33,7 +48,7 @@ const UserFavoriteCard = (props) => {
               {views}
             </li>
             <li id="favorites"><i className="material-icons tiny">favorite</i>
-            20
+              {favorites}
             </li>
             <li id="upvotes"><i className="material-icons tiny">thumb_up</i>
               {upvotes}
@@ -48,20 +63,6 @@ const UserFavoriteCard = (props) => {
   );
 };
 
-UserFavoriteCard.propTypes = {
-  recipe: PropTypes.shape({
-    title: PropTypes.string,
-    description: PropTypes.string,
-    recipeImage: PropTypes.string,
-    views: PropTypes.number,
-    upvotes: PropTypes.number,
-    downvotes: PropTypes.number,
-  }).isRequired,
-  userRecipes: PropTypes.shape({
-    user: PropTypes.shape({
-      fullName: PropTypes.string,
-    })
-  }).isRequired,
-};
+UserFavoriteCard.propTypes = propTypes;
 
 export default UserFavoriteCard;

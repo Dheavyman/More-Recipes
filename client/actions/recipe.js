@@ -2,8 +2,9 @@ import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
 import { getToken } from '../utils/authenticate';
+import config from '../config';
 
-// const URL = 'https://more-recipes-25.herokuapp.com/api/v1/';
+const { SERVER_URL } = config;
 
 // Action to retrieve all recipes
 const retrieveRecipesRequest = () => ({
@@ -55,9 +56,9 @@ const fetchUserFavoritesRequest = () => ({
   type: actionTypes.FETCH_USER_FAVORITES_REQUEST,
 });
 
-const fetchUserFavoritesSuccess = user => ({
+const fetchUserFavoritesSuccess = favorites => ({
   type: actionTypes.FETCH_USER_FAVORITES_SUCCESS,
-  payload: user
+  payload: favorites
 });
 
 const fetchUserFavoritesFailure = error => ({
@@ -67,7 +68,7 @@ const fetchUserFavoritesFailure = error => ({
 
 const retrieveRecipes = () => (dispatch) => {
   dispatch(retrieveRecipesRequest());
-  axios.get('http://127.0.0.1:3000/api/v1/recipes')
+  axios.get(`${SERVER_URL}/recipes`)
     .then((response) => {
       const { data } = response;
       dispatch(retrieveRecipesSuccess(data));
@@ -80,7 +81,10 @@ const retrieveRecipes = () => (dispatch) => {
 
 const fetchRecipe = recipeId => (dispatch) => {
   dispatch(fetchRecipeRequest());
-  axios.get(`http://127.0.0.1:3000/api/v1/recipes/${recipeId}`)
+  axios.get(`${SERVER_URL}/recipes/${recipeId}`, {
+    headers: {
+      'x-access-token': getToken(),
+    } })
     .then((response) => {
       const { data } = response,
         { data: { recipe } } = data;
@@ -94,7 +98,7 @@ const fetchRecipe = recipeId => (dispatch) => {
 
 const fetchUserRecipes = userId => (dispatch) => {
   dispatch(fetchUserRecipesRequest());
-  axios.get(`http://127.0.0.1:3000/api/v1/recipes/users/${userId}`,
+  axios.get(`${SERVER_URL}/recipes/users/${userId}`,
     { headers: {
       'x-access-token': getToken(),
     } })
@@ -111,14 +115,14 @@ const fetchUserRecipes = userId => (dispatch) => {
 
 const fetchUserFavorites = userId => (dispatch) => {
   dispatch(fetchUserFavoritesRequest());
-  axios.get(`http://127.0.0.1:3000/api/v1/users/${userId}/recipes`,
+  axios.get(`${SERVER_URL}/users/${userId}/recipes`,
     { headers: {
       'x-access-token': getToken(),
     } })
     .then((response) => {
       const { data } = response,
-        { data: { user } } = data;
-      dispatch(fetchUserFavoritesSuccess(user));
+        { data: { favorites } } = data;
+      dispatch(fetchUserFavoritesSuccess(favorites));
     })
     .catch((error) => {
       const { response: { data } } = error;

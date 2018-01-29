@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import UserFavoriteCard from './UserFavoriteCard';
-import { decodeToken } from '../../utils/authenticate';
+
+const propTypes = {
+  fetchUserFavorites: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  userRecipes: PropTypes.shape({
+    user: PropTypes.shape({
+      userFavorites: PropTypes.arrayOf(PropTypes.shape())
+    })
+  }).isRequired,
+};
 
 /**
  * Class representing user favorite recipes
@@ -18,9 +27,7 @@ class UserFavorites extends React.Component {
    * @memberof UserFavorites
    */
   componentDidMount() {
-    const { user: { id } } = decodeToken(),
-      userId = id,
-      { fetchUserFavorites } = this.props;
+    const { fetchUserFavorites, userId } = this.props;
 
     fetchUserFavorites(userId);
   }
@@ -32,15 +39,15 @@ class UserFavorites extends React.Component {
    * @memberof UserFavorites
    */
   render() {
-    const { userRecipes: { user } } = this.props,
-      { userFavorites } = user;
+    const { userRecipes: { userFavorites } } = this.props;
 
     return (
       <div className="row">
-        {userFavorites && userFavorites.map(recipe => (
+        {userFavorites && userFavorites.map(favorite => (
           <UserFavoriteCard
-            key={recipe.Recipe.id}
-            recipe={recipe.Recipe}
+            key={favorite.Recipe.id}
+            recipe={favorite.Recipe}
+            owner={favorite.Recipe.User}
             {...this.props}
           />
         ))}
@@ -49,13 +56,6 @@ class UserFavorites extends React.Component {
   }
 }
 
-UserFavorites.propTypes = {
-  fetchUserFavorites: PropTypes.func.isRequired,
-  userRecipes: PropTypes.shape({
-    user: PropTypes.shape({
-      userFavorites: PropTypes.arrayOf(PropTypes.shape())
-    })
-  }).isRequired,
-};
+UserFavorites.propTypes = propTypes;
 
 export default UserFavorites;

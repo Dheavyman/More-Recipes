@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-// import Navbar from '../common/Navbar';
-import Category from '../common/Category';
-import AuthUserNav from '../common/AuthUserNav';
 import SideNav from '../common/SideNav';
+
+const propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 /**
  * Class representing Header component
@@ -34,10 +38,6 @@ class Header extends React.Component {
     $('.button-collapse').sideNav({
       draggable: true,
     });
-    // Initialize materialize dropdown class
-    $('.dropdown-button').dropdown({
-      belowOrigin: true,
-    });
     // Initailize materialize tab class
     $('ul.tabs').tabs();
   }
@@ -49,8 +49,9 @@ class Header extends React.Component {
    * @memberof Header
    */
   handleLogoutUser() {
-    this.props.logoutUser();
-    this.props.history.push('/');
+    const { logoutUser, history } = this.props;
+    logoutUser();
+    history.push('/');
   }
 
   /**
@@ -78,50 +79,24 @@ class Header extends React.Component {
               >
                 <i className="material-icons">menu</i>
               </a>
-              <ul className="right hide-on-med-and-down">
-                <li><Link to="/">Home</Link></li>
-                <li>
-                  <a
-                    className="dropdown-button dropdown-category"
-                    data-activates="category"
-                  >
-                    Category
-                  </a>
-                </li>
-                <Category />
-                <li>
-                  <a
-                    className="dropdown-button dropdown-user"
-                    data-activates="user-control"
-                  >
-                    {'User fullname'}
-                    <i className="material-icons large left">account_circle</i>
-                  </a>
-                  <AuthUserNav handleLogoutUser={this.handleLogoutUser} />
-                </li>
-              </ul>
             </div>
             <div className="nav-content">
               <ul className="tabs tabs-transparent">
-                <li className="tab"><a href="#user-recipes">My Recipes</a></li>
+                <li className="tab"><a href="#user-profile">Profile</a></li>
+                <li className="tab"><a href="#user-recipes">Recipes</a></li>
                 <li className="tab">
-                  <a href="#user-favorites">My Favorites</a>
+                  <a href="#user-favorites">Favorites</a>
                 </li>
               </ul>
             </div>
           </nav>
         </div>
-        <SideNav />
+        <SideNav {...this.props} />
       </div>
     );
   }
 }
 
-Header.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};
+Header.propTypes = propTypes;
 
 export default Header;
