@@ -2,14 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
+const propTypes = {
+  user: PropTypes.shape({
+    userProfile: PropTypes.shape({
+      username: PropTypes.string,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      email: PropTypes.string,
+      aboutMe: PropTypes.string,
+    })
+  }).isRequired,
+  handleStartEdit: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  authenticatedUserId: PropTypes.number
+};
+
+const defaultProps = {
+  authenticatedUserId: null,
+};
+
 const ProfileDetails = (props) => {
-  const { user: { userProfile }, handleStartEdit } = props,
-    { username, firstName, lastName, email, aboutMe } = userProfile,
-    editableDetails = {
-      firstName,
-      lastName,
-      aboutMe,
-    };
+  const { user: { userProfile }, handleStartEdit, userId,
+    authenticatedUserId } = props;
+  const { username, firstName, lastName, email, aboutMe } = userProfile;
+  const editableDetails = {
+    firstName,
+    lastName,
+    aboutMe,
+  };
 
   const handleEdit = () => {
     handleStartEdit(editableDetails);
@@ -19,7 +39,8 @@ const ProfileDetails = (props) => {
     <div>
       <div className="row" />
       <div className="col s12">
-        <h5><i className="material-icons left">person</i>My Profile</h5>
+        <h5><i className="material-icons left">person</i>
+          {userId === authenticatedUserId ? 'My' : firstName} Profile</h5>
         <div className="divider black" />
         <br />
         <div id="about_user" className="row">
@@ -50,7 +71,7 @@ const ProfileDetails = (props) => {
         </div>
       </div>
       <div className="col s12">
-        <h5>About Me</h5>
+        <h5>About {userId === authenticatedUserId ? 'Me' : firstName}</h5>
         <div className="divider black" />
         <p
           id="about-me"
@@ -59,13 +80,14 @@ const ProfileDetails = (props) => {
         </p>
       </div>
       <div>
-        <button
+        {userId === authenticatedUserId
+        && <button
           id="edit-btn"
           className={'btn-floating waves-effect waves-light green right'}
           onClick={handleEdit}
         >
           <i className="material-icons left" data-tip="Edit details">edit</i>
-        </button>
+        </button>}
         <ReactTooltip />
       </div>
       <div className="row" />
@@ -73,17 +95,8 @@ const ProfileDetails = (props) => {
   );
 };
 
-ProfileDetails.propTypes = {
-  user: PropTypes.shape({
-    userProfile: PropTypes.shape({
-      username: PropTypes.string,
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
-      email: PropTypes.string,
-      aboutMe: PropTypes.string,
-    })
-  }).isRequired,
-  handleStartEdit: PropTypes.func.isRequired,
-};
+ProfileDetails.propTypes = propTypes;
+
+ProfileDetails.defaultProps = defaultProps;
 
 export default ProfileDetails;

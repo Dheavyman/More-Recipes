@@ -8,6 +8,29 @@ import Dropzone from 'react-dropzone';
 import Spinner from '../common/Spinner';
 import ErrorMessage from '../common/ErrorMessage';
 
+const propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleEditChange: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
+  handleEditRecipe: PropTypes.func.isRequired,
+  handleDrop: PropTypes.func.isRequired,
+  imagePreview: PropTypes.string.isRequired,
+  recipeToEdit: PropTypes.shape({
+    title: PropTypes.string,
+    category: PropTypes.string,
+    description: PropTypes.string,
+    preparationTime: PropTypes.number,
+    ingredients: PropTypes.string,
+    directions: PropTypes.string,
+  }).isRequired,
+  userRecipes: PropTypes.shape({
+    isLoading: PropTypes.bool.isRequired,
+    imageUploading: PropTypes.bool.isRequired,
+    error: PropTypes.shape()
+  }).isRequired,
+};
+
 /**
  * Funtion to handle editing recipe
  *
@@ -16,9 +39,10 @@ import ErrorMessage from '../common/ErrorMessage';
  */
 const EditRecipe = (props) => {
   const { open, handleEditChange, handleSelect, handleClose, handleDrop,
-    handleEditRecipe, imagePreview, recipeToEdit: {
-      title, category, description, preparationTime, ingredients, directions
-    }, userRecipes: { isLoading, imageUploading, error } } = props;
+    handleEditRecipe, imagePreview, recipeToEdit, userRecipes } = props;
+  const { title, category, description, preparationTime, ingredients,
+    directions } = recipeToEdit;
+  const { isLoading, imageUploading, error } = userRecipes;
 
   const actions = [
     <FlatButton
@@ -169,27 +193,6 @@ const EditRecipe = (props) => {
   );
 };
 
-EditRecipe.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  handleEditChange: PropTypes.func.isRequired,
-  handleSelect: PropTypes.func.isRequired,
-  handleEditRecipe: PropTypes.func.isRequired,
-  handleDrop: PropTypes.func.isRequired,
-  imagePreview: PropTypes.string.isRequired,
-  recipeToEdit: PropTypes.shape({
-    title: PropTypes.string,
-    category: PropTypes.string,
-    description: PropTypes.string,
-    preparationTime: PropTypes.number,
-    ingredients: PropTypes.string,
-    directions: PropTypes.string,
-  }).isRequired,
-  userRecipes: PropTypes.shape({
-    isLoading: PropTypes.bool.isRequired,
-    imageUploading: PropTypes.bool.isRequired,
-    error: PropTypes.shape()
-  }).isRequired,
-};
+EditRecipe.propTypes = propTypes;
 
 export default EditRecipe;

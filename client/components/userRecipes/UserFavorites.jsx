@@ -3,6 +3,16 @@ import PropTypes from 'prop-types';
 
 import UserFavoriteCard from './UserFavoriteCard';
 
+const propTypes = {
+  fetchUserFavorites: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  userRecipes: PropTypes.shape({
+    user: PropTypes.shape({
+      userFavorites: PropTypes.arrayOf(PropTypes.shape())
+    })
+  }).isRequired,
+};
+
 /**
  * Class representing user favorite recipes
  *
@@ -46,14 +56,6 @@ class UserFavorites extends React.Component {
   }
 }
 
-UserFavorites.propTypes = {
-  fetchUserFavorites: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
-  userRecipes: PropTypes.shape({
-    user: PropTypes.shape({
-      userFavorites: PropTypes.arrayOf(PropTypes.shape())
-    })
-  }).isRequired,
-};
+UserFavorites.propTypes = propTypes;
 
 export default UserFavorites;

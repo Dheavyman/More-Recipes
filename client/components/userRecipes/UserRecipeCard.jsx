@@ -4,10 +4,24 @@ import { Link } from 'react-router-dom';
 
 import RecipeImage from '../common/RecipeImage';
 
+const propTypes = {
+  recipe: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    recipeImage: PropTypes.string,
+    views: PropTypes.number,
+    upvotes: PropTypes.number,
+    downvotes: PropTypes.number,
+    favorites: PropTypes.number,
+  }).isRequired,
+  handleOpenEdit: PropTypes.func.isRequired,
+  handleOpenDelete: PropTypes.func.isRequired,
+};
+
 const UserRecipeCard = (props) => {
-  const { recipe, handleOpenEdit, handleOpenDelete } = props,
-    { id, title, description, recipeImage, views, upvotes, downvotes,
-      favorites } = recipe;
+  const { recipe, handleOpenEdit, handleOpenDelete } = props;
+  const { id, title, description, recipeImage, views, upvotes, downvotes,
+    favorites } = recipe;
 
   const openEditModal = () => {
     handleOpenEdit(recipe);
@@ -68,18 +82,6 @@ const UserRecipeCard = (props) => {
   );
 };
 
-UserRecipeCard.propTypes = {
-  recipe: PropTypes.shape({
-    title: PropTypes.string,
-    description: PropTypes.string,
-    recipeImage: PropTypes.string,
-    views: PropTypes.number,
-    upvotes: PropTypes.number,
-    downvotes: PropTypes.number,
-    favorites: PropTypes.number,
-  }).isRequired,
-  handleOpenEdit: PropTypes.func.isRequired,
-  handleOpenDelete: PropTypes.func.isRequired,
-};
+UserRecipeCard.propTypes = propTypes;
 
 export default UserRecipeCard;

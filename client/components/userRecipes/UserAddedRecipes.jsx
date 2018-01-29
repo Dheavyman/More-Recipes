@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 
 import UserRecipeCard from './UserRecipeCard';
 
+const propTypes = {
+  fetchUserRecipes: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  userRecipes: PropTypes.shape({
+    userAddedRecipes: PropTypes.arrayOf(PropTypes.shape()),
+  }).isRequired,
+};
+
 /**
  * Class representing user added recipes
  *
@@ -41,12 +49,6 @@ class UserAddedRecipes extends React.Component {
   }
 }
 
-UserAddedRecipes.propTypes = {
-  fetchUserRecipes: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
-  userRecipes: PropTypes.shape({
-    userAddedRecipes: PropTypes.arrayOf(PropTypes.shape()),
-  }).isRequired,
-};
+UserAddedRecipes.propTypes = propTypes;
 
 export default UserAddedRecipes;

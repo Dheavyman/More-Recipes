@@ -4,10 +4,25 @@ import ReactTooltip from 'react-tooltip';
 
 import TextField from '../common/TextField';
 
+const propTypes = {
+  user: PropTypes.shape({
+    userProfile: PropTypes.shape({
+      username: PropTypes.string,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      email: PropTypes.string,
+      aboutMe: PropTypes.string,
+    })
+  }).isRequired,
+  handleProfileChange: PropTypes.func.isRequired,
+  handleSubmitProfile: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired,
+};
+
 const EditProfileForm = (props) => {
   const { user: { userProfile }, handleProfileChange, handleSubmitProfile,
-      handleCancel } = props,
-    { username, firstName, lastName, email, aboutMe } = userProfile;
+    handleCancel } = props;
+  const { username, firstName, lastName, email, aboutMe } = userProfile;
   return (
     <div>
       <div className="row" />
@@ -90,19 +105,6 @@ const EditProfileForm = (props) => {
   );
 };
 
-EditProfileForm.propTypes = {
-  user: PropTypes.shape({
-    userProfile: PropTypes.shape({
-      username: PropTypes.string,
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
-      email: PropTypes.string,
-      aboutMe: PropTypes.string,
-    })
-  }).isRequired,
-  handleProfileChange: PropTypes.func.isRequired,
-  handleSubmitProfile: PropTypes.func.isRequired,
-  handleCancel: PropTypes.func.isRequired,
-};
+EditProfileForm.propTypes = propTypes;
 
 export default EditProfileForm;

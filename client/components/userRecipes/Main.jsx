@@ -10,6 +10,13 @@ import EditRecipe from './EditRecipe';
 import DeleteRecipe from './DeleteRecipe';
 import AddRecipe from './AddRecipe';
 
+const propTypes = {
+  openAdd: PropTypes.bool.isRequired,
+  openEdit: PropTypes.bool.isRequired,
+  openDelete: PropTypes.bool.isRequired,
+  handleOpenAdd: PropTypes.func.isRequired,
+};
+
 /**
  * Function representing main component
  *
@@ -58,11 +65,6 @@ const Main = (props) => {
   );
 };
 
-Main.propTypes = {
-  openAdd: PropTypes.bool.isRequired,
-  openEdit: PropTypes.bool.isRequired,
-  openDelete: PropTypes.bool.isRequired,
-  handleOpenAdd: PropTypes.func.isRequired,
-};
+Main.propTypes = propTypes;
 
 export default Main;

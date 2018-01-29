@@ -8,6 +8,26 @@ import ProfileDetails from './ProfileDetails';
 import EditProfileForm from './EditProfileForm';
 import config from '../../config';
 
+const propTypes = {
+  fetchUserProfile: PropTypes.func.isRequired,
+  editUserProfile: PropTypes.func.isRequired,
+  editProfilePicture: PropTypes.func.isRequired,
+  uploadUserImage: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  authenticatedUserId: PropTypes.number,
+  user: PropTypes.shape({
+    userProfile: PropTypes.shape({
+      fullName: PropTypes.string,
+      userImage: PropTypes.string,
+    }),
+    userImageUrl: PropTypes.string,
+  }).isRequired,
+};
+
+const defaultProps = {
+  authenticatedUserId: null,
+};
+
 /**
  * Class representing user profile section
  *
@@ -82,8 +102,8 @@ class UserProfile extends React.Component {
    * @returns {any} Set input value state values
    */
   handleProfileChange = (event) => {
-    const { target: { name, value } } = event,
-      { userDetails } = this.state;
+    const { target: { name, value } } = event;
+    const { userDetails } = this.state;
     this.setState({
       userDetails: {
         ...userDetails,
@@ -109,8 +129,8 @@ class UserProfile extends React.Component {
    * @memberof UserProfile
    */
   handleSubmitProfile = () => {
-    const { userDetails } = this.state,
-      { editUserProfile, userId } = this.props;
+    const { userDetails } = this.state;
+    const { editUserProfile, userId } = this.props;
 
     editUserProfile(userId, userDetails);
   }
@@ -124,20 +144,20 @@ class UserProfile extends React.Component {
    */
   handleUploadPhoto = (event) => {
     event.preventDefault();
-    const { target: { files } } = event,
-      file = files[0],
-      { userId, uploadUserImage, editProfilePicture } = this.props,
-      formData = new FormData();
+    const { target: { files } } = event;
+    const file = files[0];
+    const { userId, uploadUserImage, editProfilePicture } = this.props;
+    const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', config.UPLOAD_PRESET);
     formData.append('api_key', config.API_KEY);
 
     uploadUserImage(formData)
       .then(() => {
-        const { user: { userImageUrl, error } } = this.props,
-          imageFile = {
-            userImage: userImageUrl,
-          };
+        const { user: { userImageUrl, error } } = this.props;
+        const imageFile = {
+          userImage: userImageUrl,
+        };
 
         if (isEmpty(error)) {
           editProfilePicture(userId, imageFile);
@@ -152,9 +172,9 @@ class UserProfile extends React.Component {
    * @memberof UserProfile
    */
   render() {
-    const { isEditing } = this.state,
-      { user: { userProfile } } = this.props,
-      { fullName, userImage } = userProfile;
+    const { isEditing } = this.state;
+    const { user: { userProfile }, userId, authenticatedUserId } = this.props;
+    const { fullName, userImage } = userProfile;
 
     return (
       <div className="row">
@@ -170,28 +190,29 @@ class UserProfile extends React.Component {
             </figure>
           </div>
           <div className="row">
-            <div className=" image-upload-button center">
-              <label
-                htmlFor="user-image"
-                className={`btn-floating waves-effect waves-light
+            {userId === authenticatedUserId
+              && <div className=" image-upload-button center">
+                <label
+                  htmlFor="user-image"
+                  className={`btn-floating waves-effect waves-light
                   ${userImage ? 'green' : 'indigo accent-2'}`}
-              >
-                <i className="material-icons small" data-tip="Edit photo">
-                  camera_alt
-                </i>
-              </label>
-              <input
-                id="user-image"
-                name="user-image"
-                type="file"
-                onChange={this.handleUploadPhoto}
-              />
-              <ReactTooltip />
-            </div>
+                >
+                  <i className="material-icons small" data-tip="Edit photo">
+                    camera_alt
+                  </i>
+                </label>
+                <input
+                  id="user-image"
+                  name="user-image"
+                  type="file"
+                  onChange={this.handleUploadPhoto}
+                />
+                <ReactTooltip />
+              </div>}
           </div>
         </div>
         <div className="col s12 m5 l6 z-depth-1">
-          {isEditing ?
+          {isEditing && (userId === authenticatedUserId) ?
             <EditProfileForm
               handleProfileChange={this.handleProfileChange}
               handleSubmitProfile={this.handleSubmitProfile}
@@ -210,19 +231,8 @@ class UserProfile extends React.Component {
   }
 }
 
-UserProfile.propTypes = {
-  fetchUserProfile: PropTypes.func.isRequired,
-  editUserProfile: PropTypes.func.isRequired,
-  editProfilePicture: PropTypes.func.isRequired,
-  uploadUserImage: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
-  user: PropTypes.shape({
-    userProfile: PropTypes.shape({
-      fullName: PropTypes.string,
-      userImage: PropTypes.string,
-    }),
-    userImageUrl: PropTypes.string,
-  }).isRequired,
-};
+UserProfile.propTypes = propTypes;
+
+UserProfile.defaultProps = defaultProps;
 
 export default UserProfile;

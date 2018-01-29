@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 
 import SideNav from '../common/SideNav';
 
+const propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
 /**
  * Class representing Header component
  *
@@ -90,11 +97,6 @@ class Header extends React.Component {
   }
 }
 
-Header.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};
+Header.propTypes = propTypes;
 
 export default Header;

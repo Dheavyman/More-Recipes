@@ -4,10 +4,25 @@ import { Link } from 'react-router-dom';
 
 import RecipeImage from '../common/RecipeImage';
 
+const propTypes = {
+  recipe: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    recipeImage: PropTypes.string,
+    views: PropTypes.number,
+    upvotes: PropTypes.number,
+    downvotes: PropTypes.number,
+    favorites: PropTypes.number,
+  }).isRequired,
+  owner: PropTypes.shape({
+    fullName: PropTypes.string,
+  }).isRequired,
+};
+
 const UserFavoriteCard = (props) => {
-  const { recipe, owner: { fullName } } = props,
-    { id, title, description, recipeImage, views, upvotes, downvotes,
-      favorites } = recipe;
+  const { recipe, owner: { fullName } } = props;
+  const { id, title, description, recipeImage, views, upvotes, downvotes,
+    favorites } = recipe;
 
   return (
     <div className="col s12 m6 l3">
@@ -48,19 +63,6 @@ const UserFavoriteCard = (props) => {
   );
 };
 
-UserFavoriteCard.propTypes = {
-  recipe: PropTypes.shape({
-    title: PropTypes.string,
-    description: PropTypes.string,
-    recipeImage: PropTypes.string,
-    views: PropTypes.number,
-    upvotes: PropTypes.number,
-    downvotes: PropTypes.number,
-    favorites: PropTypes.number,
-  }).isRequired,
-  owner: PropTypes.shape({
-    fullName: PropTypes.string,
-  }).isRequired,
-};
+UserFavoriteCard.propTypes = propTypes;
 
 export default UserFavoriteCard;

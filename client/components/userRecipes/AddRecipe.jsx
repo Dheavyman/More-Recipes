@@ -8,6 +8,21 @@ import Dropzone from 'react-dropzone';
 import Spinner from '../common/Spinner';
 import ErrorMessage from '../common/ErrorMessage';
 
+const propTypes = {
+  category: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
+  handleAddRecipe: PropTypes.func.isRequired,
+  handleDrop: PropTypes.func.isRequired,
+  imagePreview: PropTypes.string.isRequired,
+  userRecipes: PropTypes.shape({
+    imageUploading: PropTypes.bool.isRequired,
+    error: PropTypes.shape()
+  }).isRequired,
+};
+
 /**
  * Add recipe component
  *
@@ -16,8 +31,8 @@ import ErrorMessage from '../common/ErrorMessage';
  */
 const AddRecipe = (props) => {
   const { category, open, handleChange, handleSelect, handleDrop, handleClose,
-    handleAddRecipe, imagePreview, userRecipes: { isLoading,
-      imageUploading, error } } = props;
+    handleAddRecipe, imagePreview, userRecipes } = props;
+  const { isLoading, imageUploading, error } = userRecipes;
   const actions = [
     <FlatButton
       label="Cancel"
@@ -158,19 +173,6 @@ const AddRecipe = (props) => {
   );
 };
 
-AddRecipe.propTypes = {
-  category: PropTypes.string.isRequired,
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleSelect: PropTypes.func.isRequired,
-  handleAddRecipe: PropTypes.func.isRequired,
-  handleDrop: PropTypes.func.isRequired,
-  imagePreview: PropTypes.string.isRequired,
-  userRecipes: PropTypes.shape({
-    imageUploading: PropTypes.bool.isRequired,
-    error: PropTypes.shape()
-  }).isRequired,
-};
+AddRecipe.propTypes = propTypes;
 
 export default AddRecipe;

@@ -3,11 +3,22 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
+const propTypes = {
+  recipeId: PropTypes.number,
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleDeleteRecipe: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  recipeId: null,
+};
+
 const DeleteRecipe = (props) => {
-  const { recipeId, open, handleClose, handleDeleteRecipe } = props,
-    deleteRecipe = () => {
-      handleDeleteRecipe(recipeId);
-    };
+  const { recipeId, open, handleClose, handleDeleteRecipe } = props;
+  const deleteRecipe = () => {
+    handleDeleteRecipe(recipeId);
+  };
 
   const actions = [
     <FlatButton
@@ -45,15 +56,8 @@ const DeleteRecipe = (props) => {
   );
 };
 
-DeleteRecipe.propTypes = {
-  recipeId: PropTypes.number,
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  handleDeleteRecipe: PropTypes.func.isRequired,
-};
+DeleteRecipe.propTypes = propTypes;
 
-DeleteRecipe.defaultProps = {
-  recipeId: null,
-};
+DeleteRecipe.defaultProps = defaultProps;
 
 export default DeleteRecipe;
