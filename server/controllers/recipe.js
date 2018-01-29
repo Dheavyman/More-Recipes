@@ -225,7 +225,7 @@ class RecipeController {
         const token = req.body.token || req.query.token ||
           req.headers['x-access-token'];
         let userId;
-        if (token !== 'null') {
+        if (token !== 'null' && token !== undefined) {
           const { user: { id } } = jwt.decode(token);
           userId = id;
         }
