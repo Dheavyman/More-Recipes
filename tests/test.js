@@ -1340,7 +1340,7 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
-          expect(res.body.message).to.equal('Vote removed');
+          expect(res.body.message).to.equal('Downvote removed');
           done();
         });
     });
@@ -1370,7 +1370,7 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
-          expect(res.body.message).to.equal('Vote removed');
+          expect(res.body.message).to.equal('Upvote removed');
           done();
         });
     });
