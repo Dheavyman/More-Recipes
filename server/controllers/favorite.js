@@ -33,19 +33,26 @@ class FavoriteController {
           favorite.destroy();
           Recipe
             .findById(req.params.recipeId)
-            .then(recipe => recipe.decrement('favorites'));
-          return res.status(200).send({
-            status: 'Success',
-            message: 'Recipe removed from favorites'
-          });
+            .then(recipe => recipe.decrement('favorites'))
+            .then(recipe => res.status(200).send({
+              status: 'Success',
+              message: 'Recipe removed from favorites',
+              data: {
+                favorites: recipe.favorites,
+              }
+            }));
+        } else {
+          Recipe
+            .findById(req.params.recipeId)
+            .then(recipe => recipe.increment('favorites'))
+            .then(recipe => res.status(201).send({
+              status: 'Success',
+              message: 'Recipe added to favorites',
+              data: {
+                favorites: recipe.favorites,
+              }
+            }));
         }
-        Recipe
-          .findById(req.params.recipeId)
-          .then(recipe => recipe.increment('favorites'));
-        return res.status(201).send({
-          status: 'Success',
-          message: 'Recipe added to favorites',
-        });
       })
       .catch(error => res.status(500).send({
         status: 'Error',

@@ -8,6 +8,8 @@ import helpers from '../helpers';
 const Recipe = models.Recipe,
   Review = models.Review,
   User = models.User,
+  Favorite = models.Favorite,
+  Vote = models.Vote,
   Op = Sequelize.Op,
   sendNotification = helpers.sendEmail;
 
@@ -219,6 +221,12 @@ class RecipeController {
             model: User,
             attributes: ['firstName', 'lastName'],
           }],
+        }, {
+          model: Favorite,
+          attributes: ['userId']
+        }, {
+          model: Vote,
+          attributes: ['userId', 'hasVoted']
         }],
       })
       .then((recipe) => {

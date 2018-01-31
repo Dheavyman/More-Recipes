@@ -67,7 +67,7 @@ class VoteController {
             .then(recipe => recipe.decrement('upvotes'))
             .then(recipe => res.status(200).send({
               status: 'Success',
-              message: 'Vote removed',
+              message: 'Upvote removed',
               data: {
                 id: recipe.id,
                 upvotes: recipe.upvotes,
@@ -140,7 +140,7 @@ class VoteController {
             .then(recipe => recipe.decrement('downvotes'))
             .then(recipe => res.status(200).send({
               status: 'Success',
-              message: 'Vote removed',
+              message: 'Downvote removed',
               data: {
                 id: recipe.id,
                 upvotes: recipe.upvotes,
