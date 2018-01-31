@@ -4,6 +4,10 @@ const initialState = {
   isLoading: false,
   recipe: {},
   reviews: [],
+  favoritedUsers: [],
+  voters: [],
+  voteMessage: null,
+  favoriteMessage: null,
   error: {}
 };
 
@@ -20,6 +24,8 @@ const singleRecipe = (state = initialState, action) => {
         isLoading: false,
         recipe: action.payload,
         reviews: action.payload.Reviews,
+        favoritedUsers: action.payload.Favorites,
+        voters: action.payload.Votes,
         error: {},
       };
     case actionTypes.FETCH_RECIPE_FAILURE:
@@ -43,6 +49,69 @@ const singleRecipe = (state = initialState, action) => {
         ]
       };
     case actionTypes.POST_REVIEW_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    case actionTypes.UPVOTE_RECIPE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actionTypes.UPVOTE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        voteMessage: action.payload.message,
+        recipe: {
+          ...state.recipe,
+          ...action.payload.data,
+        }
+      };
+    case actionTypes.UPVOTE_RECIPE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    case actionTypes.DOWNVOTE_RECIPE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actionTypes.DOWNVOTE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        voteMessage: action.payload.message,
+        recipe: {
+          ...state.recipe,
+          ...action.payload.data,
+        }
+      };
+    case actionTypes.DOWNVOTE_RECIPE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    case actionTypes.SET_FAVORITE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actionTypes.SET_FAVORITE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        favoriteMessage: action.payload.message,
+        recipe: {
+          ...state.recipe,
+          ...action.payload.data,
+        }
+      };
+    case actionTypes.SET_FAVORITE_FAILURE:
       return {
         ...state,
         isLoading: false,

@@ -105,6 +105,22 @@
   }
 }
 
+.single-card {
+  .chip {
+    outline: transparent;
+  }
+}
+
+.chip {
+  .black-text {
+    padding-left: 3px;
+  }
+
+  .white-text {
+    padding-left: 3px;
+  }
+}
+
 .add-review {
   border: 1px solid grey;
 }

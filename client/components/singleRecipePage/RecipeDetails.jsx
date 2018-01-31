@@ -1,14 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  recipe: PropTypes.shape({
+    category: PropTypes.string,
+    description: PropTypes.string,
+    preparationTime: PropTypes.number,
+    ingredients: PropTypes.string,
+    directions: PropTypes.string,
+  }).isRequired,
+};
+
 const formatDisplay = string => string.split(',').map((ingredient, index) => (
   <li key={index.toString()}>{ingredient.trim()}</li>
 ));
 
 const RecipeDetails = (props) => {
-  const { recipe } = props,
-    { category, description, preparationTime, ingredients,
-      directions } = recipe;
+  const { recipe } = props;
+  const { category, description, preparationTime, ingredients,
+    directions } = recipe;
+
   return (
     <div className="row">
       <div className="col s12">
@@ -45,14 +56,6 @@ const RecipeDetails = (props) => {
   );
 };
 
-RecipeDetails.propTypes = {
-  recipe: PropTypes.shape({
-    category: PropTypes.string,
-    description: PropTypes.string,
-    preparationTime: PropTypes.number,
-    ingredients: PropTypes.string,
-    directions: PropTypes.string,
-  }).isRequired,
-};
+RecipeDetails.propTypes = propTypes;
 
 export default RecipeDetails;

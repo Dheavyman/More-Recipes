@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  reviewContent: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleAddReview: PropTypes.func.isRequired,
+};
+
 const AddReview = (props) => {
   const { reviewContent, handleChange, handleAddReview } = props;
+
   return (
     <div className="row">
       <div className="col s12 m12 l8">
@@ -38,10 +45,6 @@ const AddReview = (props) => {
   );
 };
 
-AddReview.propTypes = {
-  reviewContent: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleAddReview: PropTypes.func.isRequired,
-};
+AddReview.propTypes = propTypes;
 
 export default AddReview;
