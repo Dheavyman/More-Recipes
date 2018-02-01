@@ -3,8 +3,19 @@ import PropTypes from 'prop-types';
 
 import Review from './Review';
 
+const propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
+
+/**
+ * ReviewCollection component
+ *
+ * @param {object} props - The properties passed to the compoenent
+ * @returns {object} - React element
+ */
 const ReviewCollection = (props) => {
   const { reviews } = props;
+
   return (
     <div className="row">
       <div className="col s12 valign-wrapper deep-orange darken-4">
@@ -19,8 +30,6 @@ const ReviewCollection = (props) => {
   );
 };
 
-ReviewCollection.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-};
+ReviewCollection.propTypes = propTypes;
 
 export default ReviewCollection;

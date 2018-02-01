@@ -5,6 +5,8 @@ import { signupUser, signinUser, logoutUser, fetchUserProfile,
 import postReview from './review';
 import { addRecipe, editRecipe, deleteRecipe,
   uploadImage } from './recipeActions';
+import { upvoteRecipe, downvoteRecipe } from './vote';
+import setFavorite from './favorite';
 
 export default {
   retrieveRecipes,
@@ -23,4 +25,7 @@ export default {
   editRecipe,
   deleteRecipe,
   uploadImage,
+  upvoteRecipe,
+  downvoteRecipe,
+  setFavorite,
 };

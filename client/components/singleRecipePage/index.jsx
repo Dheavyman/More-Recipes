@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -8,14 +8,36 @@ import actionCreators from '../../actions';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Main from './Main';
+import { getToken } from '../../utils/authenticate';
+
+const propTypes = {
+  singleRecipe: PropTypes.shape({
+    recipe: PropTypes.shape({
+      id: PropTypes.number,
+    })
+  }).isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+  }).isRequired,
+  fetchRecipe: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      recipeId: PropTypes.string,
+    })
+  }).isRequired,
+  postReview: PropTypes.func.isRequired,
+  upvoteRecipe: PropTypes.func.isRequired,
+  downvoteRecipe: PropTypes.func.isRequired,
+  setFavorite: PropTypes.func.isRequired,
+};
 
 /**
  * Class representing recipe details page
  *
  * @class Recipe
- * @extends {React.Component}
+ * @extends {Component}
  */
-class Recipe extends React.Component {
+class Recipe extends Component {
   /**
    * Creates an instance of Recipe.
    *
@@ -34,6 +56,9 @@ class Recipe extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
+    this.handleUpvote = this.handleUpvote.bind(this);
+    this.handleDownvote = this.handleDownvote.bind(this);
+    this.handleFavorite = this.handleFavorite.bind(this);
   }
 
   /**
@@ -108,8 +133,7 @@ class Recipe extends React.Component {
       review = {
         content: this.state.reviewContent,
       };
-
-    if (isAuthenticated) {
+    if (isAuthenticated && getToken() !== null) {
       this.props.postReview(
         this.props.match.params.recipeId, review
       )
@@ -127,6 +151,45 @@ class Recipe extends React.Component {
   }
 
   /**
+   * Function to handle upvoting a recipe
+   *
+   * @returns {any} Call to upvote recipe action
+   * @memberof Recipe
+   */
+  handleUpvote() {
+    const { singleRecipe, upvoteRecipe } = this.props;
+    const { recipe: { id } } = singleRecipe;
+
+    upvoteRecipe(id);
+  }
+
+  /**
+   * Function to handle downvoting a recipe
+   *
+   * @returns {any} Call to upvote recipe action
+   * @memberof Recipe
+   */
+  handleDownvote() {
+    const { singleRecipe, downvoteRecipe } = this.props;
+    const { recipe: { id } } = singleRecipe;
+
+    downvoteRecipe(id);
+  }
+
+  /**
+   * Function to handle downvoting a recipe
+   *
+   * @returns {any} Call to action for favoriting a recipe
+   * @memberof Recipe
+   */
+  handleFavorite() {
+    const { singleRecipe, setFavorite } = this.props;
+    const { recipe: { id } } = singleRecipe;
+
+    setFavorite(id);
+  }
+
+  /**
    * Render method
    *
    * @returns {object} React element
@@ -134,63 +197,64 @@ class Recipe extends React.Component {
    */
   render() {
     const { singleRecipe } = this.props;
+
     return (
       <div>
         {!isEmpty(singleRecipe) &&
-        <div>
-          <header>
-            <Header
-              openSignup={this.state.openSignup}
-              openSignin={this.state.openSignin}
-              handleOpenSignup={this.handleOpenSignup}
-              handleOpenSignin={this.handleOpenSignin}
-              handleClose={this.handleClose}
-              {...this.props}
-            />
-          </header>
-          <main>
-            <Main
-              singleRecipe={singleRecipe}
-              reviewContent={this.state.reviewContent}
-              handleChange={this.handleChange}
-              handleAddReview={this.handleAddReview}
-            />
-          </main>
-          <footer>
-            <Footer />
-          </footer>
-        </div>
+          <div>
+            <header>
+              <Header
+                openSignup={this.state.openSignup}
+                openSignin={this.state.openSignin}
+                handleOpenSignup={this.handleOpenSignup}
+                handleOpenSignin={this.handleOpenSignin}
+                handleClose={this.handleClose}
+                {...this.props}
+              />
+            </header>
+            <main>
+              <Main
+                singleRecipe={singleRecipe}
+                reviewContent={this.state.reviewContent}
+                handleChange={this.handleChange}
+                handleAddReview={this.handleAddReview}
+                handleUpvote={this.handleUpvote}
+                handleDownvote={this.handleDownvote}
+                handleFavorite={this.handleFavorite}
+              />
+            </main>
+            <footer>
+              <Footer />
+            </footer>
+          </div>
         }
       </div>
     );
   }
 }
 
+/**
+ * Function to map alues from state to props
+ *
+ * @param {object} state - The state values
+ * @returns {object} - The mapped props
+ */
 const mapStateToProps = state => ({
   singleRecipe: state.singleRecipe,
   user: state.user,
 });
 
+/**
+ * Function to map dispatch to props
+ * Action creators are binded to the dispatch function
+ *
+ * @param {any} dispatch
+ * @returns {any} The mapped props
+ */
 const mapDispatchToProps = dispatch => (
   bindActionCreators(actionCreators, dispatch)
 );
 
-Recipe.propTypes = {
-  singleRecipe: PropTypes.shape({
-    data: PropTypes.shape({
-      recipe: PropTypes.shape()
-    })
-  }).isRequired,
-  user: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-  }).isRequired,
-  fetchRecipe: PropTypes.func.isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      recipeId: PropTypes.string,
-    })
-  }).isRequired,
-  postReview: PropTypes.func.isRequired,
-};
+Recipe.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipe);
