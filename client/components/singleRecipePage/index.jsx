@@ -153,7 +153,6 @@ class Recipe extends Component {
   /**
    * Function to handle upvoting a recipe
    *
-   * @param {number} recipeId - The id of the recipe
    * @returns {any} Call to upvote recipe action
    * @memberof Recipe
    */
