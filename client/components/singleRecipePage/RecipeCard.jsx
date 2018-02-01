@@ -26,6 +26,12 @@ const defaultProps = {
   favoriteMessage: null,
 };
 
+/**
+ * RecipeCard component
+ *
+ * @param {object} props - The properties passed to the component
+ * @returns {object} - React element
+ */
 const RecipeCard = (props) => {
   const { recipe, voters, favoritedUsers, voteMessage, favoriteMessage,
     handleUpvote, handleDownvote, handleFavorite } = props;

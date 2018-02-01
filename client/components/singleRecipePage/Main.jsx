@@ -18,6 +18,12 @@ const propTypes = {
   }).isRequired,
 };
 
+/**
+ * Main component
+ *
+ * @param {object} props - The properties passed to the component
+ * @returns {object} - React element
+ */
 const Main = (props) => {
   const { singleRecipe } = props;
   const { recipe, reviews, favoritedUsers, voters, voteMessage,

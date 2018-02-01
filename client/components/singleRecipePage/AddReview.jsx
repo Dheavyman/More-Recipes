@@ -7,6 +7,12 @@ const propTypes = {
   handleAddReview: PropTypes.func.isRequired,
 };
 
+/**
+ * Add review component
+ *
+ * @param {object} props - The properties passed to the component
+ * @returns {object} - React element
+ */
 const AddReview = (props) => {
   const { reviewContent, handleChange, handleAddReview } = props;
 

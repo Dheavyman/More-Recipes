@@ -7,6 +7,12 @@ const propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
+/**
+ * ReviewCollection component
+ *
+ * @param {object} props - The properties passed to the compoenent
+ * @returns {object} - React element
+ */
 const ReviewCollection = (props) => {
   const { reviews } = props;
 

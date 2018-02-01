@@ -234,11 +234,24 @@ class Recipe extends Component {
   }
 }
 
+/**
+ * Function to map alues from state to props
+ *
+ * @param {object} state - The state values
+ * @returns {object} - The mapped props
+ */
 const mapStateToProps = state => ({
   singleRecipe: state.singleRecipe,
   user: state.user,
 });
 
+/**
+ * Function to map dispatch to props
+ * Action creators are binded to the dispatch function
+ *
+ * @param {any} dispatch
+ * @returns {any} The mapped props
+ */
 const mapDispatchToProps = dispatch => (
   bindActionCreators(actionCreators, dispatch)
 );
