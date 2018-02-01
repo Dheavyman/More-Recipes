@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -35,9 +35,9 @@ const propTypes = {
  * Class representing recipe details page
  *
  * @class Recipe
- * @extends {React.Component}
+ * @extends {Component}
  */
-class Recipe extends React.Component {
+class Recipe extends Component {
   /**
    * Creates an instance of Recipe.
    *

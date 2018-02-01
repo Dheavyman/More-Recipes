@@ -219,7 +219,7 @@ class RecipeController {
           attributes: ['id', 'content', 'createdAt'],
           include: [{
             model: User,
-            attributes: ['firstName', 'lastName'],
+            attributes: ['firstName', 'lastName', 'userImage'],
           }],
         }, {
           model: Favorite,

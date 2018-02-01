@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import userImage from '../../public/images/user.jpg';
+import userAvatar from '../../public/images/user_avatar_1.png';
 
 const propTypes = {
   review: PropTypes.shape({
     User: PropTypes.shape({
       fullName: PropTypes.string,
+      userImage: PropTypes.string,
     }),
     content: PropTypes.string,
     createdAt: PropTypes.string,
@@ -17,13 +18,13 @@ const createdOn = date => new Date(date).toLocaleString();
 
 const Review = (props) => {
   const { review } = props;
-  const { User: { fullName }, content, createdAt } = review;
+  const { User: { fullName, userImage }, content, createdAt } = review;
 
   return (
     <li className="collection-item avatar">
       { review &&
       <div>
-        <img src={userImage} alt="" className="circle" />
+        <img src={userImage || userAvatar} alt="" className="circle" />
         <span className="name"><b>{fullName}</b></span>
         <p className="created-on">{createdOn(createdAt)}</p>
         <p id="review-content">

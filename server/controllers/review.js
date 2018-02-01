@@ -32,7 +32,7 @@ class ReviewController {
       })
       .then(review => User
         .findById(req.decoded.user.id, {
-          attributes: ['id', 'firstName', 'lastName'],
+          attributes: ['id', 'firstName', 'lastName', 'userImage'],
         })
         .then((user) => {
           reviewer = user;
@@ -46,6 +46,7 @@ class ReviewController {
                 createdAt: review.createdAt,
                 User: {
                   fullName: reviewer.fullName,
+                  userImage: reviewer.userImage,
                 }
               }
             }

@@ -30,14 +30,20 @@ const RecipeCard = (props) => {
   const { recipe, voters, favoritedUsers, voteMessage, favoriteMessage,
     handleUpvote, handleDownvote, handleFavorite } = props;
   const { title, recipeImage, upvotes, downvotes, favorites } = recipe;
-  const { user: { id } } = decodeToken();
+
+  let userId;
+
+  if (decodeToken() !== null) {
+    const { user: { id } } = decodeToken();
+    userId = id;
+  }
 
   let isUserFavorite = favoritedUsers && favoritedUsers
-    .some(user => user.userId === id);
+    .some(user => user.userId === userId);
   let userUpvoted = voters && voters
-    .some(user => user.userId === id && user.hasVoted);
+    .some(user => user.userId === userId && user.hasVoted);
   let userDownvoted = voters && voters
-    .some(user => user.userId === id && !user.hasVoted);
+    .some(user => user.userId === userId && !user.hasVoted);
 
   if (voteMessage && (voteMessage === 'Upvote recorded'
     || voteMessage === 'Upvote recorded and downvote removed')) {
