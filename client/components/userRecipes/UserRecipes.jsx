@@ -303,10 +303,10 @@ class UserRecipes extends React.Component {
   render() {
     return (
       <div>
-        <header className="header" >
+        <header id="header" >
           <Header {...this.props} />
         </header>
-        <main className="main" >
+        <main id="main" >
           <Main
             handleChange={this.handleChange}
             handleOpenAdd={this.handleOpenAdd}

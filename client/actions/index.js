@@ -1,4 +1,4 @@
-import { retrieveRecipes, fetchRecipe, fetchUserRecipes,
+import { retrieveRecipes, retrievePopularRecipes, fetchRecipe, fetchUserRecipes,
   fetchUserFavorites } from './recipe';
 import { signupUser, signinUser, logoutUser, fetchUserProfile,
   editUserProfile, editProfilePicture, uploadUserImage } from './userActions';
@@ -10,6 +10,7 @@ import setFavorite from './favorite';
 
 export default {
   retrieveRecipes,
+  retrievePopularRecipes,
   fetchRecipe,
   fetchUserRecipes,
   fetchUserFavorites,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Home from './homepage/Home';
+import Home from './homepage';
 import singleRecipePage from './singleRecipePage';
 import UserDashboard from './userRecipes/UserRecipes';
 import '../public/style.scss';

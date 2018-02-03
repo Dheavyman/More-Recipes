@@ -53,6 +53,22 @@
   }
 }
 
+.recipes-list {
+  margin: 20px 50px;
+
+  .popular-list {
+    margin: 15px 0;
+  }
+
+  .all-recipes-list {
+    margin: 15px 0;
+  }
+
+  h4 {
+    margin-left: 15px;
+  }
+}
+
 #recipes {
   .card-title {
     color: #000000;
@@ -69,41 +85,46 @@
 
  .card-content {
     p {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 
   .card-action {
-
     p {
       margin: 0;
+    }
+
+    .recipe-owner {
+      color: #000000;
+      font-size: 14px;
+      text-transform: initial;
     }
 
     li {
       display: inline;
       font-size: 12px;
-      margin-left: 3px;
-      margin-right: 3px;
+      margin-left: 7px;
+      margin-right: 7px;
     }
   }
 }
 
-#popular {
-  img {
-    height: 180px;
-  }
+// #popular {
+//   img {
+//     height: 180px;
+//   }
 
-  p {
-    font-size: 14px;
-  }
+//   p {
+//     font-size: 14px;
+//   }
 
-  li {
-    display: inline;
-    font-size: 12px;
-    margin-left: 3px;
-    margin-right: 3px;
-  }
-}
+//   li {
+//     display: inline;
+//     font-size: 12px;
+//     margin-left: 7px;
+//     margin-right: 7px;
+//   }
+// }
 
 .single-card {
   .chip {
@@ -154,12 +175,12 @@
   }
 }
 
-.header, .main {
+#header, #main {
   padding-left: 300px;
 }
 
 @media only screen and (max-width : 992px) {
-  .header, .main {
+  #header, #main {
     padding-left: 0;
   }
 }

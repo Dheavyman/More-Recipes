@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
 import RecipeImage from '../common/RecipeImage';
 import { decodeToken } from '../../utils/authenticate';
@@ -11,6 +12,7 @@ const propTypes = {
     upvotes: PropTypes.number,
     downvotes: PropTypes.number,
     favorites: PropTypes.number,
+    views: PropTypes.views,
   }).isRequired,
   favoritedUsers: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   voters: PropTypes.arrayOf(PropTypes.shape()).isRequired,
@@ -35,7 +37,7 @@ const defaultProps = {
 const RecipeCard = (props) => {
   const { recipe, voters, favoritedUsers, voteMessage, favoriteMessage,
     handleUpvote, handleDownvote, handleFavorite } = props;
-  const { title, recipeImage, upvotes, downvotes, favorites } = recipe;
+  const { title, recipeImage, upvotes, downvotes, favorites, views } = recipe;
 
   let userId;
 
@@ -83,6 +85,12 @@ const RecipeCard = (props) => {
         <RecipeImage title={title} recipeImage={recipeImage} />
       </div>
       <div className="card-action center-align">
+        <a id="views">
+          <i className="material-icons black-text" data-tip="views">
+            visibility
+          </i>
+          <span className="black-text">{views}</span>
+        </a>
         <a
           role="button"
           tabIndex="0"
@@ -90,6 +98,7 @@ const RecipeCard = (props) => {
           className={`chip waves-effect waves-red ${
             isUserFavorite ? 'red' : ''}`}
           onClick={handleFavorite}
+          data-tip="favorite"
         >
           <i className={`fa fa-heart ${
             isUserFavorite ? 'white-text' : 'black-text'}`}
@@ -104,6 +113,7 @@ const RecipeCard = (props) => {
           id="upvote"
           className={`chip waves-effect waves-red ${userUpvoted ? 'red' : ''}`}
           onClick={handleUpvote}
+          data-tip="upvote"
         >
           <i className={`fa fa-thumbs-up ${
             userUpvoted ? 'white-text' : 'black-text'}`}
@@ -119,6 +129,7 @@ const RecipeCard = (props) => {
           className={`chip waves-effect waves-red ${
             userDownvoted ? 'red' : ''}`}
           onClick={handleDownvote}
+          data-tip="downvote"
         >
           <i className={`fa fa-thumbs-down ${
             userDownvoted ? 'white-text' : 'black-text'}`}
@@ -127,6 +138,7 @@ const RecipeCard = (props) => {
             {downvotes}
           </span>
         </a>
+        <ReactTooltip />
       </div>
     </div>
   );

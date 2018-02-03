@@ -4,11 +4,29 @@ import { Link } from 'react-router-dom';
 
 import RecipeImage from '../common/RecipeImage';
 
+const propTypes = {
+  recipe: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    category: PropTypes.string,
+    description: PropTypes.string,
+    preparationTime: PropTypes.number,
+    ingredients: PropTypes.string,
+    directions: PropTypes.string,
+  }),
+};
+
+const defaultProps = {
+  recipe: undefined,
+};
+
 const RecipeCatalogCard = (props) => {
   const { recipe } = props,
-    { id, title, recipeImage, description, views, upvotes, downvotes } = recipe;
+    { id, title, recipeImage, description, views, upvotes, downvotes,
+      favorites, User: { id: userId, fullName } } = recipe;
+
   return (
-    <div className="col s12 m6 l4">
+    <div className="col s12 m4 l3">
       <div id="recipes" className="card large">
         <Link to={`recipes/${id}`}>
           <span className="card-title">{title}</span>
@@ -22,15 +40,20 @@ const RecipeCatalogCard = (props) => {
           <p>{description}</p>
         </div>
         <div className="card-action">
+
           <p id="owner">
-            <label htmlFor="owner">Recipe by: </label> John Stew
+            <label htmlFor="owner">Recipe by: </label>
+            <Link to={`/users/${userId}/dashboard`}>
+              <span className="recipe-owner">{fullName}</span>
+            </Link>
           </p>
+
           <ul className="center-align">
             <li id="views"><i className="material-icons tiny">visibility</i>
               {views}
             </li>
             <li id="favorites"><i className="material-icons tiny">favorite</i>
-              20
+              {favorites}
             </li>
             <li id="upvotes"><i className="material-icons tiny">thumb_up</i>
               {upvotes}
@@ -45,20 +68,7 @@ const RecipeCatalogCard = (props) => {
   );
 };
 
-RecipeCatalogCard.propTypes = {
-  recipe: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    category: PropTypes.string,
-    description: PropTypes.string,
-    preparationTime: PropTypes.number,
-    ingredients: PropTypes.string,
-    directions: PropTypes.string,
-  }),
-};
-
-RecipeCatalogCard.defaultProps = {
-  recipe: undefined,
-};
+RecipeCatalogCard.propTypes = propTypes;
+RecipeCatalogCard.defaultProps = defaultProps;
 
 export default RecipeCatalogCard;

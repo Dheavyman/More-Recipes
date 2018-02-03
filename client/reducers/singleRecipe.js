@@ -17,6 +17,8 @@ const singleRecipe = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        voteMessage: null,
+        favoriteMessage: null,
       };
     case actionTypes.FETCH_RECIPE_SUCCESS:
       return {

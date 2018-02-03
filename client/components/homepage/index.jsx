@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -12,9 +12,9 @@ import Main from './Main';
  * Class representing the home component
  *
  * @class Home
- * @extends {React.Component}
+ * @extends {Component}
  */
-class Home extends React.Component {
+class Home extends Component {
 /**
  * Creates an instance of Home.
  *

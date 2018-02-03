@@ -21,6 +21,21 @@ const retrieveRecipesFailure = error => ({
   payload: error,
 });
 
+// Action to retrieve popular recipes
+const popularRecipesRequest = () => ({
+  type: actionTypes.POPULAR_RECIPES_REQUEST,
+});
+
+const popularRecipesSuccess = recipes => ({
+  type: actionTypes.POPULAR_RECIPES_SUCCESS,
+  payload: recipes,
+});
+
+const popularRecipesFailure = error => ({
+  type: actionTypes.POPULAR_RECIPES_FAILURE,
+  payload: error,
+});
+
 // Action to fetch a single recipe
 const fetchRecipeRequest = () => ({
   type: actionTypes.FETCH_RECIPE_REQUEST,
@@ -71,11 +86,26 @@ const retrieveRecipes = () => (dispatch) => {
   axios.get(`${SERVER_URL}/recipes`)
     .then((response) => {
       const { data } = response;
-      dispatch(retrieveRecipesSuccess(data));
+      const { data: { recipes } } = data;
+      dispatch(retrieveRecipesSuccess(recipes));
     })
     .catch((error) => {
       const { response: { data } } = error;
       dispatch(retrieveRecipesFailure(data));
+    });
+};
+
+const retrievePopularRecipes = () => (dispatch) => {
+  dispatch(popularRecipesRequest());
+  axios.get(`${SERVER_URL}/recipes/popular`)
+    .then((response) => {
+      const { data } = response;
+      const { data: { recipes } } = data;
+      dispatch(popularRecipesSuccess(recipes));
+    })
+    .catch((error) => {
+      const { response: { data } } = error;
+      dispatch(popularRecipesFailure(data));
     });
 };
 
@@ -130,4 +160,7 @@ const fetchUserFavorites = userId => (dispatch) => {
     });
 };
 
-export { retrieveRecipes, fetchRecipe, fetchUserRecipes, fetchUserFavorites };
+export {
+  retrieveRecipes, retrievePopularRecipes, fetchRecipe, fetchUserRecipes,
+  fetchUserFavorites
+};
