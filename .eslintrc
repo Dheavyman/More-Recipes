@@ -29,7 +29,8 @@
       "comma-dangle": 0,
       "linebreak-style": [0, "windows"],
       "curly": ["error", "multi-line"],
-      "import/no-unresolved": [2, { "commonjs": true }],
+      "import/no-unresolved": "off",
+      "import/extensions": "off",
       "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
       "valid-jsdoc": ["error", {
         "requireReturn": true,

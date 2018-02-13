@@ -80,6 +80,10 @@ class UserController {
               message: 'User logged in',
               data: {
                 token,
+                user: {
+                  fullName: user.fullName,
+                  userImage: user.userImage,
+                },
               }
             });
           })

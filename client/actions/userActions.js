@@ -113,7 +113,7 @@ const signupUser = (values, closeSignupModal) => (dispatch) => {
 
 const signinUser = (values, closeSigninModal) => (dispatch) => {
   dispatch(userSigninRequest());
-  axios.post(`${SERVER_URL}/users/signin`, values)
+  return axios.post(`${SERVER_URL}/users/signin`, values)
     .then((response) => {
       const { data } = response;
       const { data: { token } } = data;

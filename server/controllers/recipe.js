@@ -182,6 +182,11 @@ class RecipeController {
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
           'views', 'favorites'
         ],
+        limit: 4,
+        include: [{
+          model: User,
+          attributes: ['id', 'firstName', 'lastName']
+        }],
       })
       .then(recipes => res.status(200).send({
         status: 'Success',
@@ -374,7 +379,11 @@ class RecipeController {
         order: [
           ['favorites', 'DESC']
         ],
-        limit: 6,
+        limit: 8,
+        include: [{
+          model: User,
+          attributes: ['id', 'firstName', 'lastName']
+        }],
       })
       .then(recipes => res.status(200).send({
         status: 'Success',

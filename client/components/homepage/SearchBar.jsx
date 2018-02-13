@@ -1,5 +1,9 @@
 import React from 'react';
-
+/**
+ * Function representing search bar component
+ *
+ * @returns {any} React element
+ */
 const SearchBar = () => (
   <div className="row">
     <div id="search-bar" className="col s12 m6 l6 offset-m3 offset-l3">
