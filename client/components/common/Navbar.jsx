@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import isEmpty from 'lodash/isEmpty';
 
 import Category from './Category';
 import IndexUserNav from './IndexUserNav';
 import AuthUserNav from './AuthUserNav';
 import Signup from './Signup';
 import Signin from './Signin';
+import notify from '../../utils/notification';
 
 /**
  * Class representing navbar
@@ -30,7 +32,7 @@ class Navbar extends React.Component {
   /**
    * Component did mount method
    *
-   * @returns{any} Initialize materialize components
+   * @returns {any} Initialize materialize components
    * @memberof Navbar
    */
   componentDidMount() {
@@ -76,7 +78,13 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   handleSubmitSignin(values) {
-    this.props.signinUser(values, this.props.handleClose);
+    this.props.signinUser(values, this.props.handleClose)
+      .then(() => {
+        const { user: { userSignin } } = this.props;
+        if (userSignin.message === 'User logged in') {
+          notify('Login Successful');
+        }
+      });
   }
 
   /**
@@ -97,7 +105,8 @@ class Navbar extends React.Component {
    */
   render() {
     const { openSignup, openSignin, handleOpenSignup, handleOpenSignin,
-      handleClose, user: { isAuthenticated } } = this.props;
+      handleClose, user: { isAuthenticated, userSignin } } = this.props;
+    const { user } = userSignin;
 
     return (
       <div className="nav-wrapper">
@@ -130,8 +139,9 @@ class Navbar extends React.Component {
               className="dropdown-button dropdown-user"
               data-activates="user-control"
             >
-              {!isAuthenticated && 'Welcome'}
-              {isAuthenticated && 'User fullname'}
+              {!isAuthenticated || isEmpty(user)
+                ? 'Welcome Guest'
+                : user.fullName}
               <i className="material-icons large left">account_circle</i>
             </a>
             {!isAuthenticated &&

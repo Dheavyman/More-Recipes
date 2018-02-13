@@ -379,7 +379,7 @@ class RecipeController {
         order: [
           ['favorites', 'DESC']
         ],
-        limit: 4,
+        limit: 8,
         include: [{
           model: User,
           attributes: ['id', 'firstName', 'lastName']

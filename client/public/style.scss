@@ -20,9 +20,9 @@
   width: 100px;
 }
 
-.dropdown-user {
-  width: 180px;
-}
+// .dropdown-user {
+//   width: 180px;
+// }
 
 .collapsible-header {
   margin-left: 14px;
@@ -69,6 +69,12 @@
   }
 }
 
+@media only screen and (max-width : 992px) {
+  .recipes-list {
+    margin: 5px;
+  }
+}
+
 #recipes {
   .card-title {
     color: #000000;
@@ -109,9 +115,9 @@
   }
 }
 
-// #popular {
-//   img {
-//     height: 180px;
+// .popular-recipes {
+//   a:hover {
+//     text-decoration: 
 //   }
 
 //   p {
@@ -158,6 +164,10 @@
     margin-left: 5px;
     margin-right: 5px;
   }
+}
+
+.side-nav {
+  padding-top: 15px;
 }
 
 .fixed-action-btn {

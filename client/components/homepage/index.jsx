@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 import actionCreators from '../../actions';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Main from './Main';
+
+const propTypes = {
+  retrieveRecipes: PropTypes.func.isRequired,
+};
 
 /**
  * Class representing the home component
@@ -65,6 +70,7 @@ class Home extends Component {
    * Closes the modal
    *
    * @param {object} errors - The error object
+   *
    * @returns {object} Set open state to false
    * @memberof Home
    */
@@ -78,7 +84,7 @@ class Home extends Component {
   /**
    * The render function
    *
-   * @returns {any} React element
+   * @returns {object} React element
    * @memberof Home
    */
   render() {
@@ -100,6 +106,7 @@ class Home extends Component {
         <footer>
           <Footer />
         </footer>
+        <ToastContainer />
       </div>
     );
   }
@@ -114,8 +121,6 @@ const mapDispatchToProps = dispatch => (
   bindActionCreators(actionCreators, dispatch)
 );
 
-Home.propTypes = {
-  retrieveRecipes: PropTypes.func.isRequired,
-};
+Home.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

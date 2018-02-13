@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { decodeToken } from '../../utils/authenticate';
-import background from '../../public/images/background.jpg';
-import avatar from '../../public/images/avatar.png';
 
 /**
  * Class representing Side nav component
@@ -45,10 +43,11 @@ class SideNav extends React.Component {
    * @memberof SideNav
    */
   render() {
-    const { user: { isAuthenticated }, location: { pathname } } = this.props,
-      dashboard = pathname.match(/(users)/) === null ? null : 'fixed', // check the regex
-      decoded = decodeToken();
+    const { user: { isAuthenticated }, location: { pathname } } = this.props;
+    const dashboard = pathname.match(/(users)/) === null ? null : 'fixed'; // check the regex
+    const decoded = decodeToken();
     let userId;
+
     if (decoded) {
       const { user: { id } } = decoded;
       userId = id;
@@ -65,26 +64,6 @@ class SideNav extends React.Component {
               </a>
             </div>
           </li>
-          {isAuthenticated &&
-            <div>
-              <li>
-                <div className="user-view">
-                  <div className="background">
-                    <img src={background} alt="" />
-                  </div>
-                  <a href="#!user">
-                    <img className="circle" src={avatar} alt="" />
-                  </a>
-                  <a href="#!name">
-                    <span className="white-text name">John Stew</span>
-                  </a>
-                  <a href="#!email">
-                    <span className="white-text email">johnstew@gmail.com</span>
-                  </a>
-                </div>
-              </li>
-            </div>
-          }
           <li><Link to="/">Home</Link></li>
           <li>
             <ul className="collapsible" data-collapsible="accordion">

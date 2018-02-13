@@ -15,13 +15,22 @@ const defaultProps = {
  * All recipes catalog component
  *
  * @param {object} props - The properties passsed to the component
+ *
  * @returns {object} React element
  */
 const AllRecipeCatalog = (props) => {
   const { recipesCatalog } = props;
+
   return (
     <div className="row">
-      <h4>All Recipes</h4>
+      <div className="col s12" >
+        <div className="row valign-wrapper" >
+          <h4 className="col s11">All Recipes</h4>
+          <span className="col s1 right" >
+            <a href="#!">View All &gt;</a>
+          </span>
+        </div>
+      </div>
       {recipesCatalog && recipesCatalog.map((recipe, index) =>
         (<RecipeCatalogCard
           {...props}

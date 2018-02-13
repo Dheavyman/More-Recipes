@@ -31,14 +31,17 @@ class PopularRecipesCatalog extends Component {
   /**
    * Render function
    *
-   * @returns {object} React object
+   * @returns {object} React element
    * @memberof PopularRecipesCatalog
    */
   render() {
     const { recipes: { popularRecipes } } = this.props;
+
     return (
       <div className="row">
-        <h4>Popular Recipes</h4>
+        <div className="col s12 popular-recipes" >
+          <h4>Popular Recipes</h4>
+        </div>
         {popularRecipes && popularRecipes.map((recipe, index) => (
           <RecipeCatalogCard
             key={recipe.id}

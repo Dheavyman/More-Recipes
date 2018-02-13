@@ -68,6 +68,7 @@ class Recipe extends Component {
    * @memberof Recipe
    */
   componentDidMount() {
+    window.scrollTo(0, 0);
     // Initialize materialize css parallax class
     $('.parallax').parallax();
     this.props.fetchRecipe(this.props.match.params.recipeId);

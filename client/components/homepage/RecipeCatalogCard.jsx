@@ -20,10 +20,17 @@ const defaultProps = {
   recipe: undefined,
 };
 
+/**
+ * Recipe catalog card component
+ *
+ * @param {object} props - The properties passed to the component
+ *
+ * @returns {object} React element
+ */
 const RecipeCatalogCard = (props) => {
-  const { recipe } = props,
-    { id, title, recipeImage, description, views, upvotes, downvotes,
-      favorites, User: { id: userId, fullName } } = recipe;
+  const { recipe } = props;
+  const { id, title, recipeImage, description, views, upvotes, downvotes,
+    favorites, User: { id: userId, fullName } } = recipe;
 
   return (
     <div className="col s12 m4 l3">

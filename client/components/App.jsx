@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './homepage';
 import singleRecipePage from './singleRecipePage';
 import UserDashboard from './userRecipes/UserRecipes';
+import { decodeToken } from '../utils/authenticate';
 import '../public/style.scss';
 
 const propTypes = {
@@ -26,7 +27,7 @@ const App = () => (
     <Route path="/recipes/:recipeId" component={singleRecipePage} />
     <Route
       path="/users/:userId/dashboard"
-      render={props => (localStorage.getItem('token')
+      render={props => (decodeToken()
         ? <UserDashboard {...props} />
         : <Redirect to={{
           pathname: '/',
