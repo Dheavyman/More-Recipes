@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import PopularRecipesCatalog from './PopularRecipesCatalog';
 import AllRecipeCatalog from './AllRecipeCatalog';
-import SearchBar from './SearchBar';
+import SearchBar from '../common/SearchBar';
 import Slider from './Slider';
 
 const propTypes = {
@@ -31,7 +31,10 @@ const Main = (props) => {
     <div>
       <div id="position">
         <Slider />
-        <SearchBar />
+        <SearchBar
+          id={'home-search-bar'}
+          {...props}
+        />
       </div>
       <div className="grey lighten-3" >
         <div className="row recipes-list">

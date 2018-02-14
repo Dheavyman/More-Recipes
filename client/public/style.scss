@@ -36,10 +36,7 @@
   z-index: -1;
 }
 
-#search-bar {
-  position: absolute;
-  top: 0;
-  
+.search-bar {
   .input-field {
     border-radius: 10px;
   }
@@ -51,6 +48,18 @@
     padding-right: 20px;
     width: 100%;
   }
+}
+
+.search-by {
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 15px;
+  width: auto;
+}
+
+#home-search-bar {
+  position: absolute;
+  top: 0;
 }
 
 .recipes-list {

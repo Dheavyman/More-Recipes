@@ -182,7 +182,7 @@ class RecipeController {
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
           'views', 'favorites'
         ],
-        limit: 4,
+        limit: req.params.limit || 4,
         include: [{
           model: User,
           attributes: ['id', 'firstName', 'lastName']
@@ -396,6 +396,53 @@ class RecipeController {
         status: 'Error',
         message: error.message,
       }));
+  }
+
+  /**
+   * Search for recipe based on recipe title
+   *
+   * @static
+   * @param {any} req - The request object
+   * @param {any} res - THe response object
+   * @param {any} next - Call the next route handler
+   *
+   * @returns {object} Object representing success status or
+     *  error status
+   * @memberof RecipeController
+   */
+  static searchByName(req, res, next) {
+    if (req.query.search === 'name' && req.query.list) {
+      const title = req.query.list;
+      return Recipe
+        .findAll({
+          attributes: [
+            'id', 'title', 'category', 'description', 'preparationTime',
+            'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+            'views', 'favorites'
+          ],
+          where: {
+            title: {
+              [Op.iLike]: `%${title}%`,
+            }
+          }
+        })
+        .then((recipes) => {
+          if (!recipes) {
+            return res.status(404).send({
+              status: 'Fail',
+              message: 'No result found',
+            });
+          }
+          return res.status(200).send({
+            status: 'Success',
+            message: 'Recipe(s) found',
+            data: {
+              recipes
+            }
+          });
+        });
+    }
+    next();
   }
 
   /**

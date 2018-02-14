@@ -11,6 +11,9 @@ import Main from './Main';
 
 const propTypes = {
   retrieveRecipes: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 /**
@@ -20,20 +23,16 @@ const propTypes = {
  * @extends {Component}
  */
 class Home extends Component {
-/**
- * Creates an instance of Home.
- *
- * @memberof Home
- */
+  /**
+   * Creates an instance of Home.
+   *
+   * @memberof Home
+   */
   constructor() {
     super();
     this.state = {
-      openSignup: false,
-      openSignin: false
+      searchTerm: '',
     };
-    this.handleOpenSignup = this.handleOpenSignup.bind(this);
-    this.handleOpenSignin = this.handleOpenSignin.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   /**
@@ -47,37 +46,34 @@ class Home extends Component {
   }
 
   /**
-   * Opens the signup modal
+   * Function to handle change in search term
    *
-   * @returns {object} Set open state to true
+   * @param {object} event - The event object
+   *
+   * @returns {any} Changes state to the current search term
    * @memberof Home
    */
-  handleOpenSignup() {
-    this.setState({ openSignup: true });
+  handleSearchChange = (event) => {
+    const { target: { value } } = event;
+    this.setState(() => ({
+      searchTerm: value
+    }));
   }
 
   /**
-   * Opens the signin modal
+   * Function to handle submitting search term
    *
-   * @returns {object} Set open state to true
+   * @param {object} event - The event object
+   *
+   * @returns {any} Submits the search term
    * @memberof Home
    */
-  handleOpenSignin() {
-    this.setState({ openSignin: true });
-  }
-
-  /**
-   * Closes the modal
-   *
-   * @param {object} errors - The error object
-   *
-   * @returns {object} Set open state to false
-   * @memberof Home
-   */
-  handleClose() {
-    this.setState({
-      openSignup: false,
-      openSignin: false
+  handleSubmitSearch = (event) => {
+    event.preventDefault();
+    localStorage.setItem('searchTerm', this.state.searchTerm);
+    this.props.history.push({
+      pathname: '/catalog',
+      state: this.state.searchTerm,
     });
   }
 
@@ -91,17 +87,15 @@ class Home extends Component {
     return (
       <div>
         <header>
-          <Header
-            openSignup={this.state.openSignup}
-            openSignin={this.state.openSignin}
-            handleOpenSignup={this.handleOpenSignup}
-            handleOpenSignin={this.handleOpenSignin}
-            handleClose={this.handleClose}
-            {...this.props}
-          />
+          <Header {...this.props} />
         </header>
         <main>
-          <Main {...this.props} />
+          <Main
+            handleSearchChange={this.handleSearchChange}
+            handleSubmitSearch={this.handleSubmitSearch}
+            {...this.state}
+            {...this.props}
+          />
         </main>
         <footer>
           <Footer />
