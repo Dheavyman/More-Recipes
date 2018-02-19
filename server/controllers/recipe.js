@@ -424,7 +424,11 @@ class RecipeController {
             title: {
               [Op.iLike]: `%${title}%`,
             }
-          }
+          },
+          include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+          }],
         })
         .then((recipes) => {
           if (!recipes) {
@@ -473,7 +477,11 @@ class RecipeController {
           ],
           where: {
             [Op.or]: searchList,
-          }
+          },
+          include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+          }],
         })
         .then((recipes) => {
           if (recipes.length === 0) {
@@ -525,7 +533,11 @@ class RecipeController {
           ],
           where: {
             [Op.or]: searchList,
-          }
+          },
+          include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+          }],
         })
         .then((recipes) => {
           if (recipes.length === 0) {

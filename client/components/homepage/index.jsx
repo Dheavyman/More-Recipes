@@ -31,6 +31,7 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
+      searchBy: 'name',
       searchTerm: '',
     };
   }
@@ -55,9 +56,20 @@ class Home extends Component {
    */
   handleSearchChange = (event) => {
     const { target: { value } } = event;
-    this.setState(() => ({
-      searchTerm: value
-    }));
+
+    if (value === 'name') {
+      this.setState(() => ({
+        searchBy: value
+      }));
+    } else if (value === 'ingredients') {
+      this.setState(() => ({
+        searchBy: value,
+      }));
+    } else {
+      this.setState(() => ({
+        searchTerm: value
+      }));
+    }
   }
 
   /**
@@ -70,10 +82,14 @@ class Home extends Component {
    */
   handleSubmitSearch = (event) => {
     event.preventDefault();
+    const { searchBy, searchTerm } = this.state;
     localStorage.setItem('searchTerm', this.state.searchTerm);
     this.props.history.push({
       pathname: '/catalog',
-      state: this.state.searchTerm,
+      state: {
+        searchBy,
+        searchTerm,
+      }
     });
   }
 
@@ -106,11 +122,26 @@ class Home extends Component {
   }
 }
 
+/**
+ * Function to map values from state to props
+ *
+ * @param {any} state - The state values
+ *
+ * @returns {object} - The mapped props
+ */
 const mapStateToProps = state => ({
   recipes: state.recipes,
   user: state.user,
 });
 
+/**
+ * Function to map dispatch to props
+ * Action creators are binded to the dispatch function
+ *
+ * @param {any} dispatch - The store dispatch function
+ *
+ * @returns {any} The mapped props
+ */
 const mapDispatchToProps = dispatch => (
   bindActionCreators(actionCreators, dispatch)
 );

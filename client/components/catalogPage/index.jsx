@@ -11,7 +11,10 @@ import Footer from '../common/Footer';
 const propTypes = {
   searchRecipe: PropTypes.func.isRequired,
   location: PropTypes.shape({
-    state: PropTypes.string,
+    state: PropTypes.shape({
+      search: PropTypes.string,
+      searchTerm: PropTypes.string,
+    }).isRequired,
   }).isRequired,
 };
 
@@ -34,23 +37,10 @@ class CatalogPage extends Component {
   constructor() {
     super();
     this.state = {
+      searchBy: 'name',
       searchTerm: '',
     };
   }
-
-  /**
-   * Component will mount lifecycle method
-   *
-   * @returns {any} Sets state
-   * @memberof CatalogPage
-   */
-  // componentWillMount() {
-  //   console.log('this', this.props);
-  //   this.setState({
-  //     searchTerm: this.props.location.state,
-  //   });
-  //   console.log('state', this.state);
-  // }
 
   /**
    * Component did mount lifecycle method
@@ -60,9 +50,10 @@ class CatalogPage extends Component {
    */
   componentDidMount() {
     const { location: { state }, searchRecipe } = this.props;
+    const { searchBy, searchTerm } = state;
     window.scrollTo(0, 0);
     if (state) {
-      searchRecipe(state);
+      searchRecipe(searchBy, searchTerm);
     }
   }
 
@@ -76,10 +67,22 @@ class CatalogPage extends Component {
    */
   handleSearchChange = (event) => {
     const { target: { value } } = event;
-    this.setState(() => ({
-      searchTerm: value
-    }));
+
+    if (value === 'name') {
+      this.setState(() => ({
+        searchBy: value
+      }));
+    } else if (value === 'ingredients') {
+      this.setState(() => ({
+        search: value,
+      }));
+    } else {
+      this.setState(() => ({
+        searchTerm: value
+      }));
+    }
   }
+
   /**
    * Function to handle submitting search term
    *
@@ -89,7 +92,6 @@ class CatalogPage extends Component {
    * @memberof CatalogPage
    */
   handleSubmitSearch = (event) => {
-    console.log('Handle submit function ------>>>>>');
     event.preventDefault();
     localStorage.setItem('searchTerm', this.state.searchTerm);
   }
@@ -123,11 +125,26 @@ class CatalogPage extends Component {
   }
 }
 
+/**
+ * Function to map values from state to props
+ *
+ * @param {any} state - The state values
+ *
+ * @returns {object} - The mapped props
+ */
 const mapStateToProps = state => ({
   recipes: state.recipes,
   user: state.user,
 });
 
+/**
+ * Function to map dispatch to props
+ * Action creators are binded to the dispatch function
+ *
+ * @param {any} dispatch - The store dispatch function
+ *
+ * @returns {any} The mapped props
+ */
 const mapDispatchToProps = dispatch => (
   bindActionCreators(actionCreators, dispatch)
 );

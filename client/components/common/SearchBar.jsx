@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   id: PropTypes.string,
+  searchBy: PropTypes.string.isRequired,
   searchTerm: PropTypes.string,
   handleSearchChange: PropTypes.func.isRequired,
   handleSubmitSearch: PropTypes.func.isRequired,
@@ -17,25 +18,28 @@ const defaultProps = {
  * Function representing search bar component
  *
  * @param {object} props - The properties passed to the component
+ *
  * @returns {any} React element
  */
 const SearchBar = (props) => {
-  const { searchTerm, handleSearchChange, handleSubmitSearch } = props;
+  const { searchBy, searchTerm, handleSearchChange,
+    handleSubmitSearch } = props;
 
   return (
-    <div className="row">
-      <div id={props.id} className="col s12 m3 l3 push-m9 push-l9">
+    <div id={props.id} className="row">
+      <div className="col s12 m3 l3 push-m9 push-l9">
         <select
-          name="search-by"
+          name="searchBy"
           id="search-by"
           className="browser-default search-by z-depth-1"
+          value={searchBy}
+          onChange={handleSearchChange}
         >
           <option value="name">Search By Name</option>
           <option value="ingredients">Search By Ingredients</option>
         </select>
       </div>
       <div
-        id={props.id}
         className="col s12 m6 l6 offset-m3 offset-l3 pull-m3 pull-l3 search-bar"
       >
         <form onSubmit={handleSubmitSearch}>

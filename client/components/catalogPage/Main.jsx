@@ -9,7 +9,10 @@ const propTypes = {
     recipes: PropTypes.arrayOf(PropTypes.shape()),
   }),
   location: PropTypes.shape({
-    state: PropTypes.string,
+    state: PropTypes.shape({
+      search: PropTypes.string,
+      searchTerm: PropTypes.string,
+    }).isRequired,
   }).isRequired,
   searchTerm: PropTypes.string,
 };
@@ -18,16 +21,24 @@ const defaultProps = {
   recipes: undefined,
   searchTerm: undefined,
 };
-
+/**
+ * Function representing main component
+ *
+ * @param {object} props - The properties passed to the component
+ *
+ * @returns {object} React element
+ */
 const Main = (props) => {
-  console.log('the props', props);
   const { recipes: { recipes }, location: { state }, searchTerm } = props;
   return (
     <div className="grey lighten-3">
       <SearchBar {...props} />
       <div className="row recipes-list">
         <div>
-          <h4>Search results for: {searchTerm || state} </h4>
+          <h4>{ recipes.length === 0
+            ? `No Search result found for ${searchTerm || state.searchTerm}`
+            : `Search results for ${searchTerm || state.searchTerm}`
+          }</h4>
         </div>
         {recipes && recipes.map((recipe, index) =>
           (<RecipeCatalogCard

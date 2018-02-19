@@ -9,6 +9,14 @@ const initialState = {
   errorFetchingPopularRecipes: {},
 };
 
+/**
+ * Recipes reducer function
+ *
+ * @param {object} [state=initialState] - The state data
+ * @param {object} action - The action that was triggered
+ *
+ * @returns {object} The new state of data
+ */
 const recipes = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.RETRIEVE_RECIPES_REQUEST:
@@ -53,4 +61,3 @@ const recipes = (state = initialState, action) => {
 };
 
 export default recipes;
-

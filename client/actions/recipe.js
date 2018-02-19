@@ -81,20 +81,6 @@ const fetchUserFavoritesFailure = error => ({
   payload: error,
 });
 
-const searchRecipeRequest = () => ({
-  type: actionTypes.SEARCH_RECIPE_REQUEST,
-});
-
-const searchRecipeSuccess = recipe => ({
-  type: actionTypes.SEARCH_RECIPE_SUCCESS,
-  payload: recipe,
-});
-
-const searchRecipeFailure = error => ({
-  type: actionTypes.SEARCH_RECIPE_FAILURE,
-  payload: error,
-});
-
 const retrieveRecipes = () => (dispatch) => {
   dispatch(retrieveRecipesRequest());
   axios.get(`${SERVER_URL}/recipes`)
@@ -130,8 +116,8 @@ const fetchRecipe = recipeId => (dispatch) => {
       'x-access-token': getToken(),
     } })
     .then((response) => {
-      const { data } = response,
-        { data: { recipe } } = data;
+      const { data } = response;
+      const { data: { recipe } } = data;
       dispatch(fetchRecipeSuccess(recipe));
     })
     .catch((error) => {
@@ -147,8 +133,8 @@ const fetchUserRecipes = userId => (dispatch) => {
       'x-access-token': getToken(),
     } })
     .then((response) => {
-      const { data } = response,
-        { data: recipes } = data;
+      const { data } = response;
+      const { data: recipes } = data;
       dispatch(fetchUserRecipesSuccess(recipes));
     })
     .catch((error) => {
@@ -164,8 +150,8 @@ const fetchUserFavorites = userId => (dispatch) => {
       'x-access-token': getToken(),
     } })
     .then((response) => {
-      const { data } = response,
-        { data: { favorites } } = data;
+      const { data } = response;
+      const { data: { favorites } } = data;
       dispatch(fetchUserFavoritesSuccess(favorites));
     })
     .catch((error) => {
@@ -178,9 +164,9 @@ const searchRecipe = (search, list) => (dispatch) => {
   dispatch(retrieveRecipesRequest());
   axios.get(`${SERVER_URL}/recipes?search=${search}&list=${list}`)
     .then((response) => {
-      const { data } = response,
-        { data: { recipe } } = data;
-      dispatch(retrieveRecipesSuccess(recipe));
+      const { data } = response;
+      const { data: { recipes } } = data;
+      dispatch(retrieveRecipesSuccess(recipes));
     })
     .catch((error) => {
       const { response: { data } } = error;
