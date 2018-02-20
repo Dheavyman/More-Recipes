@@ -2,25 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SearchBar from '../common/SearchBar';
-import RecipeCatalogCard from '../common/RecipeCatalogCard';
+import SearchResult from './SearchResult';
+import CatalogResult from './CatalogResult';
 
 const propTypes = {
   recipes: PropTypes.shape({
-    recipes: PropTypes.arrayOf(PropTypes.shape()),
+    searchResult: PropTypes.arrayOf(PropTypes.shape()),
   }),
   location: PropTypes.shape({
     state: PropTypes.shape({
       search: PropTypes.string,
       searchTerm: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
-  searchTerm: PropTypes.string,
+    }),
+  }),
+  searchedTerm: PropTypes.string,
+  showText: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
   recipes: undefined,
-  searchTerm: undefined,
+  searchedTerm: undefined,
+  location: undefined,
 };
+
 /**
  * Function representing main component
  *
@@ -29,24 +33,29 @@ const defaultProps = {
  * @returns {object} React element
  */
 const Main = (props) => {
-  const { recipes: { recipes }, location: { state }, searchTerm } = props;
+  const { recipes: { searchResult }, location: { state },
+    searchedTerm, showText } = props;
   return (
     <div className="grey lighten-3">
       <SearchBar {...props} />
       <div className="row recipes-list">
         <div>
-          <h4>{ recipes.length === 0
-            ? `No Search result found for ${searchTerm || state.searchTerm}`
-            : `Search results for ${searchTerm || state.searchTerm}`
-          }</h4>
+          {showText &&
+            <h5><em>{searchResult.length === 0
+              ? `No Search result found for ${
+                searchedTerm || (state && state.searchTerm)}`
+              : `Search results for ${
+                searchedTerm || (state && state.searchTerm)}`
+            }</em>
+            </h5>
+          }
         </div>
-        {recipes && recipes.map((recipe, index) =>
-          (<RecipeCatalogCard
-            {...props}
-            key={recipe.id}
-            index={index}
-            recipe={recipe}
-          />))}
+        <div>
+          {showText
+            ? <SearchResult {...props} />
+            : <CatalogResult {...props} />}
+        </div>
+
       </div>
     </div>
   );

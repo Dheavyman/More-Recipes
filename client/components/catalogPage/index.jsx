@@ -14,12 +14,15 @@ const propTypes = {
     state: PropTypes.shape({
       search: PropTypes.string,
       searchTerm: PropTypes.string,
-    }).isRequired,
+    }),
+  }),
+  recipes: PropTypes.shape({
+    searchResult: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
 };
 
 const defaultProps = {
-  searchTerm: undefined,
+  location: undefined,
 };
 
 /**
@@ -39,6 +42,8 @@ class CatalogPage extends Component {
     this.state = {
       searchBy: 'name',
       searchTerm: '',
+      searchedTerm: '',
+      showText: false,
     };
   }
 
@@ -50,10 +55,23 @@ class CatalogPage extends Component {
    */
   componentDidMount() {
     const { location: { state }, searchRecipe } = this.props;
-    const { searchBy, searchTerm } = state;
     window.scrollTo(0, 0);
     if (state) {
-      searchRecipe(searchBy, searchTerm);
+      searchRecipe(state.searchBy, state.searchTerm);
+    }
+  }
+
+  /**
+   * Component will receive props lifecycle method
+   *
+   * @returns {any} Sets state
+   * @memberof CatalogPage
+   */
+  componentWillReceiveProps() {
+    if (this.props.recipes.searchResult) {
+      this.setState({
+        showText: true,
+      });
     }
   }
 
@@ -74,7 +92,7 @@ class CatalogPage extends Component {
       }));
     } else if (value === 'ingredients') {
       this.setState(() => ({
-        search: value,
+        searchBy: value,
       }));
     } else {
       this.setState(() => ({
@@ -93,7 +111,14 @@ class CatalogPage extends Component {
    */
   handleSubmitSearch = (event) => {
     event.preventDefault();
-    localStorage.setItem('searchTerm', this.state.searchTerm);
+    const { searchBy, searchTerm } = this.state;
+    const { searchRecipe } = this.props;
+
+    this.setState(() => ({
+      searchedTerm: searchTerm,
+    }));
+
+    searchRecipe(searchBy, searchTerm);
   }
 
   /**

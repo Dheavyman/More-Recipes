@@ -81,6 +81,21 @@ const fetchUserFavoritesFailure = error => ({
   payload: error,
 });
 
+// Actions to search for recipes
+const searchRecipesRequest = () => ({
+  type: actionTypes.SEARCH_RECIPE_REQUEST,
+});
+
+const searchRecipesSuccess = recipes => ({
+  type: actionTypes.SEARCH_RECIPE_SUCCESS,
+  payload: recipes,
+});
+
+const searchRecipesFailure = error => ({
+  type: actionTypes.SEARCH_RECIPE_FAILURE,
+  payload: error,
+});
+
 const retrieveRecipes = () => (dispatch) => {
   dispatch(retrieveRecipesRequest());
   axios.get(`${SERVER_URL}/recipes`)
@@ -161,16 +176,16 @@ const fetchUserFavorites = userId => (dispatch) => {
 };
 
 const searchRecipe = (search, list) => (dispatch) => {
-  dispatch(retrieveRecipesRequest());
+  dispatch(searchRecipesRequest());
   axios.get(`${SERVER_URL}/recipes?search=${search}&list=${list}`)
     .then((response) => {
       const { data } = response;
       const { data: { recipes } } = data;
-      dispatch(retrieveRecipesSuccess(recipes));
+      dispatch(searchRecipesSuccess(recipes));
     })
     .catch((error) => {
       const { response: { data } } = error;
-      dispatch(retrieveRecipesFailure(data));
+      dispatch(searchRecipesFailure(data));
     });
 };
 

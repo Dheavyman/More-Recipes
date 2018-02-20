@@ -3,7 +3,9 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   isFetchingRecipes: false,
   isFetchingPopularRecipes: false,
+  searchPerformed: false,
   recipes: [],
+  searchResult: [],
   popularRecipes: [],
   errorFetchingRecipes: {},
   errorFetchingPopularRecipes: {},
@@ -54,6 +56,24 @@ const recipes = (state = initialState, action) => {
         ...state,
         isFetchingPopularRecipes: false,
         errorFetchingPopularRecipes: action.payload,
+      };
+    case actionTypes.SEARCH_RECIPE_REQUEST:
+      return {
+        ...state,
+        isFetchingRecipes: true,
+      };
+    case actionTypes.SEARCH_RECIPE_SUCCESS:
+      return {
+        ...state,
+        isFetchingRecipes: false,
+        searchResult: action.payload,
+        errorFetchingRecipes: {},
+      };
+    case actionTypes.SEARCH_RECIPE_FAILURE:
+      return {
+        ...state,
+        isFetchingRecipes: false,
+        errorFetchingRecipes: action.payload,
       };
     default:
       return state;

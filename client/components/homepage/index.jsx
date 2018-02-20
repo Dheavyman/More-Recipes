@@ -83,7 +83,6 @@ class Home extends Component {
   handleSubmitSearch = (event) => {
     event.preventDefault();
     const { searchBy, searchTerm } = this.state;
-    localStorage.setItem('searchTerm', this.state.searchTerm);
     this.props.history.push({
       pathname: '/catalog',
       state: {

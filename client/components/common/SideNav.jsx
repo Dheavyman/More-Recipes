@@ -12,6 +12,16 @@ import { decodeToken } from '../../utils/authenticate';
  */
 class SideNav extends React.Component {
   /**
+   * ComponentDidMount lifecycle method
+   *
+   * @returns {any} Initialize materialize collapsible class
+   * @memberof SideNav
+   */
+  componentDidMount() {
+    $('.collapsible').collapsible();
+  }
+
+  /**
    * Function to handle changing of tabs
    *
    * @param {any} event - Event from clicking and element
