@@ -35,7 +35,7 @@ const SearchBar = (props) => {
           value={searchBy}
           onChange={handleSearchChange}
         >
-          <option value="name">Search By Name</option>
+          <option value="title">Search By Title</option>
           <option value="ingredients">Search By Ingredients</option>
         </select>
       </div>

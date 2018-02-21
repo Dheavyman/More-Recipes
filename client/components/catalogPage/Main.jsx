@@ -36,10 +36,10 @@ const Main = (props) => {
   const { recipes: { searchResult }, location: { state },
     searchedTerm, showText } = props;
   return (
-    <div className="grey lighten-3">
+    <div>
       <SearchBar {...props} />
       <div className="row recipes-list">
-        <div>
+        <div className="center-align">
           {showText &&
             <h5><em>{searchResult.length === 0
               ? `No Search result found for ${

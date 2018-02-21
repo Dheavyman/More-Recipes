@@ -202,7 +202,7 @@ class Recipe extends Component {
     return (
       <div>
         {!isEmpty(singleRecipe) &&
-          <div>
+          <div className="page-body">
             <header>
               <Header
                 openSignup={this.state.openSignup}

@@ -302,7 +302,7 @@ class UserRecipes extends React.Component {
    */
   render() {
     return (
-      <div>
+      <div className="page-body">
         <header id="header" >
           <Header {...this.props} />
         </header>

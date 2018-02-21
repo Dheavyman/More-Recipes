@@ -73,6 +73,7 @@ const recipes = (state = initialState, action) => {
       return {
         ...state,
         isFetchingRecipes: false,
+        searchResult: [],
         errorFetchingRecipes: action.payload,
       };
     default:

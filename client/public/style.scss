@@ -1,12 +1,12 @@
-// body {
-//   display: flex;
-//   min-height: 100vh;
-//   flex-direction: column;
-// }
+.page-body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
-// main {
-//   flex: 1 0 auto;
-// }
+main {
+  flex: 1 0 auto;
+}
 
 #logo {
   font-family: 'Lobster', cursive;
@@ -19,10 +19,6 @@
   margin-right: 100px;
   width: 100px;
 }
-
-// .dropdown-user {
-//   width: 180px;
-// }
 
 .collapsible-header {
   margin-left: 14px;
@@ -124,23 +120,6 @@
     }
   }
 }
-
-// .popular-recipes {
-//   a:hover {
-//     text-decoration: 
-//   }
-
-//   p {
-//     font-size: 14px;
-//   }
-
-//   li {
-//     display: inline;
-//     font-size: 12px;
-//     margin-left: 7px;
-//     margin-right: 7px;
-//   }
-// }
 
 .single-card {
   .chip {

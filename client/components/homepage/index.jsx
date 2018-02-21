@@ -85,6 +85,7 @@ class Home extends Component {
     const { searchBy, searchTerm } = this.state;
     this.props.history.push({
       pathname: '/catalog',
+      search: `?search=${searchBy}&list=${searchTerm}`,
       state: {
         searchBy,
         searchTerm,
@@ -100,7 +101,7 @@ class Home extends Component {
    */
   render() {
     return (
-      <div>
+      <div className="page-body">
         <header>
           <Header {...this.props} />
         </header>

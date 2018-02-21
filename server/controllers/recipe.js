@@ -410,9 +410,15 @@ class RecipeController {
      *  error status
    * @memberof RecipeController
    */
-  static searchByName(req, res, next) {
-    if (req.query.search === 'name' && req.query.list) {
-      const title = req.query.list;
+  static searchByTitle(req, res, next) {
+    if (req.query.search === 'title' && req.query.list) {
+      let titles = req.query.list.split(',').join(' ').split(' ');
+      titles = titles.filter(title => title !== '');
+      const searchList = titles.map(keyWord => ({
+        title: {
+          [Op.iLike]: `%${keyWord}%`,
+        }
+      }));
       return Recipe
         .findAll({
           attributes: [
@@ -421,9 +427,7 @@ class RecipeController {
             'views', 'favorites'
           ],
           where: {
-            title: {
-              [Op.iLike]: `%${title}%`,
-            }
+            [Op.or]: searchList,
           },
           include: [{
             model: User,
@@ -462,7 +466,8 @@ class RecipeController {
    */
   static searchByIngredients(req, res, next) {
     if (req.query.search === 'ingredients' && req.query.list) {
-      const ingredients = req.query.list.split(' ');
+      let ingredients = req.query.list.split(',').join(' ').split(' ');
+      ingredients = ingredients.filter(ingredient => ingredient !== '');
       const searchList = ingredients.map(keyWord => ({
         ingredients: {
           [Op.iLike]: `%${keyWord}%`,

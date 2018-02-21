@@ -16,6 +16,9 @@ const propTypes = {
       searchTerm: PropTypes.string,
     }),
   }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
   recipes: PropTypes.shape({
     searchResult: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
@@ -40,7 +43,7 @@ class CatalogPage extends Component {
   constructor() {
     super();
     this.state = {
-      searchBy: 'name',
+      searchBy: 'title',
       searchTerm: '',
       searchedTerm: '',
       showText: false,
@@ -86,7 +89,7 @@ class CatalogPage extends Component {
   handleSearchChange = (event) => {
     const { target: { value } } = event;
 
-    if (value === 'name') {
+    if (value === 'title') {
       this.setState(() => ({
         searchBy: value
       }));
@@ -119,6 +122,10 @@ class CatalogPage extends Component {
     }));
 
     searchRecipe(searchBy, searchTerm);
+    this.props.history.push({
+      pathname: '/catalog',
+      search: `?search=${searchBy}&list=${searchTerm}`,
+    });
   }
 
   /**
@@ -129,11 +136,11 @@ class CatalogPage extends Component {
    */
   render() {
     return (
-      <div>
+      <div className="page-body">
         <header>
           <Header {...this.props} />
         </header>
-        <main>
+        <main className="grey lighten-3">
           <Main
             handleSearchChange={this.handleSearchChange}
             handleSubmitSearch={this.handleSubmitSearch}

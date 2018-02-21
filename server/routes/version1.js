@@ -302,7 +302,7 @@ router.route('/recipes')
    *                     $ref: '#/definitions/Recipe'
    */
   .get(recipeController.getAll, recipeController.getMostUpvotes,
-    recipeController.searchByName, recipeController.searchByIngredients,
+    recipeController.searchByTitle, recipeController.searchByIngredients,
     recipeController.searchByCategory);
 
 /**
