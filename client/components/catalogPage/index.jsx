@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 
 import actionCreators from '../../actions';
 import Header from '../common/Header';
@@ -11,13 +12,10 @@ import Footer from '../common/Footer';
 const propTypes = {
   searchRecipe: PropTypes.func.isRequired,
   location: PropTypes.shape({
-    state: PropTypes.shape({
-      search: PropTypes.string,
-      searchTerm: PropTypes.string,
-    }),
+    search: PropTypes.string,
   }),
   history: PropTypes.shape({
-    push: PropTypes.func,
+    replace: PropTypes.func,
   }).isRequired,
   recipes: PropTypes.shape({
     searchResult: PropTypes.arrayOf(PropTypes.shape()),
@@ -43,8 +41,8 @@ class CatalogPage extends Component {
   constructor() {
     super();
     this.state = {
-      searchBy: 'title',
-      searchTerm: '',
+      search: 'title',
+      list: '',
       searchedTerm: '',
       showText: false,
     };
@@ -57,10 +55,12 @@ class CatalogPage extends Component {
    * @memberof CatalogPage
    */
   componentDidMount() {
-    const { location: { state }, searchRecipe } = this.props;
     window.scrollTo(0, 0);
-    if (state) {
-      searchRecipe(state.searchBy, state.searchTerm);
+    const { location: { search }, searchRecipe } = this.props;
+
+    if (search !== '') {
+      const parsed = queryString.parse(search);
+      searchRecipe(parsed.search, parsed.list);
     }
   }
 
@@ -91,15 +91,15 @@ class CatalogPage extends Component {
 
     if (value === 'title') {
       this.setState(() => ({
-        searchBy: value
+        search: value
       }));
     } else if (value === 'ingredients') {
       this.setState(() => ({
-        searchBy: value,
+        search: value,
       }));
     } else {
       this.setState(() => ({
-        searchTerm: value
+        list: value
       }));
     }
   }
@@ -114,18 +114,20 @@ class CatalogPage extends Component {
    */
   handleSubmitSearch = (event) => {
     event.preventDefault();
-    const { searchBy, searchTerm } = this.state;
+    const { search, list } = this.state;
     const { searchRecipe } = this.props;
 
-    this.setState(() => ({
-      searchedTerm: searchTerm,
-    }));
+    if (list !== '') {
+      this.setState(() => ({
+        searchedTerm: list,
+      }));
 
-    searchRecipe(searchBy, searchTerm);
-    this.props.history.push({
-      pathname: '/catalog',
-      search: `?search=${searchBy}&list=${searchTerm}`,
-    });
+      searchRecipe(search, list);
+      this.props.history.replace({
+        pathname: '/catalog',
+        search: `?search=${search}&list=${list}`,
+      });
+    }
   }
 
   /**

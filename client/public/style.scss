@@ -40,9 +40,22 @@ main {
   #search-input {
     border-radius: 10px;
     box-sizing: border-box;
-    padding-left: 40px;
-    padding-right: 20px;
+    padding-left: 20px;
+    padding-right: 50px;
     width: 100%;
+  }
+
+  .label-icon {
+    color: #000000;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
+
+  .label-icon:hover {
+    outline: blue 10px;
   }
 }
 

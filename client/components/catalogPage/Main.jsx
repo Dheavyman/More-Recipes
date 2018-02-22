@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 
 import SearchBar from '../common/SearchBar';
 import SearchResult from './SearchResult';
@@ -10,10 +11,7 @@ const propTypes = {
     searchResult: PropTypes.arrayOf(PropTypes.shape()),
   }),
   location: PropTypes.shape({
-    state: PropTypes.shape({
-      search: PropTypes.string,
-      searchTerm: PropTypes.string,
-    }),
+    search: PropTypes.string,
   }),
   searchedTerm: PropTypes.string,
   showText: PropTypes.bool.isRequired,
@@ -33,8 +31,13 @@ const defaultProps = {
  * @returns {object} React element
  */
 const Main = (props) => {
-  const { recipes: { searchResult }, location: { state },
-    searchedTerm, showText } = props;
+  const { recipes: { searchResult }, location: { search }, showText } = props;
+  let { searchedTerm } = props;
+
+  if (search !== '') {
+    const parsed = queryString.parse(search);
+    searchedTerm = parsed.list;
+  }
   return (
     <div>
       <SearchBar {...props} />
@@ -42,10 +45,8 @@ const Main = (props) => {
         <div className="center-align">
           {showText &&
             <h5><em>{searchResult.length === 0
-              ? `No Search result found for ${
-                searchedTerm || (state && state.searchTerm)}`
-              : `Search results for ${
-                searchedTerm || (state && state.searchTerm)}`
+              ? `No Search result found for ${searchedTerm}`
+              : `Search results for ${searchedTerm}`
             }</em>
             </h5>
           }

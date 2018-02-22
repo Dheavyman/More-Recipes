@@ -31,8 +31,8 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      searchBy: 'name',
-      searchTerm: '',
+      search: 'title',
+      list: '',
     };
   }
 
@@ -57,17 +57,17 @@ class Home extends Component {
   handleSearchChange = (event) => {
     const { target: { value } } = event;
 
-    if (value === 'name') {
+    if (value === 'title') {
       this.setState(() => ({
-        searchBy: value
+        search: value
       }));
     } else if (value === 'ingredients') {
       this.setState(() => ({
-        searchBy: value,
+        search: value,
       }));
     } else {
       this.setState(() => ({
-        searchTerm: value
+        list: value
       }));
     }
   }
@@ -82,15 +82,14 @@ class Home extends Component {
    */
   handleSubmitSearch = (event) => {
     event.preventDefault();
-    const { searchBy, searchTerm } = this.state;
-    this.props.history.push({
-      pathname: '/catalog',
-      search: `?search=${searchBy}&list=${searchTerm}`,
-      state: {
-        searchBy,
-        searchTerm,
-      }
-    });
+    const { search, list } = this.state;
+
+    if (list !== '') {
+      this.props.history.push({
+        pathname: '/catalog',
+        search: `?search=${search}&list=${list}`,
+      });
+    }
   }
 
   /**

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 import RecipeImage from '../common/RecipeImage';
 
@@ -66,7 +67,7 @@ const UserRecipeCard = (props) => {
             onClick={openEditModal}
             className={'btn-floating waves-effect waves-light green right'}
           >
-            <i className="material-icons">edit</i>
+            <i className="material-icons" data-tip="Edit Recipe">edit</i>
           </a>
           <a
             role="button"
@@ -74,8 +75,9 @@ const UserRecipeCard = (props) => {
             onClick={openDeleteModal}
             className={'btn-floating waves-effect waves-light red right'}
           >
-            <i className="material-icons">delete</i>
+            <i className="material-icons" data-tip="Delete Recipe">delete</i>
           </a>
+          <ReactTooltip />
         </div>
       </div>
     </div>

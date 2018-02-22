@@ -33,7 +33,7 @@ const Main = (props) => {
           onClick={handleOpenAdd}
           className={`btn-floating btn-large modal-trigger waves-effect
               waves-light indigo accent-2 pulse`}
-          data-tip="Add recipe"
+          data-tip="Add Recipe"
         >
           <i className="material-icons">add</i>
         </button>

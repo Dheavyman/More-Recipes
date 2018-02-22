@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   id: PropTypes.string,
-  searchBy: PropTypes.string.isRequired,
-  searchTerm: PropTypes.string,
+  search: PropTypes.string.isRequired,
+  list: PropTypes.string,
   handleSearchChange: PropTypes.func.isRequired,
   handleSubmitSearch: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
   id: null,
-  searchTerm: undefined,
+  list: undefined,
 };
 
 /**
@@ -22,8 +22,7 @@ const defaultProps = {
  * @returns {any} React element
  */
 const SearchBar = (props) => {
-  const { searchBy, searchTerm, handleSearchChange,
-    handleSubmitSearch } = props;
+  const { search, list, handleSearchChange, handleSubmitSearch } = props;
 
   return (
     <div id={props.id} className="row">
@@ -32,7 +31,7 @@ const SearchBar = (props) => {
           name="searchBy"
           id="search-by"
           className="browser-default search-by z-depth-1"
-          value={searchBy}
+          value={search}
           onChange={handleSearchChange}
         >
           <option value="title">Search By Title</option>
@@ -49,13 +48,19 @@ const SearchBar = (props) => {
                 id="search-input"
                 type="search"
                 placeholder="Search for recipes"
-                value={searchTerm}
+                value={list}
                 onChange={handleSearchChange}
                 required
               />
-              <label className="label-icon" htmlFor="search">
+              <a
+                role="button"
+                tabIndex="0"
+                className="label-icon"
+                htmlFor="search"
+                onClick={handleSubmitSearch}
+              >
                 <i className="material-icons">search</i>
-              </label>
+              </a>
             </div>
           </div>
         </form>
