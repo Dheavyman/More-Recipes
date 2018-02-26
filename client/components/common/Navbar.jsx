@@ -9,7 +9,7 @@ import IndexUserNav from './IndexUserNav';
 import AuthUserNav from './AuthUserNav';
 import Signup from './Signup';
 import Signin from './Signin';
-import notify from '../../utils/notification';
+// import notify from '../../utils/notification';
 
 /**
  * Class representing navbar
@@ -81,9 +81,9 @@ class Navbar extends React.Component {
     this.props.signinUser(values, this.props.handleClose)
       .then(() => {
         const { user: { userSignin } } = this.props;
-        if (userSignin.message === 'User logged in') {
-          notify('Login Successful');
-        }
+        // if (userSignin.message === 'User logged in') {
+        //   notify('Login Successful');
+        // }
       });
   }
 
