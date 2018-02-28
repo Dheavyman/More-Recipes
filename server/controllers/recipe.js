@@ -1,5 +1,4 @@
 import Sequelize from 'sequelize';
-import isEmpty from 'lodash/isEmpty';
 import jwt from 'jsonwebtoken';
 
 import models from '../models';
@@ -174,15 +173,19 @@ class RecipeController {
    * @memberof RecipeController
    */
   static getAll(req, res, next) {
-    if (!isEmpty(req.query)) return next();
+    if (req.query.sort || req.query.search) return next();
     return Recipe
-      .all({
+      .findAndCountAll({
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
           'views', 'favorites'
         ],
-        limit: 4,
+        limit: req.query.limit || 4,
+        offset: req.query.offset,
+        order: [
+          ['createdAt', 'DESC'],
+        ],
         include: [{
           model: User,
           attributes: ['id', 'firstName', 'lastName']
@@ -192,7 +195,8 @@ class RecipeController {
         status: 'Success',
         message: 'Recipes retrieved',
         data: {
-          recipes
+          recipes: recipes.rows,
+          recipesCount: recipes.count,
         }
       }))
       .catch(error => res.status(500).send({
@@ -399,6 +403,61 @@ class RecipeController {
   }
 
   /**
+   * Search for recipe based on recipe title
+   *
+   * @static
+   * @param {any} req - The request object
+   * @param {any} res - THe response object
+   * @param {any} next - Call the next route handler
+   *
+   * @returns {object} Object representing success status or
+     *  error status
+   * @memberof RecipeController
+   */
+  static searchByTitle(req, res, next) {
+    if (req.query.search === 'title' && req.query.list) {
+      let titles = req.query.list.split(',').join(' ').split(' ');
+      titles = titles.filter(title => title !== '');
+      const searchList = titles.map(keyWord => ({
+        title: {
+          [Op.iLike]: `%${keyWord}%`,
+        }
+      }));
+      return Recipe
+        .findAll({
+          attributes: [
+            'id', 'title', 'category', 'description', 'preparationTime',
+            'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
+            'views', 'favorites'
+          ],
+          where: {
+            [Op.or]: searchList,
+          },
+          include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+          }],
+        })
+        .then((recipes) => {
+          if (!recipes) {
+            return res.status(404).send({
+              status: 'Fail',
+              message: 'No result found',
+            });
+          }
+          return res.status(200).send({
+            status: 'Success',
+            message: 'Recipe(s) found',
+            data: {
+              recipes
+            }
+          });
+        });
+    }
+    next();
+  }
+
+  /**
    * Search for recipes based on list of ingredients
    *
    * @static
@@ -411,7 +470,8 @@ class RecipeController {
    */
   static searchByIngredients(req, res, next) {
     if (req.query.search === 'ingredients' && req.query.list) {
-      const ingredients = req.query.list.split(' ');
+      let ingredients = req.query.list.split(',').join(' ').split(' ');
+      ingredients = ingredients.filter(ingredient => ingredient !== '');
       const searchList = ingredients.map(keyWord => ({
         ingredients: {
           [Op.iLike]: `%${keyWord}%`,
@@ -426,7 +486,11 @@ class RecipeController {
           ],
           where: {
             [Op.or]: searchList,
-          }
+          },
+          include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+          }],
         })
         .then((recipes) => {
           if (recipes.length === 0) {
@@ -478,7 +542,11 @@ class RecipeController {
           ],
           where: {
             [Op.or]: searchList,
-          }
+          },
+          include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+          }],
         })
         .then((recipes) => {
           if (recipes.length === 0) {

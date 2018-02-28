@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import RecipeCatalogCard from './RecipeCatalogCard';
+import RecipeCatalogCard from '../common/RecipeCatalogCard';
 
 const propTypes = {
   recipesCatalog: PropTypes.arrayOf(PropTypes.shape()),
@@ -27,11 +28,11 @@ const AllRecipeCatalog = (props) => {
         <div className="row valign-wrapper" >
           <h4 className="col s11">All Recipes</h4>
           <span className="col s1 right" >
-            <a href="#!">View All &gt;</a>
+            <Link to="/catalog">View All &gt;</Link>
           </span>
         </div>
       </div>
-      {recipesCatalog && recipesCatalog.map((recipe, index) =>
+      {recipesCatalog && recipesCatalog.slice(0, 4).map((recipe, index) =>
         (<RecipeCatalogCard
           {...props}
           key={recipe.id}

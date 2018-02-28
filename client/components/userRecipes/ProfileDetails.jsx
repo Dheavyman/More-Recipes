@@ -86,7 +86,7 @@ const ProfileDetails = (props) => {
           className={'btn-floating waves-effect waves-light green right'}
           onClick={handleEdit}
         >
-          <i className="material-icons left" data-tip="Edit details">edit</i>
+          <i className="material-icons left" data-tip="Edit Details">edit</i>
         </button>}
         <ReactTooltip />
       </div>

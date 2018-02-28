@@ -197,7 +197,7 @@ class UserProfile extends React.Component {
                   className={`btn-floating waves-effect waves-light
                   ${userImage ? 'green' : 'indigo accent-2'}`}
                 >
-                  <i className="material-icons small" data-tip="Edit photo">
+                  <i className="material-icons small" data-tip="Edit Photo">
                     camera_alt
                   </i>
                 </label>

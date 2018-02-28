@@ -202,7 +202,7 @@ class Recipe extends Component {
     return (
       <div>
         {!isEmpty(singleRecipe) &&
-          <div>
+          <div className="page-body">
             <header>
               <Header
                 openSignup={this.state.openSignup}
@@ -235,9 +235,10 @@ class Recipe extends Component {
 }
 
 /**
- * Function to map alues from state to props
+ * Function to map values from state to props
  *
  * @param {object} state - The state values
+ *
  * @returns {object} - The mapped props
  */
 const mapStateToProps = state => ({
@@ -249,7 +250,8 @@ const mapStateToProps = state => ({
  * Function to map dispatch to props
  * Action creators are binded to the dispatch function
  *
- * @param {any} dispatch
+ * @param {any} dispatch - The store dispatch function
+ *
  * @returns {any} The mapped props
  */
 const mapDispatchToProps = dispatch => (

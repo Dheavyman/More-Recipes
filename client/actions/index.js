@@ -1,5 +1,5 @@
-import { retrieveRecipes, retrievePopularRecipes, fetchRecipe, fetchUserRecipes,
-  fetchUserFavorites } from './recipe';
+import { retrieveRecipes, retrievePopularRecipes, fetchRecipe,
+  fetchUserRecipes, fetchUserFavorites, searchRecipe } from './recipe';
 import { signupUser, signinUser, logoutUser, fetchUserProfile,
   editUserProfile, editProfilePicture, uploadUserImage } from './userActions';
 import postReview from './review';
@@ -29,4 +29,5 @@ export default {
   upvoteRecipe,
   downvoteRecipe,
   setFavorite,
+  searchRecipe,
 };

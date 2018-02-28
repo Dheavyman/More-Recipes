@@ -89,7 +89,7 @@ const EditProfileForm = (props) => {
         right`}
           onClick={handleSubmitProfile}
         >
-          <i className="material-icons" data-tip="Save details">save</i>
+          <i className="material-icons" data-tip="Save Details">save</i>
         </button>
         <button
           id="edit-btn"

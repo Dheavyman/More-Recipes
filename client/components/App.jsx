@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Home from './homepage';
+import CatalogPage from './catalogPage';
 import singleRecipePage from './singleRecipePage';
 import UserDashboard from './userRecipes/UserRecipes';
 import { decodeToken } from '../utils/authenticate';
@@ -24,6 +25,7 @@ const defaultProps = {
 const App = () => (
   <Switch>
     <Route exact path="/" component={Home} />
+    <Route path="/catalog" component={CatalogPage} />
     <Route path="/recipes/:recipeId" component={singleRecipePage} />
     <Route
       path="/users/:userId/dashboard"

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import RecipeCatalogCard from './RecipeCatalogCard';
+import RecipeCatalogCard from '../common/RecipeCatalogCard';
 
 const propTypes = {
   recipes: PropTypes.shape({

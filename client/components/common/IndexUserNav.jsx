@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * User navigation when unathenticated
  *
- * @param {any} props 
+ * @param {any} props - The properties passed to the component
  * @returns {object} React element
  */
 const IndexUserNav = (props) => {
