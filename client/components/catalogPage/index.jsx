@@ -18,8 +18,10 @@ const propTypes = {
     replace: PropTypes.func,
   }).isRequired,
   recipes: PropTypes.shape({
+    recipes: PropTypes.arrayOf(PropTypes.shape()),
     searchResult: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
+  retrieveRecipes: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -44,7 +46,9 @@ class CatalogPage extends Component {
       search: 'title',
       list: '',
       searchedTerm: '',
-      showText: false,
+      searchPerformed: false,
+      limit: 8,
+      offset: 8,
     };
   }
 
@@ -56,26 +60,59 @@ class CatalogPage extends Component {
    */
   componentDidMount() {
     window.scrollTo(0, 0);
-    const { location: { search }, searchRecipe } = this.props;
+    window.onscroll = () => {
+      if (document.body.scrollTop > 1000
+        || document.documentElement.scrollTop > 1000) {
+        document.getElementById('scroll-to-top').style.display = 'block';
+      } else {
+        document.getElementById('scroll-to-top').style.display = 'none';
+      }
+    };
+
+    const { location: { search }, searchRecipe, retrieveRecipes,
+      recipes: { recipes } } = this.props;
 
     if (search !== '') {
       const parsed = queryString.parse(search);
-      searchRecipe(parsed.search, parsed.list);
+
+      if (parsed.search && parsed.list) {
+        searchRecipe(parsed.search, parsed.list);
+      }
+    } else if (recipes.length <= 0) {
+      retrieveRecipes();
     }
   }
 
   /**
    * Component will receive props lifecycle method
    *
+   * @param {object} nextProps - The next properties passed
+   *
    * @returns {any} Sets state
    * @memberof CatalogPage
    */
-  componentWillReceiveProps() {
-    if (this.props.recipes.searchResult) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.recipes.recipes.length > 0) {
+      this.setState((previousState, props) => ({
+        offset: props.recipes.recipes.length,
+      }));
+    }
+
+    if (nextProps.recipes.searchResult.length > 0) {
       this.setState({
-        showText: true,
+        searchPerformed: true,
       });
     }
+  }
+
+  /**
+   * Component will unmount lifecyle method
+   *
+   * @returns {any} remove onscroll event listener
+   * @memberof CatalogPage
+   */
+  componentWillUnmount() {
+    window.onscroll = undefined;
   }
 
   /**
@@ -131,6 +168,30 @@ class CatalogPage extends Component {
   }
 
   /**
+   * Function to retrieve more recipes for more pages
+   *
+   * @returns {any} Retrieve more recipes
+   * @memberof CatalogPage
+   */
+  retrieveMoreRecipes = () => {
+    const { limit, offset } = this.state;
+    const { retrieveRecipes } = this.props;
+
+    retrieveRecipes(limit, offset);
+  }
+
+  /**
+   * Fuction to scroll to the top of the page
+   *
+   * @returns {any} Scrolls the page
+   * @memberof CatalogPage
+   */
+  scrollToTop = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  /**
    * Render method
    *
    * @returns {object} React element
@@ -146,6 +207,8 @@ class CatalogPage extends Component {
           <Main
             handleSearchChange={this.handleSearchChange}
             handleSubmitSearch={this.handleSubmitSearch}
+            retrieveMoreRecipes={this.retrieveMoreRecipes}
+            scrollToTop={this.scrollToTop}
             {...this.state}
             {...this.props}
           />

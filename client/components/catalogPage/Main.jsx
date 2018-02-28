@@ -14,7 +14,8 @@ const propTypes = {
     search: PropTypes.string,
   }),
   searchedTerm: PropTypes.string,
-  showText: PropTypes.bool.isRequired,
+  searchPerformed: PropTypes.bool.isRequired,
+  scrollToTop: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -31,7 +32,8 @@ const defaultProps = {
  * @returns {object} React element
  */
 const Main = (props) => {
-  const { recipes: { searchResult }, location: { search }, showText } = props;
+  const { recipes: { searchResult }, location: { search },
+    searchPerformed, scrollToTop } = props;
   let { searchedTerm } = props;
 
   if (search !== '') {
@@ -42,8 +44,17 @@ const Main = (props) => {
     <div>
       <SearchBar {...props} />
       <div className="row recipes-list">
+        <span
+          role="button"
+          tabIndex="0"
+          id="scroll-to-top"
+          onClick={scrollToTop}
+        >
+          <i className="fa fa-arrow-circle-up fa-3x" />
+        </span>
         <div className="center-align">
-          {showText &&
+          {search !== '' &&
+            searchPerformed &&
             <h5><em>{searchResult.length === 0
               ? `No Search result found for ${searchedTerm}`
               : `Search results for ${searchedTerm}`
@@ -52,7 +63,8 @@ const Main = (props) => {
           }
         </div>
         <div>
-          {showText
+          {search !== '' &&
+            searchPerformed
             ? <SearchResult {...props} />
             : <CatalogResult {...props} />}
         </div>

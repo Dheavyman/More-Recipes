@@ -72,6 +72,26 @@ main {
   width: 100%;
 }
 
+.catalog-page {
+  position: relative;
+}
+
+#scroll-to-top {
+  bottom: 240px;
+  cursor: pointer;
+  display: none;
+  position: fixed;
+  right: 15px;
+}
+
+.end-message {
+  bottom: -20px;
+  font-size: 18px;
+  font-weight: 300;
+  position: absolute;
+  text-align: center;
+}
+
 .recipes-list {
   margin: 20px 50px;
 

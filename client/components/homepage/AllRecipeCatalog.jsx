@@ -32,7 +32,7 @@ const AllRecipeCatalog = (props) => {
           </span>
         </div>
       </div>
-      {recipesCatalog && recipesCatalog.map((recipe, index) =>
+      {recipesCatalog && recipesCatalog.slice(0, 4).map((recipe, index) =>
         (<RecipeCatalogCard
           {...props}
           key={recipe.id}

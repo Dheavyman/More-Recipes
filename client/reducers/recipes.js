@@ -5,6 +5,8 @@ const initialState = {
   isFetchingPopularRecipes: false,
   searchPerformed: false,
   recipes: [],
+  recipesCount: 0,
+  hasMore: true,
   searchResult: [],
   popularRecipes: [],
   errorFetchingRecipes: {},
@@ -30,7 +32,11 @@ const recipes = (state = initialState, action) => {
       return {
         ...state,
         isFetchingRecipes: false,
-        recipes: action.payload,
+        recipes: [
+          ...state.recipes,
+          ...action.payload.recipes,
+        ],
+        recipesCount: action.payload.recipesCount,
         errorFetchingRecipes: {},
       };
     case actionTypes.RETRIEVE_RECIPES_FAILURE:
@@ -38,6 +44,11 @@ const recipes = (state = initialState, action) => {
         ...state,
         isFetchingRecipes: false,
         errorFetchingRecipes: action.payload,
+      };
+    case actionTypes.RETRIEVED_ALL_RECIPES:
+      return {
+        ...state,
+        hasMore: false,
       };
     case actionTypes.POPULAR_RECIPES_REQUEST:
       return {

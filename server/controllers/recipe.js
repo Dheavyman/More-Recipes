@@ -1,5 +1,4 @@
 import Sequelize from 'sequelize';
-import isEmpty from 'lodash/isEmpty';
 import jwt from 'jsonwebtoken';
 
 import models from '../models';
@@ -174,15 +173,19 @@ class RecipeController {
    * @memberof RecipeController
    */
   static getAll(req, res, next) {
-    if (!isEmpty(req.query)) return next();
+    if (req.query.sort || req.query.search) return next();
     return Recipe
-      .all({
+      .findAndCountAll({
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
           'views', 'favorites'
         ],
-        limit: req.params.limit || 4,
+        limit: req.query.limit || 4,
+        offset: req.query.offset,
+        order: [
+          ['createdAt', 'DESC'],
+        ],
         include: [{
           model: User,
           attributes: ['id', 'firstName', 'lastName']
@@ -192,7 +195,8 @@ class RecipeController {
         status: 'Success',
         message: 'Recipes retrieved',
         data: {
-          recipes
+          recipes: recipes.rows,
+          recipesCount: recipes.count,
         }
       }))
       .catch(error => res.status(500).send({

@@ -10,6 +10,9 @@ import Footer from '../common/Footer';
 import Main from './Main';
 
 const propTypes = {
+  recipes: PropTypes.shape({
+    recipes: PropTypes.arrayOf(PropTypes.shape()),
+  }).isRequired,
   retrieveRecipes: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
@@ -43,7 +46,11 @@ class Home extends Component {
    * @memberof Home
    */
   componentDidMount() {
-    this.props.retrieveRecipes();
+    const { recipes: { recipes } } = this.props;
+
+    if (!recipes.length > 0) {
+      this.props.retrieveRecipes();
+    }
   }
 
   /**
