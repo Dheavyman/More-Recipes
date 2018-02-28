@@ -32,7 +32,7 @@ const Main = (props) => {
       <div id="position">
         <Slider />
         <SearchBar
-          id={'home-search-bar'}
+          id="home-search-bar"
           {...props}
         />
       </div>

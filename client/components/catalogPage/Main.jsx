@@ -55,10 +55,13 @@ const Main = (props) => {
         <div className="center-align">
           {search !== '' &&
             searchPerformed &&
-            <h5><em>{searchResult.length === 0
-              ? `No Search result found for ${searchedTerm}`
-              : `Search results for ${searchedTerm}`
-            }</em>
+            <h5>
+              <em>
+                {searchResult.length === 0
+                  ? `No Search result found for ${searchedTerm}`
+                  : `Search results for ${searchedTerm}`
+                }
+              </em>
             </h5>
           }
         </div>
@@ -66,7 +69,8 @@ const Main = (props) => {
           {search !== '' &&
             searchPerformed
             ? <SearchResult {...props} />
-            : <CatalogResult {...props} />}
+            : <CatalogResult {...props} />
+          }
         </div>
 
       </div>
