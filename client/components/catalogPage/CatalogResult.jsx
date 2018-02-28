@@ -31,7 +31,8 @@ const CatalogResult = (props) => {
           hasMore={hasMore}
           loader={<div className="col s12 center-align">
             <Spinner />
-          </div>}
+          </div>
+          }
           endMessage={
             <div className="end-message center-align col s12">
               <b>Yay! You have seen it all</b>
@@ -44,7 +45,8 @@ const CatalogResult = (props) => {
               key={recipe.id}
               index={index}
               recipe={recipe}
-            />))}
+            />))
+          }
         </InfiniteScroll>
       </div>
     </div>
