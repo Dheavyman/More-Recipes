@@ -77,6 +77,7 @@ const recipes = (state = initialState, action) => {
       return {
         ...state,
         isFetchingRecipes: false,
+        searchPerformed: true,
         searchResult: action.payload,
         errorFetchingRecipes: {},
       };

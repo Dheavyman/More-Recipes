@@ -99,7 +99,7 @@ const uploadUserImageFailure = error => ({
 
 const signupUser = (values, closeSignupModal) => (dispatch) => {
   dispatch(userSignupRequest());
-  axios.post(`${SERVER_URL}/users/signup`, values)
+  return axios.post(`${SERVER_URL}/users/signup`, values)
     .then((response) => {
       const { data } = response;
       dispatch(userSignupSuccess(data));
@@ -111,7 +111,7 @@ const signupUser = (values, closeSignupModal) => (dispatch) => {
     });
 };
 
-const signinUser = (values, closeSigninModal) => (dispatch) => {
+const signinUser = values => (dispatch) => {
   dispatch(userSigninRequest());
   return axios.post(`${SERVER_URL}/users/signin`, values)
     .then((response) => {
@@ -119,7 +119,6 @@ const signinUser = (values, closeSigninModal) => (dispatch) => {
       const { data: { token } } = data;
       dispatch(userSigninSuccess(data));
       localStorage.setItem('token', token);
-      closeSigninModal();
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -129,8 +128,11 @@ const signinUser = (values, closeSigninModal) => (dispatch) => {
 
 const logoutUser = () => (dispatch) => {
   dispatch(userLogoutRequest());
-  localStorage.removeItem('token');
-  dispatch(userLogoutSuccess());
+  const loggingOut = new Promise(resolve => resolve());
+  return loggingOut.then(() => {
+    localStorage.removeItem('token');
+    dispatch(userLogoutSuccess());
+  });
 };
 
 const fetchUserProfile = userId => (dispatch) => {
@@ -138,7 +140,7 @@ const fetchUserProfile = userId => (dispatch) => {
     'x-access-token': localStorage.getItem('token'),
   };
   dispatch(fetchUserProfileRequest());
-  axios.get(`${SERVER_URL}/users/${userId}`, { headers: token })
+  return axios.get(`${SERVER_URL}/users/${userId}`, { headers: token })
     .then((response) => {
       const { data } = response,
         { data: { user } } = data;
@@ -155,7 +157,7 @@ const editUserProfile = (userId, values) => (dispatch) => {
     'x-access-token': localStorage.getItem('token'),
   };
   dispatch(editUserProfileRequest());
-  axios.put(`${SERVER_URL}/users/${userId}`, values,
+  return axios.put(`${SERVER_URL}/users/${userId}`, values,
     { headers: token })
     .then((response) => {
       const { data } = response,
@@ -173,7 +175,7 @@ const editProfilePicture = (userId, imageFile) => (dispatch) => {
     'x-access-token': localStorage.getItem('token'),
   };
   dispatch(editProfilePictureRequest());
-  axios.put(`${SERVER_URL}/users/${userId}/image`, imageFile,
+  return axios.put(`${SERVER_URL}/users/${userId}/image`, imageFile,
     { headers: token })
     .then((response) => {
       const { data } = response,
@@ -200,5 +202,7 @@ const uploadUserImage = value => (dispatch) => {
     });
 };
 
-export { signupUser, signinUser, logoutUser, fetchUserProfile,
-  editUserProfile, editProfilePicture, uploadUserImage };
+export {
+  signupUser, signinUser, logoutUser, fetchUserProfile,
+  editUserProfile, editProfilePicture, uploadUserImage
+};

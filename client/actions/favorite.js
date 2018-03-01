@@ -25,7 +25,7 @@ const setFavorite = recipeId => (dispatch) => {
     'x-access-token': getToken(),
   };
   dispatch(setFavoriteRequest());
-  axios.post(`${SERVER_URL}/recipes/${recipeId}/favorites`, {},
+  return axios.post(`${SERVER_URL}/recipes/${recipeId}/favorites`, {},
     { headers: token })
     .then((response) => {
       const { data } = response;

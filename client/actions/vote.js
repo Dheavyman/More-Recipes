@@ -39,7 +39,7 @@ const upvoteRecipe = recipeId => (dispatch) => {
     'x-access-token': getToken(),
   };
   dispatch(upvoteRecipeRequest());
-  axios.put(`${SERVER_URL}/recipes/${recipeId}/upvotes`, {},
+  return axios.put(`${SERVER_URL}/recipes/${recipeId}/upvotes`, {},
     { headers: token })
     .then((response) => {
       const { data } = response;
@@ -56,7 +56,7 @@ const downvoteRecipe = recipeId => (dispatch) => {
     'x-access-token': getToken(),
   };
   dispatch(downvoteRecipeRequest());
-  axios.put(`${SERVER_URL}/recipes/${recipeId}/downvotes`, {},
+  return axios.put(`${SERVER_URL}/recipes/${recipeId}/downvotes`, {},
     { headers: token })
     .then((response) => {
       const { data } = response;

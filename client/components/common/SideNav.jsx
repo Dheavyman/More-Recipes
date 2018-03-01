@@ -1,8 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { decodeToken } from '../../utils/authenticate';
+
+const propTypes = {
+  handleOpenSignup: PropTypes.func,
+  handleOpenSignin: PropTypes.func,
+  handleLogoutUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  }).isRequired,
+};
+
+const defaultProps = {
+  handleOpenSignup: undefined,
+  handleOpenSignin: undefined,
+};
 
 /**
  * Class representing Side nav component
@@ -35,26 +53,18 @@ class SideNav extends React.Component {
   }
 
   /**
-   * Logout user from the application
-   *
-   * @returns {any} Logout user
-   * @memberof SideNav
-   */
-  handleLogoutUser = () => {
-    const { logoutUser, history } = this.props;
-    logoutUser();
-    history.push('/');
-  }
-
-  /**
    * Render function
    *
    * @returns {object} React element
    * @memberof SideNav
    */
   render() {
-    const { user: { isAuthenticated }, location: { pathname } } = this.props;
-    const dashboard = pathname.match(/(users)/) === null ? null : 'fixed'; // check the regex
+    const {
+      user: { isAuthenticated }, location: { pathname }, handleOpenSignup,
+      handleOpenSignin, handleLogoutUser,
+    } = this.props;
+    const userUrl = new RegExp(/users/);
+    const dashboard = pathname.match(userUrl) === null ? null : 'fixed';
     const decoded = decodeToken();
     let userId;
 
@@ -65,15 +75,6 @@ class SideNav extends React.Component {
     return (
       <div>
         <ul className={`side-nav ${dashboard}`} id="slide_out">
-          <li>
-            <div
-              className="nav-wrapper deep-orange darken-4 hide-on-med-and-up"
-            >
-              <a id="logo" href="index.html" className="white-text">
-                More-Recipes
-              </a>
-            </div>
-          </li>
           <li><Link to="/">Home</Link></li>
           <li>
             <ul className="collapsible" data-collapsible="accordion">
@@ -142,15 +143,32 @@ class SideNav extends React.Component {
                 <a
                   role="button"
                   tabIndex="0"
-                  onClick={this.handleLogoutUser}
+                  onClick={handleLogoutUser}
                 >
                   Logout
                 </a>
+                <ToastContainer />
               </li>
             </div> :
             <div>
-              <li><a href="#signin" className="modal-trigger">Sign In</a></li>
-              <li><a href="#signup" className="modal-trigger">Register</a></li>
+              <li>
+                <a
+                  role="button"
+                  tabIndex="0"
+                  onClick={handleOpenSignin}
+                >
+                  Sign In
+                </a>
+              </li>
+              <li>
+                <a
+                  role="button"
+                  tabIndex="0"
+                  onClick={handleOpenSignup}
+                >
+                  Register
+                </a>
+              </li>
             </div>
           }
         </ul>
@@ -159,17 +177,7 @@ class SideNav extends React.Component {
   }
 }
 
-SideNav.propTypes = {
-  user: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string
-  }).isRequired,
-  logoutUser: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
+SideNav.propTypes = propTypes;
+SideNav.defaultProps = defaultProps;
 
 export default SideNav;

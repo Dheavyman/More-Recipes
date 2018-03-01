@@ -21,6 +21,7 @@ class Slider extends React.Component {
   componentDidMount() {
     $('.slider').slider({
       full_width: true,
+      height: 600,
     });
   }
   /**

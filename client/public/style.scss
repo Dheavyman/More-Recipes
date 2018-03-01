@@ -193,7 +193,7 @@ main {
 }
 
 .fixed-action-btn {
-  margin-bottom: 30px;
+  margin-bottom: 80px;
 }
 
 .dropzone {
@@ -241,4 +241,8 @@ main {
     padding: 6px 12px;
     cursor: pointer;
   }
+}
+
+#edit-btn {
+  right: 5px;
 }

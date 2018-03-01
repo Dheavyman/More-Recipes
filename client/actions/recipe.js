@@ -218,7 +218,7 @@ const searchRecipesFailure = error => ({
  */
 const retrieveRecipes = (limit = 8, offset = 0) => (dispatch) => {
   dispatch(retrieveRecipesRequest());
-  axios.get(`${SERVER_URL}/recipes?limit=${limit}&offset=${offset}`)
+  return axios.get(`${SERVER_URL}/recipes?limit=${limit}&offset=${offset}`)
     .then((response) => {
       const { data } = response;
       const { data: { recipes, recipesCount } } = data;
@@ -243,7 +243,7 @@ const retrieveRecipes = (limit = 8, offset = 0) => (dispatch) => {
  */
 const retrievePopularRecipes = () => (dispatch) => {
   dispatch(popularRecipesRequest());
-  axios.get(`${SERVER_URL}/recipes/popular`)
+  return axios.get(`${SERVER_URL}/recipes/popular`)
     .then((response) => {
       const { data } = response;
       const { data: { recipes } } = data;
@@ -264,7 +264,7 @@ const retrievePopularRecipes = () => (dispatch) => {
  */
 const fetchRecipe = recipeId => (dispatch) => {
   dispatch(fetchRecipeRequest());
-  axios.get(`${SERVER_URL}/recipes/${recipeId}`, {
+  return axios.get(`${SERVER_URL}/recipes/${recipeId}`, {
     headers: {
       'x-access-token': getToken(),
     } })
@@ -288,7 +288,7 @@ const fetchRecipe = recipeId => (dispatch) => {
  */
 const fetchUserRecipes = userId => (dispatch) => {
   dispatch(fetchUserRecipesRequest());
-  axios.get(`${SERVER_URL}/recipes/users/${userId}`,
+  return axios.get(`${SERVER_URL}/recipes/users/${userId}`,
     { headers: {
       'x-access-token': getToken(),
     } })
@@ -312,7 +312,7 @@ const fetchUserRecipes = userId => (dispatch) => {
  */
 const fetchUserFavorites = userId => (dispatch) => {
   dispatch(fetchUserFavoritesRequest());
-  axios.get(`${SERVER_URL}/users/${userId}/recipes`,
+  return axios.get(`${SERVER_URL}/users/${userId}/recipes`,
     { headers: {
       'x-access-token': getToken(),
     } })
@@ -337,7 +337,7 @@ const fetchUserFavorites = userId => (dispatch) => {
  */
 const searchRecipe = (search, list) => (dispatch) => {
   dispatch(searchRecipesRequest());
-  axios.get(`${SERVER_URL}/recipes?search=${search}&list=${list}`)
+  return axios.get(`${SERVER_URL}/recipes?search=${search}&list=${list}`)
     .then((response) => {
       const { data } = response;
       const { data: { recipes } } = data;

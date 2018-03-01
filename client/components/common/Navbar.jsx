@@ -9,7 +9,24 @@ import IndexUserNav from './IndexUserNav';
 import AuthUserNav from './AuthUserNav';
 import Signup from './Signup';
 import Signin from './Signin';
-// import notify from '../../utils/notification';
+
+const propTypes = {
+  openSignup: PropTypes.bool.isRequired,
+  openSignin: PropTypes.bool.isRequired,
+  handleOpenSignup: PropTypes.func.isRequired,
+  handleOpenSignin: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleSubmitSignup: PropTypes.func.isRequired,
+  handleSubmitSignin: PropTypes.func.isRequired,
+  handleLogoutUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    userSignin: PropTypes.shape({
+      message: PropTypes.string
+    })
+  }).isRequired,
+};
+
 
 /**
  * Class representing navbar
@@ -18,17 +35,6 @@ import Signin from './Signin';
  * @extends {React.Component}
  */
 class Navbar extends React.Component {
-  /**
-   * Creates an instance of Navbar.
-   *
-   * @memberof Navbar
-   */
-  constructor() {
-    super();
-    this.handleSubmitSignup = this.handleSubmitSignup.bind(this);
-    this.handleSubmitSignin = this.handleSubmitSignin.bind(this);
-    this.handleLogoutUser = this.handleLogoutUser.bind(this);
-  }
   /**
    * Component did mount method
    *
@@ -60,52 +66,17 @@ class Navbar extends React.Component {
   }
 
   /**
-   * Form submission handler function
-   *
-   * @param {any} values The form values
-   * @returns {any} Submit function
-   * @memberof Navbar
-   */
-  handleSubmitSignup(values) {
-    this.props.signupUser(values, this.props.handleClose);
-  }
-
-  /**
-   * Form submission handler function
-   *
-   * @param {any} values The form values
-   * @returns {any} Submit function
-   * @memberof Navbar
-   */
-  handleSubmitSignin(values) {
-    this.props.signinUser(values, this.props.handleClose)
-      .then(() => {
-        const { user: { userSignin } } = this.props;
-        // if (userSignin.message === 'User logged in') {
-        //   notify('Login Successful');
-        // }
-      });
-  }
-
-  /**
-   * Logout user from the application
-   *
-   * @returns {any} Logout user
-   * @memberof Navbar
-   */
-  handleLogoutUser() {
-    this.props.logoutUser();
-  }
-
-  /**
    * Render method
    *
    * @returns{object} React element
    * @memberof Navbar
    */
   render() {
-    const { openSignup, openSignin, handleOpenSignup, handleOpenSignin,
-      handleClose, user: { isAuthenticated, userSignin } } = this.props;
+    const {
+      openSignup, openSignin, handleOpenSignup, handleOpenSignin,
+      handleClose, handleSubmitSignup, handleSubmitSignin, handleLogoutUser,
+      user: { isAuthenticated, userSignin }
+    } = this.props;
     const { user } = userSignin;
 
     return (
@@ -151,7 +122,7 @@ class Navbar extends React.Component {
               />
             }
             {isAuthenticated &&
-              <AuthUserNav handleLogoutUser={this.handleLogoutUser} />}
+              <AuthUserNav handleLogoutUser={handleLogoutUser} />}
           </li>
         </ul>
         <MuiThemeProvider>
@@ -159,7 +130,7 @@ class Navbar extends React.Component {
             open={openSignup}
             handleClose={handleClose}
             handleOpenSignin={handleOpenSignin}
-            onSubmit={this.handleSubmitSignup}
+            onSubmit={handleSubmitSignup}
             {...this.props}
           />
         </MuiThemeProvider>
@@ -168,7 +139,7 @@ class Navbar extends React.Component {
             open={openSignin}
             handleClose={handleClose}
             handleOpenSignup={handleOpenSignup}
-            onSubmit={this.handleSubmitSignin}
+            onSubmit={handleSubmitSignin}
             {...this.props}
           />
         </MuiThemeProvider>
@@ -177,21 +148,6 @@ class Navbar extends React.Component {
   }
 }
 
-Navbar.propTypes = {
-  openSignup: PropTypes.bool.isRequired,
-  openSignin: PropTypes.bool.isRequired,
-  handleOpenSignup: PropTypes.func.isRequired,
-  handleOpenSignin: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  signupUser: PropTypes.func.isRequired,
-  signinUser: PropTypes.func.isRequired,
-  logoutUser: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-    userSignin: PropTypes.shape({
-      message: PropTypes.string
-    })
-  }).isRequired,
-};
+Navbar.propTypes = propTypes;
 
 export default Navbar;

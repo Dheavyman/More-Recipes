@@ -9,6 +9,7 @@ import Header from './Header';
 import Main from './Main';
 import { decodeToken } from '../../utils/authenticate';
 import config from '../../config';
+import notify from '../../utils/notification';
 
 /**
  * Class representing user recipes
@@ -295,6 +296,21 @@ class UserRecipes extends React.Component {
   }
 
   /**
+ * Logout user from the application
+ *
+ * @returns {any} Logout user
+ * @memberof UserRecipes
+ */
+  handleLogoutUser = () => {
+    const { logoutUser, history } = this.props;
+    logoutUser()
+      .then(() => {
+        notify('success', 'Logout Successful');
+        history.push('/');
+      });
+  }
+
+  /**
    * Render method
    *
    * @returns {object} React element
@@ -304,7 +320,10 @@ class UserRecipes extends React.Component {
     return (
       <div className="page-body">
         <header id="header" >
-          <Header {...this.props} />
+          <Header
+            handleLogoutUser={this.handleLogoutUser}
+            {...this.props}
+          />
         </header>
         <main id="main" >
           <Main
@@ -342,6 +361,10 @@ UserRecipes.propTypes = {
     params: PropTypes.shape({
       userId: PropTypes.string,
     })
+  }).isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }).isRequired,
 };
 

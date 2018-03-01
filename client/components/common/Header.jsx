@@ -1,7 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Navbar from './Navbar';
 import SideNav from './SideNav';
+import notify from '../../utils/notification';
+
+const propTypes = {
+  signupUser: PropTypes.func.isRequired,
+  signinUser: PropTypes.func.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    userSignin: PropTypes.shape({
+      message: PropTypes.string
+    })
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 /**
  * Class representing Header component
@@ -62,6 +79,57 @@ class Header extends Component {
   }
 
   /**
+   * Form submission handler function
+   *
+   * @param {any} values The form values
+   * @returns {any} Submit function
+   * @memberof Header
+   */
+  handleSubmitSignup = (values) => {
+    this.props.signupUser(values)
+      .then(() => {
+        const { user: { userSignup } } = this.props;
+        if (userSignup.message === 'User created') {
+          this.handleClose();
+          notify('success', 'Signup Successful, Please login to your account');
+        }
+      });
+  }
+
+  /**
+   * Form submission handler function
+   *
+   * @param {any} values The form values
+   * @returns {any} Submit function
+   * @memberof Header
+   */
+  handleSubmitSignin = (values) => {
+    this.props.signinUser(values)
+      .then(() => {
+        const { user: { userSignin } } = this.props;
+        if (userSignin.message === 'User logged in') {
+          this.handleClose();
+          notify('success', 'Login Successful');
+        }
+      });
+  }
+
+  /**
+   * Logout user from the application
+   *
+   * @returns {any} Logout user
+   * @memberof Header
+   */
+  handleLogoutUser = () => {
+    const { logoutUser, history } = this.props;
+    logoutUser()
+      .then(() => {
+        notify('success', 'Logout Successful');
+        history.push('/');
+      });
+  }
+
+  /**
    * Render method
    *
    * @returns {object} React element
@@ -78,6 +146,9 @@ class Header extends Component {
               handleOpenSignup={this.handleOpenSignup}
               handleOpenSignin={this.handleOpenSignin}
               handleClose={this.handleClose}
+              handleSubmitSignup={this.handleSubmitSignup}
+              handleSubmitSignin={this.handleSubmitSignin}
+              handleLogoutUser={this.handleLogoutUser}
               {...this.props}
             />
           </nav>
@@ -88,11 +159,14 @@ class Header extends Component {
           handleOpenSignup={this.handleOpenSignup}
           handleOpenSignin={this.handleOpenSignin}
           handleClose={this.handleClose}
+          handleLogoutUser={this.handleLogoutUser}
           {...this.props}
         />
       </div>
     );
   }
 }
+
+Header.propTypes = propTypes;
 
 export default Header;

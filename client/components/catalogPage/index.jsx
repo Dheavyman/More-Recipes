@@ -19,7 +19,7 @@ const propTypes = {
   }).isRequired,
   recipes: PropTypes.shape({
     recipes: PropTypes.arrayOf(PropTypes.shape()),
-    searchResult: PropTypes.arrayOf(PropTypes.shape()),
+    searchPerformed: PropTypes.bool.isRequired,
   }).isRequired,
   retrieveRecipes: PropTypes.func.isRequired,
 };
@@ -98,7 +98,7 @@ class CatalogPage extends Component {
       }));
     }
 
-    if (nextProps.recipes.searchResult.length > 0) {
+    if (nextProps.recipes.searchPerformed) {
       this.setState({
         searchPerformed: true,
       });

@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './homepage';
 import CatalogPage from './catalogPage';
 import singleRecipePage from './singleRecipePage';
-import UserDashboard from './userRecipes/UserRecipes';
+import UserDashboard from './userRecipes';
 import { decodeToken } from '../utils/authenticate';
 import '../public/style.scss';
 
