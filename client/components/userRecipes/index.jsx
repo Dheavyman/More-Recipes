@@ -10,6 +10,7 @@ import Main from './Main';
 import { decodeToken } from '../../utils/authenticate';
 import config from '../../config';
 import notify from '../../utils/notification';
+import recipeAvater from '../../public/images/recipe-avatar2.png';
 
 /**
  * Class representing user recipes
@@ -274,17 +275,25 @@ class UserRecipes extends React.Component {
     };
 
     if (!imageUploaded) {
-      uploadImage(imageData)
-        .then(() => {
-          const { userRecipes: { imageUrl, error } } = this.props;
-          values = {
-            ...values,
-            recipeImage: imageUrl,
-          };
-          if (isEmpty(error)) {
-            addRecipe(values, this.handleClose);
-          }
-        });
+      if (imageData !== null) {
+        uploadImage(imageData)
+          .then(() => {
+            const { userRecipes: { imageUrl, error } } = this.props;
+            values = {
+              ...values,
+              recipeImage: imageUrl,
+            };
+            if (isEmpty(error)) {
+              addRecipe(values, this.handleClose);
+            }
+          });
+      } else {
+        values = {
+          ...values,
+          recipeImage: recipeAvater,
+        };
+        addRecipe(values, this.handleClose);
+      }
     } else {
       const { userRecipes: { imageUrl } } = this.props;
       values = {
