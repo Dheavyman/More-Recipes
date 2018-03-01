@@ -914,7 +914,7 @@ describe('More Recipes', () => {
             done();
           });
       });
-    it('should return 404 if a user has not added any recipe', (done) => {
+    it('should return 200 if a user has not added any recipe', (done) => {
       server
         .get(`/api/v1/recipes/users/${userId2}`)
         .set('Connection', 'keep alive')
@@ -922,8 +922,8 @@ describe('More Recipes', () => {
         .set('x-access-token', userToken[1])
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
-          expect(res.body.status).to.equal('Fail');
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User has not added any recipe');
           done();
         });
@@ -1460,14 +1460,14 @@ describe('More Recipes', () => {
             done();
           });
       });
-    it('should return 404 for a searvh that has no match', (done) => {
+    it('should return 200 for a search that has no match', (done) => {
       server
         .get('/api/v1/recipes?search=ingredients&list=meat')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
+          expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('No recipe matched your search');
           done();
         });
@@ -1487,14 +1487,14 @@ describe('More Recipes', () => {
             done();
           });
       });
-    it('should return 404 for a search that has no match', (done) => {
+    it('should return 200 for a search that has no match', (done) => {
       server
         .get('/api/v1/recipes?search=category&list=breakfast')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
+          expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('No recipe matched your search');
           done();
         });

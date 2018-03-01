@@ -41,9 +41,15 @@ class UserAddedRecipes extends React.Component {
 
     return (
       <div className="row">
-        {userAddedRecipes && userAddedRecipes.map(recipe => (
-          <UserRecipeCard key={recipe.id} recipe={recipe} {...this.props} />
-        ))}
+        {userAddedRecipes &&
+          userAddedRecipes.length === 0
+          ? <div className="center-align" >
+            <h5>You have not added any recipe</h5>
+            <i className="material-icons large">folder_open</i>
+          </div>
+          : userAddedRecipes.map(recipe => (
+            <UserRecipeCard key={recipe.id} recipe={recipe} {...this.props} />
+          ))}
       </div>
     );
   }

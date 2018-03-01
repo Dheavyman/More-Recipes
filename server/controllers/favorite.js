@@ -91,9 +91,12 @@ class FavoriteController {
       })
       .then((favorites) => {
         if (favorites.length === 0) {
-          return res.status(404).send({
-            status: 'Fail',
+          return res.status(200).send({
+            status: 'Success',
             message: 'User has not favorited any recipe',
+            data: {
+              favorites,
+            }
           });
         }
         res.status(200).send({

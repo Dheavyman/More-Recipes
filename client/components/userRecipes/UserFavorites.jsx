@@ -43,14 +43,20 @@ class UserFavorites extends React.Component {
 
     return (
       <div className="row">
-        {userFavorites && userFavorites.map(favorite => (
-          <UserFavoriteCard
-            key={favorite.Recipe.id}
-            recipe={favorite.Recipe}
-            owner={favorite.Recipe.User}
-            {...this.props}
-          />
-        ))}
+        {userFavorites &&
+          userFavorites.length === 0
+          ? <div className="center-align" >
+            <h5>You have not favorited any recipe</h5>
+            <i className="material-icons large">folder_open</i>
+          </div>
+          : userFavorites.map(favorite => (
+            <UserFavoriteCard
+              key={favorite.Recipe.id}
+              recipe={favorite.Recipe}
+              owner={favorite.Recipe.User}
+              {...this.props}
+            />
+          ))}
       </div>
     );
   }

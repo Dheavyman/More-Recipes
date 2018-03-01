@@ -97,13 +97,12 @@ const uploadUserImageFailure = error => ({
   payload: error,
 });
 
-const signupUser = (values, closeSignupModal) => (dispatch) => {
+const signupUser = values => (dispatch) => {
   dispatch(userSignupRequest());
   return axios.post(`${SERVER_URL}/users/signup`, values)
     .then((response) => {
       const { data } = response;
       dispatch(userSignupSuccess(data));
-      closeSignupModal();
     })
     .catch((error) => {
       const { response: { data } } = error;

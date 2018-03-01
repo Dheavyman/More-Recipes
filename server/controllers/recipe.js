@@ -288,9 +288,12 @@ class RecipeController {
       })
       .then((recipes) => {
         if (recipes.length === 0) {
-          return res.status(404).send({
-            status: 'Fail',
+          return res.status(200).send({
+            status: 'Success',
             message: 'User has not added any recipe',
+            data: {
+              recipes,
+            }
           });
         }
         return res.status(200).send({
@@ -440,8 +443,8 @@ class RecipeController {
         })
         .then((recipes) => {
           if (!recipes) {
-            return res.status(404).send({
-              status: 'Fail',
+            return res.status(200).send({
+              status: 'Success',
               message: 'No result found',
             });
           }
@@ -494,8 +497,8 @@ class RecipeController {
         })
         .then((recipes) => {
           if (recipes.length === 0) {
-            return res.status(404).send({
-              status: 'Fail',
+            return res.status(200).send({
+              status: 'Success',
               message: 'No recipe matched your search',
             });
           }
@@ -550,8 +553,8 @@ class RecipeController {
         })
         .then((recipes) => {
           if (recipes.length === 0) {
-            return res.status(404).send({
-              status: 'Fail',
+            return res.status(200).send({
+              status: 'Success',
               message: 'No recipe matched your search',
             });
           }
