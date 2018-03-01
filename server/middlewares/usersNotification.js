@@ -1,7 +1,7 @@
 import models from '../models';
 
-const Favorite = models.Favorite,
-  User = models.User;
+const Favorite = models.Favorite;
+const User = models.User;
 
 /**
  * Class representing notification controller

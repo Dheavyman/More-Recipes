@@ -1,10 +1,10 @@
 import models from '../models';
 import helpers from '../helpers';
 
-const Review = models.Review,
-  Recipe = models.Recipe,
-  User = models.User,
-  sendNotification = helpers.sendEmail;
+const Review = models.Review;
+const Recipe = models.Recipe;
+const User = models.User;
+const sendNotification = helpers.sendEmail;
 
 /**
  * Class representing review handler

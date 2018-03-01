@@ -1,10 +1,10 @@
 import helpers from '../helpers';
 import models from '../models';
 
-const isEmpty = helpers.isEmpty,
-  isAlphaNumeric = helpers.isAlphaNumeric,
-  isEmail = helpers.isEmail,
-  User = models.User;
+const isEmpty = helpers.isEmpty;
+const isAlphaNumeric = helpers.isAlphaNumeric;
+const isEmail = helpers.isEmail;
+const User = models.User;
 
 /**
  * Class representing user validations

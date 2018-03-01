@@ -4,13 +4,13 @@ import jwt from 'jsonwebtoken';
 import models from '../models';
 import helpers from '../helpers';
 
-const Recipe = models.Recipe,
-  Review = models.Review,
-  User = models.User,
-  Favorite = models.Favorite,
-  Vote = models.Vote,
-  Op = Sequelize.Op,
-  sendNotification = helpers.sendEmail;
+const Recipe = models.Recipe;
+const Review = models.Review;
+const User = models.User;
+const Favorite = models.Favorite;
+const Vote = models.Vote;
+const Op = Sequelize.Op;
+const sendNotification = helpers.sendEmail;
 
 /**
  * Class representing recipe handler

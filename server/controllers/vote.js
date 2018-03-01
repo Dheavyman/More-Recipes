@@ -1,7 +1,7 @@
 import models from '../models';
 
-const Recipe = models.Recipe,
-  Vote = models.Vote;
+const Recipe = models.Recipe;
+const Vote = models.Vote;
 
 /**
  * Class representing voting handler for upvoting or downvoting a recipe

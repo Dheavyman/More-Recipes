@@ -4,17 +4,17 @@ import controllers from '../controllers';
 import middlewares from '../middlewares';
 import swaggerSpec from '../swagger';
 
-const router = express.Router(),
-  authenticate = middlewares.authentication,
-  favoriteController = controllers.favorite,
-  recipeController = controllers.recipe,
-  reviewController = controllers.review,
-  userController = controllers.user,
-  voteController = controllers.vote,
-  userValidate = middlewares.userValidation,
-  recipeValidate = middlewares.recipeValidation,
-  reviewValidate = middlewares.reviewValidation,
-  notifyUsers = middlewares.usersNotification;
+const router = express.Router();
+const authenticate = middlewares.authentication;
+const favoriteController = controllers.favorite;
+const recipeController = controllers.recipe;
+const reviewController = controllers.review;
+const userController = controllers.user;
+const voteController = controllers.vote;
+const userValidate = middlewares.userValidation;
+const recipeValidate = middlewares.recipeValidation;
+const reviewValidate = middlewares.reviewValidation;
+const notifyUsers = middlewares.usersNotification;
 
 // Retrieve swagger specification for API
 router.get('/swagger.json', (req, res) => {

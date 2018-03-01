@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import middlewares from '../middlewares';
 import models from '../models';
 
-const User = models.User,
-  authenticate = middlewares.authentication;
+const User = models.User;
+const authenticate = middlewares.authentication;
 
 /**
  * Class representing user handler

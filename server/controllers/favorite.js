@@ -1,8 +1,8 @@
 import models from '../models';
 
-const Favorite = models.Favorite,
-  Recipe = models.Recipe,
-  User = models.User;
+const Favorite = models.Favorite;
+const Recipe = models.Recipe;
+const User = models.User;
 
 /**
  * Class representing favorite controller functions

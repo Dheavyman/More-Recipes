@@ -1,8 +1,8 @@
 import helpers from '../helpers';
 import models from '../models';
 
-const isEmpty = helpers.isEmpty,
-  Review = models.Review;
+const isEmpty = helpers.isEmpty;
+const Review = models.Review;
 
 /**
  * Class representing recipe review validations
