@@ -41,7 +41,7 @@ routes(app);
 // Catch other routes and returns not found
 app.all('*', (req, res) => res.status(404).send({
   status: 'Fail',
-  message: 'Route not found',
+  message: 'Route does not exist',
 }));
 
 // production error handler
