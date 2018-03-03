@@ -14,11 +14,14 @@ class NotificationController {
    * get modified
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - The next route handler function
+   *
    * @returns {function} Object representing error message or
    * calls the next function
+   *
    * @memberof NotificationController
    */
   static favoriteRecipeModified(req, res, next) {

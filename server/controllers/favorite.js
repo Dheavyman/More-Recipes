@@ -11,15 +11,18 @@ const User = models.User;
  */
 class FavoriteController {
   /**
-     * Add a recipe as users favorite or undo it
-     *
-     * @static
-     * @param {object} req - The request body
-     * @param {any} res - The response body
-     * @returns {object} Object representing success status or
-     * error status
-     * @memberof FavoriteController
-     */
+   * Add a recipe as users favorite or undo it
+   *
+   * @static
+   *
+   * @param {object} req - The request body
+   * @param {any} res - The response body
+   *
+   * @returns {object} Object representing success status or
+   * error status
+   *
+   * @memberof FavoriteController
+   */
   static setFavorite(req, res) {
     return Favorite
       .findOrCreate({
@@ -64,15 +67,18 @@ class FavoriteController {
    * Retrieve all user favorite recipes
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object representing success status or
    * error stattus
+   *
    * @memberof FavoriteController
    */
   static userFavorites(req, res) {
     return Favorite
-      .findAll({
+      .findAndCountAll({
         attributes: ['userId', 'category'],
         where: {
           userId: req.params.userId,
@@ -90,12 +96,13 @@ class FavoriteController {
         }]
       })
       .then((favorites) => {
-        if (favorites.length === 0) {
+        if (favorites.rows.length === 0) {
           return res.status(200).send({
             status: 'Success',
             message: 'User has not favorited any recipe',
             data: {
-              favorites,
+              favorites: favorites.rows,
+              favoritesCount: favorites.count,
             }
           });
         }
@@ -103,7 +110,8 @@ class FavoriteController {
           status: 'Success',
           message: 'Favorites retrieved',
           data: {
-            favorites,
+            favorites: favorites.rows,
+            favoritesCount: favorites.count,
           }
         });
       })
@@ -117,10 +125,13 @@ class FavoriteController {
    * Create category for a user favorite recipe
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object representing the success status or
    * error status
+   *
    * @memberof FavoriteController
    */
   static favoriteCategory(req, res) {

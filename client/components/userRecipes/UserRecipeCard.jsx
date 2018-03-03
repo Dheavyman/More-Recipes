@@ -19,18 +19,17 @@ const propTypes = {
   handleOpenDelete: PropTypes.func.isRequired,
 };
 
+/**
+ * User recipe card component
+ *
+ * @param {object} props - The properties passed to the component
+ *
+ * @returns {object} React element
+ */
 const UserRecipeCard = (props) => {
   const { recipe, handleOpenEdit, handleOpenDelete } = props;
   const { id, title, description, recipeImage, views, upvotes, downvotes,
     favorites } = recipe;
-
-  const openEditModal = () => {
-    handleOpenEdit(recipe);
-  };
-
-  const openDeleteModal = () => {
-    handleOpenDelete(id);
-  };
 
   return (
     <div className="col s12 m6 l3">
@@ -64,7 +63,7 @@ const UserRecipeCard = (props) => {
           <a
             role="button"
             tabIndex="0"
-            onClick={openEditModal}
+            onClick={() => handleOpenEdit(recipe)}
             className={'btn-floating waves-effect waves-light green right'}
           >
             <i className="material-icons" data-tip="Edit Recipe">edit</i>
@@ -72,7 +71,7 @@ const UserRecipeCard = (props) => {
           <a
             role="button"
             tabIndex="0"
-            onClick={openDeleteModal}
+            onClick={() => handleOpenDelete(id)}
             className={'btn-floating waves-effect waves-light red right'}
           >
             <i className="material-icons" data-tip="Delete Recipe">delete</i>

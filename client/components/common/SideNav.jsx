@@ -11,21 +11,35 @@ const propTypes = {
   handleLogoutUser: PropTypes.func.isRequired,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
+    userProfile: PropTypes.shape({
+      notifications: PropTypes.bool,
+    })
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string
   }).isRequired,
+  userRecipes: PropTypes.shape({
+    userAddedRecipesCount: PropTypes.number,
+    userFavoritesCount: PropTypes.number,
+  }),
+  editUserProfile: PropTypes.func.isRequired,
+  currentProfileUserId: PropTypes.number,
+  authenticatedUserId: PropTypes.number,
 };
 
 const defaultProps = {
   handleOpenSignup: undefined,
   handleOpenSignin: undefined,
+  currentProfileUserId: null,
+  authenticatedUserId: null,
+  userRecipes: undefined,
 };
 
 /**
  * Class representing Side nav component
  *
  * @class SideNav
+ *
  * @extends {React.Component}
  */
 class SideNav extends React.Component {
@@ -33,6 +47,7 @@ class SideNav extends React.Component {
    * ComponentDidMount lifecycle method
    *
    * @returns {any} Initialize materialize collapsible class
+   *
    * @memberof SideNav
    */
   componentDidMount() {
@@ -43,7 +58,9 @@ class SideNav extends React.Component {
    * Function to handle changing of tabs
    *
    * @param {any} event - Event from clicking and element
+   *
    * @returns {any} Changes to the corresponding tab
+   *
    * @memberof SideNav
    */
   handleTabChange = (event) => {
@@ -53,16 +70,35 @@ class SideNav extends React.Component {
   }
 
   /**
+   * Handle change in notification switch
+   *
+   * @returns {object} Change the switch position
+   *
+   * @memberof SideNav
+   */
+  handleNotificationChange = () => {
+    const { editUserProfile } = this.props;
+    const checked = document.getElementById('notification-switch').checked;
+    const status = {
+      notifications: checked,
+    };
+
+    editUserProfile(status);
+  }
+
+  /**
    * Render function
    *
    * @returns {object} React element
+   *
    * @memberof SideNav
    */
   render() {
     const {
-      user: { isAuthenticated }, location: { pathname }, handleOpenSignup,
-      handleOpenSignin, handleLogoutUser,
+      user, location: { pathname }, handleOpenSignup, handleOpenSignin,
+      handleLogoutUser, userRecipes, currentProfileUserId, authenticatedUserId,
     } = this.props;
+    const { isAuthenticated, userProfile: { notifications } } = user;
     const userUrl = new RegExp(/users/);
     const dashboard = pathname.match(userUrl) === null ? null : 'fixed';
     const decoded = decodeToken();
@@ -102,8 +138,8 @@ class SideNav extends React.Component {
           <li>
             <div className="divider" />
           </li>
-          {isAuthenticated ?
-            <div>
+          {isAuthenticated
+            ? <div>
               <li><Link to={`/users/${userId}/dashboard`} >Dashboard</Link></li>
               <li>
                 <div className="divider" />
@@ -117,7 +153,9 @@ class SideNav extends React.Component {
               <li>
                 <a name="user-recipes" href="#!" onClick={this.handleTabChange}>
                   Recipes
-                  <span className="badge">22</span>
+                  <span className="badge">
+                    {userRecipes && userRecipes.userAddedRecipesCount}
+                  </span>
                 </a>
               </li>
               <li>
@@ -127,15 +165,29 @@ class SideNav extends React.Component {
                   onClick={this.handleTabChange}
                 >
                   Favorites
-                  <span className="badge">55</span>
+                  <span className="badge">
+                    {userRecipes && userRecipes.userFavoritesCount}
+                  </span>
                 </a>
               </li>
-              <li>
-                <a href="profile.html?#notifications">
-                  Notificatons
-                  <span className="new badge deep-orange darken-1">2</span>
-                </a>
-              </li>
+              {currentProfileUserId === authenticatedUserId &&
+                <li>
+                  <a>
+                    Notificatons
+                    <span className=" badge switch">
+                      <label htmlFor="notification-switch">
+                        <input
+                          id="notification-switch"
+                          type="checkbox"
+                          onClick={this.handleNotificationChange}
+                          defaultChecked={notifications}
+                        />
+                        <span className="lever" />
+                      </label>
+                    </span>
+                  </a>
+                </li>
+              }
               <li>
                 <div className="divider" />
               </li>
@@ -149,8 +201,8 @@ class SideNav extends React.Component {
                 </a>
                 <ToastContainer />
               </li>
-            </div> :
-            <div>
+            </div>
+            : <div>
               <li>
                 <a
                   role="button"

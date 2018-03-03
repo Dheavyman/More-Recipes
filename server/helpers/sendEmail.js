@@ -10,6 +10,15 @@ const transport = nodemailer.createTransport({
   }
 });
 
+/**
+ * Function to send email messages
+ *
+ * @param {string} to - The recipient address
+ * @param {string} subject - Message subject
+ * @param {string} message - Message body
+ *
+ * @returns {any} Sends mail
+ */
 const sendEmail = (to, subject, message) => {
   const mailOptions = {
     from: `"No-reply" <${process.env.ADMIN_EMAIL}>`,

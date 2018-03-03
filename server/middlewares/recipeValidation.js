@@ -14,11 +14,14 @@ class RecipeValidation {
    * Check for all required input fields
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - Calls the next route handler
+   *
    * @returns {any} Object representing error message or
    * calls the next function
+   *
    * @memberof RecipeValidation
    */
   static recipeRequiredInputs(req, res, next) {
@@ -65,11 +68,14 @@ class RecipeValidation {
    * Checks that a recipe exist
    *
    * @static
+   *
    * @param {object} req - This is the request object
    * @param {object} res - This is the response object
    * @param {function} next - The next route handler function
+   *
    * @returns {any} Object representing error message or
    * calls the next function
+   *
    * @memberof RecipeValidation
    */
   static recipeExist(req, res, next) {
@@ -102,11 +108,14 @@ class RecipeValidation {
    * Check if a recipe belongs to a user
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {any} res - The response object
    * @param {any} next The next route handler function
+   *
    * @returns {any} Object representing error message or
    * calls the next function
+   *
    * @memberof RecipeValidation
    */
   static userRecipe(req, res, next) {

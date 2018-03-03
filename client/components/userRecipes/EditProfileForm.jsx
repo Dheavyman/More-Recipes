@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
 import TextField from '../common/TextField';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   user: PropTypes.shape({
@@ -19,10 +20,20 @@ const propTypes = {
   handleCancel: PropTypes.func.isRequired,
 };
 
+/**
+ * Edit profile form component
+ *
+ * @param {object} props - The properties passed to the component
+ *
+ * @returns {object} React element
+ */
 const EditProfileForm = (props) => {
-  const { user: { userProfile }, handleProfileChange, handleSubmitProfile,
-    handleCancel } = props;
+  const {
+    user: { isLoading, userProfile }, handleProfileChange, handleSubmitProfile,
+    handleCancel
+  } = props;
   const { username, firstName, lastName, email, aboutMe } = userProfile;
+
   return (
     <div>
       <div className="row" />
@@ -81,6 +92,11 @@ const EditProfileForm = (props) => {
           className="materialize-textarea"
           onChange={handleProfileChange}
         />
+      </div>
+      <div className="row">
+        <div className="center-align">
+          {isLoading && <Spinner />}
+        </div>
       </div>
       <div>
         <button

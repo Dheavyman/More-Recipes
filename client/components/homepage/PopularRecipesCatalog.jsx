@@ -14,6 +14,7 @@ const propTypes = {
  * Class representing Popular recipes component
  *
  * @class PopularRecipesCatalog
+ *
  * @extends {Component}
  */
 class PopularRecipesCatalog extends Component {
@@ -21,6 +22,7 @@ class PopularRecipesCatalog extends Component {
    * ComponentDidMount lifecyle method
    *
    * @returns {any} - Call the action to fetch popular recipes
+   *
    * @memberof PopularRecipesCatalog
    */
   componentDidMount() {
@@ -32,6 +34,7 @@ class PopularRecipesCatalog extends Component {
    * Render function
    *
    * @returns {object} React element
+   *
    * @memberof PopularRecipesCatalog
    */
   render() {

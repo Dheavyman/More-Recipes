@@ -11,6 +11,7 @@ const propTypes = {
  * Add review component
  *
  * @param {object} props - The properties passed to the component
+ *
  * @returns {object} - React element
  */
 const AddReview = (props) => {

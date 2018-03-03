@@ -11,17 +11,12 @@ import Signup from './Signup';
 import Signin from './Signin';
 
 const propTypes = {
-  openSignup: PropTypes.bool.isRequired,
-  openSignin: PropTypes.bool.isRequired,
-  handleOpenSignup: PropTypes.func.isRequired,
-  handleOpenSignin: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
   handleSubmitSignup: PropTypes.func.isRequired,
   handleSubmitSignin: PropTypes.func.isRequired,
   handleLogoutUser: PropTypes.func.isRequired,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
-    userSignin: PropTypes.shape({
+    userAuthentication: PropTypes.shape({
       message: PropTypes.string
     })
   }).isRequired,
@@ -29,9 +24,10 @@ const propTypes = {
 
 
 /**
- * Class representing navbar
+ * Class representing navbar component
  *
  * @class Navbar
+ *
  * @extends {React.Component}
  */
 class Navbar extends React.Component {
@@ -39,6 +35,7 @@ class Navbar extends React.Component {
    * Component did mount method
    *
    * @returns {any} Initialize materialize components
+   *
    * @memberof Navbar
    */
   componentDidMount() {
@@ -56,6 +53,7 @@ class Navbar extends React.Component {
    * Component did update lifecycle mehtod
    *
    * @returns {any} Initialize materialize component
+   *
    * @memberof Navbar
    */
   componentDidUpdate() {
@@ -69,15 +67,12 @@ class Navbar extends React.Component {
    * Render method
    *
    * @returns{object} React element
+   *
    * @memberof Navbar
    */
   render() {
-    const {
-      openSignup, openSignin, handleOpenSignup, handleOpenSignin,
-      handleClose, handleSubmitSignup, handleSubmitSignin, handleLogoutUser,
-      user: { isAuthenticated, userSignin }
-    } = this.props;
-    const { user } = userSignin;
+    const { user: { isAuthenticated, userAuthentication } } = this.props;
+    const { fullName } = userAuthentication;
 
     return (
       <div className="nav-wrapper">
@@ -110,36 +105,25 @@ class Navbar extends React.Component {
               className="dropdown-button dropdown-user"
               data-activates="user-control"
             >
-              {!isAuthenticated || isEmpty(user)
+              {!isAuthenticated || isEmpty(userAuthentication)
                 ? 'Welcome Guest'
-                : user.fullName}
+                : fullName}
               <i className="material-icons large left">account_circle</i>
             </a>
             {!isAuthenticated &&
-              <IndexUserNav
-                handleOpenSignup={handleOpenSignup}
-                handleOpenSignin={handleOpenSignin}
-              />
+              <IndexUserNav {...this.props} />
             }
             {isAuthenticated &&
-              <AuthUserNav handleLogoutUser={handleLogoutUser} />}
+              <AuthUserNav {...this.props} />}
           </li>
         </ul>
         <MuiThemeProvider>
           <Signup
-            open={openSignup}
-            handleClose={handleClose}
-            handleOpenSignin={handleOpenSignin}
-            onSubmit={handleSubmitSignup}
             {...this.props}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
           <Signin
-            open={openSignin}
-            handleClose={handleClose}
-            handleOpenSignup={handleOpenSignup}
-            onSubmit={handleSubmitSignin}
             {...this.props}
           />
         </MuiThemeProvider>

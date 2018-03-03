@@ -5,7 +5,7 @@ import UserRecipeCard from './UserRecipeCard';
 
 const propTypes = {
   fetchUserRecipes: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  currentProfileUserId: PropTypes.number.isRequired,
   userRecipes: PropTypes.shape({
     userAddedRecipes: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
@@ -15,6 +15,7 @@ const propTypes = {
  * Class representing user added recipes
  *
  * @class UserAddedRecipes
+ *
  * @extends {React.Component}
  */
 class UserAddedRecipes extends React.Component {
@@ -22,18 +23,20 @@ class UserAddedRecipes extends React.Component {
    * Component did mount lifecyle method
    *
    * @returns {any} Fetches user added recipes
+   *
    * @memberof UserAddedRecipes
    */
   componentDidMount() {
-    const { fetchUserRecipes, userId } = this.props;
+    const { fetchUserRecipes, currentProfileUserId } = this.props;
 
-    fetchUserRecipes(userId);
+    fetchUserRecipes(currentProfileUserId);
   }
 
   /**
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof UserAddedRecipes
    */
   render() {

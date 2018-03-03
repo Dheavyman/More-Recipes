@@ -9,6 +9,7 @@ import slide4 from '../../public/images/slide4.jpg';
  * Class representing slider
  *
  * @class Slider
+ *
  * @extends {React.Component}
  */
 class Slider extends React.Component {
@@ -16,6 +17,7 @@ class Slider extends React.Component {
    * Component did mount method
    *
    * @returns {function} Initialize the slider
+   *
    * @memberof Slider
    */
   componentDidMount() {
@@ -28,6 +30,7 @@ class Slider extends React.Component {
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof Slider
    */
   render() {

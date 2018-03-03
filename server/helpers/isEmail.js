@@ -2,6 +2,7 @@
  * Check for valid email address
  *
  * @param {string} email - The email address to be validated
+ *
  * @returns {boolean} True if valid email format and false if not
  */
 const isValidEmail = (email) => {

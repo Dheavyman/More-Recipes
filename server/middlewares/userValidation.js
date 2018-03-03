@@ -16,43 +16,45 @@ class UserValidation {
    * Check for required signup input fields
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {object} next - The next route handler function
+   *
    * @returns {any} Object representing error message or
    * calls the next function
+   *
    * @memberof UserValidation
    */
   static signupRequiredInputs(req, res, next) {
-    // Check if username is empty
     if (!req.body.username || isEmpty(req.body.username)) {
       return res.status(400).send({
         status: 'Fail',
         message: 'Username required'
       });
     }
-    // Check if password is empty
+
     if (!req.body.password || isEmpty(req.body.password)) {
       return res.status(400).send({
         status: 'Fail',
         message: 'Password required'
       });
     }
-    // Check if email is empty
+
     if (!req.body.email || isEmpty(req.body.email)) {
       return res.status(400).send({
         status: 'Fail',
         message: 'Email required'
       });
     }
-    // Check if firstname is empty
+
     if (!req.body.firstName || isEmpty(req.body.firstName)) {
       return res.status(400).send({
         status: 'Fail',
         message: 'Firstname required'
       });
     }
-    // Check if lastname is empty
+
     if (!req.body.lastName || isEmpty(req.body.lastName)) {
       return res.status(400).send({
         status: 'Fail',
@@ -66,11 +68,14 @@ class UserValidation {
    * Validate user inputs during registration
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next The next route handler function
+   *
    * @returns {any} Object representing error message or
    * call to next route handler
+   *
    * @memberof UserValidation
    */
   static validUserInputs(req, res, next) {
@@ -94,11 +99,14 @@ class UserValidation {
    * Check if username already exist during signup
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - The next route handler function
+   *
    * @returns {any} Object representing the error message or
    * call to the next route handler function
+   *
    * @memberof UserValidation
    */
   static usernameExist(req, res, next) {
@@ -128,12 +136,15 @@ class UserValidation {
   /**
    * Check if email address already exist
    *
-   *@static
+   * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - The next route handler function
+   *
    * @returns {any} Object representing the error message or
    * call to the next route handler function
+   *
    * @memberof UserValidation
    */
   static emailExist(req, res, next) {
@@ -164,22 +175,24 @@ class UserValidation {
    * Check for required signin inputs fields
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {any} res - The response object
    * @param {any} next - The next route handler function
+   *
    * @returns {any} Object representing error message or
    * calls the next function
+   *
    * @memberof UserValidation
    */
   static signinRequiredInputs(req, res, next) {
-    // Check if username is empty
     if (!req.body.username || isEmpty(req.body.username)) {
       return res.status(400).send({
         status: 'Fail',
         message: 'Username required'
       });
     }
-    // Check if password is empty
+
     if (!req.body.password || isEmpty(req.body.password)) {
       return res.status(400).send({
         status: 'Fail',
@@ -193,11 +206,14 @@ class UserValidation {
    * Check that a user exist
    *
    * @static
+   *
    * @param {object} req - This is the request object
    * @param {object} res - This is the response object
    * @param {object} next - The next route handler function
+   *
    * @returns {any} Object representing error message or
    * calls the next function
+   *
    * @memberof UserValidation
    */
   static userExist(req, res, next) {

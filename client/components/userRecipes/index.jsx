@@ -16,6 +16,7 @@ import recipeAvater from '../../public/images/recipe-avatar2.png';
  * Class representing user recipes
  *
  * @class UserRecipes
+ *
  * @extends {React.Component}
  */
 class UserRecipes extends React.Component {
@@ -28,7 +29,7 @@ class UserRecipes extends React.Component {
     super();
     this.state = {
       recipeId: null,
-      userId: null,
+      currentProfileUserId: null,
       authenticatedUserId: null,
       recipeToEdit: {},
       openEdit: false,
@@ -61,13 +62,14 @@ class UserRecipes extends React.Component {
    * Component did mount lifecycle method
    *
    * @returns {any} Fetches user favorite recipes
+   *
    * @memberof UserFavorites
    */
   componentWillMount() {
     const { match: { params: { userId } } } = this.props;
     const { user: { id } } = decodeToken();
     this.setState({
-      userId: parseInt(userId, 10),
+      currentProfileUserId: parseInt(userId, 10),
       authenticatedUserId: id,
     });
   }
@@ -76,7 +78,9 @@ class UserRecipes extends React.Component {
    * Opens the edit recipe modal
    *
    * @param {number} recipe - The recipe to be edited
+   *
    * @returns {object} Set open state to true
+   *
    * @memberof UserRecipes
    */
   handleOpenEdit(recipe) {
@@ -90,7 +94,9 @@ class UserRecipes extends React.Component {
    * Opens the delete recipe modal
    *
    * @param {number} recipeId - The id of recipe
+   *
    * @returns {object} Set openDelete state to true
+   *
    * @memberof UserRecipes
    */
   handleOpenDelete(recipeId) {
@@ -104,6 +110,7 @@ class UserRecipes extends React.Component {
    * Opens the add recipe modal
    *
    * @returns {object} Set openAdd state to true
+   *
    * @memberof UserRecipes
    */
   handleOpenAdd() {
@@ -114,6 +121,7 @@ class UserRecipes extends React.Component {
    * Closes the modal
    *
    * @returns {object} Set open state to false
+   *
    * @memberof UserRecipes
    */
   handleClose() {
@@ -130,7 +138,9 @@ class UserRecipes extends React.Component {
    * Funtion to handle image preview
    *
    * @param {any} imagePreview - The image to be displaced
+   *
    * @returns {objec} Set the state property imagePreview
+   *
    * @memberof UserRecipes
    */
   handleImagePreview(imagePreview) {
@@ -144,7 +154,9 @@ class UserRecipes extends React.Component {
    * when user edits a recipe
    *
    * @param {any} event - The input event
+   *
    * @returns {func} Sets the state of the input
+   *
    * @memberof UserRecipes
    */
   handleEditChange(event) {
@@ -163,7 +175,9 @@ class UserRecipes extends React.Component {
    * when user enters values
    *
    * @param {any} event - The input event
+   *
    * @returns {func} Sets the state of the input
+   *
    * @memberof UserRecipes
    */
   handleChange(event) {
@@ -177,7 +191,9 @@ class UserRecipes extends React.Component {
    * Function to handle on select input change
    *
    * @param {any} event - The select input event
+   *
    * @returns {func} Sets the category input state value
+   *
    * @memberof UserRecipes
    */
   handleSelect(event) {
@@ -192,7 +208,9 @@ class UserRecipes extends React.Component {
    *
    * @param {any} files - The array of image files to be uploaded
    * Only single image upload is enabled
+   *
    * @returns {string} The image url hosted on cloudinary
+   *
    * @memberof UserRecipes
    */
   handleDrop = (files) => {
@@ -212,7 +230,9 @@ class UserRecipes extends React.Component {
    * Function to edit user recipe
    *
    * @param {any} event - The edit event
+   *
    * @returns {func} Dispatch action to edit recipe
+   *
    * @memberof UserRecipes
    */
   handleEditRecipe(event) {
@@ -230,12 +250,26 @@ class UserRecipes extends React.Component {
             recipeImage: imageUrl,
           };
           if (isEmpty(error)) {
-            editRecipe(id, values, this.handleClose);
+            editRecipe(id, values)
+              .then(() => {
+                const { userRecipes } = this.props;
+
+                if (isEmpty(userRecipes.error)) {
+                  this.handleClose();
+                }
+              });
           }
         });
     } else {
       const values = recipeToEdit;
-      editRecipe(id, values, this.handleClose);
+      editRecipe(id, values)
+        .then(() => {
+          const { userRecipes } = this.props;
+
+          if (isEmpty(userRecipes.error)) {
+            this.handleClose();
+          }
+        });
     }
   }
 
@@ -243,19 +277,30 @@ class UserRecipes extends React.Component {
    * Function to delete a recipe
    *
    * @param {any} id - The id of recipe
+   *
    * @returns {func} Dispatch action to delete recipe
+   *
    * @memberof UserRecipes
    */
   handleDeleteRecipe(id) {
     const { deleteRecipe } = this.props;
-    deleteRecipe(id, this.handleClose);
+    deleteRecipe(id)
+      .then(() => {
+        const { userRecipes } = this.props;
+
+        if (isEmpty(userRecipes.error)) {
+          this.handleClose();
+        }
+      });
   }
 
   /**
    * Function to handle submiting new recipe input values
    *
    * @param {any} event - The submit event
+   *
    * @returns {func} Submit the values to the server
+   *
    * @memberof UserRecipes
    */
   handleAddRecipe(event) {
@@ -284,7 +329,14 @@ class UserRecipes extends React.Component {
               recipeImage: imageUrl,
             };
             if (isEmpty(error)) {
-              addRecipe(values, this.handleClose);
+              addRecipe(values)
+                .then(() => {
+                  const { userRecipes } = this.props;
+
+                  if (isEmpty(userRecipes.error)) {
+                    this.handleClose();
+                  }
+                });
             }
           });
       } else {
@@ -292,7 +344,14 @@ class UserRecipes extends React.Component {
           ...values,
           recipeImage: recipeAvater,
         };
-        addRecipe(values, this.handleClose);
+        addRecipe(values)
+          .then(() => {
+            const { userRecipes } = this.props;
+
+            if (isEmpty(userRecipes.error)) {
+              this.handleClose();
+            }
+          });
       }
     } else {
       const { userRecipes: { imageUrl } } = this.props;
@@ -300,16 +359,24 @@ class UserRecipes extends React.Component {
         ...values,
         recipeImage: imageUrl,
       };
-      addRecipe(values, this.handleClose);
+      addRecipe(values)
+        .then(() => {
+          const { userRecipes } = this.props;
+
+          if (isEmpty(userRecipes.error)) {
+            this.handleClose();
+          }
+        });
     }
   }
 
   /**
- * Logout user from the application
- *
- * @returns {any} Logout user
- * @memberof UserRecipes
- */
+   * Logout user from the application
+   *
+   * @returns {any} Logout user
+   *
+   * @memberof UserRecipes
+   */
   handleLogoutUser = () => {
     const { logoutUser, history } = this.props;
     logoutUser()
@@ -323,6 +390,7 @@ class UserRecipes extends React.Component {
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof UserRecipes
    */
   render() {
@@ -331,6 +399,8 @@ class UserRecipes extends React.Component {
         <header id="header" >
           <Header
             handleLogoutUser={this.handleLogoutUser}
+            currentProfileUserId={this.state.currentProfileUserId}
+            authenticatedUserId={this.state.authenticatedUserId}
             {...this.props}
           />
         </header>
@@ -377,11 +447,26 @@ UserRecipes.propTypes = {
   }).isRequired,
 };
 
+/**
+ * Function to map values from state to props
+ *
+ * @param {any} state - The state values
+ *
+ * @returns {object} - The mapped props
+ */
 const mapStateToProps = state => ({
   user: state.user,
   userRecipes: state.userRecipes,
 });
 
+/**
+ * Function to map dispatch to props
+ * Action creators are binded to the dispatch function
+ *
+ * @param {any} dispatch - The store dispatch function
+ *
+ * @returns {any} The mapped props
+ */
 const mapDispatchToProps = dispatch => (
   bindActionCreators(actionCreators, dispatch)
 );

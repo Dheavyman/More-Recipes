@@ -217,10 +217,12 @@ main {
   }
 }
 
-#profile-image {
-  margin: auto;
-  width: 250px;
-  height: 250px;
+.user-image {
+  img {
+    height: 250px;
+    margin: auto;
+    width: 250px;
+  }
 }
 
 .image-upload-button {
@@ -245,4 +247,18 @@ main {
 
 #edit-btn {
   right: 5px;
+}
+
+.connect-icons {
+  i {
+    margin: 5px;
+  }
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: #66bb6a;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: #4caf50;
 }

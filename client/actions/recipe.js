@@ -19,7 +19,7 @@ const retrieveRecipesRequest = () => ({
  * Retrieve recipes success action creator
  *
  * @param {array} recipes - Recipes returned from server
- * @param {number} recipesCount - The number of recipes in the database
+ * @param {number} recipesCount - The number of recipes
  *
  * @returns {object} Retrieve recipes success action
  */
@@ -122,12 +122,16 @@ const fetchUserRecipesRequest = () => ({
  * Fetch user recipes success action creator
  *
  * @param {array} recipes - Recipes returned from the server
+ * @param {number} recipesCount - The number of recipes
  *
  * @returns {object} Fetch user recipes success action
  */
-const fetchUserRecipesSuccess = recipes => ({
+const fetchUserRecipesSuccess = (recipes, recipesCount) => ({
   type: actionTypes.FETCH_USER_RECIPES_SUCCESS,
-  payload: recipes,
+  payload: {
+    recipes,
+    recipesCount,
+  }
 });
 
 /**
@@ -155,12 +159,16 @@ const fetchUserFavoritesRequest = () => ({
  * Fetch user favorites success
  *
  * @param {array} favorites - User favorite recipes returned from the server
+ * @param {number} favoritesCount - The number of recipes
  *
  * @returns {object} Fetch user favorites success action
  */
-const fetchUserFavoritesSuccess = favorites => ({
+const fetchUserFavoritesSuccess = (favorites, favoritesCount) => ({
   type: actionTypes.FETCH_USER_FAVORITES_SUCCESS,
-  payload: favorites
+  payload: {
+    favorites,
+    favoritesCount,
+  }
 });
 
 /**
@@ -294,8 +302,8 @@ const fetchUserRecipes = userId => (dispatch) => {
     } })
     .then((response) => {
       const { data } = response;
-      const { data: recipes } = data;
-      dispatch(fetchUserRecipesSuccess(recipes));
+      const { data: { recipes, recipesCount } } = data;
+      dispatch(fetchUserRecipesSuccess(recipes, recipesCount));
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -318,8 +326,8 @@ const fetchUserFavorites = userId => (dispatch) => {
     } })
     .then((response) => {
       const { data } = response;
-      const { data: { favorites } } = data;
-      dispatch(fetchUserFavoritesSuccess(favorites));
+      const { data: { favorites, favoritesCount } } = data;
+      dispatch(fetchUserFavoritesSuccess(favorites, favoritesCount));
     })
     .catch((error) => {
       const { response: { data } } = error;

@@ -11,6 +11,7 @@ const propTypes = {
  * ReviewCollection component
  *
  * @param {object} props - The properties passed to the compoenent
+ *
  * @returns {object} - React element
  */
 const ReviewCollection = (props) => {

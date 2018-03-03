@@ -5,7 +5,7 @@ import UserFavoriteCard from './UserFavoriteCard';
 
 const propTypes = {
   fetchUserFavorites: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  currentProfileUserId: PropTypes.number.isRequired,
   userRecipes: PropTypes.shape({
     user: PropTypes.shape({
       userFavorites: PropTypes.arrayOf(PropTypes.shape())
@@ -17,6 +17,7 @@ const propTypes = {
  * Class representing user favorite recipes
  *
  * @class UserFavorites
+ *
  * @extends {React.Component}
  */
 class UserFavorites extends React.Component {
@@ -24,18 +25,20 @@ class UserFavorites extends React.Component {
    * Component did mount lifecycle method
    *
    * @returns {any} Fetches user favorite recipes
+   *
    * @memberof UserFavorites
    */
   componentDidMount() {
-    const { fetchUserFavorites, userId } = this.props;
+    const { fetchUserFavorites, currentProfileUserId } = this.props;
 
-    fetchUserFavorites(userId);
+    fetchUserFavorites(currentProfileUserId);
   }
 
   /**
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof UserFavorites
    */
   render() {

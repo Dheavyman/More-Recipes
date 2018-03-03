@@ -7,6 +7,7 @@ export default (ComposedComponent) => {
    * Class representing authentication component
    *
    * @class Authentication
+   *
    * @extends {Component}
    */
   class Authentication extends React.Component {
@@ -14,6 +15,7 @@ export default (ComposedComponent) => {
      * Component will mount lifecycle method
      *
      * @returns {any} Redirects user to signin
+     *
      * @memberof Authentication
      */
     componentWillMount() {
@@ -27,7 +29,9 @@ export default (ComposedComponent) => {
      * Component will update lifecycle method
      *
      * @param {any} nextProps - The next props
+     *
      * @returns {func} Redirect user to signin
+     *
      * @memberof Authentication
      */
     componentWillUpdate(nextProps) {
@@ -40,6 +44,7 @@ export default (ComposedComponent) => {
      * Render method
      *
      * @returns {object} The composed component
+     *
      * @memberof Authentication
      */
     render() {
@@ -47,6 +52,13 @@ export default (ComposedComponent) => {
     }
   }
 
+  /**
+   * Function to map values from state to props
+   *
+   * @param {any} state - The state values
+   *
+   * @returns {object} - The mapped props
+   */
   const mapStateToProps = state => ({
     user: state.user,
     isAuthenticated: state.user.isAuthenticated,

@@ -4,20 +4,27 @@ import { Link } from 'react-router-dom';
 
 import { decodeToken } from '../../utils/authenticate';
 
+const propTypes = {
+  handleLogoutUser: PropTypes.func.isRequired,
+};
+
 /**
- * User navigation when unathenticated
+ * Authenticated user navigation component
  *
  * @param {func} props - Logout a user
+ *
  * @returns {object} React element
  */
 const AuthUserNav = (props) => {
-  const { handleLogoutUser } = props,
-    decoded = decodeToken();
+  const { handleLogoutUser } = props;
+  const decoded = decodeToken();
   let userId;
+
   if (decoded) {
     const { user: { id } } = decoded;
     userId = id;
   }
+
   return (
     <ul id="user-control" className="dropdown-content">
       <li>
@@ -42,8 +49,6 @@ const AuthUserNav = (props) => {
   );
 };
 
-AuthUserNav.propTypes = {
-  handleLogoutUser: PropTypes.func.isRequired,
-};
+AuthUserNav.propTypes = propTypes;
 
 export default AuthUserNav;

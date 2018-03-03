@@ -18,6 +18,7 @@ const propTypes = {
  * Function to format date
  *
  * @param {string} date - The date to be formated
+ *
  * @returns {string} - The formated date
  */
 const createdOn = date => new Date(date).toLocaleString();
@@ -26,6 +27,7 @@ const createdOn = date => new Date(date).toLocaleString();
  * Review component
  *
  * @param {object} props - The properties passed to the component
+ *
  * @returns {object} React element
  */
 const Review = (props) => {

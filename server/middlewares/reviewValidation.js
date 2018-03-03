@@ -14,11 +14,14 @@ class ReviewValidation {
    * Checks for the required input fields
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - Calls the next route handler
+   *
    * @returns {object} Object representing the failure status or
    * calls the next route handler function
+   *
    * @memberof ReviewValidation
    */
   static reviewRequiredInputs(req, res, next) {
@@ -35,11 +38,14 @@ class ReviewValidation {
    * Check if a review exist
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {object} next - The next route handler function
+   *
    * @returns {any} Object representing the failure status or
    * call to the next route handler function
+   *
    * @memberof ReviewValidation
    */
   static reviewExist(req, res, next) {
@@ -72,11 +78,14 @@ class ReviewValidation {
    * Check if a review belongs to a user
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {any} res - The response object
    * @param {any} next The next route handler function
+   *
    * @returns {any} Object representing error message or
    * calls the next function
+   *
    * @memberof ReviewValidation
    */
   static userReview(req, res, next) {

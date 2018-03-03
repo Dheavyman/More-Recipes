@@ -38,14 +38,15 @@ app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Require our routes
 routes(app);
 
-// Catch other routes with get method
-// returns the index page
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
-});
+// Catch other routes and returns not found
+app.all('*', (req, res) => res.status(404).send({
+  status: 'Fail',
+  message: 'Route not found',
+}));
 
 // production error handler
 // no stacktraces leaked to user
+/* eslint-disable no-unused-vars */
 app.use((err, req, res, next) => {
   res.status(err.status || 500)
     .json({
@@ -53,6 +54,8 @@ app.use((err, req, res, next) => {
       message: err.message
     });
 });
+
+/* eslint-enable */
 
 // Set the app entry port
 app.set('port', process.env.PORT || 3000);

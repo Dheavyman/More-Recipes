@@ -21,6 +21,7 @@ const propTypes = {
  * Function representing main component
  *
  * @param {any} props - The props passed to the component
+ *
  * @returns {object} - React components
  */
 const Main = (props) => {

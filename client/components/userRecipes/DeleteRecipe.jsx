@@ -14,11 +14,15 @@ const defaultProps = {
   recipeId: null,
 };
 
+/**
+ * Delete recipe component
+ *
+ * @param {object} props - The properties passed to the function
+ *
+ * @returns {object} React element
+ */
 const DeleteRecipe = (props) => {
   const { recipeId, open, handleClose, handleDeleteRecipe } = props;
-  const deleteRecipe = () => {
-    handleDeleteRecipe(recipeId);
-  };
 
   const actions = [
     <FlatButton
@@ -28,7 +32,7 @@ const DeleteRecipe = (props) => {
     />,
     <FlatButton
       label="Delete"
-      onClick={deleteRecipe}
+      onClick={() => handleDeleteRecipe(recipeId)}
     />,
   ];
 

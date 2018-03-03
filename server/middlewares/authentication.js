@@ -1,7 +1,13 @@
 import jwt from 'jsonwebtoken';
 
 export default {
-  // Generate the JWT
+  /**
+   * Generate token
+   *
+   * @param {object} user - User details
+   *
+   * @returns {string} Token
+   */
   generateToken(user) {
     const token = jwt.sign({
       user: {
@@ -12,7 +18,16 @@ export default {
     });
     return token;
   },
-  // Verify the JWT
+
+  /**
+   * Verify token
+   *
+   * @param {any} req - The request object
+   * @param {any} res - The response object
+   * @param {any} next - Call next route handler
+   *
+   * @returns {any} Object representing error status
+   */
   verifyToken(req, res, next) {
     const token = req.body.token || req.query.token ||
                   req.headers['x-access-token'];

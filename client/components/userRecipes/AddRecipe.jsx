@@ -27,6 +27,7 @@ const propTypes = {
  * Add recipe component
  *
  * @param {any} props - The props passed
+ *
  * @returns { object } React component
  */
 const AddRecipe = (props) => {

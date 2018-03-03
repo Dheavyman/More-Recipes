@@ -19,6 +19,13 @@ const propTypes = {
   }).isRequired,
 };
 
+/**
+ * User favorite card component
+ *
+ * @param {object} props - The properties passed to the component
+ *
+ * @returns {object} React element
+ */
 const UserFavoriteCard = (props) => {
   const { recipe, owner: { fullName } } = props;
   const { id, title, description, recipeImage, views, upvotes, downvotes,

@@ -16,8 +16,8 @@ const initialState = {
 /**
  * Recipes reducer function
  *
- * @param {object} [state=initialState] - The state data
- * @param {object} action - The action that was triggered
+ * @param {object} [state=initialState] - State data
+ * @param {object} action - Action dispatched
  *
  * @returns {object} The new state of data
  */

@@ -41,7 +41,7 @@ module.exports = {
     },
     recipeImage: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     upvotes: {
       type: Sequelize.INTEGER,

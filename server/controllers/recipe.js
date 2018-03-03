@@ -22,10 +22,13 @@ class RecipeController {
    * Add a recipe
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} - Object representing success status or
-   *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static addRecipe(req, res) {
@@ -71,10 +74,13 @@ class RecipeController {
    * Modify a recipe
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} - Object representing success status or
-   *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static modifyRecipe(req, res) {
@@ -89,12 +95,12 @@ class RecipeController {
         res.locals.recipeTitle = recipe.title;
         return recipe
           .update({
-            title: req.body.title,
-            category: req.body.category,
-            description: req.body.description,
-            preparationTime: req.body.preparationTime,
-            ingredients: req.body.ingredients,
-            directions: req.body.directions,
+            title: req.body.title || recipe.title,
+            category: req.body.category || recipe.category,
+            description: req.body.description || recipe.description,
+            preparationTime: req.body.preparationTime || recipe.preparationTime,
+            ingredients: req.body.ingredients || recipe.ingredients,
+            directions: req.body.directions || recipe.directions,
             recipeImage: req.body.recipeImage || recipe.recipeImage,
           });
       })
@@ -136,10 +142,13 @@ class RecipeController {
    * Delete a recipe in the catalog
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The responsee object
+   *
    * @returns {object} - Object representing success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static deleteRecipe(req, res) {
@@ -165,11 +174,14 @@ class RecipeController {
    * Retrieve all the recipes
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - The next route handler function
+   *
    * @return {object} - Object representing the success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static getAll(req, res, next) {
@@ -209,10 +221,13 @@ class RecipeController {
    * Retrieve a single recipe in the catalog
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @return {object} - Object representing the success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static getOne(req, res) {
@@ -268,15 +283,18 @@ class RecipeController {
    * Retrieve user recipes
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object representing the success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static userRecipes(req, res) {
     return Recipe
-      .all({
+      .findAndCountAll({
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
@@ -287,12 +305,13 @@ class RecipeController {
         }
       })
       .then((recipes) => {
-        if (recipes.length === 0) {
+        if (recipes.rows.length === 0) {
           return res.status(200).send({
             status: 'Success',
             message: 'User has not added any recipe',
             data: {
-              recipes,
+              recipes: recipes.rows,
+              recipesCount: recipes.count,
             }
           });
         }
@@ -300,7 +319,8 @@ class RecipeController {
           status: 'Success',
           message: 'User recipes retrieved',
           data: {
-            recipes,
+            recipes: recipes.rows,
+            recipesCount: recipes.count,
           }
         });
       })
@@ -314,11 +334,14 @@ class RecipeController {
    * Retrieve recipes with most upvotes in descending order
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {object} next - Calls the next route handler
+   *
    * @return {object} Object representing the success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static getMostUpvotes(req, res, next) {
@@ -369,10 +392,13 @@ class RecipeController {
    * Retrieve popular recipes based on favorites count
    *
    * @static
+   *
    * @param {any} req - The request object
    * @param {any} res - The response object
+   *
    * @returns {object} - Object representing the success status or
-     * error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static getPopular(req, res) {
@@ -386,7 +412,7 @@ class RecipeController {
         order: [
           ['favorites', 'DESC']
         ],
-        limit: 8,
+        limit: req.query.limit || 8,
         include: [{
           model: User,
           attributes: ['id', 'firstName', 'lastName']
@@ -409,12 +435,14 @@ class RecipeController {
    * Search for recipe based on recipe title
    *
    * @static
+   *
    * @param {any} req - The request object
    * @param {any} res - THe response object
    * @param {any} next - Call the next route handler
    *
    * @returns {object} Object representing success status or
-     *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static searchByTitle(req, res, next) {
@@ -464,11 +492,14 @@ class RecipeController {
    * Search for recipes based on list of ingredients
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - Calls the next route handler
+   *
    * @returns {object} Object representing success status or
-   *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static searchByIngredients(req, res, next) {
@@ -522,10 +553,13 @@ class RecipeController {
    * Search for recipes based on category
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object representing success status or
-   *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static searchByCategory(req, res) {

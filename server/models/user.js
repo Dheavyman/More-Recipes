@@ -77,8 +77,8 @@ export default (sequelize, DataTypes) => {
           msg: 'Lastname required!',
         },
       },
-      set(val) {
-        this.setDataValue('lastName', val.trim());
+      set(value) {
+        this.setDataValue('lastName', value.trim());
       }
     },
     userImage: {

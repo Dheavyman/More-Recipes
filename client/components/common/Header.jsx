@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 
 import Navbar from './Navbar';
 import SideNav from './SideNav';
@@ -11,7 +12,7 @@ const propTypes = {
   logoutUser: PropTypes.func.isRequired,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
-    userSignin: PropTypes.shape({
+    userAuthentication: PropTypes.shape({
       message: PropTypes.string
     })
   }).isRequired,
@@ -24,6 +25,7 @@ const propTypes = {
  * Class representing Header component
  *
  * @class Header
+ *
  * @extends {Component}
  */
 class Header extends Component {
@@ -38,44 +40,26 @@ class Header extends Component {
       openSignup: false,
       openSignin: false
     };
-    this.handleOpenSignup = this.handleOpenSignup.bind(this);
-    this.handleOpenSignin = this.handleOpenSignin.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   /**
-   * Opens the signup modal
+   * Open or close the signup modal
    *
-   * @returns {object} Set open state to true
+   * @returns {object} Toggle openSignup state
    * @memberof Header
    */
-  handleOpenSignup() {
-    this.setState({ openSignup: true });
+  handleToggleSignupModal = () => {
+    this.setState({ openSignup: !this.state.openSignup });
   }
 
   /**
-   * Opens the signin modal
+   * Open or close the signin modal
    *
-   * @returns {object} Set open state to true
+   * @returns {object} Toggle openSignin state
    * @memberof Header
    */
-  handleOpenSignin() {
-    this.setState({ openSignin: true });
-  }
-
-  /**
-   * Closes the modal
-   *
-   * @param {object} errors - The error object
-   *
-   * @returns {object} Set open state to false
-   * @memberof Header
-   */
-  handleClose() {
-    this.setState({
-      openSignup: false,
-      openSignin: false
-    });
+  handleToggleSigninModal = () => {
+    this.setState({ openSignin: !this.state.openSignin });
   }
 
   /**
@@ -88,10 +72,10 @@ class Header extends Component {
   handleSubmitSignup = (values) => {
     this.props.signupUser(values)
       .then(() => {
-        const { user: { userSignup } } = this.props;
-        if (userSignup.message === 'User created') {
-          this.handleClose();
-          notify('success', 'Signup Successful, Please login to your account');
+        const { user: { error } } = this.props;
+        if (isEmpty(error)) {
+          this.handleToggleSignupModal();
+          notify('success', 'Signup Successful');
         }
       });
   }
@@ -106,9 +90,9 @@ class Header extends Component {
   handleSubmitSignin = (values) => {
     this.props.signinUser(values)
       .then(() => {
-        const { user: { userSignin } } = this.props;
-        if (userSignin.message === 'User logged in') {
-          this.handleClose();
+        const { user: { error } } = this.props;
+        if (isEmpty(error)) {
+          this.handleToggleSigninModal();
           notify('success', 'Login Successful');
         }
       });
@@ -143,9 +127,8 @@ class Header extends Component {
             <Navbar
               openSignup={this.state.openSignup}
               openSignin={this.state.openSignin}
-              handleOpenSignup={this.handleOpenSignup}
-              handleOpenSignin={this.handleOpenSignin}
-              handleClose={this.handleClose}
+              handleToggleSignupModal={this.handleToggleSignupModal}
+              handleToggleSigninModal={this.handleToggleSigninModal}
               handleSubmitSignup={this.handleSubmitSignup}
               handleSubmitSignin={this.handleSubmitSignin}
               handleLogoutUser={this.handleLogoutUser}
@@ -156,9 +139,8 @@ class Header extends Component {
         <SideNav
           openSignup={this.state.openSignup}
           openSignin={this.state.openSignin}
-          handleOpenSignup={this.handleOpenSignup}
-          handleOpenSignin={this.handleOpenSignin}
-          handleClose={this.handleClose}
+          handleToggleSignupModal={this.handleToggleSignupModal}
+          handleToggleSigninModal={this.handleToggleSigninModal}
           handleLogoutUser={this.handleLogoutUser}
           {...this.props}
         />

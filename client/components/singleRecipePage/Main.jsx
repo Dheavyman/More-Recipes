@@ -22,6 +22,7 @@ const propTypes = {
  * Main component
  *
  * @param {object} props - The properties passed to the component
+ *
  * @returns {object} - React element
  */
 const Main = (props) => {

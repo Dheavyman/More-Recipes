@@ -2,6 +2,7 @@
  * Check if the argument passed is empty
  *
  * @param {string} str - The arguement to be validated
+ *
  * @returns {boolean} true or false
  */
 const isEmpty = (str) => {

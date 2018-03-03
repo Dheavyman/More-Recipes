@@ -35,6 +35,7 @@ const propTypes = {
  * Class representing recipe details page
  *
  * @class Recipe
+ *
  * @extends {Component}
  */
 class Recipe extends Component {
@@ -42,6 +43,7 @@ class Recipe extends Component {
    * Creates an instance of Recipe.
    *
    * @param {any} props - This is the props param
+   *
    * @memberof Recipe
    */
   constructor(props) {
@@ -51,9 +53,6 @@ class Recipe extends Component {
       openSignin: false,
       reviewContent: '',
     };
-    this.handleOpenSignup = this.handleOpenSignup.bind(this);
-    this.handleOpenSignin = this.handleOpenSignin.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleUpvote = this.handleUpvote.bind(this);
@@ -65,6 +64,7 @@ class Recipe extends Component {
    * Component did mount
    *
    * @returns {object} React element
+   *
    * @memberof Recipe
    */
   componentDidMount() {
@@ -75,44 +75,12 @@ class Recipe extends Component {
   }
 
   /**
-   * Opens the signup modal
-   *
-   * @returns {object} Set open state to true
-   * @memberof Recipe
-   */
-  handleOpenSignup() {
-    this.setState({ openSignup: true });
-  }
-
-  /**
-   * Opens the signin modal
-   *
-   * @returns {object} Set open state to true
-   * @memberof Recipe
-   */
-  handleOpenSignin() {
-    this.setState({ openSignin: true });
-  }
-
-  /**
-   * Closes the modal
-   *
-   * @param {object} errors - The error object
-   * @returns {object} Set open state to false
-   * @memberof Recipe
-   */
-  handleClose() {
-    this.setState({
-      openSignup: false,
-      openSignin: false
-    });
-  }
-
-  /**
    * Funtion to handle review input state
    *
    * @param {string} event - The input value
+   *
    * @returns {string} The updated state
+   *
    * @memberof Recipe
    */
   handleChange(event) {
@@ -125,19 +93,20 @@ class Recipe extends Component {
    * Function to handle submission of review
    *
    * @param {string} event - The user review
+   *
    * @returns {func} Dispatch function
+   *
    * @memberof Recipe
    */
   handleAddReview(event) {
     event.preventDefault();
-    const { user: { isAuthenticated } } = this.props,
-      review = {
-        content: this.state.reviewContent,
-      };
+    const { postReview, match, user: { isAuthenticated } } = this.props;
+    const { params: { recipeId } } = match;
+    const review = {
+      content: this.state.reviewContent,
+    };
     if (isAuthenticated && getToken() !== null) {
-      this.props.postReview(
-        this.props.match.params.recipeId, review
-      )
+      postReview(recipeId, review)
         .then(() => {
           const { singleRecipe: { error } } = this.props;
           if (isEmpty(error)) {
@@ -155,6 +124,7 @@ class Recipe extends Component {
    * Function to handle upvoting a recipe
    *
    * @returns {any} Call to upvote recipe action
+   *
    * @memberof Recipe
    */
   handleUpvote() {
@@ -168,6 +138,7 @@ class Recipe extends Component {
    * Function to handle downvoting a recipe
    *
    * @returns {any} Call to upvote recipe action
+   *
    * @memberof Recipe
    */
   handleDownvote() {
@@ -181,6 +152,7 @@ class Recipe extends Component {
    * Function to handle downvoting a recipe
    *
    * @returns {any} Call to action for favoriting a recipe
+   *
    * @memberof Recipe
    */
   handleFavorite() {
@@ -194,6 +166,7 @@ class Recipe extends Component {
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof Recipe
    */
   render() {
@@ -205,11 +178,6 @@ class Recipe extends Component {
           <div className="page-body">
             <header>
               <Header
-                openSignup={this.state.openSignup}
-                openSignin={this.state.openSignin}
-                handleOpenSignup={this.handleOpenSignup}
-                handleOpenSignin={this.handleOpenSignin}
-                handleClose={this.handleClose}
                 {...this.props}
               />
             </header>
@@ -244,6 +212,7 @@ class Recipe extends Component {
 const mapStateToProps = state => ({
   singleRecipe: state.singleRecipe,
   user: state.user,
+  userRecipes: state.userRecipes,
 });
 
 /**

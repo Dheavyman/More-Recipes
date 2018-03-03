@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * Category options component
+ *
+ * @returns {object} React element
+ */
 const Category = () => (
   <ul id="category" className="dropdown-content">
     <li><a href="#!" className="collection-item black-text">Breakfast</a></li>

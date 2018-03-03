@@ -2,6 +2,7 @@
  * Check if input parameter is alphanumeric
  *
  * @param {string} username - The username field
+ *
  * @returns {boolean} True if alphanumeric or false if not
  */
 const isAlphaNumeric = (username) => {

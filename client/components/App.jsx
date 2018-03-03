@@ -20,7 +20,7 @@ const defaultProps = {
 /**
  * App component
  *
- * @returns {any} - Link to the matched page
+ * @returns {any} - Navigate to the matched route
  */
 const App = () => (
   <Switch>
