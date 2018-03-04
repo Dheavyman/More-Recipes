@@ -13,6 +13,7 @@ import Spinner from '../common/Spinner';
 const propTypes = {
   openSignin: PropTypes.bool.isRequired,
   handleToggleSigninModal: PropTypes.func.isRequired,
+  handleToggleModal: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleSubmitSignin: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -34,7 +35,7 @@ const propTypes = {
 const Signin = (props) => {
   const {
     openSignin, handleSubmitSignin, submitting, handleToggleSigninModal,
-    user: { isLoading, error }
+    handleToggleModal, user: { isLoading, error }
   } = props;
   const { message } = error;
 
@@ -82,7 +83,7 @@ const Signin = (props) => {
                 />
               </div>
             </div>
-            {!isEmpty(error) && <ErrorMessage message={message} /> }
+            {!isEmpty(error) && <ErrorMessage message={message} />}
             <div className="row" />
             <div className="center-align">
               {isLoading && <Spinner />}
@@ -96,6 +97,16 @@ const Signin = (props) => {
               >
                 Sign In
               </button>
+            </div>
+            <div className="row center-align">
+              Don&#39;t have an account? <a
+                role="button"
+                tabIndex="0"
+                className="cursor-pointer blue-text"
+                onClick={handleToggleModal}
+              >
+                Register
+              </a>
             </div>
           </form>
         </div>

@@ -62,6 +62,14 @@ class Header extends Component {
     this.setState({ openSignin: !this.state.openSignin });
   }
 
+  handleToggleModal = () => {
+    console.log('modal toggle happened');
+    this.setState({
+      openSignin: !this.state.openSignin,
+      openSignup: !this.state.openSignup,
+    });
+  }
+
   /**
    * Form submission handler function
    *
@@ -129,6 +137,7 @@ class Header extends Component {
               openSignin={this.state.openSignin}
               handleToggleSignupModal={this.handleToggleSignupModal}
               handleToggleSigninModal={this.handleToggleSigninModal}
+              handleToggleModal={this.handleToggleModal}
               handleSubmitSignup={this.handleSubmitSignup}
               handleSubmitSignin={this.handleSubmitSignin}
               handleLogoutUser={this.handleLogoutUser}

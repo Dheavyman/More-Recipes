@@ -14,6 +14,7 @@ const { validate } = helpers;
 const propTypes = {
   openSignup: PropTypes.bool.isRequired,
   handleToggleSignupModal: PropTypes.func.isRequired,
+  handleToggleModal: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleSubmitSignup: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -35,7 +36,7 @@ const propTypes = {
 const Signup = (props) => {
   const {
     user: { isLoading, error }, openSignup, handleToggleSignupModal,
-    handleSubmit, handleSubmitSignup, submitting
+    handleToggleModal, handleSubmit, handleSubmitSignup, submitting
   } = props;
   const { message } = error;
 
@@ -136,6 +137,16 @@ const Signup = (props) => {
               >
                 Sign Up
               </button>
+            </div>
+            <div className="row center-align">
+              Already have an account? <a
+                role="button"
+                tabIndex="0"
+                className="cursor-pointer blue-text"
+                onClick={handleToggleModal}
+              >
+                Sign In
+              </a>
             </div>
           </form>
         </div>

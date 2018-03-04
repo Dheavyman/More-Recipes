@@ -28,6 +28,10 @@ main {
   margin-left: 14px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 #position {
   position: relative;
 }
@@ -118,6 +122,16 @@ main {
     margin: 5px;
   }
 }
+
+// .card-title {
+//   height: 3rem;
+//   line-height: 1.5rem;
+//   overflow: hidden;
+//   overflow-wrap: break-word;
+//   padding: 0.8rem 1rem;
+//   text-overflow: ellipsis;
+//   word-wrap: break-word;
+// }
 
 #recipes {
   .card-title {
