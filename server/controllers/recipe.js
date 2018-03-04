@@ -32,38 +32,56 @@ class RecipeController {
    * @memberof RecipeController
    */
   static addRecipe(req, res) {
-    return Recipe
-      .create({
-        userId: req.decoded.user.id,
+    Recipe.find({
+      where: {
         title: req.body.title,
-        category: req.body.category,
-        description: req.body.description,
-        preparationTime: req.body.preparationTime,
-        ingredients: req.body.ingredients,
-        directions: req.body.directions,
-        recipeImage: req.body.recipeImage,
-      })
-      .then(recipe => recipe.increment('views'))
-      .then(recipe => res.status(201).send({
-        status: 'Success',
-        message: 'Recipe created',
-        data: {
-          recipe: {
-            id: recipe.id,
-            title: recipe.title,
-            category: recipe.category,
-            description: recipe.description,
-            preparationTime: recipe.preparationTime,
-            ingredients: recipe.ingredients,
-            directions: recipe.directions,
-            recipeImage: recipe.recipeImage,
-            upvotes: recipe.upvotes,
-            downvotes: recipe.downvotes,
-            views: recipe.views,
-            favorites: recipe.favorites,
-          }
+        userId: req.decoded.user.id,
+      }
+    })
+      .then((recipe) => {
+        if (!recipe) {
+          return Recipe
+            .create({
+              userId: req.decoded.user.id,
+              title: req.body.title,
+              category: req.body.category,
+              description: req.body.description,
+              preparationTime: req.body.preparationTime,
+              ingredients: req.body.ingredients,
+              directions: req.body.directions,
+              recipeImage: req.body.recipeImage,
+            })
+            .then(newRecipe => newRecipe.increment('views'))
+            .then(newRecipe => res.status(201).send({
+              status: 'Success',
+              message: 'Recipe created',
+              data: {
+                recipe: {
+                  id: newRecipe.id,
+                  title: newRecipe.title,
+                  category: newRecipe.category,
+                  description: newRecipe.description,
+                  preparationTime: newRecipe.preparationTime,
+                  ingredients: newRecipe.ingredients,
+                  directions: newRecipe.directions,
+                  recipeImage: newRecipe.recipeImage,
+                  upvotes: newRecipe.upvotes,
+                  downvotes: newRecipe.downvotes,
+                  views: newRecipe.views,
+                  favorites: newRecipe.favorites,
+                }
+              }
+            }))
+            .catch(error => res.status(500).send({
+              status: 'Error',
+              message: error.message,
+            }));
         }
-      }))
+        return res.status(409).send({
+          status: 'Fail',
+          message: 'You already have a recipe with same title',
+        });
+      })
       .catch(error => res.status(500).send({
         status: 'Error',
         message: error.message,
