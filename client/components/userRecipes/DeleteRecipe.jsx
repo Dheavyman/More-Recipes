@@ -8,6 +8,9 @@ const propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleDeleteRecipe: PropTypes.func.isRequired,
+  deleteMessage: PropTypes.string.isRequired,
+  actionTitle: PropTypes.string.isRequired,
+  action: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -22,24 +25,25 @@ const defaultProps = {
  * @returns {object} React element
  */
 const DeleteRecipe = (props) => {
-  const { recipeId, open, handleClose, handleDeleteRecipe } = props;
+  const { recipeId, open, handleClose, handleDeleteRecipe,
+    deleteMessage, actionTitle, action } = props;
 
   const actions = [
     <FlatButton
       label="Cancel"
-      secondary
       onClick={handleClose}
     />,
     <FlatButton
-      label="Delete"
-      onClick={() => handleDeleteRecipe(recipeId)}
+      label={action || 'Delete'}
+      secondary
+      onClick={() => handleDeleteRecipe(recipeId, actionTitle)}
     />,
   ];
 
   return (
     <div>
       <Dialog
-        title="Delete Recipe"
+        title={actionTitle}
         actions={actions}
         modal
         open={open}
@@ -48,10 +52,10 @@ const DeleteRecipe = (props) => {
         <div id="delete-recipe">
           <div className="row">
             <div className="col s2">
-              <i className="material-icons large">warning</i>
+              <i className="material-icons icon-red large">warning</i>
             </div>
             <div className="col s10">
-              <p>Are you sure you want to delete this recipe?</p>
+              <p>{deleteMessage}</p>
             </div>
           </div>
         </div>

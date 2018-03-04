@@ -12,6 +12,27 @@ import config from '../../config';
 import notify from '../../utils/notification';
 import recipeAvater from '../../public/images/recipe-avatar2.png';
 
+const propTypes = {
+  uploadImage: PropTypes.func.isRequired,
+  addRecipe: PropTypes.func.isRequired,
+  editRecipe: PropTypes.func.isRequired,
+  deleteRecipe: PropTypes.func.isRequired,
+  setFavorite: PropTypes.func.isRequired,
+  userRecipes: PropTypes.shape({
+    imageUploading: PropTypes.bool.isRequired,
+    imageUrl: PropTypes.string
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      userId: PropTypes.string,
+    })
+  }).isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
 /**
  * Class representing user recipes
  *
@@ -43,6 +64,9 @@ class UserRecipes extends React.Component {
       directions: '',
       imageData: null,
       imagePreview: '',
+      deleteMessage: '',
+      actionTitle: '',
+      action: '',
     };
     this.handleOpenEdit = this.handleOpenEdit.bind(this);
     this.handleOpenDelete = this.handleOpenDelete.bind(this);
@@ -93,15 +117,21 @@ class UserRecipes extends React.Component {
   /**
    * Opens the delete recipe modal
    *
-   * @param {number} recipeId - The id of recipe
+   * @param {number} recipeId - Id of recipe
+   * @param {string} deleteMessage - Confirmation message
+   * @param {string} actionTitle - Title of action to perform
+   * @param {string} action - Action to perform
    *
    * @returns {object} Set openDelete state to true
    *
    * @memberof UserRecipes
    */
-  handleOpenDelete(recipeId) {
+  handleOpenDelete(recipeId, deleteMessage, actionTitle, action) {
     this.setState({
       recipeId,
+      deleteMessage,
+      actionTitle,
+      action,
       openDelete: true
     });
   }
@@ -277,21 +307,33 @@ class UserRecipes extends React.Component {
    * Function to delete a recipe
    *
    * @param {any} id - The id of recipe
+   * @param {string} actionTitle - Title of action to perform
    *
    * @returns {func} Dispatch action to delete recipe
    *
    * @memberof UserRecipes
    */
-  handleDeleteRecipe(id) {
-    const { deleteRecipe } = this.props;
-    deleteRecipe(id)
-      .then(() => {
-        const { userRecipes } = this.props;
+  handleDeleteRecipe(id, actionTitle) {
+    const { deleteRecipe, setFavorite } = this.props;
+    if (actionTitle === 'Delete Recipe') {
+      deleteRecipe(id)
+        .then(() => {
+          const { userRecipes } = this.props;
 
-        if (isEmpty(userRecipes.error)) {
-          this.handleClose();
-        }
-      });
+          if (isEmpty(userRecipes.error)) {
+            this.handleClose();
+          }
+        });
+    } else if (actionTitle === 'Remove Recipe') {
+      setFavorite(id)
+        .then(() => {
+          const { userRecipes } = this.props;
+
+          if (isEmpty(userRecipes.error)) {
+            this.handleClose();
+          }
+        });
+    }
   }
 
   /**
@@ -427,25 +469,7 @@ class UserRecipes extends React.Component {
   }
 }
 
-UserRecipes.propTypes = {
-  uploadImage: PropTypes.func.isRequired,
-  addRecipe: PropTypes.func.isRequired,
-  editRecipe: PropTypes.func.isRequired,
-  deleteRecipe: PropTypes.func.isRequired,
-  userRecipes: PropTypes.shape({
-    imageUploading: PropTypes.bool.isRequired,
-    imageUrl: PropTypes.string
-  }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      userId: PropTypes.string,
-    })
-  }).isRequired,
-  logoutUser: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
+UserRecipes.propTypes = propTypes;
 
 /**
  * Function to map values from state to props

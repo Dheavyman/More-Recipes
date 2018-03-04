@@ -68,6 +68,15 @@ const userRecipes = (state = initialState, action) => {
         isFetchingUserFavorites: false,
         errorFetchingUserFavorites: action.payload,
       };
+    case actionTypes.UPDATE_USER_FAVORITE_RECIPES: {
+      let userFavorites = state.userFavorites.slice();
+      userFavorites = userFavorites.filter(recipe =>
+        recipe.Recipe.id !== action.payload);
+      return {
+        ...state,
+        userFavorites,
+      };
+    }
     case actionTypes.ADD_RECIPE_REQUEST:
       return {
         ...state,

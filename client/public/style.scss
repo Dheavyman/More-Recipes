@@ -123,15 +123,25 @@ main {
   }
 }
 
-// .card-title {
-//   height: 3rem;
-//   line-height: 1.5rem;
-//   overflow: hidden;
-//   overflow-wrap: break-word;
-//   padding: 0.8rem 1rem;
-//   text-overflow: ellipsis;
-//   word-wrap: break-word;
-// }
+.card-title {
+  display: block;
+  height: 4.0rem;
+  line-height: 1.5rem;
+  overflow: hidden;
+  // overflow-wrap: break-word;
+  padding: 0.8rem 1rem;
+  text-overflow: ellipsis;
+}
+
+.icon-red {
+  color: red;
+  cursor: pointer;
+}
+
+.icon-green {
+  color: green;
+  cursor: pointer;
+}
 
 #recipes {
   .card-title {
