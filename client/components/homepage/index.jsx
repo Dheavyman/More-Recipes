@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 
 import actionCreators from '../../actions';
 import Header from '../common/Header';
@@ -127,7 +126,6 @@ class Home extends Component {
         <footer>
           <Footer />
         </footer>
-        <ToastContainer />
       </div>
     );
   }

@@ -9,7 +9,6 @@ import Header from './Header';
 import Main from './Main';
 import { decodeToken } from '../../utils/authenticate';
 import config from '../../config';
-import notify from '../../utils/notification';
 import recipeAvater from '../../public/images/recipe-avatar2.png';
 
 const propTypes = {
@@ -423,7 +422,6 @@ class UserRecipes extends React.Component {
     const { logoutUser, history } = this.props;
     logoutUser()
       .then(() => {
-        notify('success', 'Logout Successful');
         history.push('/');
       });
   }

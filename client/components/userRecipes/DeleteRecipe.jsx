@@ -43,18 +43,20 @@ const DeleteRecipe = (props) => {
   return (
     <div>
       <Dialog
-        title={actionTitle}
+        title={<div className="center-align">
+          {actionTitle}
+        </div>}
         actions={actions}
         modal
         open={open}
         autoScrollBodyContent
       >
         <div id="delete-recipe">
-          <div className="row">
-            <div className="col s2">
+          <div className="row center-align">
+            <div className="col s12 m6 l2">
               <i className="material-icons icon-red large">warning</i>
             </div>
-            <div className="col s10">
+            <div className="col s12 m6 l8">
               <p>{deleteMessage}</p>
             </div>
           </div>

@@ -158,6 +158,9 @@ const addRecipe = values => (dispatch) => {
       const { data } = response;
       const { data: { recipe } } = data;
       dispatch(addRecipeSuccess(recipe));
+      dispatch({
+        type: actionTypes.UPDATE_USER_RECIPES_COUNT,
+      });
     })
     .catch((error) => {
       const { response: { data } } = error;

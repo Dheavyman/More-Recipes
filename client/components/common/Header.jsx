@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
+import { ToastContainer } from 'react-toastify';
 
 import Navbar from './Navbar';
 import SideNav from './SideNav';
@@ -43,6 +44,25 @@ class Header extends Component {
   }
 
   /**
+   * Component did mount method
+   *
+   * @returns {any} Initialize materialize components
+   *
+   * @memberof Header
+   */
+  componentDidMount() {
+    // Initialize materialize css side nav menu activator
+    $('.button-collapse').sideNav({
+      closeOnClick: true,
+      draggable: true,
+    });
+    // Initialize materialize dropdown class
+    $('.dropdown-button').dropdown({
+      belowOrigin: true,
+    });
+  }
+
+  /**
    * Open or close the signup modal
    *
    * @returns {object} Toggle openSignup state
@@ -63,7 +83,6 @@ class Header extends Component {
   }
 
   handleToggleModal = () => {
-    console.log('modal toggle happened');
     this.setState({
       openSignin: !this.state.openSignin,
       openSignup: !this.state.openSignup,
@@ -116,7 +135,6 @@ class Header extends Component {
     const { logoutUser, history } = this.props;
     logoutUser()
       .then(() => {
-        notify('success', 'Logout Successful');
         history.push('/');
       });
   }
@@ -153,6 +171,7 @@ class Header extends Component {
           handleLogoutUser={this.handleLogoutUser}
           {...this.props}
         />
+        <ToastContainer />
       </div>
     );
   }

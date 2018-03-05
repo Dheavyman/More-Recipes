@@ -35,24 +35,6 @@ const propTypes = {
  */
 class Navbar extends React.Component {
   /**
-   * Component did mount method
-   *
-   * @returns {any} Initialize materialize components
-   *
-   * @memberof Navbar
-   */
-  componentDidMount() {
-    // Initialize materialize css side nav menu activator
-    $('.button-collapse').sideNav({
-      draggable: true,
-    });
-    // Initialize materialize dropdown class
-    $('.dropdown-button').dropdown({
-      belowOrigin: true,
-    });
-  }
-
-  /**
    * Component did update lifecycle mehtod
    *
    * @returns {any} Initialize materialize component

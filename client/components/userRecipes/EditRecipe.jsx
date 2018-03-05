@@ -156,19 +156,20 @@ const EditRecipe = (props) => {
             </div>
             <div className="row center-align">
               <div className="col s12">
-                <div className="col s6 offset-s3">
+                <div className="dropzone-area">
                   <Dropzone
                     className="dropzone"
                     onDrop={handleDrop}
                     accept="image/*"
                     multiple={false}
                   >
-                    {!imagePreview ?
-                      <p className="center-align">
+                    {!imagePreview
+                      ? <p className="center-align">
                         Drop your file or click here to upload
                         <i className="material-icons center large">camera</i>
-                      </p> :
-                      <img src={imagePreview} alt="" />}
+                      </p>
+                      : <img src={imagePreview} alt="" />
+                    }
                   </Dropzone>
                   <div className="row" />
                   {(imageUploading || isLoading) && <Spinner size="small" />}

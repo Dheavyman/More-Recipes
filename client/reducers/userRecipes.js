@@ -99,6 +99,11 @@ const userRecipes = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+    case actionTypes.UPDATE_USER_RECIPES_COUNT:
+      return {
+        ...state,
+        userAddedRecipesCount: state.userAddedRecipesCount + 1,
+      };
     case actionTypes.EDIT_RECIPE_REQUEST:
       return {
         ...state,

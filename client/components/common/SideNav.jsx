@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 
 import { decodeToken } from '../../utils/authenticate';
 
 const propTypes = {
-  handleOpenSignup: PropTypes.func,
-  handleOpenSignin: PropTypes.func,
+  handleToggleSignupModal: PropTypes.func,
+  handleToggleSigninModal: PropTypes.func,
   handleLogoutUser: PropTypes.func.isRequired,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
@@ -28,8 +27,8 @@ const propTypes = {
 };
 
 const defaultProps = {
-  handleOpenSignup: undefined,
-  handleOpenSignin: undefined,
+  handleToggleSignupModal: undefined,
+  handleToggleSigninModal: undefined,
   currentProfileUserId: null,
   authenticatedUserId: null,
   userRecipes: undefined,
@@ -52,21 +51,6 @@ class SideNav extends React.Component {
    */
   componentDidMount() {
     $('.collapsible').collapsible();
-  }
-
-  /**
-   * Function to handle changing of tabs
-   *
-   * @param {any} event - Event from clicking and element
-   *
-   * @returns {any} Changes to the corresponding tab
-   *
-   * @memberof SideNav
-   */
-  handleTabChange = (event) => {
-    event.preventDefault();
-    const { target: { name } } = event;
-    $('ul.tabs').tabs('select_tab', name);
   }
 
   /**
@@ -95,8 +79,9 @@ class SideNav extends React.Component {
    */
   render() {
     const {
-      user, location: { pathname }, handleOpenSignup, handleOpenSignin,
-      handleLogoutUser, userRecipes, currentProfileUserId, authenticatedUserId,
+      user, location: { pathname }, userRecipes, handleToggleSignupModal,
+      handleToggleSigninModal, handleLogoutUser, currentProfileUserId,
+      authenticatedUserId,
     } = this.props;
     const { isAuthenticated, userProfile: { notifications } } = user;
     const userUrl = new RegExp(/users/);
@@ -145,13 +130,7 @@ class SideNav extends React.Component {
                 <div className="divider" />
               </li>
               <li>
-                <a name="user-profile" href="#!" onClick={this.handleTabChange}>
-                  Profile
-                </a>
-              </li>
-              <li><a className="subheader">Activities</a></li>
-              <li>
-                <a name="user-recipes" href="#!" onClick={this.handleTabChange}>
+                <a name="user-recipes" className="subheader">
                   Recipes
                   <span className="badge">
                     {userRecipes && userRecipes.userAddedRecipesCount}
@@ -159,11 +138,7 @@ class SideNav extends React.Component {
                 </a>
               </li>
               <li>
-                <a
-                  name="user-favorites"
-                  href="#!"
-                  onClick={this.handleTabChange}
-                >
+                <a name="user-favorites" className="subheader">
                   Favorites
                   <span className="badge">
                     {userRecipes && userRecipes.userFavoritesCount}
@@ -199,7 +174,6 @@ class SideNav extends React.Component {
                 >
                   Logout
                 </a>
-                <ToastContainer />
               </li>
             </div>
             : <div>
@@ -207,7 +181,7 @@ class SideNav extends React.Component {
                 <a
                   role="button"
                   tabIndex="0"
-                  onClick={handleOpenSignin}
+                  onClick={handleToggleSigninModal}
                 >
                   Sign In
                 </a>
@@ -216,7 +190,7 @@ class SideNav extends React.Component {
                 <a
                   role="button"
                   tabIndex="0"
-                  onClick={handleOpenSignup}
+                  onClick={handleToggleSignupModal}
                 >
                   Register
                 </a>

@@ -136,7 +136,7 @@ const AddRecipe = (props) => {
             </div>
             <div className="row center-align">
               <div className="col s12">
-                <div className="col s6 offset-s3">
+                <div className="dropzone-area">
                   <Dropzone
                     className="dropzone"
                     onDrop={handleDrop}

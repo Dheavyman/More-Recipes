@@ -38,6 +38,7 @@ class Header extends React.Component {
   componentDidMount() {
     // Initialize materialize css side nav menu activator
     $('.button-collapse').sideNav({
+      closeOnClick: true,
       draggable: true,
     });
     // Initailize materialize tab class

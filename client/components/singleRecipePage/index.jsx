@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
+import { ToastContainer } from 'react-toastify';
 
 import actionCreators from '../../actions';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Main from './Main';
 import { getToken } from '../../utils/authenticate';
+import notify from '../../utils/notification';
 
 const propTypes = {
   singleRecipe: PropTypes.shape({
@@ -116,7 +118,7 @@ class Recipe extends Component {
           }
         });
     } else {
-      this.handleOpenSignin();
+      notify('info', 'Please login to post review');
     }
   }
 
@@ -191,6 +193,7 @@ class Recipe extends Component {
                 handleDownvote={this.handleDownvote}
                 handleFavorite={this.handleFavorite}
               />
+              <ToastContainer />
             </main>
             <footer>
               <Footer />
