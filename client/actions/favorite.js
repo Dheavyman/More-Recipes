@@ -55,11 +55,10 @@ const setFavorite = recipeId => (dispatch) => {
     { headers: token })
     .then((response) => {
       const { data } = response;
-      const { data: { removedFavoriteId } } = data;
       dispatch(setFavoriteSuccess(data));
       dispatch({
         type: actionTypes.UPDATE_USER_FAVORITE_RECIPES,
-        payload: removedFavoriteId,
+        payload: recipeId,
       });
     })
     .catch((error) => {

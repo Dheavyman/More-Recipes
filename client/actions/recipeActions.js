@@ -207,6 +207,10 @@ const deleteRecipe = recipeId => (dispatch) => {
     { headers: token })
     .then(() => {
       dispatch(deleteRecipeSuccess(recipeId));
+      dispatch({
+        type: actionTypes.UPDATE_USER_FAVORITE_RECIPES,
+        payload: recipeId,
+      });
     })
     .catch((error) => {
       const { response: { data } } = error;

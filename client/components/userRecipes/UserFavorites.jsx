@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import UserFavoriteCard from './UserFavoriteCard';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   fetchUserFavorites: PropTypes.func.isRequired,
   currentProfileUserId: PropTypes.number.isRequired,
   userRecipes: PropTypes.shape({
-    user: PropTypes.shape({
-      userFavorites: PropTypes.arrayOf(PropTypes.shape())
-    })
+    isFetchingUserFavorites: PropTypes.bool,
+    userFavorites: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
 };
 
@@ -35,17 +35,19 @@ class UserFavorites extends React.Component {
   }
 
   /**
-   * Render method
+   * Render user favorites
+   *
+   * @param {object} props - Properties passed to the function
    *
    * @returns {object} React element
    *
    * @memberof UserFavorites
    */
-  render() {
-    const { userRecipes: { userFavorites } } = this.props;
+  renderUserFavorites = (props) => {
+    const { userRecipes: { userFavorites } } = props;
 
     return (
-      <div className="row">
+      <div>
         {userFavorites &&
           userFavorites.length === 0
           ? <div className="center-align" >
@@ -60,6 +62,28 @@ class UserFavorites extends React.Component {
               {...this.props}
             />
           ))}
+      </div>
+    );
+  }
+
+  /**
+   * Render method
+   *
+   * @returns {object} React element
+   *
+   * @memberof UserFavorites
+   */
+  render() {
+    const { userRecipes: { isFetchingUserFavorites } } = this.props;
+
+    return (
+      <div className="row">
+        {isFetchingUserFavorites
+          ? <div className="center-align">
+            {isFetchingUserFavorites && <Spinner size="big" />}
+          </div>
+          : this.renderUserFavorites(this.props)
+        }
       </div>
     );
   }

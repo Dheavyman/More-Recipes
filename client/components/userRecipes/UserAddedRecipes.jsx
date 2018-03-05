@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import UserRecipeCard from './UserRecipeCard';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   fetchUserRecipes: PropTypes.func.isRequired,
   currentProfileUserId: PropTypes.number.isRequired,
   userRecipes: PropTypes.shape({
+    isFetchingUserRecipes: PropTypes.bool,
     userAddedRecipes: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
 };
@@ -33,17 +35,19 @@ class UserAddedRecipes extends React.Component {
   }
 
   /**
-   * Render method
+   * Render user recipes
+   *
+   * @param {object} props - Properties passed to the function
    *
    * @returns {object} React element
    *
    * @memberof UserAddedRecipes
    */
-  render() {
-    const { userRecipes: { userAddedRecipes } } = this.props;
+  renderUserRecipes = (props) => {
+    const { userRecipes: { userAddedRecipes } } = props;
 
     return (
-      <div className="row">
+      <div>
         {userAddedRecipes &&
           userAddedRecipes.length === 0
           ? <div className="center-align" >
@@ -53,6 +57,28 @@ class UserAddedRecipes extends React.Component {
           : userAddedRecipes.map(recipe => (
             <UserRecipeCard key={recipe.id} recipe={recipe} {...this.props} />
           ))}
+      </div>
+    );
+  }
+
+  /**
+   * Render method
+   *
+   * @returns {object} React element
+   *
+   * @memberof UserAddedRecipes
+   */
+  render() {
+    const { userRecipes: { isFetchingUserRecipes } } = this.props;
+
+    return (
+      <div className="row">
+        {isFetchingUserRecipes
+          ? <div className="center-align">
+            <Spinner size="big" />
+          </div>
+          : this.renderUserRecipes(this.props)
+        }
       </div>
     );
   }

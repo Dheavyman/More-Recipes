@@ -95,7 +95,7 @@ const EditProfileForm = (props) => {
       </div>
       <div className="row">
         <div className="center-align">
-          {isLoading && <Spinner />}
+          {isLoading && <Spinner size="small" />}
         </div>
       </div>
       <div>

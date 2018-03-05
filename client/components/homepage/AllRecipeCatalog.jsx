@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RecipeCatalogCard from '../common/RecipeCatalogCard';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   recipesCatalog: PropTypes.arrayOf(PropTypes.shape()),
+  recipes: PropTypes.shape({
+    isFetchingRecipes: PropTypes.bool,
+  }).isRequired,
 };
 
 const defaultProps = {
@@ -20,7 +24,7 @@ const defaultProps = {
  * @returns {object} React element
  */
 const AllRecipeCatalog = (props) => {
-  const { recipesCatalog } = props;
+  const { recipesCatalog, recipes: { isFetchingRecipes } } = props;
 
   return (
     <div className="row">
@@ -32,13 +36,20 @@ const AllRecipeCatalog = (props) => {
           </span>
         </div>
       </div>
-      {recipesCatalog && recipesCatalog.slice(0, 4).map((recipe, index) =>
-        (<RecipeCatalogCard
-          {...props}
-          key={recipe.id}
-          index={index}
-          recipe={recipe}
-        />))}
+      {isFetchingRecipes
+        ? <div className="center-align">
+          <Spinner size="big" />
+        </div>
+        : <div>
+          {recipesCatalog && recipesCatalog.slice(0, 4).map((recipe, index) =>
+            (<RecipeCatalogCard
+              {...props}
+              key={recipe.id}
+              index={index}
+              recipe={recipe}
+            />))}
+        </div>
+      }
     </div>
   );
 };

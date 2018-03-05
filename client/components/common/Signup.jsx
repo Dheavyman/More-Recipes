@@ -125,7 +125,7 @@ const Signup = (props) => {
             {!isEmpty(error) && <ErrorMessage message={message} />}
             <div className="row" />
             <div className="center-align">
-              {isLoading && <Spinner />}
+              {isLoading && <Spinner size="small" />}
             </div>
             <div className="row center-align">
               <button

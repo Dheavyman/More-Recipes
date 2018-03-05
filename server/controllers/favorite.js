@@ -41,7 +41,6 @@ class FavoriteController {
               status: 'Success',
               message: 'Recipe removed from favorites',
               data: {
-                removedFavoriteId: favorite.recipeId,
                 favorites: recipe.favorites,
               }
             }));

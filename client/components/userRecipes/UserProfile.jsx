@@ -197,7 +197,7 @@ class UserProfile extends React.Component {
           </div>
           <span className="uploading-image-spinner">
             <div className="center-align">
-              {imageUploading && <Spinner />}
+              {imageUploading && <Spinner size="small" />}
             </div>
           </span>
           <div className="row">

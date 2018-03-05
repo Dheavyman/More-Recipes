@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import isEmpty from 'lodash/isEmpty';
 
 import Category from './Category';
 import IndexUserNav from './IndexUserNav';
@@ -17,8 +16,11 @@ const propTypes = {
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
     userAuthentication: PropTypes.shape({
-      message: PropTypes.string
-    })
+      fullName: PropTypes.string
+    }),
+    userProfile: PropTypes.shape({
+      fullName: PropTypes.string,
+    }),
   }).isRequired,
 };
 
@@ -71,7 +73,9 @@ class Navbar extends React.Component {
    * @memberof Navbar
    */
   render() {
-    const { user: { isAuthenticated, userAuthentication } } = this.props;
+    const {
+      user: { isAuthenticated, userAuthentication, userProfile }
+    } = this.props;
     const { fullName } = userAuthentication;
 
     return (
@@ -105,9 +109,9 @@ class Navbar extends React.Component {
               className="dropdown-button dropdown-user"
               data-activates="user-control"
             >
-              {!isAuthenticated || isEmpty(userAuthentication)
+              {!isAuthenticated
                 ? 'Welcome Guest'
-                : fullName}
+                : fullName || userProfile.fullName}
               <i className="material-icons large left">account_circle</i>
             </a>
             {!isAuthenticated &&

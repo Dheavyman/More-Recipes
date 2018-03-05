@@ -151,7 +151,7 @@ const AddRecipe = (props) => {
                       <img src={imagePreview} alt="" />}
                   </Dropzone>
                   <div className="row" />
-                  {(imageUploading || isLoading) && <Spinner />}
+                  {(imageUploading || isLoading) && <Spinner size="small" />}
                 </div>
               </div>
             </div>

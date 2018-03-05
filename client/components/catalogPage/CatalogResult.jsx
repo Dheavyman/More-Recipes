@@ -30,7 +30,7 @@ const CatalogResult = (props) => {
           next={retrieveMoreRecipes}
           hasMore={hasMore}
           loader={<div className="col s12 center-align">
-            <Spinner />
+            <Spinner size="small" />
           </div>
           }
           endMessage={

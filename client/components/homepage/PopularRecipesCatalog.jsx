@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import RecipeCatalogCard from '../common/RecipeCatalogCard';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   recipes: PropTypes.shape({
+    isFetchingPopularRecipes: PropTypes.bool,
     popularRecipes: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
   retrievePopularRecipes: PropTypes.func.isRequired,
@@ -38,21 +40,30 @@ class PopularRecipesCatalog extends Component {
    * @memberof PopularRecipesCatalog
    */
   render() {
-    const { recipes: { popularRecipes } } = this.props;
+    const {
+      recipes: { isFetchingPopularRecipes, popularRecipes }
+    } = this.props;
 
     return (
       <div className="row">
         <div className="col s12 popular-recipes" >
           <h4>Popular Recipes</h4>
         </div>
-        {popularRecipes && popularRecipes.map((recipe, index) => (
-          <RecipeCatalogCard
-            key={recipe.id}
-            index={index}
-            recipe={recipe}
-            {...this.props}
-          />
-        ))}
+        {isFetchingPopularRecipes
+          ? <div className="center-align">
+            <Spinner size="big" />
+          </div>
+          : <div>
+            {popularRecipes && popularRecipes.map((recipe, index) => (
+              <RecipeCatalogCard
+                key={recipe.id}
+                index={index}
+                recipe={recipe}
+                {...this.props}
+              />
+            ))}
+          </div>
+        }
       </div>
     );
   }
