@@ -4,13 +4,13 @@ import jwt from 'jsonwebtoken';
 import models from '../models';
 import helpers from '../helpers';
 
-const Recipe = models.Recipe,
-  Review = models.Review,
-  User = models.User,
-  Favorite = models.Favorite,
-  Vote = models.Vote,
-  Op = Sequelize.Op,
-  sendNotification = helpers.sendEmail;
+const Recipe = models.Recipe;
+const Review = models.Review;
+const User = models.User;
+const Favorite = models.Favorite;
+const Vote = models.Vote;
+const Op = Sequelize.Op;
+const sendNotification = helpers.sendEmail;
 
 /**
  * Class representing recipe handler
@@ -22,45 +22,66 @@ class RecipeController {
    * Add a recipe
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} - Object representing success status or
-   *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static addRecipe(req, res) {
-    return Recipe
-      .create({
-        userId: req.decoded.user.id,
+    Recipe.find({
+      where: {
         title: req.body.title,
-        category: req.body.category,
-        description: req.body.description,
-        preparationTime: req.body.preparationTime,
-        ingredients: req.body.ingredients,
-        directions: req.body.directions,
-        recipeImage: req.body.recipeImage,
-      })
-      .then(recipe => recipe.increment('views'))
-      .then(recipe => res.status(201).send({
-        status: 'Success',
-        message: 'Recipe created',
-        data: {
-          recipe: {
-            id: recipe.id,
-            title: recipe.title,
-            category: recipe.category,
-            description: recipe.description,
-            preparationTime: recipe.preparationTime,
-            ingredients: recipe.ingredients,
-            directions: recipe.directions,
-            recipeImage: recipe.recipeImage,
-            upvotes: recipe.upvotes,
-            downvotes: recipe.downvotes,
-            views: recipe.views,
-            favorites: recipe.favorites,
-          }
+        userId: req.decoded.user.id,
+      }
+    })
+      .then((recipe) => {
+        if (!recipe) {
+          return Recipe
+            .create({
+              userId: req.decoded.user.id,
+              title: req.body.title,
+              category: req.body.category,
+              description: req.body.description,
+              preparationTime: req.body.preparationTime,
+              ingredients: req.body.ingredients,
+              directions: req.body.directions,
+              recipeImage: req.body.recipeImage,
+            })
+            .then(newRecipe => newRecipe.increment('views'))
+            .then(newRecipe => res.status(201).send({
+              status: 'Success',
+              message: 'Recipe created',
+              data: {
+                recipe: {
+                  id: newRecipe.id,
+                  title: newRecipe.title,
+                  category: newRecipe.category,
+                  description: newRecipe.description,
+                  preparationTime: newRecipe.preparationTime,
+                  ingredients: newRecipe.ingredients,
+                  directions: newRecipe.directions,
+                  recipeImage: newRecipe.recipeImage,
+                  upvotes: newRecipe.upvotes,
+                  downvotes: newRecipe.downvotes,
+                  views: newRecipe.views,
+                  favorites: newRecipe.favorites,
+                }
+              }
+            }))
+            .catch(error => res.status(500).send({
+              status: 'Error',
+              message: error.message,
+            }));
         }
-      }))
+        return res.status(409).send({
+          status: 'Fail',
+          message: 'You already have a recipe with same title',
+        });
+      })
       .catch(error => res.status(500).send({
         status: 'Error',
         message: error.message,
@@ -71,10 +92,13 @@ class RecipeController {
    * Modify a recipe
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} - Object representing success status or
-   *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static modifyRecipe(req, res) {
@@ -89,12 +113,12 @@ class RecipeController {
         res.locals.recipeTitle = recipe.title;
         return recipe
           .update({
-            title: req.body.title,
-            category: req.body.category,
-            description: req.body.description,
-            preparationTime: req.body.preparationTime,
-            ingredients: req.body.ingredients,
-            directions: req.body.directions,
+            title: req.body.title || recipe.title,
+            category: req.body.category || recipe.category,
+            description: req.body.description || recipe.description,
+            preparationTime: req.body.preparationTime || recipe.preparationTime,
+            ingredients: req.body.ingredients || recipe.ingredients,
+            directions: req.body.directions || recipe.directions,
             recipeImage: req.body.recipeImage || recipe.recipeImage,
           });
       })
@@ -136,10 +160,13 @@ class RecipeController {
    * Delete a recipe in the catalog
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The responsee object
+   *
    * @returns {object} - Object representing success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static deleteRecipe(req, res) {
@@ -165,11 +192,14 @@ class RecipeController {
    * Retrieve all the recipes
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - The next route handler function
+   *
    * @return {object} - Object representing the success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static getAll(req, res, next) {
@@ -209,10 +239,13 @@ class RecipeController {
    * Retrieve a single recipe in the catalog
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @return {object} - Object representing the success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static getOne(req, res) {
@@ -268,15 +301,18 @@ class RecipeController {
    * Retrieve user recipes
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object representing the success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static userRecipes(req, res) {
     return Recipe
-      .all({
+      .findAndCountAll({
         attributes: [
           'id', 'title', 'category', 'description', 'preparationTime',
           'ingredients', 'directions', 'recipeImage', 'upvotes', 'downvotes',
@@ -287,17 +323,22 @@ class RecipeController {
         }
       })
       .then((recipes) => {
-        if (recipes.length === 0) {
-          return res.status(404).send({
-            status: 'Fail',
+        if (recipes.rows.length === 0) {
+          return res.status(200).send({
+            status: 'Success',
             message: 'User has not added any recipe',
+            data: {
+              recipes: recipes.rows,
+              recipesCount: recipes.count,
+            }
           });
         }
         return res.status(200).send({
           status: 'Success',
           message: 'User recipes retrieved',
           data: {
-            recipes,
+            recipes: recipes.rows,
+            recipesCount: recipes.count,
           }
         });
       })
@@ -311,11 +352,14 @@ class RecipeController {
    * Retrieve recipes with most upvotes in descending order
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {object} next - Calls the next route handler
+   *
    * @return {object} Object representing the success status or
    * error status
+   *
    * @memberof RecipeController
    */
   static getMostUpvotes(req, res, next) {
@@ -366,10 +410,13 @@ class RecipeController {
    * Retrieve popular recipes based on favorites count
    *
    * @static
+   *
    * @param {any} req - The request object
    * @param {any} res - The response object
+   *
    * @returns {object} - Object representing the success status or
-     * error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static getPopular(req, res) {
@@ -383,7 +430,7 @@ class RecipeController {
         order: [
           ['favorites', 'DESC']
         ],
-        limit: 8,
+        limit: req.query.limit || 8,
         include: [{
           model: User,
           attributes: ['id', 'firstName', 'lastName']
@@ -406,12 +453,14 @@ class RecipeController {
    * Search for recipe based on recipe title
    *
    * @static
+   *
    * @param {any} req - The request object
    * @param {any} res - THe response object
    * @param {any} next - Call the next route handler
    *
    * @returns {object} Object representing success status or
-     *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static searchByTitle(req, res, next) {
@@ -440,8 +489,8 @@ class RecipeController {
         })
         .then((recipes) => {
           if (!recipes) {
-            return res.status(404).send({
-              status: 'Fail',
+            return res.status(200).send({
+              status: 'Success',
               message: 'No result found',
             });
           }
@@ -461,11 +510,14 @@ class RecipeController {
    * Search for recipes based on list of ingredients
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @param {function} next - Calls the next route handler
+   *
    * @returns {object} Object representing success status or
-   *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static searchByIngredients(req, res, next) {
@@ -494,8 +546,8 @@ class RecipeController {
         })
         .then((recipes) => {
           if (recipes.length === 0) {
-            return res.status(404).send({
-              status: 'Fail',
+            return res.status(200).send({
+              status: 'Success',
               message: 'No recipe matched your search',
             });
           }
@@ -519,10 +571,13 @@ class RecipeController {
    * Search for recipes based on category
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object representing success status or
-   *  error status
+   * error status
+   *
    * @memberof RecipeController
    */
   static searchByCategory(req, res) {
@@ -550,8 +605,8 @@ class RecipeController {
         })
         .then((recipes) => {
           if (recipes.length === 0) {
-            return res.status(404).send({
-              status: 'Fail',
+            return res.status(200).send({
+              status: 'Success',
               message: 'No recipe matched your search',
             });
           }

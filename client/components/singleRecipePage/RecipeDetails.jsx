@@ -15,6 +15,7 @@ const propTypes = {
  * Function to format display of comma seperated string values into lists
  *
  * @param {string} string - The string value to be formated
+ *
  * @returns {object} - React element represent the list item
  */
 const formatDisplay = string => string.split(',').map((ingredient, index) => (
@@ -25,6 +26,7 @@ const formatDisplay = string => string.split(',').map((ingredient, index) => (
  * RecipeDetails component
  *
  * @param {object} props - The properties passed to the component
+ *
  * @returns {object} React element
  */
 const RecipeDetails = (props) => {

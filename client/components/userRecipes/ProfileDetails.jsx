@@ -13,7 +13,7 @@ const propTypes = {
     })
   }).isRequired,
   handleStartEdit: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  currentProfileUserId: PropTypes.number.isRequired,
   authenticatedUserId: PropTypes.number
 };
 
@@ -21,9 +21,18 @@ const defaultProps = {
   authenticatedUserId: null,
 };
 
+/**
+ * Profile details component
+ *
+ * @param {object} props - The properties passed to the component
+ *
+ * @returns {object} React element
+ */
 const ProfileDetails = (props) => {
-  const { user: { userProfile }, handleStartEdit, userId,
-    authenticatedUserId } = props;
+  const {
+    user: { userProfile }, handleStartEdit, currentProfileUserId,
+    authenticatedUserId
+  } = props;
   const { username, firstName, lastName, email, aboutMe } = userProfile;
   const editableDetails = {
     firstName,
@@ -31,16 +40,14 @@ const ProfileDetails = (props) => {
     aboutMe,
   };
 
-  const handleEdit = () => {
-    handleStartEdit(editableDetails);
-  };
-
   return (
     <div>
       <div className="row" />
       <div className="col s12">
         <h5><i className="material-icons left">person</i>
-          {userId === authenticatedUserId ? 'My' : firstName} Profile</h5>
+          {currentProfileUserId === authenticatedUserId
+            ? 'My'
+            : firstName} Profile</h5>
         <div className="divider black" />
         <br />
         <div id="about_user" className="row">
@@ -71,7 +78,10 @@ const ProfileDetails = (props) => {
         </div>
       </div>
       <div className="col s12">
-        <h5>About {userId === authenticatedUserId ? 'Me' : firstName}</h5>
+        <h5>About {currentProfileUserId === authenticatedUserId
+          ? 'Me'
+          : firstName
+        }</h5>
         <div className="divider black" />
         <p
           id="about-me"
@@ -80,11 +90,11 @@ const ProfileDetails = (props) => {
         </p>
       </div>
       <div>
-        {userId === authenticatedUserId
+        {currentProfileUserId === authenticatedUserId
         && <button
           id="edit-btn"
           className={'btn-floating waves-effect waves-light green right'}
-          onClick={handleEdit}
+          onClick={() => handleStartEdit(editableDetails)}
         >
           <i className="material-icons left" data-tip="Edit Details">edit</i>
         </button>}

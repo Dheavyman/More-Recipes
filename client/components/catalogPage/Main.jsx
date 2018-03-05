@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
+import ReactTooltip from 'react-tooltip';
 
 import SearchBar from '../common/SearchBar';
 import SearchResult from './SearchResult';
@@ -48,10 +49,12 @@ const Main = (props) => {
           role="button"
           tabIndex="0"
           id="scroll-to-top"
+          data-tip="Back To Top"
           onClick={scrollToTop}
         >
           <i className="fa fa-arrow-circle-up fa-3x" />
         </span>
+        <ReactTooltip />
         <div className="center-align">
           {search !== '' &&
             searchPerformed &&

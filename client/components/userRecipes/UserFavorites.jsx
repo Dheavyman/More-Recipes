@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import UserFavoriteCard from './UserFavoriteCard';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   fetchUserFavorites: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  currentProfileUserId: PropTypes.number.isRequired,
   userRecipes: PropTypes.shape({
-    user: PropTypes.shape({
-      userFavorites: PropTypes.arrayOf(PropTypes.shape())
-    })
+    isFetchingUserFavorites: PropTypes.bool,
+    userFavorites: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
 };
 
@@ -17,6 +17,7 @@ const propTypes = {
  * Class representing user favorite recipes
  *
  * @class UserFavorites
+ *
  * @extends {React.Component}
  */
 class UserFavorites extends React.Component {
@@ -24,33 +25,66 @@ class UserFavorites extends React.Component {
    * Component did mount lifecycle method
    *
    * @returns {any} Fetches user favorite recipes
+   *
    * @memberof UserFavorites
    */
   componentDidMount() {
-    const { fetchUserFavorites, userId } = this.props;
+    const { fetchUserFavorites, currentProfileUserId } = this.props;
 
-    fetchUserFavorites(userId);
+    fetchUserFavorites(currentProfileUserId);
+  }
+
+  /**
+   * Render user favorites
+   *
+   * @param {object} props - Properties passed to the function
+   *
+   * @returns {object} React element
+   *
+   * @memberof UserFavorites
+   */
+  renderUserFavorites = (props) => {
+    const { userRecipes: { userFavorites } } = props;
+
+    return (
+      <div>
+        {userFavorites &&
+          userFavorites.length === 0
+          ? <div className="center-align" >
+            <h5>You have not favorited any recipe</h5>
+            <i className="material-icons large">folder_open</i>
+          </div>
+          : userFavorites.map(favorite => (
+            <UserFavoriteCard
+              key={favorite.Recipe.id}
+              recipe={favorite.Recipe}
+              owner={favorite.Recipe.User}
+              {...this.props}
+            />
+          ))
+        }
+      </div>
+    );
   }
 
   /**
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof UserFavorites
    */
   render() {
-    const { userRecipes: { userFavorites } } = this.props;
+    const { userRecipes: { isFetchingUserFavorites } } = this.props;
 
     return (
       <div className="row">
-        {userFavorites && userFavorites.map(favorite => (
-          <UserFavoriteCard
-            key={favorite.Recipe.id}
-            recipe={favorite.Recipe}
-            owner={favorite.Recipe.User}
-            {...this.props}
-          />
-        ))}
+        {isFetchingUserFavorites
+          ? <div className="center-align">
+            {isFetchingUserFavorites && <Spinner size="big" />}
+          </div>
+          : this.renderUserFavorites(this.props)
+        }
       </div>
     );
   }

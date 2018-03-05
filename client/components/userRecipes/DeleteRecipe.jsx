@@ -8,46 +8,58 @@ const propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleDeleteRecipe: PropTypes.func.isRequired,
+  deleteMessage: PropTypes.string.isRequired,
+  actionTitle: PropTypes.string.isRequired,
+  action: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
   recipeId: null,
 };
 
+/**
+ * Delete recipe component
+ *
+ * @param {object} props - The properties passed to the function
+ *
+ * @returns {object} React element
+ */
 const DeleteRecipe = (props) => {
-  const { recipeId, open, handleClose, handleDeleteRecipe } = props;
-  const deleteRecipe = () => {
-    handleDeleteRecipe(recipeId);
-  };
+  const {
+    recipeId, open, handleClose, handleDeleteRecipe,
+    deleteMessage, actionTitle, action
+  } = props;
 
   const actions = [
     <FlatButton
       label="Cancel"
-      secondary
       onClick={handleClose}
     />,
     <FlatButton
-      label="Delete"
-      onClick={deleteRecipe}
+      label={action || 'Delete'}
+      secondary
+      onClick={() => handleDeleteRecipe(recipeId, actionTitle)}
     />,
   ];
 
   return (
     <div>
       <Dialog
-        title="Delete Recipe"
+        title={<div className="center-align">
+          {actionTitle}
+        </div>}
         actions={actions}
         modal
         open={open}
         autoScrollBodyContent
       >
         <div id="delete-recipe">
-          <div className="row">
-            <div className="col s2">
-              <i className="material-icons large">warning</i>
+          <div className="row center-align">
+            <div className="col s12 m6 l2">
+              <i className="material-icons icon-red large">warning</i>
             </div>
-            <div className="col s10">
-              <p>Are you sure you want to delete this recipe?</p>
+            <div className="col s12 m6 l8">
+              <p>{deleteMessage}</p>
             </div>
           </div>
         </div>

@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 import RecipeImage from '../common/RecipeImage';
 
 const propTypes = {
+  handleOpenDelete: PropTypes.func.isRequired,
   recipe: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -19,10 +21,20 @@ const propTypes = {
   }).isRequired,
 };
 
+/**
+ * User favorite card component
+ *
+ * @param {object} props - The properties passed to the component
+ *
+ * @returns {object} React element
+ */
 const UserFavoriteCard = (props) => {
-  const { recipe, owner: { fullName } } = props;
+  const { handleOpenDelete, recipe, owner: { fullName } } = props;
   const { id, title, description, recipeImage, views, upvotes, downvotes,
     favorites } = recipe;
+  const message = 'Are you sure you want to remove recipe from your favorites?';
+  const actionTitle = 'Remove Recipe';
+  const action = 'Remove';
 
   return (
     <div className="col s12 m6 l3">
@@ -57,6 +69,15 @@ const UserFavoriteCard = (props) => {
               {downvotes}
             </li>
           </ul>
+          <a
+            role="button"
+            tabIndex="0"
+            onClick={() => handleOpenDelete(id, message, actionTitle, action)}
+            data-tip="Remove"
+          >
+            <i className="material-icons icon-red right">remove_circle</i>
+          </a>
+          <ReactTooltip />
         </div>
       </div>
     </div>

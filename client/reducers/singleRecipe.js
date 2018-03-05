@@ -11,6 +11,14 @@ const initialState = {
   error: {}
 };
 
+/**
+ * Single recipe reducer
+ *
+ * @param {object} [state=initialState] - State data
+ * @param {object} action - Action dispatched
+ *
+ * @returns {object} New state data
+ */
 const singleRecipe = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_RECIPE_REQUEST:

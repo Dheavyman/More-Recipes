@@ -9,47 +9,36 @@ import IndexUserNav from './IndexUserNav';
 import AuthUserNav from './AuthUserNav';
 import Signup from './Signup';
 import Signin from './Signin';
-// import notify from '../../utils/notification';
+
+const propTypes = {
+  handleSubmitSignup: PropTypes.func.isRequired,
+  handleSubmitSignin: PropTypes.func.isRequired,
+  handleLogoutUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    userAuthentication: PropTypes.shape({
+      fullName: PropTypes.string
+    }),
+    userProfile: PropTypes.shape({
+      fullName: PropTypes.string,
+    }),
+  }).isRequired,
+};
+
 
 /**
- * Class representing navbar
+ * Class representing navbar component
  *
  * @class Navbar
+ *
  * @extends {React.Component}
  */
 class Navbar extends React.Component {
   /**
-   * Creates an instance of Navbar.
-   *
-   * @memberof Navbar
-   */
-  constructor() {
-    super();
-    this.handleSubmitSignup = this.handleSubmitSignup.bind(this);
-    this.handleSubmitSignin = this.handleSubmitSignin.bind(this);
-    this.handleLogoutUser = this.handleLogoutUser.bind(this);
-  }
-  /**
-   * Component did mount method
-   *
-   * @returns {any} Initialize materialize components
-   * @memberof Navbar
-   */
-  componentDidMount() {
-    // Initialize materialize css side nav menu activator
-    $('.button-collapse').sideNav({
-      draggable: true,
-    });
-    // Initialize materialize dropdown class
-    $('.dropdown-button').dropdown({
-      belowOrigin: true,
-    });
-  }
-
-  /**
    * Component did update lifecycle mehtod
    *
    * @returns {any} Initialize materialize component
+   *
    * @memberof Navbar
    */
   componentDidUpdate() {
@@ -60,53 +49,17 @@ class Navbar extends React.Component {
   }
 
   /**
-   * Form submission handler function
-   *
-   * @param {any} values The form values
-   * @returns {any} Submit function
-   * @memberof Navbar
-   */
-  handleSubmitSignup(values) {
-    this.props.signupUser(values, this.props.handleClose);
-  }
-
-  /**
-   * Form submission handler function
-   *
-   * @param {any} values The form values
-   * @returns {any} Submit function
-   * @memberof Navbar
-   */
-  handleSubmitSignin(values) {
-    this.props.signinUser(values, this.props.handleClose)
-      .then(() => {
-        const { user: { userSignin } } = this.props;
-        // if (userSignin.message === 'User logged in') {
-        //   notify('Login Successful');
-        // }
-      });
-  }
-
-  /**
-   * Logout user from the application
-   *
-   * @returns {any} Logout user
-   * @memberof Navbar
-   */
-  handleLogoutUser() {
-    this.props.logoutUser();
-  }
-
-  /**
    * Render method
    *
    * @returns{object} React element
+   *
    * @memberof Navbar
    */
   render() {
-    const { openSignup, openSignin, handleOpenSignup, handleOpenSignin,
-      handleClose, user: { isAuthenticated, userSignin } } = this.props;
-    const { user } = userSignin;
+    const {
+      user: { isAuthenticated, userAuthentication, userProfile }
+    } = this.props;
+    const { fullName } = userAuthentication;
 
     return (
       <div className="nav-wrapper">
@@ -139,36 +92,25 @@ class Navbar extends React.Component {
               className="dropdown-button dropdown-user"
               data-activates="user-control"
             >
-              {!isAuthenticated || isEmpty(user)
+              {!isAuthenticated || isEmpty(userProfile)
                 ? 'Welcome Guest'
-                : user.fullName}
+                : fullName || userProfile.fullName}
               <i className="material-icons large left">account_circle</i>
             </a>
             {!isAuthenticated &&
-              <IndexUserNav
-                handleOpenSignup={handleOpenSignup}
-                handleOpenSignin={handleOpenSignin}
-              />
+              <IndexUserNav {...this.props} />
             }
             {isAuthenticated &&
-              <AuthUserNav handleLogoutUser={this.handleLogoutUser} />}
+              <AuthUserNav {...this.props} />}
           </li>
         </ul>
         <MuiThemeProvider>
           <Signup
-            open={openSignup}
-            handleClose={handleClose}
-            handleOpenSignin={handleOpenSignin}
-            onSubmit={this.handleSubmitSignup}
             {...this.props}
           />
         </MuiThemeProvider>
         <MuiThemeProvider>
           <Signin
-            open={openSignin}
-            handleClose={handleClose}
-            handleOpenSignup={handleOpenSignup}
-            onSubmit={this.handleSubmitSignin}
             {...this.props}
           />
         </MuiThemeProvider>
@@ -177,21 +119,6 @@ class Navbar extends React.Component {
   }
 }
 
-Navbar.propTypes = {
-  openSignup: PropTypes.bool.isRequired,
-  openSignin: PropTypes.bool.isRequired,
-  handleOpenSignup: PropTypes.func.isRequired,
-  handleOpenSignin: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  signupUser: PropTypes.func.isRequired,
-  signinUser: PropTypes.func.isRequired,
-  logoutUser: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-    userSignin: PropTypes.shape({
-      message: PropTypes.string
-    })
-  }).isRequired,
-};
+Navbar.propTypes = propTypes;
 
 export default Navbar;

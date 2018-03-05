@@ -1,10 +1,15 @@
 import React from 'react';
 
+/**
+ * Footer component
+ *
+ * @returns {object} React element
+ */
 const Footer = () => (
   <div className="page-footer deep-orange darken-1">
     <div className="container center-align">
       <div className="row">
-        <div className="col s12 m6 l6">
+        <div className="connect-icons col s12 m6 l6">
           <h5 className="white-text">Stay Connected</h5>
           <i className="fa fa-facebook-square fa-2x" />
           <i className="fa fa-twitter-square fa-2x" />

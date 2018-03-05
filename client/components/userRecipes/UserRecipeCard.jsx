@@ -19,18 +19,20 @@ const propTypes = {
   handleOpenDelete: PropTypes.func.isRequired,
 };
 
+/**
+ * User recipe card component
+ *
+ * @param {object} props - The properties passed to the component
+ *
+ * @returns {object} React element
+ */
 const UserRecipeCard = (props) => {
   const { recipe, handleOpenEdit, handleOpenDelete } = props;
   const { id, title, description, recipeImage, views, upvotes, downvotes,
     favorites } = recipe;
-
-  const openEditModal = () => {
-    handleOpenEdit(recipe);
-  };
-
-  const openDeleteModal = () => {
-    handleOpenDelete(id);
-  };
+  const message = 'Are you sure you want to delete this recipe?';
+  const actionTitle = 'Delete Recipe';
+  const action = 'Delete';
 
   return (
     <div className="col s12 m6 l3">
@@ -64,18 +66,28 @@ const UserRecipeCard = (props) => {
           <a
             role="button"
             tabIndex="0"
-            onClick={openEditModal}
-            className={'btn-floating waves-effect waves-light green right'}
+            onClick={() => handleOpenEdit(recipe)}
+            className="right"
           >
-            <i className="material-icons" data-tip="Edit Recipe">edit</i>
+            <i
+              className="material-icons icon-green"
+              data-tip="Edit Recipe"
+            >
+              edit
+            </i>
           </a>
           <a
             role="button"
             tabIndex="0"
-            onClick={openDeleteModal}
-            className={'btn-floating waves-effect waves-light red right'}
+            onClick={() => handleOpenDelete(id, message, actionTitle, action)}
+            className="right"
           >
-            <i className="material-icons" data-tip="Delete Recipe">delete</i>
+            <i
+              className="material-icons icon-red"
+              data-tip="Delete Recipe"
+            >
+              delete
+            </i>
           </a>
           <ReactTooltip />
         </div>

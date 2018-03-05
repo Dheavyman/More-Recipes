@@ -19,7 +19,7 @@ const propTypes = {
   }).isRequired,
   recipes: PropTypes.shape({
     recipes: PropTypes.arrayOf(PropTypes.shape()),
-    searchResult: PropTypes.arrayOf(PropTypes.shape()),
+    searchPerformed: PropTypes.bool.isRequired,
   }).isRequired,
   retrieveRecipes: PropTypes.func.isRequired,
 };
@@ -32,6 +32,7 @@ const defaultProps = {
  * Class representing catalog page
  *
  * @class CatalogPage
+ *
  * @extends {Component}
  */
 class CatalogPage extends Component {
@@ -56,6 +57,7 @@ class CatalogPage extends Component {
    * Component did mount lifecycle method
    *
    * @returns {any} Any
+   *
    * @memberof CatalogPage
    */
   componentDidMount() {
@@ -89,6 +91,7 @@ class CatalogPage extends Component {
    * @param {object} nextProps - The next properties passed
    *
    * @returns {any} Sets state
+   *
    * @memberof CatalogPage
    */
   componentWillReceiveProps(nextProps) {
@@ -98,7 +101,7 @@ class CatalogPage extends Component {
       }));
     }
 
-    if (nextProps.recipes.searchResult.length > 0) {
+    if (nextProps.recipes.searchPerformed) {
       this.setState({
         searchPerformed: true,
       });
@@ -108,7 +111,8 @@ class CatalogPage extends Component {
   /**
    * Component will unmount lifecyle method
    *
-   * @returns {any} remove onscroll event listener
+   * @returns {any} Remove onscroll event listener
+   *
    * @memberof CatalogPage
    */
   componentWillUnmount() {
@@ -121,6 +125,7 @@ class CatalogPage extends Component {
    * @param {object} event - The event object
    *
    * @returns {any} Changes state to the current search term
+   *
    * @memberof CatalogPage
    */
   handleSearchChange = (event) => {
@@ -147,6 +152,7 @@ class CatalogPage extends Component {
    * @param {object} event - The event object
    *
    * @returns {any} Submits the search term
+   *
    * @memberof CatalogPage
    */
   handleSubmitSearch = (event) => {
@@ -171,6 +177,7 @@ class CatalogPage extends Component {
    * Function to retrieve more recipes for more pages
    *
    * @returns {any} Retrieve more recipes
+   *
    * @memberof CatalogPage
    */
   retrieveMoreRecipes = () => {
@@ -184,6 +191,7 @@ class CatalogPage extends Component {
    * Fuction to scroll to the top of the page
    *
    * @returns {any} Scrolls the page
+   *
    * @memberof CatalogPage
    */
   scrollToTop = () => {
@@ -195,6 +203,7 @@ class CatalogPage extends Component {
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof CatalogPage
    */
   render() {

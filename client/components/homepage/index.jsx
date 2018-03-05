@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 
 import actionCreators from '../../actions';
 import Header from '../common/Header';
@@ -23,6 +22,7 @@ const propTypes = {
  * Class representing the home component
  *
  * @class Home
+ *
  * @extends {Component}
  */
 class Home extends Component {
@@ -43,6 +43,7 @@ class Home extends Component {
    * Component did mount function
    *
    * @returns {object} The response from the server
+   *
    * @memberof Home
    */
   componentDidMount() {
@@ -59,6 +60,7 @@ class Home extends Component {
    * @param {object} event - The event object
    *
    * @returns {any} Changes state to the current search term
+   *
    * @memberof Home
    */
   handleSearchChange = (event) => {
@@ -85,6 +87,7 @@ class Home extends Component {
    * @param {object} event - The event object
    *
    * @returns {any} Submits the search term
+   *
    * @memberof Home
    */
   handleSubmitSearch = (event) => {
@@ -103,6 +106,7 @@ class Home extends Component {
    * The render function
    *
    * @returns {object} React element
+   *
    * @memberof Home
    */
   render() {
@@ -122,7 +126,6 @@ class Home extends Component {
         <footer>
           <Footer />
         </footer>
-        <ToastContainer />
       </div>
     );
   }
@@ -138,6 +141,7 @@ class Home extends Component {
 const mapStateToProps = state => ({
   recipes: state.recipes,
   user: state.user,
+  userRecipes: state.userRecipes,
 });
 
 /**

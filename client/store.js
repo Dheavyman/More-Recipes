@@ -7,12 +7,17 @@ import rootReducer from './reducers';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 
+let enhancer;
+
+if (process.env.NODE_ENV === 'production') {
+  enhancer = composeEnhancers(applyMiddleware(thunk));
+} else {
+  enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+}
+
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(
-    thunk,
-    logger
-  ))
+  enhancer,
 );
 
 export default store;

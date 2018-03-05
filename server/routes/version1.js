@@ -4,17 +4,17 @@ import controllers from '../controllers';
 import middlewares from '../middlewares';
 import swaggerSpec from '../swagger';
 
-const router = express.Router(),
-  authenticate = middlewares.authentication,
-  favoriteController = controllers.favorite,
-  recipeController = controllers.recipe,
-  reviewController = controllers.review,
-  userController = controllers.user,
-  voteController = controllers.vote,
-  userValidate = middlewares.userValidation,
-  recipeValidate = middlewares.recipeValidation,
-  reviewValidate = middlewares.reviewValidation,
-  notifyUsers = middlewares.usersNotification;
+const router = express.Router();
+const authenticate = middlewares.authentication;
+const favoriteController = controllers.favorite;
+const recipeController = controllers.recipe;
+const reviewController = controllers.review;
+const userController = controllers.user;
+const voteController = controllers.vote;
+const userValidate = middlewares.userValidation;
+const recipeValidate = middlewares.recipeValidation;
+const reviewValidate = middlewares.reviewValidation;
+const notifyUsers = middlewares.usersNotification;
 
 // Retrieve swagger specification for API
 router.get('/swagger.json', (req, res) => {
@@ -156,57 +156,7 @@ router.get('/users/:userId', authenticate.verifyToken, userValidate.userExist,
  *                 user:
  *                   $ref: '#/definitions/NewUserDetails'
  */
-router.put(
-  '/users/:userId', authenticate.verifyToken, userValidate.userExist,
-  userController.editUserDetails
-);
-
-/**
- * @swagger
- * /users/{userId}/image:
- *   put:
- *     tags:
- *       - Users
- *     summary: Edit a user image
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: userId
- *         in: path
- *         description: Id of user
- *         type: integer
- *         required: true
- *       - name: userImage
- *         in: body
- *         description: New user image url
- *         required: true
- *         schema:
- *           type: object
- *           properties:
- *             userImage:
- *               type: string
- *     responses:
- *       200:
- *         description: Ok
- *         schema:
- *           type: object
- *           properties:
- *             status:
- *               type: string
- *               example: Success
- *             message:
- *               type: string
- *               example: User image updated
- *             data:
- *               type: object
- *               properties:
- *                 userImage:
- *                   type: string
- */
-router.put(
-  '/users/:userId/image', authenticate.verifyToken, userValidate.userExist,
-  userController.editUserImage
-);
+router.put('/users', authenticate.verifyToken, userController.editUserDetails);
 
 router.route('/recipes')
   /**
@@ -779,56 +729,6 @@ router.put('/recipes/:recipeId/upvotes', authenticate.verifyToken,
  */
 router.put('/recipes/:recipeId/downvotes', authenticate.verifyToken,
   recipeValidate.recipeExist, voteController.downvote);
-
-/**
- * @swagger
- * /users/enable:
- *   put:
- *     tags:
- *       - Users
- *     summary: Enable notification
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: Ok, Notification enabled
- *         schema:
- *           type: object
- *           properties:
- *             status:
- *               type: string
- *               example: Success
- *             message:
- *               type: string
- *               example: Notification enabled
- */
-router.put('/users/:userId/enable', authenticate.verifyToken,
-  userController.enableNotifications);
-
-/**
- * @swagger
- * /users/disable:
- *   put:
- *     tags:
- *       - Users
- *     summary: Disable notification
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: Ok, Notification disabled
- *         schema:
- *           type: object
- *           properties:
- *             status:
- *               type: string
- *               example: Success
- *             message:
- *               type: string
- *               example: Notification disabled
- */
-router.put('/users/:userId/disable', authenticate.verifyToken,
-  userController.disableNotifications);
 
 export default router;
 

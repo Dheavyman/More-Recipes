@@ -3,226 +3,218 @@ import chai from 'chai';
 import supertest from 'supertest';
 import app from '../server/app';
 
-const server = supertest.agent(app),
-  expect = chai.expect,
-  validSignupSeed = [{
-    username: 'Scotch',
-    password: 'scotchpassword',
-    email: 'scotch@example.com',
-    firstName: 'John',
-    lastName: 'Scoth',
-  }, {
-    username: 'Jessy',
-    password: 'jessypassword',
-    email: 'jessy@example.com',
-    firstName: 'Jessy',
-    lastName: 'Sanders',
-  }, {
-    username: 'Vincent',
-    password: 'vincentpassword',
-    email: 'scotch@example.com',
-    firstName: 'Vincent',
-    lastName: 'Cross',
-  }, {
-    username: 'Francis',
-    password: 'francispassword',
-    email: 'francis@example.com',
-    firstName: 'Francis',
-    lastName: 'Johnson',
-  }],
-  invalidSignupSeed = [{
-    username: '  ',
-    password: 'awesome',
-    email: '@example.com',
-    firstName: 'Alex',
-    lastName: 'Scotch',
-  }, {
-    username: 'Paul',
-    password: '  ',
-    email: 'paul@example.com',
-    firstName: 'Paul',
-    lastName: 'Sunders',
-  }, {
-    username: 'Paul',
-    password: 'awesome',
-    email: '   ',
-    firstName: 'Paul',
-    lastName: 'Sunders',
-  }, {
-    username: 'Paul',
-    password: 'awesome',
-    email: 'paul@example.com',
-    firstName: '   ',
-    lastName: 'Sunders',
-  }, {
-    username: 'Paul',
-    password: 'awesome',
-    email: 'paul@example.com',
-    firstName: 'Paul',
-    lastName: '  ',
-  }, {
-    username: 'Paul#',
-    password: 'awesome',
-    email: 'paul@example.com',
-    firstName: 'Paul',
-    lastName: 'Sunders',
-    gender: 'male'
-  }, {
-    username: 'paul',
-    password: 'awesome',
-    email: 'paulexample.com',
-    firstName: 'Paul',
-    lastName: 'Sunders',
-  }],
-  validSigninSeed = [{
-    username: 'Jessy',
-    password: 'jessypassword',
-  }, {
-    username: 'scotch',
-    password: 'scotchpassword',
-  }, {
-    username: 'Francis',
-    password: 'francispassword',
-  }],
-  invalidSigninSeed = [{
-    username: '  ',
-    password: 'jessypassword',
-  }, {
-    username: 'Jessy',
-    password: '   ',
-  }, {
-    username: 'notJessy',
-    password: 'jessypassword',
-  }, {
-    username: 'Jessy',
-    password: 'notjessypassword',
-  }],
-  validUserSeed = [{
-    firstName: 'John',
-    lastName: 'Scotch',
-    aboutMe: 'This is my bio',
-  }, {
-    userImage: 'user.image.url',
-  }],
-  validRecipeSeed = [{
-    title: 'Beans',
-    category: 'Dessert',
-    description: 'Tasty beans',
-    preparationTime: 65,
-    ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
-    directions: 'Cook the beans and add the ingredients',
-    recipeImage: 'Url',
-  }, {
-    title: 'Yam sauce',
-    category: 'Lunch',
-    description: 'Served white and colourful',
-    preparationTime: 50,
-    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-    directions: 'Slice the yam and prepare the sauce',
-    recipeImage: 'Url',
-  }, {
-    title: 'Beans',
-    category: 'Appetizer',
-    description: 'Tasty and nutricious beans',
-    preparationTime: 80,
-    ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
-    directions: 'Cook the beans and add the ingredients',
-    recipeImage: 'Url',
-  }, {
-    title: 'Egusi soup',
-    category: 'Dinner',
-    description: 'Tasty and nutricious soup',
-    preparationTime: 65,
-    ingredients: 'Egusi, stock fish, red oil, onion, salt, maggi, pepper',
-    directions: 'Cook the egusi and add the ingredients',
-    recipeImage: 'Url',
-  }, {
-    title: 'Yam sauce',
-    category: 'Lunch',
-    description: 'Served white and colourful',
-    preparationTime: 50,
-    ingredients: 'Yam, tomatoes, vegetable oil, egg, salt, maggi, pepper',
-    directions: 'Slice the yam and prepare the sauce',
-    recipeImage: 'Url',
-  }],
-  invalidRecipeSeed = [{
-    title: '   ',
-    category: 'Lunch',
-    description: 'Served white and colourful',
-    preparationTime: 50,
-    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-    directions: 'Slice the yam and prepare the sauce',
-    recipeImage: 'Url',
-  }, {
-    title: 'Yam sauce',
-    category: 'Breakfast',
-    description: '   ',
-    preparationTime: 50,
-    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-    directions: 'Slice the yam and prepare the sauce',
-    recipeImage: 'Url',
-  }, {
-    title: 'Yam sauce',
-    category: 'Main',
-    description: 'Served white and colourful',
-    preparationTime: null,
-    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-    directions: 'Slice the yam and prepare the sauce',
-    recipeImage: 'Url',
-  }, {
-    title: 'Yam sauce',
-    category: 'Dinner',
-    description: 'Served white and colourful',
-    preparationTime: 50,
-    ingredients: '   ',
-    directions: 'Slice the yam and prepare the sauce',
-    recipeImage: 'Url',
-  }, {
-    title: 'Yam sauce',
-    category: 'Breakfast',
-    description: 'Served white and colourful',
-    preparationTime: 50,
-    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-    directions: '   ',
-    recipeImage: 'Url',
-  }, {
-    title: 'Spaghetti',
-    category: '  ',
-    description: 'Served white and colourful',
-    preparationTime: 50,
-    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-    directions: 'Slice the yam and prepare the sauce',
-    recipeImage: 'Url',
-  }, {
-    title: 'Spaghetti',
-    category: 'Dinner',
-    description: 'Served white and colourful',
-    preparationTime: 50,
-    ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-    directions: 'Slice the yam and prepare the sauce',
-    recipeImage: '   ',
-  }],
-  validReviewSeed = [{
-    content: 'A nice recipe idea',
-  }, {
-    content: 'I added spinach and it was wonderful',
-  }, {
-    content: 'A very tasty recipe, so sweet',
-  }],
-  invalidReviewSeed = [{
-    content: '  ',
-  }],
-  userFavoriteCategory = [{
-    category: 'Lunch',
-  }],
-  userToken = [];
-let userId1,
-  userId2,
-  recipeId1,
-  recipeId2,
-  recipeId3,
-  reviewId1,
-  reviewId2;
+const server = supertest.agent(app);
+const expect = chai.expect;
+const validSignupSeed = [{
+  username: 'Scotch',
+  password: 'scotchpassword',
+  email: 'scotch@example.com',
+  firstName: 'John',
+  lastName: 'Scoth',
+}, {
+  username: 'Jessy',
+  password: 'jessypassword',
+  email: 'jessy@example.com',
+  firstName: 'Jessy',
+  lastName: 'Sanders',
+}, {
+  username: 'Vincent',
+  password: 'vincentpassword',
+  email: 'scotch@example.com',
+  firstName: 'Vincent',
+  lastName: 'Cross',
+}, {
+  username: 'Francis',
+  password: 'francispassword',
+  email: 'francis@example.com',
+  firstName: 'Francis',
+  lastName: 'Johnson',
+}];
+const invalidSignupSeed = [{
+  username: '  ',
+  password: 'awesome',
+  email: '@example.com',
+  firstName: 'Alex',
+  lastName: 'Scotch',
+}, {
+  username: 'Paul',
+  password: '  ',
+  email: 'paul@example.com',
+  firstName: 'Paul',
+  lastName: 'Sunders',
+}, {
+  username: 'Paul',
+  password: 'awesome',
+  email: '   ',
+  firstName: 'Paul',
+  lastName: 'Sunders',
+}, {
+  username: 'Paul',
+  password: 'awesome',
+  email: 'paul@example.com',
+  firstName: '   ',
+  lastName: 'Sunders',
+}, {
+  username: 'Paul',
+  password: 'awesome',
+  email: 'paul@example.com',
+  firstName: 'Paul',
+  lastName: '  ',
+}, {
+  username: 'Paul#',
+  password: 'awesome',
+  email: 'paul@example.com',
+  firstName: 'Paul',
+  lastName: 'Sunders',
+  gender: 'male'
+}, {
+  username: 'paul',
+  password: 'awesome',
+  email: 'paulexample.com',
+  firstName: 'Paul',
+  lastName: 'Sunders',
+}];
+const validSigninSeed = [{
+  username: 'Jessy',
+  password: 'jessypassword',
+}, {
+  username: 'scotch',
+  password: 'scotchpassword',
+}, {
+  username: 'Francis',
+  password: 'francispassword',
+}];
+const invalidSigninSeed = [{
+  username: '  ',
+  password: 'jessypassword',
+}, {
+  username: 'Jessy',
+  password: '   ',
+}, {
+  username: 'notJessy',
+  password: 'jessypassword',
+}, {
+  username: 'Jessy',
+  password: 'notjessypassword',
+}];
+const validUserSeed = [{
+  firstName: 'John',
+  lastName: 'Scotch',
+  aboutMe: 'This is my bio',
+}, {
+  userImage: 'user.image.url',
+}];
+const validRecipeSeed = [{
+  title: 'Beans',
+  category: 'Dessert',
+  description: 'Tasty beans',
+  preparationTime: 65,
+  ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
+  directions: 'Cook the beans and add the ingredients',
+  recipeImage: 'Url',
+}, {
+  title: 'Yam sauce',
+  category: 'Lunch',
+  description: 'Served white and colourful',
+  preparationTime: 50,
+  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
+  directions: 'Slice the yam and prepare the sauce',
+  recipeImage: 'Url',
+}, {
+  title: 'Beans',
+  category: 'Appetizer',
+  description: 'Tasty and nutricious beans',
+  preparationTime: 80,
+  ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
+  directions: 'Cook the beans and add the ingredients',
+  recipeImage: 'Url',
+}, {
+  title: 'Egusi soup',
+  category: 'Dinner',
+  description: 'Tasty and nutricious soup',
+  preparationTime: 65,
+  ingredients: 'Egusi, stock fish, red oil, onion, salt, maggi, pepper',
+  directions: 'Cook the egusi and add the ingredients',
+  recipeImage: 'Url',
+}, {
+  title: 'Yam sauce',
+  category: 'Lunch',
+  description: 'Served white and colourful',
+  preparationTime: 50,
+  ingredients: 'Yam, tomatoes, vegetable oil, egg, salt, maggi, pepper',
+  directions: 'Slice the yam and prepare the sauce',
+  recipeImage: 'Url',
+}];
+const invalidRecipeSeed = [{
+  title: '   ',
+  category: 'Lunch',
+  description: 'Served white and colourful',
+  preparationTime: 50,
+  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
+  directions: 'Slice the yam and prepare the sauce',
+  recipeImage: 'Url',
+}, {
+  title: 'Yam sauce',
+  category: 'Breakfast',
+  description: '   ',
+  preparationTime: 50,
+  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
+  directions: 'Slice the yam and prepare the sauce',
+  recipeImage: 'Url',
+}, {
+  title: 'Yam sauce',
+  category: 'Main',
+  description: 'Served white and colourful',
+  preparationTime: null,
+  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
+  directions: 'Slice the yam and prepare the sauce',
+  recipeImage: 'Url',
+}, {
+  title: 'Yam sauce',
+  category: 'Dinner',
+  description: 'Served white and colourful',
+  preparationTime: 50,
+  ingredients: '   ',
+  directions: 'Slice the yam and prepare the sauce',
+  recipeImage: 'Url',
+}, {
+  title: 'Yam sauce',
+  category: 'Breakfast',
+  description: 'Served white and colourful',
+  preparationTime: 50,
+  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
+  directions: '   ',
+  recipeImage: 'Url',
+}, {
+  title: 'Spaghetti',
+  category: '  ',
+  description: 'Served white and colourful',
+  preparationTime: 50,
+  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
+  directions: 'Slice the yam and prepare the sauce',
+  recipeImage: 'Url',
+}];
+const validReviewSeed = [{
+  content: 'A nice recipe idea',
+}, {
+  content: 'I added spinach and it was wonderful',
+}, {
+  content: 'A very tasty recipe, so sweet',
+}];
+const invalidReviewSeed = [{
+  content: '  ',
+}];
+const userFavoriteCategory = [{
+  category: 'Lunch',
+}];
+const userToken = [];
+let userId1;
+let userId2;
+let recipeId1;
+let recipeId2;
+let recipeId3;
+let reviewId1;
+let reviewId2;
 
 describe('More Recipes', () => {
   describe('Test Server Connection', () => {
@@ -247,7 +239,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validSignupSeed[0])
         .end((err, res) => {
-          userId1 = res.body.data.id;
+          userId1 = res.body.data.user.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User created');
@@ -304,7 +296,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validSignupSeed[3])
         .end((err, res) => {
-          userId2 = res.body.data.id;
+          userId2 = res.body.data.user.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User created');
@@ -471,7 +463,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validSigninSeed[0])
         .end((err, res) => {
-          userToken[0] = res.body.data.token;
+          userToken[0] = res.body.data.user.token;
           expect('Content-Type', 'application/json');
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
@@ -487,7 +479,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validSigninSeed[1])
         .end((err, res) => {
-          userToken[1] = res.body.data.token;
+          userToken[1] = res.body.data.user.token;
           expect('Content-Type', 'application/json');
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
@@ -503,7 +495,7 @@ describe('More Recipes', () => {
         .type('form')
         .send(validSigninSeed[2])
         .end((err, res) => {
-          userToken[2] = res.body.data.token;
+          userToken[2] = res.body.data.user.token;
           expect('Content-Type', 'application/json');
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
@@ -542,9 +534,9 @@ describe('More Recipes', () => {
     });
   });
   describe('edit user profile API', () => {
-    it('should allow a user to retrieve user profile details', (done) => {
+    it('should allow a user to edit his/her profile details', (done) => {
       server
-        .put(`/api/v1/users/${userId1}`)
+        .put('/api/v1/users')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])
@@ -553,7 +545,7 @@ describe('More Recipes', () => {
         .send(validUserSeed[0])
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('User details updated');
+          expect(res.body.message).to.equal('User profile updated');
           expect(res.body.data.user.firstName).to.equal('John');
           expect(res.body.data.user.lastName).to.equal('Scotch');
           expect(res.body.data.user.aboutMe).to.equal('This is my bio');
@@ -562,7 +554,7 @@ describe('More Recipes', () => {
     });
     it('should allow a user to update his/her profile image', (done) => {
       server
-        .put(`/api/v1/users/${userId1}/image`)
+        .put('/api/v1/users')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])
@@ -571,7 +563,7 @@ describe('More Recipes', () => {
         .send(validUserSeed[1])
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('User image updated');
+          expect(res.body.message).to.equal('User profile updated');
           expect(res.body.data.user.userImage).to.equal('user.image.url');
           done();
         });
@@ -775,22 +767,6 @@ describe('More Recipes', () => {
           done();
         });
     });
-    it('should return 400 for an empty recipe image', (done) => {
-      server
-        .post('/api/v1/recipes')
-        .set('Connection', 'keep alive')
-        .set('Accept', 'application/json')
-        .set('x-access-token', userToken[0])
-        .set('Content-Type', 'application/json')
-        .type('form')
-        .send(invalidRecipeSeed[6])
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.status).to.equal('Fail');
-          expect(res.body.message).to.equal('Recipe image cannot be empty');
-          done();
-        });
-    });
   });
   describe('modify recipe API', () => {
     it('should allow logged in user to modify his/her recipe', (done) => {
@@ -914,7 +890,7 @@ describe('More Recipes', () => {
             done();
           });
       });
-    it('should return 404 if a user has not added any recipe', (done) => {
+    it('should return 200 if a user has not added any recipe', (done) => {
       server
         .get(`/api/v1/recipes/users/${userId2}`)
         .set('Connection', 'keep alive')
@@ -922,8 +898,8 @@ describe('More Recipes', () => {
         .set('x-access-token', userToken[1])
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
-          expect(res.body.status).to.equal('Fail');
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User has not added any recipe');
           done();
         });
@@ -1277,8 +1253,8 @@ describe('More Recipes', () => {
         .set('x-access-token', userToken[1])
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
-          expect(res.body.status).to.equal('Fail');
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal(
             'User has not favorited any recipe');
           done();
@@ -1460,14 +1436,14 @@ describe('More Recipes', () => {
             done();
           });
       });
-    it('should return 404 for a searvh that has no match', (done) => {
+    it('should return 200 for a search that has no match', (done) => {
       server
         .get('/api/v1/recipes?search=ingredients&list=meat')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
+          expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('No recipe matched your search');
           done();
         });
@@ -1487,14 +1463,14 @@ describe('More Recipes', () => {
             done();
           });
       });
-    it('should return 404 for a search that has no match', (done) => {
+    it('should return 200 for a search that has no match', (done) => {
       server
         .get('/api/v1/recipes?search=category&list=breakfast')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
+          expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('No recipe matched your search');
           done();
         });
@@ -1534,27 +1510,29 @@ describe('More Recipes', () => {
   describe('opt-in and test notifications', () => {
     it('should allow a user to opt-in for notifications', (done) => {
       server
-        .put(`/api/v1/users/${userId1}/enable`)
+        .put('/api/v1/users')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])
         .set('Content-Type', 'application/json')
+        .send({ notifications: true })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('Notifications enabled');
+          expect(res.body.message).to.equal('User profile updated');
           done();
         });
     });
     it('should allow another user to opt-in for notifications', (done) => {
       server
-        .put(`/api/v1/users/${userId2}/enable`)
+        .put('/api/v1/users')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[2])
         .set('Content-Type', 'application/json')
+        .send({ notifications: true })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('Notifications enabled');
+          expect(res.body.message).to.equal('User profile updated');
           done();
         });
     });
@@ -1594,14 +1572,15 @@ describe('More Recipes', () => {
       });
     it('should allow a user to opt-out for notifications', (done) => {
       server
-        .put(`/api/v1/users/${userId1}/disable`)
+        .put('/api/v1/users')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
         .set('x-access-token', userToken[0])
         .set('Content-Type', 'application/json')
+        .send({ notifications: false })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('Notifications disabled');
+          expect(res.body.message).to.equal('User profile updated');
           done();
         });
     });

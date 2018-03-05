@@ -21,6 +21,7 @@ const propTypes = {
  * Function representing main component
  *
  * @param {any} props - The props passed to the component
+ *
  * @returns {object} - React components
  */
 const Main = (props) => {
@@ -31,8 +32,8 @@ const Main = (props) => {
       <div className="fixed-action-btn">
         <button
           onClick={handleOpenAdd}
-          className={`btn-floating btn-large modal-trigger waves-effect
-              waves-light indigo accent-2 pulse`}
+          className={`btn-floating btn-large waves-effect waves-light
+            indigo accent-2 pulse`}
           data-tip="Add Recipe"
         >
           <i className="material-icons">add</i>

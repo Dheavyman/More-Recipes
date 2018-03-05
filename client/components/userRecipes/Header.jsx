@@ -15,6 +15,7 @@ const propTypes = {
  * Class representing Header component
  *
  * @class Header
+ *
  * @extends {React.Component}
  */
 class Header extends React.Component {
@@ -31,11 +32,13 @@ class Header extends React.Component {
    * Component did mount lifecycle method
    *
    * @returns {function} Initialize materialize componenets
+   *
    * @memberof Header
    */
   componentDidMount() {
     // Initialize materialize css side nav menu activator
     $('.button-collapse').sideNav({
+      closeOnClick: true,
       draggable: true,
     });
     // Initailize materialize tab class
@@ -46,6 +49,7 @@ class Header extends React.Component {
    * Logout user from the application
    *
    * @returns {any} Logout user
+   *
    * @memberof Header
    */
   handleLogoutUser() {
@@ -58,6 +62,7 @@ class Header extends React.Component {
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof Header
    */
   render() {

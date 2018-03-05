@@ -1,20 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Spinner from '../common/Spinner';
+
 const propTypes = {
   reviewContent: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleAddReview: PropTypes.func.isRequired,
+  singleRecipe: PropTypes.shape({
+    isLoading: PropTypes.bool,
+  }).isRequired,
 };
 
 /**
  * Add review component
  *
  * @param {object} props - The properties passed to the component
+ *
  * @returns {object} - React element
  */
 const AddReview = (props) => {
-  const { reviewContent, handleChange, handleAddReview } = props;
+  const { reviewContent, handleChange, handleAddReview, singleRecipe } = props;
+  const { isLoading } = singleRecipe;
 
   return (
     <div className="row">
@@ -35,6 +42,10 @@ const AddReview = (props) => {
               />
               <label htmlFor="new-review">Add your review</label>
             </div>
+          </div>
+          <div className="row" />
+          <div className="center-align">
+            {isLoading && <Spinner size="small" />}
           </div>
           <div className="row">
             <button

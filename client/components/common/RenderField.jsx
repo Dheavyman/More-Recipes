@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  input: PropTypes.shape().isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  meta: PropTypes.shape({
+    touched: PropTypes.bool,
+    error: PropTypes.string,
+  }).isRequired,
+};
+
 /**
- * Function to render each of the input fields
+ * Input field component
  *
  * @param {object} Field - The input field
  * @param {object} Field.input - The input field element
@@ -11,6 +21,7 @@ import PropTypes from 'prop-types';
  * @param {object} Field.meta
  * @param {boolean} Field.meta.touched - The field input state
  * @param {string} Field.meta.error - Validation error message
+ *
  * @returns {object} Input element
  */
 const RenderField = ({
@@ -33,14 +44,6 @@ const RenderField = ({
   </div>
 );
 
-RenderField.propTypes = {
-  input: PropTypes.shape().isRequired,
-  label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  meta: PropTypes.shape({
-    touched: PropTypes.bool,
-    error: PropTypes.string,
-  }).isRequired,
-};
+RenderField.propTypes = propTypes;
 
 export default RenderField;

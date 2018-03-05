@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  handleToggleSignupModal: PropTypes.func.isRequired,
+  handleToggleSigninModal: PropTypes.func.isRequired,
+};
+
 /**
- * User navigation when unathenticated
+ * User navigation component when not authenticated
  *
  * @param {any} props - The properties passed to the component
+ *
  * @returns {object} React element
  */
 const IndexUserNav = (props) => {
-  const { handleOpenSignin, handleOpenSignup } = props;
+  const { handleToggleSigninModal, handleToggleSignupModal } = props;
   return (
     <ul id="user-control" className="dropdown-content">
       <li>
@@ -16,7 +22,7 @@ const IndexUserNav = (props) => {
           role="button"
           tabIndex="0"
           className="black-text"
-          onClick={handleOpenSignin}
+          onClick={handleToggleSigninModal}
         >
           Sign in
           <i className="material-icons left">person</i>
@@ -27,7 +33,7 @@ const IndexUserNav = (props) => {
           role="button"
           tabIndex="0"
           className="black-text"
-          onClick={handleOpenSignup}
+          onClick={handleToggleSignupModal}
         >
           Register
           <i className="material-icons left">folder</i>
@@ -37,9 +43,6 @@ const IndexUserNav = (props) => {
   );
 };
 
-IndexUserNav.propTypes = {
-  handleOpenSignup: PropTypes.func.isRequired,
-  handleOpenSignin: PropTypes.func.isRequired,
-};
+IndexUserNav.propTypes = propTypes;
 
 export default IndexUserNav;

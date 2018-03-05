@@ -8,12 +8,22 @@ const initialState = {
   imageUploaded: false,
   imageUrl: null,
   userAddedRecipes: [],
+  userAddedRecipesCount: 0,
   userFavorites: [],
+  userFavoritesCount: 0,
   errorFetchingUserRecipes: {},
   errorFetchingUserFavorites: {},
   error: {}
 };
 
+/**
+ * User recipes reducer
+ *
+ * @param {object} [state=initialState] - The state data
+ * @param {object} action - Action dispatched
+ *
+ * @returns {object} The new state of data
+ */
 const userRecipes = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_USER_RECIPES_REQUEST:
@@ -21,12 +31,14 @@ const userRecipes = (state = initialState, action) => {
         ...state,
         isFectchingUserRecipes: true,
         userAddedRecipes: [],
+        userAddedRecipesCount: 0,
       };
     case actionTypes.FETCH_USER_RECIPES_SUCCESS:
       return {
         ...state,
         isFectchingUserRecipes: false,
         userAddedRecipes: action.payload.recipes,
+        userAddedRecipesCount: action.payload.recipesCount,
         errorFetchingUserRecipes: {},
       };
     case actionTypes.FETCH_USER_RECIPES_FAILURE:
@@ -40,12 +52,14 @@ const userRecipes = (state = initialState, action) => {
         ...state,
         isFetchingUserFavorites: true,
         userFavorites: [],
+        userFavoritesCount: 0,
       };
     case actionTypes.FETCH_USER_FAVORITES_SUCCESS:
       return {
         ...state,
         isFetchingUserFavorites: false,
-        userFavorites: action.payload,
+        userFavorites: action.payload.favorites,
+        userFavoritesCount: action.payload.favoritesCount,
         errorFetchingUserFavorites: {},
       };
     case actionTypes.FETCH_USER_FAVORITES_FAILURE:
@@ -54,6 +68,15 @@ const userRecipes = (state = initialState, action) => {
         isFetchingUserFavorites: false,
         errorFetchingUserFavorites: action.payload,
       };
+    case actionTypes.UPDATE_USER_FAVORITE_RECIPES: {
+      let userFavorites = state.userFavorites.slice();
+      userFavorites = userFavorites.filter(recipe =>
+        recipe.Recipe.id !== action.payload);
+      return {
+        ...state,
+        userFavorites,
+      };
+    }
     case actionTypes.ADD_RECIPE_REQUEST:
       return {
         ...state,
@@ -75,6 +98,11 @@ const userRecipes = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    case actionTypes.UPDATE_USER_RECIPES_COUNT:
+      return {
+        ...state,
+        userAddedRecipesCount: state.userAddedRecipesCount + 1,
       };
     case actionTypes.EDIT_RECIPE_REQUEST:
       return {

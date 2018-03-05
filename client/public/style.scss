@@ -20,8 +20,16 @@ main {
   width: 100px;
 }
 
+.dropdown-user {
+  min-width: 200px;
+}
+
 .collapsible-header {
   margin-left: 14px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 #position {
@@ -82,6 +90,7 @@ main {
   display: none;
   position: fixed;
   right: 15px;
+  z-index: 5;
 }
 
 .end-message {
@@ -112,6 +121,26 @@ main {
   .recipes-list {
     margin: 5px;
   }
+}
+
+.card-title {
+  display: block;
+  height: 4.0rem;
+  line-height: 1.5rem;
+  overflow: hidden;
+  // overflow-wrap: break-word;
+  padding: 0.8rem 1rem;
+  text-overflow: ellipsis;
+}
+
+.icon-red {
+  color: red;
+  cursor: pointer;
+}
+
+.icon-green {
+  color: green;
+  cursor: pointer;
 }
 
 #recipes {
@@ -158,6 +187,11 @@ main {
   .chip {
     outline: transparent;
   }
+
+  .card-action {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
 }
 
 .chip {
@@ -193,13 +227,29 @@ main {
 }
 
 .fixed-action-btn {
-  margin-bottom: 30px;
+  margin-bottom: 80px;
+}
+
+.dropzone-area {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+@media only screen and (max-width : 992px) {
+  .dropzone-area {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
 }
 
 .dropzone {
   width: 100%;
   height: 15rem;
   border: 0.2rem dotted #2196f3;
+
+  i {
+    display: block;
+  }
 
   img {
     width: 100%;
@@ -217,10 +267,12 @@ main {
   }
 }
 
-#profile-image {
-  margin: auto;
-  width: 250px;
-  height: 250px;
+.user-image {
+  img {
+    height: 250px;
+    margin: auto;
+    width: 250px;
+  }
 }
 
 .image-upload-button {
@@ -241,4 +293,22 @@ main {
     padding: 6px 12px;
     cursor: pointer;
   }
+}
+
+#edit-btn {
+  right: 5px;
+}
+
+.connect-icons {
+  i {
+    margin: 5px;
+  }
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: #66bb6a;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: #4caf50;
 }

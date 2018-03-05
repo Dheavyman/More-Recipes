@@ -1,10 +1,10 @@
 import models from '../models';
 import helpers from '../helpers';
 
-const Review = models.Review,
-  Recipe = models.Recipe,
-  User = models.User,
-  sendNotification = helpers.sendEmail;
+const Review = models.Review;
+const Recipe = models.Recipe;
+const User = models.User;
+const sendNotification = helpers.sendEmail;
 
 /**
  * Class representing review handler
@@ -16,10 +16,13 @@ class ReviewController {
    * Add a review for a recipe
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} - Object representing success status or
    * error status
+   *
    * @memberof ReviewController
    */
   static addReview(req, res) {
@@ -78,10 +81,13 @@ class ReviewController {
    * Delete a review for a recipe
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object representing success status or
    * error status
+   *
    * @memberof ReviewController
    */
   static deleteReview(req, res) {

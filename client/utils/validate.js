@@ -1,33 +1,83 @@
+/**
+ * Check for required fields
+ *
+ * @param {string} value - Field value
+ *
+ * @returns {any} Message or undefined
+ */
 const required = value => (value ? undefined : 'Required');
 
+/**
+ * Check if field is empty
+ *
+ * @param {string} value - Field value
+ *
+ * @returns {any} Error message or undefined
+ */
 const isEmptyField = value => (
   !/^\s*$/.test(value) ? undefined : 'Invalid input'
 );
 
+/**
+ * Check email format
+ *
+ * @param {string} value - Field value
+ *
+ * @returns {any} Error message or undefined
+ */
 const email = value => (
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Invalid email address'
     : undefined
 );
 
+/**
+ * Check alpha-numeric format
+ *
+ * @param {string} value - Field value
+ *
+ * @returns {any} Error message or undefined
+ */
 const alphaNumeric = value => (
   value && /[^a-zA-Z0-9 ]/i.test(value)
     ? 'Only alphanumeric characters'
     : undefined
 );
 
+/**
+ * Check minimum length of value
+ *
+ * @param {number} min - Length to check against
+ *
+ * @returns {any} Error message or undefined
+ */
 const minLength = min => value => (
   value && value.length < min
     ? `Must be ${min} characters or more`
     : undefined
 );
 
+/**
+ * Confirm password
+ *
+ * @param {string} value - Field value
+ * @param {string} password - Password value
+ *
+ * @returns {any} Error message or undefined
+ */
 const confirmPassword = (value, { password }) => (
   value !== password
     ? 'Passwords do not match'
     : undefined
 );
 
+/**
+ * Validate input values
+ *
+ * @param {string} values - Field values
+ *
+ * @returns {object} Error message(s)
+ */
 const validate = (values) => {
   const errors = {};
   if (!values.firstName) {

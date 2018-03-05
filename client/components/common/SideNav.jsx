@@ -4,10 +4,41 @@ import { Link } from 'react-router-dom';
 
 import { decodeToken } from '../../utils/authenticate';
 
+const propTypes = {
+  handleToggleSignupModal: PropTypes.func,
+  handleToggleSigninModal: PropTypes.func,
+  handleLogoutUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    userProfile: PropTypes.shape({
+      notifications: PropTypes.bool,
+    })
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  }).isRequired,
+  userRecipes: PropTypes.shape({
+    userAddedRecipesCount: PropTypes.number,
+    userFavoritesCount: PropTypes.number,
+  }),
+  editUserProfile: PropTypes.func.isRequired,
+  currentProfileUserId: PropTypes.number,
+  authenticatedUserId: PropTypes.number,
+};
+
+const defaultProps = {
+  handleToggleSignupModal: undefined,
+  handleToggleSigninModal: undefined,
+  currentProfileUserId: null,
+  authenticatedUserId: null,
+  userRecipes: undefined,
+};
+
 /**
  * Class representing Side nav component
  *
  * @class SideNav
+ *
  * @extends {React.Component}
  */
 class SideNav extends React.Component {
@@ -15,6 +46,7 @@ class SideNav extends React.Component {
    * ComponentDidMount lifecycle method
    *
    * @returns {any} Initialize materialize collapsible class
+   *
    * @memberof SideNav
    */
   componentDidMount() {
@@ -22,39 +54,38 @@ class SideNav extends React.Component {
   }
 
   /**
-   * Function to handle changing of tabs
+   * Handle change in notification switch
    *
-   * @param {any} event - Event from clicking and element
-   * @returns {any} Changes to the corresponding tab
+   * @returns {object} Change the switch position
+   *
    * @memberof SideNav
    */
-  handleTabChange = (event) => {
-    event.preventDefault();
-    const { target: { name } } = event;
-    $('ul.tabs').tabs('select_tab', name);
-  }
+  handleNotificationChange = () => {
+    const { editUserProfile } = this.props;
+    const checked = document.getElementById('notification-switch').checked;
+    const status = {
+      notifications: checked,
+    };
 
-  /**
-   * Logout user from the application
-   *
-   * @returns {any} Logout user
-   * @memberof SideNav
-   */
-  handleLogoutUser = () => {
-    const { logoutUser, history } = this.props;
-    logoutUser();
-    history.push('/');
+    editUserProfile(status);
   }
 
   /**
    * Render function
    *
    * @returns {object} React element
+   *
    * @memberof SideNav
    */
   render() {
-    const { user: { isAuthenticated }, location: { pathname } } = this.props;
-    const dashboard = pathname.match(/(users)/) === null ? null : 'fixed'; // check the regex
+    const {
+      user, location: { pathname }, userRecipes, handleToggleSignupModal,
+      handleToggleSigninModal, handleLogoutUser, currentProfileUserId,
+      authenticatedUserId,
+    } = this.props;
+    const { isAuthenticated, userProfile: { notifications } } = user;
+    const userUrl = new RegExp(/users/);
+    const dashboard = pathname.match(userUrl) === null ? null : 'fixed';
     const decoded = decodeToken();
     let userId;
 
@@ -65,15 +96,6 @@ class SideNav extends React.Component {
     return (
       <div>
         <ul className={`side-nav ${dashboard}`} id="slide_out">
-          <li>
-            <div
-              className="nav-wrapper deep-orange darken-4 hide-on-med-and-up"
-            >
-              <a id="logo" href="index.html" className="white-text">
-                More-Recipes
-              </a>
-            </div>
-          </li>
           <li><Link to="/">Home</Link></li>
           <li>
             <ul className="collapsible" data-collapsible="accordion">
@@ -101,40 +123,46 @@ class SideNav extends React.Component {
           <li>
             <div className="divider" />
           </li>
-          {isAuthenticated ?
-            <div>
+          {isAuthenticated
+            ? <div>
               <li><Link to={`/users/${userId}/dashboard`} >Dashboard</Link></li>
               <li>
                 <div className="divider" />
               </li>
               <li>
-                <a name="user-profile" href="#!" onClick={this.handleTabChange}>
-                  Profile
-                </a>
-              </li>
-              <li><a className="subheader">Activities</a></li>
-              <li>
-                <a name="user-recipes" href="#!" onClick={this.handleTabChange}>
+                <a name="user-recipes" className="subheader">
                   Recipes
-                  <span className="badge">22</span>
+                  <span className="badge">
+                    {userRecipes && userRecipes.userAddedRecipesCount}
+                  </span>
                 </a>
               </li>
               <li>
-                <a
-                  name="user-favorites"
-                  href="#!"
-                  onClick={this.handleTabChange}
-                >
+                <a name="user-favorites" className="subheader">
                   Favorites
-                  <span className="badge">55</span>
+                  <span className="badge">
+                    {userRecipes && userRecipes.userFavoritesCount}
+                  </span>
                 </a>
               </li>
-              <li>
-                <a href="profile.html?#notifications">
-                  Notificatons
-                  <span className="new badge deep-orange darken-1">2</span>
-                </a>
-              </li>
+              {currentProfileUserId === authenticatedUserId &&
+                <li>
+                  <a>
+                    Notificatons
+                    <span className=" badge switch">
+                      <label htmlFor="notification-switch">
+                        <input
+                          id="notification-switch"
+                          type="checkbox"
+                          onClick={this.handleNotificationChange}
+                          defaultChecked={notifications}
+                        />
+                        <span className="lever" />
+                      </label>
+                    </span>
+                  </a>
+                </li>
+              }
               <li>
                 <div className="divider" />
               </li>
@@ -142,15 +170,31 @@ class SideNav extends React.Component {
                 <a
                   role="button"
                   tabIndex="0"
-                  onClick={this.handleLogoutUser}
+                  onClick={handleLogoutUser}
                 >
                   Logout
                 </a>
               </li>
-            </div> :
-            <div>
-              <li><a href="#signin" className="modal-trigger">Sign In</a></li>
-              <li><a href="#signup" className="modal-trigger">Register</a></li>
+            </div>
+            : <div>
+              <li>
+                <a
+                  role="button"
+                  tabIndex="0"
+                  onClick={handleToggleSigninModal}
+                >
+                  Sign In
+                </a>
+              </li>
+              <li>
+                <a
+                  role="button"
+                  tabIndex="0"
+                  onClick={handleToggleSignupModal}
+                >
+                  Register
+                </a>
+              </li>
             </div>
           }
         </ul>
@@ -159,17 +203,7 @@ class SideNav extends React.Component {
   }
 }
 
-SideNav.propTypes = {
-  user: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string
-  }).isRequired,
-  logoutUser: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
+SideNav.propTypes = propTypes;
+SideNav.defaultProps = defaultProps;
 
 export default SideNav;

@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
+import { ToastContainer } from 'react-toastify';
 
 import Navbar from './Navbar';
 import SideNav from './SideNav';
+import notify from '../../utils/notification';
+
+const propTypes = {
+  signupUser: PropTypes.func.isRequired,
+  signinUser: PropTypes.func.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    userAuthentication: PropTypes.shape({
+      message: PropTypes.string
+    })
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 /**
  * Class representing Header component
  *
  * @class Header
+ *
  * @extends {Component}
  */
 class Header extends Component {
@@ -21,44 +41,102 @@ class Header extends Component {
       openSignup: false,
       openSignin: false
     };
-    this.handleOpenSignup = this.handleOpenSignup.bind(this);
-    this.handleOpenSignin = this.handleOpenSignin.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   /**
-   * Opens the signup modal
+   * Component did mount method
    *
-   * @returns {object} Set open state to true
+   * @returns {any} Initialize materialize components
+   *
    * @memberof Header
    */
-  handleOpenSignup() {
-    this.setState({ openSignup: true });
-  }
-
-  /**
-   * Opens the signin modal
-   *
-   * @returns {object} Set open state to true
-   * @memberof Header
-   */
-  handleOpenSignin() {
-    this.setState({ openSignin: true });
-  }
-
-  /**
-   * Closes the modal
-   *
-   * @param {object} errors - The error object
-   *
-   * @returns {object} Set open state to false
-   * @memberof Header
-   */
-  handleClose() {
-    this.setState({
-      openSignup: false,
-      openSignin: false
+  componentDidMount() {
+    // Initialize materialize css side nav menu activator
+    $('.button-collapse').sideNav({
+      closeOnClick: true,
+      draggable: true,
     });
+    // Initialize materialize dropdown class
+    $('.dropdown-button').dropdown({
+      belowOrigin: true,
+    });
+  }
+
+  /**
+   * Open or close the signup modal
+   *
+   * @returns {object} Toggle openSignup state
+   * @memberof Header
+   */
+  handleToggleSignupModal = () => {
+    this.setState({ openSignup: !this.state.openSignup });
+  }
+
+  /**
+   * Open or close the signin modal
+   *
+   * @returns {object} Toggle openSignin state
+   * @memberof Header
+   */
+  handleToggleSigninModal = () => {
+    this.setState({ openSignin: !this.state.openSignin });
+  }
+
+  handleToggleModal = () => {
+    this.setState({
+      openSignin: !this.state.openSignin,
+      openSignup: !this.state.openSignup,
+    });
+  }
+
+  /**
+   * Form submission handler function
+   *
+   * @param {any} values The form values
+   * @returns {any} Submit function
+   * @memberof Header
+   */
+  handleSubmitSignup = (values) => {
+    this.props.signupUser(values)
+      .then(() => {
+        const { user: { error } } = this.props;
+        if (isEmpty(error)) {
+          this.handleToggleSignupModal();
+          notify('success', 'Signup Successful');
+        }
+      });
+  }
+
+  /**
+   * Form submission handler function
+   *
+   * @param {any} values The form values
+   * @returns {any} Submit function
+   * @memberof Header
+   */
+  handleSubmitSignin = (values) => {
+    this.props.signinUser(values)
+      .then(() => {
+        const { user: { error } } = this.props;
+        if (isEmpty(error)) {
+          this.handleToggleSigninModal();
+          notify('success', 'Login Successful');
+        }
+      });
+  }
+
+  /**
+   * Logout user from the application
+   *
+   * @returns {any} Logout user
+   * @memberof Header
+   */
+  handleLogoutUser = () => {
+    const { logoutUser, history } = this.props;
+    logoutUser()
+      .then(() => {
+        history.push('/');
+      });
   }
 
   /**
@@ -75,9 +153,12 @@ class Header extends Component {
             <Navbar
               openSignup={this.state.openSignup}
               openSignin={this.state.openSignin}
-              handleOpenSignup={this.handleOpenSignup}
-              handleOpenSignin={this.handleOpenSignin}
-              handleClose={this.handleClose}
+              handleToggleSignupModal={this.handleToggleSignupModal}
+              handleToggleSigninModal={this.handleToggleSigninModal}
+              handleToggleModal={this.handleToggleModal}
+              handleSubmitSignup={this.handleSubmitSignup}
+              handleSubmitSignin={this.handleSubmitSignin}
+              handleLogoutUser={this.handleLogoutUser}
               {...this.props}
             />
           </nav>
@@ -85,14 +166,17 @@ class Header extends Component {
         <SideNav
           openSignup={this.state.openSignup}
           openSignin={this.state.openSignin}
-          handleOpenSignup={this.handleOpenSignup}
-          handleOpenSignin={this.handleOpenSignin}
-          handleClose={this.handleClose}
+          handleToggleSignupModal={this.handleToggleSignupModal}
+          handleToggleSigninModal={this.handleToggleSigninModal}
+          handleLogoutUser={this.handleLogoutUser}
           {...this.props}
         />
+        <ToastContainer />
       </div>
     );
   }
 }
+
+Header.propTypes = propTypes;
 
 export default Header;

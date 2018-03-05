@@ -32,7 +32,7 @@ export default (sequelize, DataTypes) => {
     },
     recipeImage: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     upvotes: {
       type: DataTypes.INTEGER,

@@ -8,22 +8,42 @@ import isEmpty from 'lodash/isEmpty';
 import { required, isEmptyField } from '../../utils/validate';
 import ErrorMessage from '../common/ErrorMessage';
 import RenderField from '../common/RenderField';
+import Spinner from '../common/Spinner';
+
+const propTypes = {
+  openSignin: PropTypes.bool.isRequired,
+  handleToggleSigninModal: PropTypes.func.isRequired,
+  handleToggleModal: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleSubmitSignin: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    isLoading: PropTypes.bool.isRequired,
+    error: PropTypes.shape({
+      message: PropTypes.string
+    })
+  }).isRequired,
+};
 
 /**
- * Signin react component
+ * Signin component
  *
  * @param {any} props The props passed to component
+ *
  * @returns {object} React element
  */
 const Signin = (props) => {
-  const { open, onSubmit, submitting, user: { error } } = props,
-    { message } = error;
+  const {
+    openSignin, handleSubmitSignin, submitting, handleToggleSigninModal,
+    handleToggleModal, user: { isLoading, error }
+  } = props;
+  const { message } = error;
 
   const actions = [
     <FlatButton
       label="Cancel"
       secondary
-      onClick={props.handleClose}
+      onClick={handleToggleSigninModal}
     />
   ];
 
@@ -33,13 +53,13 @@ const Signin = (props) => {
         title="Login into your account"
         actions={actions}
         modal
-        open={open}
+        open={openSignin}
         autoScrollBodyContent
       >
         <div className="row">
           <form
             className="col s12"
-            onSubmit={props.handleSubmit(onSubmit)}
+            onSubmit={props.handleSubmit(handleSubmitSignin)}
           >
             <div className="row">
               <div className="input-field col s12">
@@ -63,8 +83,11 @@ const Signin = (props) => {
                 />
               </div>
             </div>
-            {!isEmpty(error) && <ErrorMessage message={message} /> }
+            {!isEmpty(error) && <ErrorMessage message={message} />}
             <div className="row" />
+            <div className="center-align">
+              {isLoading && <Spinner size="small" />}
+            </div>
             <div className="row center-align">
               <button
                 type="submit"
@@ -75,6 +98,16 @@ const Signin = (props) => {
                 Sign In
               </button>
             </div>
+            <div className="row center-align">
+              Don&#39;t have an account? <a
+                role="button"
+                tabIndex="0"
+                className="cursor-pointer blue-text"
+                onClick={handleToggleModal}
+              >
+                Register
+              </a>
+            </div>
           </form>
         </div>
       </Dialog>
@@ -82,19 +115,7 @@ const Signin = (props) => {
   );
 };
 
-// Signin props validation
-Signin.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  user: PropTypes.shape({
-    error: PropTypes.shape({
-      message: PropTypes.string
-    })
-  }).isRequired,
-};
+Signin.propTypes = propTypes;
 
 export default reduxForm({
   form: 'Signin'

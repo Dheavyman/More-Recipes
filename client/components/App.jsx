@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './homepage';
 import CatalogPage from './catalogPage';
 import singleRecipePage from './singleRecipePage';
-import UserDashboard from './userRecipes/UserRecipes';
+import UserDashboard from './userRecipes';
 import { decodeToken } from '../utils/authenticate';
 import '../public/style.scss';
 
@@ -20,7 +20,7 @@ const defaultProps = {
 /**
  * App component
  *
- * @returns {any} - Link to the matched page
+ * @returns {any} - Navigate to the matched route
  */
 const App = () => (
   <Switch>

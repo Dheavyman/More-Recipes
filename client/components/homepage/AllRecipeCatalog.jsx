@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RecipeCatalogCard from '../common/RecipeCatalogCard';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   recipesCatalog: PropTypes.arrayOf(PropTypes.shape()),
+  recipes: PropTypes.shape({
+    isFetchingRecipes: PropTypes.bool,
+  }).isRequired,
 };
 
 const defaultProps = {
@@ -20,25 +24,32 @@ const defaultProps = {
  * @returns {object} React element
  */
 const AllRecipeCatalog = (props) => {
-  const { recipesCatalog } = props;
+  const { recipesCatalog, recipes: { isFetchingRecipes } } = props;
 
   return (
     <div className="row">
       <div className="col s12" >
         <div className="row valign-wrapper" >
-          <h4 className="col s11">All Recipes</h4>
-          <span className="col s1 right" >
+          <h4 className="col s8 m10 l11">All Recipes</h4>
+          <span className="col s4 m2 l1  right" >
             <Link to="/catalog">View All &gt;</Link>
           </span>
         </div>
       </div>
-      {recipesCatalog && recipesCatalog.slice(0, 4).map((recipe, index) =>
-        (<RecipeCatalogCard
-          {...props}
-          key={recipe.id}
-          index={index}
-          recipe={recipe}
-        />))}
+      {isFetchingRecipes
+        ? <div className="center-align">
+          <Spinner size="big" />
+        </div>
+        : <div>
+          {recipesCatalog && recipesCatalog.slice(0, 4).map((recipe, index) =>
+            (<RecipeCatalogCard
+              {...props}
+              key={recipe.id}
+              index={index}
+              recipe={recipe}
+            />))}
+        </div>
+      }
     </div>
   );
 };

@@ -9,6 +9,7 @@ import slide4 from '../../public/images/slide4.jpg';
  * Class representing slider
  *
  * @class Slider
+ *
  * @extends {React.Component}
  */
 class Slider extends React.Component {
@@ -16,17 +17,20 @@ class Slider extends React.Component {
    * Component did mount method
    *
    * @returns {function} Initialize the slider
+   *
    * @memberof Slider
    */
   componentDidMount() {
     $('.slider').slider({
       full_width: true,
+      height: 600,
     });
   }
   /**
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof Slider
    */
   render() {

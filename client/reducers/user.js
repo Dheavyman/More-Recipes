@@ -5,13 +5,20 @@ const initialState = {
   imageUploading: false,
   imageUploaded: false,
   userImageUrl: null,
-  userSignup: {},
-  userSignin: {},
+  userAuthentication: {},
   userProfile: {},
   isAuthenticated: !!localStorage.getItem('token'),
   error: {},
 };
 
+/**
+ * User reducer
+ *
+ * @param {object} [state=initialState] - State data
+ * @param {object} action - Action dispatched
+ *
+ * @returns {object} The new state of data
+ */
 const user = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SIGNUP_REQUEST:
@@ -23,27 +30,28 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        userSignup: action.payload,
+        isAuthenticated: true,
+        userAuthentication: action.payload,
         error: {},
       };
     case actionTypes.SIGNUP_FAILURE:
       return {
         ...state,
         isLoading: false,
+        isAuthenticated: false,
         error: action.payload
       };
     case actionTypes.SIGNIN_REQUEST:
       return {
         ...state,
         isLoading: true,
-        isAuthenticated: false,
       };
     case actionTypes.SIGNIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isAuthenticated: true,
-        userSignin: action.payload,
+        userAuthentication: action.payload,
         error: {},
       };
     case actionTypes.SIGNIN_FAILURE:
@@ -57,13 +65,13 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        isAuthenticated: true,
       };
     case actionTypes.LOGOUT_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isAuthenticated: false,
+        userAuthentication: {},
       };
     case actionTypes.FETCH_USER_PROFILE_REQUEST:
       return {

@@ -1,7 +1,7 @@
 import models from '../models';
 
-const Recipe = models.Recipe,
-  Vote = models.Vote;
+const Recipe = models.Recipe;
+const Vote = models.Vote;
 
 /**
  * Class representing voting handler for upvoting or downvoting a recipe
@@ -13,9 +13,12 @@ class VoteController {
    * Recipe upvote
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object representing the success or failure message
+   *
    * @memberof VoteController
    */
   static upvote(req, res) {
@@ -85,10 +88,13 @@ class VoteController {
    * downvote a recipe
    *
    * @static
+   *
    * @param {object} req - The request object
    * @param {object} res - The response object
+   *
    * @returns {object} Object containing the success status or
    * error status
+   *
    * @memberof VoteController
    */
   static downvote(req, res) {

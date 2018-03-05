@@ -7,15 +7,16 @@ import avatar from '../../public/images/avatar.png';
 import ProfileDetails from './ProfileDetails';
 import EditProfileForm from './EditProfileForm';
 import config from '../../config';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   fetchUserProfile: PropTypes.func.isRequired,
   editUserProfile: PropTypes.func.isRequired,
-  editProfilePicture: PropTypes.func.isRequired,
   uploadUserImage: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  currentProfileUserId: PropTypes.number.isRequired,
   authenticatedUserId: PropTypes.number,
   user: PropTypes.shape({
+    imageUploading: PropTypes.bool.isRequired,
     userProfile: PropTypes.shape({
       fullName: PropTypes.string,
       userImage: PropTypes.string,
@@ -32,11 +33,13 @@ const defaultProps = {
  * Class representing user profile section
  *
  * @class UserProfile
+ *
  * @extends {React.Component}
  */
 class UserProfile extends React.Component {
   /**
    * Creates an instance of UserProfile.
+   *
    * @memberof UserProfile
    */
   constructor() {
@@ -51,6 +54,7 @@ class UserProfile extends React.Component {
    * Component did mount lifecycle method
    *
    * @returns {any} Dispatch action to fetch user profile
+   *
    * @memberof UserProfile
    */
   componentDidMount() {
@@ -61,30 +65,15 @@ class UserProfile extends React.Component {
       delay: 50
     });
 
-    const { fetchUserProfile, userId } = this.props;
-    fetchUserProfile(userId);
-  }
-
-  /**
-   * Component will receive props lifecycle method
-   *
-   * @param {any} nextProps - The next props
-   * @returns {any} Changes state
-   * @memberof UserProfile
-   */
-  componentWillReceiveProps(nextProps) {
-    const { user: { error } } = nextProps;
-    if (isEmpty(error)) {
-      this.setState({
-        isEditing: false,
-      });
-    }
+    const { fetchUserProfile, currentProfileUserId } = this.props;
+    fetchUserProfile(currentProfileUserId);
   }
 
   /**
    * Function to switch to edit profile form
    *
    * @param {object} userDetails - The details of the user
+   *
    * @returns {any} Set editing to true
    */
   handleStartEdit = (userDetails) => {
@@ -99,6 +88,7 @@ class UserProfile extends React.Component {
    * Function to handle edit profile input fields
    *
    * @param {object} event - Edit profile events
+   *
    * @returns {any} Set input value state values
    */
   handleProfileChange = (event) => {
@@ -114,6 +104,7 @@ class UserProfile extends React.Component {
 
   /**
    * Function to handle canceling of profile edit event
+   *
    * @returns {any} Cancels the edit event
    */
   handleCancel = () => {
@@ -126,27 +117,38 @@ class UserProfile extends React.Component {
    * Function to handle submiting profile changes
    *
    * @returns {any} Submits the changes made
+   *
    * @memberof UserProfile
    */
   handleSubmitProfile = () => {
     const { userDetails } = this.state;
-    const { editUserProfile, userId } = this.props;
+    const { editUserProfile } = this.props;
 
-    editUserProfile(userId, userDetails);
+    editUserProfile(userDetails)
+      .then(() => {
+        const { user: { error } } = this.props;
+        if (isEmpty(error)) {
+          this.setState({
+            isEditing: false,
+          });
+        }
+      });
   }
 
   /**
    * Function to handle profile picture upload
    *
    * @param {event} event - Picture upload event
+   *
    * @returns {any} Uploads picture
+   *
    * @memberof UserProfile
    */
   handleUploadPhoto = (event) => {
     event.preventDefault();
     const { target: { files } } = event;
     const file = files[0];
-    const { userId, uploadUserImage, editProfilePicture } = this.props;
+    const { uploadUserImage, editUserProfile } = this.props;
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', config.UPLOAD_PRESET);
@@ -160,7 +162,7 @@ class UserProfile extends React.Component {
         };
 
         if (isEmpty(error)) {
-          editProfilePicture(userId, imageFile);
+          editUserProfile(imageFile);
         }
       });
   }
@@ -169,16 +171,20 @@ class UserProfile extends React.Component {
    * Render function
    *
    * @returns {object} React element
+   *
    * @memberof UserProfile
    */
   render() {
     const { isEditing } = this.state;
-    const { user: { userProfile }, userId, authenticatedUserId } = this.props;
+    const {
+      user: { imageUploading, userProfile }, currentProfileUserId,
+      authenticatedUserId
+    } = this.props;
     const { fullName, userImage } = userProfile;
 
     return (
       <div className="row">
-        <div className="col s12 m5 l4">
+        <div className="user-image col s12 m5 l4">
           <div className="row">
             <figure className="col s12">
               <img
@@ -189,8 +195,13 @@ class UserProfile extends React.Component {
               />
             </figure>
           </div>
+          <span className="uploading-image-spinner">
+            <div className="center-align">
+              {imageUploading && <Spinner size="small" />}
+            </div>
+          </span>
           <div className="row">
-            {userId === authenticatedUserId
+            {currentProfileUserId === authenticatedUserId
               && <div className=" image-upload-button center">
                 <label
                   htmlFor="user-image"
@@ -212,7 +223,7 @@ class UserProfile extends React.Component {
           </div>
         </div>
         <div className="col s12 m5 l6 z-depth-1">
-          {isEditing && (userId === authenticatedUserId) ?
+          {isEditing && (currentProfileUserId === authenticatedUserId) ?
             <EditProfileForm
               handleProfileChange={this.handleProfileChange}
               handleSubmitProfile={this.handleSubmitProfile}

@@ -15,7 +15,7 @@ const defaultProps = {
 };
 
 /**
- * Function representing search bar component
+ * Search bar component
  *
  * @param {object} props - The properties passed to the component
  *
