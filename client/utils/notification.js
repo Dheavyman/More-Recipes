@@ -1,5 +1,13 @@
 import { toast } from 'react-toastify';
 
+/**
+ * Toaster notification
+ *
+ * @param {string} type - Type of toast message
+ * @param {string} message - Message info to display
+ *
+ * @returns {any} Toast message
+ */
 const notify = (type, message) => {
   switch (type) {
     case 'success':

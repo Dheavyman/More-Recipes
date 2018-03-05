@@ -61,7 +61,8 @@ class UserFavorites extends React.Component {
               owner={favorite.Recipe.User}
               {...this.props}
             />
-          ))}
+          ))
+        }
       </div>
     );
   }

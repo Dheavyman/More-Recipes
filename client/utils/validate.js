@@ -61,7 +61,7 @@ const minLength = min => value => (
  * Confirm password
  *
  * @param {string} value - Field value
- * @param {string} { password } - Password value
+ * @param {string} password - Password value
  *
  * @returns {any} Error message or undefined
  */

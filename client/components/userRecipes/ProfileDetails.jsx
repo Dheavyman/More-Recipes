@@ -29,8 +29,10 @@ const defaultProps = {
  * @returns {object} React element
  */
 const ProfileDetails = (props) => {
-  const { user: { userProfile }, handleStartEdit, currentProfileUserId,
-    authenticatedUserId } = props;
+  const {
+    user: { userProfile }, handleStartEdit, currentProfileUserId,
+    authenticatedUserId
+  } = props;
   const { username, firstName, lastName, email, aboutMe } = userProfile;
   const editableDetails = {
     firstName,
@@ -78,7 +80,8 @@ const ProfileDetails = (props) => {
       <div className="col s12">
         <h5>About {currentProfileUserId === authenticatedUserId
           ? 'Me'
-          : firstName}</h5>
+          : firstName
+        }</h5>
         <div className="divider black" />
         <p
           id="about-me"

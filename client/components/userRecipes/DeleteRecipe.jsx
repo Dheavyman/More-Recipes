@@ -25,8 +25,10 @@ const defaultProps = {
  * @returns {object} React element
  */
 const DeleteRecipe = (props) => {
-  const { recipeId, open, handleClose, handleDeleteRecipe,
-    deleteMessage, actionTitle, action } = props;
+  const {
+    recipeId, open, handleClose, handleDeleteRecipe,
+    deleteMessage, actionTitle, action
+  } = props;
 
   const actions = [
     <FlatButton

@@ -56,7 +56,8 @@ class UserAddedRecipes extends React.Component {
           </div>
           : userAddedRecipes.map(recipe => (
             <UserRecipeCard key={recipe.id} recipe={recipe} {...this.props} />
-          ))}
+          ))
+        }
       </div>
     );
   }
