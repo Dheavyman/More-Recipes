@@ -258,7 +258,10 @@ class RecipeController {
         ],
         include: [{
           model: Review,
-          attributes: ['id', 'content', 'createdAt'],
+          limit: 5,
+          order: [
+            ['createdAt', 'DESC']
+          ],
           include: [{
             model: User,
             attributes: ['firstName', 'lastName', 'userImage'],
@@ -323,7 +326,7 @@ class RecipeController {
         }
       })
       .then((recipes) => {
-        if (recipes.rows.length === 0) {
+        if (recipes.count === 0) {
           return res.status(200).send({
             status: 'Success',
             message: 'User has not added any recipe',
