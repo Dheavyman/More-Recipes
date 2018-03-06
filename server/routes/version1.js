@@ -470,8 +470,10 @@ router.route('/recipes/:recipeId/reviews')
    *       400:
    *         description: Invalid or incomplete details to create review
    */
-  .post(authenticate.verifyToken, reviewValidate.reviewRequiredInputs,
-    recipeValidate.recipeExist, reviewController.addReview);
+  .post(
+    authenticate.verifyToken, reviewValidate.reviewRequiredInputs,
+    recipeValidate.recipeExist, reviewController.addReview
+  );
 
 /**
  * @swagger
