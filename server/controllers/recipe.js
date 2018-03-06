@@ -258,7 +258,10 @@ class RecipeController {
         ],
         include: [{
           model: Review,
-          attributes: ['id', 'content', 'createdAt'],
+          limit: 5,
+          order: [
+            ['createdAt', 'DESC']
+          ],
           include: [{
             model: User,
             attributes: ['firstName', 'lastName', 'userImage'],
@@ -323,7 +326,7 @@ class RecipeController {
         }
       })
       .then((recipes) => {
-        if (recipes.rows.length === 0) {
+        if (recipes.count === 0) {
           return res.status(200).send({
             status: 'Success',
             message: 'User has not added any recipe',
@@ -487,21 +490,13 @@ class RecipeController {
             attributes: ['id', 'firstName', 'lastName']
           }],
         })
-        .then((recipes) => {
-          if (!recipes) {
-            return res.status(200).send({
-              status: 'Success',
-              message: 'No result found',
-            });
+        .then(recipes => res.status(200).send({
+          status: 'Success',
+          message: 'Recipe(s) retrieved',
+          data: {
+            recipes
           }
-          return res.status(200).send({
-            status: 'Success',
-            message: 'Recipe(s) found',
-            data: {
-              recipes
-            }
-          });
-        });
+        }));
     }
     next();
   }

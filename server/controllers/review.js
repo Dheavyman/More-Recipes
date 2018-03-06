@@ -49,6 +49,8 @@ class ReviewController {
                 createdAt: review.createdAt,
                 User: {
                   fullName: reviewer.fullName,
+                  firstName: reviewer.firstName,
+                  lastName: reviewer.lastName,
                   userImage: reviewer.userImage,
                 }
               }
@@ -61,11 +63,11 @@ class ReviewController {
           include: [{
             model: User,
             attributes: ['id', 'email', 'notifications'],
-          }]
+          }],
         }))
       .then((recipe) => {
         if (recipe.User.notifications === true &&
-              recipe.User.id !== reviewer.id) {
+            recipe.User.id !== reviewer.id) {
           sendNotification(recipe.User.email,
             'New notification', `Your recipe ${
               recipe.title} was reviewed by ${reviewer.fullName}`);
@@ -104,6 +106,49 @@ class ReviewController {
       .then(() => res.status(200).send({
         status: 'Success',
         message: 'Review deleted'
+      }))
+      .catch(error => res.status(500).send({
+        status: 'Error',
+        message: error.message,
+      }));
+  }
+
+  /**
+   * Get the reviews for a recipe
+   *
+   * @static
+   *
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   *
+   * @returns {object} Object representing success status or
+   * error status
+   *
+   * @memberof ReviewController
+   */
+  static getReviews(req, res) {
+    return Review
+      .findAndCountAll({
+        where: {
+          recipeId: req.params.recipeId
+        },
+        order: [
+          ['createdAt', 'DESC']
+        ],
+        limit: req.query.limit || 5,
+        offset: req.query.offset,
+        include: [{
+          model: User,
+          attributes: ['firstName', 'lastName', 'userImage'],
+        }],
+      })
+      .then(reviews => res.status(200).send({
+        status: 'Success',
+        message: 'Reviews retrieved',
+        data: {
+          reviews: reviews.rows,
+          reviewsCount: reviews.count,
+        }
       }))
       .catch(error => res.status(500).send({
         status: 'Error',

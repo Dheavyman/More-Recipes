@@ -398,50 +398,89 @@ router.route('/recipes/:recipeId')
   .delete(authenticate.verifyToken, recipeValidate.recipeExist,
     recipeValidate.userRecipe, recipeController.deleteRecipe);
 
-/**
- * @swagger
- * /recipes/{recipeId}/reviews:
- *   post:
- *     tags:
+router.route('/recipes/:recipeId/reviews')
+  /**
+   * @swagger
+   * /recipes/{recipeId}/reviews:
+   *   get:
+   *     tags:
    *       - Reviews
- *     summary: Add a review
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: recipeId
- *         in: path
- *         description: Id of recipe to delete
- *         type: integer
- *         required: true
- *       - name: body
- *         in: body
- *         description: Review content
- *         required: true
- *         schema:
- *           type: object
- *           properties:
- *             content:
- *               type: string
- *     responses:
- *       201:
- *         description: Review created
- *         schema:
- *           $ref: '#/definitions/Review'
- *       400:
- *         description: Invalid or incomplete details to create review
- */
-router.post('/recipes/:recipeId/reviews', authenticate.verifyToken,
-  reviewValidate.reviewRequiredInputs, recipeValidate.recipeExist,
-  reviewController.addReview);
+   *     summary: Retrieve recipe reviews
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: recipeId
+   *         in: path
+   *         description: Id of recipe to retrieve
+   *         type: integer
+   *         required: true
+   *     responses:
+   *       200:
+   *         description: Ok, Reviews retrieved
+   *         schema:
+   *           type: object
+   *           properties:
+   *             status:
+   *               type: string
+   *               example: Success
+   *             message:
+   *               type: string
+   *               example: Reviews retrieved
+   *             data:
+   *               type: object
+   *               properties:
+   *                 reviews:
+   *                   type: array
+   *                   items:
+   *                     $ref: '#/definitions/Review'
+   */
+  .get(recipeValidate.recipeExist, reviewController.getReviews)
+
+  /**
+   * @swagger
+   * /recipes/{recipeId}/reviews:
+   *   post:
+   *     tags:
+   *       - Reviews
+   *     summary: Add a review
+   *     consumes:
+   *       - application/json
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: recipeId
+   *         in: path
+   *         description: Id of recipe to delete
+   *         type: integer
+   *         required: true
+   *       - name: body
+   *         in: body
+   *         description: Review content
+   *         required: true
+   *         schema:
+   *           type: object
+   *           properties:
+   *             content:
+   *               type: string
+   *     responses:
+   *       201:
+   *         description: Review created
+   *         schema:
+   *           $ref: '#/definitions/Review'
+   *       400:
+   *         description: Invalid or incomplete details to create review
+   */
+  .post(
+    authenticate.verifyToken, reviewValidate.reviewRequiredInputs,
+    recipeValidate.recipeExist, reviewController.addReview
+  );
 
 /**
  * @swagger
  * /recipes/{recipeId}/reviews/{reviewId}:
  *   delete:
  *     tags:
-   *       - Reviews
+ *       - Reviews
  *     summary: Delete a review
  *     produces:
  *       - application/json
@@ -899,6 +938,12 @@ export default router;
  *                 type: object
  *                 properties:
  *                   fullName:
+ *                     type: string
+ *                   firstName:
+ *                     type: string
+ *                   lastName:
+ *                     type: string
+ *                   useImage:
  *                     type: string
  *   UserFavorites:
  *     type: object
