@@ -36,8 +36,10 @@ const defaultProps = {
  * @returns {object} - React element
  */
 const RecipeCard = (props) => {
-  const { recipe, voters, favoritedUsers, voteMessage, favoriteMessage,
-    handleUpvote, handleDownvote, handleFavorite } = props;
+  const {
+    recipe, voters, favoritedUsers, voteMessage, favoriteMessage,
+    handleUpvote, handleDownvote, handleFavorite
+  } = props;
   const { title, recipeImage, upvotes, downvotes, favorites, views } = recipe;
 
   let userId;

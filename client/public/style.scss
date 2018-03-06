@@ -128,7 +128,6 @@ main {
   height: 4.0rem;
   line-height: 1.5rem;
   overflow: hidden;
-  // overflow-wrap: break-word;
   padding: 0.8rem 1rem;
   text-overflow: ellipsis;
 }
@@ -206,6 +205,14 @@ main {
 
 .add-review {
   border: 1px solid grey;
+}
+
+.delete-review {
+  cursor: pointer
+}
+
+.review-content {
+  overflow-wrap: break-word;
 }
 
 .created-on {
