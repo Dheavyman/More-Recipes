@@ -637,6 +637,24 @@ describe('More Recipes', () => {
           done();
         });
     });
+    it('should return 409 if a user posts a recipe with same title', (done) => {
+      server
+        .post('/api/v1/recipes')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[0])
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(validRecipeSeed[0])
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(409);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal(
+            'You already have a recipe with same title'
+          );
+          done();
+        });
+    });
     it('should allow logged in user to post another recipe', (done) => {
       server
         .post('/api/v1/recipes')
