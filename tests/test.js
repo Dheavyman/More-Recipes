@@ -1019,6 +1019,21 @@ describe('More Recipes', () => {
             done();
           });
       });
+    it('should allow a user to retrieve recipe reviews', (done) => {
+      server
+        .get(`/api/v1/recipes/${recipeId2}/reviews`)
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', userToken[1])
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Reviews retrieved');
+          expect(res.body.data.reviewsCount).to.equal(2);
+          done();
+        });
+    });
     it('should allow logged in user delete his/her review',
       (done) => {
         server
@@ -1418,6 +1433,36 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
+          done();
+        });
+    });
+  });
+  describe('search recipes by title', () => {
+    it('should allow users to search for recipes based on title', (done) => {
+      server
+        .get('/api/v1/recipes?search=title&list=egusi+soup')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Recipe(s) retrieved');
+          expect(res.body.data.recipes.length).to.equal(1);
+          done();
+        });
+    });
+    it('should notify users if there search returned empty array', (done) => {
+      server
+        .get('/api/v1/recipes?search=title&list=NoTitle')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Recipe(s) retrieved');
+          expect(res.body.data.recipes.length).to.equal(0);
           done();
         });
     });

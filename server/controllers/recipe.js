@@ -490,21 +490,13 @@ class RecipeController {
             attributes: ['id', 'firstName', 'lastName']
           }],
         })
-        .then((recipes) => {
-          if (!recipes) {
-            return res.status(200).send({
-              status: 'Success',
-              message: 'No result found',
-            });
+        .then(recipes => res.status(200).send({
+          status: 'Success',
+          message: 'Recipe(s) retrieved',
+          data: {
+            recipes
           }
-          return res.status(200).send({
-            status: 'Success',
-            message: 'Recipe(s) found',
-            data: {
-              recipes
-            }
-          });
-        });
+        }));
     }
     next();
   }
