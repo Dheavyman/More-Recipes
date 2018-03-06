@@ -24,7 +24,8 @@ const sendEmail = (to, subject, message) => {
     from: `"No-reply" <${process.env.ADMIN_EMAIL}>`,
     to,
     subject,
-    text: message,
+    html: `<p>Hello,</p>
+      <p>${message}</p>`,
   };
 
   transport.sendMail(mailOptions);

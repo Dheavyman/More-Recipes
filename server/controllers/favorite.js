@@ -96,7 +96,7 @@ class FavoriteController {
         }]
       })
       .then((favorites) => {
-        if (favorites.rows.length === 0) {
+        if (favorites.count === 0) {
           return res.status(200).send({
             status: 'Success',
             message: 'User has not favorited any recipe',
