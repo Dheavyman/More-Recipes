@@ -125,11 +125,21 @@ main {
 
 .card-title {
   display: block;
-  height: 4.0rem;
   line-height: 1.5rem;
   overflow: hidden;
   padding: 0.8rem 1rem;
   text-overflow: ellipsis;
+}
+
+.card-content {
+  display: block;
+  height: 5.2rem;
+  line-height: 1.2rem;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  // white-space: nowrap;
+  word-wrap: break-word;
 }
 
 .icon-red {
@@ -193,6 +203,10 @@ main {
   }
 }
 
+#description {
+  word-break: break-all;
+}
+
 .chip {
   .black-text {
     padding-left: 3px;
@@ -208,7 +222,7 @@ main {
 }
 
 .delete-review {
-  cursor: pointer
+  cursor: pointer;
 }
 
 .review-content {
@@ -304,6 +318,13 @@ main {
 
 #edit-btn {
   right: 5px;
+}
+
+button {
+  .disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
 }
 
 .connect-icons {

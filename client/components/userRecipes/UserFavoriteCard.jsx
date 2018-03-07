@@ -19,6 +19,12 @@ const propTypes = {
   owner: PropTypes.shape({
     fullName: PropTypes.string,
   }).isRequired,
+  currentProfileUserId: PropTypes.number.isRequired,
+  authenticatedUserId: PropTypes.number,
+};
+
+const defaultProps = {
+  authenticatedUserId: null,
 };
 
 /**
@@ -29,7 +35,10 @@ const propTypes = {
  * @returns {object} React element
  */
 const UserFavoriteCard = (props) => {
-  const { handleOpenDelete, recipe, owner: { fullName } } = props;
+  const {
+    handleOpenDelete, recipe, owner: { fullName }, currentProfileUserId,
+    authenticatedUserId
+  } = props;
   const { id, title, description, recipeImage, views, upvotes, downvotes,
     favorites } = recipe;
   const message = 'Are you sure you want to remove recipe from your favorites?';
@@ -51,7 +60,7 @@ const UserFavoriteCard = (props) => {
           <p>{description}</p>
         </div>
         <div className="card-action">
-          <p id="owner">
+          <p>
             <label htmlFor="owner">Recipe by: </label>
             {fullName}
           </p>
@@ -69,14 +78,16 @@ const UserFavoriteCard = (props) => {
               {downvotes}
             </li>
           </ul>
-          <a
-            role="button"
-            tabIndex="0"
-            onClick={() => handleOpenDelete(id, message, actionTitle, action)}
-            data-tip="Remove"
-          >
-            <i className="material-icons icon-red right">remove_circle</i>
-          </a>
+          {currentProfileUserId === authenticatedUserId &&
+            <a
+              role="button"
+              tabIndex="0"
+              onClick={() => handleOpenDelete(id, message, actionTitle, action)}
+              data-tip="Remove"
+            >
+              <i className="material-icons icon-red right">remove_circle</i>
+            </a>
+          }
           <ReactTooltip />
         </div>
       </div>
@@ -85,5 +96,6 @@ const UserFavoriteCard = (props) => {
 };
 
 UserFavoriteCard.propTypes = propTypes;
+UserFavoriteCard.defaultProps = defaultProps;
 
 export default UserFavoriteCard;

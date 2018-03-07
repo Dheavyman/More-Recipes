@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import { getToken } from '../utils/authenticate';
 import config from '../config';
+import store from '../store';
 
 const { SERVER_URL } = config;
 
@@ -121,7 +122,8 @@ const fetchReviews = (recipeId, limit = 5, offset = 0) => (dispatch) => {
       const { data } = response;
       const { data: { reviews, reviewsCount } } = data;
 
-      if (reviews.length < limit) {
+      if (store.getState().singleRecipe.reviews.length + reviews.length ===
+        reviewsCount) {
         dispatch({
           type: actionTypes.FETCHED_ALL_REVIEWS,
         });
@@ -159,10 +161,8 @@ const deleteReview = (recipeId, reviewId) => (dispatch) => {
     'x-access-token': getToken(),
   };
 
-  return axios.delete(
-    `${SERVER_URL}/recipes/${recipeId}/reviews/${reviewId}`,
-    { headers: token }
-  )
+  return axios.delete(`${SERVER_URL}/recipes/${recipeId}/reviews/${reviewId}`,
+    { headers: token })
     .then(() => {
       dispatch({
         type: actionTypes.DELETE_REVIEW,

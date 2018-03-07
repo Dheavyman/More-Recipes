@@ -17,6 +17,12 @@ const propTypes = {
   }).isRequired,
   handleOpenEdit: PropTypes.func.isRequired,
   handleOpenDelete: PropTypes.func.isRequired,
+  currentProfileUserId: PropTypes.number.isRequired,
+  authenticatedUserId: PropTypes.number,
+};
+
+const defaultProps = {
+  authenticatedUserId: null,
 };
 
 /**
@@ -27,7 +33,10 @@ const propTypes = {
  * @returns {object} React element
  */
 const UserRecipeCard = (props) => {
-  const { recipe, handleOpenEdit, handleOpenDelete } = props;
+  const {
+    recipe, handleOpenEdit, handleOpenDelete, currentProfileUserId,
+    authenticatedUserId
+  } = props;
   const { id, title, description, recipeImage, views, upvotes, downvotes,
     favorites } = recipe;
   const message = 'Are you sure you want to delete this recipe?';
@@ -63,32 +72,36 @@ const UserRecipeCard = (props) => {
               {downvotes}
             </li>
           </ul>
-          <a
-            role="button"
-            tabIndex="0"
-            onClick={() => handleOpenEdit(recipe)}
-            className="right"
-          >
-            <i
-              className="material-icons icon-green"
-              data-tip="Edit Recipe"
+          {currentProfileUserId === authenticatedUserId &&
+            <a
+              role="button"
+              tabIndex="0"
+              onClick={() => handleOpenEdit(recipe)}
+              className="right"
             >
-              edit
-            </i>
-          </a>
-          <a
-            role="button"
-            tabIndex="0"
-            onClick={() => handleOpenDelete(id, message, actionTitle, action)}
-            className="right"
-          >
-            <i
-              className="material-icons icon-red"
-              data-tip="Delete Recipe"
+              <i
+                className="material-icons icon-green"
+                data-tip="Edit Recipe"
+              >
+                edit
+              </i>
+            </a>
+          }
+          {currentProfileUserId === authenticatedUserId &&
+            <a
+              role="button"
+              tabIndex="0"
+              onClick={() => handleOpenDelete(id, message, actionTitle, action)}
+              className="right"
             >
-              delete
-            </i>
-          </a>
+              <i
+                className="material-icons icon-red"
+                data-tip="Delete Recipe"
+              >
+                delete
+              </i>
+            </a>
+          }
           <ReactTooltip />
         </div>
       </div>
@@ -97,5 +110,6 @@ const UserRecipeCard = (props) => {
 };
 
 UserRecipeCard.propTypes = propTypes;
+UserRecipeCard.defaultProps = defaultProps;
 
 export default UserRecipeCard;

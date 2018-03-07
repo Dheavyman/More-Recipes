@@ -45,6 +45,8 @@ class ReviewController {
             data: {
               review: {
                 id: review.id,
+                recipeId: review.recipeId,
+                userId: review.userId,
                 content: review.content,
                 createdAt: review.createdAt,
                 User: {

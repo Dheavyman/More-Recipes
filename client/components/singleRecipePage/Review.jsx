@@ -43,29 +43,29 @@ const Review = (props) => {
 
   return (
     <li className="collection-item avatar">
-      { review &&
-      <div>
-        <img src={userImage || userAvatar} alt="" className="circle" />
-        <span className="name"><b>{fullName}</b></span>
-        <p className="created-on">
-          {createdOn(createdAt)}
-          {userId === decodeToken().user.id &&
-          <i
-            role="button"
-            tabIndex="0"
-            className="material-icons delete-review right"
-            onClick={() => handleDeleteReview(recipeId, id)}
-            data-tip="Delete"
-          >
-            delete
-          </i>
-          }
-        </p>
-        <p className="review-content">
-          {content}
-        </p>
-        <ReactTooltip />
-      </div>
+      {review &&
+        <div>
+          <img src={userImage || userAvatar} alt="" className="circle" />
+          <span className="name"><b>{fullName}</b></span>
+          <p className="created-on">
+            {createdOn(createdAt)}
+            {userId === decodeToken().user.id &&
+              <i
+                role="button"
+                tabIndex="0"
+                className="material-icons delete-review right"
+                onClick={() => handleDeleteReview(recipeId, id)}
+                data-tip="Delete"
+              >
+                  delete
+              </i>
+            }
+          </p>
+          <p className="review-content">
+            {content}
+          </p>
+          <ReactTooltip />
+        </div>
       }
     </li>
   );
