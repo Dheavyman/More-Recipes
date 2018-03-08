@@ -58,6 +58,7 @@ class UserProfile extends React.Component {
    * @memberof UserProfile
    */
   componentDidMount() {
+    window.scrollTo(0, 0);
     // Initialize materialize material box class
     $('.materialboxed').materialbox();
     // Initialize materialize tooltip class

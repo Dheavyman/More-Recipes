@@ -2,7 +2,7 @@ import { retrieveRecipes, retrievePopularRecipes, fetchRecipe,
   fetchUserRecipes, fetchUserFavorites, searchRecipe } from './recipe';
 import { signupUser, signinUser, logoutUser, fetchUserProfile,
   editUserProfile, uploadUserImage } from './userActions';
-import postReview from './review';
+import { postReview, fetchReviews, clearReviews, deleteReview } from './review';
 import { addRecipe, editRecipe, deleteRecipe,
   uploadImage } from './recipeActions';
 import { upvoteRecipe, downvoteRecipe } from './vote';
@@ -21,6 +21,9 @@ export default {
   editUserProfile,
   uploadUserImage,
   postReview,
+  fetchReviews,
+  clearReviews,
+  deleteReview,
   addRecipe,
   editRecipe,
   deleteRecipe,

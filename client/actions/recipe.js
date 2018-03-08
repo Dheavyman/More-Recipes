@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import { getToken } from '../utils/authenticate';
 import config from '../config';
+import store from '../store';
 
 const { SERVER_URL } = config;
 
@@ -231,7 +232,8 @@ const retrieveRecipes = (limit = 8, offset = 0) => (dispatch) => {
       const { data } = response;
       const { data: { recipes, recipesCount } } = data;
 
-      if (recipes.length < limit) {
+      if (store.getState().recipes.recipes.length + recipes.length ===
+        recipesCount) {
         dispatch({
           type: actionTypes.RETRIEVED_ALL_RECIPES,
         });

@@ -5,7 +5,6 @@ import models from '../models';
 import helpers from '../helpers';
 
 const Recipe = models.Recipe;
-const Review = models.Review;
 const User = models.User;
 const Favorite = models.Favorite;
 const Vote = models.Vote;
@@ -257,16 +256,6 @@ class RecipeController {
           'views', 'favorites', 'userId'
         ],
         include: [{
-          model: Review,
-          limit: 5,
-          order: [
-            ['createdAt', 'DESC']
-          ],
-          include: [{
-            model: User,
-            attributes: ['firstName', 'lastName', 'userImage'],
-          }],
-        }, {
           model: Favorite,
           attributes: ['userId']
         }, {

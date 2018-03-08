@@ -16,7 +16,8 @@ const propTypes = {
   singleRecipe: PropTypes.shape({
     recipe: PropTypes.shape({
       id: PropTypes.number,
-    })
+    }),
+    reviews: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
@@ -31,6 +32,9 @@ const propTypes = {
   upvoteRecipe: PropTypes.func.isRequired,
   downvoteRecipe: PropTypes.func.isRequired,
   setFavorite: PropTypes.func.isRequired,
+  fetchReviews: PropTypes.func.isRequired,
+  clearReviews: PropTypes.func.isRequired,
+  deleteReview: PropTypes.func.isRequired,
 };
 
 /**
@@ -54,6 +58,8 @@ class Recipe extends Component {
       openSignup: false,
       openSignin: false,
       reviewContent: '',
+      limit: 5,
+      offset: 5,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
@@ -73,7 +79,42 @@ class Recipe extends Component {
     window.scrollTo(0, 0);
     // Initialize materialize css parallax class
     $('.parallax').parallax();
-    this.props.fetchRecipe(this.props.match.params.recipeId);
+
+    const { fetchRecipe, fetchReviews, match } = this.props;
+    const { params: { recipeId } } = match;
+
+    fetchRecipe(recipeId);
+    fetchReviews(recipeId);
+  }
+
+  /**
+   * Component will receive props lifecycle method
+   *
+   * @param {any} nextProps - The next properties passed to the component
+   *
+   * @returns {any} Set new state data
+   *
+   * @memberof Recipe
+   */
+  componentWillReceiveProps(nextProps) {
+    const { singleRecipe: { hasMoreReviews, reviews } } = nextProps;
+
+    if (hasMoreReviews) {
+      this.setState({
+        offset: reviews.length,
+      });
+    }
+  }
+
+  /**
+   * Component will unmount lifecycle method
+   *
+   * @returns {any} Clear recipe reviews
+   *
+   * @memberof Recipe
+   */
+  componentWillUnmount() {
+    this.props.clearReviews();
   }
 
   /**
@@ -123,9 +164,23 @@ class Recipe extends Component {
   }
 
   /**
+   * Function to delete a review
+   *
+   * @param {number} recipeId - Id of recipe
+   * @param {number} reviewId - Id of review
+   * @returns {any} Delete review
+   * @memberof Recipe
+   */
+  handleDeleteReview = (recipeId, reviewId) => {
+    const { deleteReview } = this.props;
+
+    deleteReview(recipeId, reviewId);
+  }
+
+  /**
    * Function to handle upvoting a recipe
    *
-   * @returns {any} Call to upvote recipe action
+   * @returns {any} Upvote recipe
    *
    * @memberof Recipe
    */
@@ -139,7 +194,7 @@ class Recipe extends Component {
   /**
    * Function to handle downvoting a recipe
    *
-   * @returns {any} Call to upvote recipe action
+   * @returns {any} Downvote recipe
    *
    * @memberof Recipe
    */
@@ -153,7 +208,7 @@ class Recipe extends Component {
   /**
    * Function to handle downvoting a recipe
    *
-   * @returns {any} Call to action for favoriting a recipe
+   * @returns {any} Favorite recipe
    *
    * @memberof Recipe
    */
@@ -162,6 +217,21 @@ class Recipe extends Component {
     const { recipe: { id } } = singleRecipe;
 
     setFavorite(id);
+  }
+
+  /**
+   * Function to handle viewing more reviews
+   *
+   * @returns {any} Fetch more recipes
+   *
+   * @memberof Recipe
+   */
+  handleViewMoreReviews = () => {
+    const { limit, offset } = this.state;
+    const { fetchReviews, match } = this.props;
+    const { params: { recipeId } } = match;
+
+    fetchReviews(recipeId, limit, offset);
   }
 
   /**
@@ -192,6 +262,8 @@ class Recipe extends Component {
                 handleUpvote={this.handleUpvote}
                 handleDownvote={this.handleDownvote}
                 handleFavorite={this.handleFavorite}
+                handleViewMoreReviews={this.handleViewMoreReviews}
+                handleDeleteReview={this.handleDeleteReview}
               />
               <ToastContainer />
             </main>

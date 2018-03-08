@@ -15,7 +15,9 @@ const propTypes = {
     voters: PropTypes.arrayOf(PropTypes.shape()),
     voteMessage: PropTypes.string,
     favoriteMessage: PropTypes.string,
+    hasMoreReviews: PropTypes.bool,
   }).isRequired,
+  handleViewMoreReviews: PropTypes.func.isRequired,
 };
 
 /**
@@ -26,9 +28,11 @@ const propTypes = {
  * @returns {object} - React element
  */
 const Main = (props) => {
-  const { singleRecipe } = props;
-  const { recipe, reviews, favoritedUsers, voters, voteMessage,
-    favoriteMessage } = singleRecipe;
+  const { singleRecipe, handleViewMoreReviews } = props;
+  const {
+    recipe, reviews, favoritedUsers, voters, voteMessage,
+    favoriteMessage, hasMoreReviews
+  } = singleRecipe;
   const { title, recipeImage } = recipe;
 
   return (
@@ -59,8 +63,18 @@ const Main = (props) => {
             <RecipeDetails recipe={recipe} />
           </div>
         </div>
-        <ReviewCollection reviews={reviews} />
         <AddReview {...props} />
+        <ReviewCollection reviews={reviews} {...props} />
+        <div className="row center-align">
+          <button
+            className={`btn waves-effect waves-light indigo accent-2
+              white-text`}
+            onClick={handleViewMoreReviews}
+            disabled={!hasMoreReviews}
+          >
+            View More
+          </button>
+        </div>
       </div>
     </div>
   );

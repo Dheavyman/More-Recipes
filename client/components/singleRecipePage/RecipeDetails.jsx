@@ -31,8 +31,10 @@ const formatDisplay = string => string.split(',').map((ingredient, index) => (
  */
 const RecipeDetails = (props) => {
   const { recipe } = props;
-  const { category, description, preparationTime, ingredients,
-    directions } = recipe;
+  const {
+    category, description, preparationTime, ingredients,
+    directions
+  } = recipe;
 
   return (
     <div className="row">

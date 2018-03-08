@@ -90,14 +90,14 @@ const ProfileDetails = (props) => {
         </p>
       </div>
       <div>
-        {currentProfileUserId === authenticatedUserId
-        && <button
-          id="edit-btn"
-          className={'btn-floating waves-effect waves-light green right'}
-          onClick={() => handleStartEdit(editableDetails)}
-        >
-          <i className="material-icons left" data-tip="Edit Details">edit</i>
-        </button>}
+        {currentProfileUserId === authenticatedUserId &&
+          <button
+            id="edit-btn"
+            className={'btn-floating waves-effect waves-light green right'}
+            onClick={() => handleStartEdit(editableDetails)}
+          >
+            <i className="material-icons left" data-tip="Edit Details">edit</i>
+          </button>}
         <ReactTooltip />
       </div>
       <div className="row" />
