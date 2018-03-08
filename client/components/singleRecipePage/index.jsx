@@ -287,7 +287,7 @@ class Recipe extends Component {
           </header>
           <main>
             {isLoading
-              ? <div className="center-align">
+              ? <div className="center-spinner center-align">
                 <Spinner size="big" />
               </div>
               : this.renderMainComponent()
