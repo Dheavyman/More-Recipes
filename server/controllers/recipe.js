@@ -162,7 +162,7 @@ class RecipeController {
    * @static
    *
    * @param {object} req - The request object
-   * @param {object} res - The responsee object
+   * @param {object} res - The response object
    *
    * @returns {object} - Object representing success status or
    * error status

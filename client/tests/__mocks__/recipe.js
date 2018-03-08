@@ -1,0 +1,182 @@
+export default {
+  retrieveRecipesSuccess: {
+    recipes: [],
+    recipesCount: 0,
+  },
+  retrieveRecipesFailure: {
+    status: 'Fail',
+    message: 'Error message',
+  },
+  popularRecipesSuccess: [{
+    title: 'Rice',
+    category: 'Lunch',
+    description: 'Tasty rice',
+    preparationTime: 50,
+    ingredients: 'Rice, tomatoes, salt',
+    directions: 'Do this, do that',
+  }, {
+    title: 'Yam',
+    category: 'Breakfast',
+    description: 'Tasty yam',
+    preparationTime: 30,
+    ingredients: 'Yam, palm oil,  salt',
+    directions: 'Do this, do that',
+  }],
+  popularRecipesFailure: {
+    status: 'Fail',
+    message: 'Error message',
+  },
+  fetchRecipeSuccess: {
+    title: 'Yam',
+    category: 'Breakfast',
+    description: 'Tasty yam',
+    preparationTime: 30,
+    ingredients: 'Yam, palm oil,  salt',
+    directions: 'Do this, do that',
+  },
+  fetchRecipeFailure: {
+    status: 'Fail',
+    message: 'Error message',
+  },
+  fetchUserRecipesSuccess: {
+    recipes: [{
+      title: 'Rice',
+      category: 'Lunch',
+      description: 'Tasty rice',
+      preparationTime: 50,
+      ingredients: 'Rice, tomatoes, salt',
+      directions: 'Do this, do that',
+    }],
+    recipesCount: 1,
+  },
+  fetchUserRecipesFailure: {
+    status: 'Fail',
+    message: 'Error message',
+  },
+  fetchUserFavoritesSuccess: [{
+    title: 'Rice',
+    category: 'Lunch',
+    description: 'Tasty rice',
+    preparationTime: 50,
+    ingredients: 'Rice, tomatoes, salt',
+    directions: 'Do this, do that',
+  }],
+  fetchUserFavoritesFailure: {
+    status: 'Fail',
+    message: 'Error message',
+  },
+  searchRecipeSuccess: [{
+    title: 'Yam',
+    category: 'Breakfast',
+    description: 'Tasty yam',
+    preparationTime: 30,
+    ingredients: 'Yam, palm oil,  salt',
+    directions: 'Do this, do that',
+  }, {
+    title: 'Rice',
+    category: 'Lunch',
+    description: 'Tasty rice',
+    preparationTime: 50,
+    ingredients: 'Rice, tomatoes, salt',
+    directions: 'Do this, do that',
+  }],
+  searchRecipeFailure: {
+    status: 'Fail',
+    message: 'Error message',
+  },
+  retrieveRecipesSuccessResponse: {
+    status: 'Success',
+    message: 'Recipes retrieved',
+    data: {
+      recipes: [{
+        title: 'Yam',
+        category: 'Breakfast',
+        description: 'Tasty yam',
+        preparationTime: 30,
+        ingredients: 'Yam, palm oil,  salt',
+        directions: 'Do this, do that',
+      }, {
+        title: 'Rice',
+        category: 'Lunch',
+        description: 'Tasty rice',
+        preparationTime: 50,
+        ingredients: 'Rice, tomatoes, salt',
+        directions: 'Do this, do that',
+      }],
+      recipesCount: 2,
+    },
+  },
+  retrieveRecipesFailureResponse: {
+    status: 'Fail',
+    message: 'Error retrieving recipes',
+  },
+  popularRecipesSuccessResponse: {
+    status: 'Success',
+    message: 'Recipes retrieved',
+    data: {
+      recipes: [{
+        title: 'Yam',
+        category: 'Breakfast',
+        description: 'Tasty yam',
+        preparationTime: 30,
+        ingredients: 'Yam, palm oil,  salt',
+        directions: 'Do this, do that',
+      }, {
+        title: 'Rice',
+        category: 'Lunch',
+        description: 'Tasty rice',
+        preparationTime: 50,
+        ingredients: 'Rice, tomatoes, salt',
+        directions: 'Do this, do that',
+      }],
+      recipesCount: 2,
+    },
+  },
+  fetchRecipeSuccessResponse: {
+    status: 'Success',
+    message: 'Recipe retrieved',
+    data: {
+      recipe: {
+        title: 'Yam',
+        category: 'Breakfast',
+        description: 'Tasty yam',
+        preparationTime: 30,
+        ingredients: 'Yam, palm oil,  salt',
+        directions: 'Do this, do that',
+        Favorites: [],
+        Votes: [],
+        Reviews: [],
+      },
+    },
+  },
+  fetchRecipeFailureResponse: {
+    status: 'Fail',
+    message: 'Error in fetching recipe',
+  },
+  userRecipesSuccessResponse: {
+    status: 'Success',
+    message: 'Recipes retrieved',
+    data: {
+      recipes: [{
+        title: 'Yam',
+        category: 'Breakfast',
+        description: 'Tasty yam',
+        preparationTime: 30,
+        ingredients: 'Yam, palm oil,  salt',
+        directions: 'Do this, do that',
+      }, {
+        title: 'Rice',
+        category: 'Lunch',
+        description: 'Tasty rice',
+        preparationTime: 50,
+        ingredients: 'Rice, tomatoes, salt',
+        directions: 'Do this, do that',
+      }],
+      recipesCount: 2,
+    },
+  },
+  userRecipesFailureResponse: {
+    status: 'Fail',
+    message: 'Error fetching user recipes',
+  },
+};
