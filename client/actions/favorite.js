@@ -11,7 +11,7 @@ const { SERVER_URL } = config;
  *
  * @returns {object} Set favorite request action
  */
-const setFavoriteRequest = () => ({
+export const setFavoriteRequest = () => ({
   type: actionTypes.SET_FAVORITE_REQUEST,
 });
 
@@ -22,7 +22,7 @@ const setFavoriteRequest = () => ({
  *
  * @returns {object} Set favorite success action
  */
-const setFavoriteSuccess = data => ({
+export const setFavoriteSuccess = data => ({
   type: actionTypes.SET_FAVORITE_SUCCESS,
   payload: data,
 });
@@ -34,7 +34,7 @@ const setFavoriteSuccess = data => ({
  *
  * @returns {object} Set favorite failure action
  */
-const setFavoriteFailure = error => ({
+export const setFavoriteFailure = error => ({
   type: actionTypes.SET_FAVORITE_FAILURE,
   payload: error,
 });
@@ -46,7 +46,7 @@ const setFavoriteFailure = error => ({
  *
  * @returns {object} Dispatch necessary action
  */
-const setFavorite = recipeId => (dispatch) => {
+export const setFavorite = recipeId => (dispatch) => {
   const token = {
     'x-access-token': getToken(),
   };
@@ -66,5 +66,3 @@ const setFavorite = recipeId => (dispatch) => {
       dispatch(setFavoriteFailure(data));
     });
 };
-
-export default setFavorite;

@@ -11,7 +11,7 @@ const { SERVER_URL, CLOUDINARY_URL } = config;
  *
  * @returns {object} Add recipe request action
  */
-const addRecipeRequest = () => ({
+export const addRecipeRequest = () => ({
   type: actionTypes.ADD_RECIPE_REQUEST,
 });
 
@@ -22,7 +22,7 @@ const addRecipeRequest = () => ({
  *
  * @returns {object} Add recipe success action
  */
-const addRecipeSuccess = recipe => ({
+export const addRecipeSuccess = recipe => ({
   type: actionTypes.ADD_RECIPE_SUCCESS,
   payload: recipe,
 });
@@ -34,7 +34,7 @@ const addRecipeSuccess = recipe => ({
  *
  * @returns {object} Add recipe action
  */
-const addRecipeFailure = error => ({
+export const addRecipeFailure = error => ({
   type: actionTypes.ADD_RECIPE_FAILURE,
   payload: error,
 });
@@ -44,7 +44,7 @@ const addRecipeFailure = error => ({
  *
  * @returns {object} Edit recipe request action
  */
-const editRecipeRequest = () => ({
+export const editRecipeRequest = () => ({
   type: actionTypes.EDIT_RECIPE_REQUEST,
 });
 
@@ -56,7 +56,7 @@ const editRecipeRequest = () => ({
  *
  * @returns {object} Edit recipe success action
  */
-const editRecipeSuccess = (id, recipe) => ({
+export const editRecipeSuccess = (id, recipe) => ({
   type: actionTypes.EDIT_RECIPE_SUCCESS,
   id,
   payload: recipe,
@@ -69,7 +69,7 @@ const editRecipeSuccess = (id, recipe) => ({
  *
  * @returns {object} Edit recipe failure action
  */
-const editRecipeFailure = error => ({
+export const editRecipeFailure = error => ({
   type: actionTypes.EDIT_RECIPE_FAILURE,
   payload: error,
 });
@@ -79,7 +79,7 @@ const editRecipeFailure = error => ({
  *
  * @returns {object} Delete recipe request action
  */
-const deleteRecipeRequest = () => ({
+export const deleteRecipeRequest = () => ({
   type: actionTypes.DELETE_RECIPE_REQUEST,
 });
 
@@ -90,7 +90,7 @@ const deleteRecipeRequest = () => ({
  *
  * @returns {object} Delete recipe success action
  */
-const deleteRecipeSuccess = id => ({
+export const deleteRecipeSuccess = id => ({
   type: actionTypes.DELETE_RECIPE_SUCCESS,
   id,
 });
@@ -102,7 +102,7 @@ const deleteRecipeSuccess = id => ({
  *
  * @returns {object} Delete recipe failure action
  */
-const deleteRecipeFailure = error => ({
+export const deleteRecipeFailure = error => ({
   type: actionTypes.DELETE_RECIPE_FAILURE,
   payload: error,
 });
@@ -112,7 +112,7 @@ const deleteRecipeFailure = error => ({
  *
  * @returns {object} Upload image request action
  */
-const uploadImageRequest = () => ({
+export const uploadImageRequest = () => ({
   type: actionTypes.UPLOAD_IMAGE_REQUEST,
 });
 
@@ -123,7 +123,7 @@ const uploadImageRequest = () => ({
  *
  * @returns {object} Upload image success action
  */
-const uploadImageSuccess = imageUrl => ({
+export const uploadImageSuccess = imageUrl => ({
   type: actionTypes.UPLOAD_IMAGE_SUCCESS,
   payload: imageUrl,
 });
@@ -135,10 +135,11 @@ const uploadImageSuccess = imageUrl => ({
  *
  * @returns {object} Upload image failure action
  */
-const uploadImageFailure = error => ({
+export const uploadImageFailure = error => ({
   type: actionTypes.UPLOAD_IMAGE_FAILURE,
   payload: error,
 });
+
 /**
  * Add recipe async action creator
  *

@@ -361,7 +361,7 @@ describe('User', () => {
       ];
       const store = mockStore({});
 
-      return store.dispatch(actions.uploadUserImage())
+      return store.dispatch(actions.uploadUserImage(userMockData.userImageFile))
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
           done();

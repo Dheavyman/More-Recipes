@@ -187,7 +187,7 @@ describe('Recipe', () => {
       });
       const expectedActions = [
         actions.retrieveRecipesRequest(),
-        { type: 'RETRIEVED_ALL_RECIPES' },
+        { type: actionTypes.RETRIEVED_ALL_RECIPES },
         actions.retrieveRecipesSuccess(
           recipesMockData.retrieveRecipesSuccessResponse.data.recipes,
           recipesMockData.retrieveRecipesSuccessResponse.data.recipesCount),
@@ -358,6 +358,101 @@ describe('Recipe', () => {
       const store = mockStore({});
 
       return store.dispatch(actions.fetchUserRecipes())
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+  });
+  describe('fetch user favorite recipes async action', () => {
+    beforeEach(() => moxios.install());
+    afterEach(() => moxios.uninstall());
+
+    it('should fetch user favorite recipes', (done) => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: recipesMockData.userFavoritesSuccessResponse,
+        });
+      });
+      const expectedActions = [
+        actions.fetchUserFavoritesRequest(),
+        actions.fetchUserFavoritesSuccess(
+          recipesMockData.userFavoritesSuccessResponse.data.favorites,
+          recipesMockData.userFavoritesSuccessResponse.data.favoritesCount)
+      ];
+      const store = mockStore({});
+
+      return store.dispatch(actions.fetchUserFavorites())
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+    it('should return an error for unsuccessful request', (done) => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 400,
+          response: recipesMockData.userFavoritesFailureResponse,
+        });
+      });
+      const expectedActions = [
+        actions.fetchUserFavoritesRequest(),
+        actions.fetchUserFavoritesFailure(
+          recipesMockData.userFavoritesFailureResponse)
+      ];
+      const store = mockStore({});
+
+      return store.dispatch(actions.fetchUserFavorites())
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+  });
+  describe('search recipes async action', () => {
+    beforeEach(() => moxios.install());
+    afterEach(() => moxios.uninstall());
+
+    it('should search for recipes', (done) => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: recipesMockData.searchRecipesSuccessResponse,
+        });
+      });
+      const expectedActions = [
+        actions.searchRecipesRequest(),
+        actions.searchRecipesSuccess(
+          recipesMockData.searchRecipesSuccessResponse.data.recipes)
+      ];
+      const store = mockStore({});
+
+      return store.dispatch(actions.searchRecipe())
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+    it('should return an error for unsuccessful request', (done) => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 400,
+          response: recipesMockData.searchRecipesFailureResponse,
+        });
+      });
+      const expectedActions = [
+        actions.searchRecipesRequest(),
+        actions.searchRecipesFailure(
+          recipesMockData.searchRecipesFailureResponse)
+      ];
+      const store = mockStore({});
+
+      return store.dispatch(actions.searchRecipe())
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
           done();

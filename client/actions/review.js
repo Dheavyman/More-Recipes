@@ -10,7 +10,7 @@ const { SERVER_URL } = config;
  *
  * @return {object} Post review request action
  */
-const postReviewRequest = () => ({
+export const postReviewRequest = () => ({
   type: actionTypes.POST_REVIEW_REQUEST,
 });
 
@@ -21,7 +21,7 @@ const postReviewRequest = () => ({
  *
  * @returns {object} Post review success action
  */
-const postReviewSuccess = review => ({
+export const postReviewSuccess = review => ({
   type: actionTypes.POST_REVIEW_SUCCESS,
   payload: review,
 });
@@ -33,7 +33,7 @@ const postReviewSuccess = review => ({
  *
  * @returns {object} Post review failure action
  */
-const postReviewFailure = error => ({
+export const postReviewFailure = error => ({
   type: actionTypes.POST_REVIEW_FAILURE,
   payload: error,
 });
@@ -46,7 +46,7 @@ const postReviewFailure = error => ({
  *
  * @returns {object} Dispatch necessary action
  */
-const postReview = (recipeId, reviewContent) => (dispatch) => {
+export const postReview = (recipeId, reviewContent) => (dispatch) => {
   const token = {
     'x-access-token': localStorage.getItem('token'),
   };
@@ -64,5 +64,3 @@ const postReview = (recipeId, reviewContent) => (dispatch) => {
       dispatch(postReviewFailure(data));
     });
 };
-
-export default postReview;
