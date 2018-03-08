@@ -217,6 +217,10 @@ main {
   }
 }
 
+.center-spinner {
+  margin-top: 50px;
+}
+
 .add-review {
   border: 1px solid grey;
 }
@@ -339,4 +343,14 @@ button {
 
 .switch label input[type=checkbox]:checked+.lever:after {
   background-color: #4caf50;
+}
+
+.not-found {
+  font-size: 40px;
+  
+  .status-number {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    margin-bottom: 10px;
+  }
 }

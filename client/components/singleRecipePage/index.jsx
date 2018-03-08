@@ -9,6 +9,7 @@ import actionCreators from '../../actions';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Main from './Main';
+import Spinner from '../common/Spinner';
 import { getToken } from '../../utils/authenticate';
 import notify from '../../utils/notification';
 
@@ -77,8 +78,6 @@ class Recipe extends Component {
    */
   componentDidMount() {
     window.scrollTo(0, 0);
-    // Initialize materialize css parallax class
-    $('.parallax').parallax();
 
     const { fetchRecipe, fetchReviews, match } = this.props;
     const { params: { recipeId } } = match;
@@ -234,6 +233,39 @@ class Recipe extends Component {
     fetchReviews(recipeId, limit, offset);
   }
 
+  renderNotFound = () => (
+    <div className="row center-align">
+      <div className="not-found">
+        <p className="page-data">RECIPE NOT FOUND</p>
+        <i className="material-icons large">error</i>
+      </div>
+    </div>
+  )
+
+  renderMainComponent = () => {
+    const { singleRecipe } = this.props;
+    const { recipe } = singleRecipe;
+
+    return (
+      <div>
+        {isEmpty(recipe)
+          ? this.renderNotFound()
+          : <Main
+            singleRecipe={singleRecipe}
+            reviewContent={this.state.reviewContent}
+            handleChange={this.handleChange}
+            handleAddReview={this.handleAddReview}
+            handleUpvote={this.handleUpvote}
+            handleDownvote={this.handleDownvote}
+            handleFavorite={this.handleFavorite}
+            handleViewMoreReviews={this.handleViewMoreReviews}
+            handleDeleteReview={this.handleDeleteReview}
+          />
+        }
+      </div>
+    );
+  }
+
   /**
    * Render method
    *
@@ -243,35 +275,29 @@ class Recipe extends Component {
    */
   render() {
     const { singleRecipe } = this.props;
+    const { isLoading } = singleRecipe;
 
     return (
-      <div>
-        {!isEmpty(singleRecipe) &&
-          <div className="page-body">
-            <header>
-              <Header
-                {...this.props}
-              />
-            </header>
-            <main>
-              <Main
-                singleRecipe={singleRecipe}
-                reviewContent={this.state.reviewContent}
-                handleChange={this.handleChange}
-                handleAddReview={this.handleAddReview}
-                handleUpvote={this.handleUpvote}
-                handleDownvote={this.handleDownvote}
-                handleFavorite={this.handleFavorite}
-                handleViewMoreReviews={this.handleViewMoreReviews}
-                handleDeleteReview={this.handleDeleteReview}
-              />
-              <ToastContainer />
-            </main>
-            <footer>
-              <Footer />
-            </footer>
-          </div>
-        }
+      <div className="row">
+        <div className="page-body">
+          <header>
+            <Header
+              {...this.props}
+            />
+          </header>
+          <main>
+            {isLoading
+              ? <div className="center-align">
+                <Spinner size="big" />
+              </div>
+              : this.renderMainComponent()
+            }
+            <ToastContainer />
+          </main>
+          <footer>
+            <Footer />
+          </footer>
+        </div>
       </div>
     );
   }

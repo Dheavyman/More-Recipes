@@ -6,6 +6,7 @@ import Home from './homepage';
 import CatalogPage from './catalogPage';
 import singleRecipePage from './singleRecipePage';
 import UserDashboard from './userRecipes';
+import NotFoundPage from './notFoundPage';
 import { decodeToken } from '../utils/authenticate';
 import '../public/style.scss';
 
@@ -40,6 +41,7 @@ const App = () => (
         />)
       }
     />
+    <Route component={NotFoundPage} />
   </Switch>
 );
 

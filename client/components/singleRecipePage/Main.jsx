@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import RecipeImage from '../common/RecipeImage';
@@ -19,66 +19,86 @@ const propTypes = {
   }).isRequired,
   handleViewMoreReviews: PropTypes.func.isRequired,
 };
-
 /**
- * Main component
+ * Class representing main component
  *
- * @param {object} props - The properties passed to the component
+ * @class Main
  *
- * @returns {object} - React element
+ * @extends {Component}
  */
-const Main = (props) => {
-  const { singleRecipe, handleViewMoreReviews } = props;
-  const {
-    recipe, reviews, favoritedUsers, voters, voteMessage,
-    favoriteMessage, hasMoreReviews
-  } = singleRecipe;
-  const { title, recipeImage } = recipe;
+class Main extends Component {
+  /**
+   * Component did mount lifecycle method
+   *
+   * @returns {any} Initialize materialize class
+   *
+   * @memberof Main
+   */
+  componentDidMount() {
+    // Initialize materialize css parallax class
+    $('.parallax').parallax();
+  }
 
-  return (
-    <div>
-      <div className="parallax-container">
-        <div className="parallax">
-          <RecipeImage title={title} recipeImage={recipeImage} />
+  /**
+   * Render method
+   *
+   * @returns {object} React element
+   *
+   * @memberof Main
+   */
+  render() {
+    const { singleRecipe, handleViewMoreReviews } = this.props;
+    const {
+      recipe, reviews, favoritedUsers, voters, voteMessage,
+      favoriteMessage, hasMoreReviews
+    } = singleRecipe;
+    const { title, recipeImage } = recipe;
+
+    return (
+      <div>
+        <div className="parallax-container">
+          <div className="parallax">
+            <RecipeImage title={title} recipeImage={recipeImage} />
+          </div>
+        </div>
+        <div className="section white container">
+          <div className="row">
+            <div className="col s12">
+              <h4 className="title-header">{title}</h4>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col s12 m6 l5">
+              <RecipeCard
+                recipe={recipe}
+                favoritedUsers={favoritedUsers}
+                voters={voters}
+                voteMessage={voteMessage}
+                favoriteMessage={favoriteMessage}
+                {...this.props}
+              />
+            </div>
+            <div className="col s12 m6 l6 offset-l1">
+              <RecipeDetails recipe={recipe} />
+            </div>
+          </div>
+          <AddReview {...this.props} />
+          <ReviewCollection reviews={reviews} {...this.props} />
+          <div className="row center-align">
+            <button
+              className={`btn waves-effect waves-light indigo accent-2
+                white-text`}
+              onClick={handleViewMoreReviews}
+              disabled={!hasMoreReviews}
+            >
+              View More
+            </button>
+          </div>
         </div>
       </div>
-      <div className="section white container">
-        <div className="row">
-          <div className="col s12">
-            <h4 className="title-header">{title}</h4>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col s12 m6 l5">
-            <RecipeCard
-              recipe={recipe}
-              favoritedUsers={favoritedUsers}
-              voters={voters}
-              voteMessage={voteMessage}
-              favoriteMessage={favoriteMessage}
-              {...props}
-            />
-          </div>
-          <div className="col s12 m6 l6 offset-l1">
-            <RecipeDetails recipe={recipe} />
-          </div>
-        </div>
-        <AddReview {...props} />
-        <ReviewCollection reviews={reviews} {...props} />
-        <div className="row center-align">
-          <button
-            className={`btn waves-effect waves-light indigo accent-2
-              white-text`}
-            onClick={handleViewMoreReviews}
-            disabled={!hasMoreReviews}
-          >
-            View More
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 Main.propTypes = propTypes;
 

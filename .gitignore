@@ -10,8 +10,11 @@ client/dist/
 
 # Coverage directory used by tools like istanbul
 coverage
+client/coverage
 
 # dotenv environment variables file
 .env
 
 .DS_Store
+
+.vscode

@@ -29,6 +29,15 @@ const propTypes = {
 const createdOn = date => new Date(date).toLocaleString();
 
 /**
+ * Get authenticated user id
+ *
+ * @returns {any} User id or null
+ */
+const getAuthenticatedUserId = () => (
+  decodeToken() !== null ? decodeToken().user.id : null
+);
+
+/**
  * Review component
  *
  * @param {object} props - The properties passed to the component
@@ -49,7 +58,7 @@ const Review = (props) => {
           <span className="name"><b>{fullName}</b></span>
           <p className="created-on">
             {createdOn(createdAt)}
-            {userId === decodeToken().user.id &&
+            {userId === getAuthenticatedUserId() &&
               <i
                 role="button"
                 tabIndex="0"
