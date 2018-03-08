@@ -233,6 +233,13 @@ class Recipe extends Component {
     fetchReviews(recipeId, limit, offset);
   }
 
+  /**
+   * Render notification
+   *
+   * @returns {object} React element
+   *
+   * @memberof Recipe
+   */
   renderNotFound = () => (
     <div className="row center-align">
       <div className="not-found">
@@ -242,6 +249,13 @@ class Recipe extends Component {
     </div>
   )
 
+  /**
+   * Render main component
+   *
+   * @returns {object} React element
+   *
+   * @memberof Recipe
+   */
   renderMainComponent = () => {
     const { singleRecipe } = this.props;
     const { recipe } = singleRecipe;

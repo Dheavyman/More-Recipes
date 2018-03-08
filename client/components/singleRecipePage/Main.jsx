@@ -19,6 +19,7 @@ const propTypes = {
   }).isRequired,
   handleViewMoreReviews: PropTypes.func.isRequired,
 };
+
 /**
  * Class representing main component
  *
@@ -35,7 +36,6 @@ class Main extends Component {
    * @memberof Main
    */
   componentDidMount() {
-    // Initialize materialize css parallax class
     $('.parallax').parallax();
   }
 
