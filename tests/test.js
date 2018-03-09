@@ -1507,7 +1507,7 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('No recipe matched your search');
+          expect(res.body.message).to.equal('Recipe(s) found');
           done();
         });
     });
@@ -1534,7 +1534,7 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('No recipe matched your search');
+          expect(res.body.message).to.equal('Recipe(s) found');
           done();
         });
     });

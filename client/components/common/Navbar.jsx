@@ -85,7 +85,7 @@ class Navbar extends React.Component {
               Category
             </a>
           </li>
-          <Category />
+          <Category {...this.props} />
           <li>
             <a
               className="dropdown-button dropdown-user"
