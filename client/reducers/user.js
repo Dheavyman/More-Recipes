@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initialState = {
+export const initialState = {
   isLoading: false,
   imageUploading: false,
   imageUploaded: false,
@@ -108,27 +108,6 @@ const user = (state = initialState, action) => {
         error: {},
       };
     case actionTypes.EDIT_USER_PROFILE_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-    case actionTypes.EDIT_PROFILE_PICTURE_REQUEST:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case actionTypes.EDIT_PROFILE_PICTURE_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        userProfile: {
-          ...state.userProfile,
-          ...action.payload,
-        },
-        error: {},
-      };
-    case actionTypes.EDIT_PROFILE_PICTURE_FAILURE:
       return {
         ...state,
         isLoading: false,

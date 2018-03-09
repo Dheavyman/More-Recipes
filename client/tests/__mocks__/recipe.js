@@ -33,6 +33,9 @@ export default {
     preparationTime: 30,
     ingredients: 'Yam, palm oil,  salt',
     directions: 'Do this, do that',
+    Favorites: [],
+    Votes: [],
+    Reviews: [],
   },
   fetchRecipeFailure: {
     status: 'Fail',

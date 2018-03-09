@@ -10,6 +10,10 @@ export default {
       userImage: 'User image',
     },
   },
+  postReviewFailure: {
+    status: 'Fail',
+    message: 'Error posting review',
+  },
   postReviewSuccessResponse: {
     status: 'Success',
     message: 'Review created',
