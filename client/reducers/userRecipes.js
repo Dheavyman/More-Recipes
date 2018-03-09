@@ -141,7 +141,7 @@ const userRecipes = (state = initialState, action) => {
     case actionTypes.DELETE_RECIPE_SUCCESS: {
       let userAddedRecipes = state.userAddedRecipes.slice();
       userAddedRecipes = userAddedRecipes.filter(recipe =>
-        recipe.id !== action.id);
+        recipe.id !== action.payload);
       return {
         ...state,
         isLoading: false,

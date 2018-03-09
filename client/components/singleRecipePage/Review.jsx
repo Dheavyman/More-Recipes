@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
 import userAvatar from '../../public/images/user_avatar_1.png';
+import { decodeToken } from '../../utils/authenticate';
 
 const propTypes = {
   review: PropTypes.shape({
+    id: PropTypes.number,
+    recipeId: PropTypes.number,
     User: PropTypes.shape({
       fullName: PropTypes.string,
       userImage: PropTypes.string,
@@ -12,6 +16,7 @@ const propTypes = {
     content: PropTypes.string,
     createdAt: PropTypes.string,
   }).isRequired,
+  handleDeleteReview: PropTypes.func.isRequired,
 };
 
 /**
@@ -24,6 +29,15 @@ const propTypes = {
 const createdOn = date => new Date(date).toLocaleString();
 
 /**
+ * Get authenticated user id
+ *
+ * @returns {any} User id or null
+ */
+const getAuthenticatedUserId = () => (
+  decodeToken() !== null ? decodeToken().user.id : null
+);
+
+/**
  * Review component
  *
  * @param {object} props - The properties passed to the component
@@ -31,20 +45,36 @@ const createdOn = date => new Date(date).toLocaleString();
  * @returns {object} React element
  */
 const Review = (props) => {
-  const { review } = props;
-  const { User: { fullName, userImage }, content, createdAt } = review;
+  const { review, handleDeleteReview } = props;
+  const {
+    id, recipeId, userId, content, createdAt, User: { fullName, userImage }
+  } = review;
 
   return (
     <li className="collection-item avatar">
-      { review &&
-      <div>
-        <img src={userImage || userAvatar} alt="" className="circle" />
-        <span className="name"><b>{fullName}</b></span>
-        <p className="created-on">{createdOn(createdAt)}</p>
-        <p id="review-content">
-          {content}
-        </p>
-      </div>
+      {review &&
+        <div>
+          <img src={userImage || userAvatar} alt="" className="circle" />
+          <span className="name"><b>{fullName}</b></span>
+          <p className="created-on">
+            {createdOn(createdAt)}
+            {userId === getAuthenticatedUserId() &&
+              <i
+                role="button"
+                tabIndex="0"
+                className="material-icons delete-review right"
+                onClick={() => handleDeleteReview(recipeId, id)}
+                data-tip="Delete"
+              >
+                  delete
+              </i>
+            }
+          </p>
+          <p className="review-content">
+            {content}
+          </p>
+          <ReactTooltip />
+        </div>
       }
     </li>
   );

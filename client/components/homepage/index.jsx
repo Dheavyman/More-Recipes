@@ -103,6 +103,23 @@ class Home extends Component {
   }
 
   /**
+   * Search recipes by category
+   *
+   * @param {object} event - The event performed
+   *
+   * @return {any} Submit the search
+   *
+   * @memberof Home
+   */
+  handleSearchCategory = (event) => {
+    const { target: { name } } = event;
+    this.props.history.push({
+      pathname: '/catalog',
+      search: `?search=category&list=${name}`,
+    });
+  }
+
+  /**
    * The render function
    *
    * @returns {object} React element
@@ -113,7 +130,10 @@ class Home extends Component {
     return (
       <div className="page-body">
         <header>
-          <Header {...this.props} />
+          <Header
+            handleSearchCategory={this.handleSearchCategory}
+            {...this.props}
+          />
         </header>
         <main>
           <Main

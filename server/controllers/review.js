@@ -45,6 +45,8 @@ class ReviewController {
             data: {
               review: {
                 id: review.id,
+                recipeId: review.recipeId,
+                userId: review.userId,
                 content: review.content,
                 createdAt: review.createdAt,
                 User: {
@@ -136,7 +138,7 @@ class ReviewController {
           ['createdAt', 'DESC']
         ],
         limit: req.query.limit || 5,
-        offset: req.query.offset,
+        offset: req.query.offset || 0,
         include: [{
           model: User,
           attributes: ['firstName', 'lastName', 'userImage'],

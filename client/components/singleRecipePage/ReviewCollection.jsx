@@ -24,7 +24,7 @@ const ReviewCollection = (props) => {
       </div>
       <ul className="collection">
         {reviews && reviews.map(review => (
-          <Review key={review.id} review={review} />
+          <Review key={review.id} review={review} {...props} />
         ))}
       </ul>
     </div>

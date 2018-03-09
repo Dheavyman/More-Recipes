@@ -9,6 +9,7 @@ import actionCreators from '../../actions';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Main from './Main';
+import Spinner from '../common/Spinner';
 import { getToken } from '../../utils/authenticate';
 import notify from '../../utils/notification';
 
@@ -16,7 +17,8 @@ const propTypes = {
   singleRecipe: PropTypes.shape({
     recipe: PropTypes.shape({
       id: PropTypes.number,
-    })
+    }),
+    reviews: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
@@ -31,6 +33,9 @@ const propTypes = {
   upvoteRecipe: PropTypes.func.isRequired,
   downvoteRecipe: PropTypes.func.isRequired,
   setFavorite: PropTypes.func.isRequired,
+  fetchReviews: PropTypes.func.isRequired,
+  clearReviews: PropTypes.func.isRequired,
+  deleteReview: PropTypes.func.isRequired,
 };
 
 /**
@@ -54,6 +59,8 @@ class Recipe extends Component {
       openSignup: false,
       openSignin: false,
       reviewContent: '',
+      limit: 5,
+      offset: 5,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
@@ -71,9 +78,42 @@ class Recipe extends Component {
    */
   componentDidMount() {
     window.scrollTo(0, 0);
-    // Initialize materialize css parallax class
-    $('.parallax').parallax();
-    this.props.fetchRecipe(this.props.match.params.recipeId);
+
+    const { fetchRecipe, fetchReviews, match } = this.props;
+    const { params: { recipeId } } = match;
+
+    fetchRecipe(recipeId);
+    fetchReviews(recipeId);
+  }
+
+  /**
+   * Component will receive props lifecycle method
+   *
+   * @param {any} nextProps - The next properties passed to the component
+   *
+   * @returns {any} Set new state data
+   *
+   * @memberof Recipe
+   */
+  componentWillReceiveProps(nextProps) {
+    const { singleRecipe: { hasMoreReviews, reviews } } = nextProps;
+
+    if (hasMoreReviews) {
+      this.setState({
+        offset: reviews.length,
+      });
+    }
+  }
+
+  /**
+   * Component will unmount lifecycle method
+   *
+   * @returns {any} Clear recipe reviews
+   *
+   * @memberof Recipe
+   */
+  componentWillUnmount() {
+    this.props.clearReviews();
   }
 
   /**
@@ -123,9 +163,23 @@ class Recipe extends Component {
   }
 
   /**
+   * Function to delete a review
+   *
+   * @param {number} recipeId - Id of recipe
+   * @param {number} reviewId - Id of review
+   * @returns {any} Delete review
+   * @memberof Recipe
+   */
+  handleDeleteReview = (recipeId, reviewId) => {
+    const { deleteReview } = this.props;
+
+    deleteReview(recipeId, reviewId);
+  }
+
+  /**
    * Function to handle upvoting a recipe
    *
-   * @returns {any} Call to upvote recipe action
+   * @returns {any} Upvote recipe
    *
    * @memberof Recipe
    */
@@ -139,7 +193,7 @@ class Recipe extends Component {
   /**
    * Function to handle downvoting a recipe
    *
-   * @returns {any} Call to upvote recipe action
+   * @returns {any} Downvote recipe
    *
    * @memberof Recipe
    */
@@ -153,7 +207,7 @@ class Recipe extends Component {
   /**
    * Function to handle downvoting a recipe
    *
-   * @returns {any} Call to action for favoriting a recipe
+   * @returns {any} Favorite recipe
    *
    * @memberof Recipe
    */
@@ -165,6 +219,68 @@ class Recipe extends Component {
   }
 
   /**
+   * Function to handle viewing more reviews
+   *
+   * @returns {any} Fetch more recipes
+   *
+   * @memberof Recipe
+   */
+  handleViewMoreReviews = () => {
+    const { limit, offset } = this.state;
+    const { fetchReviews, match } = this.props;
+    const { params: { recipeId } } = match;
+
+    fetchReviews(recipeId, limit, offset);
+  }
+
+  /**
+   * Render notification
+   *
+   * @returns {object} React element
+   *
+   * @memberof Recipe
+   */
+  renderNotFound = () => (
+    <div className="row center-align">
+      <div className="not-found">
+        <p className="page-data">RECIPE NOT FOUND</p>
+        <i className="material-icons large">error</i>
+      </div>
+    </div>
+  )
+
+  /**
+   * Render main component
+   *
+   * @returns {object} React element
+   *
+   * @memberof Recipe
+   */
+  renderMainComponent = () => {
+    const { singleRecipe } = this.props;
+    const { recipe } = singleRecipe;
+
+    return (
+      <div>
+        {isEmpty(recipe)
+          ? this.renderNotFound()
+          : <Main
+            singleRecipe={singleRecipe}
+            reviewContent={this.state.reviewContent}
+            handleChange={this.handleChange}
+            handleAddReview={this.handleAddReview}
+            handleUpvote={this.handleUpvote}
+            handleDownvote={this.handleDownvote}
+            handleFavorite={this.handleFavorite}
+            handleViewMoreReviews={this.handleViewMoreReviews}
+            handleDeleteReview={this.handleDeleteReview}
+          />
+        }
+      </div>
+    );
+  }
+
+  /**
    * Render method
    *
    * @returns {object} React element
@@ -173,33 +289,29 @@ class Recipe extends Component {
    */
   render() {
     const { singleRecipe } = this.props;
+    const { isLoading } = singleRecipe;
 
     return (
-      <div>
-        {!isEmpty(singleRecipe) &&
-          <div className="page-body">
-            <header>
-              <Header
-                {...this.props}
-              />
-            </header>
-            <main>
-              <Main
-                singleRecipe={singleRecipe}
-                reviewContent={this.state.reviewContent}
-                handleChange={this.handleChange}
-                handleAddReview={this.handleAddReview}
-                handleUpvote={this.handleUpvote}
-                handleDownvote={this.handleDownvote}
-                handleFavorite={this.handleFavorite}
-              />
-              <ToastContainer />
-            </main>
-            <footer>
-              <Footer />
-            </footer>
-          </div>
-        }
+      <div className="row">
+        <div className="page-body">
+          <header>
+            <Header
+              {...this.props}
+            />
+          </header>
+          <main>
+            {isLoading
+              ? <div className="center-spinner center-align">
+                <Spinner size="big" />
+              </div>
+              : this.renderMainComponent()
+            }
+            <ToastContainer />
+          </main>
+          <footer>
+            <Footer />
+          </footer>
+        </div>
       </div>
     );
   }

@@ -5,7 +5,6 @@ import models from '../models';
 import helpers from '../helpers';
 
 const Recipe = models.Recipe;
-const Review = models.Review;
 const User = models.User;
 const Favorite = models.Favorite;
 const Vote = models.Vote;
@@ -257,16 +256,6 @@ class RecipeController {
           'views', 'favorites', 'userId'
         ],
         include: [{
-          model: Review,
-          limit: 5,
-          order: [
-            ['createdAt', 'DESC']
-          ],
-          include: [{
-            model: User,
-            attributes: ['firstName', 'lastName', 'userImage'],
-          }],
-        }, {
           model: Favorite,
           attributes: ['userId']
         }, {
@@ -539,21 +528,13 @@ class RecipeController {
             attributes: ['id', 'firstName', 'lastName']
           }],
         })
-        .then((recipes) => {
-          if (recipes.length === 0) {
-            return res.status(200).send({
-              status: 'Success',
-              message: 'No recipe matched your search',
-            });
+        .then(recipes => res.status(200).send({
+          status: 'Success',
+          message: 'Recipe(s) found',
+          data: {
+            recipes,
           }
-          return res.status(200).send({
-            status: 'Success',
-            message: 'Recipe(s) found',
-            data: {
-              recipes,
-            }
-          });
-        })
+        }))
         .catch(error => res.status(500).send({
           status: 'Error',
           message: error.message,
@@ -598,21 +579,13 @@ class RecipeController {
             attributes: ['id', 'firstName', 'lastName']
           }],
         })
-        .then((recipes) => {
-          if (recipes.length === 0) {
-            return res.status(200).send({
-              status: 'Success',
-              message: 'No recipe matched your search',
-            });
+        .then(recipes => res.status(200).send({
+          status: 'Success',
+          message: 'Recipe(s) found',
+          data: {
+            recipes,
           }
-          return res.status(200).send({
-            status: 'Success',
-            message: 'Recipe(s) found',
-            data: {
-              recipes,
-            }
-          });
-        })
+        }))
         .catch(error => res.status(500).send({
           status: 'Error',
           message: error.message,

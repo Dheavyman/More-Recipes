@@ -70,7 +70,7 @@ describe('Recipe', () => {
     it('should create an action for delete recipe success', () => {
       const expectedAction = {
         type: actionTypes.DELETE_RECIPE_SUCCESS,
-        id: recipeMockData.recipeId,
+        payload: recipeMockData.recipeId,
       };
       expect(actions.deleteRecipeSuccess(recipeMockData.recipeId))
         .toEqual(expectedAction);

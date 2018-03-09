@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import isEmpty from 'lodash/isEmpty';
 
 import Category from './Category';
 import IndexUserNav from './IndexUserNav';
@@ -86,13 +85,13 @@ class Navbar extends React.Component {
               Category
             </a>
           </li>
-          <Category />
+          <Category {...this.props} />
           <li>
             <a
               className="dropdown-button dropdown-user"
               data-activates="user-control"
             >
-              {!isAuthenticated || isEmpty(userProfile)
+              {!isAuthenticated
                 ? 'Welcome Guest'
                 : fullName || userProfile.fullName}
               <i className="material-icons large left">account_circle</i>

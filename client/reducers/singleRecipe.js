@@ -2,8 +2,11 @@ import * as actionTypes from '../actions/actionTypes';
 
 export const initialState = {
   isLoading: false,
+  isLoadingReviews: false,
   recipe: {},
   reviews: [],
+  reviewsCount: 0,
+  hasMoreReviews: true,
   favoritedUsers: [],
   voters: [],
   voteMessage: null,
@@ -33,7 +36,6 @@ const singleRecipe = (state = initialState, action) => {
         ...state,
         isLoading: false,
         recipe: action.payload,
-        reviews: action.payload.Reviews,
         favoritedUsers: action.payload.Favorites,
         voters: action.payload.Votes,
         error: {},
@@ -44,6 +46,38 @@ const singleRecipe = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+    case actionTypes.FETCH_REVIEWS_REQUEST:
+      return {
+        ...state,
+        isLoadingReviews: true,
+        hasMoreReviews: true,
+      };
+    case actionTypes.FETCH_REVIEWS_SUCCESS:
+      return {
+        ...state,
+        isLoadingReviews: false,
+        reviews: [
+          ...state.reviews,
+          ...action.payload.reviews,
+        ],
+        reviewsCount: action.payload.reviewsCount,
+      };
+    case actionTypes.FETCH_REVIEWS_FAILURE:
+      return {
+        ...state,
+        isLoadingReviews: false,
+        error: action.payload,
+      };
+    case actionTypes.FETCHED_ALL_REVIEWS:
+      return {
+        ...state,
+        hasMoreReviews: false,
+      };
+    case actionTypes.CLEAR_ALL_REVIEWS:
+      return {
+        ...state,
+        reviews: [],
+      };
     case actionTypes.POST_REVIEW_REQUEST:
       return {
         ...state,
@@ -53,10 +87,7 @@ const singleRecipe = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        reviews: [
-          ...state.reviews,
-          action.payload,
-        ]
+        ...state.reviews.unshift(action.payload)
       };
     case actionTypes.POST_REVIEW_FAILURE:
       return {
@@ -64,6 +95,16 @@ const singleRecipe = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+    case actionTypes.DELETE_REVIEW: {
+      let reviews = state.reviews.slice();
+      reviews = reviews.filter(review =>
+        review.id !== action.payload);
+
+      return {
+        ...state,
+        reviews,
+      };
+    }
     case actionTypes.UPVOTE_RECIPE_REQUEST:
       return {
         ...state,

@@ -20,6 +20,7 @@ const propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  handleSearchCategory: PropTypes.func.isRequired,
 };
 
 /**
@@ -66,6 +67,7 @@ class Header extends Component {
    * Open or close the signup modal
    *
    * @returns {object} Toggle openSignup state
+   *
    * @memberof Header
    */
   handleToggleSignupModal = () => {
@@ -76,6 +78,7 @@ class Header extends Component {
    * Open or close the signin modal
    *
    * @returns {object} Toggle openSignin state
+   *
    * @memberof Header
    */
   handleToggleSigninModal = () => {
@@ -93,7 +96,9 @@ class Header extends Component {
    * Form submission handler function
    *
    * @param {any} values The form values
+   *
    * @returns {any} Submit function
+   *
    * @memberof Header
    */
   handleSubmitSignup = (values) => {
@@ -111,7 +116,9 @@ class Header extends Component {
    * Form submission handler function
    *
    * @param {any} values The form values
+   *
    * @returns {any} Submit function
+   *
    * @memberof Header
    */
   handleSubmitSignin = (values) => {
@@ -129,6 +136,7 @@ class Header extends Component {
    * Logout user from the application
    *
    * @returns {any} Logout user
+   *
    * @memberof Header
    */
   handleLogoutUser = () => {
@@ -143,6 +151,7 @@ class Header extends Component {
    * Render method
    *
    * @returns {object} React element
+   *
    * @memberof Header
    */
   render() {
@@ -159,6 +168,7 @@ class Header extends Component {
               handleSubmitSignup={this.handleSubmitSignup}
               handleSubmitSignin={this.handleSubmitSignin}
               handleLogoutUser={this.handleLogoutUser}
+              handleSearchCategory={this.props.handleSearchCategory}
               {...this.props}
             />
           </nav>
@@ -169,6 +179,7 @@ class Header extends Component {
           handleToggleSignupModal={this.handleToggleSignupModal}
           handleToggleSigninModal={this.handleToggleSigninModal}
           handleLogoutUser={this.handleLogoutUser}
+          handleSearchCategory={this.props.handleSearchCategory}
           {...this.props}
         />
         <ToastContainer />

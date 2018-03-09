@@ -34,6 +34,35 @@ describe('Review', () => {
         .toEqual(expectedAction);
     });
   });
+  describe('fetch review action creator', () => {
+    it('should create an action for fetch review request', () => {
+      const expectedAction = {
+        type: actionTypes.FETCH_REVIEWS_REQUEST,
+      };
+      expect(actions.fetchReviewsRequest()).toEqual(expectedAction);
+    });
+    it('should create an action for fetch review success', () => {
+      const expectedAction = {
+        type: actionTypes.FETCH_REVIEWS_SUCCESS,
+        payload: {
+          reviews: reviewMockData.fetchReviewsSuccess.reviews,
+          reviewsCount: reviewMockData.fetchReviewsSuccess.reviewsCount,
+        },
+      };
+      expect(actions.fetchReviewsSuccess(
+        reviewMockData.fetchReviewsSuccess.reviews,
+        reviewMockData.fetchReviewsSuccess.reviewsCount))
+        .toEqual(expectedAction);
+    });
+    it('should create an action for fetch review failure', () => {
+      const expectedAction = {
+        type: actionTypes.FETCH_REVIEWS_FAILURE,
+        payload: reviewMockData.fetchReviewsFailure,
+      };
+      expect(actions.fetchReviewsFailure(reviewMockData.fetchReviewsFailure))
+        .toEqual(expectedAction);
+    });
+  });
   describe('add review async action', () => {
     beforeEach(() => moxios.install());
     afterEach(() => moxios.uninstall());
@@ -75,6 +104,55 @@ describe('Review', () => {
       const store = mockStore({});
 
       return store.dispatch(actions.postReview(reviewMockData.reviewValue))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+  });
+  describe('fetch reviews async action', () => {
+    beforeEach(() => moxios.install());
+    afterEach(() => moxios.uninstall());
+
+    it('should fetch reviews', (done) => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: reviewMockData.fetchReviewsSuccessResponse,
+        });
+      });
+      const expectedActions = [
+        actions.fetchReviewsRequest(),
+        { type: actionTypes.FETCHED_ALL_REVIEWS },
+        actions.fetchReviewsSuccess(
+          reviewMockData.fetchReviewsSuccessResponse.data.reviews,
+          reviewMockData.fetchReviewsSuccessResponse.data.reviewsCount)
+      ];
+      const store = mockStore({});
+
+      return store.dispatch(actions.fetchReviews(reviewMockData.reviewValue))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+    it('should return an error for unsuccessful request', (done) => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 400,
+          response: reviewMockData.fetchReviewsFailure,
+        });
+      });
+      const expectedActions = [
+        actions.fetchReviewsRequest(),
+        actions.fetchReviewsFailure(
+          reviewMockData.fetchReviewsFailure)
+      ];
+      const store = mockStore({});
+
+      return store.dispatch(actions.fetchReviews(reviewMockData.reviewValue))
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
           done();

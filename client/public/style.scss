@@ -125,12 +125,20 @@ main {
 
 .card-title {
   display: block;
-  height: 4.0rem;
   line-height: 1.5rem;
   overflow: hidden;
-  // overflow-wrap: break-word;
   padding: 0.8rem 1rem;
   text-overflow: ellipsis;
+}
+
+.card-content {
+  display: block;
+  height: 5.2rem;
+  line-height: 1.2rem;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
 .icon-red {
@@ -194,6 +202,10 @@ main {
   }
 }
 
+#description {
+  word-break: break-all;
+}
+
 .chip {
   .black-text {
     padding-left: 3px;
@@ -204,8 +216,20 @@ main {
   }
 }
 
+.center-spinner {
+  margin-top: 50px;
+}
+
 .add-review {
   border: 1px solid grey;
+}
+
+.delete-review {
+  cursor: pointer;
+}
+
+.review-content {
+  overflow-wrap: break-word;
 }
 
 .created-on {
@@ -299,6 +323,13 @@ main {
   right: 5px;
 }
 
+button {
+  .disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}
+
 .connect-icons {
   i {
     margin: 5px;
@@ -311,4 +342,14 @@ main {
 
 .switch label input[type=checkbox]:checked+.lever:after {
   background-color: #4caf50;
+}
+
+.not-found {
+  font-size: 40px;
+
+  .status-number {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    margin-bottom: 10px;
+  }
 }

@@ -31,4 +31,20 @@ export default {
       },
     },
   },
+  fetchReviewsSuccess: {
+    reviews: [],
+    reviewsCount: 0,
+  },
+  fetchReviewsFailure: {
+    status: 'Fail',
+    message: 'Error fetching reviews',
+  },
+  fetchReviewsSuccessResponse: {
+    status: 'Success',
+    message: 'Reviews retrieved',
+    data: {
+      reviews: [],
+      reviewsCount: 0,
+    }
+  },
 };

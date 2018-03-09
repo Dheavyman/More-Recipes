@@ -92,7 +92,7 @@ export const deleteRecipeRequest = () => ({
  */
 export const deleteRecipeSuccess = id => ({
   type: actionTypes.DELETE_RECIPE_SUCCESS,
-  id,
+  payload: id,
 });
 
 /**

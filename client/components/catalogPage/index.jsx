@@ -54,7 +54,7 @@ class CatalogPage extends Component {
   }
 
   /**
-   * Component did mount lifecycle method
+   * Component did mount life cycle method
    *
    * @returns {any} Any
    *
@@ -86,7 +86,7 @@ class CatalogPage extends Component {
   }
 
   /**
-   * Component will receive props lifecycle method
+   * Component will receive props life cycle method
    *
    * @param {object} nextProps - The next properties passed
    *
@@ -109,7 +109,7 @@ class CatalogPage extends Component {
   }
 
   /**
-   * Component will unmount lifecyle method
+   * Component will un-mount life cycle method
    *
    * @returns {any} Remove onscroll event listener
    *
@@ -174,6 +174,26 @@ class CatalogPage extends Component {
   }
 
   /**
+   * Search recipes by category
+   *
+   * @param {object} event - The event performed
+   *
+   * @return {any} Submit the search
+   *
+   * @memberof CatalogPage
+   */
+  handleSearchCategory = (event) => {
+    const { target: { name } } = event;
+    const { searchRecipe } = this.props;
+
+    searchRecipe('category', name);
+    this.props.history.replace({
+      pathname: '/catalog',
+      search: `?search=category&list=${name}`,
+    });
+  }
+
+  /**
    * Function to retrieve more recipes for more pages
    *
    * @returns {any} Retrieve more recipes
@@ -210,7 +230,10 @@ class CatalogPage extends Component {
     return (
       <div className="page-body">
         <header>
-          <Header {...this.props} />
+          <Header
+            handleSearchCategory={this.handleSearchCategory}
+            {...this.props}
+          />
         </header>
         <main className="grey lighten-3">
           <Main
