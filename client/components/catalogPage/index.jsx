@@ -54,7 +54,7 @@ class CatalogPage extends Component {
   }
 
   /**
-   * Component did mount lifecycle method
+   * Component did mount life cycle method
    *
    * @returns {any} Any
    *
@@ -86,7 +86,7 @@ class CatalogPage extends Component {
   }
 
   /**
-   * Component will receive props lifecycle method
+   * Component will receive props life cycle method
    *
    * @param {object} nextProps - The next properties passed
    *
@@ -109,7 +109,7 @@ class CatalogPage extends Component {
   }
 
   /**
-   * Component will unmount lifecyle method
+   * Component will un-mount life cycle method
    *
    * @returns {any} Remove onscroll event listener
    *
@@ -183,7 +183,6 @@ class CatalogPage extends Component {
    * @memberof CatalogPage
    */
   handleSearchCategory = (event) => {
-    console.log('the event======>>>>>>>', event.target.name);
     const { target: { name } } = event;
     const { searchRecipe } = this.props;
 

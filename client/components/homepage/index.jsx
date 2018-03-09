@@ -112,7 +112,6 @@ class Home extends Component {
    * @memberof Home
    */
   handleSearchCategory = (event) => {
-    console.log('the event======>>>>>>>', event.target.name);
     const { target: { name } } = event;
     this.props.history.push({
       pathname: '/catalog',
