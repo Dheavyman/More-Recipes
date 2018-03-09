@@ -138,7 +138,6 @@ main {
   overflow: hidden;
   overflow-wrap: break-word;
   text-overflow: ellipsis;
-  // white-space: nowrap;
   word-wrap: break-word;
 }
 
@@ -215,6 +214,10 @@ main {
   .white-text {
     padding-left: 3px;
   }
+}
+
+.center-spinner {
+  margin-top: 50px;
 }
 
 .add-review {
@@ -339,4 +342,14 @@ button {
 
 .switch label input[type=checkbox]:checked+.lever:after {
   background-color: #4caf50;
+}
+
+.not-found {
+  font-size: 40px;
+
+  .status-number {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    margin-bottom: 10px;
+  }
 }
