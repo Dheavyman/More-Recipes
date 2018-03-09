@@ -528,21 +528,13 @@ class RecipeController {
             attributes: ['id', 'firstName', 'lastName']
           }],
         })
-        .then((recipes) => {
-          if (recipes.length === 0) {
-            return res.status(200).send({
-              status: 'Success',
-              message: 'No recipe matched your search',
-            });
+        .then(recipes => res.status(200).send({
+          status: 'Success',
+          message: 'Recipe(s) found',
+          data: {
+            recipes,
           }
-          return res.status(200).send({
-            status: 'Success',
-            message: 'Recipe(s) found',
-            data: {
-              recipes,
-            }
-          });
-        })
+        }))
         .catch(error => res.status(500).send({
           status: 'Error',
           message: error.message,
@@ -587,21 +579,13 @@ class RecipeController {
             attributes: ['id', 'firstName', 'lastName']
           }],
         })
-        .then((recipes) => {
-          if (recipes.length === 0) {
-            return res.status(200).send({
-              status: 'Success',
-              message: 'No recipe matched your search',
-            });
+        .then(recipes => res.status(200).send({
+          status: 'Success',
+          message: 'Recipe(s) found',
+          data: {
+            recipes,
           }
-          return res.status(200).send({
-            status: 'Success',
-            message: 'Recipe(s) found',
-            data: {
-              recipes,
-            }
-          });
-        })
+        }))
         .catch(error => res.status(500).send({
           status: 'Error',
           message: error.message,

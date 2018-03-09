@@ -174,6 +174,27 @@ class CatalogPage extends Component {
   }
 
   /**
+   * Search recipes by category
+   *
+   * @param {object} event - The event performed
+   *
+   * @return {any} Submit the search
+   *
+   * @memberof CatalogPage
+   */
+  handleSearchCategory = (event) => {
+    console.log('the event======>>>>>>>', event.target.name);
+    const { target: { name } } = event;
+    const { searchRecipe } = this.props;
+
+    searchRecipe('category', name);
+    this.props.history.replace({
+      pathname: '/catalog',
+      search: `?search=category&list=${name}`,
+    });
+  }
+
+  /**
    * Function to retrieve more recipes for more pages
    *
    * @returns {any} Retrieve more recipes
@@ -210,7 +231,10 @@ class CatalogPage extends Component {
     return (
       <div className="page-body">
         <header>
-          <Header {...this.props} />
+          <Header
+            handleSearchCategory={this.handleSearchCategory}
+            {...this.props}
+          />
         </header>
         <main className="grey lighten-3">
           <Main

@@ -61,7 +61,7 @@ const Main = (props) => {
             <h5>
               <em>
                 {searchResult.length === 0
-                  ? `No Search result found for ${searchedTerm}`
+                  ? `No search result found for ${searchedTerm}`
                   : `Search results for ${searchedTerm}`
                 }
               </em>
