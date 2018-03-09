@@ -116,9 +116,6 @@ Contributions are welcome and appreciated. To contribute
 #### Who can contribute?
     Anyone!. This application is open to all those who want to contribute to open-source development and are willing to follow the set standards for contributing.
     
-#### Is there a set standard for pull requests to this repository?
-    Yes, there are set conventions for pull requests to this repository and can be found in the project wiki.
-    
 #### What language was used to develop this application?
     This project is a full stack Javascript application
     
