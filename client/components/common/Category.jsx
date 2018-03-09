@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  handleSearchCategory: PropTypes.func.isRequired,
+  handleSearchCategory: PropTypes.func,
+};
+
+const defaultProps = {
+  handleSearchCategory: undefined,
 };
 
 /**
@@ -88,5 +92,6 @@ const Category = (props) => {
 };
 
 Category.propTypes = propTypes;
+Category.defaultProps = defaultProps;
 
 export default Category;

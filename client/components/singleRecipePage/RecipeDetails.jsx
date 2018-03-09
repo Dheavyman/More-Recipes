@@ -14,13 +14,26 @@ const propTypes = {
 /**
  * Function to format display of comma seperated string values into lists
  *
- * @param {string} string - The string value to be formated
+ * @param {string} ingredients - The string value to be formated
  *
  * @returns {object} - React element represent the list item
  */
-const formatDisplay = string => string.split(',').map((ingredient, index) => (
-  <li key={index.toString()}>{ingredient.trim()}</li>
-));
+const formatIngredientsDisplay = ingredients => ingredients
+  .split(',').map((ingredient, index) => (
+    <li key={index.toString()}>{ingredient.trim()}</li>
+  ));
+
+/**
+ * Function to format display of comma seperated string values into lists
+ *
+ * @param {string} directions - The string value to be formated
+ *
+ * @returns {object} - React element represent the list item
+ */
+const formatDirectionsDisplay = directions => directions
+  .split('.').map((direction, index) => (
+    <li key={index.toString()}>{direction.trim()}</li>
+  ));
 
 /**
  * RecipeDetails component
@@ -59,13 +72,13 @@ const RecipeDetails = (props) => {
       <div className="col s12">
         <h6><b><em>Ingredients:</em></b></h6>
         <p id="ingredients" className="grey-text text-darken-3 lighten-3">
-          {ingredients && formatDisplay(ingredients)}
+          {ingredients && formatIngredientsDisplay(ingredients)}
         </p>
       </div>
       <div className="col s12">
         <h6><b><em>Directions:</em></b></h6>
         <ol id="directions" className="grey-text text-darken-3 lighten-3">
-          {directions && formatDisplay(directions)}
+          {directions && formatDirectionsDisplay(directions)}
         </ol>
       </div>
     </div>

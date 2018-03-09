@@ -130,6 +130,7 @@ const EditRecipe = (props) => {
                 <textarea
                   id="ingredients"
                   name="ingredients"
+                  placeholder="Enter ingredients separated by comma"
                   defaultValue={ingredients}
                   className="materialize-textarea validate"
                   onChange={handleEditChange}
@@ -144,6 +145,8 @@ const EditRecipe = (props) => {
               <div className="input-field col s12">
                 <textarea
                   id="directions"
+                  name="directions"
+                  placeholder="Enter directions separated by full stop"
                   defaultValue={directions}
                   className="materialize-textarea validate"
                   onChange={handleEditChange}

@@ -20,7 +20,11 @@ const propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-  handleSearchCategory: PropTypes.func.isRequired,
+  handleSearchCategory: PropTypes.func,
+};
+
+const defaultProps = {
+  handleSearchCategory: undefined
 };
 
 /**
@@ -189,5 +193,6 @@ class Header extends Component {
 }
 
 Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;
