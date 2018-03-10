@@ -102,8 +102,9 @@ const EditProfileForm = (props) => {
         <button
           id="edit-btn"
           className={`btn-floating waves-effect waves-light indigo accent-2
-        right`}
+            right`}
           onClick={handleSubmitProfile}
+          disabled={isLoading}
         >
           <i className="material-icons" data-tip="Save Details">save</i>
         </button>
@@ -111,6 +112,7 @@ const EditProfileForm = (props) => {
           id="edit-btn"
           className={'btn-floating waves-effect waves-light red right'}
           onClick={handleCancel}
+          disabled={isLoading}
         >
           <i className="material-icons" data-tip="Cancel">cancel</i>
         </button>

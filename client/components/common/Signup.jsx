@@ -17,7 +17,6 @@ const propTypes = {
   handleToggleModal: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleSubmitSignup: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     isLoading: PropTypes.bool.isRequired,
     error: PropTypes.shape({
@@ -36,7 +35,7 @@ const propTypes = {
 const Signup = (props) => {
   const {
     user: { isLoading, error }, openSignup, handleToggleSignupModal,
-    handleToggleModal, handleSubmit, handleSubmitSignup, submitting
+    handleToggleModal, handleSubmit, handleSubmitSignup
   } = props;
   const { message } = error;
 
@@ -133,7 +132,7 @@ const Signup = (props) => {
                 name="signupbtn"
                 className={`btn btn-large waves-effect waves-light
                   indigo accent-2`}
-                disabled={submitting}
+                disabled={isLoading}
               >
                 Sign Up
               </button>

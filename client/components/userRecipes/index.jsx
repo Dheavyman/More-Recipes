@@ -58,7 +58,7 @@ class UserRecipes extends React.Component {
       title: '',
       category: 'Select Category',
       description: '',
-      preparationTime: null,
+      preparationTime: undefined,
       ingredients: '',
       directions: '',
       imageData: null,
@@ -189,8 +189,13 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   handleEditChange(event) {
-    const { target: { name, value } } = event;
     const { recipeToEdit } = this.state;
+    const { target: { name } } = event;
+    let { target: { value } } = event;
+
+    if (name === 'preparationTime') {
+      value = parseInt(value, 10);
+    }
     this.setState({
       recipeToEdit: {
         ...recipeToEdit,

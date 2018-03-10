@@ -11,6 +11,9 @@ const propTypes = {
   deleteMessage: PropTypes.string.isRequired,
   actionTitle: PropTypes.string.isRequired,
   action: PropTypes.string.isRequired,
+  userRecipes: PropTypes.shape({
+    isLoading: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 const defaultProps = {
@@ -27,8 +30,9 @@ const defaultProps = {
 const DeleteRecipe = (props) => {
   const {
     recipeId, open, handleClose, handleDeleteRecipe,
-    deleteMessage, actionTitle, action
+    deleteMessage, actionTitle, action, userRecipes
   } = props;
+  const { isLoading } = userRecipes;
 
   const actions = [
     <FlatButton
@@ -39,6 +43,7 @@ const DeleteRecipe = (props) => {
       label={action || 'Delete'}
       secondary
       onClick={() => handleDeleteRecipe(recipeId, actionTitle)}
+      disabled={isLoading}
     />,
   ];
 

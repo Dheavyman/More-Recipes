@@ -187,6 +187,7 @@ const EditRecipe = (props) => {
                 type="submit"
                 className={`btn btn-large waves-effect waves-light
                     indigo accent-2`}
+                disabled={imageUploading || isLoading}
               >
                 Save
               </button>
