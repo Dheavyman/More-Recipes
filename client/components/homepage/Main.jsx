@@ -38,7 +38,7 @@ const Main = (props) => {
       </div>
       <div className="grey lighten-3" >
         <div className="row recipes-list">
-          <div className="col s12 popular-list white">
+          <div id="popular" className="col s12 popular-list white">
             <PopularRecipesCatalog popularRecipes={popularRecipes} {...props} />
           </div>
           <div className="col s12 all-recipes-list white">

@@ -17,6 +17,7 @@ const propTypes = {
   editRecipe: PropTypes.func.isRequired,
   deleteRecipe: PropTypes.func.isRequired,
   setFavorite: PropTypes.func.isRequired,
+  searchRecipe: PropTypes.func.isRequired,
   userRecipes: PropTypes.shape({
     imageUploading: PropTypes.bool.isRequired,
     imageUrl: PropTypes.string
@@ -29,6 +30,7 @@ const propTypes = {
   logoutUser: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
+    replace: PropTypes.func,
   }).isRequired,
 };
 
@@ -429,6 +431,23 @@ class UserRecipes extends React.Component {
       .then(() => {
         history.push('/');
       });
+  }
+
+  /**
+   * Search recipes by category
+   *
+   * @param {object} event - The event performed
+   *
+   * @return {any} Submit the search
+   *
+   * @memberof UserRecipes
+   */
+  handleSearchCategory = (event) => {
+    const { target: { name } } = event;
+    this.props.history.push({
+      pathname: '/catalog',
+      search: `?search=category&list=${name}`,
+    });
   }
 
   /**

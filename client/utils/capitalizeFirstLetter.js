@@ -5,7 +5,7 @@
  *
  * @returns {string} Formatted text
  */
-const capitalizeFirstLetter = text => text
-  .replace(/^./, text[0].toUpperCase());
+const capitalizeFirstLetter = text => text &&
+  text.replace(/^./, text[0].toUpperCase());
 
 export default capitalizeFirstLetter;

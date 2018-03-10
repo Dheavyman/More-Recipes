@@ -8,6 +8,7 @@ const propTypes = {
   handleToggleSignupModal: PropTypes.func,
   handleToggleSigninModal: PropTypes.func,
   handleLogoutUser: PropTypes.func.isRequired,
+  handleSearchCategory: PropTypes.func,
   user: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
     userProfile: PropTypes.shape({
@@ -29,6 +30,7 @@ const propTypes = {
 const defaultProps = {
   handleToggleSignupModal: undefined,
   handleToggleSigninModal: undefined,
+  handleSearchCategory: undefined,
   currentProfileUserId: null,
   authenticatedUserId: null,
   userRecipes: undefined,
@@ -81,7 +83,7 @@ class SideNav extends React.Component {
     const {
       user, location: { pathname }, userRecipes, handleToggleSignupModal,
       handleToggleSigninModal, handleLogoutUser, currentProfileUserId,
-      authenticatedUserId,
+      authenticatedUserId, handleSearchCategory
     } = this.props;
     const { isAuthenticated, userProfile: { notifications } } = user;
     const userUrl = new RegExp(/users/);
@@ -104,16 +106,70 @@ class SideNav extends React.Component {
                 <div className="collapsible-body">
                   <ul>
                     <li>
-                      <a href="#!" className="collection-item">Breakfast</a>
+                      <a
+                        role="button"
+                        tabIndex="0"
+                        name="breakfast"
+                        className="collection-item"
+                        onClick={handleSearchCategory}
+                      >
+                        Breakfast
+                      </a>
                     </li>
-                    <li><a href="#!" className="collection-item">Lunch</a></li>
-                    <li><a href="#!" className="collection-item">Dinner</a></li>
                     <li>
-                      <a href="#!" className="collection-item">Appetizer</a>
+                      <a
+                        role="button"
+                        tabIndex="0"
+                        name="lunch"
+                        className="collection-item"
+                        onClick={handleSearchCategory}
+                      >
+                        Lunch
+                      </a>
                     </li>
-                    <li><a href="#!" className="collection-item">Main</a></li>
                     <li>
-                      <a href="#!" className="collection-item">Dessert</a>
+                      <a
+                        role="button"
+                        tabIndex="0"
+                        name="dinner"
+                        className="collection-item"
+                        onClick={handleSearchCategory}
+                      >
+                        Dinner
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        role="button"
+                        tabIndex="0"
+                        name="appetizer"
+                        className="collection-item"
+                        onClick={handleSearchCategory}
+                      >
+                        Appetizer
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        role="button"
+                        tabIndex="0"
+                        name="main"
+                        className="collection-item"
+                        onClick={handleSearchCategory}
+                      >
+                        Main
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        role="button"
+                        tabIndex="0"
+                        name="dessert"
+                        className="collection-item"
+                        onClick={handleSearchCategory}
+                      >
+                        Dessert
+                      </a>
                     </li>
                   </ul>
                 </div>
