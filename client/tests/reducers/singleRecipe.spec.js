@@ -146,7 +146,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: true,
+        isActing: true,
       });
     });
     it('should handle upvote recipe success', () => {
@@ -156,7 +156,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isActing: false,
         voteMessage: action.payload.message,
         recipe: {
           ...initialState.recipe,
@@ -171,7 +171,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isActing: false,
         error: action.payload,
       });
     });
@@ -183,7 +183,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: true,
+        isActing: true,
       });
     });
     it('should handle downvote recipe success', () => {
@@ -193,7 +193,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isActing: false,
         voteMessage: action.payload.message,
         recipe: {
           ...initialState.recipe,
@@ -208,7 +208,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isActing: false,
         error: action.payload,
       });
     });
@@ -220,17 +220,17 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: true,
+        isActing: true,
       });
     });
-    it('should handle downvote recipe success', () => {
+    it('should handle set favorite recipe success', () => {
       const action = {
         type: actionTypes.SET_FAVORITE_SUCCESS,
         payload: recipesMockData.setFavoriteSuccessResponse
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isActing: false,
         favoriteMessage: action.payload.message,
         recipe: {
           ...initialState.recipe,
@@ -238,14 +238,14 @@ describe('Single recipe reducer', () => {
         }
       });
     });
-    it('should handle downvote recipe failure', () => {
+    it('should handle set favorite recipe failure', () => {
       const action = {
         type: actionTypes.SET_FAVORITE_FAILURE,
         payload: recipesMockData.setFavoriteFailureResponse
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isActing: false,
         error: action.payload,
       });
     });

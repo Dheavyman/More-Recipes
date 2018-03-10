@@ -4,6 +4,7 @@ export const initialState = {
   isFetching: false,
   isLoading: false,
   isLoadingReviews: false,
+  isActing: false,
   recipe: {},
   reviews: [],
   reviewsCount: 0,
@@ -109,12 +110,12 @@ const singleRecipe = (state = initialState, action) => {
     case actionTypes.UPVOTE_RECIPE_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isActing: true,
       };
     case actionTypes.UPVOTE_RECIPE_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isActing: false,
         voteMessage: action.payload.message,
         recipe: {
           ...state.recipe,
@@ -124,18 +125,18 @@ const singleRecipe = (state = initialState, action) => {
     case actionTypes.UPVOTE_RECIPE_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isActing: false,
         error: action.payload,
       };
     case actionTypes.DOWNVOTE_RECIPE_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isActing: true,
       };
     case actionTypes.DOWNVOTE_RECIPE_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isActing: false,
         voteMessage: action.payload.message,
         recipe: {
           ...state.recipe,
@@ -145,18 +146,18 @@ const singleRecipe = (state = initialState, action) => {
     case actionTypes.DOWNVOTE_RECIPE_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isActing: false,
         error: action.payload,
       };
     case actionTypes.SET_FAVORITE_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isActing: true,
       };
     case actionTypes.SET_FAVORITE_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isActing: false,
         favoriteMessage: action.payload.message,
         recipe: {
           ...state.recipe,
@@ -166,7 +167,7 @@ const singleRecipe = (state = initialState, action) => {
     case actionTypes.SET_FAVORITE_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isActing: false,
         error: action.payload,
       };
     default:
