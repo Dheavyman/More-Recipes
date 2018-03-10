@@ -185,10 +185,16 @@ class Recipe extends Component {
    * @memberof Recipe
    */
   handleUpvote() {
-    const { singleRecipe, upvoteRecipe } = this.props;
+    const {
+      singleRecipe, upvoteRecipe, user: { isAuthenticated }
+    } = this.props;
     const { recipe: { id } } = singleRecipe;
 
-    upvoteRecipe(id);
+    if (isAuthenticated && getToken() !== null) {
+      upvoteRecipe(id);
+    } else {
+      notify('info', 'Please login to perform this action');
+    }
   }
 
   /**
@@ -199,10 +205,16 @@ class Recipe extends Component {
    * @memberof Recipe
    */
   handleDownvote() {
-    const { singleRecipe, downvoteRecipe } = this.props;
+    const {
+      singleRecipe, downvoteRecipe, user: { isAuthenticated }
+    } = this.props;
     const { recipe: { id } } = singleRecipe;
 
-    downvoteRecipe(id);
+    if (isAuthenticated && getToken() !== null) {
+      downvoteRecipe(id);
+    } else {
+      notify('info', 'Please login to perform this action');
+    }
   }
 
   /**
@@ -213,10 +225,14 @@ class Recipe extends Component {
    * @memberof Recipe
    */
   handleFavorite() {
-    const { singleRecipe, setFavorite } = this.props;
+    const { singleRecipe, setFavorite, user: { isAuthenticated } } = this.props;
     const { recipe: { id } } = singleRecipe;
 
-    setFavorite(id);
+    if (isAuthenticated && getToken() !== null) {
+      setFavorite(id);
+    } else {
+      notify('info', 'Please login to perform this action');
+    }
   }
 
   /**
