@@ -33,7 +33,7 @@ const defaultProps = {
  * @returns {object} React element
  */
 const Main = (props) => {
-  const { recipes: { searchResult }, location: { search },
+  const { recipes: { isFetchingRecipes, searchResult }, location: { search },
     searchPerformed, scrollToTop } = props;
   let { searchedTerm } = props;
 
@@ -58,6 +58,7 @@ const Main = (props) => {
         <div className="center-align">
           {search !== '' &&
             searchPerformed &&
+            !isFetchingRecipes &&
             <h5>
               <em>
                 {searchResult.length === 0
