@@ -15,7 +15,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: true,
+        isFetching: true,
         voteMessage: null,
         favoriteMessage: null,
       });
@@ -27,7 +27,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isFetching: false,
         recipe: action.payload,
         reviews: action.payload.Reviews,
         favoritedUsers: action.payload.Favorites,
@@ -42,7 +42,7 @@ describe('Single recipe reducer', () => {
       };
       expect(singleRecipeReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isFetching: false,
         error: action.payload,
       });
     });

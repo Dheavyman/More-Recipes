@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 export const initialState = {
+  isFetching: false,
   isLoading: false,
   isLoadingReviews: false,
   recipe: {},
@@ -27,14 +28,14 @@ const singleRecipe = (state = initialState, action) => {
     case actionTypes.FETCH_RECIPE_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isFetching: true,
         voteMessage: null,
         favoriteMessage: null,
       };
     case actionTypes.FETCH_RECIPE_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isFetching: false,
         recipe: action.payload,
         favoritedUsers: action.payload.Favorites,
         voters: action.payload.Votes,
@@ -43,7 +44,7 @@ const singleRecipe = (state = initialState, action) => {
     case actionTypes.FETCH_RECIPE_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isFetching: false,
         error: action.payload,
       };
     case actionTypes.FETCH_REVIEWS_REQUEST:

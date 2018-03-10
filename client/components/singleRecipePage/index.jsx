@@ -15,6 +15,7 @@ import notify from '../../utils/notification';
 
 const propTypes = {
   singleRecipe: PropTypes.shape({
+    isFetching: PropTypes.bool.isRequired,
     recipe: PropTypes.shape({
       id: PropTypes.number,
     }),
@@ -289,7 +290,7 @@ class Recipe extends Component {
    */
   render() {
     const { singleRecipe } = this.props;
-    const { isLoading } = singleRecipe;
+    const { isFetching } = singleRecipe;
 
     return (
       <div className="row">
@@ -300,7 +301,7 @@ class Recipe extends Component {
             />
           </header>
           <main>
-            {isLoading
+            {isFetching
               ? <div className="center-spinner center-align">
                 <Spinner size="big" />
               </div>
