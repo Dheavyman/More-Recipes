@@ -47,6 +47,6 @@ module.exports = {
   testPathIgnorePatterns: [
     './node_modules/',
     'client/tests/__mocks__',
-    'tests/test.js'
+    './tests/test.js'
   ],
 };

@@ -1,212 +1,24 @@
 import 'mocha';
 import chai from 'chai';
 import supertest from 'supertest';
+
 import app from '../server/app';
+import {
+  validSignupSeed,
+  invalidSignupSeed,
+  validSigninSeed,
+  invalidSigninSeed,
+  validUserSeed
+} from './__mocks__/user';
+import {
+  validRecipeSeed,
+  invalidRecipeSeed,
+  userFavoriteCategory
+} from './__mocks__/recipes';
+import { validReviewSeed, invalidReviewSeed } from './__mocks__/review';
 
 const server = supertest.agent(app);
 const expect = chai.expect;
-const validSignupSeed = [{
-  username: 'Scotch',
-  password: 'scotchpassword',
-  email: 'scotch@example.com',
-  firstName: 'John',
-  lastName: 'Scoth',
-}, {
-  username: 'Jessy',
-  password: 'jessypassword',
-  email: 'jessy@example.com',
-  firstName: 'Jessy',
-  lastName: 'Sanders',
-}, {
-  username: 'Vincent',
-  password: 'vincentpassword',
-  email: 'scotch@example.com',
-  firstName: 'Vincent',
-  lastName: 'Cross',
-}, {
-  username: 'Francis',
-  password: 'francispassword',
-  email: 'francis@example.com',
-  firstName: 'Francis',
-  lastName: 'Johnson',
-}];
-const invalidSignupSeed = [{
-  username: '  ',
-  password: 'awesome',
-  email: '@example.com',
-  firstName: 'Alex',
-  lastName: 'Scotch',
-}, {
-  username: 'Paul',
-  password: '  ',
-  email: 'paul@example.com',
-  firstName: 'Paul',
-  lastName: 'Sunders',
-}, {
-  username: 'Paul',
-  password: 'awesome',
-  email: '   ',
-  firstName: 'Paul',
-  lastName: 'Sunders',
-}, {
-  username: 'Paul',
-  password: 'awesome',
-  email: 'paul@example.com',
-  firstName: '   ',
-  lastName: 'Sunders',
-}, {
-  username: 'Paul',
-  password: 'awesome',
-  email: 'paul@example.com',
-  firstName: 'Paul',
-  lastName: '  ',
-}, {
-  username: 'Paul#',
-  password: 'awesome',
-  email: 'paul@example.com',
-  firstName: 'Paul',
-  lastName: 'Sunders',
-  gender: 'male'
-}, {
-  username: 'paul',
-  password: 'awesome',
-  email: 'paulexample.com',
-  firstName: 'Paul',
-  lastName: 'Sunders',
-}];
-const validSigninSeed = [{
-  username: 'Jessy',
-  password: 'jessypassword',
-}, {
-  username: 'scotch',
-  password: 'scotchpassword',
-}, {
-  username: 'Francis',
-  password: 'francispassword',
-}];
-const invalidSigninSeed = [{
-  username: '  ',
-  password: 'jessypassword',
-}, {
-  username: 'Jessy',
-  password: '   ',
-}, {
-  username: 'notJessy',
-  password: 'jessypassword',
-}, {
-  username: 'Jessy',
-  password: 'notjessypassword',
-}];
-const validUserSeed = [{
-  firstName: 'John',
-  lastName: 'Scotch',
-  aboutMe: 'This is my bio',
-}, {
-  userImage: 'user.image.url',
-}];
-const validRecipeSeed = [{
-  title: 'Beans',
-  category: 'Dessert',
-  description: 'Tasty beans',
-  preparationTime: 65,
-  ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
-  directions: 'Cook the beans and add the ingredients',
-  recipeImage: 'Url',
-}, {
-  title: 'Yam sauce',
-  category: 'Lunch',
-  description: 'Served white and colourful',
-  preparationTime: 50,
-  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-  directions: 'Slice the yam and prepare the sauce',
-  recipeImage: 'Url',
-}, {
-  title: 'Beans',
-  category: 'Appetizer',
-  description: 'Tasty and nutricious beans',
-  preparationTime: 80,
-  ingredients: 'Beans, red oil, onion, salt, maggi, pepper',
-  directions: 'Cook the beans and add the ingredients',
-  recipeImage: 'Url',
-}, {
-  title: 'Egusi soup',
-  category: 'Dinner',
-  description: 'Tasty and nutricious soup',
-  preparationTime: 65,
-  ingredients: 'Egusi, stock fish, red oil, onion, salt, maggi, pepper',
-  directions: 'Cook the egusi and add the ingredients',
-  recipeImage: 'Url',
-}, {
-  title: 'Yam sauce',
-  category: 'Lunch',
-  description: 'Served white and colourful',
-  preparationTime: 50,
-  ingredients: 'Yam, tomatoes, vegetable oil, egg, salt, maggi, pepper',
-  directions: 'Slice the yam and prepare the sauce',
-  recipeImage: 'Url',
-}];
-const invalidRecipeSeed = [{
-  title: '   ',
-  category: 'Lunch',
-  description: 'Served white and colourful',
-  preparationTime: 50,
-  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-  directions: 'Slice the yam and prepare the sauce',
-  recipeImage: 'Url',
-}, {
-  title: 'Yam sauce',
-  category: 'Breakfast',
-  description: '   ',
-  preparationTime: 50,
-  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-  directions: 'Slice the yam and prepare the sauce',
-  recipeImage: 'Url',
-}, {
-  title: 'Yam sauce',
-  category: 'Main',
-  description: 'Served white and colourful',
-  preparationTime: null,
-  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-  directions: 'Slice the yam and prepare the sauce',
-  recipeImage: 'Url',
-}, {
-  title: 'Yam sauce',
-  category: 'Dinner',
-  description: 'Served white and colourful',
-  preparationTime: 50,
-  ingredients: '   ',
-  directions: 'Slice the yam and prepare the sauce',
-  recipeImage: 'Url',
-}, {
-  title: 'Yam sauce',
-  category: 'Breakfast',
-  description: 'Served white and colourful',
-  preparationTime: 50,
-  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-  directions: '   ',
-  recipeImage: 'Url',
-}, {
-  title: 'Spaghetti',
-  category: '  ',
-  description: 'Served white and colourful',
-  preparationTime: 50,
-  ingredients: 'Yam, tomatoes, egg, salt, maggi, pepper',
-  directions: 'Slice the yam and prepare the sauce',
-  recipeImage: 'Url',
-}];
-const validReviewSeed = [{
-  content: 'A nice recipe idea',
-}, {
-  content: 'I added spinach and it was wonderful',
-}, {
-  content: 'A very tasty recipe, so sweet',
-}];
-const invalidReviewSeed = [{
-  content: '  ',
-}];
-const userFavoriteCategory = [{
-  category: 'Lunch',
-}];
 const userToken = [];
 let userId1;
 let userId2;
@@ -243,6 +55,11 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User created');
+          expect(res.body.data.user.username).to.equal('scotch');
+          expect(res.body.data.user.fullName).to.equal('John Scotch');
+          expect(res.body.data.user.email).to.equal('scotch@example.com');
+          expect(res.body.data.user.notifications).to.equal(false);
+          expect(res.body.data.user.token).to.be.a('string');
           done();
         });
     });
@@ -285,6 +102,11 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User created');
+          expect(res.body.data.user.username).to.equal('jessy');
+          expect(res.body.data.user.fullName).to.equal('Jessy Sanders');
+          expect(res.body.data.user.email).to.equal('jessy@example.com');
+          expect(res.body.data.user.notifications).to.equal(false);
+          expect(res.body.data.user.token).to.be.a('string');
           done();
         });
     });
@@ -300,6 +122,11 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User created');
+          expect(res.body.data.user.username).to.equal('francis');
+          expect(res.body.data.user.fullName).to.equal('Francis Johnson');
+          expect(res.body.data.user.email).to.equal('francis@example.com');
+          expect(res.body.data.user.notifications).to.equal(false);
+          expect(res.body.data.user.token).to.be.a('string');
           done();
         });
     });
@@ -342,7 +169,7 @@ describe('More Recipes', () => {
           done();
         });
     });
-    it('should return 400 for empty firstname', (done) => {
+    it('should return 400 for empty first name', (done) => {
       server
         .post('/api/v1/users/signup')
         .set('Connection', 'keep alive')
@@ -351,11 +178,11 @@ describe('More Recipes', () => {
         .send(invalidSignupSeed[3])
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('Firstname required');
+          expect(res.body.message).to.equal('First name required');
           done();
         });
     });
-    it('should return 400 for empty lastname', (done) => {
+    it('should return 400 for empty last name', (done) => {
       server
         .post('/api/v1/users/signup')
         .set('Connection', 'keep alive')
@@ -364,7 +191,7 @@ describe('More Recipes', () => {
         .send(invalidSignupSeed[4])
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('Lastname required');
+          expect(res.body.message).to.equal('Last name required');
           done();
         });
     });
@@ -468,6 +295,9 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User logged in');
+          expect(res.body.data.user.fullName).to.equal('Jessy Sanders');
+          expect(res.body.data.user.userImage).to.equal(null);
+          expect(res.body.data.user.token).to.be.a('string');
           done();
         });
     });
@@ -484,6 +314,9 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User logged in');
+          expect(res.body.data.user.fullName).to.equal('John Scotch');
+          expect(res.body.data.user.userImage).to.equal(null);
+          expect(res.body.data.user.token).to.be.a('string');
           done();
         });
     });
@@ -500,6 +333,9 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User logged in');
+          expect(res.body.data.user.fullName).to.equal('Francis Johnson');
+          expect(res.body.data.user.userImage).to.equal(null);
+          expect(res.body.data.user.token).to.be.a('string');
           done();
         });
     });
@@ -516,6 +352,14 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User profile retrieved');
+          expect(res.body.data.user.username).to.equal('scotch');
+          expect(res.body.data.user.fullName).to.equal('John Scotch');
+          expect(res.body.data.user.firstName).to.equal('John');
+          expect(res.body.data.user.lastName).to.equal('Scotch');
+          expect(res.body.data.user.email).to.equal('scotch@example.com');
+          expect(res.body.data.user.userImage).to.equal(null);
+          expect(res.body.data.user.aboutMe).to.equal(null);
+          expect(res.body.data.user.notifications).to.equal(false);
           done();
         });
     });
@@ -539,7 +383,7 @@ describe('More Recipes', () => {
         .put('/api/v1/users')
         .set('Connection', 'keep alive')
         .set('Accept', 'application/json')
-        .set('x-access-token', userToken[0])
+        .set('x-access-token', userToken[1])
         .set('Content-Type', 'application/json')
         .type('form')
         .send(validUserSeed[0])
@@ -549,6 +393,8 @@ describe('More Recipes', () => {
           expect(res.body.data.user.firstName).to.equal('John');
           expect(res.body.data.user.lastName).to.equal('Scotch');
           expect(res.body.data.user.aboutMe).to.equal('This is my bio');
+          expect(res.body.data.user.userImage).to.equal(null);
+          expect(res.body.data.user.notifications).to.equal(false);
           done();
         });
     });
@@ -564,7 +410,11 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('User profile updated');
+          expect(res.body.data.user.firstName).to.equal('Jessy');
+          expect(res.body.data.user.lastName).to.equal('Sanders');
+          expect(res.body.data.user.aboutMe).to.equal(null);
           expect(res.body.data.user.userImage).to.equal('user.image.url');
+          expect(res.body.data.user.notifications).to.equal(false);
           done();
         });
     });
@@ -634,6 +484,15 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe created');
+          expect(res.body.data.recipe.title).to.equal('Beans');
+          expect(res.body.data.recipe.category).to.equal('Dessert');
+          expect(res.body.data.recipe.description).to.equal('Tasty beans');
+          expect(res.body.data.recipe.preparationTime).to.equal(65);
+          expect(res.body.data.recipe.ingredients).to
+            .equal('Beans, red oil, onion, salt, maggi, pepper');
+          expect(res.body.data.recipe.directions).to
+            .equal('Cook the beans and add the ingredients');
+          expect(res.body.data.recipe.recipeImage).to.equal('Beans URL');
           done();
         });
     });
@@ -669,6 +528,15 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe created');
+          expect(res.body.data.recipe.title).to.equal('Yam sauce');
+          expect(res.body.data.recipe.category).to.equal('Lunch');
+          expect(res.body.data.recipe.description).to.equal('Served white and colorful');
+          expect(res.body.data.recipe.preparationTime).to.equal(50);
+          expect(res.body.data.recipe.ingredients).to
+            .equal('Yam, tomatoes, egg, salt, maggi, pepper');
+          expect(res.body.data.recipe.directions).to
+            .equal('Slice the yam and prepare the sauce');
+          expect(res.body.data.recipe.recipeImage).to.equal('Yam URL');
           done();
         });
     });
@@ -686,6 +554,15 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe created');
+          expect(res.body.data.recipe.title).to.equal('Egusi soup');
+          expect(res.body.data.recipe.category).to.equal('Dinner');
+          expect(res.body.data.recipe.description).to.equal('Tasty and nutritious soup');
+          expect(res.body.data.recipe.preparationTime).to.equal(65);
+          expect(res.body.data.recipe.ingredients).to
+            .equal('Egusi, stock fish, red oil, onion, salt, maggi, pepper');
+          expect(res.body.data.recipe.directions).to
+            .equal('Cook the egusi and add the ingredients');
+          expect(res.body.data.recipe.recipeImage).to.equal('Egusi URL');
           done();
         });
     });
@@ -800,8 +677,16 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe modified');
+          expect(res.body.data.recipe.title).to.equal('Beans');
+          expect(res.body.data.recipe.category).to.equal('Appetizer');
           expect(res.body.data.recipe.description).to
-            .equal('Tasty and nutricious beans');
+            .equal('Tasty and nutritious beans');
+          expect(res.body.data.recipe.preparationTime).to.equal(80);
+          expect(res.body.data.recipe.ingredients).to
+            .equal('Beans, red oil, onion, salt, maggi, pepper');
+          expect(res.body.data.recipe.directions).to
+            .equal('Cook the beans and add the ingredients');
+          expect(res.body.data.recipe.recipeImage).to.equal('Beans URL');
           done();
         });
     });
@@ -833,6 +718,8 @@ describe('More Recipes', () => {
           .send(validRecipeSeed[2])
           .end((err, res) => {
             expect(res.statusCode).to.equal(403);
+            expect(res.body.status).to.equal('Fail');
+            expect(res.body.message).to.equal('Not user\'s recipe');
             done();
           });
       });
@@ -849,6 +736,8 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipes retrieved');
+            expect(res.body.data.recipes).to.be.an('array');
+            expect(res.body.data.recipesCount).to.be.a('number').that.equals(3);
             done();
           });
       });
@@ -863,6 +752,16 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipe retrieved');
+            expect(res.body.data.recipe.title).to.equal('Yam sauce');
+            expect(res.body.data.recipe.category).to.equal('Lunch');
+            expect(res.body.data.recipe.description).to
+              .equal('Served white and colorful');
+            expect(res.body.data.recipe.preparationTime).to.equal(50);
+            expect(res.body.data.recipe.ingredients).to
+              .equal('Yam, tomatoes, egg, salt, maggi, pepper');
+            expect(res.body.data.recipe.directions).to
+              .equal('Slice the yam and prepare the sauce');
+            expect(res.body.data.recipe.recipeImage).to.equal('Yam URL');
             done();
           });
       });
@@ -878,6 +777,15 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipe retrieved');
+            expect(res.body.data.recipe.title).to.equal('Yam sauce');
+            expect(res.body.data.recipe.category).to.equal('Lunch');
+            expect(res.body.data.recipe.description).to.equal('Served white and colorful');
+            expect(res.body.data.recipe.preparationTime).to.equal(50);
+            expect(res.body.data.recipe.ingredients).to
+              .equal('Yam, tomatoes, egg, salt, maggi, pepper');
+            expect(res.body.data.recipe.directions).to
+              .equal('Slice the yam and prepare the sauce');
+            expect(res.body.data.recipe.recipeImage).to.equal('Yam URL');
             done();
           });
       });
@@ -905,6 +813,8 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('User recipes retrieved');
+            expect(res.body.data.recipes).to.be.an('array');
+            expect(res.body.data.recipesCount).to.be.a('number').that.equals(1);
             done();
           });
       });
@@ -919,6 +829,8 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User has not added any recipe');
+          expect(res.body.data.recipes).to.be.an('array');
+          expect(res.body.data.recipesCount).to.be.a('number').that.equals(0);
           done();
         });
     });
@@ -933,6 +845,7 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Popular recipes retrieved');
+            expect(res.body.data.recipes).to.be.an('array');
             done();
           });
       });
@@ -1016,6 +929,13 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Review created');
+          expect(res.body.data.review).to.be.an('object');
+          expect(res.body.data.review).to.have.a.property('id');
+          expect(res.body.data.review).to.have.a.property('userId');
+          expect(res.body.data.review).to.have.a.property('User');
+          expect(res.body.data.review.content).to.equal('A nice recipe idea');
+          expect(res.body.data.review.recipeId).to.equal(recipeId2);
+          expect(res.body.data.review.User.fullName).to.equal('Jessy Sanders');
           done();
         });
     });
@@ -1034,6 +954,13 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Review created');
+            expect(res.body.data.review).to.be.an('object');
+            expect(res.body.data.review).to.have.a.property('id');
+            expect(res.body.data.review).to.have.a.property('userId');
+            expect(res.body.data.review).to.have.a.property('User');
+            expect(res.body.data.review.content).to.equal('I added spinach and it was wonderful');
+            expect(res.body.data.review.recipeId).to.equal(recipeId2);
+            expect(res.body.data.review.User.fullName).to.equal('John Scotch');
             done();
           });
       });
@@ -1077,6 +1004,7 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('Error in parameter');
+          expect(res.body).to.have.a.property('message');
           done();
         });
     });
@@ -1105,6 +1033,8 @@ describe('More Recipes', () => {
           .set('Content-Type', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(404);
+            expect(res.body.status).to.equal('Fail');
+            expect(res.body.message).to.equal('Review not found');
             done();
           });
       });
@@ -1170,6 +1100,7 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipe added to favorites');
+            expect(res.body.data.favorites).to.equal(1);
             done();
           });
       });
@@ -1185,6 +1116,7 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipe added to favorites');
+            expect(res.body.data.favorites).to.equal(1);
             done();
           });
       });
@@ -1200,6 +1132,7 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipe added to favorites');
+            expect(res.body.data.favorites).to.equal(2);
             done();
           });
       });
@@ -1215,6 +1148,7 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipe added to favorites');
+            expect(res.body.data.favorites).to.equal(3);
             done();
           });
       });
@@ -1245,6 +1179,8 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Favorites retrieved');
+            expect(res.body.data.favorites).to.be.an('array');
+            expect(res.body.data.favoritesCount).to.equal(1);
             done();
           });
       });
@@ -1306,6 +1242,8 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Upvote recorded');
+          expect(res.body.data).to.have.a.property('upvotes').that.equals(1);
+          expect(res.body.data).to.have.a.property('downvotes').that.equals(0);
           done();
         });
     });
@@ -1320,6 +1258,8 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Downvote recorded');
+          expect(res.body.data).to.have.a.property('upvotes').that.equals(1);
+          expect(res.body.data).to.have.a.property('downvotes').that.equals(1);
           done();
         });
     });
@@ -1336,6 +1276,8 @@ describe('More Recipes', () => {
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to
               .equal('Downvote recorded and upvote removed');
+            expect(res.body.data).to.have.a.property('upvotes').that.equals(0);
+            expect(res.body.data).to.have.a.property('downvotes').that.equals(2);
             done();
           });
       });
@@ -1350,6 +1292,8 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Downvote removed');
+          expect(res.body.data).to.have.a.property('upvotes').that.equals(0);
+          expect(res.body.data).to.have.a.property('downvotes').that.equals(1);
           done();
         });
     });
@@ -1366,6 +1310,8 @@ describe('More Recipes', () => {
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to
               .equal('Upvote recorded and downvote removed');
+            expect(res.body.data).to.have.a.property('upvotes').that.equals(1);
+            expect(res.body.data).to.have.a.property('downvotes').that.equals(0);
             done();
           });
       });
@@ -1380,6 +1326,8 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Upvote removed');
+          expect(res.body.data).to.have.a.property('upvotes').that.equals(0);
+          expect(res.body.data).to.have.a.property('downvotes').that.equals(0);
           done();
         });
     });
@@ -1427,6 +1375,7 @@ describe('More Recipes', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipes retrieved');
+            expect(res.body.data.recipes).to.be.an('array');
             done();
           });
       });
@@ -1439,6 +1388,8 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('No match found, wrong query strings');
           done();
         });
     });
@@ -1451,6 +1402,8 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
+          expect(res.body.status).to.equal('Fail');
+          expect(res.body.message).to.equal('No match found, wrong query strings');
           done();
         });
     });
@@ -1466,6 +1419,7 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe(s) retrieved');
+          expect(res.body.data.recipes).to.be.an('array');
           expect(res.body.data.recipes.length).to.equal(1);
           done();
         });
@@ -1480,6 +1434,7 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe(s) retrieved');
+          expect(res.body.data.recipes).to.be.an('array');
           expect(res.body.data.recipes.length).to.equal(0);
           done();
         });
@@ -1496,6 +1451,8 @@ describe('More Recipes', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.message).to.equal('Recipe(s) found');
+            expect(res.body.data.recipes).to.be.an('array');
+            expect(res.body.data.recipes.length).to.equal(2);
             done();
           });
       });
@@ -1507,7 +1464,10 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe(s) found');
+          expect(res.body.data.recipes).to.be.an('array');
+          expect(res.body.data.recipes.length).to.equal(0);
           done();
         });
     });
@@ -1522,7 +1482,10 @@ describe('More Recipes', () => {
           .set('Content-Type', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Recipe(s) found');
+            expect(res.body.data.recipes).to.be.an('array');
+            expect(res.body.data.recipes.length).to.equal(1);
             done();
           });
       });
@@ -1534,7 +1497,10 @@ describe('More Recipes', () => {
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Recipe(s) found');
+          expect(res.body.data.recipes).to.be.an('array');
+          expect(res.body.data.recipes.length).to.equal(0);
           done();
         });
     });
@@ -1551,6 +1517,7 @@ describe('More Recipes', () => {
           .send(userFavoriteCategory[0])
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Favorite recipe category added');
             done();
           });
@@ -1565,6 +1532,7 @@ describe('More Recipes', () => {
         .send(userFavoriteCategory[0])
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
+          expect(res.body.status).to.equal('Fail');
           expect(res.body.message).to.equal('Favorite recipe not found');
           done();
         });
@@ -1581,7 +1549,13 @@ describe('More Recipes', () => {
         .send({ notifications: true })
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('User profile updated');
+          expect(res.body.data.user.firstName).to.equal('Jessy');
+          expect(res.body.data.user.lastName).to.equal('Sanders');
+          expect(res.body.data.user.aboutMe).to.equal(null);
+          expect(res.body.data.user.userImage).to.equal('user.image.url');
+          expect(res.body.data.user.notifications).to.equal(true);
           done();
         });
     });
@@ -1596,6 +1570,11 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('User profile updated');
+          expect(res.body.data.user.firstName).to.equal('Francis');
+          expect(res.body.data.user.lastName).to.equal('Johnson');
+          expect(res.body.data.user.aboutMe).to.equal(null);
+          expect(res.body.data.user.userImage).to.equal(null);
+          expect(res.body.data.user.notifications).to.equal(true);
           done();
         });
     });
@@ -1613,6 +1592,13 @@ describe('More Recipes', () => {
           expect(res.statusCode).to.equal(201);
           expect(res.body.status).to.equal('Success');
           expect(res.body.message).to.equal('Review created');
+          expect(res.body.data.review).to.be.an('object');
+          expect(res.body.data.review).to.have.a.property('id');
+          expect(res.body.data.review).to.have.a.property('userId');
+          expect(res.body.data.review).to.have.a.property('User');
+          expect(res.body.data.review.content).to.equal('A very tasty recipe, so sweet');
+          expect(res.body.data.review.recipeId).to.equal(recipeId2);
+          expect(res.body.data.review.User.fullName).to.equal('John Scotch');
           done();
         });
     });
@@ -1644,6 +1630,11 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('User profile updated');
+          expect(res.body.data.user.firstName).to.equal('Jessy');
+          expect(res.body.data.user.lastName).to.equal('Sanders');
+          expect(res.body.data.user.aboutMe).to.equal(null);
+          expect(res.body.data.user.userImage).to.equal('user.image.url');
+          expect(res.body.data.user.notifications).to.equal(false);
           done();
         });
     });

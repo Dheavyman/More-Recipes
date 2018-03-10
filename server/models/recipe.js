@@ -21,6 +21,11 @@ export default (sequelize, DataTypes) => {
     preparationTime: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      get() {
+        const preparationTime = this.getDataValue('preparationTime');
+
+        return parseInt(preparationTime, 10);
+      }
     },
     ingredients: {
       type: DataTypes.STRING,
