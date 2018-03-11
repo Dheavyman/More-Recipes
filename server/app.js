@@ -38,6 +38,12 @@ app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Require our routes
 routes(app);
 
+// Catch other routes with get method
+// returns the index page
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+});
+
 // Catch other routes and returns not found
 app.all('*', (req, res) => res.status(404).send({
   status: 'Fail',
