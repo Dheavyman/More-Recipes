@@ -9,7 +9,7 @@ import Header from './Header';
 import Main from './Main';
 import { decodeToken } from '../../utils/authenticate';
 import config from '../../config';
-import recipeAvater from '../../public/images/recipe-avatar2.png';
+import recipeAvatar from '../../public/images/recipe-avatar2.png';
 
 const propTypes = {
   uploadImage: PropTypes.func.isRequired,
@@ -84,7 +84,7 @@ class UserRecipes extends React.Component {
   }
 
   /**
-   * Component did mount lifecycle method
+   * Component did mount life cycle method
    *
    * @returns {any} Fetches user favorite recipes
    *
@@ -166,11 +166,11 @@ class UserRecipes extends React.Component {
   }
 
   /**
-   * Funtion to handle image preview
+   * Function to handle image preview
    *
    * @param {any} imagePreview - The image to be displaced
    *
-   * @returns {objec} Set the state property imagePreview
+   * @returns {object} Set the state property imagePreview
    *
    * @memberof UserRecipes
    */
@@ -343,7 +343,7 @@ class UserRecipes extends React.Component {
   }
 
   /**
-   * Function to handle submiting new recipe input values
+   * Function to handle submitting new recipe input values
    *
    * @param {any} event - The submit event
    *
@@ -390,7 +390,7 @@ class UserRecipes extends React.Component {
       } else {
         values = {
           ...values,
-          recipeImage: recipeAvater,
+          recipeImage: recipeAvatar,
         };
         addRecipe(values)
           .then(() => {
@@ -465,6 +465,7 @@ class UserRecipes extends React.Component {
             handleLogoutUser={this.handleLogoutUser}
             currentProfileUserId={this.state.currentProfileUserId}
             authenticatedUserId={this.state.authenticatedUserId}
+            handleSearchCategory={this.handleSearchCategory}
             {...this.props}
           />
         </header>
@@ -507,7 +508,7 @@ const mapStateToProps = state => ({
 
 /**
  * Function to map dispatch to props
- * Action creators are binded to the dispatch function
+ * Action creators are bound to the dispatch function
  *
  * @param {any} dispatch - The store dispatch function
  *

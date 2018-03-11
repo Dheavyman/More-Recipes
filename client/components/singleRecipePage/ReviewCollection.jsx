@@ -14,7 +14,7 @@ const propTypes = {
 /**
  * ReviewCollection component
  *
- * @param {object} props - The properties passed to the compoenent
+ * @param {object} props - The properties passed to the component
  *
  * @returns {object} - React element
  */
@@ -27,7 +27,7 @@ const ReviewCollection = (props) => {
       <div className="col s12 valign-wrapper deep-orange darken-4">
         <h5 className="white-text">Reviews</h5>
       </div>
-      {isLoadingReviews
+      {reviews.length === 0 && isLoadingReviews
         ? <div className="center-align">
           <Spinner size="small" />
         </div>

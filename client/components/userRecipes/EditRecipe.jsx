@@ -32,11 +32,11 @@ const propTypes = {
 };
 
 /**
- * Funtion to handle editing recipe
+ * Function to handle editing recipe
  *
  * @param {any} props - The props passed to the functions
  *
- * @returns {object} React elememt
+ * @returns {object} React element
  */
 const EditRecipe = (props) => {
   const { open, handleEditChange, handleSelect, handleClose, handleDrop,

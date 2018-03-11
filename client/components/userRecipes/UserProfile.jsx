@@ -51,7 +51,7 @@ class UserProfile extends React.Component {
   }
 
   /**
-   * Component did mount lifecycle method
+   * Component did mount life cycle method
    *
    * @returns {any} Dispatch action to fetch user profile
    *
@@ -61,10 +61,6 @@ class UserProfile extends React.Component {
     window.scrollTo(0, 0);
     // Initialize materialize material box class
     $('.materialboxed').materialbox();
-    // Initialize materialize tooltip class
-    $('.tooltipped').tooltip({
-      delay: 50
-    });
 
     const { fetchUserProfile, currentProfileUserId } = this.props;
     fetchUserProfile(currentProfileUserId);
@@ -115,7 +111,7 @@ class UserProfile extends React.Component {
   }
 
   /**
-   * Function to handle submiting profile changes
+   * Function to handle submitting profile changes
    *
    * @returns {any} Submits the changes made
    *

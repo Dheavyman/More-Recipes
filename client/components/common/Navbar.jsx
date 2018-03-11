@@ -34,7 +34,7 @@ const propTypes = {
  */
 class Navbar extends React.Component {
   /**
-   * Component did update lifecycle mehtod
+   * Component did update life cycle method
    *
    * @returns {any} Initialize materialize component
    *

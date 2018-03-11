@@ -22,7 +22,7 @@ const propTypes = {
  */
 class UserAddedRecipes extends React.Component {
   /**
-   * Component did mount lifecyle method
+   * Component did mount life cycle method
    *
    * @returns {any} Fetches user added recipes
    *

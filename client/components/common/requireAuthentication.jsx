@@ -12,7 +12,7 @@ export default (ComposedComponent) => {
    */
   class Authentication extends React.Component {
     /**
-     * Component will mount lifecycle method
+     * Component will mount life cycle method
      *
      * @returns {any} Redirects user to signin
      *
@@ -26,7 +26,7 @@ export default (ComposedComponent) => {
     }
 
     /**
-     * Component will update lifecycle method
+     * Component will update life cycle method
      *
      * @param {any} nextProps - The next props
      *

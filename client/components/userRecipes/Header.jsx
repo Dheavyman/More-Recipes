@@ -29,9 +29,9 @@ class Header extends React.Component {
     this.handleLogoutUser = this.handleLogoutUser.bind(this);
   }
   /**
-   * Component did mount lifecycle method
+   * Component did mount life cycle method
    *
-   * @returns {function} Initialize materialize componenets
+   * @returns {function} Initialize materialize components
    *
    * @memberof Header
    */
@@ -41,7 +41,7 @@ class Header extends React.Component {
       closeOnClick: true,
       draggable: true,
     });
-    // Initailize materialize tab class
+    // Initialize materialize tab class
     $('ul.tabs').tabs();
   }
 

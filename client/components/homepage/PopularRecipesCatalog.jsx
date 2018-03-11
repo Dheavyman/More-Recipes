@@ -21,7 +21,7 @@ const propTypes = {
  */
 class PopularRecipesCatalog extends Component {
   /**
-   * ComponentDidMount lifecyle method
+   * ComponentDidMount life cycle method
    *
    * @returns {any} - Call the action to fetch popular recipes
    *
