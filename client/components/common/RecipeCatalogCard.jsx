@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RecipeImage from '../common/RecipeImage';
+import notify from '../../utils/notification';
 
 const propTypes = {
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool,
+  }).isRequired,
   recipe: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -21,6 +25,15 @@ const defaultProps = {
 };
 
 /**
+ * Function to notify user to login
+ *
+ * @returns {any} Toast message
+ */
+const handleNotify = () => {
+  notify('info', 'Please login to view the user profile');
+};
+
+/**
  * Recipe catalog card component
  *
  * @param {object} props - The properties passed to the component
@@ -28,7 +41,7 @@ const defaultProps = {
  * @returns {object} React element
  */
 const RecipeCatalogCard = (props) => {
-  const { recipe } = props;
+  const { user: { isAuthenticated }, recipe } = props;
   const { id, title, recipeImage, description, views, upvotes, downvotes,
     favorites, User: { id: userId, fullName } } = recipe;
 
@@ -50,9 +63,17 @@ const RecipeCatalogCard = (props) => {
 
           <p id="owner">
             <label htmlFor="owner">Recipe by: </label>
-            <Link to={`/users/${userId}/dashboard`}>
-              <span className="recipe-owner">{fullName}</span>
-            </Link>
+            {isAuthenticated
+              ? <Link to={`/users/${userId}/dashboard`}>
+                <span className="recipe-owner">{fullName}</span>
+              </Link>
+              : <a
+                href="#!"
+                onClick={handleNotify}
+              >
+                <span className="recipe-owner">{fullName}</span>
+              </a>
+            }
           </p>
 
           <ul className="center-align">

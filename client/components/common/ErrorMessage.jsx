@@ -13,7 +13,7 @@ const ErrorMessage = (props) => {
 
   return (
     <div className="red-text center-align">
-      {message.include('jwt')
+      {message.includes('jwt')
         ? 'Please login to continue'
         : message
       }
