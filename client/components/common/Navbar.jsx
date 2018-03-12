@@ -56,7 +56,7 @@ class Navbar extends React.Component {
    */
   render() {
     const {
-      user: { isAuthenticated, userAuthentication, userProfile }
+      user: { isAuthenticated, userAuthentication }
     } = this.props;
     const { fullName } = userAuthentication;
 
