@@ -130,14 +130,12 @@ class Header extends Component {
    */
   handleSubmitSignin = (values) => {
     const { signinUser, history, location: { state } } = this.props;
-    console.log('the state on signin =======', state);
     signinUser(values)
       .then(() => {
         const { user: { error } } = this.props;
         if (isEmpty(error)) {
           this.handleToggleSigninModal();
           if (!isEmpty(state) || state !== undefined) {
-            console.log('this happened=======>>>>>>');
             history.push(state.from.pathname);
           } else {
             notify('success', 'Login Successful');
