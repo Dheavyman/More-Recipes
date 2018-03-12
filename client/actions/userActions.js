@@ -245,6 +245,7 @@ const logoutUser = () => (dispatch) => {
   const loggingOut = new Promise(resolve => resolve());
   return loggingOut.then(() => {
     localStorage.removeItem('token');
+    localStorage.removeItem('fullName');
     dispatch(userLogoutSuccess());
   });
 };
