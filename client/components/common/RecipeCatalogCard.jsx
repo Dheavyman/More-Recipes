@@ -27,9 +27,12 @@ const defaultProps = {
 /**
  * Function to notify user to login
  *
+ * @param {object} event - The event performed
+ *
  * @returns {any} Toast message
  */
-const handleNotify = () => {
+const handleNotify = (event) => {
+  event.preventDefault();
   notify('info', 'Please login to view the user profile');
 };
 
