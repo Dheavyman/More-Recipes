@@ -29,7 +29,7 @@ const Main = (props) => {
 
   return (
     <div>
-      <div id="position">
+      <div id="homepage-main-position">
         <Slider />
         <SearchBar
           id="home-search-bar"

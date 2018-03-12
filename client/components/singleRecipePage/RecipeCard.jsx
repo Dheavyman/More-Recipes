@@ -83,7 +83,7 @@ const RecipeCard = (props) => {
   }
 
   return (
-    <div className="card single-card">
+    <div className="card single-card hoverable">
       <div className="card-image">
         <RecipeImage title={title} recipeImage={recipeImage} />
       </div>

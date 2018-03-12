@@ -93,7 +93,9 @@ class Navbar extends React.Component {
             >
               {!isAuthenticated
                 ? 'Welcome Guest'
-                : fullName || userProfile.fullName}
+                : fullName || userProfile.fullName || localStorage
+                  .getItem('fullName')
+              }
               <i className="material-icons large left">account_circle</i>
             </a>
             {!isAuthenticated &&

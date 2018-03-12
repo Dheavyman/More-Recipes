@@ -20,6 +20,9 @@ const propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape(),
+  }).isRequired,
   handleSearchCategory: PropTypes.func,
 };
 
@@ -126,12 +129,19 @@ class Header extends Component {
    * @memberof Header
    */
   handleSubmitSignin = (values) => {
-    this.props.signinUser(values)
+    const { signinUser, history, location: { state } } = this.props;
+    console.log('the state on signin =======', state);
+    signinUser(values)
       .then(() => {
         const { user: { error } } = this.props;
         if (isEmpty(error)) {
           this.handleToggleSigninModal();
-          notify('success', 'Login Successful');
+          if (!isEmpty(state) || state !== undefined) {
+            console.log('this happened=======>>>>>>');
+            history.push(state.from.pathname);
+          } else {
+            notify('success', 'Login Successful');
+          }
         }
       });
   }

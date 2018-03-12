@@ -18,6 +18,9 @@ const propTypes = {
   deleteRecipe: PropTypes.func.isRequired,
   setFavorite: PropTypes.func.isRequired,
   searchRecipe: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    errorFetchingProfile: PropTypes.shape(),
+  }).isRequired,
   userRecipes: PropTypes.shape({
     imageUploading: PropTypes.bool.isRequired,
     imageUrl: PropTypes.string
@@ -31,6 +34,9 @@ const propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
     replace: PropTypes.func,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 };
 
@@ -97,6 +103,34 @@ class UserRecipes extends React.Component {
       currentProfileUserId: parseInt(userId, 10),
       authenticatedUserId: id,
     });
+  }
+
+  /**
+   * Component will receive props life cycle method
+   *
+   * @param {any} nextProps - The next properties
+   *
+   * @returns {any} Navigate to homepage
+   *
+   * @memberof UserRecipes
+   */
+  componentWillReceiveProps(nextProps) {
+    const { user: { errorFetchingProfile }, history, location } = nextProps;
+
+    if (!isEmpty(errorFetchingProfile)) {
+      if (errorFetchingProfile.message.includes('jwt') ||
+      errorFetchingProfile.message.includes('invalid')) {
+        history.push({
+          pathname: '/',
+          state: {
+            message: 'Unauthenticated user',
+            from: {
+              pathname: location.pathname,
+            },
+          },
+        });
+      }
+    }
   }
 
   /**

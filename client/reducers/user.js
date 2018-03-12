@@ -9,6 +9,7 @@ export const initialState = {
   userProfile: {},
   isAuthenticated: !!localStorage.getItem('token'),
   error: {},
+  errorFetchingProfile: {},
 };
 
 /**
@@ -77,6 +78,7 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        errorFetchingProfile: {},
         userProfile: {},
       };
     case actionTypes.FETCH_USER_PROFILE_SUCCESS:
@@ -84,13 +86,13 @@ const user = (state = initialState, action) => {
         ...state,
         isLoading: false,
         userProfile: action.payload,
-        error: {},
+        errorFetchingProfile: {},
       };
     case actionTypes.FETCH_USER_PROFILE_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        errorFetchingProfile: action.payload,
       };
     case actionTypes.EDIT_USER_PROFILE_REQUEST:
       return {
@@ -133,6 +135,11 @@ const user = (state = initialState, action) => {
         imageUploading: false,
         imageUploaded: false,
         error: action.payload,
+      };
+    case actionTypes.RESET_AUTHENTICATION:
+      return {
+        ...state,
+        isAuthenticated: false,
       };
     default:
       return state;

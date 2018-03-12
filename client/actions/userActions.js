@@ -200,9 +200,10 @@ const signupUser = values => (dispatch) => {
     .then((response) => {
       const { data } = response;
       const { data: { user } } = data;
-      const { token } = user;
+      const { token, fullName } = user;
       dispatch(userSignupSuccess(user));
       localStorage.setItem('token', token);
+      localStorage.setItem('fullName', fullName);
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -223,9 +224,10 @@ const signinUser = values => (dispatch) => {
     .then((response) => {
       const { data } = response;
       const { data: { user } } = data;
-      const { token } = user;
+      const { token, fullName } = user;
       dispatch(userSigninSuccess(user));
       localStorage.setItem('token', token);
+      localStorage.setItem('fullName', fullName);
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -317,7 +319,21 @@ const uploadUserImage = value => (dispatch) => {
     });
 };
 
+/**
+ * Reset user authentication status
+ *
+ * @returns {object} Dispatch action to set authentication
+ * to false
+ */
+const resetAuthentication = () => (dispatch) => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('fullName');
+  dispatch({
+    type: actionTypes.RESET_AUTHENTICATION,
+  });
+};
+
 export {
   signupUser, signinUser, logoutUser, fetchUserProfile, editUserProfile,
-  uploadUserImage,
+  uploadUserImage, resetAuthentication
 };

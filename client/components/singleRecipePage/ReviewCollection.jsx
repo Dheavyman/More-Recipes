@@ -27,6 +27,11 @@ const ReviewCollection = (props) => {
       <div className="col s12 valign-wrapper deep-orange darken-4">
         <h5 className="white-text">Reviews</h5>
       </div>
+      <div className="col s12 center-align">
+        {reviews.length === 0 &&
+          <p>No reviews yet</p>
+        }
+      </div>
       {reviews.length === 0 && isLoadingReviews
         ? <div className="center-align">
           <Spinner size="small" />

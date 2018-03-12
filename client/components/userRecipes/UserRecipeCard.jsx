@@ -45,7 +45,7 @@ const UserRecipeCard = (props) => {
 
   return (
     <div className="col s12 m6 l3">
-      <div id="recipes" className="card large">
+      <div id="recipes" className="card large hoverable">
         <Link to={`/recipes/${id}`}>
           <span className="card-title">{title}</span>
         </Link>
