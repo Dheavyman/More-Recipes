@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
+import { ToastContainer } from 'react-toastify';
 
 import actionCreators from '../../actions';
 import Header from './Header';
@@ -10,8 +11,12 @@ import Main from './Main';
 import { decodeToken } from '../../utils/authenticate';
 import config from '../../config';
 import recipeAvatar from '../../public/images/recipe-avatar2.png';
+import notify from '../../utils/notification';
 
 const propTypes = {
+  fetchUserProfile: PropTypes.func.isRequired,
+  fetchUserRecipes: PropTypes.func.isRequired,
+  fetchUserFavorites: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
   addRecipe: PropTypes.func.isRequired,
   editRecipe: PropTypes.func.isRequired,
@@ -115,6 +120,7 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   componentWillReceiveProps(nextProps) {
+    console.log('the next props', nextProps);
     const { user: { errorFetchingProfile }, history, location } = nextProps;
 
     if (!isEmpty(errorFetchingProfile)) {
@@ -130,6 +136,14 @@ class UserRecipes extends React.Component {
           },
         });
       }
+    }
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      const {
+        fetchUserProfile, fetchUserRecipes, fetchUserFavorites
+      } = this.props;
+      fetchUserProfile(nextProps.match.params.userId);
+      fetchUserRecipes(nextProps.match.params.userId);
+      fetchUserFavorites(nextProps.match.params.userId);
     }
   }
 
@@ -326,8 +340,13 @@ class UserRecipes extends React.Component {
 
                 if (isEmpty(userRecipes.error)) {
                   this.handleClose();
+                  notify('success', 'Recipe edited successfully');
+                } else {
+                  notify('error', 'Edit recipe unsuccessful');
                 }
               });
+          } else {
+            notify('error', 'Image upload unsuccessful');
           }
         });
     } else {
@@ -338,6 +357,9 @@ class UserRecipes extends React.Component {
 
           if (isEmpty(userRecipes.error)) {
             this.handleClose();
+            notify('success', 'Recipe edited successfully');
+          } else {
+            notify('error', 'Edit recipe unsuccessful');
           }
         });
     }
@@ -362,6 +384,9 @@ class UserRecipes extends React.Component {
 
           if (isEmpty(userRecipes.error)) {
             this.handleClose();
+            notify('success', 'Recipe deleted successfully');
+          } else {
+            notify('error', 'Delete recipe unsuccessful');
           }
         });
     } else if (actionTitle === 'Remove Recipe') {
@@ -371,6 +396,9 @@ class UserRecipes extends React.Component {
 
           if (isEmpty(userRecipes.error)) {
             this.handleClose();
+            notify('success', 'Recipe removed successfully');
+          } else {
+            notify('error', 'Remove recipe unsuccessful');
           }
         });
     }
@@ -417,8 +445,13 @@ class UserRecipes extends React.Component {
 
                   if (isEmpty(userRecipes.error)) {
                     this.handleClose();
+                    notify('success', 'Recipe created successfully');
+                  } else {
+                    notify('error', 'Create recipe unsuccessful');
                   }
                 });
+            } else {
+              notify('error', 'Image upload unsuccessful');
             }
           });
       } else {
@@ -432,6 +465,9 @@ class UserRecipes extends React.Component {
 
             if (isEmpty(userRecipes.error)) {
               this.handleClose();
+              notify('success', 'Recipe created successfully');
+            } else {
+              notify('error', 'Create recipe unsuccessful');
             }
           });
       }
@@ -447,6 +483,9 @@ class UserRecipes extends React.Component {
 
           if (isEmpty(userRecipes.error)) {
             this.handleClose();
+            notify('success', 'Recipe created successfully');
+          } else {
+            notify('error', 'Create recipe unsuccessful');
           }
         });
     }
@@ -520,6 +559,7 @@ class UserRecipes extends React.Component {
             {...this.state}
             {...this.props}
           />
+          <ToastContainer />
         </main>
       </div>
     );

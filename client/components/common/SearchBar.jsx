@@ -55,6 +55,7 @@ const SearchBar = (props) => {
               <a
                 role="button"
                 tabIndex="0"
+                id="search-button"
                 className="label-icon"
                 htmlFor="search"
                 onClick={handleSubmitSearch}

@@ -160,6 +160,7 @@ const AddRecipe = (props) => {
             <div className="row" />
             <div className="row center-align">
               <button
+                name="add-recipe"
                 type="submit"
                 className={`btn btn-large waves-effect
                     waves-light indigo accent-2`}

@@ -21,6 +21,7 @@ const IndexUserNav = (props) => {
         <a
           role="button"
           tabIndex="0"
+          id="signin"
           className="black-text"
           onClick={handleToggleSigninModal}
         >
@@ -32,6 +33,7 @@ const IndexUserNav = (props) => {
         <a
           role="button"
           tabIndex="0"
+          id="register"
           className="black-text"
           onClick={handleToggleSignupModal}
         >

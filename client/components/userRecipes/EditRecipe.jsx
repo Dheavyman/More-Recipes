@@ -115,7 +115,7 @@ const EditRecipe = (props) => {
                   name="preparationTime"
                   type="number"
                   min="0"
-                  defaultValue={preparationTime}
+                  defaultValue={isNaN(preparationTime) ? 0 : preparationTime}
                   className="validate"
                   onChange={handleEditChange}
                   required

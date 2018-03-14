@@ -6,18 +6,20 @@ import RecipeImage from '../common/RecipeImage';
 import { decodeToken } from '../../utils/authenticate';
 
 const propTypes = {
-  recipe: PropTypes.shape({
-    title: PropTypes.string,
-    recipeImage: PropTypes.string,
-    upvotes: PropTypes.number,
-    downvotes: PropTypes.number,
-    favorites: PropTypes.number,
-    views: PropTypes.views,
+  singleRecipe: PropTypes.shape({
+    recipe: PropTypes.shape({
+      title: PropTypes.string,
+      recipeImage: PropTypes.string,
+      upvotes: PropTypes.number,
+      downvotes: PropTypes.number,
+      favorites: PropTypes.number,
+      views: PropTypes.views,
+    }).isRequired,
+    favoritedUsers: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    voteMessage: PropTypes.string,
+    favoriteMessage: PropTypes.string,
+    voters: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   }).isRequired,
-  favoritedUsers: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  voters: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  voteMessage: PropTypes.string,
-  favoriteMessage: PropTypes.string,
   handleUpvote: PropTypes.func.isRequired,
   handleDownvote: PropTypes.func.isRequired,
   handleFavorite: PropTypes.func.isRequired,
@@ -37,9 +39,9 @@ const defaultProps = {
  */
 const RecipeCard = (props) => {
   const {
-    recipe, voters, favoritedUsers, voteMessage, favoriteMessage,
-    handleUpvote, handleDownvote, handleFavorite
+    singleRecipe, handleUpvote, handleDownvote, handleFavorite
   } = props;
+  const { recipe, favoritedUsers, voters, voteMessage, favoriteMessage } = singleRecipe;
   const { title, recipeImage, upvotes, downvotes, favorites, views } = recipe;
 
   let userId;

@@ -163,6 +163,86 @@ class UserProfile extends React.Component {
         }
       });
   }
+  /**
+   * Render user profile
+   *
+   * @returns {object} User profile
+   *
+   * @memberof UserProfile
+   */
+  renderUserProfile() {
+    const { isEditing } = this.state;
+    const {
+      user: { imageUploading, userProfile }, currentProfileUserId,
+      authenticatedUserId
+    } = this.props;
+    const { fullName, userImage } = userProfile;
+    return (
+      <div>
+        {isEmpty(userProfile)
+          ? <div className="center-align" >
+            <h5>User does not exist</h5>
+            <i className="material-icons large">folder_open</i>
+          </div>
+          : <div>
+            <div className="user-image col s12 m5 l4">
+              <div className="row">
+                <figure className="col s12">
+                  <img
+                    id="profile-image"
+                    className="materialboxed responsive-img circle"
+                    src={userImage || avatar}
+                    alt={fullName}
+                  />
+                </figure>
+              </div>
+              <span className="uploading-image-spinner">
+                <div className="center-align">
+                  {imageUploading && <Spinner size="small" />}
+                </div>
+              </span>
+              <div className="row">
+                {currentProfileUserId === authenticatedUserId
+                  && <div className=" image-upload-button center">
+                    <label
+                      htmlFor="user-image"
+                      className={`btn-floating waves-effect waves-light
+                  ${userImage ? 'green' : 'indigo accent-2'}`}
+                    >
+                      <i className="material-icons small" data-tip="Edit Photo">
+                        camera_alt
+                      </i>
+                    </label>
+                    <input
+                      id="user-image"
+                      name="user-image"
+                      type="file"
+                      onChange={this.handleUploadPhoto}
+                    />
+                    <ReactTooltip />
+                  </div>}
+              </div>
+            </div>
+            <div className="col s12 m5 l6 z-depth-1">
+              {isEditing && (currentProfileUserId === authenticatedUserId) ?
+                <EditProfileForm
+                  handleProfileChange={this.handleProfileChange}
+                  handleSubmitProfile={this.handleSubmitProfile}
+                  handleCancel={this.handleCancel}
+                  {...this.state}
+                  {...this.props}
+                /> :
+                <ProfileDetails
+                  handleStartEdit={this.handleStartEdit}
+                  {...this.props}
+                />
+              }
+            </div>
+          </div>
+        }
+      </div>
+    );
+  }
 
   /**
    * Render function
@@ -172,68 +252,16 @@ class UserProfile extends React.Component {
    * @memberof UserProfile
    */
   render() {
-    const { isEditing } = this.state;
-    const {
-      user: { imageUploading, userProfile }, currentProfileUserId,
-      authenticatedUserId
-    } = this.props;
-    const { fullName, userImage } = userProfile;
+    const { user: { isLoading } } = this.props;
 
     return (
       <div className="row">
-        <div className="user-image col s12 m5 l4">
-          <div className="row">
-            <figure className="col s12">
-              <img
-                id="profile-image"
-                className="materialboxed responsive-img circle"
-                src={userImage || avatar}
-                alt={fullName}
-              />
-            </figure>
+        {isLoading
+          ? <div className="center-align">
+            <Spinner size="big" />
           </div>
-          <span className="uploading-image-spinner">
-            <div className="center-align">
-              {imageUploading && <Spinner size="small" />}
-            </div>
-          </span>
-          <div className="row">
-            {currentProfileUserId === authenticatedUserId
-              && <div className=" image-upload-button center">
-                <label
-                  htmlFor="user-image"
-                  className={`btn-floating waves-effect waves-light
-                  ${userImage ? 'green' : 'indigo accent-2'}`}
-                >
-                  <i className="material-icons small" data-tip="Edit Photo">
-                    camera_alt
-                  </i>
-                </label>
-                <input
-                  id="user-image"
-                  name="user-image"
-                  type="file"
-                  onChange={this.handleUploadPhoto}
-                />
-                <ReactTooltip />
-              </div>}
-          </div>
-        </div>
-        <div className="col s12 m5 l6 z-depth-1">
-          {isEditing && (currentProfileUserId === authenticatedUserId) ?
-            <EditProfileForm
-              handleProfileChange={this.handleProfileChange}
-              handleSubmitProfile={this.handleSubmitProfile}
-              handleCancel={this.handleCancel}
-              {...this.state}
-              {...this.props}
-            /> :
-            <ProfileDetails
-              handleStartEdit={this.handleStartEdit}
-              {...this.props}
-            />
-          }
-        </div>
+          : this.renderUserProfile(this.props)
+        }
       </div>
     );
   }

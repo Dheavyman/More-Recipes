@@ -65,7 +65,6 @@ class Home extends Component {
     if (!recipes.length > 0) {
       retrieveRecipes();
     }
-
     if (state && state.message === 'Unauthenticated user') {
       resetAuthentication();
       notify('info', 'Please login to continue');

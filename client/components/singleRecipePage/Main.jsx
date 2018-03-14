@@ -51,8 +51,7 @@ class Main extends Component {
   render() {
     const { singleRecipe, handleViewMoreReviews } = this.props;
     const {
-      recipe, reviews, favoritedUsers, voters, voteMessage,
-      favoriteMessage, hasMoreReviews, isLoadingReviews
+      recipe, reviews, hasMoreReviews, isLoadingReviews
     } = singleRecipe;
     const { title, recipeImage } = recipe;
 
@@ -71,14 +70,7 @@ class Main extends Component {
           </div>
           <div className="row">
             <div className="col s12 m6 l5">
-              <RecipeCard
-                recipe={recipe}
-                favoritedUsers={favoritedUsers}
-                voters={voters}
-                voteMessage={voteMessage}
-                favoriteMessage={favoriteMessage}
-                {...this.props}
-              />
+              <RecipeCard {...this.props} />
             </div>
             <div className="col s12 m6 l6 offset-l1">
               <RecipeDetails recipe={recipe} />
