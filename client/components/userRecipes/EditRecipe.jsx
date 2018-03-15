@@ -47,6 +47,7 @@ const EditRecipe = (props) => {
 
   const actions = [
     <FlatButton
+      id="cancel-edit-button"
       label="Cancel"
       secondary
       onClick={handleClose}
@@ -184,6 +185,7 @@ const EditRecipe = (props) => {
             <div className="row" />
             <div className="row center-align">
               <button
+                name="edit-save"
                 type="submit"
                 className={`btn btn-large waves-effect waves-light
                     indigo accent-2`}

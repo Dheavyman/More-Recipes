@@ -42,7 +42,7 @@ const Main = (props) => {
       </div>
       <div className="dashboard">
         <div className="" >
-          <div id="user-profile" name="user-profile" className="col s12" >
+          <div id="user-profile" className="col s12" >
             <UserProfile {...props} />
           </div>
           <div id="user-recipes" className="col s12" >

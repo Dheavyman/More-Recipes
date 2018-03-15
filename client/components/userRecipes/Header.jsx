@@ -20,15 +20,6 @@ const propTypes = {
  */
 class Header extends React.Component {
   /**
-   * Creates an instance of Header.
-   *
-   * @memberof Header
-   */
-  constructor() {
-    super();
-    this.handleLogoutUser = this.handleLogoutUser.bind(this);
-  }
-  /**
    * Component did mount life cycle method
    *
    * @returns {function} Initialize materialize components
@@ -43,19 +34,6 @@ class Header extends React.Component {
     });
     // Initialize materialize tab class
     $('ul.tabs').tabs();
-  }
-
-  /**
-   * Logout user from the application
-   *
-   * @returns {any} Logout user
-   *
-   * @memberof Header
-   */
-  handleLogoutUser() {
-    const { logoutUser, history } = this.props;
-    logoutUser();
-    history.push('/');
   }
 
   /**
@@ -87,10 +65,16 @@ class Header extends React.Component {
             </div>
             <div className="nav-content">
               <ul className="tabs tabs-transparent">
-                <li className="tab"><a href="#user-profile">Profile</a></li>
-                <li className="tab"><a href="#user-recipes">Recipes</a></li>
                 <li className="tab">
-                  <a href="#user-favorites">Favorites</a>
+                  <a data-tab="user-profile" href="#user-profile">Profile</a>
+                </li>
+                <li className="tab">
+                  <a data-tab="user-recipes" href="#user-recipes">Recipes</a>
+                </li>
+                <li className="tab">
+                  <a data-tab="user-favorites" href="#user-favorites">
+                    Favorites
+                  </a>
                 </li>
               </ul>
             </div>

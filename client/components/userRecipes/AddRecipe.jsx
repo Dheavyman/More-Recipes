@@ -18,6 +18,7 @@ const propTypes = {
   handleDrop: PropTypes.func.isRequired,
   imagePreview: PropTypes.string.isRequired,
   userRecipes: PropTypes.shape({
+    isLoading: PropTypes.bool,
     imageUploading: PropTypes.bool.isRequired,
     error: PropTypes.shape()
   }).isRequired,
@@ -160,6 +161,7 @@ const AddRecipe = (props) => {
             <div className="row" />
             <div className="row center-align">
               <button
+                id="add-recipe"
                 name="add-recipe"
                 type="submit"
                 className={`btn btn-large waves-effect

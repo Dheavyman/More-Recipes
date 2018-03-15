@@ -7,6 +7,7 @@ import Spinner from '../common/Spinner';
 
 const propTypes = {
   user: PropTypes.shape({
+    isLoading: PropTypes.bool,
     userProfile: PropTypes.shape({
       username: PropTypes.string,
       firstName: PropTypes.string,
@@ -85,7 +86,7 @@ const EditProfileForm = (props) => {
         <h5>About Me</h5>
         <div className="divider black" />
         <textarea
-          id="textarea"
+          id="aboutMe"
           name="aboutMe"
           placeholder="About me"
           defaultValue={aboutMe}
@@ -100,7 +101,7 @@ const EditProfileForm = (props) => {
       </div>
       <div>
         <button
-          id="edit-btn"
+          id="confirm-edit-btn"
           className={`btn-floating waves-effect waves-light indigo accent-2
             right`}
           onClick={handleSubmitProfile}
@@ -109,7 +110,7 @@ const EditProfileForm = (props) => {
           <i className="material-icons" data-tip="Save Details">save</i>
         </button>
         <button
-          id="edit-btn"
+          id="cancel-edit-btn"
           className={'btn-floating waves-effect waves-light red right'}
           onClick={handleCancel}
           disabled={isLoading}

@@ -80,6 +80,7 @@ const UserFavoriteCard = (props) => {
           </ul>
           {currentProfileUserId === authenticatedUserId &&
             <a
+              id="remove-favorite"
               role="button"
               tabIndex="0"
               onClick={() => handleOpenDelete(id, message, actionTitle, action)}

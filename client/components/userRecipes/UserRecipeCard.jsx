@@ -47,7 +47,7 @@ const UserRecipeCard = (props) => {
     <div className="col s12 m6 l3">
       <div id="recipes" className="card large hoverable">
         <Link to={`/recipes/${id}`}>
-          <span className="card-title">{title}</span>
+          <span id="recipe-title" className="card-title">{title}</span>
         </Link>
         <div className="card-image">
           <Link to={`/recipes/${id}`}>
@@ -74,6 +74,7 @@ const UserRecipeCard = (props) => {
           </ul>
           {currentProfileUserId === authenticatedUserId &&
             <a
+              id="edit-recipe-button"
               role="button"
               tabIndex="0"
               onClick={() => handleOpenEdit(recipe)}
@@ -89,6 +90,7 @@ const UserRecipeCard = (props) => {
           }
           {currentProfileUserId === authenticatedUserId &&
             <a
+              id="delete-recipe-button"
               role="button"
               tabIndex="0"
               onClick={() => handleOpenDelete(id, message, actionTitle, action)}
