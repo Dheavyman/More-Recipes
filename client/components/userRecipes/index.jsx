@@ -120,7 +120,6 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   componentWillReceiveProps(nextProps) {
-    console.log('the next props', nextProps);
     const { user: { errorFetchingProfile }, history, location } = nextProps;
 
     if (!isEmpty(errorFetchingProfile)) {

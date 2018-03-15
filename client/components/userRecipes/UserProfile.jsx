@@ -59,11 +59,20 @@ class UserProfile extends React.Component {
    */
   componentDidMount() {
     window.scrollTo(0, 0);
-    // Initialize materialize material box class
     $('.materialboxed').materialbox();
 
     const { fetchUserProfile, currentProfileUserId } = this.props;
     fetchUserProfile(currentProfileUserId);
+  }
+
+  /**
+   * Component did update life cycle method
+   *
+   * @returns {any} Initialize materialize class
+   * @memberof UserProfile
+   */
+  componentDidUpdate() {
+    $('.materialboxed').materialbox();
   }
 
   /**
