@@ -12,7 +12,7 @@ const { SERVER_URL } = config;
  *
  * @return {object} Post review request action
  */
-const postReviewRequest = () => ({
+export const postReviewRequest = () => ({
   type: actionTypes.POST_REVIEW_REQUEST,
 });
 
@@ -23,7 +23,7 @@ const postReviewRequest = () => ({
  *
  * @returns {object} Post review success action
  */
-const postReviewSuccess = review => ({
+export const postReviewSuccess = review => ({
   type: actionTypes.POST_REVIEW_SUCCESS,
   payload: review,
 });
@@ -35,7 +35,7 @@ const postReviewSuccess = review => ({
  *
  * @returns {object} Post review failure action
  */
-const postReviewFailure = error => ({
+export const postReviewFailure = error => ({
   type: actionTypes.POST_REVIEW_FAILURE,
   payload: error,
 });
@@ -45,7 +45,7 @@ const postReviewFailure = error => ({
  *
  * @returns {object} Fetch reviews request action
  */
-const fetchReviewsRequest = () => ({
+export const fetchReviewsRequest = () => ({
   type: actionTypes.FETCH_REVIEWS_REQUEST,
 });
 
@@ -57,7 +57,7 @@ const fetchReviewsRequest = () => ({
  *
  * @returns {object} Fetch reviews success action
  */
-const fetchReviewsSuccess = (reviews, reviewsCount) => ({
+export const fetchReviewsSuccess = (reviews, reviewsCount) => ({
   type: actionTypes.FETCH_REVIEWS_SUCCESS,
   payload: {
     reviews,
@@ -72,7 +72,7 @@ const fetchReviewsSuccess = (reviews, reviewsCount) => ({
  *
  * @returns {object} Fetch reviews failure action
  */
-const fetchReviewFailure = error => ({
+export const fetchReviewsFailure = error => ({
   type: actionTypes.FETCH_REVIEWS_FAILURE,
   payload: error,
 });
@@ -133,7 +133,7 @@ const fetchReviews = (recipeId, limit = 5, offset = 0) => (dispatch) => {
     })
     .catch((error) => {
       const { response: { data } } = error;
-      dispatch(fetchReviewFailure(data));
+      dispatch(fetchReviewsFailure(data));
     });
 };
 

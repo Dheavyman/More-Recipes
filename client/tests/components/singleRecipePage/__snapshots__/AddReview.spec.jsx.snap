@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add review component should render component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col s12 m12 l8"
+  >
+    <form
+      className="add-review col s12 center-align"
+      onSubmit={[MockFunction]}
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="input-field col s12"
+          type="text"
+        >
+          <textarea
+            className="materialize-textarea"
+            id="new-review"
+            onChange={[MockFunction]}
+            required={true}
+            type="text"
+            value="This is a nice recipe"
+          />
+          <label
+            htmlFor="new-review"
+          >
+            Add your review
+          </label>
+        </div>
+      </div>
+      <div
+        className="row"
+      />
+      <div
+        className="center-align"
+      />
+      <div
+        className="row"
+      >
+        <button
+          className="btn waves-effect waves-light indigo accent-2
+              white-text"
+          disabled={false}
+          type="submit"
+        >
+          Post Review
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Add review component should render component with spinner and disabling submit button 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col s12 m12 l8"
+  >
+    <form
+      className="add-review col s12 center-align"
+      onSubmit={[MockFunction]}
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="input-field col s12"
+          type="text"
+        >
+          <textarea
+            className="materialize-textarea"
+            id="new-review"
+            onChange={[MockFunction]}
+            required={true}
+            type="text"
+            value="This is a nice recipe"
+          />
+          <label
+            htmlFor="new-review"
+          >
+            Add your review
+          </label>
+        </div>
+      </div>
+      <div
+        className="row"
+      />
+      <div
+        className="center-align"
+      >
+        <Spinner
+          size="small"
+        />
+      </div>
+      <div
+        className="row"
+      >
+        <button
+          className="btn waves-effect waves-light indigo accent-2
+              white-text"
+          disabled={true}
+          type="submit"
+        >
+          Post Review
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Add review component should render component with spinner and disabling submit button 2`] = `
+<div
+  className="row"
+>
+  <div
+    className="col s12 m12 l8"
+  >
+    <form
+      className="add-review col s12 center-align"
+      onSubmit={[MockFunction]}
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="input-field col s12"
+          type="text"
+        >
+          <textarea
+            className="materialize-textarea"
+            id="new-review"
+            onChange={
+              [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {
+                      "target": Object {
+                        "value": "Wonderful recipe",
+                      },
+                    },
+                  ],
+                ],
+              }
+            }
+            required={true}
+            type="text"
+            value="This is a nice recipe"
+          />
+          <label
+            htmlFor="new-review"
+          >
+            Add your review
+          </label>
+        </div>
+      </div>
+      <div
+        className="row"
+      />
+      <div
+        className="center-align"
+      >
+        <Spinner
+          size="small"
+        />
+      </div>
+      <div
+        className="row"
+      >
+        <button
+          className="btn waves-effect waves-light indigo accent-2
+              white-text"
+          disabled={true}
+          type="submit"
+        >
+          Post Review
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;

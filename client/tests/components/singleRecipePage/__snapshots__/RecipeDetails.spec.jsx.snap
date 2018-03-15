@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeDetails component should render component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col s12"
+  >
+    <h6>
+      <b>
+        <em>
+          Category:
+        </em>
+      </b>
+    </h6>
+    <p
+      className="grey-text text-darken-3 lighten-3"
+      id="description"
+    >
+      Lunch
+    </p>
+  </div>
+  <div
+    className="col s12"
+  >
+    <h6>
+      <b>
+        <em>
+          Description:
+        </em>
+      </b>
+    </h6>
+    <p
+      className="grey-text text-darken-3 lighten-3"
+      id="description"
+    >
+      Tasty dish
+    </p>
+  </div>
+  <div
+    className="col s12"
+  >
+    <h6>
+      <b>
+        <em>
+          Preparation Time (Minutes):
+        </em>
+      </b>
+    </h6>
+    <p
+      className="grey-text text-darken-3 lighten-3"
+      id="prep-time"
+    >
+      55
+    </p>
+  </div>
+  <div
+    className="col s12"
+  >
+    <h6>
+      <b>
+        <em>
+          Ingredients:
+        </em>
+      </b>
+    </h6>
+    <ol
+      className="grey-text text-darken-3 lighten-3"
+      id="ingredients"
+    >
+      <li
+        key="0"
+      >
+        Rice
+      </li>
+      <li
+        key="1"
+      >
+        Beans
+      </li>
+      <li
+        key="2"
+      >
+        Tomatoes
+      </li>
+      <li
+        key="3"
+      >
+        Salt
+      </li>
+    </ol>
+  </div>
+  <div
+    className="col s12"
+  >
+    <h6>
+      <b>
+        <em>
+          Directions:
+        </em>
+      </b>
+    </h6>
+    <ol
+      className="grey-text text-darken-3 lighten-3"
+      id="directions"
+    >
+      <li
+        key="0"
+      >
+        Do this
+      </li>
+      <li
+        key="1"
+      >
+        Do this
+      </li>
+      <li
+        key="2"
+      >
+        Do that
+      </li>
+    </ol>
+  </div>
+</div>
+`;

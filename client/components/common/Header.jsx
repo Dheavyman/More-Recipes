@@ -20,7 +20,14 @@ const propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-  handleSearchCategory: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape(),
+  }).isRequired,
+  handleSearchCategory: PropTypes.func,
+};
+
+const defaultProps = {
+  handleSearchCategory: undefined
 };
 
 /**
@@ -122,12 +129,17 @@ class Header extends Component {
    * @memberof Header
    */
   handleSubmitSignin = (values) => {
-    this.props.signinUser(values)
+    const { signinUser, history, location: { state } } = this.props;
+    signinUser(values)
       .then(() => {
         const { user: { error } } = this.props;
         if (isEmpty(error)) {
           this.handleToggleSigninModal();
-          notify('success', 'Login Successful');
+          if (!isEmpty(state) || state !== undefined) {
+            history.push(state.from.pathname);
+          } else {
+            notify('success', 'Login Successful');
+          }
         }
       });
   }
@@ -189,5 +201,6 @@ class Header extends Component {
 }
 
 Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;

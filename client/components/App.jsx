@@ -26,8 +26,8 @@ const defaultProps = {
 const App = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/catalog" component={CatalogPage} />
-    <Route path="/recipes/:recipeId" component={singleRecipePage} />
+    <Route exact path="/catalog" component={CatalogPage} />
+    <Route exact path="/recipes/:recipeId" component={singleRecipePage} />
     <Route
       path="/users/:userId/dashboard"
       render={props => (decodeToken()

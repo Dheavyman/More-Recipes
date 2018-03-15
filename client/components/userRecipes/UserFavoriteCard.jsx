@@ -47,7 +47,7 @@ const UserFavoriteCard = (props) => {
 
   return (
     <div className="col s12 m6 l3">
-      <div id="recipes" className="card large">
+      <div id="recipes" className="card large hoverable">
         <a href="recipe.html">
           <span className="card-title">{title}</span>
         </a>
@@ -80,6 +80,7 @@ const UserFavoriteCard = (props) => {
           </ul>
           {currentProfileUserId === authenticatedUserId &&
             <a
+              id="remove-favorite"
               role="button"
               tabIndex="0"
               onClick={() => handleOpenDelete(id, message, actionTitle, action)}

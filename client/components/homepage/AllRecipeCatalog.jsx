@@ -19,7 +19,7 @@ const defaultProps = {
 /**
  * All recipes catalog component
  *
- * @param {object} props - The properties passsed to the component
+ * @param {object} props - The properties passed to the component
  *
  * @returns {object} React element
  */

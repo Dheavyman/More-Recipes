@@ -6,6 +6,7 @@ import RecipeCard from './RecipeCard';
 import RecipeDetails from './RecipeDetails';
 import ReviewCollection from './ReviewCollection';
 import AddReview from './AddReview';
+import Spinner from '../common/Spinner';
 
 const propTypes = {
   singleRecipe: PropTypes.shape({
@@ -16,6 +17,7 @@ const propTypes = {
     voteMessage: PropTypes.string,
     favoriteMessage: PropTypes.string,
     hasMoreReviews: PropTypes.bool,
+    isLoadingReviews: PropTypes.bool,
   }).isRequired,
   handleViewMoreReviews: PropTypes.func.isRequired,
 };
@@ -29,7 +31,7 @@ const propTypes = {
  */
 class Main extends Component {
   /**
-   * Component did mount lifecycle method
+   * Component did mount life cycle method
    *
    * @returns {any} Initialize materialize class
    *
@@ -49,8 +51,7 @@ class Main extends Component {
   render() {
     const { singleRecipe, handleViewMoreReviews } = this.props;
     const {
-      recipe, reviews, favoritedUsers, voters, voteMessage,
-      favoriteMessage, hasMoreReviews
+      recipe, reviews, hasMoreReviews, isLoadingReviews
     } = singleRecipe;
     const { title, recipeImage } = recipe;
 
@@ -69,14 +70,7 @@ class Main extends Component {
           </div>
           <div className="row">
             <div className="col s12 m6 l5">
-              <RecipeCard
-                recipe={recipe}
-                favoritedUsers={favoritedUsers}
-                voters={voters}
-                voteMessage={voteMessage}
-                favoriteMessage={favoriteMessage}
-                {...this.props}
-              />
+              <RecipeCard {...this.props} />
             </div>
             <div className="col s12 m6 l6 offset-l1">
               <RecipeDetails recipe={recipe} />
@@ -85,14 +79,19 @@ class Main extends Component {
           <AddReview {...this.props} />
           <ReviewCollection reviews={reviews} {...this.props} />
           <div className="row center-align">
-            <button
-              className={`btn waves-effect waves-light indigo accent-2
+            <div>
+              {isLoadingReviews && <Spinner size="small" />}
+            </div>
+            <div>
+              <button
+                className={`btn waves-effect waves-light indigo accent-2
                 white-text`}
-              onClick={handleViewMoreReviews}
-              disabled={!hasMoreReviews}
-            >
+                onClick={handleViewMoreReviews}
+                disabled={isLoadingReviews || !hasMoreReviews}
+              >
               View More
-            </button>
+              </button>
+            </div>
           </div>
         </div>
       </div>

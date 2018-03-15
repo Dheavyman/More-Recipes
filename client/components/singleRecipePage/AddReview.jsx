@@ -52,6 +52,7 @@ const AddReview = (props) => {
               type="submit"
               className={`btn waves-effect waves-light indigo accent-2
               white-text`}
+              disabled={isLoading}
             >
               Post Review
             </button>

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
+
 const propTypes = {
   recipe: PropTypes.shape({
     category: PropTypes.string,
@@ -12,15 +14,28 @@ const propTypes = {
 };
 
 /**
- * Function to format display of comma seperated string values into lists
+ * Function to format display of comma separated string values into lists
  *
- * @param {string} string - The string value to be formated
+ * @param {string} ingredients - The string value to be formated
  *
  * @returns {object} - React element represent the list item
  */
-const formatDisplay = string => string.split(',').map((ingredient, index) => (
-  <li key={index.toString()}>{ingredient.trim()}</li>
-));
+const formatIngredientsDisplay = ingredients => ingredients
+  .split(',').map((ingredient, index) => (
+    <li key={index.toString()}>{capitalizeFirstLetter(ingredient.trim())}</li>
+  ));
+
+/**
+ * Function to format display of comma separated string values into lists
+ *
+ * @param {string} directions - The string value to be formated
+ *
+ * @returns {object} - React element represent the list item
+ */
+const formatDirectionsDisplay = directions => directions
+  .split('.').map((direction, index) => (
+    <li key={index.toString()}>{capitalizeFirstLetter(direction.trim())}</li>
+  ));
 
 /**
  * RecipeDetails component
@@ -41,13 +56,13 @@ const RecipeDetails = (props) => {
       <div className="col s12">
         <h6><b><em>Category:</em></b></h6>
         <p id="description" className="grey-text text-darken-3 lighten-3">
-          {category}
+          {capitalizeFirstLetter(category)}
         </p>
       </div>
       <div className="col s12">
         <h6><b><em>Description:</em></b></h6>
         <p id="description" className="grey-text text-darken-3 lighten-3">
-          {description}
+          {capitalizeFirstLetter(description)}
         </p>
       </div>
       <div className="col s12">
@@ -58,14 +73,14 @@ const RecipeDetails = (props) => {
       </div>
       <div className="col s12">
         <h6><b><em>Ingredients:</em></b></h6>
-        <p id="ingredients" className="grey-text text-darken-3 lighten-3">
-          {ingredients && formatDisplay(ingredients)}
-        </p>
+        <ol id="ingredients" className="grey-text text-darken-3 lighten-3">
+          {ingredients && formatIngredientsDisplay(ingredients)}
+        </ol>
       </div>
       <div className="col s12">
         <h6><b><em>Directions:</em></b></h6>
         <ol id="directions" className="grey-text text-darken-3 lighten-3">
-          {directions && formatDisplay(directions)}
+          {directions && formatDirectionsDisplay(directions)}
         </ol>
       </div>
     </div>

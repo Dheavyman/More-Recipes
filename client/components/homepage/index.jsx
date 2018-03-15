@@ -7,15 +7,23 @@ import actionCreators from '../../actions';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Main from './Main';
+import notify from '../../utils/notification';
 
 const propTypes = {
   recipes: PropTypes.shape({
     recipes: PropTypes.arrayOf(PropTypes.shape()),
   }).isRequired,
+  retrievePopularRecipes: PropTypes.func.isRequired,
   retrieveRecipes: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      message: PropTypes.string,
+    }),
+  }).isRequired,
+  resetAuthentication: PropTypes.func.isRequired,
 };
 
 /**
@@ -47,10 +55,19 @@ class Home extends Component {
    * @memberof Home
    */
   componentDidMount() {
-    const { recipes: { recipes } } = this.props;
+    const {
+      recipes: { recipes }, location: { state }, resetAuthentication,
+      retrievePopularRecipes, retrieveRecipes
+    } = this.props;
+
+    retrievePopularRecipes();
 
     if (!recipes.length > 0) {
-      this.props.retrieveRecipes();
+      retrieveRecipes();
+    }
+    if (state && state.message === 'Unauthenticated user') {
+      resetAuthentication();
+      notify('info', 'Please login to continue');
     }
   }
 
@@ -166,7 +183,7 @@ const mapStateToProps = state => ({
 
 /**
  * Function to map dispatch to props
- * Action creators are binded to the dispatch function
+ * Action creators are bound to the dispatch function
  *
  * @param {any} dispatch - The store dispatch function
  *

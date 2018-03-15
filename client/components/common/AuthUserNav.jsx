@@ -27,7 +27,7 @@ const AuthUserNav = (props) => {
 
   return (
     <ul id="user-control" className="dropdown-content">
-      <li>
+      <li id="dashboard">
         <Link to={`/users/${userId}/dashboard`} className="black-text">
           Dashboard
           <i className="material-icons left">person</i>
@@ -38,6 +38,7 @@ const AuthUserNav = (props) => {
         <a
           role="button"
           tabIndex="0"
+          id="logout"
           className="black-text"
           onClick={handleLogoutUser}
         >

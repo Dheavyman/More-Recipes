@@ -22,7 +22,7 @@ const propTypes = {
  */
 class UserFavorites extends React.Component {
   /**
-   * Component did mount lifecycle method
+   * Component did mount life cycle method
    *
    * @returns {any} Fetches user favorite recipes
    *
@@ -51,7 +51,7 @@ class UserFavorites extends React.Component {
         {userFavorites &&
           userFavorites.length === 0
           ? <div className="center-align" >
-            <h5>You have not favorited any recipe</h5>
+            <h5>No favorite recipes yet</h5>
             <i className="material-icons large">folder_open</i>
           </div>
           : userFavorites.map(favorite => (

@@ -6,6 +6,10 @@
           "jsx": true
       }
     },
+    "globals": {
+      "shallow": true,
+      "mount": true
+    },
     "root": true,
     "extends": "airbnb",
     "plugins": [
@@ -17,7 +21,8 @@
       "browser": true,
       "es6": true,
       "jquery": true,
-      "mocha": true
+      "mocha": true,
+      "jest": true
     },
     "rules": {
       "max-len": [1, 80, 2],
@@ -28,6 +33,7 @@
       "curly": ["error", "multi-line"],
       "import/no-unresolved": "off",
       "import/extensions": "off",
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
       "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
       "valid-jsdoc": ["error", {
         "requireReturn": true,

@@ -51,14 +51,14 @@ class UserValidation {
     if (!req.body.firstName || isEmpty(req.body.firstName)) {
       return res.status(400).send({
         status: 'Fail',
-        message: 'Firstname required'
+        message: 'First name required'
       });
     }
 
     if (!req.body.lastName || isEmpty(req.body.lastName)) {
       return res.status(400).send({
         status: 'Fail',
-        message: 'Lastname required'
+        message: 'Last name required'
       });
     }
     return next();

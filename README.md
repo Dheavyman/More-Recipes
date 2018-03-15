@@ -14,7 +14,7 @@ More-Recipes provides a platform for users to share the awesome and exciting  re
 - [API Documentation](#api-documentation)
 - [Running the tests](#running-the-tests)
 - [Built With](#built-with)
-- [Contributing to the Project](#contributing-to-the-Project)
+- [Contributing to the Project](#contributing-to-the-project)
 - [FAQ](#faq)
 - [Application Limitations](#application-limitations)
 - [License](#license)
@@ -128,7 +128,7 @@ Contributions are welcome and appreciated. To contribute
 ## Application limitations
 * The application runs on a single database and might impact the speed of response
 * Users cannot register or login with there social accounts at the moment
-## Licence
+## License
 This project is available for use and modification under the MIT License. See the LICENSE file or click [here](https://github.com/Dheavyman/More-Recipes/blob/develop/LICENSE.md) for more details.
 
 ## Credits

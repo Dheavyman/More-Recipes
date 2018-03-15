@@ -18,6 +18,7 @@ const propTypes = {
   handleDrop: PropTypes.func.isRequired,
   imagePreview: PropTypes.string.isRequired,
   userRecipes: PropTypes.shape({
+    isLoading: PropTypes.bool,
     imageUploading: PropTypes.bool.isRequired,
     error: PropTypes.shape()
   }).isRequired,
@@ -110,7 +111,7 @@ const AddRecipe = (props) => {
               <div className="input-field col s12">
                 <textarea
                   name="ingredients"
-                  placeholder="Enter ingredients seperated by comma"
+                  placeholder="Enter ingredients separated by comma"
                   className="materialize-textarea validate"
                   onChange={handleChange}
                   required
@@ -124,7 +125,7 @@ const AddRecipe = (props) => {
               <div className="input-field col s12">
                 <textarea
                   name="directions"
-                  placeholder="Enter directions seperated by comma"
+                  placeholder="Enter directions separated by full stop"
                   className="materialize-textarea validate"
                   onChange={handleChange}
                   required
@@ -160,9 +161,12 @@ const AddRecipe = (props) => {
             <div className="row" />
             <div className="row center-align">
               <button
+                id="add-recipe"
+                name="add-recipe"
                 type="submit"
                 className={`btn btn-large waves-effect
                     waves-light indigo accent-2`}
+                disabled={imageUploading || isLoading}
               >
                 Add Recipe
               </button>

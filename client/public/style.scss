@@ -25,14 +25,14 @@ main {
 }
 
 .collapsible-header {
-  margin-left: 14px;
+  padding-left: 32px !important;
 }
 
 .cursor-pointer {
   cursor: pointer;
 }
 
-#position {
+#homepage-main-position {
   position: relative;
 }
 
@@ -323,11 +323,8 @@ main {
   right: 5px;
 }
 
-button {
-  .disabled {
-    cursor: not-allowed;
-    opacity: 0.65;
-  }
+.logout-button {
+  cursor: pointer;
 }
 
 .connect-icons {

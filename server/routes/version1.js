@@ -363,9 +363,11 @@ router.route('/recipes/:recipeId')
    *                 recipe:
    *                   $ref: '#/definitions/Recipe'
    */
-  .put(authenticate.verifyToken, recipeValidate.recipeRequiredInputs,
-    recipeValidate.recipeExist, recipeValidate.userRecipe,
-    notifyUsers.favoriteRecipeModified, recipeController.modifyRecipe)
+  .put(
+    authenticate.verifyToken, recipeValidate.recipeExist,
+    recipeValidate.userRecipe, notifyUsers.favoriteRecipeModified,
+    recipeController.modifyRecipe
+  )
 
   /**
    * @swagger

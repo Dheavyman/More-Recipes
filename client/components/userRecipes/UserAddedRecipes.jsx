@@ -22,7 +22,7 @@ const propTypes = {
  */
 class UserAddedRecipes extends React.Component {
   /**
-   * Component did mount lifecyle method
+   * Component did mount life cycle method
    *
    * @returns {any} Fetches user added recipes
    *
@@ -51,7 +51,7 @@ class UserAddedRecipes extends React.Component {
         {userAddedRecipes &&
           userAddedRecipes.length === 0
           ? <div className="center-align" >
-            <h5>You have not added any recipe</h5>
+            <h5>No recipes yet</h5>
             <i className="material-icons large">folder_open</i>
           </div>
           : userAddedRecipes.map(recipe => (

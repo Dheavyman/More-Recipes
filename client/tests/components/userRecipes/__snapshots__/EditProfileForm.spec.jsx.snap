@@ -1,0 +1,525 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditProfileForm component should call onChange handler function 1`] = `
+<div>
+  <div
+    className="row"
+  />
+  <h5>
+    <i
+      className="material-icons left"
+    >
+      person
+    </i>
+    My Profile
+  </h5>
+  <div
+    className="divider black"
+  />
+  <br />
+  <div
+    className="row"
+    id="about_user"
+  >
+    <TextField
+      className="validate"
+      defaultValue="John Mark"
+      disabled={true}
+      id="Username"
+      name="username"
+      onChange={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "target": Object {
+                  "value": "JOHN",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "MARK",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "You can hola me to know",
+                },
+              },
+            ],
+          ],
+        }
+      }
+      placeholder="Username"
+      type="text"
+    />
+    <TextField
+      className="validate"
+      defaultValue="John"
+      id="First Name"
+      name="firstName"
+      onChange={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "target": Object {
+                  "value": "JOHN",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "MARK",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "You can hola me to know",
+                },
+              },
+            ],
+          ],
+        }
+      }
+      placeholder="First name"
+      required={true}
+      type="text"
+    />
+    <TextField
+      className="validate"
+      defaultValue="Mark"
+      id="Last Name"
+      name="lastName"
+      onChange={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "target": Object {
+                  "value": "JOHN",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "MARK",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "You can hola me to know",
+                },
+              },
+            ],
+          ],
+        }
+      }
+      placeholder="Last name"
+      required={true}
+      type="text"
+    />
+    <TextField
+      defaultValue="john@example.com"
+      disabled={true}
+      id="Email"
+      name="email"
+      onChange={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "target": Object {
+                  "value": "JOHN",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "MARK",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "You can hola me to know",
+                },
+              },
+            ],
+          ],
+        }
+      }
+      placeholder="Email"
+      type="email"
+    />
+  </div>
+  <div
+    className="col s12"
+  >
+    <h5>
+      About Me
+    </h5>
+    <div
+      className="divider black"
+    />
+    <textarea
+      className="materialize-textarea"
+      defaultValue="A lot about me"
+      id="aboutMe"
+      name="aboutMe"
+      onChange={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "target": Object {
+                  "value": "JOHN",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "MARK",
+                },
+              },
+            ],
+            Array [
+              Object {
+                "target": Object {
+                  "value": "You can hola me to know",
+                },
+              },
+            ],
+          ],
+        }
+      }
+      placeholder="About me"
+    />
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="center-align"
+    />
+  </div>
+  <div>
+    <button
+      className="btn-floating waves-effect waves-light indigo accent-2
+            right"
+      disabled={false}
+      id="confirm-edit-btn"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        data-tip="Save Details"
+      >
+        save
+      </i>
+    </button>
+    <button
+      className="btn-floating waves-effect waves-light red right"
+      disabled={false}
+      id="cancel-edit-btn"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        data-tip="Cancel"
+      >
+        cancel
+      </i>
+    </button>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+  <div
+    className="row"
+  />
+</div>
+`;
+
+exports[`EditProfileForm component should render component 1`] = `
+<div>
+  <div
+    className="row"
+  />
+  <h5>
+    <i
+      className="material-icons left"
+    >
+      person
+    </i>
+    My Profile
+  </h5>
+  <div
+    className="divider black"
+  />
+  <br />
+  <div
+    className="row"
+    id="about_user"
+  >
+    <TextField
+      className="validate"
+      defaultValue="John Mark"
+      disabled={true}
+      id="Username"
+      name="username"
+      onChange={[MockFunction]}
+      placeholder="Username"
+      type="text"
+    />
+    <TextField
+      className="validate"
+      defaultValue="John"
+      id="First Name"
+      name="firstName"
+      onChange={[MockFunction]}
+      placeholder="First name"
+      required={true}
+      type="text"
+    />
+    <TextField
+      className="validate"
+      defaultValue="Mark"
+      id="Last Name"
+      name="lastName"
+      onChange={[MockFunction]}
+      placeholder="Last name"
+      required={true}
+      type="text"
+    />
+    <TextField
+      defaultValue="john@example.com"
+      disabled={true}
+      id="Email"
+      name="email"
+      onChange={[MockFunction]}
+      placeholder="Email"
+      type="email"
+    />
+  </div>
+  <div
+    className="col s12"
+  >
+    <h5>
+      About Me
+    </h5>
+    <div
+      className="divider black"
+    />
+    <textarea
+      className="materialize-textarea"
+      defaultValue="A lot about me"
+      id="aboutMe"
+      name="aboutMe"
+      onChange={[MockFunction]}
+      placeholder="About me"
+    />
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="center-align"
+    />
+  </div>
+  <div>
+    <button
+      className="btn-floating waves-effect waves-light indigo accent-2
+            right"
+      disabled={false}
+      id="confirm-edit-btn"
+      onClick={[MockFunction]}
+    >
+      <i
+        className="material-icons"
+        data-tip="Save Details"
+      >
+        save
+      </i>
+    </button>
+    <button
+      className="btn-floating waves-effect waves-light red right"
+      disabled={false}
+      id="cancel-edit-btn"
+      onClick={[MockFunction]}
+    >
+      <i
+        className="material-icons"
+        data-tip="Cancel"
+      >
+        cancel
+      </i>
+    </button>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+  <div
+    className="row"
+  />
+</div>
+`;
+
+exports[`EditProfileForm component should show spinner 1`] = `
+<div>
+  <div
+    className="row"
+  />
+  <h5>
+    <i
+      className="material-icons left"
+    >
+      person
+    </i>
+    My Profile
+  </h5>
+  <div
+    className="divider black"
+  />
+  <br />
+  <div
+    className="row"
+    id="about_user"
+  >
+    <TextField
+      className="validate"
+      defaultValue="John Mark"
+      disabled={true}
+      id="Username"
+      name="username"
+      onChange={[MockFunction]}
+      placeholder="Username"
+      type="text"
+    />
+    <TextField
+      className="validate"
+      defaultValue="John"
+      id="First Name"
+      name="firstName"
+      onChange={[MockFunction]}
+      placeholder="First name"
+      required={true}
+      type="text"
+    />
+    <TextField
+      className="validate"
+      defaultValue="Mark"
+      id="Last Name"
+      name="lastName"
+      onChange={[MockFunction]}
+      placeholder="Last name"
+      required={true}
+      type="text"
+    />
+    <TextField
+      defaultValue="john@example.com"
+      disabled={true}
+      id="Email"
+      name="email"
+      onChange={[MockFunction]}
+      placeholder="Email"
+      type="email"
+    />
+  </div>
+  <div
+    className="col s12"
+  >
+    <h5>
+      About Me
+    </h5>
+    <div
+      className="divider black"
+    />
+    <textarea
+      className="materialize-textarea"
+      defaultValue="A lot about me"
+      id="aboutMe"
+      name="aboutMe"
+      onChange={[MockFunction]}
+      placeholder="About me"
+    />
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="center-align"
+    >
+      <Spinner
+        size="small"
+      />
+    </div>
+  </div>
+  <div>
+    <button
+      className="btn-floating waves-effect waves-light indigo accent-2
+            right"
+      disabled={true}
+      id="confirm-edit-btn"
+      onClick={[MockFunction]}
+    >
+      <i
+        className="material-icons"
+        data-tip="Save Details"
+      >
+        save
+      </i>
+    </button>
+    <button
+      className="btn-floating waves-effect waves-light red right"
+      disabled={true}
+      id="cancel-edit-btn"
+      onClick={[MockFunction]}
+    >
+      <i
+        className="material-icons"
+        data-tip="Cancel"
+      >
+        cancel
+      </i>
+    </button>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+  <div
+    className="row"
+  />
+</div>
+`;

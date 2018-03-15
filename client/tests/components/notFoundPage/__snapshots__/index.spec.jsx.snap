@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundPage component should render component 1`] = `
+<div
+  className="row"
+>
+  <nav>
+    <div
+      className="nav-wrapper deep-orange darken-4"
+    >
+      <Link
+        className="brand-logo hide-on-small-only"
+        id="logo"
+        replace={false}
+        to="/"
+      >
+        More-Recipes
+      </Link>
+    </div>
+  </nav>
+  <div
+    className="row center-align"
+  >
+    <div
+      className="not-found"
+    >
+      <p
+        className="status-number"
+      >
+        404
+      </p>
+      <p
+        className="page-data"
+      >
+        PAGE NOT FOUND
+      </p>
+      <i
+        className="material-icons large"
+      >
+        error
+      </i>
+    </div>
+    <span>
+      <a
+        href="#!"
+        onClick={[MockFunction]}
+      >
+        Go back 
+      </a>
+      <span>
+        |
+      </span>
+      <Link
+        replace={false}
+        to="/"
+      >
+         Go home
+      </Link>
+    </span>
+  </div>
+</div>
+`;

@@ -1,0 +1,730 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddRecipe component should render component 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Add Recipe"
+  >
+    <div
+      className="row"
+      id="add-recipe"
+    >
+      <form
+        className="col s12"
+        onSubmit={[MockFunction]}
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <input
+              className="validate"
+              name="title"
+              onChange={[MockFunction]}
+              required={true}
+              type="text"
+            />
+            <label
+              htmlFor="recipe_name"
+            >
+              Title
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <select
+            className="browser-default"
+            onChange={[MockFunction]}
+            value="Breakfast"
+          >
+            <option
+              value=""
+            >
+              Select Category
+            </option>
+            <option
+              value="Breakfast"
+            >
+              Breakfast
+            </option>
+            <option
+              name="Lunch"
+              value="Lunch"
+            >
+              Lunch
+            </option>
+            <option
+              value="Dinner"
+            >
+              Dinner
+            </option>
+            <option
+              value="Appetizer"
+            >
+              Appetizer
+            </option>
+            <option
+              value="Main"
+            >
+              Main
+            </option>
+            <option
+              value="Dessert"
+            >
+              Dessert
+            </option>
+          </select>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="description"
+              onChange={[MockFunction]}
+              required={true}
+            />
+            <label
+              htmlFor="recipe_description"
+            >
+              Description
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <input
+              className="validate"
+              min="0"
+              name="preparationTime"
+              onChange={[MockFunction]}
+              required={true}
+              type="number"
+            />
+            <label
+              htmlFor="recipe_prep_time"
+            >
+              Preparation Time (MINS)
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="ingredients"
+              onChange={[MockFunction]}
+              placeholder="Enter ingredients separated by comma"
+              required={true}
+            />
+            <label
+              className="active"
+              htmlFor="recipe_ingredients"
+            >
+              Ingredients
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="directions"
+              onChange={[MockFunction]}
+              placeholder="Enter directions separated by full stop"
+              required={true}
+            />
+            <label
+              className="active"
+              htmlFor="recipe_directions"
+            >
+              Directions
+            </label>
+          </div>
+        </div>
+        <div
+          className="row center-align"
+        >
+          <div
+            className="col s12"
+          >
+            <div
+              className="dropzone-area"
+            >
+              <Dropzone
+                accept="image/*"
+                className="dropzone"
+                disableClick={false}
+                disablePreview={false}
+                disabled={false}
+                maxSize={Infinity}
+                minSize={0}
+                multiple={false}
+                onDrop={[MockFunction]}
+                preventDropOnDocument={true}
+              >
+                <p
+                  className="center-align"
+                >
+                  Drop your file or click here to upload
+                  <i
+                    className="material-icons center large"
+                  >
+                    camera
+                  </i>
+                </p>
+              </Dropzone>
+              <div
+                className="row"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="row"
+        />
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect
+                    waves-light indigo accent-2"
+            disabled={false}
+            id="add-recipe"
+            name="add-recipe"
+            type="submit"
+          >
+            Add Recipe
+          </button>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;
+
+exports[`AddRecipe component should show error message if any 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Add Recipe"
+  >
+    <div
+      className="row"
+      id="add-recipe"
+    >
+      <form
+        className="col s12"
+        onSubmit={[MockFunction]}
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <input
+              className="validate"
+              name="title"
+              onChange={[MockFunction]}
+              required={true}
+              type="text"
+            />
+            <label
+              htmlFor="recipe_name"
+            >
+              Title
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <select
+            className="browser-default"
+            onChange={[MockFunction]}
+            value="Breakfast"
+          >
+            <option
+              value=""
+            >
+              Select Category
+            </option>
+            <option
+              value="Breakfast"
+            >
+              Breakfast
+            </option>
+            <option
+              name="Lunch"
+              value="Lunch"
+            >
+              Lunch
+            </option>
+            <option
+              value="Dinner"
+            >
+              Dinner
+            </option>
+            <option
+              value="Appetizer"
+            >
+              Appetizer
+            </option>
+            <option
+              value="Main"
+            >
+              Main
+            </option>
+            <option
+              value="Dessert"
+            >
+              Dessert
+            </option>
+          </select>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="description"
+              onChange={[MockFunction]}
+              required={true}
+            />
+            <label
+              htmlFor="recipe_description"
+            >
+              Description
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <input
+              className="validate"
+              min="0"
+              name="preparationTime"
+              onChange={[MockFunction]}
+              required={true}
+              type="number"
+            />
+            <label
+              htmlFor="recipe_prep_time"
+            >
+              Preparation Time (MINS)
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="ingredients"
+              onChange={[MockFunction]}
+              placeholder="Enter ingredients separated by comma"
+              required={true}
+            />
+            <label
+              className="active"
+              htmlFor="recipe_ingredients"
+            >
+              Ingredients
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="directions"
+              onChange={[MockFunction]}
+              placeholder="Enter directions separated by full stop"
+              required={true}
+            />
+            <label
+              className="active"
+              htmlFor="recipe_directions"
+            >
+              Directions
+            </label>
+          </div>
+        </div>
+        <div
+          className="row center-align"
+        >
+          <div
+            className="col s12"
+          >
+            <div
+              className="dropzone-area"
+            >
+              <Dropzone
+                accept="image/*"
+                className="dropzone"
+                disableClick={false}
+                disablePreview={false}
+                disabled={false}
+                maxSize={Infinity}
+                minSize={0}
+                multiple={false}
+                onDrop={[MockFunction]}
+                preventDropOnDocument={true}
+              >
+                <img
+                  alt=""
+                  src="Image file local url"
+                />
+              </Dropzone>
+              <div
+                className="row"
+              />
+            </div>
+          </div>
+        </div>
+        <ErrorMessage
+          message="Error adding recipe"
+        />
+        <div
+          className="row"
+        />
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect
+                    waves-light indigo accent-2"
+            disabled={false}
+            id="add-recipe"
+            name="add-recipe"
+            type="submit"
+          >
+            Add Recipe
+          </button>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;
+
+exports[`AddRecipe component should show spinner when adding recipe 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Add Recipe"
+  >
+    <div
+      className="row"
+      id="add-recipe"
+    >
+      <form
+        className="col s12"
+        onSubmit={[MockFunction]}
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <input
+              className="validate"
+              name="title"
+              onChange={[MockFunction]}
+              required={true}
+              type="text"
+            />
+            <label
+              htmlFor="recipe_name"
+            >
+              Title
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <select
+            className="browser-default"
+            onChange={[MockFunction]}
+            value="Breakfast"
+          >
+            <option
+              value=""
+            >
+              Select Category
+            </option>
+            <option
+              value="Breakfast"
+            >
+              Breakfast
+            </option>
+            <option
+              name="Lunch"
+              value="Lunch"
+            >
+              Lunch
+            </option>
+            <option
+              value="Dinner"
+            >
+              Dinner
+            </option>
+            <option
+              value="Appetizer"
+            >
+              Appetizer
+            </option>
+            <option
+              value="Main"
+            >
+              Main
+            </option>
+            <option
+              value="Dessert"
+            >
+              Dessert
+            </option>
+          </select>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="description"
+              onChange={[MockFunction]}
+              required={true}
+            />
+            <label
+              htmlFor="recipe_description"
+            >
+              Description
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <input
+              className="validate"
+              min="0"
+              name="preparationTime"
+              onChange={[MockFunction]}
+              required={true}
+              type="number"
+            />
+            <label
+              htmlFor="recipe_prep_time"
+            >
+              Preparation Time (MINS)
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="ingredients"
+              onChange={[MockFunction]}
+              placeholder="Enter ingredients separated by comma"
+              required={true}
+            />
+            <label
+              className="active"
+              htmlFor="recipe_ingredients"
+            >
+              Ingredients
+            </label>
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <textarea
+              className="materialize-textarea validate"
+              name="directions"
+              onChange={[MockFunction]}
+              placeholder="Enter directions separated by full stop"
+              required={true}
+            />
+            <label
+              className="active"
+              htmlFor="recipe_directions"
+            >
+              Directions
+            </label>
+          </div>
+        </div>
+        <div
+          className="row center-align"
+        >
+          <div
+            className="col s12"
+          >
+            <div
+              className="dropzone-area"
+            >
+              <Dropzone
+                accept="image/*"
+                className="dropzone"
+                disableClick={false}
+                disablePreview={false}
+                disabled={false}
+                maxSize={Infinity}
+                minSize={0}
+                multiple={false}
+                onDrop={[MockFunction]}
+                preventDropOnDocument={true}
+              >
+                <img
+                  alt=""
+                  src="Image file local url"
+                />
+              </Dropzone>
+              <div
+                className="row"
+              />
+              <Spinner
+                size="small"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="row"
+        />
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect
+                    waves-light indigo accent-2"
+            disabled={true}
+            id="add-recipe"
+            name="add-recipe"
+            type="submit"
+          >
+            Add Recipe
+          </button>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;

@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main component should render component 1`] = `
+<div>
+  <div
+    id="homepage-main-position"
+  >
+    <Slider />
+    <SearchBar
+      id="home-search-bar"
+      recipes={
+        Object {
+          "popularRecipes": Array [],
+          "recipes": Array [],
+        }
+      }
+      search="title"
+    />
+  </div>
+  <div
+    className="grey lighten-3"
+  >
+    <div
+      className="row recipes-list"
+    >
+      <div
+        className="col s12 popular-list white"
+        id="popular"
+      >
+        <PopularRecipesCatalog
+          popularRecipes={Array []}
+          recipes={
+            Object {
+              "popularRecipes": Array [],
+              "recipes": Array [],
+            }
+          }
+          search="title"
+        />
+      </div>
+      <div
+        className="col s12 all-recipes-list white"
+      >
+        <AllRecipeCatalog
+          recipes={
+            Object {
+              "popularRecipes": Array [],
+              "recipes": Array [],
+            }
+          }
+          recipesCatalog={Array []}
+          search="title"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

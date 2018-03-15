@@ -11,7 +11,7 @@ const { SERVER_URL } = config;
  *
  * @returns {object} Upvote recipe request action
  */
-const upvoteRecipeRequest = () => ({
+export const upvoteRecipeRequest = () => ({
   type: actionTypes.UPVOTE_RECIPE_REQUEST,
 });
 
@@ -22,7 +22,7 @@ const upvoteRecipeRequest = () => ({
  *
  * @returns {object} Upvote recipe success action
  */
-const upvoteRecipeSuccess = data => ({
+export const upvoteRecipeSuccess = data => ({
   type: actionTypes.UPVOTE_RECIPE_SUCCESS,
   payload: data,
 });
@@ -34,7 +34,7 @@ const upvoteRecipeSuccess = data => ({
  *
  * @returns {object} Upvote recipe failure action
  */
-const upvoteRecipeFailure = error => ({
+export const upvoteRecipeFailure = error => ({
   type: actionTypes.UPVOTE_RECIPE_FAILURE,
   payload: error,
 });
@@ -44,7 +44,7 @@ const upvoteRecipeFailure = error => ({
  *
  * @returns {object} Downvote recipe request action
  */
-const downvoteRecipeRequest = () => ({
+export const downvoteRecipeRequest = () => ({
   type: actionTypes.DOWNVOTE_RECIPE_REQUEST,
 });
 
@@ -55,7 +55,7 @@ const downvoteRecipeRequest = () => ({
  *
  * @returns {object} Downvote recipe success action
  */
-const downvoteRecipeSuccess = data => ({
+export const downvoteRecipeSuccess = data => ({
   type: actionTypes.DOWNVOTE_RECIPE_SUCCESS,
   payload: data,
 });
@@ -67,7 +67,7 @@ const downvoteRecipeSuccess = data => ({
  *
  * @returns {object} Downvote recipe failure action
  */
-const downvoteRecipeFailure = error => ({
+export const downvoteRecipeFailure = error => ({
   type: actionTypes.DOWNVOTE_RECIPE_FAILURE,
   payload: error,
 });

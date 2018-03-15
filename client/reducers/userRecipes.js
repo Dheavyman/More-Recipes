@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initialState = {
-  isFectchingUserRecipes: false,
+export const initialState = {
+  isFetchingUserRecipes: false,
   isFetchingUserFavorites: false,
   isLoading: false,
   imageUploading: false,
@@ -29,14 +29,14 @@ const userRecipes = (state = initialState, action) => {
     case actionTypes.FETCH_USER_RECIPES_REQUEST:
       return {
         ...state,
-        isFectchingUserRecipes: true,
+        isFetchingUserRecipes: true,
         userAddedRecipes: [],
         userAddedRecipesCount: 0,
       };
     case actionTypes.FETCH_USER_RECIPES_SUCCESS:
       return {
         ...state,
-        isFectchingUserRecipes: false,
+        isFetchingUserRecipes: false,
         userAddedRecipes: action.payload.recipes,
         userAddedRecipesCount: action.payload.recipesCount,
         errorFetchingUserRecipes: {},
@@ -44,7 +44,7 @@ const userRecipes = (state = initialState, action) => {
     case actionTypes.FETCH_USER_RECIPES_FAILURE:
       return {
         ...state,
-        isFectchingUserRecipes: false,
+        isFetchingUserRecipes: false,
         errorFetchingUserRecipes: action.payload,
       };
     case actionTypes.FETCH_USER_FAVORITES_REQUEST:

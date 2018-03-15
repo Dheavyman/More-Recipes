@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render field component should render component 1`] = `
+<div>
+  <label
+    htmlFor="Username"
+  >
+    Username
+  </label>
+  <br />
+  <div>
+    <input
+      placeholder="Username"
+      type="text"
+    />
+  </div>
+</div>
+`;

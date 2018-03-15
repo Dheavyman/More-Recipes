@@ -1,12 +1,12 @@
 import { retrieveRecipes, retrievePopularRecipes, fetchRecipe,
   fetchUserRecipes, fetchUserFavorites, searchRecipe } from './recipe';
 import { signupUser, signinUser, logoutUser, fetchUserProfile,
-  editUserProfile, uploadUserImage } from './userActions';
+  editUserProfile, uploadUserImage, resetAuthentication } from './userActions';
 import { postReview, fetchReviews, clearReviews, deleteReview } from './review';
 import { addRecipe, editRecipe, deleteRecipe,
   uploadImage } from './recipeActions';
 import { upvoteRecipe, downvoteRecipe } from './vote';
-import setFavorite from './favorite';
+import { setFavorite } from './favorite';
 
 export default {
   retrieveRecipes,
@@ -20,6 +20,7 @@ export default {
   fetchUserProfile,
   editUserProfile,
   uploadUserImage,
+  resetAuthentication,
   postReview,
   fetchReviews,
   clearReviews,

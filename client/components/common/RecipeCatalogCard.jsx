@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RecipeImage from '../common/RecipeImage';
+import notify from '../../utils/notification';
 
 const propTypes = {
+  user: PropTypes.shape({
+    isAuthenticated: PropTypes.bool,
+  }).isRequired,
   recipe: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -21,6 +25,18 @@ const defaultProps = {
 };
 
 /**
+ * Function to notify user to login
+ *
+ * @param {object} event - The event performed
+ *
+ * @returns {any} Toast message
+ */
+const handleNotify = (event) => {
+  event.preventDefault();
+  notify('info', 'Please login to view the user profile');
+};
+
+/**
  * Recipe catalog card component
  *
  * @param {object} props - The properties passed to the component
@@ -28,13 +44,13 @@ const defaultProps = {
  * @returns {object} React element
  */
 const RecipeCatalogCard = (props) => {
-  const { recipe } = props;
+  const { user: { isAuthenticated }, recipe } = props;
   const { id, title, recipeImage, description, views, upvotes, downvotes,
     favorites, User: { id: userId, fullName } } = recipe;
 
   return (
     <div className="col s12 m4 l3">
-      <div id="recipes" className="card large">
+      <div id="recipes" className="card large hoverable">
         <Link to={`recipes/${id}`}>
           <span className="card-title">{title}</span>
         </Link>
@@ -50,9 +66,17 @@ const RecipeCatalogCard = (props) => {
 
           <p id="owner">
             <label htmlFor="owner">Recipe by: </label>
-            <Link to={`/users/${userId}/dashboard`}>
-              <span className="recipe-owner">{fullName}</span>
-            </Link>
+            {isAuthenticated
+              ? <Link to={`/users/${userId}/dashboard`}>
+                <span className="recipe-owner">{fullName}</span>
+              </Link>
+              : <a
+                href="#!"
+                onClick={handleNotify}
+              >
+                <span className="recipe-owner">{fullName}</span>
+              </a>
+            }
           </p>
 
           <ul className="center-align">

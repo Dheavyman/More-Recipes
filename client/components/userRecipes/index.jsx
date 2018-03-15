@@ -3,20 +3,29 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
+import { ToastContainer } from 'react-toastify';
 
 import actionCreators from '../../actions';
 import Header from './Header';
 import Main from './Main';
 import { decodeToken } from '../../utils/authenticate';
 import config from '../../config';
-import recipeAvater from '../../public/images/recipe-avatar2.png';
+import recipeAvatar from '../../public/images/recipe-avatar2.png';
+import notify from '../../utils/notification';
 
 const propTypes = {
+  fetchUserProfile: PropTypes.func.isRequired,
+  fetchUserRecipes: PropTypes.func.isRequired,
+  fetchUserFavorites: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
   addRecipe: PropTypes.func.isRequired,
   editRecipe: PropTypes.func.isRequired,
   deleteRecipe: PropTypes.func.isRequired,
   setFavorite: PropTypes.func.isRequired,
+  searchRecipe: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    errorFetchingProfile: PropTypes.shape(),
+  }).isRequired,
   userRecipes: PropTypes.shape({
     imageUploading: PropTypes.bool.isRequired,
     imageUrl: PropTypes.string
@@ -29,6 +38,10 @@ const propTypes = {
   logoutUser: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
+    replace: PropTypes.func,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 };
 
@@ -58,7 +71,7 @@ class UserRecipes extends React.Component {
       title: '',
       category: 'Select Category',
       description: '',
-      preparationTime: null,
+      preparationTime: undefined,
       ingredients: '',
       directions: '',
       imageData: null,
@@ -82,7 +95,7 @@ class UserRecipes extends React.Component {
   }
 
   /**
-   * Component did mount lifecycle method
+   * Component did mount life cycle method
    *
    * @returns {any} Fetches user favorite recipes
    *
@@ -95,6 +108,42 @@ class UserRecipes extends React.Component {
       currentProfileUserId: parseInt(userId, 10),
       authenticatedUserId: id,
     });
+  }
+
+  /**
+   * Component will receive props life cycle method
+   *
+   * @param {any} nextProps - The next properties
+   *
+   * @returns {any} Navigate to homepage
+   *
+   * @memberof UserRecipes
+   */
+  componentWillReceiveProps(nextProps) {
+    const { user: { errorFetchingProfile }, history, location } = nextProps;
+
+    if (!isEmpty(errorFetchingProfile)) {
+      if (errorFetchingProfile.message.includes('jwt') ||
+      errorFetchingProfile.message.includes('invalid')) {
+        history.push({
+          pathname: '/',
+          state: {
+            message: 'Unauthenticated user',
+            from: {
+              pathname: location.pathname,
+            },
+          },
+        });
+      }
+    }
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      const {
+        fetchUserProfile, fetchUserRecipes, fetchUserFavorites
+      } = this.props;
+      fetchUserProfile(nextProps.match.params.userId);
+      fetchUserRecipes(nextProps.match.params.userId);
+      fetchUserFavorites(nextProps.match.params.userId);
+    }
   }
 
   /**
@@ -164,11 +213,11 @@ class UserRecipes extends React.Component {
   }
 
   /**
-   * Funtion to handle image preview
+   * Function to handle image preview
    *
    * @param {any} imagePreview - The image to be displaced
    *
-   * @returns {objec} Set the state property imagePreview
+   * @returns {object} Set the state property imagePreview
    *
    * @memberof UserRecipes
    */
@@ -189,8 +238,13 @@ class UserRecipes extends React.Component {
    * @memberof UserRecipes
    */
   handleEditChange(event) {
-    const { target: { name, value } } = event;
     const { recipeToEdit } = this.state;
+    const { target: { name } } = event;
+    let { target: { value } } = event;
+
+    if (name === 'preparationTime') {
+      value = parseInt(value, 10);
+    }
     this.setState({
       recipeToEdit: {
         ...recipeToEdit,
@@ -285,8 +339,13 @@ class UserRecipes extends React.Component {
 
                 if (isEmpty(userRecipes.error)) {
                   this.handleClose();
+                  notify('success', 'Recipe edited successfully');
+                } else {
+                  notify('error', 'Edit recipe unsuccessful');
                 }
               });
+          } else {
+            notify('error', 'Image upload unsuccessful');
           }
         });
     } else {
@@ -297,6 +356,9 @@ class UserRecipes extends React.Component {
 
           if (isEmpty(userRecipes.error)) {
             this.handleClose();
+            notify('success', 'Recipe edited successfully');
+          } else {
+            notify('error', 'Edit recipe unsuccessful');
           }
         });
     }
@@ -321,6 +383,9 @@ class UserRecipes extends React.Component {
 
           if (isEmpty(userRecipes.error)) {
             this.handleClose();
+            notify('success', 'Recipe deleted successfully');
+          } else {
+            notify('error', 'Delete recipe unsuccessful');
           }
         });
     } else if (actionTitle === 'Remove Recipe') {
@@ -330,13 +395,16 @@ class UserRecipes extends React.Component {
 
           if (isEmpty(userRecipes.error)) {
             this.handleClose();
+            notify('success', 'Recipe removed successfully');
+          } else {
+            notify('error', 'Remove recipe unsuccessful');
           }
         });
     }
   }
 
   /**
-   * Function to handle submiting new recipe input values
+   * Function to handle submitting new recipe input values
    *
    * @param {any} event - The submit event
    *
@@ -376,14 +444,19 @@ class UserRecipes extends React.Component {
 
                   if (isEmpty(userRecipes.error)) {
                     this.handleClose();
+                    notify('success', 'Recipe created successfully');
+                  } else {
+                    notify('error', 'Create recipe unsuccessful');
                   }
                 });
+            } else {
+              notify('error', 'Image upload unsuccessful');
             }
           });
       } else {
         values = {
           ...values,
-          recipeImage: recipeAvater,
+          recipeImage: recipeAvatar,
         };
         addRecipe(values)
           .then(() => {
@@ -391,6 +464,9 @@ class UserRecipes extends React.Component {
 
             if (isEmpty(userRecipes.error)) {
               this.handleClose();
+              notify('success', 'Recipe created successfully');
+            } else {
+              notify('error', 'Create recipe unsuccessful');
             }
           });
       }
@@ -406,6 +482,9 @@ class UserRecipes extends React.Component {
 
           if (isEmpty(userRecipes.error)) {
             this.handleClose();
+            notify('success', 'Recipe created successfully');
+          } else {
+            notify('error', 'Create recipe unsuccessful');
           }
         });
     }
@@ -427,6 +506,23 @@ class UserRecipes extends React.Component {
   }
 
   /**
+   * Search recipes by category
+   *
+   * @param {object} event - The event performed
+   *
+   * @return {any} Submit the search
+   *
+   * @memberof UserRecipes
+   */
+  handleSearchCategory = (event) => {
+    const { target: { name } } = event;
+    this.props.history.push({
+      pathname: '/catalog',
+      search: `?search=category&list=${name}`,
+    });
+  }
+
+  /**
    * Render method
    *
    * @returns {object} React element
@@ -441,6 +537,7 @@ class UserRecipes extends React.Component {
             handleLogoutUser={this.handleLogoutUser}
             currentProfileUserId={this.state.currentProfileUserId}
             authenticatedUserId={this.state.authenticatedUserId}
+            handleSearchCategory={this.handleSearchCategory}
             {...this.props}
           />
         </header>
@@ -461,6 +558,7 @@ class UserRecipes extends React.Component {
             {...this.state}
             {...this.props}
           />
+          <ToastContainer />
         </main>
       </div>
     );
@@ -483,7 +581,7 @@ const mapStateToProps = state => ({
 
 /**
  * Function to map dispatch to props
- * Action creators are binded to the dispatch function
+ * Action creators are bound to the dispatch function
  *
  * @param {any} dispatch - The store dispatch function
  *

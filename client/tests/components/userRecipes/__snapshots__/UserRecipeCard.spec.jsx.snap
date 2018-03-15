@@ -1,0 +1,374 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserRecipeCard component should render component 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <UserRecipeCard
+      authenticatedUserId={1}
+      currentProfileUserId={3}
+      handleOpenDelete={[MockFunction]}
+      handleOpenEdit={[MockFunction]}
+      recipe={
+        Object {
+          "description": "Tasty rice and beans",
+          "downvotes": 2,
+          "favorites": 45,
+          "recipeImage": "Recipe image URL",
+          "title": "Rice and beans",
+          "upvotes": 32,
+          "views": 54,
+        }
+      }
+    >
+      <div
+        className="col s12 m6 l3"
+      >
+        <div
+          className="card large hoverable"
+          id="recipes"
+        >
+          <Link
+            replace={false}
+            to="/recipes/undefined"
+          >
+            <a
+              href="/recipes/undefined"
+              onClick={[Function]}
+            >
+              <span
+                className="card-title"
+                id="recipe-title"
+              >
+                Rice and beans
+              </span>
+            </a>
+          </Link>
+          <div
+            className="card-image"
+          >
+            <Link
+              replace={false}
+              to="/recipes/undefined"
+            >
+              <a
+                href="/recipes/undefined"
+                onClick={[Function]}
+              >
+                <RecipeImage
+                  recipeImage="Recipe image URL"
+                  title="Rice and beans"
+                >
+                  <img
+                    alt="Rice and beans"
+                    src="Recipe image URL"
+                  />
+                </RecipeImage>
+              </a>
+            </Link>
+          </div>
+          <div
+            className="card-content"
+          >
+            <p>
+              Tasty rice and beans
+            </p>
+          </div>
+          <div
+            className="card-action"
+          >
+            <ul
+              className="center-align"
+            >
+              <li
+                id="views"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  visibility
+                </i>
+                54
+              </li>
+              <li
+                id="favorites"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  favorite
+                </i>
+                45
+              </li>
+              <li
+                id="upvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_up
+                </i>
+                32
+              </li>
+              <li
+                id="downvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_down
+                </i>
+                2
+              </li>
+            </ul>
+            <ReactTooltip
+              insecure={true}
+              resizeHide={true}
+              wrapper="div"
+            >
+              <div
+                className="__react_component_tooltip place-top type-dark "
+                data-id="tooltip"
+              />
+            </ReactTooltip>
+          </div>
+        </div>
+      </div>
+    </UserRecipeCard>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`UserRecipeCard component should simulate edit and delete recipe click events 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <UserRecipeCard
+      authenticatedUserId={1}
+      currentProfileUserId={1}
+      handleOpenDelete={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              undefined,
+              "Are you sure you want to delete this recipe?",
+              "Delete Recipe",
+              "Delete",
+            ],
+          ],
+        }
+      }
+      handleOpenEdit={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "description": "Tasty rice and beans",
+                "downvotes": 2,
+                "favorites": 45,
+                "recipeImage": "Recipe image URL",
+                "title": "Rice and beans",
+                "upvotes": 32,
+                "views": 54,
+              },
+            ],
+          ],
+        }
+      }
+      recipe={
+        Object {
+          "description": "Tasty rice and beans",
+          "downvotes": 2,
+          "favorites": 45,
+          "recipeImage": "Recipe image URL",
+          "title": "Rice and beans",
+          "upvotes": 32,
+          "views": 54,
+        }
+      }
+    >
+      <div
+        className="col s12 m6 l3"
+      >
+        <div
+          className="card large hoverable"
+          id="recipes"
+        >
+          <Link
+            replace={false}
+            to="/recipes/undefined"
+          >
+            <a
+              href="/recipes/undefined"
+              onClick={[Function]}
+            >
+              <span
+                className="card-title"
+                id="recipe-title"
+              >
+                Rice and beans
+              </span>
+            </a>
+          </Link>
+          <div
+            className="card-image"
+          >
+            <Link
+              replace={false}
+              to="/recipes/undefined"
+            >
+              <a
+                href="/recipes/undefined"
+                onClick={[Function]}
+              >
+                <RecipeImage
+                  recipeImage="Recipe image URL"
+                  title="Rice and beans"
+                >
+                  <img
+                    alt="Rice and beans"
+                    src="Recipe image URL"
+                  />
+                </RecipeImage>
+              </a>
+            </Link>
+          </div>
+          <div
+            className="card-content"
+          >
+            <p>
+              Tasty rice and beans
+            </p>
+          </div>
+          <div
+            className="card-action"
+          >
+            <ul
+              className="center-align"
+            >
+              <li
+                id="views"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  visibility
+                </i>
+                54
+              </li>
+              <li
+                id="favorites"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  favorite
+                </i>
+                45
+              </li>
+              <li
+                id="upvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_up
+                </i>
+                32
+              </li>
+              <li
+                id="downvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_down
+                </i>
+                2
+              </li>
+            </ul>
+            <a
+              className="right"
+              id="edit-recipe-button"
+              onClick={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <i
+                className="material-icons icon-green"
+                data-tip="Edit Recipe"
+              >
+                edit
+              </i>
+            </a>
+            <a
+              className="right"
+              id="delete-recipe-button"
+              onClick={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <i
+                className="material-icons icon-red"
+                data-tip="Delete Recipe"
+              >
+                delete
+              </i>
+            </a>
+            <ReactTooltip
+              insecure={true}
+              resizeHide={true}
+              wrapper="div"
+            >
+              <div
+                className="__react_component_tooltip place-top type-dark "
+                data-id="tooltip"
+              />
+            </ReactTooltip>
+          </div>
+        </div>
+      </div>
+    </UserRecipeCard>
+  </Router>
+</BrowserRouter>
+`;

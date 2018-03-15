@@ -34,7 +34,7 @@ const propTypes = {
  */
 class Navbar extends React.Component {
   /**
-   * Component did update lifecycle mehtod
+   * Component did update life cycle method
    *
    * @returns {any} Initialize materialize component
    *
@@ -56,7 +56,7 @@ class Navbar extends React.Component {
    */
   render() {
     const {
-      user: { isAuthenticated, userAuthentication, userProfile }
+      user: { isAuthenticated, userAuthentication }
     } = this.props;
     const { fullName } = userAuthentication;
 
@@ -93,7 +93,8 @@ class Navbar extends React.Component {
             >
               {!isAuthenticated
                 ? 'Welcome Guest'
-                : fullName || userProfile.fullName}
+                : fullName || localStorage.getItem('fullName')
+              }
               <i className="material-icons large left">account_circle</i>
             </a>
             {!isAuthenticated &&

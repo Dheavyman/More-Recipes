@@ -208,7 +208,7 @@ class CatalogPage extends Component {
   }
 
   /**
-   * Fuction to scroll to the top of the page
+   * Function to scroll to the top of the page
    *
    * @returns {any} Scrolls the page
    *
@@ -268,7 +268,7 @@ const mapStateToProps = state => ({
 
 /**
  * Function to map dispatch to props
- * Action creators are binded to the dispatch function
+ * Action creators are bound to the dispatch function
  *
  * @param {any} dispatch - The store dispatch function
  *

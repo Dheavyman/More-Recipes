@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Footer component
@@ -20,12 +21,7 @@ const Footer = () => (
           <h5 className="white-text">Navigate</h5>
           <ul>
             <li>
-              <a className="grey-text text-lighten-3" href="#!">Home</a>
-            </li>
-            <li>
-              <a className="grey-text text-lighten-3" href="#popular">
-                Popular Recipes
-              </a>
+              <Link to="/" className="grey-text text-lighten-3">Home</Link>
             </li>
             <li>
               <a className="grey-text text-lighten-3" href="#!">About Us</a>

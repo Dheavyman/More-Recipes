@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error message component should display custom error message for unauthenticated user 1`] = `
+<div
+  className="red-text center-align"
+  id="show-error"
+>
+  Please login to continue
+</div>
+`;
+
+exports[`Error message component should render component and display error message 1`] = `
+<div
+  className="red-text center-align"
+  id="show-error"
+>
+  Username already exist
+</div>
+`;

@@ -10,7 +10,7 @@ const { SERVER_URL, CLOUDINARY_URL } = config;
  *
  * @returns {object} User signup request action
  */
-const userSignupRequest = () => ({
+export const userSignupRequest = () => ({
   type: actionTypes.SIGNUP_REQUEST,
 });
 
@@ -21,7 +21,7 @@ const userSignupRequest = () => ({
  *
  * @returns {object} User signup action
  */
-const userSignupSuccess = user => ({
+export const userSignupSuccess = user => ({
   type: actionTypes.SIGNUP_SUCCESS,
   payload: user,
 });
@@ -33,7 +33,7 @@ const userSignupSuccess = user => ({
  *
  * @returns {object} User signup failure object
  */
-const userSignupFailure = error => ({
+export const userSignupFailure = error => ({
   type: actionTypes.SIGNUP_FAILURE,
   payload: error,
 });
@@ -43,7 +43,7 @@ const userSignupFailure = error => ({
  *
  * @returns {object} User signin request action
  */
-const userSigninRequest = () => ({
+export const userSigninRequest = () => ({
   type: actionTypes.SIGNIN_REQUEST,
 });
 
@@ -54,7 +54,7 @@ const userSigninRequest = () => ({
  *
  * @returns {object} User signin action
  */
-const userSigninSuccess = user => ({
+export const userSigninSuccess = user => ({
   type: actionTypes.SIGNIN_SUCCESS,
   payload: user,
 });
@@ -66,7 +66,7 @@ const userSigninSuccess = user => ({
  *
  * @returns {object} User signin failure action
  */
-const userSigninFailure = error => ({
+export const userSigninFailure = error => ({
   type: actionTypes.SIGNIN_FAILURE,
   payload: error,
 });
@@ -76,7 +76,7 @@ const userSigninFailure = error => ({
  *
  * @returns {object} User logout request action
  */
-const userLogoutRequest = () => ({
+export const userLogoutRequest = () => ({
   type: actionTypes.LOGOUT_REQUEST,
 });
 
@@ -85,7 +85,7 @@ const userLogoutRequest = () => ({
  *
  * @returns {object} User logout success action
  */
-const userLogoutSuccess = () => ({
+export const userLogoutSuccess = () => ({
   type: actionTypes.LOGOUT_SUCCESS
 });
 
@@ -94,7 +94,7 @@ const userLogoutSuccess = () => ({
  *
  * @returns {object} Fetch user profile request action
  */
-const fetchUserProfileRequest = () => ({
+export const fetchUserProfileRequest = () => ({
   type: actionTypes.FETCH_USER_PROFILE_REQUEST,
 });
 
@@ -105,7 +105,7 @@ const fetchUserProfileRequest = () => ({
  *
  * @returns {object} Fetch user profile success action
  */
-const fetchUserProfileSuccess = user => ({
+export const fetchUserProfileSuccess = user => ({
   type: actionTypes.FETCH_USER_PROFILE_SUCCESS,
   payload: user,
 });
@@ -117,7 +117,7 @@ const fetchUserProfileSuccess = user => ({
  *
  * @returns {object} Fetch user profile failure action
  */
-const fetchUserProfileFailure = error => ({
+export const fetchUserProfileFailure = error => ({
   type: actionTypes.FETCH_USER_PROFILE_FAILURE,
   payload: error,
 });
@@ -127,7 +127,7 @@ const fetchUserProfileFailure = error => ({
  *
  * @returns {object} Edit user profile request action
  */
-const editUserProfileRequest = () => ({
+export const editUserProfileRequest = () => ({
   type: actionTypes.EDIT_USER_PROFILE_REQUEST,
 });
 
@@ -138,7 +138,7 @@ const editUserProfileRequest = () => ({
  *
  * @returns {object} Edit user profile success action
  */
-const editUserProfileSuccess = user => ({
+export const editUserProfileSuccess = user => ({
   type: actionTypes.EDIT_USER_PROFILE_SUCCESS,
   payload: user,
 });
@@ -149,7 +149,7 @@ const editUserProfileSuccess = user => ({
  *
  * @returns {object} Edit user profile failure action
  */
-const editUserProfileFailure = error => ({
+export const editUserProfileFailure = error => ({
   type: actionTypes.EDIT_USER_PROFILE_FAILURE,
   payload: error,
 });
@@ -159,7 +159,7 @@ const editUserProfileFailure = error => ({
  *
  * @returns {object} Upload user image request action
  */
-const uploadUserImageRequest = () => ({
+export const uploadUserImageRequest = () => ({
   type: actionTypes.UPLOAD_USER_IMAGE_REQUEST,
 });
 
@@ -170,7 +170,7 @@ const uploadUserImageRequest = () => ({
  *
  * @returns {object} Upload user image success action
  */
-const uploadUserImageSuccess = userImageUrl => ({
+export const uploadUserImageSuccess = userImageUrl => ({
   type: actionTypes.UPLOAD_USER_IMAGE_SUCCESS,
   payload: userImageUrl,
 });
@@ -182,7 +182,7 @@ const uploadUserImageSuccess = userImageUrl => ({
  *
  * @returns {object} Upload user image failure action
  */
-const uploadUserImageFailure = error => ({
+export const uploadUserImageFailure = error => ({
   type: actionTypes.UPLOAD_USER_IMAGE_FAILURE,
   payload: error,
 });
@@ -200,9 +200,10 @@ const signupUser = values => (dispatch) => {
     .then((response) => {
       const { data } = response;
       const { data: { user } } = data;
-      const { token } = user;
+      const { token, fullName } = user;
       dispatch(userSignupSuccess(user));
       localStorage.setItem('token', token);
+      localStorage.setItem('fullName', fullName);
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -223,9 +224,10 @@ const signinUser = values => (dispatch) => {
     .then((response) => {
       const { data } = response;
       const { data: { user } } = data;
-      const { token } = user;
+      const { token, fullName } = user;
       dispatch(userSigninSuccess(user));
       localStorage.setItem('token', token);
+      localStorage.setItem('fullName', fullName);
     })
     .catch((error) => {
       const { response: { data } } = error;
@@ -243,6 +245,7 @@ const logoutUser = () => (dispatch) => {
   const loggingOut = new Promise(resolve => resolve());
   return loggingOut.then(() => {
     localStorage.removeItem('token');
+    localStorage.removeItem('fullName');
     dispatch(userLogoutSuccess());
   });
 };
@@ -317,7 +320,21 @@ const uploadUserImage = value => (dispatch) => {
     });
 };
 
+/**
+ * Reset user authentication status
+ *
+ * @returns {object} Dispatch action to set authentication
+ * to false
+ */
+const resetAuthentication = () => (dispatch) => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('fullName');
+  dispatch({
+    type: actionTypes.RESET_AUTHENTICATION,
+  });
+};
+
 export {
   signupUser, signinUser, logoutUser, fetchUserProfile, editUserProfile,
-  uploadUserImage,
+  uploadUserImage, resetAuthentication
 };

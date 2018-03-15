@@ -12,7 +12,7 @@ const { SERVER_URL } = config;
  *
  * @returns {object} Retrieve recipes request action
  */
-const retrieveRecipesRequest = () => ({
+export const retrieveRecipesRequest = () => ({
   type: actionTypes.RETRIEVE_RECIPES_REQUEST,
 });
 
@@ -24,7 +24,7 @@ const retrieveRecipesRequest = () => ({
  *
  * @returns {object} Retrieve recipes success action
  */
-const retrieveRecipesSuccess = (recipes, recipesCount) => ({
+export const retrieveRecipesSuccess = (recipes, recipesCount) => ({
   type: actionTypes.RETRIEVE_RECIPES_SUCCESS,
   payload: {
     recipes,
@@ -39,7 +39,7 @@ const retrieveRecipesSuccess = (recipes, recipesCount) => ({
  *
  * @returns {object} Retrieve recipes failure action
  */
-const retrieveRecipesFailure = error => ({
+export const retrieveRecipesFailure = error => ({
   type: actionTypes.RETRIEVE_RECIPES_FAILURE,
   payload: error,
 });
@@ -49,7 +49,7 @@ const retrieveRecipesFailure = error => ({
  *
  * @returns {object} Popular recipes request action
  */
-const popularRecipesRequest = () => ({
+export const popularRecipesRequest = () => ({
   type: actionTypes.POPULAR_RECIPES_REQUEST,
 });
 
@@ -60,7 +60,7 @@ const popularRecipesRequest = () => ({
  *
  * @returns {object} Popular recipes success action
  */
-const popularRecipesSuccess = recipes => ({
+export const popularRecipesSuccess = recipes => ({
   type: actionTypes.POPULAR_RECIPES_SUCCESS,
   payload: recipes,
 });
@@ -72,7 +72,7 @@ const popularRecipesSuccess = recipes => ({
  *
  * @returns {object} Popular recipes failure action
  */
-const popularRecipesFailure = error => ({
+export const popularRecipesFailure = error => ({
   type: actionTypes.POPULAR_RECIPES_FAILURE,
   payload: error,
 });
@@ -82,7 +82,7 @@ const popularRecipesFailure = error => ({
  *
  * @returns {object} Fetch recipes request action
  */
-const fetchRecipeRequest = () => ({
+export const fetchRecipeRequest = () => ({
   type: actionTypes.FETCH_RECIPE_REQUEST,
 });
 
@@ -93,7 +93,7 @@ const fetchRecipeRequest = () => ({
  *
  * @returns {object} Fetch recipe success action
  */
-const fetchRecipeSuccess = recipe => ({
+export const fetchRecipeSuccess = recipe => ({
   type: actionTypes.FETCH_RECIPE_SUCCESS,
   payload: recipe,
 });
@@ -105,7 +105,7 @@ const fetchRecipeSuccess = recipe => ({
  *
  * @returns {object} Fetch recipe failure action
  */
-const fetchRecipeFailure = error => ({
+export const fetchRecipeFailure = error => ({
   type: actionTypes.FETCH_RECIPE_FAILURE,
   payload: error,
 });
@@ -115,7 +115,7 @@ const fetchRecipeFailure = error => ({
  *
  * @returns {object} Fetch user recipes request action
  */
-const fetchUserRecipesRequest = () => ({
+export const fetchUserRecipesRequest = () => ({
   type: actionTypes.FETCH_USER_RECIPES_REQUEST,
 });
 
@@ -127,7 +127,7 @@ const fetchUserRecipesRequest = () => ({
  *
  * @returns {object} Fetch user recipes success action
  */
-const fetchUserRecipesSuccess = (recipes, recipesCount) => ({
+export const fetchUserRecipesSuccess = (recipes, recipesCount) => ({
   type: actionTypes.FETCH_USER_RECIPES_SUCCESS,
   payload: {
     recipes,
@@ -142,7 +142,7 @@ const fetchUserRecipesSuccess = (recipes, recipesCount) => ({
  *
  * @returns {object} Fetch user recipes failure action
  */
-const fetchUserRecipesFailure = error => ({
+export const fetchUserRecipesFailure = error => ({
   type: actionTypes.FETCH_USER_RECIPES_FAILURE,
   payload: error,
 });
@@ -152,7 +152,7 @@ const fetchUserRecipesFailure = error => ({
  *
  * @returns {object} Fetch user favorites request action
  */
-const fetchUserFavoritesRequest = () => ({
+export const fetchUserFavoritesRequest = () => ({
   type: actionTypes.FETCH_USER_FAVORITES_REQUEST,
 });
 
@@ -164,7 +164,7 @@ const fetchUserFavoritesRequest = () => ({
  *
  * @returns {object} Fetch user favorites success action
  */
-const fetchUserFavoritesSuccess = (favorites, favoritesCount) => ({
+export const fetchUserFavoritesSuccess = (favorites, favoritesCount) => ({
   type: actionTypes.FETCH_USER_FAVORITES_SUCCESS,
   payload: {
     favorites,
@@ -179,7 +179,7 @@ const fetchUserFavoritesSuccess = (favorites, favoritesCount) => ({
  *
  * @returns {object} Fetch user favorites failure action
  */
-const fetchUserFavoritesFailure = error => ({
+export const fetchUserFavoritesFailure = error => ({
   type: actionTypes.FETCH_USER_FAVORITES_FAILURE,
   payload: error,
 });
@@ -189,7 +189,7 @@ const fetchUserFavoritesFailure = error => ({
  *
  * @returns {object} Search recipes request action
  */
-const searchRecipesRequest = () => ({
+export const searchRecipesRequest = () => ({
   type: actionTypes.SEARCH_RECIPE_REQUEST,
 });
 
@@ -200,7 +200,7 @@ const searchRecipesRequest = () => ({
  *
  * @returns {object} Search recipes success action
  */
-const searchRecipesSuccess = recipes => ({
+export const searchRecipesSuccess = recipes => ({
   type: actionTypes.SEARCH_RECIPE_SUCCESS,
   payload: recipes,
 });
@@ -212,7 +212,7 @@ const searchRecipesSuccess = recipes => ({
  *
  * @returns {object} Search recipes failure action
  */
-const searchRecipesFailure = error => ({
+export const searchRecipesFailure = error => ({
   type: actionTypes.SEARCH_RECIPE_FAILURE,
   payload: error,
 });

@@ -32,11 +32,11 @@ const propTypes = {
 };
 
 /**
- * Funtion to handle editing recipe
+ * Function to handle editing recipe
  *
  * @param {any} props - The props passed to the functions
  *
- * @returns {object} React elememt
+ * @returns {object} React element
  */
 const EditRecipe = (props) => {
   const { open, handleEditChange, handleSelect, handleClose, handleDrop,
@@ -47,6 +47,7 @@ const EditRecipe = (props) => {
 
   const actions = [
     <FlatButton
+      id="cancel-edit-button"
       label="Cancel"
       secondary
       onClick={handleClose}
@@ -115,7 +116,7 @@ const EditRecipe = (props) => {
                   name="preparationTime"
                   type="number"
                   min="0"
-                  defaultValue={preparationTime}
+                  defaultValue={isNaN(preparationTime) ? 0 : preparationTime}
                   className="validate"
                   onChange={handleEditChange}
                   required
@@ -130,6 +131,7 @@ const EditRecipe = (props) => {
                 <textarea
                   id="ingredients"
                   name="ingredients"
+                  placeholder="Enter ingredients separated by comma"
                   defaultValue={ingredients}
                   className="materialize-textarea validate"
                   onChange={handleEditChange}
@@ -144,6 +146,8 @@ const EditRecipe = (props) => {
               <div className="input-field col s12">
                 <textarea
                   id="directions"
+                  name="directions"
+                  placeholder="Enter directions separated by full stop"
                   defaultValue={directions}
                   className="materialize-textarea validate"
                   onChange={handleEditChange}
@@ -181,9 +185,11 @@ const EditRecipe = (props) => {
             <div className="row" />
             <div className="row center-align">
               <button
+                name="edit-save"
                 type="submit"
                 className={`btn btn-large waves-effect waves-light
                     indigo accent-2`}
+                disabled={imageUploading || isLoading}
               >
                 Save
               </button>

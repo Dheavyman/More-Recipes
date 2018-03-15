@@ -11,6 +11,9 @@ const propTypes = {
   deleteMessage: PropTypes.string.isRequired,
   actionTitle: PropTypes.string.isRequired,
   action: PropTypes.string.isRequired,
+  userRecipes: PropTypes.shape({
+    isLoading: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 const defaultProps = {
@@ -27,25 +30,29 @@ const defaultProps = {
 const DeleteRecipe = (props) => {
   const {
     recipeId, open, handleClose, handleDeleteRecipe,
-    deleteMessage, actionTitle, action
+    deleteMessage, actionTitle, action, userRecipes
   } = props;
+  const { isLoading } = userRecipes;
 
   const actions = [
     <FlatButton
+      id="cancel-delete-button"
       label="Cancel"
       onClick={handleClose}
     />,
     <FlatButton
+      id="confirm-delete-button"
       label={action || 'Delete'}
       secondary
       onClick={() => handleDeleteRecipe(recipeId, actionTitle)}
+      disabled={isLoading}
     />,
   ];
 
   return (
     <div>
       <Dialog
-        title={<div className="center-align">
+        title={<div className="modal-title center-align">
           {actionTitle}
         </div>}
         actions={actions}
@@ -59,7 +66,7 @@ const DeleteRecipe = (props) => {
               <i className="material-icons icon-red large">warning</i>
             </div>
             <div className="col s12 m6 l8">
-              <p>{deleteMessage}</p>
+              <p id="delete-message">{deleteMessage}</p>
             </div>
           </div>
         </div>

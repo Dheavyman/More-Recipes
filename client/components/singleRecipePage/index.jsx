@@ -15,6 +15,7 @@ import notify from '../../utils/notification';
 
 const propTypes = {
   singleRecipe: PropTypes.shape({
+    isFetching: PropTypes.bool.isRequired,
     recipe: PropTypes.shape({
       id: PropTypes.number,
     }),
@@ -24,6 +25,9 @@ const propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
   }).isRequired,
   fetchRecipe: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       recipeId: PropTypes.string,
@@ -87,7 +91,7 @@ class Recipe extends Component {
   }
 
   /**
-   * Component will receive props lifecycle method
+   * Component will receive props life cycle method
    *
    * @param {any} nextProps - The next properties passed to the component
    *
@@ -106,7 +110,7 @@ class Recipe extends Component {
   }
 
   /**
-   * Component will unmount lifecycle method
+   * Component will un-mount life cycle method
    *
    * @returns {any} Clear recipe reviews
    *
@@ -117,7 +121,7 @@ class Recipe extends Component {
   }
 
   /**
-   * Funtion to handle review input state
+   * Function to handle review input state
    *
    * @param {string} event - The input value
    *
@@ -184,10 +188,16 @@ class Recipe extends Component {
    * @memberof Recipe
    */
   handleUpvote() {
-    const { singleRecipe, upvoteRecipe } = this.props;
+    const {
+      singleRecipe, upvoteRecipe, user: { isAuthenticated }
+    } = this.props;
     const { recipe: { id } } = singleRecipe;
 
-    upvoteRecipe(id);
+    if (isAuthenticated && getToken() !== null) {
+      upvoteRecipe(id);
+    } else {
+      notify('info', 'Please login to perform this action');
+    }
   }
 
   /**
@@ -198,10 +208,16 @@ class Recipe extends Component {
    * @memberof Recipe
    */
   handleDownvote() {
-    const { singleRecipe, downvoteRecipe } = this.props;
+    const {
+      singleRecipe, downvoteRecipe, user: { isAuthenticated }
+    } = this.props;
     const { recipe: { id } } = singleRecipe;
 
-    downvoteRecipe(id);
+    if (isAuthenticated && getToken() !== null) {
+      downvoteRecipe(id);
+    } else {
+      notify('info', 'Please login to perform this action');
+    }
   }
 
   /**
@@ -212,10 +228,14 @@ class Recipe extends Component {
    * @memberof Recipe
    */
   handleFavorite() {
-    const { singleRecipe, setFavorite } = this.props;
+    const { singleRecipe, setFavorite, user: { isAuthenticated } } = this.props;
     const { recipe: { id } } = singleRecipe;
 
-    setFavorite(id);
+    if (isAuthenticated && getToken() !== null) {
+      setFavorite(id);
+    } else {
+      notify('info', 'Please login to perform this action');
+    }
   }
 
   /**
@@ -231,6 +251,23 @@ class Recipe extends Component {
     const { params: { recipeId } } = match;
 
     fetchReviews(recipeId, limit, offset);
+  }
+
+  /**
+   * Search recipes by category
+   *
+   * @param {object} event - The event performed
+   *
+   * @return {any} Submit the search
+   *
+   * @memberof Recipe
+   */
+  handleSearchCategory = (event) => {
+    const { target: { name } } = event;
+    this.props.history.push({
+      pathname: '/catalog',
+      search: `?search=category&list=${name}`,
+    });
   }
 
   /**
@@ -289,18 +326,19 @@ class Recipe extends Component {
    */
   render() {
     const { singleRecipe } = this.props;
-    const { isLoading } = singleRecipe;
+    const { isFetching } = singleRecipe;
 
     return (
       <div className="row">
         <div className="page-body">
           <header>
             <Header
+              handleSearchCategory={this.handleSearchCategory}
               {...this.props}
             />
           </header>
           <main>
-            {isLoading
+            {isFetching
               ? <div className="center-spinner center-align">
                 <Spinner size="big" />
               </div>
@@ -332,7 +370,7 @@ const mapStateToProps = state => ({
 
 /**
  * Function to map dispatch to props
- * Action creators are binded to the dispatch function
+ * Action creators are bound to the dispatch function
  *
  * @param {any} dispatch - The store dispatch function
  *
