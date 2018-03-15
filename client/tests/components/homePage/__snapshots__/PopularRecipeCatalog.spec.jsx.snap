@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popular recipe catalog component should render component 1`] = `
+<PopularRecipesCatalog
+  recipes={
+    Object {
+      "isFetchingPopularRecipes": false,
+      "popularRecipes": Array [],
+    }
+  }
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col s12 popular-recipes"
+    >
+      <h4>
+        Popular Recipes
+      </h4>
+    </div>
+    <div />
+  </div>
+</PopularRecipesCatalog>
+`;
+
+exports[`Popular recipe catalog component should render component with child recipe catalog card 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col s12 popular-recipes"
+  >
+    <h4>
+      Popular Recipes
+    </h4>
+  </div>
+  <div>
+    <RecipeCatalogCard
+      index={0}
+      key="1"
+      recipe={
+        Object {
+          "category": "Dinner",
+          "description": "Tasty rice",
+          "directions": "Do this. Do this. Do that.",
+          "downvotes": 0,
+          "favorites": 5,
+          "id": 1,
+          "ingredients": "Rice, tomatoes, salt",
+          "preparationTime": 69,
+          "title": "Rice",
+          "upvotes": 2,
+          "votes": 3,
+        }
+      }
+      recipes={
+        Object {
+          "isFetchingPopularRecipes": false,
+          "popularRecipes": Array [
+            Object {
+              "category": "Dinner",
+              "description": "Tasty rice",
+              "directions": "Do this. Do this. Do that.",
+              "downvotes": 0,
+              "favorites": 5,
+              "id": 1,
+              "ingredients": "Rice, tomatoes, salt",
+              "preparationTime": 69,
+              "title": "Rice",
+              "upvotes": 2,
+              "votes": 3,
+            },
+            Object {
+              "category": "Breakfast",
+              "description": "Tasty yam",
+              "directions": "Do this. Do this. Do that.",
+              "downvotes": 2,
+              "favorites": 4,
+              "id": 2,
+              "ingredients": "Yam, tomatoes, egg, salt",
+              "preparationTime": 50,
+              "title": "Yam",
+              "upvotes": 5,
+              "votes": 5,
+            },
+          ],
+        }
+      }
+    />
+    <RecipeCatalogCard
+      index={1}
+      key="2"
+      recipe={
+        Object {
+          "category": "Breakfast",
+          "description": "Tasty yam",
+          "directions": "Do this. Do this. Do that.",
+          "downvotes": 2,
+          "favorites": 4,
+          "id": 2,
+          "ingredients": "Yam, tomatoes, egg, salt",
+          "preparationTime": 50,
+          "title": "Yam",
+          "upvotes": 5,
+          "votes": 5,
+        }
+      }
+      recipes={
+        Object {
+          "isFetchingPopularRecipes": false,
+          "popularRecipes": Array [
+            Object {
+              "category": "Dinner",
+              "description": "Tasty rice",
+              "directions": "Do this. Do this. Do that.",
+              "downvotes": 0,
+              "favorites": 5,
+              "id": 1,
+              "ingredients": "Rice, tomatoes, salt",
+              "preparationTime": 69,
+              "title": "Rice",
+              "upvotes": 2,
+              "votes": 3,
+            },
+            Object {
+              "category": "Breakfast",
+              "description": "Tasty yam",
+              "directions": "Do this. Do this. Do that.",
+              "downvotes": 2,
+              "favorites": 4,
+              "id": 2,
+              "ingredients": "Yam, tomatoes, egg, salt",
+              "preparationTime": 50,
+              "title": "Yam",
+              "upvotes": 5,
+              "votes": 5,
+            },
+          ],
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`Popular recipe catalog component should render component with spinner when fetching recipes 1`] = `
+<PopularRecipesCatalog
+  recipes={
+    Object {
+      "isFetchingPopularRecipes": true,
+      "popularRecipes": Array [],
+    }
+  }
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col s12 popular-recipes"
+    >
+      <h4>
+        Popular Recipes
+      </h4>
+    </div>
+    <div
+      className="center-align"
+    >
+      <Spinner
+        size="big"
+      >
+        <div
+          className="preloader-wrapper big active valign-wrapper"
+        >
+          <div
+            className="spinner-layer spinner-blue"
+          >
+            <div
+              className="circle-clipper left"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+            <div
+              className="gap-patch"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+            <div
+              className="circle-clipper right"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+          </div>
+          <div
+            className="spinner-layer spinner-red"
+          >
+            <div
+              className="circle-clipper left"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+            <div
+              className="gap-patch"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+            <div
+              className="circle-clipper right"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+          </div>
+          <div
+            className="spinner-layer spinner-yellow"
+          >
+            <div
+              className="circle-clipper left"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+            <div
+              className="gap-patch"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+            <div
+              className="circle-clipper right"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+          </div>
+          <div
+            className="spinner-layer spinner-green"
+          >
+            <div
+              className="circle-clipper left"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+            <div
+              className="gap-patch"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+            <div
+              className="circle-clipper right"
+            >
+              <div
+                className="circle"
+              />
+            </div>
+          </div>
+        </div>
+      </Spinner>
+    </div>
+  </div>
+</PopularRecipesCatalog>
+`;

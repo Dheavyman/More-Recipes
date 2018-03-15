@@ -108,6 +108,7 @@ describe('User reducer', () => {
       expect(userReducer(initialState, action)).toEqual({
         ...initialState,
         isLoading: true,
+        errorFetchingProfile: {},
         userProfile: {},
       });
     });
@@ -120,7 +121,7 @@ describe('User reducer', () => {
         ...initialState,
         isLoading: false,
         userProfile: action.payload,
-        error: {},
+        errorFetchingProfile: {},
       });
     });
     it('should handle fetch user profile failure', () => {
@@ -131,7 +132,7 @@ describe('User reducer', () => {
       expect(userReducer(initialState, action)).toEqual({
         ...initialState,
         isLoading: false,
-        error: action.payload,
+        errorFetchingProfile: action.payload,
       });
     });
   });
@@ -206,6 +207,17 @@ describe('User reducer', () => {
         imageUploading: false,
         imageUploaded: false,
         error: action.payload,
+      });
+    });
+  });
+  describe('reset authentication', () => {
+    it('should reset authentication to false', () => {
+      const action = {
+        type: actionTypes.RESET_AUTHENTICATION,
+      };
+      expect(userReducer(initialState, action)).toEqual({
+        ...initialState,
+        isAuthenticated: false,
       });
     });
   });

@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileDetails component should simulate click action 1`] = `
+<div>
+  <div
+    className="row"
+  />
+  <div
+    className="col s12"
+  >
+    <h5>
+      <i
+        className="material-icons left"
+      >
+        person
+      </i>
+      My
+       Profile
+    </h5>
+    <div
+      className="divider black"
+    />
+    <br />
+    <div
+      className="row"
+      id="about_user"
+    >
+      <div
+        className="row"
+        id="profile_username"
+      >
+        <label
+          className="col s3 black-text"
+          htmlFor="username"
+        >
+          Username:
+        </label>
+        <div
+          className="col s9"
+          id="username"
+        >
+          johnmark
+        </div>
+      </div>
+      <div
+        className="row"
+        id="profile_first_name"
+      >
+        <label
+          className="col s3 black-text"
+          htmlFor="firstname"
+        >
+          First Name:
+        </label>
+        <div
+          className="col s9"
+          id="firstname"
+        >
+          John
+        </div>
+      </div>
+      <div
+        className="row"
+        id="profile_last_name"
+      >
+        <label
+          className="col s3 black-text"
+          htmlFor="lastname"
+        >
+          Last Name:
+        </label>
+        <div
+          className="col s9"
+          id="lastname"
+        >
+          Mark
+        </div>
+      </div>
+      <div
+        className="row"
+        id="profile_email"
+      >
+        <label
+          className="col s3 black-text"
+          htmlFor="email"
+        >
+          Email:
+        </label>
+        <div
+          className="col s9"
+          id="email"
+        >
+          john@example.com
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="col s12"
+  >
+    <h5>
+      About 
+      Me
+    </h5>
+    <div
+      className="divider black"
+    />
+    <p
+      id="about-me"
+    >
+      This is about me
+    </p>
+  </div>
+  <div>
+    <button
+      className="btn-floating waves-effect waves-light green right"
+      id="edit-btn"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left"
+        data-tip="Edit Details"
+      >
+        edit
+      </i>
+    </button>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+  <div
+    className="row"
+  />
+</div>
+`;

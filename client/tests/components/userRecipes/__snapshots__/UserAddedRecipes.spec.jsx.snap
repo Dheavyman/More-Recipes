@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserAddedRecipes component should render component 1`] = `
+<div
+  className="row"
+>
+  <div>
+    <div
+      className="center-align"
+    >
+      <h5>
+        No recipes yet
+      </h5>
+      <i
+        className="material-icons large"
+      >
+        folder_open
+      </i>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserAddedRecipes component should render recipes fetched 1`] = `
+<div
+  className="row"
+>
+  <div>
+    <UserRecipeCard
+      authenticatedUserId={null}
+      currentProfileUserId={1}
+      fetchUserRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              1,
+            ],
+          ],
+        }
+      }
+      recipe={
+        Object {
+          "category": "Main",
+          "description": "Tasty beans",
+          "directions": "Do this. Do that",
+          "ingredients": "Beans, onions, palm oil, salt",
+          "preparationTime": 85,
+          "title": "Beans",
+        }
+      }
+      userRecipes={
+        Object {
+          "isFetchingUserRecipes": false,
+          "userAddedRecipes": Array [
+            Object {
+              "category": "Main",
+              "description": "Tasty beans",
+              "directions": "Do this. Do that",
+              "ingredients": "Beans, onions, palm oil, salt",
+              "preparationTime": 85,
+              "title": "Beans",
+            },
+            Object {
+              "category": "Dinner",
+              "description": "Tasty beans and rice",
+              "directions": "Do this. Do this. Do that",
+              "ingredients": "Beans, rice, onions, palm oil, salt",
+              "preparationTime": 95,
+              "title": "Beans and rice",
+            },
+          ],
+        }
+      }
+    />
+    <UserRecipeCard
+      authenticatedUserId={null}
+      currentProfileUserId={1}
+      fetchUserRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              1,
+            ],
+          ],
+        }
+      }
+      recipe={
+        Object {
+          "category": "Dinner",
+          "description": "Tasty beans and rice",
+          "directions": "Do this. Do this. Do that",
+          "ingredients": "Beans, rice, onions, palm oil, salt",
+          "preparationTime": 95,
+          "title": "Beans and rice",
+        }
+      }
+      userRecipes={
+        Object {
+          "isFetchingUserRecipes": false,
+          "userAddedRecipes": Array [
+            Object {
+              "category": "Main",
+              "description": "Tasty beans",
+              "directions": "Do this. Do that",
+              "ingredients": "Beans, onions, palm oil, salt",
+              "preparationTime": 85,
+              "title": "Beans",
+            },
+            Object {
+              "category": "Dinner",
+              "description": "Tasty beans and rice",
+              "directions": "Do this. Do this. Do that",
+              "ingredients": "Beans, rice, onions, palm oil, salt",
+              "preparationTime": 95,
+              "title": "Beans and rice",
+            },
+          ],
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`UserAddedRecipes component should render spinner 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="center-align"
+  >
+    <Spinner
+      size="big"
+    />
+  </div>
+</div>
+`;

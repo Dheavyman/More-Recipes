@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search bar component should render component 1`] = `
+<div
+  className="row"
+  id={null}
+>
+  <div
+    className="col s12 m3 l3 push-m9 push-l9"
+  >
+    <select
+      className="browser-default search-by z-depth-1"
+      id="search-by"
+      name="searchBy"
+      onChange={[MockFunction]}
+      value="ingredients"
+    >
+      <option
+        value="title"
+      >
+        Search By Title
+      </option>
+      <option
+        value="ingredients"
+      >
+        Search By Ingredients
+      </option>
+    </select>
+  </div>
+  <div
+    className="col s12 m6 l6 offset-m3 offset-l3 pull-m3 pull-l3 search-bar"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="input-field white"
+        >
+          <input
+            id="search-input"
+            onChange={[MockFunction]}
+            placeholder="Search for recipes"
+            required={true}
+            type="search"
+            value="palm oil, beans"
+          />
+          <a
+            className="label-icon"
+            htmlFor="search"
+            id="search-button"
+            onClick={[MockFunction]}
+            role="button"
+            tabIndex="0"
+          >
+            <i
+              className="material-icons"
+            >
+              search
+            </i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

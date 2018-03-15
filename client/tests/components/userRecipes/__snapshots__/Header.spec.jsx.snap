@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component should render component 1`] = `
+<div>
+  <div
+    className="navbar-fixed"
+  >
+    <nav
+      className="nav-extended deep-orange darken-4"
+    >
+      <div
+        className="nav-wrapper"
+      >
+        <Link
+          className="brand-logo hide-on-small-only"
+          id="logo"
+          replace={false}
+          to="/"
+        >
+          More-Recipes
+        </Link>
+        <a
+          className="button-collapse"
+          data-activates="slide_out"
+        >
+          <i
+            className="material-icons"
+          >
+            menu
+          </i>
+        </a>
+      </div>
+      <div
+        className="nav-content"
+      >
+        <ul
+          className="tabs tabs-transparent"
+        >
+          <li
+            className="tab"
+          >
+            <a
+              data-tab="user-profile"
+              href="#user-profile"
+            >
+              Profile
+            </a>
+          </li>
+          <li
+            className="tab"
+          >
+            <a
+              data-tab="user-recipes"
+              href="#user-recipes"
+            >
+              Recipes
+            </a>
+          </li>
+          <li
+            className="tab"
+          >
+            <a
+              data-tab="user-favorites"
+              href="#user-favorites"
+            >
+              Favorites
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <SideNav
+    authenticatedUserId={null}
+    currentProfileUserId={null}
+    handleLogoutUser={[MockFunction]}
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    logoutUser={[MockFunction]}
+    user={
+      Object {
+        "isAuthenticated": true,
+      }
+    }
+  />
+</div>
+`;

@@ -13,7 +13,7 @@ describe('User recipes reducer', () => {
       };
       expect(userRecipesReducer(initialState, action)).toEqual({
         ...initialState,
-        isFectchingUserRecipes: true,
+        isFetchingUserRecipes: true,
         userAddedRecipes: [],
         userAddedRecipesCount: 0,
       });
@@ -29,7 +29,7 @@ describe('User recipes reducer', () => {
       };
       expect(userRecipesReducer(initialState, action)).toEqual({
         ...initialState,
-        isFectchingUserRecipes: false,
+        isFetchingUserRecipes: false,
         userAddedRecipes: action.payload.recipes,
         userAddedRecipesCount: action.payload.recipesCount,
         errorFetchingUserRecipes: {},
@@ -42,7 +42,7 @@ describe('User recipes reducer', () => {
       };
       expect(userRecipesReducer(initialState, action)).toEqual({
         ...initialState,
-        isFectchingUserRecipes: false,
+        isFetchingUserRecipes: false,
         errorFetchingUserRecipes: action.payload,
       });
     });

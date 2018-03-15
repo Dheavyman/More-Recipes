@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteRecipe component should render component 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          id="cancel-delete-button"
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={false}
+        />,
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          id="confirm-delete-button"
+          label="Delete"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[Function]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title={
+      <div
+        className="modal-title center-align"
+      >
+        Delete Recipe
+      </div>
+    }
+  >
+    <div
+      id="delete-recipe"
+    >
+      <div
+        className="row center-align"
+      >
+        <div
+          className="col s12 m6 l2"
+        >
+          <i
+            className="material-icons icon-red large"
+          >
+            warning
+          </i>
+        </div>
+        <div
+          className="col s12 m6 l8"
+        >
+          <p
+            id="delete-message"
+          >
+            Are you sure you want to delete this recipe
+          </p>
+        </div>
+      </div>
+    </div>
+  </Dialog>
+</div>
+`;

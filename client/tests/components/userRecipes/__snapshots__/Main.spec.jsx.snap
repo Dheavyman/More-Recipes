@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main component should render component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="fixed-action-btn"
+  >
+    <button
+      className="btn-floating btn-large waves-effect waves-light
+            indigo accent-2 pulse"
+      data-tip="Add Recipe"
+      onClick={[MockFunction]}
+    >
+      <i
+        className="material-icons"
+      >
+        add
+      </i>
+    </button>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+  <div
+    className="dashboard"
+  >
+    <div
+      className=""
+    >
+      <div
+        className="col s12"
+        id="user-profile"
+      >
+        <UserProfile
+          authenticatedUserId={null}
+          handleOpenAdd={[MockFunction]}
+          openAdd={false}
+          openDelete={false}
+          openEdit={false}
+        />
+      </div>
+      <div
+        className="col s12"
+        id="user-recipes"
+      >
+        <UserAddedRecipes
+          handleOpenAdd={[MockFunction]}
+          openAdd={false}
+          openDelete={false}
+          openEdit={false}
+        />
+      </div>
+      <div
+        className="col s12"
+        id="user-favorites"
+      >
+        <UserFavorites
+          handleOpenAdd={[MockFunction]}
+          openAdd={false}
+          openDelete={false}
+          openEdit={false}
+        />
+      </div>
+    </div>
+  </div>
+  <MuiThemeProvider>
+    <EditRecipe
+      handleOpenAdd={[MockFunction]}
+      open={false}
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+    />
+  </MuiThemeProvider>
+  <MuiThemeProvider>
+    <DeleteRecipe
+      handleOpenAdd={[MockFunction]}
+      open={false}
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+      recipeId={null}
+    />
+  </MuiThemeProvider>
+  <MuiThemeProvider>
+    <AddRecipe
+      handleOpenAdd={[MockFunction]}
+      open={false}
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+    />
+  </MuiThemeProvider>
+</div>
+`;

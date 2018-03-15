@@ -1,0 +1,343 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserFavoriteCard component should render component 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <UserFavoriteCard
+      authenticatedUserId={null}
+      currentProfileUserId={1}
+      handleOpenDelete={[MockFunction]}
+      owner={
+        Object {
+          "fullName": "John Mark",
+        }
+      }
+      recipe={
+        Object {
+          "category": "Main",
+          "description": "Tasty beans",
+          "directions": "Do this. Do that",
+          "ingredients": "Beans, onions, palm oil, salt",
+          "preparationTime": 85,
+          "title": "Beans",
+        }
+      }
+    >
+      <div
+        className="col s12 m6 l3"
+      >
+        <div
+          className="card large hoverable"
+          id="recipes"
+        >
+          <a
+            href="recipe.html"
+          >
+            <span
+              className="card-title"
+            >
+              Beans
+            </span>
+          </a>
+          <div
+            className="card-image"
+          >
+            <Link
+              replace={false}
+              to="/recipes/undefined"
+            >
+              <a
+                href="/recipes/undefined"
+                onClick={[Function]}
+              >
+                <RecipeImage
+                  recipeImage={null}
+                  title="Beans"
+                >
+                  <img
+                    alt="Beans"
+                    src={null}
+                  />
+                </RecipeImage>
+              </a>
+            </Link>
+          </div>
+          <div
+            className="card-content"
+          >
+            <p>
+              Tasty beans
+            </p>
+          </div>
+          <div
+            className="card-action"
+          >
+            <p>
+              <label
+                htmlFor="owner"
+              >
+                Recipe by: 
+              </label>
+              John Mark
+            </p>
+            <ul
+              className="center-align"
+            >
+              <li
+                id="views"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  visibility
+                </i>
+              </li>
+              <li
+                id="favorites"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  favorite
+                </i>
+              </li>
+              <li
+                id="upvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_up
+                </i>
+              </li>
+              <li
+                id="downvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_down
+                </i>
+              </li>
+            </ul>
+            <ReactTooltip
+              insecure={true}
+              resizeHide={true}
+              wrapper="div"
+            >
+              <div
+                className="__react_component_tooltip place-top type-dark "
+                data-id="tooltip"
+              />
+            </ReactTooltip>
+          </div>
+        </div>
+      </div>
+    </UserFavoriteCard>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`UserFavoriteCard component should simulate click action 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <UserFavoriteCard
+      authenticatedUserId={1}
+      currentProfileUserId={1}
+      handleOpenDelete={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              undefined,
+              "Are you sure you want to remove recipe from your favorites?",
+              "Remove Recipe",
+              "Remove",
+            ],
+          ],
+        }
+      }
+      owner={
+        Object {
+          "fullName": "John Mark",
+        }
+      }
+      recipe={
+        Object {
+          "category": "Main",
+          "description": "Tasty beans",
+          "directions": "Do this. Do that",
+          "ingredients": "Beans, onions, palm oil, salt",
+          "preparationTime": 85,
+          "title": "Beans",
+        }
+      }
+    >
+      <div
+        className="col s12 m6 l3"
+      >
+        <div
+          className="card large hoverable"
+          id="recipes"
+        >
+          <a
+            href="recipe.html"
+          >
+            <span
+              className="card-title"
+            >
+              Beans
+            </span>
+          </a>
+          <div
+            className="card-image"
+          >
+            <Link
+              replace={false}
+              to="/recipes/undefined"
+            >
+              <a
+                href="/recipes/undefined"
+                onClick={[Function]}
+              >
+                <RecipeImage
+                  recipeImage={null}
+                  title="Beans"
+                >
+                  <img
+                    alt="Beans"
+                    src={null}
+                  />
+                </RecipeImage>
+              </a>
+            </Link>
+          </div>
+          <div
+            className="card-content"
+          >
+            <p>
+              Tasty beans
+            </p>
+          </div>
+          <div
+            className="card-action"
+          >
+            <p>
+              <label
+                htmlFor="owner"
+              >
+                Recipe by: 
+              </label>
+              John Mark
+            </p>
+            <ul
+              className="center-align"
+            >
+              <li
+                id="views"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  visibility
+                </i>
+              </li>
+              <li
+                id="favorites"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  favorite
+                </i>
+              </li>
+              <li
+                id="upvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_up
+                </i>
+              </li>
+              <li
+                id="downvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_down
+                </i>
+              </li>
+            </ul>
+            <a
+              data-tip="Remove"
+              id="remove-favorite"
+              onClick={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <i
+                className="material-icons icon-red right"
+              >
+                remove_circle
+              </i>
+            </a>
+            <ReactTooltip
+              insecure={true}
+              resizeHide={true}
+              wrapper="div"
+            >
+              <div
+                className="__react_component_tooltip place-top type-dark "
+                data-id="tooltip"
+              />
+            </ReactTooltip>
+          </div>
+        </div>
+      </div>
+    </UserFavoriteCard>
+  </Router>
+</BrowserRouter>
+`;

@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReviewCollection component should render component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col s12 valign-wrapper deep-orange darken-4"
+  >
+    <h5
+      className="white-text"
+    >
+      Reviews
+    </h5>
+  </div>
+  <div
+    className="col s12 center-align"
+  >
+    <p>
+      No reviews yet
+    </p>
+  </div>
+  <ul
+    className="collection"
+  />
+</div>
+`;
+
+exports[`ReviewCollection component should render component with reviews 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col s12 valign-wrapper deep-orange darken-4"
+  >
+    <h5
+      className="white-text"
+    >
+      Reviews
+    </h5>
+  </div>
+  <div
+    className="col s12 center-align"
+  />
+  <ul
+    className="collection"
+  >
+    <Review
+      handleDeleteReview={[MockFunction]}
+      key="1"
+      review={
+        Object {
+          "content": "A review for the recipe",
+          "id": 1,
+        }
+      }
+      reviews={
+        Array [
+          Object {
+            "content": "A review for the recipe",
+            "id": 1,
+          },
+          Object {
+            "content": "Another review for the recipe",
+            "id": 2,
+          },
+        ]
+      }
+      singleRecipe={
+        Object {
+          "isLoadingReviews": false,
+        }
+      }
+    />
+    <Review
+      handleDeleteReview={[MockFunction]}
+      key="2"
+      review={
+        Object {
+          "content": "Another review for the recipe",
+          "id": 2,
+        }
+      }
+      reviews={
+        Array [
+          Object {
+            "content": "A review for the recipe",
+            "id": 1,
+          },
+          Object {
+            "content": "Another review for the recipe",
+            "id": 2,
+          },
+        ]
+      }
+      singleRecipe={
+        Object {
+          "isLoadingReviews": false,
+        }
+      }
+    />
+  </ul>
+</div>
+`;
+
+exports[`ReviewCollection component should render spinner when loading reviews 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col s12 valign-wrapper deep-orange darken-4"
+  >
+    <h5
+      className="white-text"
+    >
+      Reviews
+    </h5>
+  </div>
+  <div
+    className="col s12 center-align"
+  >
+    <p>
+      No reviews yet
+    </p>
+  </div>
+  <div
+    className="center-align"
+  >
+    <Spinner
+      size="small"
+    />
+  </div>
+</div>
+`;

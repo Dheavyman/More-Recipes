@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Review component should render component 1`] = `
+<li
+  className="collection-item avatar"
+>
+  <div>
+    <img
+      alt=""
+      className="circle"
+      src="User image url"
+    />
+    <span
+      className="name"
+    >
+      <b>
+        John Cane
+      </b>
+    </span>
+    <p
+      className="created-on"
+    >
+      Invalid Date
+    </p>
+    <p
+      className="review-content"
+    >
+      Wonderful recipe idea
+    </p>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+</li>
+`;

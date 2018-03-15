@@ -1,0 +1,655 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeCard component should render component 1`] = `
+<div
+  className="card single-card hoverable"
+>
+  <div
+    className="card-image"
+  >
+    <RecipeImage
+      recipeImage="Recipe image URL"
+      title="Macaroni"
+    />
+  </div>
+  <div
+    className="card-action center-align"
+  >
+    <a
+      id="views"
+    >
+      <i
+        className="material-icons black-text"
+        data-tip="views"
+      >
+        visibility
+      </i>
+      <span
+        className="black-text"
+      >
+        25
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="favorite"
+      id="favorite"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-heart black-text"
+      />
+      <span
+        className="black-text"
+      >
+        8
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="upvote"
+      id="upvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-up black-text"
+      />
+      <span
+        className="black-text"
+      >
+        4
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="downvote"
+      id="downvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-down black-text"
+      />
+      <span
+        className="black-text"
+      >
+        0
+      </span>
+    </a>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+</div>
+`;
+
+exports[`RecipeCard component should render component with downvote 1`] = `
+<div
+  className="card single-card hoverable"
+>
+  <div
+    className="card-image"
+  >
+    <RecipeImage
+      recipeImage="Recipe image URL"
+      title="Macaroni"
+    />
+  </div>
+  <div
+    className="card-action center-align"
+  >
+    <a
+      id="views"
+    >
+      <i
+        className="material-icons black-text"
+        data-tip="views"
+      >
+        visibility
+      </i>
+      <span
+        className="black-text"
+      >
+        25
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="favorite"
+      id="favorite"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-heart black-text"
+      />
+      <span
+        className="black-text"
+      >
+        8
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="upvote"
+      id="upvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-up black-text"
+      />
+      <span
+        className="black-text"
+      >
+        4
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red red"
+      data-tip="downvote"
+      id="downvote"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-down white-text"
+      />
+      <span
+        className="white-text"
+      >
+        0
+      </span>
+    </a>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+</div>
+`;
+
+exports[`RecipeCard component should render component with downvote 2`] = `
+<div
+  className="card single-card hoverable"
+>
+  <div
+    className="card-image"
+  >
+    <RecipeImage
+      recipeImage="Recipe image URL"
+      title="Macaroni"
+    />
+  </div>
+  <div
+    className="card-action center-align"
+  >
+    <a
+      id="views"
+    >
+      <i
+        className="material-icons black-text"
+        data-tip="views"
+      >
+        visibility
+      </i>
+      <span
+        className="black-text"
+      >
+        25
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="favorite"
+      id="favorite"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-heart black-text"
+      />
+      <span
+        className="black-text"
+      >
+        8
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="upvote"
+      id="upvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-up black-text"
+      />
+      <span
+        className="black-text"
+      >
+        4
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="downvote"
+      id="downvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-down black-text"
+      />
+      <span
+        className="black-text"
+      >
+        0
+      </span>
+    </a>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+</div>
+`;
+
+exports[`RecipeCard component should render component with favorite 1`] = `
+<div
+  className="card single-card hoverable"
+>
+  <div
+    className="card-image"
+  >
+    <RecipeImage
+      recipeImage="Recipe image URL"
+      title="Macaroni"
+    />
+  </div>
+  <div
+    className="card-action center-align"
+  >
+    <a
+      id="views"
+    >
+      <i
+        className="material-icons black-text"
+        data-tip="views"
+      >
+        visibility
+      </i>
+      <span
+        className="black-text"
+      >
+        25
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red red"
+      data-tip="favorite"
+      id="favorite"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-heart white-text"
+      />
+      <span
+        className="white-text"
+      >
+        8
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="upvote"
+      id="upvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-up black-text"
+      />
+      <span
+        className="black-text"
+      >
+        4
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="downvote"
+      id="downvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-down black-text"
+      />
+      <span
+        className="black-text"
+      >
+        0
+      </span>
+    </a>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+</div>
+`;
+
+exports[`RecipeCard component should render component with favorite 2`] = `
+<div
+  className="card single-card hoverable"
+>
+  <div
+    className="card-image"
+  >
+    <RecipeImage
+      recipeImage="Recipe image URL"
+      title="Macaroni"
+    />
+  </div>
+  <div
+    className="card-action center-align"
+  >
+    <a
+      id="views"
+    >
+      <i
+        className="material-icons black-text"
+        data-tip="views"
+      >
+        visibility
+      </i>
+      <span
+        className="black-text"
+      >
+        25
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="favorite"
+      id="favorite"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-heart black-text"
+      />
+      <span
+        className="black-text"
+      >
+        8
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="upvote"
+      id="upvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-up black-text"
+      />
+      <span
+        className="black-text"
+      >
+        4
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="downvote"
+      id="downvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-down black-text"
+      />
+      <span
+        className="black-text"
+      >
+        0
+      </span>
+    </a>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+</div>
+`;
+
+exports[`RecipeCard component should render component with upvote 1`] = `
+<div
+  className="card single-card hoverable"
+>
+  <div
+    className="card-image"
+  >
+    <RecipeImage
+      recipeImage="Recipe image URL"
+      title="Macaroni"
+    />
+  </div>
+  <div
+    className="card-action center-align"
+  >
+    <a
+      id="views"
+    >
+      <i
+        className="material-icons black-text"
+        data-tip="views"
+      >
+        visibility
+      </i>
+      <span
+        className="black-text"
+      >
+        25
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="favorite"
+      id="favorite"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-heart black-text"
+      />
+      <span
+        className="black-text"
+      >
+        8
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red red"
+      data-tip="upvote"
+      id="upvote"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-up white-text"
+      />
+      <span
+        className="white-text"
+      >
+        4
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="downvote"
+      id="downvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-down black-text"
+      />
+      <span
+        className="black-text"
+      >
+        0
+      </span>
+    </a>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+</div>
+`;
+
+exports[`RecipeCard component should render component with upvote 2`] = `
+<div
+  className="card single-card hoverable"
+>
+  <div
+    className="card-image"
+  >
+    <RecipeImage
+      recipeImage="Recipe image URL"
+      title="Macaroni"
+    />
+  </div>
+  <div
+    className="card-action center-align"
+  >
+    <a
+      id="views"
+    >
+      <i
+        className="material-icons black-text"
+        data-tip="views"
+      >
+        visibility
+      </i>
+      <span
+        className="black-text"
+      >
+        25
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="favorite"
+      id="favorite"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-heart black-text"
+      />
+      <span
+        className="black-text"
+      >
+        8
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="upvote"
+      id="upvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-up black-text"
+      />
+      <span
+        className="black-text"
+      >
+        4
+      </span>
+    </a>
+    <a
+      className="chip waves-effect waves-red "
+      data-tip="downvote"
+      id="downvote"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-thumbs-down black-text"
+      />
+      <span
+        className="black-text"
+      >
+        0
+      </span>
+    </a>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+  </div>
+</div>
+`;

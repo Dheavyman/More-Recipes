@@ -389,4 +389,14 @@ describe('User', () => {
         });
     });
   });
+  describe('reset authentication action', () => {
+    it('should dispatch action to reset user authentication status', () => {
+      const expectedAction = [{
+        type: actionTypes.RESET_AUTHENTICATION,
+      }];
+      const store = mockStore({});
+      store.dispatch(actions.resetAuthentication());
+      expect(store.getActions()).toEqual(expectedAction);
+    });
+  });
 });

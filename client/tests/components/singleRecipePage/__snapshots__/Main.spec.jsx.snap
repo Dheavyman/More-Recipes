@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main component should render component 1`] = `
+<div>
+  <div
+    className="parallax-container"
+  >
+    <div
+      className="parallax"
+    >
+      <RecipeImage
+        recipeImage={null}
+        title={null}
+      />
+    </div>
+  </div>
+  <div
+    className="section white container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col s12"
+      >
+        <h4
+          className="title-header"
+        />
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col s12 m6 l5"
+      >
+        <RecipeCard
+          favoriteMessage={null}
+          handleDownvote={[MockFunction]}
+          handleFavorite={[MockFunction]}
+          handleUpvote={[MockFunction]}
+          handleViewMoreReviews={[MockFunction]}
+          reviewContent="Review for a recipe"
+          singleRecipe={
+            Object {
+              "favoriteMessage": "Recipe added to favorites",
+              "favoritedUsers": Array [],
+              "hasMoreReviews": false,
+              "isLoadingReviews": false,
+              "recipe": Object {},
+              "reviews": Array [],
+              "voteMessage": "Upvote recorded",
+              "voters": Array [],
+            }
+          }
+          voteMessage={null}
+        />
+      </div>
+      <div
+        className="col s12 m6 l6 offset-l1"
+      >
+        <RecipeDetails
+          recipe={Object {}}
+        />
+      </div>
+    </div>
+    <AddReview
+      handleDownvote={[MockFunction]}
+      handleFavorite={[MockFunction]}
+      handleUpvote={[MockFunction]}
+      handleViewMoreReviews={[MockFunction]}
+      reviewContent="Review for a recipe"
+      singleRecipe={
+        Object {
+          "favoriteMessage": "Recipe added to favorites",
+          "favoritedUsers": Array [],
+          "hasMoreReviews": false,
+          "isLoadingReviews": false,
+          "recipe": Object {},
+          "reviews": Array [],
+          "voteMessage": "Upvote recorded",
+          "voters": Array [],
+        }
+      }
+    />
+    <ReviewCollection
+      handleDownvote={[MockFunction]}
+      handleFavorite={[MockFunction]}
+      handleUpvote={[MockFunction]}
+      handleViewMoreReviews={[MockFunction]}
+      reviewContent="Review for a recipe"
+      reviews={Array []}
+      singleRecipe={
+        Object {
+          "favoriteMessage": "Recipe added to favorites",
+          "favoritedUsers": Array [],
+          "hasMoreReviews": false,
+          "isLoadingReviews": false,
+          "recipe": Object {},
+          "reviews": Array [],
+          "voteMessage": "Upvote recorded",
+          "voters": Array [],
+        }
+      }
+    />
+    <div
+      className="row center-align"
+    >
+      <div />
+      <div>
+        <button
+          className="btn waves-effect waves-light indigo accent-2
+                white-text"
+          disabled={true}
+          onClick={[MockFunction]}
+        >
+          View More
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Main component should render component with spinner 1`] = `
+<div>
+  <div
+    className="parallax-container"
+  >
+    <div
+      className="parallax"
+    >
+      <RecipeImage
+        recipeImage={null}
+        title={null}
+      />
+    </div>
+  </div>
+  <div
+    className="section white container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col s12"
+      >
+        <h4
+          className="title-header"
+        />
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col s12 m6 l5"
+      >
+        <RecipeCard
+          favoriteMessage={null}
+          handleDownvote={[MockFunction]}
+          handleFavorite={[MockFunction]}
+          handleUpvote={[MockFunction]}
+          handleViewMoreReviews={[MockFunction]}
+          reviewContent="Review for a recipe"
+          singleRecipe={
+            Object {
+              "favoriteMessage": "Recipe added to favorites",
+              "favoritedUsers": Array [],
+              "hasMoreReviews": false,
+              "isLoadingReviews": true,
+              "recipe": Object {},
+              "reviews": Array [],
+              "voteMessage": "Upvote recorded",
+              "voters": Array [],
+            }
+          }
+          voteMessage={null}
+        />
+      </div>
+      <div
+        className="col s12 m6 l6 offset-l1"
+      >
+        <RecipeDetails
+          recipe={Object {}}
+        />
+      </div>
+    </div>
+    <AddReview
+      handleDownvote={[MockFunction]}
+      handleFavorite={[MockFunction]}
+      handleUpvote={[MockFunction]}
+      handleViewMoreReviews={[MockFunction]}
+      reviewContent="Review for a recipe"
+      singleRecipe={
+        Object {
+          "favoriteMessage": "Recipe added to favorites",
+          "favoritedUsers": Array [],
+          "hasMoreReviews": false,
+          "isLoadingReviews": true,
+          "recipe": Object {},
+          "reviews": Array [],
+          "voteMessage": "Upvote recorded",
+          "voters": Array [],
+        }
+      }
+    />
+    <ReviewCollection
+      handleDownvote={[MockFunction]}
+      handleFavorite={[MockFunction]}
+      handleUpvote={[MockFunction]}
+      handleViewMoreReviews={[MockFunction]}
+      reviewContent="Review for a recipe"
+      reviews={Array []}
+      singleRecipe={
+        Object {
+          "favoriteMessage": "Recipe added to favorites",
+          "favoritedUsers": Array [],
+          "hasMoreReviews": false,
+          "isLoadingReviews": true,
+          "recipe": Object {},
+          "reviews": Array [],
+          "voteMessage": "Upvote recorded",
+          "voters": Array [],
+        }
+      }
+    />
+    <div
+      className="row center-align"
+    >
+      <div>
+        <Spinner
+          size="small"
+        />
+      </div>
+      <div>
+        <button
+          className="btn waves-effect waves-light indigo accent-2
+                white-text"
+          disabled={true}
+          onClick={[MockFunction]}
+        >
+          View More
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

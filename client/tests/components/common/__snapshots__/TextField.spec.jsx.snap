@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextField component should render component 1`] = `
+<div
+  className="row"
+>
+  <label
+    className="col s3 black-text"
+    htmlFor="title"
+  >
+    title
+    :
+  </label>
+  <div
+    className="col s9"
+  >
+    <input
+      className="className"
+      defaultValue={null}
+      disabled={false}
+      name="title"
+      onChange={[MockFunction]}
+      placeholder="Title"
+      required={false}
+      type="text"
+    />
+  </div>
+</div>
+`;

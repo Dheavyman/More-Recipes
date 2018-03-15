@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider component should render component 1`] = `
+<Slider>
+  <div
+    className="slider col s12"
+  >
+    <ul
+      className="slides"
+    >
+      <li>
+        <img
+          alt="Picture1"
+          src="test-file-stub"
+        />
+        <div
+          className="caption center-align"
+        >
+          <h3>
+            The taste of nature's gift.
+          </h3>
+          <h5
+            className="light white-text"
+          >
+            The source of healthy living.
+          </h5>
+        </div>
+      </li>
+      <li>
+        <img
+          alt="Picture2"
+          src="test-file-stub"
+        />
+        <div
+          className="caption left-align"
+        >
+          <h3>
+            We eat to live.
+          </h3>
+          <h5
+            className="light white-text text-lighten-3"
+          >
+            Let the food be worth it.
+          </h5>
+        </div>
+      </li>
+      <li>
+        <img
+          alt="Picture3"
+          src="test-file-stub"
+        />
+        <div
+          className="caption right-align"
+        >
+          <h3>
+            Let healthiness be your priority.
+          </h3>
+          <h5
+            className="light white-text text-lighten-3"
+          >
+            Health is wealth.
+          </h5>
+        </div>
+      </li>
+      <li>
+        <img
+          alt="Picture4"
+          src="test-file-stub"
+        />
+        <div
+          className="caption center-align"
+        >
+          <h3>
+            Share your wonderful recipe
+          </h3>
+          <h5
+            className="light white-text text-lighten-3"
+          >
+            Never let your ideas get lost.
+          </h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+</Slider>
+`;

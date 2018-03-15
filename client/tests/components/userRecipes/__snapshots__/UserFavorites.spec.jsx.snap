@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserFavorites  component should render component 1`] = `
+<div
+  className="row"
+>
+  <div>
+    <div
+      className="center-align"
+    >
+      <h5>
+        No favorite recipes yet
+      </h5>
+      <i
+        className="material-icons large"
+      >
+        folder_open
+      </i>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserFavorites  component should show spinner 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="center-align"
+  >
+    <Spinner
+      size="big"
+    />
+  </div>
+</div>
+`;
+
+exports[`UserFavorites  component should show user favorite recipes 1`] = `
+<div
+  className="row"
+>
+  <div>
+    <UserFavoriteCard
+      authenticatedUserId={null}
+      currentProfileUserId={1}
+      fetchUserFavorites={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              1,
+            ],
+          ],
+        }
+      }
+      key="2"
+      recipe={
+        Object {
+          "category": "Main",
+          "description": "Tasty beans",
+          "directions": "Do this. Do that",
+          "id": 2,
+          "ingredients": "Beans, onions, palm oil, salt",
+          "preparationTime": 85,
+          "title": "Beans",
+        }
+      }
+      userRecipes={
+        Object {
+          "isFetchingUserFavorites": false,
+          "userFavorites": Array [
+            Object {
+              "Recipe": Object {
+                "category": "Main",
+                "description": "Tasty beans",
+                "directions": "Do this. Do that",
+                "id": 2,
+                "ingredients": "Beans, onions, palm oil, salt",
+                "preparationTime": 85,
+                "title": "Beans",
+              },
+            },
+          ],
+        }
+      }
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Category component should render category component 1`] = `
+<ul
+  className="dropdown-content"
+  id="category"
+>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="breakfast"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      Breakfast
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="lunch"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      Lunch
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="dinner"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      Dinner
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="appetizer"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      Appetizer
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="main"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      Main
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="dessert"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      Dessert
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Category component should search for a category 1`] = `
+<ul
+  className="dropdown-content"
+  id="category"
+>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="breakfast"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      Breakfast
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="lunch"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      Lunch
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="dinner"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      Dinner
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="appetizer"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      Appetizer
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="main"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      Main
+    </a>
+  </li>
+  <li>
+    <a
+      className="collection-item black-text"
+      name="dessert"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+            Array [],
+          ],
+        }
+      }
+      role="button"
+      tabIndex="0"
+    >
+      Dessert
+    </a>
+  </li>
+</ul>
+`;

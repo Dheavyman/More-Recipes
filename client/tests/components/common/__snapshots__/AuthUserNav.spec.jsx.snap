@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authenticated user navigation component should render component 1`] = `
+<ul
+  className="dropdown-content"
+  id="user-control"
+>
+  <li
+    id="dashboard"
+  >
+    <Link
+      className="black-text"
+      replace={false}
+      to="/users/undefined/dashboard"
+    >
+      Dashboard
+      <i
+        className="material-icons left"
+      >
+        person
+      </i>
+    </Link>
+  </li>
+  <li
+    className="divider"
+  />
+  <li>
+    <a
+      className="black-text"
+      id="logout"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      Logout
+      <i
+        className="material-icons left"
+      >
+        lock
+      </i>
+    </a>
+  </li>
+</ul>
+`;
