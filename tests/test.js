@@ -9,13 +9,13 @@ import {
   validSigninSeed,
   invalidSigninSeed,
   validUserSeed
-} from './__mocks__/user';
+} from './__mockData__/user';
 import {
   validRecipeSeed,
   invalidRecipeSeed,
   userFavoriteCategory
-} from './__mocks__/recipes';
-import { validReviewSeed, invalidReviewSeed } from './__mocks__/review';
+} from './__mockData__/recipes';
+import { validReviewSeed, invalidReviewSeed } from './__mockData__/review';
 
 const server = supertest.agent(app);
 const expect = chai.expect;
