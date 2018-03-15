@@ -25,4 +25,6 @@ exclude_paths:
   - "template/*"
   - "server/routes/"
   - "tests/"
+  - "client/tests/"
+  - "e2e_test/"
   
