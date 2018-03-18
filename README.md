@@ -122,7 +122,7 @@ Contributions are welcome and appreciated. To contribute
 #### Can I clone this application for personal use?
     Yes!. This application is licensed under MIT. Further information can be found in the LICENSE file.
 
-### What format is the API response in?
+#### What format is the API response in?
     The API response is in JSON format
 
 ## Application limitations
