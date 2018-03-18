@@ -73,6 +73,7 @@ const EditRecipe = (props) => {
                   type="text"
                   defaultValue={title}
                   className="validate"
+                  maxLength="255"
                   onChange={handleEditChange}
                   required
                 />
@@ -101,6 +102,7 @@ const EditRecipe = (props) => {
                   name="description"
                   defaultValue={description}
                   className="materialize-textarea validate"
+                  maxLength="255"
                   onChange={handleEditChange}
                   required
                 />

@@ -161,6 +161,7 @@ const addRecipe = values => (dispatch) => {
       dispatch(addRecipeSuccess(recipe));
       dispatch({
         type: actionTypes.UPDATE_USER_RECIPES_COUNT,
+        payload: 1
       });
     })
     .catch((error) => {
@@ -211,6 +212,10 @@ const deleteRecipe = recipeId => (dispatch) => {
     { headers: token })
     .then(() => {
       dispatch(deleteRecipeSuccess(recipeId));
+      dispatch({
+        type: actionTypes.UPDATE_USER_RECIPES_COUNT,
+        payload: -1,
+      });
       dispatch({
         type: actionTypes.UPDATE_USER_FAVORITE_RECIPES,
         payload: recipeId,

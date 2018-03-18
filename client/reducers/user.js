@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 export const initialState = {
   isLoading: false,
+  isFetchingUserProfile: false,
   imageUploading: false,
   imageUploaded: false,
   userImageUrl: null,
@@ -77,21 +78,21 @@ const user = (state = initialState, action) => {
     case actionTypes.FETCH_USER_PROFILE_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isFetchingUserProfile: true,
         errorFetchingProfile: {},
         userProfile: {},
       };
     case actionTypes.FETCH_USER_PROFILE_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isFetchingUserProfile: false,
         userProfile: action.payload,
         errorFetchingProfile: {},
       };
     case actionTypes.FETCH_USER_PROFILE_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isFetchingUserProfile: false,
         errorFetchingProfile: action.payload,
       };
     case actionTypes.EDIT_USER_PROFILE_REQUEST:

@@ -1,8 +1,15 @@
 import React from 'react';
 
 import RecipeCard from '../../../components/singleRecipePage/RecipeCard';
+import userMockData from '../../__mocks__/user';
 
 describe('RecipeCard component', () => {
+  beforeEach(() => {
+    localStorage.setItem(
+      'token',
+      userMockData.signinSuccessResponse.data.user.token
+    );
+  });
   it('should render component', () => {
     const props = {
       singleRecipe: {

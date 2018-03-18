@@ -49,7 +49,7 @@ const propTypes = {
  *
  * @extends {Component}
  */
-class Recipe extends Component {
+export class Recipe extends Component {
   /**
    * Creates an instance of Recipe.
    *
@@ -149,18 +149,23 @@ class Recipe extends Component {
     const { postReview, match, user: { isAuthenticated } } = this.props;
     const { params: { recipeId } } = match;
     const review = {
-      content: this.state.reviewContent,
+      content: this.state.reviewContent.trim(),
     };
+
     if (isAuthenticated && getToken() !== null) {
-      postReview(recipeId, review)
-        .then(() => {
-          const { singleRecipe: { error } } = this.props;
-          if (isEmpty(error)) {
-            this.setState({
-              reviewContent: '',
-            });
-          }
-        });
+      if (review.content === '') {
+        notify('info', 'Please add your comment');
+      } else {
+        postReview(recipeId, review)
+          .then(() => {
+            const { singleRecipe: { error } } = this.props;
+            if (isEmpty(error)) {
+              this.setState({
+                reviewContent: '',
+              });
+            }
+          });
+      }
     } else {
       notify('info', 'Please login to post review');
     }
@@ -196,7 +201,7 @@ class Recipe extends Component {
     if (isAuthenticated && getToken() !== null) {
       upvoteRecipe(id);
     } else {
-      notify('info', 'Please login to perform this action');
+      notify('info', 'Please login to upvote');
     }
   }
 
@@ -216,7 +221,7 @@ class Recipe extends Component {
     if (isAuthenticated && getToken() !== null) {
       downvoteRecipe(id);
     } else {
-      notify('info', 'Please login to perform this action');
+      notify('info', 'Please login to downvote');
     }
   }
 
@@ -234,7 +239,7 @@ class Recipe extends Component {
     if (isAuthenticated && getToken() !== null) {
       setFavorite(id);
     } else {
-      notify('info', 'Please login to perform this action');
+      notify('info', 'Please login to favorite');
     }
   }
 
@@ -280,7 +285,7 @@ class Recipe extends Component {
   renderNotFound = () => (
     <div className="row center-align">
       <div className="not-found">
-        <p className="page-data">RECIPE NOT FOUND</p>
+        <p className="page-data">Recipe not found</p>
         <i className="material-icons large">error</i>
       </div>
     </div>

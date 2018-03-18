@@ -46,6 +46,7 @@ exports[`Add review component should render component 1`] = `
           className="btn waves-effect waves-light indigo accent-2
               white-text"
           disabled={false}
+          id="post-review"
           type="submit"
         >
           Post Review
@@ -106,6 +107,7 @@ exports[`Add review component should render component with spinner and disabling
           className="btn waves-effect waves-light indigo accent-2
               white-text"
           disabled={true}
+          id="post-review"
           type="submit"
         >
           Post Review
@@ -178,6 +180,7 @@ exports[`Add review component should render component with spinner and disabling
           className="btn waves-effect waves-light indigo accent-2
               white-text"
           disabled={true}
+          id="post-review"
           type="submit"
         >
           Post Review

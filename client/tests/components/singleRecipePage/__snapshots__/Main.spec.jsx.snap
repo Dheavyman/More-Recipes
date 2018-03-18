@@ -112,6 +112,7 @@ exports[`Main component should render component 1`] = `
           className="btn waves-effect waves-light indigo accent-2
                 white-text"
           disabled={true}
+          id="view-more-reviews"
           onClick={[MockFunction]}
         >
           View More
@@ -238,6 +239,7 @@ exports[`Main component should render component with spinner 1`] = `
           className="btn waves-effect waves-light indigo accent-2
                 white-text"
           disabled={true}
+          id="view-more-reviews"
           onClick={[MockFunction]}
         >
           View More

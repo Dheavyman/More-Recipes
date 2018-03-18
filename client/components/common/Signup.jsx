@@ -32,7 +32,7 @@ const propTypes = {
  *
  * @returns {object} React element
  */
-const Signup = (props) => {
+export const Signup = (props) => {
   const {
     user: { isLoading, error }, openSignup, handleToggleSignupModal,
     handleToggleModal, handleSubmit, handleSubmitSignup

@@ -1,0 +1,740 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe component should clear review when component is been unmounted 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="page-body"
+  >
+    <header>
+      <Header
+        clearReviews={[MockFunction]}
+        deleteReview={[MockFunction]}
+        downvoteRecipe={[MockFunction]}
+        fetchRecipe={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        fetchReviews={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        handleSearchCategory={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        match={
+          Object {
+            "params": Object {
+              "recipeId": 2,
+            },
+          }
+        }
+        postReview={[MockFunction]}
+        setFavorite={[MockFunction]}
+        singleRecipe={
+          Object {
+            "isFetching": false,
+            "recipe": Object {
+              "id": 2,
+            },
+            "reviews": Array [],
+          }
+        }
+        upvoteRecipe={[MockFunction]}
+        user={
+          Object {
+            "isAuthenticated": true,
+          }
+        }
+      />
+    </header>
+    <main>
+      <div>
+        <Main
+          handleAddReview={[Function]}
+          handleChange={[Function]}
+          handleDeleteReview={[Function]}
+          handleDownvote={[Function]}
+          handleFavorite={[Function]}
+          handleUpvote={[Function]}
+          handleViewMoreReviews={[Function]}
+          reviewContent=""
+          singleRecipe={
+            Object {
+              "isFetching": false,
+              "recipe": Object {
+                "id": 2,
+              },
+              "reviews": Array [],
+            }
+          }
+        />
+      </div>
+      <ToastContainer
+        autoClose={5000}
+        bodyClassName=""
+        className={null}
+        closeButton={
+          <DefaultCloseButton
+            ariaLabel="close"
+          />
+        }
+        closeOnClick={true}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnHover={true}
+        position="top-right"
+        progressClassName=""
+        style={null}
+        toastClassName=""
+        transition={[Function]}
+      />
+    </main>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
+</div>
+`;
+
+exports[`Recipe component should clear review when component is been unmounted 2`] = `
+<div
+  className="row"
+>
+  <div
+    className="page-body"
+  >
+    <header>
+      <Header
+        clearReviews={
+          [MockFunction] {
+            "calls": Array [
+              Array [],
+            ],
+          }
+        }
+        deleteReview={[MockFunction]}
+        downvoteRecipe={[MockFunction]}
+        fetchRecipe={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        fetchReviews={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        handleSearchCategory={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        match={
+          Object {
+            "params": Object {
+              "recipeId": 2,
+            },
+          }
+        }
+        postReview={[MockFunction]}
+        setFavorite={[MockFunction]}
+        singleRecipe={
+          Object {
+            "isFetching": false,
+            "recipe": Object {
+              "id": 2,
+            },
+            "reviews": Array [],
+          }
+        }
+        upvoteRecipe={[MockFunction]}
+        user={
+          Object {
+            "isAuthenticated": true,
+          }
+        }
+      />
+    </header>
+    <main>
+      <div>
+        <Main
+          handleAddReview={[Function]}
+          handleChange={[Function]}
+          handleDeleteReview={[Function]}
+          handleDownvote={[Function]}
+          handleFavorite={[Function]}
+          handleUpvote={[Function]}
+          handleViewMoreReviews={[Function]}
+          reviewContent=""
+          singleRecipe={
+            Object {
+              "isFetching": false,
+              "recipe": Object {
+                "id": 2,
+              },
+              "reviews": Array [],
+            }
+          }
+        />
+      </div>
+      <ToastContainer
+        autoClose={5000}
+        bodyClassName=""
+        className={null}
+        closeButton={
+          <DefaultCloseButton
+            ariaLabel="close"
+          />
+        }
+        closeOnClick={true}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnHover={true}
+        position="top-right"
+        progressClassName=""
+        style={null}
+        toastClassName=""
+        transition={[Function]}
+      />
+    </main>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
+</div>
+`;
+
+exports[`Recipe component should render component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="page-body"
+  >
+    <header>
+      <Header
+        clearReviews={[MockFunction]}
+        deleteReview={[MockFunction]}
+        downvoteRecipe={[MockFunction]}
+        fetchRecipe={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        fetchReviews={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        handleSearchCategory={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        match={
+          Object {
+            "params": Object {
+              "recipeId": 2,
+            },
+          }
+        }
+        postReview={[MockFunction]}
+        setFavorite={[MockFunction]}
+        singleRecipe={
+          Object {
+            "isFetching": false,
+            "recipe": Object {},
+            "reviews": Array [],
+          }
+        }
+        upvoteRecipe={[MockFunction]}
+        user={
+          Object {
+            "isAuthenticated": false,
+          }
+        }
+      />
+    </header>
+    <main>
+      <div>
+        <div
+          className="row center-align"
+        >
+          <div
+            className="not-found"
+          >
+            <p
+              className="page-data"
+            >
+              Recipe not found
+            </p>
+            <i
+              className="material-icons large"
+            >
+              error
+            </i>
+          </div>
+        </div>
+      </div>
+      <ToastContainer
+        autoClose={5000}
+        bodyClassName=""
+        className={null}
+        closeButton={
+          <DefaultCloseButton
+            ariaLabel="close"
+          />
+        }
+        closeOnClick={true}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnHover={true}
+        position="top-right"
+        progressClassName=""
+        style={null}
+        toastClassName=""
+        transition={[Function]}
+      />
+    </main>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
+</div>
+`;
+
+exports[`Recipe component should render component 2`] = `
+<div
+  className="row"
+>
+  <div
+    className="page-body"
+  >
+    <header>
+      <Header
+        clearReviews={[MockFunction]}
+        deleteReview={[MockFunction]}
+        downvoteRecipe={[MockFunction]}
+        fetchRecipe={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        fetchReviews={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        handleSearchCategory={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        match={
+          Object {
+            "params": Object {
+              "recipeId": 2,
+            },
+          }
+        }
+        postReview={[MockFunction]}
+        setFavorite={[MockFunction]}
+        singleRecipe={
+          Object {
+            "isFetching": true,
+          }
+        }
+        upvoteRecipe={[MockFunction]}
+        user={
+          Object {
+            "isAuthenticated": false,
+          }
+        }
+      />
+    </header>
+    <main>
+      <div
+        className="center-spinner center-align"
+      >
+        <Spinner
+          size="big"
+        />
+      </div>
+      <ToastContainer
+        autoClose={5000}
+        bodyClassName=""
+        className={null}
+        closeButton={
+          <DefaultCloseButton
+            ariaLabel="close"
+          />
+        }
+        closeOnClick={true}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnHover={true}
+        position="top-right"
+        progressClassName=""
+        style={null}
+        toastClassName=""
+        transition={[Function]}
+      />
+    </main>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
+</div>
+`;
+
+exports[`Recipe component should render component 3`] = `
+<div
+  className="row"
+>
+  <div
+    className="page-body"
+  >
+    <header>
+      <Header
+        clearReviews={[MockFunction]}
+        deleteReview={[MockFunction]}
+        downvoteRecipe={[MockFunction]}
+        fetchRecipe={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        fetchReviews={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        handleSearchCategory={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        match={
+          Object {
+            "params": Object {
+              "recipeId": 2,
+            },
+          }
+        }
+        postReview={[MockFunction]}
+        setFavorite={[MockFunction]}
+        singleRecipe={
+          Object {
+            "hasMoreReviews": true,
+            "isFetching": false,
+            "recipe": Object {
+              "category": "Main",
+              "description": "Tasty beans",
+              "directions": "Do this. Do that",
+              "downvotes": 0,
+              "favorites": 8,
+              "id": 2,
+              "ingredients": "Beans, onions, palm oil, salt",
+              "preparationTime": 85,
+              "title": "Beans",
+              "upvotes": 4,
+              "views": 25,
+            },
+            "reviews": Array [
+              Object {
+                "content": "Nice recipe",
+              },
+            ],
+          }
+        }
+        upvoteRecipe={[MockFunction]}
+        user={
+          Object {
+            "isAuthenticated": false,
+          }
+        }
+      />
+    </header>
+    <main>
+      <div>
+        <Main
+          handleAddReview={[Function]}
+          handleChange={[Function]}
+          handleDeleteReview={[Function]}
+          handleDownvote={[Function]}
+          handleFavorite={[Function]}
+          handleUpvote={[Function]}
+          handleViewMoreReviews={[Function]}
+          reviewContent=""
+          singleRecipe={
+            Object {
+              "hasMoreReviews": true,
+              "isFetching": false,
+              "recipe": Object {
+                "category": "Main",
+                "description": "Tasty beans",
+                "directions": "Do this. Do that",
+                "downvotes": 0,
+                "favorites": 8,
+                "id": 2,
+                "ingredients": "Beans, onions, palm oil, salt",
+                "preparationTime": 85,
+                "title": "Beans",
+                "upvotes": 4,
+                "views": 25,
+              },
+              "reviews": Array [
+                Object {
+                  "content": "Nice recipe",
+                },
+              ],
+            }
+          }
+        />
+      </div>
+      <ToastContainer
+        autoClose={5000}
+        bodyClassName=""
+        className={null}
+        closeButton={
+          <DefaultCloseButton
+            ariaLabel="close"
+          />
+        }
+        closeOnClick={true}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnHover={true}
+        position="top-right"
+        progressClassName=""
+        style={null}
+        toastClassName=""
+        transition={[Function]}
+      />
+    </main>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
+</div>
+`;
+
+exports[`Recipe component should simulate instance methods call 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="page-body"
+  >
+    <header>
+      <Header
+        clearReviews={[MockFunction]}
+        deleteReview={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+                1,
+              ],
+            ],
+          }
+        }
+        downvoteRecipe={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        fetchRecipe={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        fetchReviews={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+              Array [
+                2,
+                5,
+                5,
+              ],
+            ],
+          }
+        }
+        handleSearchCategory={[Function]}
+        history={
+          Object {
+            "push": [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "pathname": "/catalog",
+                    "search": "?search=category&list=undefined",
+                  },
+                ],
+              ],
+            },
+          }
+        }
+        match={
+          Object {
+            "params": Object {
+              "recipeId": 2,
+            },
+          }
+        }
+        postReview={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+                Object {
+                  "content": "Change in input field",
+                },
+              ],
+            ],
+          }
+        }
+        setFavorite={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        singleRecipe={
+          Object {
+            "isFetching": false,
+            "recipe": Object {
+              "id": 2,
+            },
+            "reviews": Array [],
+          }
+        }
+        upvoteRecipe={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                2,
+              ],
+            ],
+          }
+        }
+        user={
+          Object {
+            "isAuthenticated": true,
+          }
+        }
+      />
+    </header>
+    <main>
+      <div>
+        <Main
+          handleAddReview={[Function]}
+          handleChange={[Function]}
+          handleDeleteReview={[Function]}
+          handleDownvote={[Function]}
+          handleFavorite={[Function]}
+          handleUpvote={[Function]}
+          handleViewMoreReviews={[Function]}
+          reviewContent=""
+          singleRecipe={
+            Object {
+              "isFetching": false,
+              "recipe": Object {
+                "id": 2,
+              },
+              "reviews": Array [],
+            }
+          }
+        />
+      </div>
+      <ToastContainer
+        autoClose={5000}
+        bodyClassName=""
+        className={null}
+        closeButton={
+          <DefaultCloseButton
+            ariaLabel="close"
+          />
+        }
+        closeOnClick={true}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnHover={true}
+        position="top-right"
+        progressClassName=""
+        style={null}
+        toastClassName=""
+        transition={[Function]}
+      />
+    </main>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
+</div>
+`;

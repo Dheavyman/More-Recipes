@@ -61,6 +61,7 @@ const EditProfileForm = (props) => {
           className="validate"
           required
           onChange={handleProfileChange}
+          maxLength="255"
         />
         <TextField
           id="Last Name"
@@ -71,6 +72,7 @@ const EditProfileForm = (props) => {
           className="validate"
           required
           onChange={handleProfileChange}
+          maxLength="255"
         />
         <TextField
           id="Email"

@@ -499,7 +499,7 @@ exports[`RecipeCard component should render component with upvote 1`] = `
       </span>
     </a>
     <a
-      className="chip waves-effect waves-red "
+      className="chip waves-effect waves-red red"
       data-tip="favorite"
       id="favorite"
       onClick={[MockFunction]}
@@ -507,10 +507,10 @@ exports[`RecipeCard component should render component with upvote 1`] = `
       tabIndex="0"
     >
       <i
-        className="fa fa-heart black-text"
+        className="fa fa-heart white-text"
       />
       <span
-        className="black-text"
+        className="white-text"
       >
         8
       </span>
@@ -595,7 +595,7 @@ exports[`RecipeCard component should render component with upvote 2`] = `
       </span>
     </a>
     <a
-      className="chip waves-effect waves-red "
+      className="chip waves-effect waves-red red"
       data-tip="favorite"
       id="favorite"
       onClick={[MockFunction]}
@@ -603,10 +603,10 @@ exports[`RecipeCard component should render component with upvote 2`] = `
       tabIndex="0"
     >
       <i
-        className="fa fa-heart black-text"
+        className="fa fa-heart white-text"
       />
       <span
-        className="black-text"
+        className="white-text"
       >
         8
       </span>

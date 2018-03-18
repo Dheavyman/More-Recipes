@@ -7,11 +7,14 @@ module.exports = {
   coverageDirectory: '<rootDir>/client/coverage',
   collectCoverageFrom: [
     '**/client/**/*.{js,jsx}',
+    '!**/client/**/App.jsx',
     '!**/client/public/**',
     '!**/client/coverage/**',
     '!**/client/config/**',
     '!**/client/tests/**',
-    '!**/client/utils'
+    '!**/client/utils',
+    '!**/client/index.jsx',
+    '!**/client/store.js'
   ],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|svg)$': '<rootDir>/client/tests/__mocks__/fileMock.js',

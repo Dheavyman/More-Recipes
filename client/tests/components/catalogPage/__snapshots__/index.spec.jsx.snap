@@ -1,0 +1,338 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatalogPage component should handle instance method events 1`] = `
+<div
+  className="page-body"
+>
+  <header>
+    <Header
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "replace": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=ingredients&list=pepper",
+                },
+              ],
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=category&list=Appetizer",
+                },
+              ],
+            ],
+          },
+        }
+      }
+      location={
+        Object {
+          "search": "",
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [],
+          "searchPerformed": false,
+        }
+      }
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [
+              8,
+              8,
+            ],
+          ],
+        }
+      }
+      searchRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "ingredients",
+              "pepper",
+            ],
+            Array [
+              "category",
+              "Appetizer",
+            ],
+          ],
+        }
+      }
+    />
+  </header>
+  <main
+    className="grey lighten-3"
+  >
+    <Main
+      handleSearchChange={[Function]}
+      handleSubmitSearch={[Function]}
+      history={
+        Object {
+          "replace": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=ingredients&list=pepper",
+                },
+              ],
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=category&list=Appetizer",
+                },
+              ],
+            ],
+          },
+        }
+      }
+      limit={8}
+      list=""
+      location={
+        Object {
+          "search": "",
+        }
+      }
+      offset={8}
+      recipes={
+        Object {
+          "recipes": Array [],
+          "searchPerformed": false,
+        }
+      }
+      retrieveMoreRecipes={[Function]}
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [
+              8,
+              8,
+            ],
+          ],
+        }
+      }
+      scrollToTop={[Function]}
+      search="title"
+      searchPerformed={false}
+      searchRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "ingredients",
+              "pepper",
+            ],
+            Array [
+              "category",
+              "Appetizer",
+            ],
+          ],
+        }
+      }
+      searchedTerm=""
+    />
+  </main>
+  <footer>
+    <Footer />
+  </footer>
+</div>
+`;
+
+exports[`CatalogPage component should render component 1`] = `
+<div
+  className="page-body"
+>
+  <header>
+    <Header
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "replace": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "search": "",
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [],
+          "searchPerformed": false,
+        }
+      }
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      searchRecipe={[MockFunction]}
+    />
+  </header>
+  <main
+    className="grey lighten-3"
+  >
+    <Main
+      handleSearchChange={[Function]}
+      handleSubmitSearch={[Function]}
+      history={
+        Object {
+          "replace": [MockFunction],
+        }
+      }
+      limit={8}
+      list=""
+      location={
+        Object {
+          "search": "",
+        }
+      }
+      offset={8}
+      recipes={
+        Object {
+          "recipes": Array [],
+          "searchPerformed": false,
+        }
+      }
+      retrieveMoreRecipes={[Function]}
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      scrollToTop={[Function]}
+      search="title"
+      searchPerformed={false}
+      searchRecipe={[MockFunction]}
+      searchedTerm=""
+    />
+  </main>
+  <footer>
+    <Footer />
+  </footer>
+</div>
+`;
+
+exports[`CatalogPage component should search for recipe if search is performed 1`] = `
+<div
+  className="page-body"
+>
+  <header>
+    <Header
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "replace": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "search": "?search=title&list=rice",
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [
+            Object {
+              "category": "Dinner",
+              "description": "Tasty macaroni",
+              "directions": "Do this, do that",
+              "downvotes": 0,
+              "favorites": 0,
+              "id": 5,
+              "ingredients": "Macaroni, groundnut oil, salt",
+              "preparationTime": 45,
+              "recipeImage": "Recipe image",
+              "title": "Macaroni",
+              "upvotes": 0,
+              "views": 1,
+            },
+          ],
+          "searchPerformed": true,
+        }
+      }
+      retrieveRecipes={[MockFunction]}
+      searchRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "title",
+              "rice",
+            ],
+          ],
+        }
+      }
+    />
+  </header>
+  <main
+    className="grey lighten-3"
+  >
+    <Main
+      handleSearchChange={[Function]}
+      handleSubmitSearch={[Function]}
+      history={
+        Object {
+          "replace": [MockFunction],
+        }
+      }
+      limit={8}
+      list=""
+      location={
+        Object {
+          "search": "?search=title&list=rice",
+        }
+      }
+      offset={0}
+      recipes={
+        Object {
+          "recipes": Array [
+            Object {
+              "category": "Dinner",
+              "description": "Tasty macaroni",
+              "directions": "Do this, do that",
+              "downvotes": 0,
+              "favorites": 0,
+              "id": 5,
+              "ingredients": "Macaroni, groundnut oil, salt",
+              "preparationTime": 45,
+              "recipeImage": "Recipe image",
+              "title": "Macaroni",
+              "upvotes": 0,
+              "views": 1,
+            },
+          ],
+          "searchPerformed": true,
+        }
+      }
+      retrieveMoreRecipes={[Function]}
+      retrieveRecipes={[MockFunction]}
+      scrollToTop={[Function]}
+      search="title"
+      searchPerformed={true}
+      searchRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "title",
+              "rice",
+            ],
+          ],
+        }
+      }
+      searchedTerm=""
+    />
+  </main>
+  <footer>
+    <Footer />
+  </footer>
+</div>
+`;

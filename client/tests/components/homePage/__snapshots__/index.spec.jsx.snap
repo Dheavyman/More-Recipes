@@ -1,0 +1,328 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component should simulate calling class instance properties 1`] = `
+<div
+  className="page-body"
+>
+  <header>
+    <Header
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "state": Object {
+            "message": "Unauthenticated user",
+          },
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [],
+        }
+      }
+      resetAuthentication={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrievePopularRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+    />
+  </header>
+  <main>
+    <Main
+      handleSearchChange={[Function]}
+      handleSubmitSearch={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+        }
+      }
+      list=""
+      location={
+        Object {
+          "state": Object {
+            "message": "Unauthenticated user",
+          },
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [],
+        }
+      }
+      resetAuthentication={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrievePopularRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      search="title"
+    />
+  </main>
+  <footer>
+    <Footer />
+  </footer>
+</div>
+`;
+
+exports[`Home component should simulate calling class instance properties 2`] = `
+<div
+  className="page-body"
+>
+  <header>
+    <Header
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "state": Object {
+            "message": "Unauthenticated user",
+          },
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [],
+        }
+      }
+      resetAuthentication={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrievePopularRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+    />
+  </header>
+  <main>
+    <Main
+      handleSearchChange={[Function]}
+      handleSubmitSearch={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+        }
+      }
+      list=""
+      location={
+        Object {
+          "state": Object {
+            "message": "Unauthenticated user",
+          },
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [],
+        }
+      }
+      resetAuthentication={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrievePopularRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      search="title"
+    />
+  </main>
+  <footer>
+    <Footer />
+  </footer>
+</div>
+`;
+
+exports[`Home component should simulate calling class instance properties 3`] = `
+<div
+  className="page-body"
+>
+  <header>
+    <Header
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=ingredients&list=rice, tomatoes",
+                },
+              ],
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=category&list=breakfast",
+                },
+              ],
+            ],
+          },
+        }
+      }
+      location={
+        Object {
+          "state": Object {
+            "message": "Unauthenticated user",
+          },
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [],
+        }
+      }
+      resetAuthentication={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrievePopularRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+    />
+  </header>
+  <main>
+    <Main
+      handleSearchChange={[Function]}
+      handleSubmitSearch={[Function]}
+      history={
+        Object {
+          "push": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=ingredients&list=rice, tomatoes",
+                },
+              ],
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=category&list=breakfast",
+                },
+              ],
+            ],
+          },
+        }
+      }
+      list=""
+      location={
+        Object {
+          "state": Object {
+            "message": "Unauthenticated user",
+          },
+        }
+      }
+      recipes={
+        Object {
+          "recipes": Array [],
+        }
+      }
+      resetAuthentication={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrievePopularRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      retrieveRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      search="title"
+    />
+  </main>
+  <footer>
+    <Footer />
+  </footer>
+</div>
+`;

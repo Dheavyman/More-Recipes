@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatalogResult component should render component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="catalog-page"
+  >
+    <InfiniteScroll
+      disableBrowserPullToRefresh={true}
+      endMessage={
+        <div
+          className="end-message center-align col s12"
+        >
+          <b>
+            Yay! You have seen it all
+          </b>
+        </div>
+      }
+      hasMore={false}
+      loader={
+        <div
+          className="col s12 center-align"
+        >
+          <Spinner
+            size="small"
+          />
+        </div>
+      }
+      next={[MockFunction]}
+      pullDownToRefreshContent={
+        <h3>
+          Pull down to refresh
+        </h3>
+      }
+      pullDownToRefreshThreshold={100}
+      releaseToRefreshContent={
+        <h3>
+          Release to refresh
+        </h3>
+      }
+    >
+      <RecipeCatalogCard
+        index={0}
+        recipe={
+          Object {
+            "category": "Main",
+            "description": "Tasty beans",
+            "directions": "Do this. Do that",
+            "ingredients": "Beans, onions, palm oil, salt",
+            "preparationTime": 85,
+            "title": "Beans",
+          }
+        }
+        recipes={
+          Object {
+            "hasMore": false,
+            "recipes": Array [
+              Object {
+                "category": "Main",
+                "description": "Tasty beans",
+                "directions": "Do this. Do that",
+                "ingredients": "Beans, onions, palm oil, salt",
+                "preparationTime": 85,
+                "title": "Beans",
+              },
+            ],
+          }
+        }
+        retrieveMoreRecipes={[MockFunction]}
+      />
+    </InfiniteScroll>
+  </div>
+</div>
+`;

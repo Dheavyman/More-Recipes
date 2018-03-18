@@ -1,5 +1,5 @@
 {
-  "src_folders" : ["e2e_test"],
+  "src_folders" : ["e2e_test/user/", "e2e_test/recipe/", "e2e_test/review/", "e2e_test/search"],
   "output_folder" : "reports",
   "globals_path": "globals.js",
   "selenium" : {

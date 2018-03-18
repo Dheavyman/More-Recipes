@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeCatalogCard component should notify users to signin before viewing other users profile 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <RecipeCatalogCard
+      recipe={
+        Object {
+          "User": Object {
+            "fullName": "John Mark",
+            "id": 1,
+          },
+          "category": "Main",
+          "description": "Tasty beans",
+          "directions": "Do this. Do that",
+          "downvotes": 48,
+          "favorites": 5,
+          "id": 1,
+          "ingredients": "Beans, onions, palm oil, salt",
+          "preparationTime": 85,
+          "title": "Beans",
+          "upvotes": 20,
+          "views": 34,
+        }
+      }
+      user={
+        Object {
+          "isAuthenticated": false,
+        }
+      }
+    >
+      <div
+        className="col s12 m4 l3"
+      >
+        <div
+          className="card large hoverable"
+          id="recipes"
+        >
+          <Link
+            replace={false}
+            to="recipes/1"
+          >
+            <a
+              href="recipes/1"
+              onClick={[Function]}
+            >
+              <span
+                className="card-title"
+              >
+                Beans
+              </span>
+            </a>
+          </Link>
+          <div
+            className="card-image"
+          >
+            <Link
+              replace={false}
+              to="recipes/1"
+            >
+              <a
+                href="recipes/1"
+                onClick={[Function]}
+              >
+                <RecipeImage
+                  recipeImage={null}
+                  title="Beans"
+                >
+                  <img
+                    alt="Beans"
+                    src={null}
+                  />
+                </RecipeImage>
+              </a>
+            </Link>
+          </div>
+          <div
+            className="card-content"
+          >
+            <p>
+              Tasty beans
+            </p>
+          </div>
+          <div
+            className="card-action"
+          >
+            <p
+              id="owner"
+            >
+              <label
+                htmlFor="owner"
+              >
+                Recipe by: 
+              </label>
+              <a
+                href="#!"
+                id="view-user-profile"
+                onClick={[Function]}
+              >
+                <span
+                  className="recipe-owner"
+                >
+                  John Mark
+                </span>
+              </a>
+            </p>
+            <ul
+              className="center-align"
+            >
+              <li
+                id="views"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  visibility
+                </i>
+                34
+              </li>
+              <li
+                id="favorites"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  favorite
+                </i>
+                5
+              </li>
+              <li
+                id="upvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_up
+                </i>
+                20
+              </li>
+              <li
+                id="downvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_down
+                </i>
+                48
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </RecipeCatalogCard>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`RecipeCatalogCard component should render component 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <RecipeCatalogCard
+      recipe={
+        Object {
+          "User": Object {
+            "fullName": "John Mark",
+            "id": 1,
+          },
+          "category": "Main",
+          "description": "Tasty beans",
+          "directions": "Do this. Do that",
+          "downvotes": 48,
+          "favorites": 5,
+          "id": 1,
+          "ingredients": "Beans, onions, palm oil, salt",
+          "preparationTime": 85,
+          "title": "Beans",
+          "upvotes": 20,
+          "views": 34,
+        }
+      }
+      user={
+        Object {
+          "isAuthenticated": true,
+        }
+      }
+    >
+      <div
+        className="col s12 m4 l3"
+      >
+        <div
+          className="card large hoverable"
+          id="recipes"
+        >
+          <Link
+            replace={false}
+            to="recipes/1"
+          >
+            <a
+              href="recipes/1"
+              onClick={[Function]}
+            >
+              <span
+                className="card-title"
+              >
+                Beans
+              </span>
+            </a>
+          </Link>
+          <div
+            className="card-image"
+          >
+            <Link
+              replace={false}
+              to="recipes/1"
+            >
+              <a
+                href="recipes/1"
+                onClick={[Function]}
+              >
+                <RecipeImage
+                  recipeImage={null}
+                  title="Beans"
+                >
+                  <img
+                    alt="Beans"
+                    src={null}
+                  />
+                </RecipeImage>
+              </a>
+            </Link>
+          </div>
+          <div
+            className="card-content"
+          >
+            <p>
+              Tasty beans
+            </p>
+          </div>
+          <div
+            className="card-action"
+          >
+            <p
+              id="owner"
+            >
+              <label
+                htmlFor="owner"
+              >
+                Recipe by: 
+              </label>
+              <Link
+                replace={false}
+                to="/users/1/dashboard"
+              >
+                <a
+                  href="/users/1/dashboard"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="recipe-owner"
+                  >
+                    John Mark
+                  </span>
+                </a>
+              </Link>
+            </p>
+            <ul
+              className="center-align"
+            >
+              <li
+                id="views"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  visibility
+                </i>
+                34
+              </li>
+              <li
+                id="favorites"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  favorite
+                </i>
+                5
+              </li>
+              <li
+                id="upvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_up
+                </i>
+                20
+              </li>
+              <li
+                id="downvotes"
+              >
+                <i
+                  className="material-icons tiny"
+                >
+                  thumb_down
+                </i>
+                48
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </RecipeCatalogCard>
+  </Router>
+</BrowserRouter>
+`;

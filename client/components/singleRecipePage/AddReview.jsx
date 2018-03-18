@@ -49,6 +49,7 @@ const AddReview = (props) => {
           </div>
           <div className="row">
             <button
+              id="post-review"
               type="submit"
               className={`btn waves-effect waves-light indigo accent-2
               white-text`}

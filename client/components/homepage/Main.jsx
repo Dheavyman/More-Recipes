@@ -41,7 +41,7 @@ const Main = (props) => {
           <div id="popular" className="col s12 popular-list white">
             <PopularRecipesCatalog popularRecipes={popularRecipes} {...props} />
           </div>
-          <div className="col s12 all-recipes-list white">
+          <div id="recipe-catalog" className="col s12 all-recipes-list white">
             <AllRecipeCatalog recipesCatalog={recipes} {...props} />
           </div>
         </div>

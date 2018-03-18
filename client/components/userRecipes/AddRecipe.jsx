@@ -60,6 +60,7 @@ const AddRecipe = (props) => {
                   name="title"
                   type="text"
                   className="validate"
+                  maxLength="255"
                   onChange={handleChange}
                   required
                 />
@@ -87,6 +88,7 @@ const AddRecipe = (props) => {
                   name="description"
                   className="materialize-textarea validate"
                   onChange={handleChange}
+                  maxLength="255"
                   required
                 />
                 <label htmlFor="recipe_description">Description</label>

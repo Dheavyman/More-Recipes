@@ -28,11 +28,11 @@ export default (sequelize, DataTypes) => {
       }
     },
     ingredients: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     directions: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     recipeImage: {

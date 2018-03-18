@@ -44,6 +44,7 @@ exports[`AddRecipe component should render component 1`] = `
           >
             <input
               className="validate"
+              maxLength="255"
               name="title"
               onChange={[MockFunction]}
               required={true}
@@ -110,6 +111,7 @@ exports[`AddRecipe component should render component 1`] = `
           >
             <textarea
               className="materialize-textarea validate"
+              maxLength="255"
               name="description"
               onChange={[MockFunction]}
               required={true}
@@ -289,6 +291,7 @@ exports[`AddRecipe component should show error message if any 1`] = `
           >
             <input
               className="validate"
+              maxLength="255"
               name="title"
               onChange={[MockFunction]}
               required={true}
@@ -355,6 +358,7 @@ exports[`AddRecipe component should show error message if any 1`] = `
           >
             <textarea
               className="materialize-textarea validate"
+              maxLength="255"
               name="description"
               onChange={[MockFunction]}
               required={true}
@@ -531,6 +535,7 @@ exports[`AddRecipe component should show spinner when adding recipe 1`] = `
           >
             <input
               className="validate"
+              maxLength="255"
               name="title"
               onChange={[MockFunction]}
               required={true}
@@ -597,6 +602,7 @@ exports[`AddRecipe component should show spinner when adding recipe 1`] = `
           >
             <textarea
               className="materialize-textarea validate"
+              maxLength="255"
               name="description"
               onChange={[MockFunction]}
               required={true}

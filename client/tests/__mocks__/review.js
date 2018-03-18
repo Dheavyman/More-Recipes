@@ -31,6 +31,10 @@ export default {
       },
     },
   },
+  deleteReviewSuccessResponse: {
+    status: 'Success',
+    message: 'Review deleted',
+  },
   fetchReviewsSuccess: {
     reviews: [],
     reviewsCount: 0,
