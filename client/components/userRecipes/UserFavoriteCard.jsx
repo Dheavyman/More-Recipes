@@ -80,13 +80,14 @@ const UserFavoriteCard = (props) => {
           </ul>
           {currentProfileUserId === authenticatedUserId &&
             <a
-              id="remove-favorite"
               role="button"
               tabIndex="0"
               onClick={() => handleOpenDelete(id, message, actionTitle, action)}
               data-tip="Remove"
             >
-              <i className="material-icons icon-red right">remove_circle</i>
+              <i id="remove-favorite" className="material-icons icon-red right">
+                remove_circle
+              </i>
             </a>
           }
           <ReactTooltip />

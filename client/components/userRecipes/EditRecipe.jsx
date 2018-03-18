@@ -49,7 +49,6 @@ const EditRecipe = (props) => {
     <FlatButton
       id="cancel-edit-button"
       label="Cancel"
-      secondary
       onClick={handleClose}
     />
   ];

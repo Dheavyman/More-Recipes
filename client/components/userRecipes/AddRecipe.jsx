@@ -38,7 +38,6 @@ const AddRecipe = (props) => {
   const actions = [
     <FlatButton
       label="Cancel"
-      secondary
       onClick={handleClose}
     />
   ];

@@ -68,8 +68,7 @@ export default {
       .moveToElement('a#downvote', 10, 10)
       .pause(500)
       .click('a#downvote')
-      .pause(2000)
-      .end();
+      .pause(2000);
   },
   'user should see favorite recipes in his dashboard': (browser) => {
     browser
@@ -86,9 +85,10 @@ export default {
       .pause(2000)
       .moveToElement('[data-tab=user-favorites]', 20, 20)
       .click('[data-tab=user-favorites]')
-      .moveToElement('a#remove-favorite', 5, 5)
       .pause(1000)
-      .click('a#remove-favorite')
+      .moveToElement('#remove-favorite', 10, 10)
+      .pause(500)
+      .click('#remove-favorite')
       .pause(2000)
       .assert.containsText('div.modal-title', 'Remove Recipe')
       .assert.containsText(
