@@ -17,7 +17,7 @@ exports[`AddRecipe component should render component 1`] = `
           onMouseLeave={[Function]}
           onTouchStart={[Function]}
           primary={false}
-          secondary={true}
+          secondary={false}
         />,
       ]
     }
@@ -264,7 +264,7 @@ exports[`AddRecipe component should show error message if any 1`] = `
           onMouseLeave={[Function]}
           onTouchStart={[Function]}
           primary={false}
-          secondary={true}
+          secondary={false}
         />,
       ]
     }
@@ -508,7 +508,7 @@ exports[`AddRecipe component should show spinner when adding recipe 1`] = `
           onMouseLeave={[Function]}
           onTouchStart={[Function]}
           primary={false}
-          secondary={true}
+          secondary={false}
         />,
       ]
     }

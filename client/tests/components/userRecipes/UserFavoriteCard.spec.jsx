@@ -50,7 +50,7 @@ describe('UserFavoriteCard component', () => {
     );
 
     expect(wrapper).toBeDefined();
-    wrapper.find('a#remove-favorite').simulate('click');
+    wrapper.find('i#remove-favorite').simulate('click');
     expect(props.handleOpenDelete).toBeCalled();
     expect(wrapper).toMatchSnapshot();
   });
