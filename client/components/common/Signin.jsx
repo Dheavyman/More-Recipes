@@ -49,7 +49,7 @@ export const Signin = (props) => {
   return (
     <div>
       <Dialog
-        title="Login into your account"
+        title="Sign In"
         actions={actions}
         modal
         open={openSignin}

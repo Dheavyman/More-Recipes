@@ -50,7 +50,7 @@ export const Signup = (props) => {
   return (
     <div>
       <Dialog
-        title="Create an account"
+        title="Sign Up"
         actions={actions}
         modal
         open={openSignup}
