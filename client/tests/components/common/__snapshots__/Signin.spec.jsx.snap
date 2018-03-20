@@ -1,0 +1,329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signin component should render component 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Login into your account"
+  >
+    <div
+      className="row"
+    >
+      <form
+        className="col s12"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Username"
+              name="username"
+              type="text"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Password"
+              name="password"
+              type="password"
+              validate={[Function]}
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        />
+        <div
+          className="center-align"
+        />
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect waves-light
+                  indigo accent-2"
+            disabled={false}
+            id="signin"
+            type="submit"
+          >
+            Sign In
+          </button>
+        </div>
+        <div
+          className="row center-align"
+        >
+          Don't have an account? 
+          <a
+            className="cursor-pointer blue-text"
+            onClick={[MockFunction]}
+            role="button"
+            tabIndex="0"
+          >
+            Register
+          </a>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;
+
+exports[`Signin component should show error in signin 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Login into your account"
+  >
+    <div
+      className="row"
+    >
+      <form
+        className="col s12"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Username"
+              name="username"
+              type="text"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Password"
+              name="password"
+              type="password"
+              validate={[Function]}
+            />
+          </div>
+        </div>
+        <ErrorMessage
+          message="Error in signin"
+        />
+        <div
+          className="row"
+        />
+        <div
+          className="center-align"
+        />
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect waves-light
+                  indigo accent-2"
+            disabled={false}
+            id="signin"
+            type="submit"
+          >
+            Sign In
+          </button>
+        </div>
+        <div
+          className="row center-align"
+        >
+          Don't have an account? 
+          <a
+            className="cursor-pointer blue-text"
+            onClick={[MockFunction]}
+            role="button"
+            tabIndex="0"
+          >
+            Register
+          </a>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;
+
+exports[`Signin component should show spinner when submitting details 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Login into your account"
+  >
+    <div
+      className="row"
+    >
+      <form
+        className="col s12"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Username"
+              name="username"
+              type="text"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Password"
+              name="password"
+              type="password"
+              validate={[Function]}
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        />
+        <div
+          className="center-align"
+        >
+          <Spinner
+            size="small"
+          />
+        </div>
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect waves-light
+                  indigo accent-2"
+            disabled={true}
+            id="signin"
+            type="submit"
+          >
+            Sign In
+          </button>
+        </div>
+        <div
+          className="row center-align"
+        >
+          Don't have an account? 
+          <a
+            className="cursor-pointer blue-text"
+            onClick={[MockFunction]}
+            role="button"
+            tabIndex="0"
+          >
+            Register
+          </a>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;

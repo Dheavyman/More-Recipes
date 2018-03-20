@@ -204,6 +204,7 @@ class SideNav extends React.Component {
       <div>
         <ul className={`side-nav ${fixed}`} id="slide_out">
           <li><Link to="/">Home</Link></li>
+          <li><Link to="/catalog">Catalog</Link></li>
           <li>
             <ul className="collapsible" data-collapsible="accordion">
               <li>

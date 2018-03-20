@@ -17,6 +17,7 @@ describe('UserProfile component', () => {
       currentProfileUserId: 1,
       authenticatedUserId: 1,
       user: {
+        isFetchingUserProfile: false,
         imageUploading: false,
         userProfile: {
           fullName: 'John Mark',
@@ -39,6 +40,7 @@ describe('UserProfile component', () => {
       currentProfileUserId: 567,
       authenticatedUserId: 1,
       user: {
+        isFetchingUserProfile: false,
         imageUploading: false,
         userProfile: {},
         userImageUrl: '',
@@ -58,7 +60,7 @@ describe('UserProfile component', () => {
       currentProfileUserId: 1,
       authenticatedUserId: 1,
       user: {
-        isLoading: true,
+        isFetchingUserProfile: true,
         imageUploading: false,
         userProfile: {
           fullName: 'John Mark',

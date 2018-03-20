@@ -18,7 +18,7 @@ exports[`EditRecipe component should render component 1`] = `
           onMouseLeave={[Function]}
           onTouchStart={[Function]}
           primary={false}
-          secondary={true}
+          secondary={false}
         />,
       ]
     }
@@ -47,6 +47,7 @@ exports[`EditRecipe component should render component 1`] = `
               className="validate"
               defaultValue="Beans"
               id="title"
+              maxLength="255"
               name="title"
               onChange={[MockFunction]}
               required={true}
@@ -117,6 +118,7 @@ exports[`EditRecipe component should render component 1`] = `
               className="materialize-textarea validate"
               defaultValue="Tasty beans"
               id="description"
+              maxLength="255"
               name="description"
               onChange={[MockFunction]}
               required={true}
@@ -277,7 +279,7 @@ exports[`EditRecipe component should show error message if any 1`] = `
           onMouseLeave={[Function]}
           onTouchStart={[Function]}
           primary={false}
-          secondary={true}
+          secondary={false}
         />,
       ]
     }
@@ -306,6 +308,7 @@ exports[`EditRecipe component should show error message if any 1`] = `
               className="validate"
               defaultValue="Beans"
               id="title"
+              maxLength="255"
               name="title"
               onChange={[MockFunction]}
               required={true}
@@ -376,6 +379,7 @@ exports[`EditRecipe component should show error message if any 1`] = `
               className="materialize-textarea validate"
               defaultValue="Tasty beans"
               id="description"
+              maxLength="255"
               name="description"
               onChange={[MockFunction]}
               required={true}
@@ -533,7 +537,7 @@ exports[`EditRecipe component should show spinner when updating recipe 1`] = `
           onMouseLeave={[Function]}
           onTouchStart={[Function]}
           primary={false}
-          secondary={true}
+          secondary={false}
         />,
       ]
     }
@@ -562,6 +566,7 @@ exports[`EditRecipe component should show spinner when updating recipe 1`] = `
               className="validate"
               defaultValue="Beans"
               id="title"
+              maxLength="255"
               name="title"
               onChange={[MockFunction]}
               required={true}
@@ -632,6 +637,7 @@ exports[`EditRecipe component should show spinner when updating recipe 1`] = `
               className="materialize-textarea validate"
               defaultValue="Tasty beans"
               id="description"
+              maxLength="255"
               name="description"
               onChange={[MockFunction]}
               required={true}

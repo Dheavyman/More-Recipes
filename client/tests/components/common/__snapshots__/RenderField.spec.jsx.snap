@@ -1,18 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render field component should render component 1`] = `
-<div>
-  <label
-    htmlFor="Username"
-  >
-    Username
-  </label>
-  <br />
+<RenderField
+  input={Object {}}
+  label="Username"
+  meta={
+    Object {
+      "error": null,
+      "touched": false,
+    }
+  }
+  type="text"
+>
   <div>
-    <input
-      placeholder="Username"
-      type="text"
-    />
+    <label
+      htmlFor="Username"
+    >
+      Username
+    </label>
+    <br />
+    <div>
+      <input
+        placeholder="Username"
+        type="text"
+      />
+    </div>
   </div>
-</div>
+</RenderField>
+`;
+
+exports[`Render field component should show error when present 1`] = `
+<RenderField
+  input={Object {}}
+  label="Username"
+  meta={
+    Object {
+      "error": "New error message",
+      "touched": true,
+    }
+  }
+  type="text"
+>
+  <div>
+    <label
+      htmlFor="Username"
+    >
+      Username
+    </label>
+    <br />
+    <div>
+      <input
+        placeholder="Username"
+        type="text"
+      />
+      <span
+        className="red-text"
+      >
+        New error message
+      </span>
+    </div>
+  </div>
+</RenderField>
 `;

@@ -40,12 +40,36 @@ export default {
       .assert.elementPresent('textarea[name=directions]')
       .setValue('input[name=title]', 'Rice and stew')
       .click('select.browser-default')
+      .moveToElement('option[value=Lunch]', 20, 20)
+      .pause(500)
+      .click('option[value=Lunch]')
+      .setValue('input[name=preparationTime]', 65)
+      .setValue('textarea[name=ingredients]', 'Rice, tomatoes, water, salt')
+      .setValue('textarea[name=directions]', 'Do this. Do this. Do that.')
+      .moveToElement('button[name=add-recipe]', 10, 10)
+      .click('button[name=add-recipe]')
+      .pause(2000)
+      .moveToElement('textarea[name=description]', 20, 20)
+      .pause(500)
+      .setValue('textarea[name=description]', 'Tasty rice and stew')
+      .moveToElement('button[name=add-recipe]', 10, 10)
+      .click('button[name=add-recipe]')
+      .pause(2000);
+  },
+  'user should be able to add another new recipe': (browser) => {
+    browser
+      .moveToElement('button.pulse', 10, 10)
+      .pause(500)
+      .click('button.pulse')
+      .pause(2000)
+      .setValue('input[name=title]', 'Spaghetti')
+      .click('select.browser-default')
       .moveToElement('option[value=Lunch', 20, 20)
       .pause(500)
       .click('option[value=Lunch')
-      .setValue('textarea[name=description]', 'Tasty rice and stew')
-      .setValue('input[name=preparationTime]', 65)
-      .setValue('textarea[name=ingredients]', 'Rice, tomatoes, water, salt')
+      .setValue('textarea[name=description]', 'Tasty spaghetti')
+      .setValue('input[name=preparationTime]', 45)
+      .setValue('textarea[name=ingredients]', 'Spaghetti, carrots, salt')
       .setValue('textarea[name=directions]', 'Do this. Do this. Do that.')
       .moveToElement('button[name=add-recipe]', 10, 10)
       .click('button[name=add-recipe]')
@@ -58,7 +82,7 @@ export default {
       .moveToElement('#edit-recipe-button', 5, 5)
       .pause(1000)
       .click('#edit-recipe-button')
-      .pause(1000)
+      .pause(2000)
       .assert.elementPresent('form')
       .assert.elementPresent('input[name=title]')
       .assert.elementPresent('select.browser-default')
@@ -87,22 +111,6 @@ export default {
       .click('button[name=edit-save]')
       .pause(3000);
   },
-  // 'user should be able to favorite a recipe': (browser) => {
-  //   browser
-  //     .moveToElement('span#recipe-title', 20, 20)
-  //     .pause(500)
-  //     .click('span#recipe-title')
-  //     .pause(2000)
-  //     .waitForElementVisible('body', 2000)
-  //     .assert.urlEquals('http://localhost:8080/recipes/1')
-  //     .moveToElement('form.add-review', 20, 20)
-  //     .pause(500)
-  //     .moveToElement('a#favorite', 20, 20)
-  //     .pause(500)
-  //     .click('a#favorite')
-  //     .pause(2000)
-  //     .end();
-  // },
   'user should not create a recipe with same title recipe': (browser) => {
     browser
       .moveToElement('button.pulse', 10, 10)
@@ -115,7 +123,7 @@ export default {
       .click('option[value=Lunch]')
       .setValue('textarea[name=description]', 'So delicious for all occasions')
       .setValue('input[name=preparationTime]', 80)
-      .setValue('textarea[name=ingredients]', 'Rice, tomatoes, spices, salt')
+      .setValue('textarea[name=ingredients]', 'Rice, corn flour, spices, salt')
       .setValue('textarea[name=directions]', 'Do this. Do this. Do that.')
       .moveToElement('button[name=add-recipe]', 10, 10)
       .click('button[name=add-recipe]')
@@ -124,7 +132,7 @@ export default {
       .pause(500)
       .clearValue('input[name=title]')
       .pause(1000)
-      .setValue('input[name=title]', 'Rice and Sauce stew')
+      .setValue('input[name=title]', 'Rice and Sauce')
       .pause(500)
       .moveToElement('button[name=add-recipe]', 10, 10)
       .pause(500)
@@ -137,10 +145,10 @@ export default {
       .pause(500)
       .click('#delete-recipe-button')
       .pause(1000)
+      .assert.containsText('div.modal-title', 'Delete Recipe')
       .assert.containsText(
         'p#delete-message', 'Are you sure you want to delete this recipe?'
       )
-      .assert.containsText('div.modal-title', 'Delete Recipe')
       .moveToElement('#cancel-delete-button', 20, 20)
       .pause(500)
       .click('#cancel-delete-button')
@@ -152,6 +160,21 @@ export default {
       .moveToElement('#confirm-delete-button', 20, 20)
       .pause(500)
       .click('#confirm-delete-button')
+      .pause(2000);
+  },
+  'user should be able to view recipes in the catalog': (browser) => {
+    browser
+      .url('http://localhost:8080')
+      .waitForElementVisible('body', 2000)
+      .pause(1000)
+      .moveToElement('div#recipe-catalog', 20, 20)
+      .pause(500)
+      .moveToElement('span#view-catalog', 10, 10)
+      .pause(1000)
+      .click('span#view-catalog')
+      .pause(1000)
+      .waitForElementVisible('body', 2000)
+      .assert.urlEquals('http://localhost:8080/catalog')
       .pause(2000)
       .end();
   }

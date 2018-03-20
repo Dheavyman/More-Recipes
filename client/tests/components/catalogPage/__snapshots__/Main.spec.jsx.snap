@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main component should render component 1`] = `
+<div>
+  <SearchBar
+    id={null}
+    location={
+      Object {
+        "search": "",
+      }
+    }
+    recipes={
+      Object {
+        "searchResult": Array [],
+      }
+    }
+    scrollToTop={[MockFunction]}
+    searchPerformed={false}
+    searchedTerm=""
+  />
+  <div
+    className="row recipes-list"
+  >
+    <span
+      data-tip="Back To Top"
+      id="scroll-to-top"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-arrow-circle-up fa-3x"
+      />
+    </span>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+    <div
+      className="center-align"
+    />
+    <div>
+      <CatalogResult
+        location={
+          Object {
+            "search": "",
+          }
+        }
+        recipes={
+          Object {
+            "searchResult": Array [],
+          }
+        }
+        scrollToTop={[MockFunction]}
+        searchPerformed={false}
+        searchedTerm=""
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Main component should render notification when no recipe is found after search 1`] = `
+<div>
+  <SearchBar
+    id={null}
+    location={
+      Object {
+        "search": "ingredients",
+      }
+    }
+    recipes={
+      Object {
+        "searchResult": Array [],
+      }
+    }
+    scrollToTop={[MockFunction]}
+    searchPerformed={true}
+    searchedTerm="plantain porridge"
+  />
+  <div
+    className="row recipes-list"
+  >
+    <span
+      data-tip="Back To Top"
+      id="scroll-to-top"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-arrow-circle-up fa-3x"
+      />
+    </span>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+    <div
+      className="center-align"
+    >
+      <h5>
+        <em>
+          No search result found for undefined
+        </em>
+      </h5>
+    </div>
+    <div>
+      <SearchResult
+        location={
+          Object {
+            "search": "ingredients",
+          }
+        }
+        recipes={
+          Object {
+            "searchResult": Array [],
+          }
+        }
+        scrollToTop={[MockFunction]}
+        searchPerformed={true}
+        searchedTerm="plantain porridge"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Main component should render search results 1`] = `
+<div>
+  <SearchBar
+    id={null}
+    location={
+      Object {
+        "search": "ingredients",
+      }
+    }
+    recipes={
+      Object {
+        "searchResult": Array [
+          Object {
+            "category": "Main",
+            "description": "Tasty beans",
+            "directions": "Do this. Do that",
+            "downVotes": 2,
+            "favorites": 58,
+            "ingredients": "Beans, onions, palm oil, salt",
+            "preparationTime": 85,
+            "title": "Beans",
+            "upvotes": 48,
+            "views": 350,
+          },
+        ],
+      }
+    }
+    scrollToTop={[MockFunction]}
+    searchPerformed={true}
+    searchedTerm="beans"
+  />
+  <div
+    className="row recipes-list"
+  >
+    <span
+      data-tip="Back To Top"
+      id="scroll-to-top"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex="0"
+    >
+      <i
+        className="fa fa-arrow-circle-up fa-3x"
+      />
+    </span>
+    <ReactTooltip
+      insecure={true}
+      resizeHide={true}
+      wrapper="div"
+    />
+    <div
+      className="center-align"
+    >
+      <h5>
+        <em>
+          Search results for undefined
+        </em>
+      </h5>
+    </div>
+    <div>
+      <SearchResult
+        location={
+          Object {
+            "search": "ingredients",
+          }
+        }
+        recipes={
+          Object {
+            "searchResult": Array [
+              Object {
+                "category": "Main",
+                "description": "Tasty beans",
+                "directions": "Do this. Do that",
+                "downVotes": 2,
+                "favorites": 58,
+                "ingredients": "Beans, onions, palm oil, salt",
+                "preparationTime": 85,
+                "title": "Beans",
+                "upvotes": 48,
+                "views": 350,
+              },
+            ],
+          }
+        }
+        scrollToTop={[MockFunction]}
+        searchPerformed={true}
+        searchedTerm="beans"
+      />
+    </div>
+  </div>
+</div>
+`;

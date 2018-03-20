@@ -33,7 +33,7 @@ const propTypes = {
  *
  * @extends {Component}
  */
-class Home extends Component {
+export class Home extends Component {
   /**
    * Creates an instance of Home.
    *

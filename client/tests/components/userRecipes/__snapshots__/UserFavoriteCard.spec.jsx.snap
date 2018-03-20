@@ -313,13 +313,13 @@ exports[`UserFavoriteCard component should simulate click action 1`] = `
             </ul>
             <a
               data-tip="Remove"
-              id="remove-favorite"
               onClick={[Function]}
               role="button"
               tabIndex="0"
             >
               <i
                 className="material-icons icon-red right"
+                id="remove-favorite"
               >
                 remove_circle
               </i>

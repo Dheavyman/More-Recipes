@@ -1,8 +1,15 @@
 import React from 'react';
 
 import AuthUserNav from '../../../components/common/AuthUserNav';
+import userMockData from '../../__mocks__/user';
 
 describe('Authenticated user navigation component', () => {
+  beforeEach(() => {
+    localStorage.setItem(
+      'token',
+      userMockData.signinSuccessResponse.data.user.token
+    );
+  });
   const props = {
     handleLogoutUser: jest.fn(),
   };

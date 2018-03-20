@@ -5,6 +5,7 @@ import configureMockStore from 'redux-mock-store';
 import * as actionTypes from '../../actions/actionTypes';
 import * as actions from '../../actions/review';
 import reviewMockData from '../__mocks__/review';
+import recipeMockData from '../__mocks__/recipe';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -108,6 +109,40 @@ describe('Review', () => {
           expect(store.getActions()).toEqual(expectedActions);
           done();
         });
+    });
+  });
+  describe('delete review async action', () => {
+    beforeEach(() => moxios.install());
+    afterEach(() => moxios.uninstall());
+    it('should delete user reviews', () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: reviewMockData.deleteReviewSuccessResponse,
+        });
+      });
+      const expectedAction = [{
+        type: actionTypes.DELETE_REVIEW,
+        payload: 1,
+      }];
+      const store = mockStore({});
+
+      return store.dispatch(actions.deleteReview(recipeMockData.recipeId, 1))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedAction);
+        });
+    });
+  });
+  describe('clear review action', () => {
+    it('should dispatch action to clear reviews', () => {
+      const expectedAction = [{
+        type: actionTypes.CLEAR_ALL_REVIEWS,
+      }];
+      const store = mockStore({});
+
+      store.dispatch(actions.clearReviews());
+      expect(store.getActions()).toEqual(expectedAction);
     });
   });
   describe('fetch reviews async action', () => {

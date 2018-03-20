@@ -1,0 +1,675 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component should handle user logout event 1`] = `
+<div>
+  <div
+    className="navbar-fixed"
+  >
+    <nav
+      className="deep-orange darken-4"
+    >
+      <Navbar
+        handleLogoutUser={[Function]}
+        handleSearchCategory={[MockFunction]}
+        handleSubmitSignin={[Function]}
+        handleSubmitSignup={[Function]}
+        handleToggleModal={[Function]}
+        handleToggleSigninModal={[Function]}
+        handleToggleSignupModal={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        location={
+          Object {
+            "state": Object {
+              "from": Object {
+                "pathname": "URL",
+              },
+            },
+          }
+        }
+        logoutUser={
+          [MockFunction] {
+            "calls": Array [
+              Array [],
+            ],
+          }
+        }
+        openSignin={false}
+        openSignup={false}
+        signinUser={[MockFunction]}
+        signupUser={[MockFunction]}
+        user={
+          Object {
+            "error": Object {},
+            "isAuthenticated": true,
+            "userAuthentication": Object {
+              "message": null,
+            },
+          }
+        }
+      />
+    </nav>
+  </div>
+  <SideNav
+    authenticatedUserId={null}
+    currentProfileUserId={null}
+    handleLogoutUser={[Function]}
+    handleSearchCategory={[MockFunction]}
+    handleToggleSigninModal={[Function]}
+    handleToggleSignupModal={[Function]}
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={
+      Object {
+        "state": Object {
+          "from": Object {
+            "pathname": "URL",
+          },
+        },
+      }
+    }
+    logoutUser={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    openSignin={false}
+    openSignup={false}
+    signinUser={[MockFunction]}
+    signupUser={[MockFunction]}
+    user={
+      Object {
+        "error": Object {},
+        "isAuthenticated": true,
+        "userAuthentication": Object {
+          "message": null,
+        },
+      }
+    }
+  />
+  <ToastContainer
+    autoClose={5000}
+    bodyClassName=""
+    className={null}
+    closeButton={
+      <DefaultCloseButton
+        ariaLabel="close"
+      />
+    }
+    closeOnClick={true}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnHover={true}
+    position="top-right"
+    progressClassName=""
+    style={null}
+    toastClassName=""
+    transition={[Function]}
+  />
+</div>
+`;
+
+exports[`Header component should handle user signin and redirect user to former location 1`] = `
+<div>
+  <div
+    className="navbar-fixed"
+  >
+    <nav
+      className="deep-orange darken-4"
+    >
+      <Navbar
+        handleLogoutUser={[Function]}
+        handleSearchCategory={[MockFunction]}
+        handleSubmitSignin={[Function]}
+        handleSubmitSignup={[Function]}
+        handleToggleModal={[Function]}
+        handleToggleSigninModal={[Function]}
+        handleToggleSignupModal={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        location={Object {}}
+        logoutUser={[MockFunction]}
+        openSignin={false}
+        openSignup={false}
+        signinUser={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                undefined,
+              ],
+            ],
+          }
+        }
+        signupUser={[MockFunction]}
+        user={
+          Object {
+            "error": Object {},
+            "isAuthenticated": false,
+            "userAuthentication": Object {
+              "message": null,
+            },
+          }
+        }
+      />
+    </nav>
+  </div>
+  <SideNav
+    authenticatedUserId={null}
+    currentProfileUserId={null}
+    handleLogoutUser={[Function]}
+    handleSearchCategory={[MockFunction]}
+    handleToggleSigninModal={[Function]}
+    handleToggleSignupModal={[Function]}
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={Object {}}
+    logoutUser={[MockFunction]}
+    openSignin={false}
+    openSignup={false}
+    signinUser={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            undefined,
+          ],
+        ],
+      }
+    }
+    signupUser={[MockFunction]}
+    user={
+      Object {
+        "error": Object {},
+        "isAuthenticated": false,
+        "userAuthentication": Object {
+          "message": null,
+        },
+      }
+    }
+  />
+  <ToastContainer
+    autoClose={5000}
+    bodyClassName=""
+    className={null}
+    closeButton={
+      <DefaultCloseButton
+        ariaLabel="close"
+      />
+    }
+    closeOnClick={true}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnHover={true}
+    position="top-right"
+    progressClassName=""
+    style={null}
+    toastClassName=""
+    transition={[Function]}
+  />
+</div>
+`;
+
+exports[`Header component should handle user signin event 1`] = `
+<div>
+  <div
+    className="navbar-fixed"
+  >
+    <nav
+      className="deep-orange darken-4"
+    >
+      <Navbar
+        handleLogoutUser={[Function]}
+        handleSearchCategory={[MockFunction]}
+        handleSubmitSignin={[Function]}
+        handleSubmitSignup={[Function]}
+        handleToggleModal={[Function]}
+        handleToggleSigninModal={[Function]}
+        handleToggleSignupModal={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        location={
+          Object {
+            "state": Object {
+              "from": Object {
+                "pathname": "URL",
+              },
+            },
+          }
+        }
+        logoutUser={[MockFunction]}
+        openSignin={false}
+        openSignup={false}
+        signinUser={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                undefined,
+              ],
+            ],
+          }
+        }
+        signupUser={[MockFunction]}
+        user={
+          Object {
+            "error": Object {},
+            "isAuthenticated": false,
+            "userAuthentication": Object {
+              "message": null,
+            },
+          }
+        }
+      />
+    </nav>
+  </div>
+  <SideNav
+    authenticatedUserId={null}
+    currentProfileUserId={null}
+    handleLogoutUser={[Function]}
+    handleSearchCategory={[MockFunction]}
+    handleToggleSigninModal={[Function]}
+    handleToggleSignupModal={[Function]}
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={
+      Object {
+        "state": Object {
+          "from": Object {
+            "pathname": "URL",
+          },
+        },
+      }
+    }
+    logoutUser={[MockFunction]}
+    openSignin={false}
+    openSignup={false}
+    signinUser={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            undefined,
+          ],
+        ],
+      }
+    }
+    signupUser={[MockFunction]}
+    user={
+      Object {
+        "error": Object {},
+        "isAuthenticated": false,
+        "userAuthentication": Object {
+          "message": null,
+        },
+      }
+    }
+  />
+  <ToastContainer
+    autoClose={5000}
+    bodyClassName=""
+    className={null}
+    closeButton={
+      <DefaultCloseButton
+        ariaLabel="close"
+      />
+    }
+    closeOnClick={true}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnHover={true}
+    position="top-right"
+    progressClassName=""
+    style={null}
+    toastClassName=""
+    transition={[Function]}
+  />
+</div>
+`;
+
+exports[`Header component should handle user signup event 1`] = `
+<div>
+  <div
+    className="navbar-fixed"
+  >
+    <nav
+      className="deep-orange darken-4"
+    >
+      <Navbar
+        handleLogoutUser={[Function]}
+        handleSearchCategory={[MockFunction]}
+        handleSubmitSignin={[Function]}
+        handleSubmitSignup={[Function]}
+        handleToggleModal={[Function]}
+        handleToggleSigninModal={[Function]}
+        handleToggleSignupModal={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        location={
+          Object {
+            "state": Object {
+              "from": Object {
+                "pathname": "URL",
+              },
+            },
+          }
+        }
+        logoutUser={[MockFunction]}
+        openSignin={false}
+        openSignup={false}
+        signinUser={[MockFunction]}
+        signupUser={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                undefined,
+              ],
+            ],
+          }
+        }
+        user={
+          Object {
+            "error": Object {},
+            "isAuthenticated": false,
+            "userAuthentication": Object {
+              "message": null,
+            },
+          }
+        }
+      />
+    </nav>
+  </div>
+  <SideNav
+    authenticatedUserId={null}
+    currentProfileUserId={null}
+    handleLogoutUser={[Function]}
+    handleSearchCategory={[MockFunction]}
+    handleToggleSigninModal={[Function]}
+    handleToggleSignupModal={[Function]}
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={
+      Object {
+        "state": Object {
+          "from": Object {
+            "pathname": "URL",
+          },
+        },
+      }
+    }
+    logoutUser={[MockFunction]}
+    openSignin={false}
+    openSignup={false}
+    signinUser={[MockFunction]}
+    signupUser={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            undefined,
+          ],
+        ],
+      }
+    }
+    user={
+      Object {
+        "error": Object {},
+        "isAuthenticated": false,
+        "userAuthentication": Object {
+          "message": null,
+        },
+      }
+    }
+  />
+  <ToastContainer
+    autoClose={5000}
+    bodyClassName=""
+    className={null}
+    closeButton={
+      <DefaultCloseButton
+        ariaLabel="close"
+      />
+    }
+    closeOnClick={true}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnHover={true}
+    position="top-right"
+    progressClassName=""
+    style={null}
+    toastClassName=""
+    transition={[Function]}
+  />
+</div>
+`;
+
+exports[`Header component should render component 1`] = `
+<div>
+  <div
+    className="navbar-fixed"
+  >
+    <nav
+      className="deep-orange darken-4"
+    >
+      <Navbar
+        handleLogoutUser={[Function]}
+        handleSearchCategory={[MockFunction]}
+        handleSubmitSignin={[Function]}
+        handleSubmitSignup={[Function]}
+        handleToggleModal={[Function]}
+        handleToggleSigninModal={[Function]}
+        handleToggleSignupModal={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        location={
+          Object {
+            "state": Object {
+              "from": Object {
+                "pathname": "URL",
+              },
+            },
+          }
+        }
+        logoutUser={[MockFunction]}
+        openSignin={false}
+        openSignup={false}
+        signinUser={[MockFunction]}
+        signupUser={[MockFunction]}
+        user={
+          Object {
+            "error": Object {},
+            "isAuthenticated": false,
+            "userAuthentication": Object {
+              "message": null,
+            },
+          }
+        }
+      />
+    </nav>
+  </div>
+  <SideNav
+    authenticatedUserId={null}
+    currentProfileUserId={null}
+    handleLogoutUser={[Function]}
+    handleSearchCategory={[MockFunction]}
+    handleToggleSigninModal={[Function]}
+    handleToggleSignupModal={[Function]}
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={
+      Object {
+        "state": Object {
+          "from": Object {
+            "pathname": "URL",
+          },
+        },
+      }
+    }
+    logoutUser={[MockFunction]}
+    openSignin={false}
+    openSignup={false}
+    signinUser={[MockFunction]}
+    signupUser={[MockFunction]}
+    user={
+      Object {
+        "error": Object {},
+        "isAuthenticated": false,
+        "userAuthentication": Object {
+          "message": null,
+        },
+      }
+    }
+  />
+  <ToastContainer
+    autoClose={5000}
+    bodyClassName=""
+    className={null}
+    closeButton={
+      <DefaultCloseButton
+        ariaLabel="close"
+      />
+    }
+    closeOnClick={true}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnHover={true}
+    position="top-right"
+    progressClassName=""
+    style={null}
+    toastClassName=""
+    transition={[Function]}
+  />
+</div>
+`;
+
+exports[`Header component should render component 2`] = `
+<div>
+  <div
+    className="navbar-fixed"
+  >
+    <nav
+      className="deep-orange darken-4"
+    >
+      <Navbar
+        handleLogoutUser={[Function]}
+        handleSearchCategory={[MockFunction]}
+        handleSubmitSignin={[Function]}
+        handleSubmitSignup={[Function]}
+        handleToggleModal={[Function]}
+        handleToggleSigninModal={[Function]}
+        handleToggleSignupModal={[Function]}
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        location={
+          Object {
+            "state": Object {
+              "from": Object {
+                "pathname": "URL",
+              },
+            },
+          }
+        }
+        logoutUser={[MockFunction]}
+        openSignin={false}
+        openSignup={false}
+        signinUser={[MockFunction]}
+        signupUser={[MockFunction]}
+        user={
+          Object {
+            "error": Object {},
+            "isAuthenticated": false,
+            "userAuthentication": Object {
+              "message": null,
+            },
+          }
+        }
+      />
+    </nav>
+  </div>
+  <SideNav
+    authenticatedUserId={null}
+    currentProfileUserId={null}
+    handleLogoutUser={[Function]}
+    handleSearchCategory={[MockFunction]}
+    handleToggleSigninModal={[Function]}
+    handleToggleSignupModal={[Function]}
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    location={
+      Object {
+        "state": Object {
+          "from": Object {
+            "pathname": "URL",
+          },
+        },
+      }
+    }
+    logoutUser={[MockFunction]}
+    openSignin={false}
+    openSignup={false}
+    signinUser={[MockFunction]}
+    signupUser={[MockFunction]}
+    user={
+      Object {
+        "error": Object {},
+        "isAuthenticated": false,
+        "userAuthentication": Object {
+          "message": null,
+        },
+      }
+    }
+  />
+  <ToastContainer
+    autoClose={5000}
+    bodyClassName=""
+    className={null}
+    closeButton={
+      <DefaultCloseButton
+        ariaLabel="close"
+      />
+    }
+    closeOnClick={true}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnHover={true}
+    position="top-right"
+    progressClassName=""
+    style={null}
+    toastClassName=""
+    transition={[Function]}
+  />
+</div>
+`;

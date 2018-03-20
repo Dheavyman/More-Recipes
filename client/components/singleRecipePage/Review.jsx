@@ -62,6 +62,7 @@ const Review = (props) => {
               <i
                 role="button"
                 tabIndex="0"
+                id="delete-review"
                 className="material-icons delete-review right"
                 onClick={() => handleDeleteReview(recipeId, id)}
                 data-tip="Delete"

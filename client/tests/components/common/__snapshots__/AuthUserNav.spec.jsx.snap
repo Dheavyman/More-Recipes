@@ -11,7 +11,7 @@ exports[`Authenticated user navigation component should render component 1`] = `
     <Link
       className="black-text"
       replace={false}
-      to="/users/undefined/dashboard"
+      to="/users/2/dashboard"
     >
       Dashboard
       <i

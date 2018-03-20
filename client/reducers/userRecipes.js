@@ -75,6 +75,7 @@ const userRecipes = (state = initialState, action) => {
       return {
         ...state,
         userFavorites,
+        userFavoritesCount: userFavorites.length,
       };
     }
     case actionTypes.ADD_RECIPE_REQUEST:
@@ -102,7 +103,7 @@ const userRecipes = (state = initialState, action) => {
     case actionTypes.UPDATE_USER_RECIPES_COUNT:
       return {
         ...state,
-        userAddedRecipesCount: state.userAddedRecipesCount + 1,
+        userAddedRecipesCount: state.userAddedRecipesCount + action.payload,
       };
     case actionTypes.EDIT_RECIPE_REQUEST:
       return {

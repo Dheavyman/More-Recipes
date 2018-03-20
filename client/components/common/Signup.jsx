@@ -32,7 +32,7 @@ const propTypes = {
  *
  * @returns {object} React element
  */
-const Signup = (props) => {
+export const Signup = (props) => {
   const {
     user: { isLoading, error }, openSignup, handleToggleSignupModal,
     handleToggleModal, handleSubmit, handleSubmitSignup
@@ -50,7 +50,7 @@ const Signup = (props) => {
   return (
     <div>
       <Dialog
-        title="Create an account"
+        title="Sign Up"
         actions={actions}
         modal
         open={openSignup}

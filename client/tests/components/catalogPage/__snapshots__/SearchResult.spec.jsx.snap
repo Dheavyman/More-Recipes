@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchResult component should render component 1`] = `
+<div>
+  <div />
+</div>
+`;
+
+exports[`SearchResult component should render component with search results 1`] = `
+<div>
+  <div>
+    <RecipeCatalogCard
+      index={0}
+      recipe={
+        Object {
+          "category": "Main",
+          "description": "Tasty beans",
+          "directions": "Do this. Do that",
+          "downVotes": 2,
+          "favorites": 58,
+          "ingredients": "Beans, onions, palm oil, salt",
+          "preparationTime": 85,
+          "title": "Beans",
+          "upvotes": 48,
+          "views": 350,
+        }
+      }
+      recipes={
+        Object {
+          "isFetchingRecipes": false,
+          "searchResult": Array [
+            Object {
+              "category": "Main",
+              "description": "Tasty beans",
+              "directions": "Do this. Do that",
+              "downVotes": 2,
+              "favorites": 58,
+              "ingredients": "Beans, onions, palm oil, salt",
+              "preparationTime": 85,
+              "title": "Beans",
+              "upvotes": 48,
+              "views": 350,
+            },
+          ],
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`SearchResult component should render component with spinner when searching for recipe 1`] = `
+<div>
+  <div
+    className="center-align"
+  >
+    <Spinner
+      size="big"
+    />
+  </div>
+</div>
+`;

@@ -16,6 +16,7 @@ const propTypes = {
   currentProfileUserId: PropTypes.number.isRequired,
   authenticatedUserId: PropTypes.number,
   user: PropTypes.shape({
+    isFetchingUserProfile: PropTypes.bool,
     imageUploading: PropTypes.bool.isRequired,
     userProfile: PropTypes.shape({
       fullName: PropTypes.string,
@@ -261,11 +262,11 @@ class UserProfile extends React.Component {
    * @memberof UserProfile
    */
   render() {
-    const { user: { isLoading } } = this.props;
+    const { user: { isFetchingUserProfile } } = this.props;
 
     return (
       <div className="row">
-        {isLoading
+        {isFetchingUserProfile
           ? <div className="center-align">
             <Spinner size="big" />
           </div>

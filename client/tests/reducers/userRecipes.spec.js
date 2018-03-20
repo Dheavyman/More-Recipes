@@ -92,9 +92,17 @@ describe('User recipes reducer', () => {
         type: actionTypes.UPDATE_USER_FAVORITE_RECIPES,
         payload: recipesMockData.recipeId,
       };
-      expect(userRecipesReducer(initialState, action)).toEqual({
+      const newState = {
         ...initialState,
-        // userFavorites,
+        userFavorites: [{
+          Recipe: { id: 2 }
+        }, {
+          Recipe: { id: 3 }
+        }],
+        userFavoritesCount: 2,
+      };
+      expect(userRecipesReducer(newState, action)).toEqual({
+        ...newState,
       });
     });
   });
@@ -138,10 +146,11 @@ describe('User recipes reducer', () => {
     it('should handle update user recipes count', () => {
       const action = {
         type: actionTypes.UPDATE_USER_RECIPES_COUNT,
+        payload: 1,
       };
       expect(userRecipesReducer(initialState, action)).toEqual({
         ...initialState,
-        userAddedRecipesCount: initialState.userAddedRecipesCount + 1,
+        userAddedRecipesCount: initialState.userAddedRecipesCount + action.payload,
       });
     });
   });
@@ -158,13 +167,44 @@ describe('User recipes reducer', () => {
     it('should handle edit recipe success', () => {
       const action = {
         type: actionTypes.EDIT_RECIPE_SUCCESS,
-        payload: recipesMockData.editRecipeSuccess
+        id: 5,
+        payload: recipesMockData.editRecipeSuccess.recipe,
       };
-      expect(userRecipesReducer(initialState, action)).toEqual({
+      const newState = {
         ...initialState,
+        userAddedRecipes: [{
+          id: 5,
+          title: 'Macaroni',
+          category: 'Dinner',
+          description: 'Tasty and nutritious macaroni',
+          preparationTime: 45,
+          ingredients: 'Macaroni, groundnut oil, salt',
+          directions: 'Do this, do this again, do that',
+          recipeImage: 'Recipe image',
+          upvotes: 0,
+          downvotes: 0,
+          views: 1,
+          favorites: 0,
+        }, {
+          id: 8,
+          title: 'Rice',
+          category: 'Lunch',
+          description: 'Tasty rice',
+          preparationTime: 65,
+          ingredients: 'Rice, groundnut oil, salt',
+          directions: 'Do this, do this again, do that',
+          recipeImage: 'Recipe image',
+          upvotes: 5,
+          downvotes: 0,
+          views: 8,
+          favorites: 0,
+        }],
+        userAddedRecipesCount: 2,
+      };
+      expect(userRecipesReducer(newState, action)).toEqual({
+        ...newState,
         isLoading: false,
         imageUploaded: false,
-        // userAddedRecipes,
         error: {},
       });
     });
@@ -193,12 +233,42 @@ describe('User recipes reducer', () => {
     it('should handle delete recipe success', () => {
       const action = {
         type: actionTypes.DELETE_RECIPE_SUCCESS,
-        payload: recipesMockData.deleteRecipeSuccessResponse
+        payload: 8,
       };
-      expect(userRecipesReducer(initialState, action)).toEqual({
+      const newState = {
         ...initialState,
+        userAddedRecipes: [{
+          id: 5,
+          title: 'Macaroni',
+          category: 'Dinner',
+          description: 'Tasty and nutritious macaroni',
+          preparationTime: 45,
+          ingredients: 'Macaroni, groundnut oil, salt',
+          directions: 'Do this, do this again, do that',
+          recipeImage: 'Recipe image',
+          upvotes: 0,
+          downvotes: 0,
+          views: 1,
+          favorites: 0,
+        }, {
+          id: 8,
+          title: 'Rice',
+          category: 'Lunch',
+          description: 'Tasty rice',
+          preparationTime: 65,
+          ingredients: 'Rice, groundnut oil, salt',
+          directions: 'Do this, do this again, do that',
+          recipeImage: 'Recipe image',
+          upvotes: 5,
+          downvotes: 0,
+          views: 8,
+          favorites: 0,
+        }],
+      };
+      expect(userRecipesReducer(newState, action)).toEqual({
+        ...newState,
         isLoading: false,
-        // userAddedRecipes,
+        userAddedRecipes: [newState.userAddedRecipes[0]],
         error: {},
       });
     });

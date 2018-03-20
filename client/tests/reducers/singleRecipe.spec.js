@@ -139,6 +139,26 @@ describe('Single recipe reducer', () => {
       });
     });
   });
+  describe('Delete review', () => {
+    it('should handle deleting user review', () => {
+      const action = {
+        type: actionTypes.DELETE_REVIEW,
+        payload: 2,
+      };
+      const newState = {
+        ...initialState,
+        reviews: [{
+          id: 1,
+        }, {
+          id: 2
+        }],
+      };
+      expect(singleRecipeReducer(newState, action)).toEqual({
+        ...newState,
+        reviews: [newState.reviews[0]],
+      });
+    });
+  });
   describe('upvote recipe', () => {
     it('should handle upvote recipe request', () => {
       const action = {

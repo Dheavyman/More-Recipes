@@ -83,6 +83,7 @@ exports[`UserProfile component should render component 1`] = `
           user={
             Object {
               "imageUploading": false,
+              "isFetchingUserProfile": false,
               "userImageUrl": "",
               "userProfile": Object {
                 "fullName": "John Mark",
@@ -999,6 +1000,7 @@ exports[`UserProfile component should simulate edit profile click event 1`] = `
                 <TextField
                   className="validate"
                   id="First Name"
+                  maxLength="255"
                   name="firstName"
                   onChange={[Function]}
                   placeholder="First name"
@@ -1020,6 +1022,7 @@ exports[`UserProfile component should simulate edit profile click event 1`] = `
                     >
                       <input
                         className="validate"
+                        maxLength="255"
                         name="firstName"
                         onChange={[Function]}
                         placeholder="First name"
@@ -1032,6 +1035,7 @@ exports[`UserProfile component should simulate edit profile click event 1`] = `
                 <TextField
                   className="validate"
                   id="Last Name"
+                  maxLength="255"
                   name="lastName"
                   onChange={[Function]}
                   placeholder="Last name"
@@ -1053,6 +1057,7 @@ exports[`UserProfile component should simulate edit profile click event 1`] = `
                     >
                       <input
                         className="validate"
+                        maxLength="255"
                         name="lastName"
                         onChange={[Function]}
                         placeholder="Last name"

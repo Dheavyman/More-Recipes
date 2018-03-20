@@ -31,7 +31,7 @@ const AllRecipeCatalog = (props) => {
       <div className="col s12" >
         <div className="row valign-wrapper" >
           <h4 className="col s8 m10 l11">All Recipes</h4>
-          <span className="col s4 m2 l1  right" >
+          <span id="view-catalog" className="col s4 m2 l1  right" >
             <Link to="/catalog">View All &gt;</Link>
           </span>
         </div>

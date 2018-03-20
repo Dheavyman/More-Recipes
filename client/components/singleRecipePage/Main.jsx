@@ -84,6 +84,7 @@ class Main extends Component {
             </div>
             <div>
               <button
+                id="view-more-reviews"
                 className={`btn waves-effect waves-light indigo accent-2
                 white-text`}
                 onClick={handleViewMoreReviews}

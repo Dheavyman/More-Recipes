@@ -49,7 +49,6 @@ const EditRecipe = (props) => {
     <FlatButton
       id="cancel-edit-button"
       label="Cancel"
-      secondary
       onClick={handleClose}
     />
   ];
@@ -73,14 +72,17 @@ const EditRecipe = (props) => {
                   type="text"
                   defaultValue={title}
                   className="validate"
+                  maxLength="255"
                   onChange={handleEditChange}
                   required
                 />
                 <label htmlFor="title" className="active">Title</label>
               </div>
             </div>
-            <div className="row">
+            <div className="row select-category">
+              <label htmlFor="select-category">Category</label>
               <select
+                id="select-category"
                 className="browser-default"
                 defaultValue={category}
                 onChange={handleSelect}
@@ -101,6 +103,7 @@ const EditRecipe = (props) => {
                   name="description"
                   defaultValue={description}
                   className="materialize-textarea validate"
+                  maxLength="255"
                   onChange={handleEditChange}
                   required
                 />

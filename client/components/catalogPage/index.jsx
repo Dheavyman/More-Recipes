@@ -35,7 +35,7 @@ const defaultProps = {
  *
  * @extends {Component}
  */
-class CatalogPage extends Component {
+export class CatalogPage extends Component {
   /**
    * Creates an instance of CatalogPage.
    *

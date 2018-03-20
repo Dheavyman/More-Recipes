@@ -11,6 +11,7 @@ const propTypes = {
   required: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
+  maxLength: PropTypes.string,
 };
 
 const defaultProps = {
@@ -18,6 +19,7 @@ const defaultProps = {
   className: undefined,
   required: undefined,
   disabled: undefined,
+  maxLength: undefined,
 };
 
 /**
@@ -29,7 +31,7 @@ const defaultProps = {
  */
 const TextField = (props) => {
   const { id, name, type, defaultValue, placeholder, className,
-    required, disabled, onChange } = props;
+    required, disabled, onChange, maxLength } = props;
 
   return (
     <div className="row">
@@ -46,6 +48,7 @@ const TextField = (props) => {
           required={required}
           disabled={disabled}
           onChange={onChange}
+          maxLength={maxLength}
         />
       </div>
     </div>

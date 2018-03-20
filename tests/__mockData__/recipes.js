@@ -38,6 +38,14 @@ export const validRecipeSeed = [{
   ingredients: 'Yam, tomatoes, vegetable oil, egg, salt, maggi, pepper',
   directions: 'Slice the yam and prepare the sauce',
   recipeImage: 'Url',
+}, {
+  title: 'Ogbono soup',
+  category: 'Main',
+  description: 'Tasty ogbono soup',
+  preparationTime: 60,
+  ingredients: 'Ogbono, palm oil, salt, stock fish',
+  directions: 'Do this, do this. do that',
+  recipeImage: 'Ogbono URL',
 }];
 
 export const invalidRecipeSeed = [{

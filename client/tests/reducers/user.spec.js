@@ -107,7 +107,7 @@ describe('User reducer', () => {
       };
       expect(userReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: true,
+        isFetchingUserProfile: true,
         errorFetchingProfile: {},
         userProfile: {},
       });
@@ -119,7 +119,7 @@ describe('User reducer', () => {
       };
       expect(userReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isFetchingUserProfile: false,
         userProfile: action.payload,
         errorFetchingProfile: {},
       });
@@ -131,7 +131,7 @@ describe('User reducer', () => {
       };
       expect(userReducer(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        isFetchingUserProfile: false,
         errorFetchingProfile: action.payload,
       });
     });

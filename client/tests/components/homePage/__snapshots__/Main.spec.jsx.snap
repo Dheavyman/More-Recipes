@@ -40,6 +40,7 @@ exports[`Main component should render component 1`] = `
       </div>
       <div
         className="col s12 all-recipes-list white"
+        id="recipe-catalog"
       >
         <AllRecipeCatalog
           recipes={

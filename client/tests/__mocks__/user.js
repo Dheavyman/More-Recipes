@@ -81,7 +81,7 @@ export default {
     data: {
       user: {
         fullName: 'George Fernando',
-        token: 'token',
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyfSwiaWF0IjoxNTIxMjkxODc2LCJleHAiOjE1MjEzNzgyNzZ9.U6TH67pCpBdrXVl5ArNeNGcBY-_VWGdIrRFVKnQhnl4', // eslint-disable-line
       },
     },
   },

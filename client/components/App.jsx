@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Home from './homepage';
+import HomePage from './homepage';
 import CatalogPage from './catalogPage';
-import singleRecipePage from './singleRecipePage';
-import UserDashboard from './userRecipes';
+import SingleRecipePage from './singleRecipePage';
+import UserDashboardPage from './userRecipes';
 import NotFoundPage from './notFoundPage';
 import { decodeToken } from '../utils/authenticate';
 import '../public/style.scss';
@@ -25,13 +25,13 @@ const defaultProps = {
  */
 const App = () => (
   <Switch>
-    <Route exact path="/" component={Home} />
+    <Route exact path="/" component={HomePage} />
     <Route exact path="/catalog" component={CatalogPage} />
-    <Route exact path="/recipes/:recipeId" component={singleRecipePage} />
+    <Route exact path="/recipes/:recipeId" component={SingleRecipePage} />
     <Route
       path="/users/:userId/dashboard"
       render={props => (decodeToken()
-        ? <UserDashboard {...props} />
+        ? <UserDashboardPage {...props} />
         : <Redirect to={{
           pathname: '/',
           state: {

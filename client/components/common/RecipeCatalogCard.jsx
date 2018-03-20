@@ -71,6 +71,7 @@ const RecipeCatalogCard = (props) => {
                 <span className="recipe-owner">{fullName}</span>
               </Link>
               : <a
+                id="view-user-profile"
                 href="#!"
                 onClick={handleNotify}
               >

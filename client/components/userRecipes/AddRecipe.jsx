@@ -38,7 +38,6 @@ const AddRecipe = (props) => {
   const actions = [
     <FlatButton
       label="Cancel"
-      secondary
       onClick={handleClose}
     />
   ];
@@ -60,13 +59,15 @@ const AddRecipe = (props) => {
                   name="title"
                   type="text"
                   className="validate"
+                  maxLength="255"
                   onChange={handleChange}
                   required
                 />
                 <label htmlFor="recipe_name">Title</label>
               </div>
             </div>
-            <div className="row">
+            <div className="row select-category">
+              <label htmlFor="select-category">Category</label>
               <select
                 className="browser-default"
                 value={category}
@@ -87,6 +88,7 @@ const AddRecipe = (props) => {
                   name="description"
                   className="materialize-textarea validate"
                   onChange={handleChange}
+                  maxLength="255"
                   required
                 />
                 <label htmlFor="recipe_description">Description</label>

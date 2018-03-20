@@ -124,7 +124,7 @@ describe('Recipe', () => {
         actions.addRecipeRequest(),
         actions.addRecipeSuccess(
           recipeMockData.addRecipeSuccessResponse.data.recipe),
-        { type: actionTypes.UPDATE_USER_RECIPES_COUNT },
+        { type: actionTypes.UPDATE_USER_RECIPES_COUNT, payload: 1 },
       ];
       const store = mockStore({});
 
@@ -220,6 +220,7 @@ describe('Recipe', () => {
       const expectedActions = [
         actions.deleteRecipeRequest(),
         actions.deleteRecipeSuccess(recipeMockData.recipeId),
+        { type: actionTypes.UPDATE_USER_RECIPES_COUNT, payload: -1, },
         { type: actionTypes.UPDATE_USER_FAVORITE_RECIPES,
           payload: recipeMockData.recipeId }
       ];

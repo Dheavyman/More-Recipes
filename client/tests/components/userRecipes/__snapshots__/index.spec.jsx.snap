@@ -1,0 +1,1230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserRecipes component should handle submit events 1`] = `
+<div
+  className="page-body"
+>
+  <header
+    id="header"
+  >
+    <Header
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      currentProfileUserId={2}
+      deleteRecipe={[MockFunction]}
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleLogoutUser={[Function]}
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={[MockFunction]}
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      uploadImage={[MockFunction]}
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "error": Object {},
+          "imageUploading": false,
+          "imageUrl": "",
+        }
+      }
+    />
+  </header>
+  <main
+    id="main"
+  >
+    <Main
+      action=""
+      actionTitle=""
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      category="Dinner"
+      currentProfileUserId={2}
+      deleteMessage=""
+      deleteRecipe={[MockFunction]}
+      description="Tasty macaroni"
+      directions="Do this, do that"
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleAddRecipe={[Function]}
+      handleChange={[Function]}
+      handleClose={[Function]}
+      handleDeleteRecipe={[Function]}
+      handleDrop={[Function]}
+      handleEditChange={[Function]}
+      handleEditRecipe={[Function]}
+      handleImagePreview={[Function]}
+      handleOpenAdd={[Function]}
+      handleOpenDelete={[Function]}
+      handleOpenEdit={[Function]}
+      handleSelect={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      imageData={null}
+      imagePreview=""
+      ingredients="Macaroni, groundnut oil, salt"
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={[MockFunction]}
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+      preparationTime={45}
+      recipeId={null}
+      recipeToEdit={Object {}}
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      title="Macaroni"
+      uploadImage={[MockFunction]}
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "error": Object {},
+          "imageUploading": false,
+          "imageUrl": "",
+        }
+      }
+    />
+    <ToastContainer
+      autoClose={5000}
+      bodyClassName=""
+      className={null}
+      closeButton={
+        <DefaultCloseButton
+          ariaLabel="close"
+        />
+      }
+      closeOnClick={true}
+      hideProgressBar={false}
+      newestOnTop={false}
+      pauseOnHover={true}
+      position="top-right"
+      progressClassName=""
+      style={null}
+      toastClassName=""
+      transition={[Function]}
+    />
+  </main>
+</div>
+`;
+
+exports[`UserRecipes component should handle submit events 2`] = `
+<div
+  className="page-body"
+>
+  <header
+    id="header"
+  >
+    <Header
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      currentProfileUserId={2}
+      deleteRecipe={[MockFunction]}
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleLogoutUser={[Function]}
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={[MockFunction]}
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      uploadImage={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "image data",
+            ],
+          ],
+        }
+      }
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "error": Object {},
+          "imageUploading": false,
+          "imageUrl": "",
+        }
+      }
+    />
+  </header>
+  <main
+    id="main"
+  >
+    <Main
+      action=""
+      actionTitle=""
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      category="Dinner"
+      currentProfileUserId={2}
+      deleteMessage=""
+      deleteRecipe={[MockFunction]}
+      description="Tasty macaroni"
+      directions="Do this, do that"
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleAddRecipe={[Function]}
+      handleChange={[Function]}
+      handleClose={[Function]}
+      handleDeleteRecipe={[Function]}
+      handleDrop={[Function]}
+      handleEditChange={[Function]}
+      handleEditRecipe={[Function]}
+      handleImagePreview={[Function]}
+      handleOpenAdd={[Function]}
+      handleOpenDelete={[Function]}
+      handleOpenEdit={[Function]}
+      handleSelect={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      imageData="image data"
+      imagePreview=""
+      ingredients="Macaroni, groundnut oil, salt"
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={[MockFunction]}
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+      preparationTime={45}
+      recipeId={null}
+      recipeToEdit={Object {}}
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      title="Macaroni"
+      uploadImage={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "image data",
+            ],
+          ],
+        }
+      }
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "error": Object {},
+          "imageUploading": false,
+          "imageUrl": "",
+        }
+      }
+    />
+    <ToastContainer
+      autoClose={5000}
+      bodyClassName=""
+      className={null}
+      closeButton={
+        <DefaultCloseButton
+          ariaLabel="close"
+        />
+      }
+      closeOnClick={true}
+      hideProgressBar={false}
+      newestOnTop={false}
+      pauseOnHover={true}
+      position="top-right"
+      progressClassName=""
+      style={null}
+      toastClassName=""
+      transition={[Function]}
+    />
+  </main>
+</div>
+`;
+
+exports[`UserRecipes component should handle submit events 3`] = `
+<div
+  className="page-body"
+>
+  <header
+    id="header"
+  >
+    <Header
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": undefined,
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      currentProfileUserId={2}
+      deleteRecipe={[MockFunction]}
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleLogoutUser={[Function]}
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={[MockFunction]}
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      uploadImage={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "image data",
+            ],
+          ],
+        }
+      }
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "imageUploaded": true,
+        }
+      }
+    />
+  </header>
+  <main
+    id="main"
+  >
+    <Main
+      action=""
+      actionTitle=""
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": undefined,
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      category="Dinner"
+      currentProfileUserId={2}
+      deleteMessage=""
+      deleteRecipe={[MockFunction]}
+      description="Tasty macaroni"
+      directions="Do this, do that"
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleAddRecipe={[Function]}
+      handleChange={[Function]}
+      handleClose={[Function]}
+      handleDeleteRecipe={[Function]}
+      handleDrop={[Function]}
+      handleEditChange={[Function]}
+      handleEditRecipe={[Function]}
+      handleImagePreview={[Function]}
+      handleOpenAdd={[Function]}
+      handleOpenDelete={[Function]}
+      handleOpenEdit={[Function]}
+      handleSelect={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      imageData="image data"
+      imagePreview=""
+      ingredients="Macaroni, groundnut oil, salt"
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={[MockFunction]}
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+      preparationTime={45}
+      recipeId={null}
+      recipeToEdit={Object {}}
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      title="Macaroni"
+      uploadImage={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "image data",
+            ],
+          ],
+        }
+      }
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "imageUploaded": true,
+        }
+      }
+    />
+    <ToastContainer
+      autoClose={5000}
+      bodyClassName=""
+      className={null}
+      closeButton={
+        <DefaultCloseButton
+          ariaLabel="close"
+        />
+      }
+      closeOnClick={true}
+      hideProgressBar={false}
+      newestOnTop={false}
+      pauseOnHover={true}
+      position="top-right"
+      progressClassName=""
+      style={null}
+      toastClassName=""
+      transition={[Function]}
+    />
+  </main>
+</div>
+`;
+
+exports[`UserRecipes component should handle submit events 4`] = `
+<div
+  className="page-body"
+>
+  <header
+    id="header"
+  >
+    <Header
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": undefined,
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      currentProfileUserId={2}
+      deleteRecipe={[MockFunction]}
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleLogoutUser={[Function]}
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      uploadImage={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "image data",
+            ],
+          ],
+        }
+      }
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "imageUploaded": true,
+        }
+      }
+    />
+  </header>
+  <main
+    id="main"
+  >
+    <Main
+      action=""
+      actionTitle=""
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": undefined,
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      category="Dinner"
+      currentProfileUserId={2}
+      deleteMessage=""
+      deleteRecipe={[MockFunction]}
+      description="Tasty macaroni"
+      directions="Do this, do that"
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleAddRecipe={[Function]}
+      handleChange={[Function]}
+      handleClose={[Function]}
+      handleDeleteRecipe={[Function]}
+      handleDrop={[Function]}
+      handleEditChange={[Function]}
+      handleEditRecipe={[Function]}
+      handleImagePreview={[Function]}
+      handleOpenAdd={[Function]}
+      handleOpenDelete={[Function]}
+      handleOpenEdit={[Function]}
+      handleSelect={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      imageData="image data"
+      imagePreview=""
+      ingredients="Macaroni, groundnut oil, salt"
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+      preparationTime={45}
+      recipeId={null}
+      recipeToEdit={Object {}}
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      title="Macaroni"
+      uploadImage={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "image data",
+            ],
+          ],
+        }
+      }
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "imageUploaded": true,
+        }
+      }
+    />
+    <ToastContainer
+      autoClose={5000}
+      bodyClassName=""
+      className={null}
+      closeButton={
+        <DefaultCloseButton
+          ariaLabel="close"
+        />
+      }
+      closeOnClick={true}
+      hideProgressBar={false}
+      newestOnTop={false}
+      pauseOnHover={true}
+      position="top-right"
+      progressClassName=""
+      style={null}
+      toastClassName=""
+      transition={[Function]}
+    />
+  </main>
+</div>
+`;
+
+exports[`UserRecipes component should handle submit events 5`] = `
+<div
+  className="page-body"
+>
+  <header
+    id="header"
+  >
+    <Header
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": undefined,
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      currentProfileUserId={2}
+      deleteRecipe={[MockFunction]}
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleLogoutUser={[Function]}
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=category&list=rice",
+                },
+              ],
+            ],
+          },
+          "replace": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      uploadImage={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "image data",
+            ],
+          ],
+        }
+      }
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "imageUploaded": true,
+        }
+      }
+    />
+  </header>
+  <main
+    id="main"
+  >
+    <Main
+      action=""
+      actionTitle=""
+      addRecipe={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": "test-file-stub",
+                "title": "Macaroni",
+              },
+            ],
+            Array [
+              Object {
+                "category": "Dinner",
+                "description": "Tasty macaroni",
+                "directions": "Do this, do that",
+                "ingredients": "Macaroni, groundnut oil, salt",
+                "preparationTime": 45,
+                "recipeImage": undefined,
+                "title": "Macaroni",
+              },
+            ],
+          ],
+        }
+      }
+      authenticatedUserId={2}
+      category="Dinner"
+      currentProfileUserId={2}
+      deleteMessage=""
+      deleteRecipe={[MockFunction]}
+      description="Tasty macaroni"
+      directions="Do this, do that"
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleAddRecipe={[Function]}
+      handleChange={[Function]}
+      handleClose={[Function]}
+      handleDeleteRecipe={[Function]}
+      handleDrop={[Function]}
+      handleEditChange={[Function]}
+      handleEditRecipe={[Function]}
+      handleImagePreview={[Function]}
+      handleOpenAdd={[Function]}
+      handleOpenDelete={[Function]}
+      handleOpenEdit={[Function]}
+      handleSelect={[Function]}
+      history={
+        Object {
+          "push": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "pathname": "/catalog",
+                  "search": "?search=category&list=rice",
+                },
+              ],
+            ],
+          },
+          "replace": [MockFunction],
+        }
+      }
+      imageData="image data"
+      imagePreview=""
+      ingredients="Macaroni, groundnut oil, salt"
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+      preparationTime={45}
+      recipeId={null}
+      recipeToEdit={Object {}}
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      title="Macaroni"
+      uploadImage={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "image data",
+            ],
+          ],
+        }
+      }
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "imageUploaded": true,
+        }
+      }
+    />
+    <ToastContainer
+      autoClose={5000}
+      bodyClassName=""
+      className={null}
+      closeButton={
+        <DefaultCloseButton
+          ariaLabel="close"
+        />
+      }
+      closeOnClick={true}
+      hideProgressBar={false}
+      newestOnTop={false}
+      pauseOnHover={true}
+      position="top-right"
+      progressClassName=""
+      style={null}
+      toastClassName=""
+      transition={[Function]}
+    />
+  </main>
+</div>
+`;
+
+exports[`UserRecipes component should render component 1`] = `
+<div
+  className="page-body"
+>
+  <header
+    id="header"
+  >
+    <Header
+      addRecipe={[MockFunction]}
+      authenticatedUserId={2}
+      currentProfileUserId={2}
+      deleteRecipe={[MockFunction]}
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleLogoutUser={[Function]}
+      handleSearchCategory={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={[MockFunction]}
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      uploadImage={[MockFunction]}
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "imageUploading": false,
+          "imageUrl": "",
+        }
+      }
+    />
+  </header>
+  <main
+    id="main"
+  >
+    <Main
+      action=""
+      actionTitle=""
+      addRecipe={[MockFunction]}
+      authenticatedUserId={2}
+      category="Select Category"
+      currentProfileUserId={2}
+      deleteMessage=""
+      deleteRecipe={[MockFunction]}
+      description=""
+      directions=""
+      editRecipe={[MockFunction]}
+      fetchUserFavorites={[MockFunction]}
+      fetchUserProfile={[MockFunction]}
+      fetchUserRecipes={[MockFunction]}
+      handleAddRecipe={[Function]}
+      handleChange={[Function]}
+      handleClose={[Function]}
+      handleDeleteRecipe={[Function]}
+      handleDrop={[Function]}
+      handleEditChange={[Function]}
+      handleEditRecipe={[Function]}
+      handleImagePreview={[Function]}
+      handleOpenAdd={[Function]}
+      handleOpenDelete={[Function]}
+      handleOpenEdit={[Function]}
+      handleSelect={[Function]}
+      history={
+        Object {
+          "push": [MockFunction],
+          "replace": [MockFunction],
+        }
+      }
+      imageData={null}
+      imagePreview=""
+      ingredients=""
+      location={
+        Object {
+          "pathname": "users/2/dashboard",
+        }
+      }
+      logoutUser={[MockFunction]}
+      match={
+        Object {
+          "params": Object {
+            "userId": 2,
+          },
+        }
+      }
+      openAdd={false}
+      openDelete={false}
+      openEdit={false}
+      recipeId={null}
+      recipeToEdit={Object {}}
+      searchRecipe={[MockFunction]}
+      setFavorite={[MockFunction]}
+      title=""
+      uploadImage={[MockFunction]}
+      user={
+        Object {
+          "errorFetchingProfile": Object {},
+        }
+      }
+      userRecipes={
+        Object {
+          "imageUploading": false,
+          "imageUrl": "",
+        }
+      }
+    />
+    <ToastContainer
+      autoClose={5000}
+      bodyClassName=""
+      className={null}
+      closeButton={
+        <DefaultCloseButton
+          ariaLabel="close"
+        />
+      }
+      closeOnClick={true}
+      hideProgressBar={false}
+      newestOnTop={false}
+      pauseOnHover={true}
+      position="top-right"
+      progressClassName=""
+      style={null}
+      toastClassName=""
+      transition={[Function]}
+    />
+  </main>
+</div>
+`;

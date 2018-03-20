@@ -27,7 +27,7 @@ const propTypes = {
     errorFetchingProfile: PropTypes.shape(),
   }).isRequired,
   userRecipes: PropTypes.shape({
-    imageUploading: PropTypes.bool.isRequired,
+    imageUploaded: PropTypes.bool.isRequired,
     imageUrl: PropTypes.string
   }).isRequired,
   match: PropTypes.shape({
@@ -52,7 +52,7 @@ const propTypes = {
  *
  * @extends {React.Component}
  */
-class UserRecipes extends React.Component {
+export class UserRecipes extends React.Component {
   /**
    * Creates an instance of UserRecipes.
    *
@@ -140,9 +140,16 @@ class UserRecipes extends React.Component {
       const {
         fetchUserProfile, fetchUserRecipes, fetchUserFavorites
       } = this.props;
+
       fetchUserProfile(nextProps.match.params.userId);
       fetchUserRecipes(nextProps.match.params.userId);
       fetchUserFavorites(nextProps.match.params.userId);
+    }
+    if (parseInt(nextProps.match.params.userId, 10)
+        !== this.state.currentProfileUserId) {
+      this.setState({
+        currentProfileUserId: parseInt(nextProps.match.params.userId, 10),
+      });
     }
   }
 

@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar component should render component 1`] = `
+<div
+  className="nav-wrapper"
+>
+  <Link
+    className="brand-logo hide-on-small-only"
+    id="logo"
+    replace={false}
+    to="/"
+  >
+    More-Recipes
+  </Link>
+  <a
+    className="button-collapse"
+    data-activates="slide_out"
+  >
+    <i
+      className="material-icons"
+    >
+      menu
+    </i>
+  </a>
+  <ul
+    className="right hide-on-med-and-down"
+  >
+    <li>
+      <Link
+        replace={false}
+        to="/"
+      >
+        Home
+      </Link>
+    </li>
+    <li>
+      <a
+        className="dropdown-button dropdown-category"
+        data-activates="category"
+      >
+        Category
+      </a>
+    </li>
+    <Category
+      handleLogoutUser={[MockFunction]}
+      handleSubmitSignin={[MockFunction]}
+      handleSubmitSignup={[MockFunction]}
+      user={
+        Object {
+          "isAuthenticated": false,
+          "userAuthentication": Object {},
+          "userProfile": Object {},
+        }
+      }
+    />
+    <li>
+      <a
+        className="dropdown-button dropdown-user"
+        data-activates="user-control"
+      >
+        Welcome Guest
+        <i
+          className="material-icons large left"
+        >
+          account_circle
+        </i>
+      </a>
+      <IndexUserNav
+        handleLogoutUser={[MockFunction]}
+        handleSubmitSignin={[MockFunction]}
+        handleSubmitSignup={[MockFunction]}
+        user={
+          Object {
+            "isAuthenticated": false,
+            "userAuthentication": Object {},
+            "userProfile": Object {},
+          }
+        }
+      />
+    </li>
+  </ul>
+  <MuiThemeProvider>
+    <ReduxForm
+      handleLogoutUser={[MockFunction]}
+      handleSubmitSignin={[MockFunction]}
+      handleSubmitSignup={[MockFunction]}
+      user={
+        Object {
+          "isAuthenticated": false,
+          "userAuthentication": Object {},
+          "userProfile": Object {},
+        }
+      }
+    />
+  </MuiThemeProvider>
+  <MuiThemeProvider>
+    <ReduxForm
+      handleLogoutUser={[MockFunction]}
+      handleSubmitSignin={[MockFunction]}
+      handleSubmitSignup={[MockFunction]}
+      user={
+        Object {
+          "isAuthenticated": false,
+          "userAuthentication": Object {},
+          "userProfile": Object {},
+        }
+      }
+    />
+  </MuiThemeProvider>
+</div>
+`;
+
+exports[`Navbar component should simulate component did update 1`] = `
+<div
+  className="nav-wrapper"
+>
+  <Link
+    className="brand-logo hide-on-small-only"
+    id="logo"
+    replace={false}
+    to="/"
+  >
+    More-Recipes
+  </Link>
+  <a
+    className="button-collapse"
+    data-activates="slide_out"
+  >
+    <i
+      className="material-icons"
+    >
+      menu
+    </i>
+  </a>
+  <ul
+    className="right hide-on-med-and-down"
+  >
+    <li>
+      <Link
+        replace={false}
+        to="/"
+      >
+        Home
+      </Link>
+    </li>
+    <li>
+      <a
+        className="dropdown-button dropdown-category"
+        data-activates="category"
+      >
+        Category
+      </a>
+    </li>
+    <Category
+      handleLogoutUser={[MockFunction]}
+      handleSubmitSignin={[MockFunction]}
+      handleSubmitSignup={[MockFunction]}
+      user={
+        Object {
+          "isAuthenticated": true,
+          "userAuthentication": Object {
+            "fullName": "John Mark",
+          },
+          "userProfile": Object {
+            "firstName": "John",
+            "lastName": "Mark",
+          },
+        }
+      }
+    />
+    <li>
+      <a
+        className="dropdown-button dropdown-user"
+        data-activates="user-control"
+      >
+        John Mark
+        <i
+          className="material-icons large left"
+        >
+          account_circle
+        </i>
+      </a>
+      <AuthUserNav
+        handleLogoutUser={[MockFunction]}
+        handleSubmitSignin={[MockFunction]}
+        handleSubmitSignup={[MockFunction]}
+        user={
+          Object {
+            "isAuthenticated": true,
+            "userAuthentication": Object {
+              "fullName": "John Mark",
+            },
+            "userProfile": Object {
+              "firstName": "John",
+              "lastName": "Mark",
+            },
+          }
+        }
+      />
+    </li>
+  </ul>
+  <MuiThemeProvider>
+    <ReduxForm
+      handleLogoutUser={[MockFunction]}
+      handleSubmitSignin={[MockFunction]}
+      handleSubmitSignup={[MockFunction]}
+      user={
+        Object {
+          "isAuthenticated": true,
+          "userAuthentication": Object {
+            "fullName": "John Mark",
+          },
+          "userProfile": Object {
+            "firstName": "John",
+            "lastName": "Mark",
+          },
+        }
+      }
+    />
+  </MuiThemeProvider>
+  <MuiThemeProvider>
+    <ReduxForm
+      handleLogoutUser={[MockFunction]}
+      handleSubmitSignin={[MockFunction]}
+      handleSubmitSignup={[MockFunction]}
+      user={
+        Object {
+          "isAuthenticated": true,
+          "userAuthentication": Object {
+            "fullName": "John Mark",
+          },
+          "userProfile": Object {
+            "firstName": "John",
+            "lastName": "Mark",
+          },
+        }
+      }
+    />
+  </MuiThemeProvider>
+</div>
+`;

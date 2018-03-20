@@ -12,4 +12,5 @@ global.$ = () => ({
   tabs: jest.fn(),
   collapsible: jest.fn(),
   materialbox: jest.fn(),
+  dropdown: jest.fn(),
 });

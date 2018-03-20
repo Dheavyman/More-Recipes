@@ -1,0 +1,476 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup component should render component 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Create an account"
+  >
+    <div
+      className="row"
+    >
+      <form
+        className="col s12"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="First Name"
+              name="firstName"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Last Name"
+              name="lastName"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Username"
+              name="username"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Email"
+              name="email"
+              type="email"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Password"
+              name="password"
+              type="password"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Retype-Password"
+              name="retypePassword"
+              type="password"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        />
+        <div
+          className="center-align"
+        />
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect waves-light
+                  indigo accent-2"
+            disabled={false}
+            name="signupbtn"
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </div>
+        <div
+          className="row center-align"
+        >
+          Already have an account? 
+          <a
+            className="cursor-pointer blue-text"
+            onClick={[MockFunction]}
+            role="button"
+            tabIndex="0"
+          >
+            Sign In
+          </a>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;
+
+exports[`Signup component should show error in signup 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Create an account"
+  >
+    <div
+      className="row"
+    >
+      <form
+        className="col s12"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="First Name"
+              name="firstName"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Last Name"
+              name="lastName"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Username"
+              name="username"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Email"
+              name="email"
+              type="email"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Password"
+              name="password"
+              type="password"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Retype-Password"
+              name="retypePassword"
+              type="password"
+            />
+          </div>
+        </div>
+        <ErrorMessage
+          message="Error in signup"
+        />
+        <div
+          className="row"
+        />
+        <div
+          className="center-align"
+        />
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect waves-light
+                  indigo accent-2"
+            disabled={false}
+            name="signupbtn"
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </div>
+        <div
+          className="row center-align"
+        >
+          Already have an account? 
+          <a
+            className="cursor-pointer blue-text"
+            onClick={[MockFunction]}
+            role="button"
+            tabIndex="0"
+          >
+            Sign In
+          </a>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;
+
+exports[`Signup component should show spinner when submitting details 1`] = `
+<div>
+  <Dialog
+    actions={
+      Array [
+        <FlatButton
+          disabled={false}
+          fullWidth={false}
+          label="Cancel"
+          labelPosition="after"
+          labelStyle={Object {}}
+          onClick={[MockFunction]}
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={true}
+        />,
+      ]
+    }
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={true}
+    modal={true}
+    open={true}
+    repositionOnUpdate={true}
+    title="Create an account"
+  >
+    <div
+      className="row"
+    >
+      <form
+        className="col s12"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="First Name"
+              name="firstName"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Last Name"
+              name="lastName"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Username"
+              name="username"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Email"
+              name="email"
+              type="email"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Password"
+              name="password"
+              type="password"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="input-field col s12"
+          >
+            <Field
+              component={[Function]}
+              label="Retype-Password"
+              name="retypePassword"
+              type="password"
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        />
+        <div
+          className="center-align"
+        >
+          <Spinner
+            size="small"
+          />
+        </div>
+        <div
+          className="row center-align"
+        >
+          <button
+            className="btn btn-large waves-effect waves-light
+                  indigo accent-2"
+            disabled={true}
+            name="signupbtn"
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </div>
+        <div
+          className="row center-align"
+        >
+          Already have an account? 
+          <a
+            className="cursor-pointer blue-text"
+            onClick={[MockFunction]}
+            role="button"
+            tabIndex="0"
+          >
+            Sign In
+          </a>
+        </div>
+      </form>
+    </div>
+  </Dialog>
+</div>
+`;

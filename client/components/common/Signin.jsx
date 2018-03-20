@@ -31,7 +31,7 @@ const propTypes = {
  *
  * @returns {object} React element
  */
-const Signin = (props) => {
+export const Signin = (props) => {
   const {
     openSignin, handleSubmitSignin, handleToggleSigninModal,
     handleToggleModal, user: { isLoading, error }
@@ -49,7 +49,7 @@ const Signin = (props) => {
   return (
     <div>
       <Dialog
-        title="Login into your account"
+        title="Sign In"
         actions={actions}
         modal
         open={openSignin}
@@ -89,6 +89,7 @@ const Signin = (props) => {
             </div>
             <div className="row center-align">
               <button
+                id="signin"
                 type="submit"
                 className={`btn btn-large waves-effect waves-light
                   indigo accent-2`}
