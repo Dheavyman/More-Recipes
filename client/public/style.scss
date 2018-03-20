@@ -333,6 +333,12 @@ main {
   }
 }
 
+.select-category {
+  label {
+    margin-left: .75rem;
+  }
+}
+
 .switch label input[type=checkbox]:checked+.lever {
   background-color: #66bb6a;
 }

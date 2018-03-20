@@ -66,7 +66,8 @@ const AddRecipe = (props) => {
                 <label htmlFor="recipe_name">Title</label>
               </div>
             </div>
-            <div className="row">
+            <div className="row select-category">
+              <label htmlFor="select-category">Category</label>
               <select
                 className="browser-default"
                 value={category}

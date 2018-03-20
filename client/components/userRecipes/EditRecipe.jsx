@@ -79,8 +79,10 @@ const EditRecipe = (props) => {
                 <label htmlFor="title" className="active">Title</label>
               </div>
             </div>
-            <div className="row">
+            <div className="row select-category">
+              <label htmlFor="select-category">Category</label>
               <select
+                id="select-category"
                 className="browser-default"
                 defaultValue={category}
                 onChange={handleSelect}
