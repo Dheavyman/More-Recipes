@@ -1,33 +1,15 @@
 import 'mocha';
 import chai from 'chai';
 import supertest from 'supertest';
-import jwt from 'jsonwebtoken';
 
 import app from '../server/app';
-import {
-  validSignupSeed,
-  invalidSignupSeed,
-  validSigninSeed,
-  invalidSigninSeed,
-  validUserSeed
-} from './__mockData__/user';
-import {
-  validRecipeSeed,
-  invalidRecipeSeed,
-  userFavoriteCategory
-} from './__mockData__/recipes';
-import { validReviewSeed, invalidReviewSeed } from './__mockData__/review';
+import { validSigninSeed } from './__mockData__/user';
+import { validRecipeSeed } from './__mockData__/recipes';
 
 const server = supertest.agent(app);
 const expect = chai.expect;
 const userToken = [];
-let userId1;
-let userId2;
-let recipeId1;
 let recipeId2;
-let recipeId3;
-let reviewId1;
-let reviewId2;
 
 describe('More Recipes', () => {
   describe('signin user', () => {
@@ -40,7 +22,6 @@ describe('More Recipes', () => {
         .send(validSigninSeed[0])
         .end((err, res) => {
           userToken[0] = res.body.data.user.token;
-          userId1 = jwt.decode(userToken[0]).user.id;
           expect('Content-Type', 'application/json');
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal('Success');
@@ -147,7 +128,8 @@ describe('More Recipes', () => {
             expect(res.body.message).to
               .equal('Downvote recorded and upvote removed');
             expect(res.body.data).to.have.a.property('upvotes').that.equals(0);
-            expect(res.body.data).to.have.a.property('downvotes').that.equals(2);
+            expect(res.body.data).to.have.a.property('downvotes').that
+              .equals(2);
             done();
           });
       });
@@ -181,7 +163,8 @@ describe('More Recipes', () => {
             expect(res.body.message).to
               .equal('Upvote recorded and downvote removed');
             expect(res.body.data).to.have.a.property('upvotes').that.equals(1);
-            expect(res.body.data).to.have.a.property('downvotes').that.equals(0);
+            expect(res.body.data).to.have.a.property('downvotes').that
+              .equals(0);
             done();
           });
       });
